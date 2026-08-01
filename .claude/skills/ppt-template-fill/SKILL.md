@@ -9,6 +9,22 @@ description: Fill a raw PowerPoint (.pptx) template with new content by cloning 
 
 This skill is **independent** from the ppt-master SVG generation pipeline. It keeps the original PowerPoint design intact and writes a new `.pptx` by cloning selected source slides and replacing text directly in OOXML. Executable scripts are shared with ppt-master and stay at `.claude/skills/ppt-master/scripts/`.
 
+## Route Entry and Authority
+
+**Entry contract**: [`ppt-master/workflows/routing.md`](../ppt-master/workflows/routing.md)
+selects the raw-PPTX template-fill route before this full skill is loaded. Route
+selection does not require loading the main `ppt-master/SKILL.md`.
+
+**Gate owner**: After selection, this skill owns every runtime gate from inputs
+through native render validation. Root summaries and the main SVG skill add no
+preflight, confirmation, spec, SVG, export, or completion gate to this route.
+Reusing shared scripts does not transfer workflow ownership.
+
+**Route change**: If the request changes to reusable-template creation, strict
+1:1 beautify, main-pipeline re-architecture, or finished-PPTX native
+enhancement, return to [`routing.md`](../ppt-master/workflows/routing.md) before
+loading the new owner.
+
 **Boundary against template-based generation**: run this skill for raw PPTX template + generated PPTX requests. Skip this skill only when the user explicitly wants a reusable template package, SVG-derived template roster, or SVG-generated deck that can freely select / repeat / skip / adapt template pages. In that case, they must run [`create-template`](../ppt-master/workflows/create-template.md) first and then provide the generated template directory path to the ppt-master main pipeline.
 
 | User wants | Route |
@@ -19,7 +35,7 @@ This skill is **independent** from the ppt-master SVG generation pipeline. It ke
 | Generate a new PPT from a reusable template package | ppt-master main pipeline Step 3 with the explicit template directory path |
 | Generate through the SVG pipeline directly from a raw PPTX "template" | Not allowed; create the template package first |
 | Re-layout an existing deck 1:1 (same pages, same wording) | ppt-master [`beautify-pptx`](../ppt-master/workflows/beautify-pptx.md) |
-| Enhance a finished PPTX (notes, narration, transitions only) | ppt-master [`native-enhance-pptx`](../ppt-master/workflows/native-enhance-pptx.md) |
+| Enhance a finished PPTX (notes, narration, transitions only) | [`native-enhance-pptx`](../native-enhance-pptx/SKILL.md) standalone skill |
 
 ## When to Run
 
@@ -34,7 +50,11 @@ Recognize requests that combine an existing PowerPoint template with new content
 | Native PPT template fill | "Use this PowerPoint template for this content and fill the slides directly" |
 | Direct wording | "Fill this deck with the new content" |
 
-**Hard rule**: Do not run `pptx_to_svg.py`, `pptx_template_import.py`, `finalize_svg.py`, or `svg_to_pptx.py` for this skill. SVG conversion is for presentation generation / template creation; this skill is direct PowerPoint editing.
+**Hard rule**: Do not run main-pipeline `preflight.py`, `confirm_ui`,
+`validate_spec.py`, `svg_quality_checker.py`, `finalize_svg.py`,
+`svg_to_pptx.py`, or `verify_deck.py` for this skill. Do not run
+`pptx_to_svg.py` or `pptx_template_import.py`. This skill edits PowerPoint
+directly and uses its own plan, apply, OfficeCLI, and native-render gates.
 
 **Deterministic routing rule**: do not ask a route-choice question for raw PPTX template + generated PPTX requests; route them here. If the user asks for SVG/template-package generation from a raw PPTX, state that `create-template` must run first and stop this skill until they provide the generated template directory path.
 

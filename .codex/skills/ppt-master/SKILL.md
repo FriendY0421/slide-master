@@ -1,10 +1,13 @@
 ---
 name: ppt-master
 description: >
-  AI-driven multi-format SVG content generation system. Converts source documents
-  (PDF/DOCX/URL/Markdown) into high-quality SVG pages and exports to PPTX through
-  multi-role collaboration. Use when user asks to "create PPT", "make presentation",
-  "PPT 만들어줘", "슬라이드 만들어줘", "발표자료 만들어줘", or mentions "ppt-master".
+  Post-router owner for authoring or regenerating presentation visuals through
+  the PPT Master SVG pipeline: new decks from source material or a topic, PPTX
+  re-architecture, reusable SVG-template workflows, and shared SVG steps only
+  after a strict 1:1 beautify workflow explicitly hands off. Read
+  workflows/routing.md first. Do not use for ambiguous existing-PPTX
+  optimization, raw-PPTX native filling, or finished-PPTX native enhancement;
+  those are pre-route or standalone direct-PPTX requests.
 ---
 
 # ppt-master (Codex discovery stub)

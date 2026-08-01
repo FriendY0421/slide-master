@@ -1,17 +1,27 @@
 ---
 name: ppt-master
 description: >
-  AI-driven multi-format SVG content generation system. Converts source documents
-  (PDF/DOCX/URL/Markdown) into high-quality SVG pages and exports to PPTX through
-  multi-role collaboration. Use when user asks to "create PPT", "make presentation",
-  "PPT 만들어줘", "슬라이드 만들어줘", "발표자료 만들어줘", or mentions "ppt-master".
+  Post-router owner for authoring or regenerating presentation visuals through
+  the PPT Master SVG pipeline: new decks from source material or a topic, PPTX
+  re-architecture, reusable SVG-template workflows, and shared SVG steps only
+  after a strict 1:1 beautify workflow explicitly hands off. Read
+  workflows/routing.md first. Do not use for ambiguous existing-PPTX
+  optimization, raw-PPTX native filling, or finished-PPTX native enhancement;
+  those are pre-route or standalone direct-PPTX requests.
 ---
 
 # PPT Master Skill
 
+**Entry precondition — route first**: Before loading this full file,
+[`workflows/routing.md`](workflows/routing.md) has selected the main SVG family,
+or another workflow has explicitly handed off to shared SVG steps. Strict 1:1
+selection loads `beautify-pptx.md` first and loads this file only at that
+workflow's explicit handoff. Raw template fill and finished-PPTX native
+enhancement do not load or inherit this file.
+
 > AI-driven multi-format SVG content generation system. Converts source documents into high-quality SVG pages through multi-role collaboration and exports to PPTX.
 
-**Core Pipeline**: `Source Document → Create Project → [Template] → Strategist Structured Plan → [Image_Generator] → Executor Live Preview → Quality Check → Post-processing → Export`
+**Main SVG Pipeline**: `Source Document → Create Project → [Template] → Strategist Structured Plan → [Image_Generator] → Executor Live Preview → Quality Check → Post-processing → Export`
 
 ### SVG Page-Design Boundary
 
@@ -143,7 +153,9 @@ the strict benchmark-plan schema are in [`scripts/README.md`](scripts/README.md)
 
 ## Standalone Workflows
 
-**Route authority**: Use [`workflows/routing.md`](workflows/routing.md) before entering the main pipeline or any standalone workflow.
+**Route authority**: Load [`workflows/routing.md`](workflows/routing.md) before
+this full skill or any standalone workflow. After selection, the chosen owner
+defines its gates; do not import this main pipeline into a direct-PPTX route.
 
 **Registry**: Use [`workflows/index.md`](workflows/index.md) for the complete workflow list, triggers, preconditions, exclusions, outputs, and blocking points.
 
@@ -155,7 +167,7 @@ the strict benchmark-plan schema are in [`scripts/README.md`](scripts/README.md)
 | Existing PPTX, preserve page count/order and slide wording 1:1, improve layout | [`beautify-pptx`](workflows/beautify-pptx.md) |
 | Existing PPTX as source material, rethink outline or change page count/order | Main pipeline via `source_to_md.py` plus PPTX intake |
 | Build a reusable template package from a PPTX/design reference | [`create-template`](workflows/create-template.md), then return with the generated template workspace path |
-| Finished PPTX, keep content/layout stable and add notes/audio/timing/transitions | [`native-enhance-pptx`](workflows/native-enhance-pptx.md) |
+| Finished PPTX, keep content/layout stable and add notes/audio/timing/transitions | [`native-enhance-pptx` skill](../native-enhance-pptx/SKILL.md) |
 
 **MUST**: Raw `.pptx` template plus "generate PPTX" routes to the `ppt-template-fill` skill by default. The SVG generation route consumes only an explicit template workspace path with a valid `templates/design_spec.md`, or a supported direct/legacy package root with `design_spec.md`.
 

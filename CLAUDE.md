@@ -4,33 +4,50 @@ This file is the project entry point for Claude Code. The ppt-master skill lives
 
 > **Cross-harness (dual-host)**: [`AGENTS.md`](AGENTS.md) is the Codex-side execution-rules layer — it references this file as SSOT and only adds enforcement, so content edits here do not need mirroring there. `.codex/skills/` holds **generated** Codex discovery stubs: after editing any `.claude/skills/<name>/SKILL.md` frontmatter, run `python3 .claude/skills/ppt-master/scripts/sync_codex_stubs.py` (never hand-edit stubs; `preflight.py` fails while they are stale). Skill content itself lives only in `.claude/skills/`.
 
-**You MUST read [`.claude/skills/ppt-master/SKILL.md`](.claude/skills/ppt-master/SKILL.md) before any PPT generation task or repo modification.** This repository exists to generate presentations; SKILL.md is the authoritative workflow that owns project creation, role switching, serial execution, quality gates, post-processing, export, and every per-step command. The rest of this file only points to where related material lives — it never substitutes for SKILL.md.
+**Route before full-load (mandatory)**: for a presentation request, first read
+[`.claude/skills/ppt-master/workflows/routing.md`](.claude/skills/ppt-master/workflows/routing.md).
+Select the route there, then read only the selected execution owner(s) in full.
+Do not preload the main SVG skill for a direct-PPTX route. For a repository edit,
+read the owner of the contract being changed; the main skill is authoritative only
+for the main SVG family and the shared SVG steps that explicitly invoke it.
 
 ## Project Overview
 
-PPT Master is an AI-driven presentation generation system. Multi-role collaboration (Strategist → Image_Generator → Executor) converts source documents (PDF/DOCX/URL/Markdown) into natively editable PPTX with real PowerPoint shapes (DrawingML).
+PPT Master is a presentation workflow package with SVG-authoring and direct-PPTX
+route families. The main SVG family uses Strategist → Image_Generator → Executor
+to convert source documents into editable DrawingML. Direct-PPTX routes preserve
+an existing PowerPoint package and use their own execution gates.
 
-**Core Pipeline**: `Source Document → Create Project → [Template] → Strategist confirmation stage → [Image_Generator] → Executor Live Preview → Quality Check → Post-processing → Export PPTX`
+**Main SVG Pipeline**: `Source Document → Create Project → [Template] → Strategist confirmation stage → [Image_Generator] → Executor Live Preview → Quality Check → Post-processing → Export PPTX`
 
-**Route selection authority**: [`.claude/skills/ppt-master/workflows/routing.md`](.claude/skills/ppt-master/workflows/routing.md) owns the complete route matrix. The hard boundaries below stay inline because they bypass or redirect the main pipeline and are the most expensive to misroute.
+**Route selection authority**:
+[`.claude/skills/ppt-master/workflows/routing.md`](.claude/skills/ppt-master/workflows/routing.md)
+owns the complete matrix and wins over every summary below.
 
-- Topic-only requests run [`topic-research`](.claude/skills/ppt-master/workflows/topic-research.md) before SKILL.md Step 1.
-- Raw PPTX template plus new material/topic routes to the standalone [`ppt-template-fill`](.claude/skills/ppt-template-fill/SKILL.md) skill, not the SVG pipeline.
-- Raw PPTX cannot be consumed as a Step 3 SVG template; run [`create-template`](.claude/skills/ppt-master/workflows/create-template.md) first and return with the generated template workspace root.
-- PPTX beautify is strictly 1:1 page count/order and verbatim wording via [`beautify-pptx`](.claude/skills/ppt-master/workflows/beautify-pptx.md); any split/merge/drop/reorder routes to the main pipeline.
-- Finished PPTX native enhancement uses [`native-enhance-pptx`](.claude/skills/ppt-master/workflows/native-enhance-pptx.md) and must not enter SVG regeneration.
-- [`visual-review`](.claude/skills/ppt-master/workflows/visual-review.md), [`verify-pptx-export`](.claude/skills/ppt-master/workflows/verify-pptx-export.md), [`customize-animations`](.claude/skills/ppt-master/workflows/customize-animations.md), and [`generate-audio`](.claude/skills/ppt-master/workflows/generate-audio.md) are explicit-request workflows.
+| Selected family | Full execution owner(s) |
+|---|---|
+| New SVG-authored deck or PPTX re-architecture | [Main `ppt-master/SKILL.md`](.claude/skills/ppt-master/SKILL.md) |
+| Existing PPTX, strict 1:1 wording/page preservation with visual redesign | [`beautify-pptx.md`](.claude/skills/ppt-master/workflows/beautify-pptx.md), then the main skill only at its explicit shared-SVG handoff |
+| Raw PPTX template plus new material/topic | [`ppt-template-fill/SKILL.md`](.claude/skills/ppt-template-fill/SKILL.md) only |
+| Finished PPTX, stable visible content/layout, add notes/audio/timing/transitions | [`native-enhance-pptx/SKILL.md`](.claude/skills/native-enhance-pptx/SKILL.md), then its required execution workflow |
+| Reusable template creation or another standalone workflow | The selected workflow; load another owner only at an explicit handoff |
 
-## Execution Requirements
+An ambiguous PPTX optimization request stays in the router until its one
+discriminator question resolves whether the deck is 1:1 beautify or
+re-architectable source. Do not load either full owner before that answer.
 
-- For standalone template creation (no source deck), read [`.claude/skills/ppt-master/workflows/create-template.md`](.claude/skills/ppt-master/workflows/create-template.md).
-- Technical SVG/PPT constraints live in [`.claude/skills/ppt-master/references/shared-standards.md`](.claude/skills/ppt-master/references/shared-standards.md).
-- Canvas choices live in [`.claude/skills/ppt-master/references/canvas-formats.md`](.claude/skills/ppt-master/references/canvas-formats.md).
-- Icon library details live in [`.claude/skills/ppt-master/templates/icons/README.md`](.claude/skills/ppt-master/templates/icons/README.md).
+## Execution Ownership
+
+- The selected skill or workflow owns its confirmations, preflight, validation,
+  recovery, export, and completion gates. This root file adds none.
+- Shared scripts do not transfer gate ownership between SVG and direct-PPTX
+  families.
+- Topic research, template creation, and post-route workflows load the next
+  owner only when their own procedure declares a handoff.
 
 ## Font Policy (install-local, standing preference)
 
-- Every generated deck uses **Pretendard** as the fixed font family — do not propose or pick other families unless the user explicitly asks in the current conversation. Hierarchy comes from weight/size, not family switching. Full contract: [`strategist.md §g` install-local font lock](.claude/skills/ppt-master/references/strategist.md).
+- Every SVG-authored deck uses **Pretendard** as the fixed font family — do not propose or pick other families unless the user explicitly asks in the current conversation. Hierarchy comes from weight/size, not family switching. Direct-PPTX routes preserve source fonts unless their selected owner says otherwise. Full contract: [`strategist.md §g` install-local font lock](.claude/skills/ppt-master/references/strategist.md).
 - Stack: `Pretendard, "Malgun Gothic", sans-serif`; intermediate weights use installed family names (`"Pretendard Medium"`, `"Pretendard SemiBold"`, etc.).
 - Font files are bundled at [`.claude/skills/ppt-master/assets/fonts/Pretendard/`](.claude/skills/ppt-master/assets/fonts/Pretendard/) (SIL OFL) and installed user-level on this machine. PPTX does not embed fonts — decks shared to other machines need Pretendard installed there.
 
@@ -43,72 +60,30 @@ PPT Master is an AI-driven presentation generation system. Multi-role collaborat
 
 - This repository is a workflow/skill package, not an app or service scaffold.
 - Do NOT assume generic-project conventions like `.worktrees/`, `tests/`, or mandatory branch setup unless the user explicitly requests them.
-- On conflict with a generic coding skill, prioritize [`.claude/skills/ppt-master/SKILL.md`](.claude/skills/ppt-master/SKILL.md) inside this repository.
+- On conflict with a generic coding skill, prioritize the selected repo-local
+  execution owner. The main [`ppt-master/SKILL.md`](.claude/skills/ppt-master/SKILL.md)
+  has that role only when routing selected the main SVG family or an explicit
+  shared-SVG handoff.
 
-## Command Quick Reference
+## Execution Pointers
 
-Convenience summary only — full workflow in [`.claude/skills/ppt-master/SKILL.md`](.claude/skills/ppt-master/SKILL.md).
+Commands and defaults belong to the selected owner; use these pointers instead
+of treating a root-level command list as a gate checklist.
 
-```bash
-# Source content conversion
-python3 .claude/skills/ppt-master/scripts/source_to_md.py <file_or_URL_or_dir> [<file_or_URL_or_dir> ...]
-
-# Project management
-python3 .claude/skills/ppt-master/scripts/project_manager.py init <project_name> --format ppt169
-python3 .claude/skills/ppt-master/scripts/project_manager.py import-sources <project_path> <source_files_or_dirs_or_URLs...> --move
-python3 .claude/skills/ppt-master/scripts/project_manager.py validate <project_path>
-
-# Environment preflight — run once after init so a long run never dies mid-pipeline (--needs-images for AI-image decks)
-python3 .claude/skills/ppt-master/scripts/preflight.py
-
-# Planning artifact gate — run right after design_spec.md + spec_lock.md are written; fix errors before generation
-python3 .claude/skills/ppt-master/scripts/validate_spec.py <project_path>
-
-# Icon selection — copy chosen library icons into <project>/icons/ (missing names reported + non-zero = re-pick)
-python3 .claude/skills/ppt-master/scripts/icon_sync.py <project_path> <lib/name> [<lib/name>...]
-
-# Step 4 Strategist confirmation stage — interactive visual page (default auto-launch; chat fallback)
-python3 .claude/skills/ppt-master/scripts/confirm_ui/server.py <project_path> --daemon --wait
-
-# Image tools and SVG quality check
-python3 .claude/skills/ppt-master/scripts/analyze_images.py <project_path>/images
-# Formula rendering — manifest written by Strategist after typography confirmation:
-python3 .claude/skills/ppt-master/scripts/latex_render.py <project_path>
-python3 .claude/skills/ppt-master/scripts/latex_render.py <project_path> --dry-run
-python3 .claude/skills/ppt-master/scripts/latex_render.py <project_path> --providers codecogs,quicklatex,mathpad,wikimedia
-# In-pipeline AI image generation — manifest mode (required, even for 1 image).
-# Ladder: codex backend (default, Codex CLI OAuth) → API backend (only when IMAGE_BACKEND + key configured) → web-sourcing switch → user-drop.
-# Launched as a BACKGROUND process at the end of Step 4 (overlaps spec writing); Step 5 collects — see SKILL.md:
-python3 .claude/skills/ppt-master/scripts/image_gen.py --manifest <project_path>/images/image_prompts.json
-# Out-of-pipeline one-off / debug / single-image fixup only (no manifest, no audit trail):
-python3 .claude/skills/ppt-master/scripts/image_gen.py "prompt" --aspect_ratio 16:9 --image_size 1K -o <project_path>/images
-# Spot illustrations — slice one AI grid sheet into individual elements (see image-generator.md §4.3):
-python3 .claude/skills/ppt-master/scripts/slice_images.py <project_path>/images/<sheet>.png --grid RxC --names a,b,c --trim --alpha
-python3 .claude/skills/ppt-master/scripts/svg_editor/server.py <project_path> --live --daemon
-python3 .claude/skills/ppt-master/scripts/svg_quality_checker.py <project_path>
-# create-template review deck (workspace root may be global or project-scoped)
-python3 .claude/skills/ppt-master/scripts/template_preview_pptx.py <template_workspace>
-python3 .claude/skills/ppt-master/scripts/animation_config.py scaffold <project_path>  # optional, only for custom object-level animation
-python3 .claude/skills/ppt-master/scripts/animation_config.py validate <project_path>  # optional, before re-export
-
-# Existing PPTX native enhancement workflow — direct OOXML patch, no SVG conversion
-python3 .claude/skills/ppt-master/scripts/native_enhance_pptx.py init <PPTX_file> --name <project_slug>
-python3 .claude/skills/ppt-master/scripts/native_enhance_pptx.py validate <project_path>
-python3 .claude/skills/ppt-master/scripts/native_enhance_pptx.py apply <project_path>
-
-# Post-processing pipeline: run sequentially, one command at a time
-python3 .claude/skills/ppt-master/scripts/total_md_split.py <project_path>   # only when speaker notes were requested (notes are opt-in, default off)
-python3 .claude/skills/ppt-master/scripts/finalize_svg.py <project_path>  # on-demand (deferred by default): svg_final/ preview only — export reads svg_output/ directly
-python3 .claude/skills/ppt-master/scripts/svg_to_pptx.py <project_path>
-# Mergeable dy-stacked paragraph blocks collapse into one editable text frame by default; add --no-merge to keep every line as its own frame (strict line fidelity). See SKILL.md Step 7.3.
-
-# Final deck verification — stage parity/freshness, native PPTX integrity, plan + SVG re-check, optional OfficeCLI render
-python3 .claude/skills/ppt-master/scripts/verify_deck.py <project_path>
-```
+| Work | Runtime authority |
+|---|---|
+| Route selection | [`routing.md`](.claude/skills/ppt-master/workflows/routing.md) |
+| Main SVG generation and re-architecture | [`ppt-master/SKILL.md`](.claude/skills/ppt-master/SKILL.md) |
+| Strict 1:1 SVG beautify | [`beautify-pptx.md`](.claude/skills/ppt-master/workflows/beautify-pptx.md) and only the shared main steps it invokes |
+| Raw template fill | [`ppt-template-fill/SKILL.md`](.claude/skills/ppt-template-fill/SKILL.md) |
+| Finished-PPTX native enhancement | [`native-enhance-pptx/SKILL.md`](.claude/skills/native-enhance-pptx/SKILL.md) |
+| Standalone workflow inventory | [`workflows/index.md`](.claude/skills/ppt-master/workflows/index.md) |
 
 ## Core Directories
 
-- `.claude/skills/ppt-master/SKILL.md` — main workflow authority.
+- `.claude/skills/ppt-master/SKILL.md` — main SVG workflow authority.
+- `.claude/skills/ppt-template-fill/SKILL.md` — raw-template direct-PPTX authority.
+- `.claude/skills/native-enhance-pptx/SKILL.md` — finished-PPTX enhancement entry owner.
 - `.claude/skills/ppt-master/references/` — role definitions and technical specifications.
 - `.claude/skills/ppt-master/scripts/` — runnable tool scripts.
 - `.claude/skills/ppt-master/scripts/docs/` — topic-focused script docs.
