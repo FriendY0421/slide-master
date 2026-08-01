@@ -30,7 +30,7 @@ python3 scripts/project_manager.py import-sources <project_path> <source_files_o
 python3 scripts/preflight.py  # environment gate — resolve failures before the long run
 python3 scripts/validate_spec.py <project_path>  # after design_spec.md + spec_lock.md are written
 python3 scripts/total_md_split.py <project_path>  # only when speaker notes were requested (opt-in)
-python3 scripts/finalize_svg.py <project_path>
+python3 scripts/finalize_svg.py <project_path>  # on-demand: self-contained SVG previews only
 python3 scripts/animation_config.py scaffold <project_path>  # optional object-level animation overrides
 python3 scripts/svg_to_pptx.py <project_path>
 python3 scripts/verify_deck.py <project_path>  # final verification gate
@@ -221,7 +221,7 @@ python3 scripts/update_repo.py
 | Pipeline gates | `preflight.py` (environment, after project init), `validate_spec.py` (planning artifacts, after Step 4 spec output), `verify_deck.py` (final deck verification, after Step 7; optional OfficeCLI OpenXML + contact-sheet layer) | script docstrings |
 | Run measurement | `run_telemetry.py`, `measure_run.py`, `benchmark_pipeline_ab.py` | section above; script docstrings |
 | Image tools | `image_gen.py`, `latex_render.py`, `analyze_images.py`, `gemini_watermark_remover.py` | [docs/image.md](./docs/image.md) |
-| Repo maintenance | `update_repo.py`, `sync_codex_stubs.py` (regenerate `.codex/skills` Codex discovery stubs after editing canonical skill frontmatter; `--check` is enforced by `preflight.py`) | README install/update section; script docstrings |
+| Repo maintenance | `update_repo.py`, `sync_codex_stubs.py` (regenerate `.codex/skills` Codex discovery stubs after editing canonical skill frontmatter; `--check` is enforced by `preflight.py`), `check_runtime_contracts.py` (standalone contributor drift diagnostic; not a preflight gate) | README install/update section; script docstrings |
 | Troubleshooting | validation, preview, export, dependency issues | [docs/troubleshooting.md](./docs/troubleshooting.md) |
 
 ## High-Frequency Commands
@@ -308,14 +308,14 @@ Post-processing and export:
 
 ```bash
 python3 scripts/extract_svg_assets.py <svg_dir> --icons-dir <icons_dir> --inplace --id-prefix <prefix>  # optional: shrink imported/reference SVGs before AI review
-python3 scripts/total_md_split.py <project_path>
-python3 scripts/finalize_svg.py <project_path>
+python3 scripts/total_md_split.py <project_path>  # only when notes were requested
+python3 scripts/finalize_svg.py <project_path>  # only when svg_final/ previews are requested
 python3 scripts/svg_to_pptx.py <project_path>
 ```
 
 `finalize_svg.py` optimizes raster images by default using `2x` display pixels and max `2560px`. Native `svg_to_pptx.py` defaults to `--image-sizing cap`: only oversized full source images are reduced to max `2560px`, so later PowerPoint resizing keeps more image detail. Use `svg_to_pptx.py --image-sizing display --image-scale 2` only for aggressive size reduction, or `--no-image-optimize` when the native PPTX must embed original image bytes.
 
-`finalize_svg.py` remains mandatory because it creates the self-contained `svg_final/` visual preview. Those SVGs may be opened directly or inserted into PowerPoint as SVG pictures. The only supported generated-PPTX path is `svg_output/` through the project SVG-to-DrawingML converter; `-s final` is diagnostic-only, and PowerPoint's manual Convert-to-Shape operation is unsupported.
+`finalize_svg.py` is on-demand because native export reads `svg_output/` directly. Run it when the user or another workflow needs the self-contained `svg_final/` visual preview; those SVGs may be opened directly or inserted into PowerPoint as SVG pictures. The only supported generated-PPTX path is `svg_output/` through the project SVG-to-DrawingML converter; `-s final` is diagnostic-only, and PowerPoint's manual Convert-to-Shape operation is unsupported.
 
 For SVG-authoring routes, `svg_output/` is the complete visible page-design source: every exported text, image, shape, background, and template-derived layout element is present in the page SVG or explicitly referenced by it. Export may translate represented content into Master/Layout/Slide parts or native objects, but it does not retrieve missing visible content from templates or planning files. Speaker notes, animation, narration, transitions, the `ppt-template-fill` skill, and `native-enhance-pptx` remain separately owned capabilities.
 

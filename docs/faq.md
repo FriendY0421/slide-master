@@ -73,9 +73,9 @@ Be clear on what this buys you: **web search only finds *a* relevant, downloadab
 
 ## Q: Can I edit the generated presentations?
 
-Yes. The only PPTX export route in the SVG pipeline is PPT Master's own `svg_output/` → DrawingML conversion. It saves a timestamped native PowerPoint deck to `exports/`, with text, graphics, and colors directly editable as PowerPoint objects. A copy of `svg_output/` (the Executor's raw SVG source) is always written to `backup/<timestamp>/svg_output/` so you can rebuild via `finalize_svg → svg_to_pptx` without re-running the LLM.
+Yes. The only PPTX export route in the SVG pipeline is PPT Master's own `svg_output/` → DrawingML conversion. It saves a timestamped native PowerPoint deck to `exports/`, with text, graphics, and colors directly editable as PowerPoint objects. A copy of `svg_output/` (the Executor's raw SVG source) is always written to `backup/<timestamp>/svg_output/` so you can rebuild via `svg_to_pptx` without re-running the LLM; run `finalize_svg` first only when you also need self-contained SVG previews.
 
-`finalize_svg.py` remains a mandatory Step 7 operation even though native PPTX export reads `svg_output/`. It produces self-contained files in `svg_final/` for visual inspection and for manual insertion into another deck as SVG pictures. PowerPoint's manual **Convert to Shape** command is not a supported round-trip path; use the generated native PPTX when you need editable shapes.
+`finalize_svg.py` is an on-demand Step 7 operation because native PPTX export reads `svg_output/` directly. Run it when you need self-contained files in `svg_final/` for visual inspection or manual insertion into another deck as SVG pictures. PowerPoint's manual **Convert to Shape** command is not a supported round-trip path; use the generated native PPTX when you need editable shapes.
 
 ## Q: Why is one paragraph split into multiple text boxes? Can I get one text box per paragraph instead?
 

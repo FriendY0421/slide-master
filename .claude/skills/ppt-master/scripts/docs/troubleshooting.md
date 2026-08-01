@@ -15,7 +15,7 @@ python3 scripts/project_manager.py validate <project_path>
 
 1. Check the file path and filename.
 2. Confirm naming conventions are consistent.
-3. Run the mandatory post-processing step when you need a self-contained preview:
+3. Run the on-demand post-processing step when you need a self-contained preview:
 
 ```bash
 python3 scripts/finalize_svg.py <project_path>
@@ -39,15 +39,15 @@ python3 scripts/total_md_split.py <project_path>
 
 ## PPT Export Quality Issues
 
-Preferred sequence:
+Run the applicable commands as separate steps:
 
 ```bash
-python3 scripts/total_md_split.py <project_path>
-python3 scripts/finalize_svg.py <project_path>
+python3 scripts/total_md_split.py <project_path>  # only when notes were requested
+python3 scripts/finalize_svg.py <project_path>  # only when svg_final/ previews are requested
 python3 scripts/svg_to_pptx.py <project_path>
 ```
 
-Keep all three steps even though they have different consumers: Step 7.2 creates the mandatory `svg_final/` visual preview, while the supported native PPTX exporter reads `svg_output/` directly. Do not pass `-s final` for a release export; that override is diagnostic-only.
+The supported native PPTX exporter reads `svg_output/` directly. Step 7.2 is needed only for the independent `svg_final/` preview; notes splitting is needed only for requested notes. Do not pass `-s final` for a release export; that override is diagnostic-only.
 
 ## Inserted SVG Does Not Convert Cleanly to Shapes
 

@@ -39,11 +39,11 @@ User Input (PDF/DOCX/XLSX/PPTX/URL/Markdown/topic text)
     ↓
 [Visual self-check (optional, opt-in)] → visual-review workflow (only when the user explicitly requests it)
     ↓
-[Post-processing] → total_md_split.py (split notes) → finalize_svg.py → svg_to_pptx.py
+[Post-processing] → [total_md_split.py when notes were requested] → [finalize_svg.py when SVG previews were requested] → svg_to_pptx.py
     ↓
 Output:
-    svg_final/
-    └── *.svg                                           ← Mandatory self-contained visual previews; may be inserted as SVG pictures
+    svg_final/                                          ← On-demand; absent on a routine PPTX-only run
+    └── *.svg                                           ← Self-contained visual previews; may be inserted as SVG pictures
 
     # Every PPTX variant below is produced through the svg_output → native DrawingML route
     exports/
@@ -53,7 +53,7 @@ Output:
 
     # Always written in default-flow mode (no -o)
     backup/<timestamp>/
-    └── svg_output/                            ← Archived Executor SVG source (rerun finalize_svg → svg_to_pptx to rebuild)
+    └── svg_output/                            ← Archived Executor SVG source (rerun svg_to_pptx; finalize first only for previews)
 ```
 
 ### SVG as the Page-Design Language
@@ -135,7 +135,7 @@ analysis/image_analysis.csv ────┘
 spec_lock.md + images/ + icons/ + templates/
     └─> Executor -> svg_output/
               ├─> svg_quality_checker.py
-              ├─> finalize_svg.py -> svg_final/
+              ├─> [on demand] finalize_svg.py -> svg_final/
               └─> svg_to_pptx.py -> exports/<name>_<ts>.pptx
                                       backup/<ts>/svg_output/
 
@@ -352,7 +352,7 @@ Several architectural decisions shape this phase:
 
 **Terminal status before Executor.** Rows that require acquisition must end in `Generated`, `Sourced`, or `Needs-Manual`; `Pending` and `Failed` are not allowed to leak into Executor. A `Needs-Manual` row can continue through SVG generation only as a known placeholder/dependency, and Step 7 re-checks required files before final export.
 
-**External refs during development, two divergent embedding strategies for derived outputs.** While editing in `svg_output/`, images are external file references — fast iteration, single-source-of-truth replacement. Step 7 always creates both downstream forms: `svg_final/` Base64-inlines assets into self-contained SVGs that an IDE or browser can inspect and users may manually insert as SVG pictures; native pptx instead reads `svg_output/`, copies bitmaps into the PPTX media folder, and uses `<a:srcRect>` to express cropping. The split exists because Base64 inside DrawingML works but bloats file size 3-4×, while file-referenced bitmaps are PowerPoint's native idiom for which `<a:srcRect>` is the canonical crop expression. Manual PowerPoint Convert to Shape is not a third conversion route and is not covered by the project contract.
+**External refs during development, two divergent embedding strategies for derived outputs.** While editing in `svg_output/`, images are external file references — fast iteration, single-source-of-truth replacement. A routine Step 7 creates the native PPTX directly: it reads `svg_output/`, copies bitmaps into the PPTX media folder, and uses `<a:srcRect>` to express cropping. When a self-contained SVG preview is requested, `finalize_svg.py` additionally Base64-inlines assets into `svg_final/` for IDE/browser inspection or manual insertion as SVG pictures. The split exists because Base64 inside DrawingML works but bloats file size 3-4×, while file-referenced bitmaps are PowerPoint's native idiom for which `<a:srcRect>` is the canonical crop expression. Manual PowerPoint Convert to Shape is not a third conversion route and is not covered by the project contract.
 
 **Three-dimensional AI image lock at Strategist time.** When the deck includes AI-generated images, Strategist decides three orthogonal dimensions up front — `rendering` (visual style family: vector-illustration / editorial / 3d-isometric / sketch-notes / …), `palette` (how the deck's HEX values are *used*: proportion + role + temperament), `type` (per-image internal composition: background / hero / framework / comparison / …). The first two are deck-wide and written into `spec_lock.md`; Image_Generator then assembles every per-image prompt from the single locked rendering + palette plus a per-image type, instead of re-deciding style per image. Without this, every image gets its own style drift and the deck reads as a stack of unrelated illustrations. This is the visual-cohesion dual of `spec_lock`'s typography/color anti-drift mechanism, just one level upstream of pixels. Strategist surfaces ≥3 candidate `rendering × palette` combinations to the user during the Strategist confirmation stage — never auto-locking a single combination silently, because the choice has far-reaching deck-wide consequences and the user's taste is the only oracle for it.
 
@@ -413,7 +413,7 @@ The post-processing and export stages work with distinct artifacts. Each one ser
 | Artifact | Workflow it serves | Why nothing else replaces it |
 | --- | --- | --- |
 | `svg_output/` | source of truth, manual editing, `update_spec.py`, `svg_quality_checker.py` | only directory whose contents are authored, not derived |
-| `svg_final/` | mandatory self-contained visual preview; IDE/browser inspection; manual insertion as an SVG picture | `.pptx` is not openable in IDEs; `svg_output/` won't render fully because of external icon / image refs. PowerPoint Convert to Shape is not supported |
+| `svg_final/` | on-demand self-contained visual preview; IDE/browser inspection; manual insertion as an SVG picture | `.pptx` is not openable in IDEs; `svg_output/` won't render fully because of external icon / image refs. PowerPoint Convert to Shape is not supported |
 | `exports/<name>_<ts>.pptx` (native) | primary deliverable — editable in PowerPoint with DrawingML shapes | only artifact whose shapes the user can resize / recolor / restyle natively in PowerPoint |
 | `exports/<name>_<ts>_native_charts.pptx` (opt-in via `--native-objects`) | when `data-pptx-native` chart/table markers should ship as real editable PowerPoint objects instead of flattened shapes | data-backed chart/table objects the user can edit in PowerPoint; name marks it apart from the plain shape export |
 | `exports/<name>_<ts>_narrated.pptx` (via `--recorded-narration audio`) | narrated deck for auto-play and PowerPoint video export | embedded per-slide audio plus auto-advance timings; name marks it apart from silent exports |
@@ -423,7 +423,7 @@ The post-processing and export stages work with distinct artifacts. Each one ser
 
 This is the key insight that's easy to miss when reading the code. Cleanup modules under `.claude/skills/ppt-master/scripts/svg_finalize/`, together with the local-reference expander, are used in two places for two different products.
 
-**Disk consumer** — `finalize_svg.py` writes `svg_output/` → `svg_final/` once per run, expanding both project icon placeholders and qualified local `<use>` references. This mandatory output feeds IDE/browser preview and may be inserted manually as an SVG picture; it is not converted into a separate PPTX artifact.
+**Disk consumer** — on demand, `finalize_svg.py` writes `svg_output/` → `svg_final/`, expanding both project icon placeholders and qualified local `<use>` references. This optional output feeds IDE/browser preview and may be inserted manually as an SVG picture; it is not converted into a separate PPTX artifact.
 
 **Memory consumer** — native pptx generation reads `svg_output/` directly (no disk hop), but DrawingML cannot consume project icon placeholders, retained SVG reference instances, or positional text runs inline, so the converter applies the matching preprocessors **in memory**:
 

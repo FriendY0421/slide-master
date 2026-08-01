@@ -4,7 +4,7 @@
 
 These tools cover post-processing, SVG validation, speaker notes, recorded narration, and PPTX export.
 
-The supported delivery contract has one PPTX path: `svg_output/` → the project SVG-to-DrawingML converter → native PPTX. The mandatory `finalize_svg.py` step separately creates self-contained `svg_final/` visual previews, which may be opened directly or inserted into PowerPoint as SVG pictures. There is no SVG-image PPTX output, and PowerPoint's manual Convert-to-Shape operation is unsupported.
+The supported delivery contract has one PPTX path: `svg_output/` → the project SVG-to-DrawingML converter → native PPTX. The on-demand `finalize_svg.py` step separately creates self-contained `svg_final/` visual previews, which may be opened directly or inserted into PowerPoint as SVG pictures. There is no SVG-image PPTX output, and PowerPoint's manual Convert-to-Shape operation is unsupported.
 
 ## `svg_authoring_view.py`
 
@@ -37,13 +37,13 @@ projection is deliberately not a template generator, not a replacement for
 the explicit Master/Layout restoration workflow, and not a supported release
 input to `svg_to_pptx.py`.
 
-## Recommended Pipeline
+## Export Pipeline
 
-Run these steps in order:
+Run the applicable steps in order:
 
 ```bash
-python3 scripts/total_md_split.py <project_path>
-python3 scripts/finalize_svg.py <project_path>
+python3 scripts/total_md_split.py <project_path>  # only when notes were requested
+python3 scripts/finalize_svg.py <project_path>  # only when svg_final/ previews are requested
 python3 scripts/svg_to_pptx.py <project_path>
 ```
 
@@ -57,7 +57,7 @@ It aggregates:
 - `align_embed_images.py` (`crop-images` / `fix-aspect` / `embed-images` aliases route here)
 - `flatten_tspan.py`
 
-`svg_final/` remains a required Step 7.2 artifact even though the native exporter reads `svg_output/`. It is the self-contained visual reference and may be manually inserted as an SVG picture.
+`svg_final/` is an on-demand Step 7.2 artifact because the native exporter reads `svg_output/`. Generate it when a self-contained visual reference or manually inserted SVG picture is needed.
 
 ## `svg_to_pptx.py`
 
@@ -84,8 +84,8 @@ python3 scripts/svg_to_pptx.py <project_path> --recorded-narration audio
 Behavior:
 - Default output (default-flow mode, no `-o`):
   - `exports/<project_name>_<timestamp>.pptx` — native editable pptx (canonical output)
-  - `backup/<timestamp>/svg_output/` — copy of Executor SVG source, always written so the pptx can be rebuilt via `finalize_svg → svg_to_pptx` without re-running the LLM
-- `finalize_svg.py` always creates `svg_final/` before export. This directory is the self-contained SVG visual preview; it is not packaged as a second PPTX.
+  - `backup/<timestamp>/svg_output/` — copy of Executor SVG source, always written so the pptx can be rebuilt via `svg_to_pptx` without re-running the LLM; finalize first only when previews are also needed
+- When requested, `finalize_svg.py` creates `svg_final/` independently of export. This directory is the self-contained SVG visual preview; it is not packaged as a second PPTX.
 - Explicit `-o/--output` changes the native PPTX destination and skips `backup/`.
 - Paragraph merging is enabled by default and trades some SVG line-layout fidelity for PowerPoint editability:
   - Default: mergeable paragraph blocks (same x, dy clustered around one base line-height) collapse into one editable text frame. Equal effective font sizes may join as flowing prose; a font-size change, list marker, or accepted larger gap starts a new `<a:p>` with precise `<a:lnSpc>` / `<a:spcBef>`. Resizing the box reflows text inside it without erasing those paragraph boundaries.

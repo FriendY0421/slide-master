@@ -63,17 +63,19 @@ following Codex enforcement remains mandatory for that route only:
   and stop on failure. Every blocking confirmation is a hard stop; use the
   Confirm UI and only its documented staged-chat fallback.
 - Immediately run `validate_spec.py` on `design_spec.md` plus `spec_lock.md` and
-  fix every error before SVG generation; re-read the lock before every page.
-  Run the page-1 SVG quality gate before page 2 and the full quality gate after
-  the last page; fix every error.
+  fix every error before SVG generation. Re-read `spec_lock.md` at P01/P05/P09
+  and after context compaction. On a valid execution-packet path, the immediate
+  post-packet read satisfies P01. Run the page-1 SVG quality gate before page 2
+  and the full quality gate after the last page; fix every error.
 - Honor the confirmed image source and exact §VIII targets. The default `codex`
   AI path uses Codex built-in `image_gen`; legacy `host-native` reads as `auto`.
   On acquisition failure, retry once, mark `Needs-Manual`, report, and continue
   without substitution.
-- Post-process in separate ordered calls: optional `total_md_split.py`, then
-  `finalize_svg.py`, then `svg_to_pptx.py`; never replace finalize with a copy or
-  use `-s final` for release. Require `verify_deck.py <project>` exit 0 before
-  declaring completion.
+- Post-process in separate ordered calls: `total_md_split.py` only when notes
+  were requested, `finalize_svg.py` only when a self-contained SVG preview is
+  requested or a workflow explicitly needs `svg_final/`, then `svg_to_pptx.py`.
+  Never replace finalize with a copy or use `-s final` for release. Require
+  `verify_deck.py <project> --no-render` exit 0 before declaring completion.
 
 Direct-PPTX routes use only their own native validation loops and preserve their
 source fonts. Pretendard applies to SVG-authoring routes. `docs/rules/` style
