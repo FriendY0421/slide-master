@@ -8,7 +8,7 @@
 
 **Hard rule — route-specific PowerPoint structure**: Free-design and brand-only projects use `pptx_structure.mode: flat`: write no root Master/Layout identity, `data-pptx-layer`, or `data-pptx-placeholder`; every visible object remains Slide-local under PowerPoint's default Master and Blank Layout. **Every flat page still declares the root `data-pptx-page-role`** (`cover` / `toc` / `section` / `content` / `ending`) — it is the route's only structural marker and names the exported slide's baseline Layout; see [`semantic-svg.md`](./semantic-svg.md) §4.1. Deck/layout template projects use `mode: structured`: every page reads its locked Master/Layout row and declares the four root identity attributes from the first draft. On that structured route only, do not add `data-pptx-layout-kind` and do not duplicate the Layout identity with `data-pptx-page-role`. Add `data-pptx-role` only to structural page-frame objects whose package, page-number, or animation behavior is not already expressed by specialized metadata; the marked element uses a stable unique `id`. See [`semantic-svg.md`](./semantic-svg.md).
 
-**Hard rule — supported PPTX route**: The only supported generated-PPTX path is `svg_output/` through the project SVG-to-DrawingML converter. Step 7.2 still generates `svg_final/` as a mandatory self-contained visual preview that may be inserted as an SVG picture. Do not treat PowerPoint's manual Convert-to-Shape operation as an authoring target or compatibility requirement.
+**Hard rule — supported PPTX route**: The only supported generated-PPTX path is `svg_output/` through the project SVG-to-DrawingML converter. Step 7.2 generates the self-contained `svg_final/` visual preview only on demand; a routine PPTX-only run skips it. Do not treat PowerPoint's manual Convert-to-Shape operation as an authoring target or compatibility requirement.
 
 > Note: this rule covers page design only. Speaker notes, animations, transitions, narration, and direct native-PPTX workflows retain their separate artifacts and package-level processing.
 
@@ -339,7 +339,7 @@ Examples: `01_封面.svg` / `02_目录.svg` / `03_核心优势.svg`; `01_cover.s
 
 Strategist chooses the library and inventory; Executor only implements. Library details and one-library rule: [`../templates/icons/README.md`](../templates/icons/README.md). This section defines placeholder syntax.
 
-> **Resolution is project-first.** Strategist copied the chosen icons into `<project_path>/icons/<lib>/` (via `icon_sync.py`); `finalize_svg.py embed-icons` embeds from there, falling back to the global library per-icon. **Custom icons**: drop an `.svg` into `<project_path>/icons/<lib>/` (any `<lib>`, e.g. `custom/`) and reference it as `data-icon="<lib>/<name>"` — it embeds like any other. Reference only icons in the `spec_lock.md` inventory.
+> **Resolution is project-first.** Strategist copied the chosen icons into `<project_path>/icons/<lib>/` (via `icon_sync.py`); native export expands them in memory, and an on-demand `finalize_svg.py embed-icons` preview run embeds them from the same project directory, falling back to the global library per-icon. **Custom icons**: drop an `.svg` into `<project_path>/icons/<lib>/` (any `<lib>`, e.g. `custom/`) and reference it as `data-icon="<lib>/<name>"` — it embeds like any other. Reference only icons in the `spec_lock.md` inventory.
 
 **Built-in icons — Placeholder method (recommended)**:
 
@@ -368,7 +368,7 @@ Strategist chooses the library and inventory; Executor only implements. Library 
 >
 > **stroke-width** (stroke-style libraries only, currently `tabler-outline`): allowed values `{1.5, 2, 3}`. If `spec_lock.md icons.stroke_width` is declared, all placeholders MUST use that value deck-wide. Default `2` if absent (legacy). Ignored on non-stroke libraries.
 >
-> Icons are auto-embedded by `finalize_svg.py` — no need to run `embed_icons.py` manually.
+> Native export expands icons in memory. When a self-contained SVG preview is requested, `finalize_svg.py` embeds them into `svg_final/`; do not run `embed_icons.py` manually.
 
 **Searching for icons** — use terminal, zero token cost:
 ```bash

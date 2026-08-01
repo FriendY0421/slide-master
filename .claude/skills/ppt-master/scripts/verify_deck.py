@@ -306,7 +306,7 @@ def run_checks(project: Path) -> tuple[list[str], list[str]]:
             failures.append(f"exports/{newest.name}: " + "; ".join(errs))
         if newest.stat().st_mtime < _newest_mtime(pages):
             failures.append(f"exports/{newest.name} is older than svg_output/ "
-                            f"— re-run finalize_svg.py + svg_to_pptx.py")
+                            f"— re-run svg_to_pptx.py")
 
     # 5. planning artifacts (skip when unchanged since the recorded pass —
     # validate_spec.py writes .spec_pass.json on PASS)

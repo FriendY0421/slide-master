@@ -28,7 +28,7 @@ Verify the project's planning-session artifacts before doing anything else:
 
 | File / Directory | Required when | Reason |
 |---|---|---|
-| `<project_path>/spec_lock.md` | Always | Strategist's execution contract; Executor reads it per page |
+| `<project_path>/spec_lock.md` | Always | Strategist's execution contract; Executor re-reads it at P01/P05/P09 milestones and after context compaction |
 | `<project_path>/design_spec.md` | Always | Section IX page outline; Executor cross-references it |
 | `<project_path>/images/` | `spec_lock images` references any image | Images must exist for embedding |
 | `<project_path>/templates/` | `spec_lock page_layouts` / `page_charts` references any | Layout / chart SVGs needed for batch read |
@@ -48,10 +48,10 @@ Then jump to `### Step 6: Executor Phase` and run the documented pipeline:
 - Read references (executor-base + shared-standards + the locked `mode` file under `modes/` + the locked `visual_style` file under `visual-styles/` + image-layout-spec + svg-image-embedding)
 - Design Parameter Confirmation
 - Pre-generation Batch Read (every layout / chart SVG referenced in `spec_lock`)
-- Per-page `spec_lock` re-read + sequential page generation
+- Milestone `spec_lock` re-read (P01/P05/P09, …, plus after context compaction) + sequential page generation
 - Quality Check Gate
 - Speaker notes generation (only when requested in `design_spec.md §X`)
-- Step 7: Post-processing & Export (`total_md_split` when notes exist → `finalize_svg` → `svg_to_pptx`)
+- Step 7: Post-processing & Export (`total_md_split` when notes exist → `finalize_svg` only when a self-contained SVG preview is requested or already exists → `svg_to_pptx`)
 
 The fresh session pays the cost of re-reading references (~14K tokens) but earns back substantially more headroom by dropping the planning session's accumulated context. Net win in both window pressure and reasoning budget per page.
 

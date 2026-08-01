@@ -6,7 +6,7 @@ description: Post-export PPTX verification via OfficeCLI — package schema vali
 
 > Standalone post-export step. Runs OfficeCLI against an exported `.pptx` to catch what SVG-stage checks cannot see: package-level schema violations, text overflow in native frames, broken part references, and SVG-to-DrawingML conversion drift. Explicit-request only.
 
-This workflow is **independent**: it reads `<project>/exports/<file>.pptx` (plus `svg_final/` for comparison when the deck came through the SVG pipeline) — no upstream conversation context required. Safe to invoke in a fresh session.
+This workflow is **independent**: it reads `<project>/exports/<file>.pptx` and the route-owned comparison source. For an SVG-pipeline deck, compare against `svg_output/`; generate `svg_final/` on demand only when a self-contained comparison view is useful. No upstream conversation context is required, so the workflow is safe to invoke in a fresh session.
 
 ## When to Run
 
@@ -92,7 +92,7 @@ Read the rendered output and check every page:
 
 | Deck route | Compare against |
 |---|---|
-| SVG pipeline export (`svg_output/` route) | `svg_final/<page>.svg` design intent, page by page |
+| SVG pipeline export (`svg_output/` route) | `svg_output/<page>.svg` design intent, page by page; optionally generate `svg_final/` on demand for a self-contained comparison view |
 | `ppt-template-fill` / `native-enhance-pptx` | Source deck design — unchanged pages must look unchanged |
 
 **Known HTML-engine deviations** (only under `--render html`) — never report these as export defects:
@@ -111,7 +111,7 @@ Read the rendered output and check every page:
 
 | Deck route | Fix location | Re-export |
 |---|---|---|
-| Main SVG pipeline / beautify | `svg_output/<page>.svg` | `SKILL.md` Step 7.2–7.3 (`finalize_svg.py`, then `svg_to_pptx.py`) |
+| Main SVG pipeline / beautify | `svg_output/<page>.svg` | Run `svg_to_pptx.py`; rerun on-demand Step 7.2 first only when `svg_final/` is requested or already exists |
 | `ppt-template-fill` | `fill_plan.json` (shorten text, re-pick page) | [`ppt-template-fill`](../../ppt-template-fill/SKILL.md) Step 6–7 (its Step 7.2 gate already runs this scan) |
 | `native-enhance-pptx` | Enhancement plan / config | native-enhance apply + validate |
 

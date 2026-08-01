@@ -63,7 +63,7 @@ Triggered by the user signals listed in "When to Run".
    - Append one `annotation_applied` JSONL record to `<project_path>/live_preview/annotations.jsonl` with `ts`, `file`, `element_id`, and the original annotation text.
 4. Re-export:
    ```bash
-   python3 ${SKILL_DIR}/scripts/finalize_svg.py <project_path>
+   python3 ${SKILL_DIR}/scripts/finalize_svg.py <project_path>  # only when svg_final/ is requested or already exists
    python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project_path>
    ```
 5. Tell the user (in their language): annotations applied, new PPTX exported, preview is still running. If the browser still shows the old slide, refresh or reselect the page.
@@ -81,7 +81,7 @@ Triggered by the user signals listed in "When to Run".
 - **Overlap picker**: right-click anywhere on the canvas to list every selectable element under the pointer (top→bottom), so stacked shapes can be reached without blind cycling. Left-click is unchanged (selects the topmost). Hovering a row highlights that element; clicking it selects it; `Esc` or an outside click closes the list. With exactly one element under the pointer, right-click selects it directly.
 - **Undo**: `Ctrl+Z` or the **Undo** button drops the last staged direct edit on the current slide (per-slide LIFO, this session). Consecutive edits to the *same element and same field set* (e.g. nudging one color or coordinate several times) coalesce into a single undo step, keeping the original pre-edit value; switching element or field starts a new step. Applied old→new history is appended to `<project>/live_preview/edits.jsonl`; annotation save/update/remove history is appended to `<project>/live_preview/annotations.jsonl`; un-applied staged edits are in-memory only.
 - **Unsaved-work guard**: staged direct edits and annotation changes (added or removed) live in server memory until **Apply changes**; closing the tab triggers the browser's native "leave site?" prompt while any are unapplied, since an idle timeout or process kill would drop them.
-- **Re-export is chat-driven**: applying changes updates `svg_output/` only. Refreshing the PPTX (finalize + svg_to_pptx) stays a chat step — the editor never runs the export pipeline or presents browser-side export as part of applying edits.
+- **Re-export is chat-driven**: applying changes updates `svg_output/` only. Refreshing the PPTX with `svg_to_pptx.py` stays a chat step; refresh `svg_final/` first only when that preview is requested or already exists. The editor never runs the export pipeline or presents browser-side export as part of applying edits.
 - **Stop conditions**: the service stops when the user clicks **Exit preview** in the browser, asks in chat to stop it, the idle timeout fires, or the process is killed externally.
 - **Port**: default `5050`, auto-advancing to the next free port when another project already holds it (report the actual URL from the launch log); force a specific port with `--port <other>`.
 - **Idle timeout**: plain mode `900s`, `--live` mode `7200s`; override with `--timeout <seconds>` (`0` disables).

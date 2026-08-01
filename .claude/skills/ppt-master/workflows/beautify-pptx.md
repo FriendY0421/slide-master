@@ -105,7 +105,7 @@ Use the cleaned `analysis/source_svg_import/svg-flat/slide_*.svg` files plus `an
 
 Default: do **not** copy these candidates into the project `icons/`, do **not** list them as reusable output assets, and do **not** preserve original vector decorations byte-for-byte in the beautified deck. The Executor still regenerates fresh native shapes from the confirmed plan.
 
-Optional reuse gate: if a candidate is a non-text brand/logo/motif/decorative asset that should survive the beautification, list it in the Step 5 plan with source slide, candidate filename, intended reuse, and dependency notes from the inventory. Wait for user confirmation. Only confirmed candidates may be promoted into `<project_path>/icons/` and referenced from generated SVGs with `<use data-icon="..."/>`; `finalize_svg.py` then re-inlines them as native shapes. Never promote text-bearing groups, charts/tables, source page layouts, or dense slide composites as reusable assets.
+Optional reuse gate: if a candidate is a non-text brand/logo/motif/decorative asset that should survive the beautification, list it in the Step 5 plan with source slide, candidate filename, intended reuse, and dependency notes from the inventory. Wait for user confirmation. Only confirmed candidates may be promoted into `<project_path>/icons/` and referenced from generated SVGs with `<use data-icon="..."/>`; native export expands those references in memory, while an on-demand `finalize_svg.py` run re-inlines them only for the self-contained SVG preview. Never promote text-bearing groups, charts/tables, source page layouts, or dense slide composites as reusable assets.
 
 **Assemble the inventory** — the deterministic join into one per-slide ledger, `analysis/beautify_inventory.json`, the contract Step 5 confirms and Step 7 verifies against:
 
@@ -212,7 +212,7 @@ On confirmation, enter SKILL.md Step 4 as Strategist with the plan pre-resolved.
 Run the standard pipeline (SKILL.md Steps 6–7). The Executor re-lays-out each page — hierarchy, spacing, alignment, page rhythm — using **only** the inherited palette + fonts from `spec_lock.md`, regenerates charts / tables as native SVG from the extracted data, and re-lays-out the source pictures.
 
 ```bash
-python3 ${SKILL_DIR}/scripts/finalize_svg.py <project_path>
+python3 ${SKILL_DIR}/scripts/finalize_svg.py <project_path>  # only when svg_final/ is requested or already exists
 python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project_path>
 ```
 

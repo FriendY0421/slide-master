@@ -22,7 +22,7 @@ The past two months' structural capability growth. Single flags / incremental po
 - **Source-less generation**: `topic-research` workflow supports "topic only, no source files"
 - **PPTX export step-change**: SVG clipPath → DrawingML picture geometry, marker → native arrows, output consolidated to `exports/`
 - **Chart library expands to 70 templates + three icon libraries** (simple-icons / phosphor-duotone / brand-logo)
-- **`spec_lock.md` machine-readable contract**: Strategist locks the spec, Executor re-reads it before every page — cross-page consistency gets a real guarantee
+- **`spec_lock.md` machine-readable contract**: Strategist locks the spec, Executor re-reads it at P01/P05/P09 milestones and after context compaction — cross-page consistency gets a real guarantee without a per-page read tax
 - **Per-element animation support** + recorded narration / video export ([`workflows/generate-audio.md`](../.claude/skills/ppt-master/workflows/generate-audio.md)); the current behavior is opt-in, with element animation defaulting to `none`
 
 ### 2026-05 — Visual editing + AI image systematization

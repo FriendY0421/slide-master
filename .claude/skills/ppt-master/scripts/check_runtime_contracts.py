@@ -2,8 +2,8 @@
 """
 PPT Master - Runtime Contract Drift Check
 
-Check a small set of stable cross-host workflow invariants without running the
-presentation pipeline. This is a contributor diagnostic, not a runtime gate.
+Check active cross-host workflow invariants without running the presentation
+pipeline. This is a contributor diagnostic, not a runtime gate.
 
 Usage:
     python3 scripts/check_runtime_contracts.py [--repo-root PATH]
@@ -19,6 +19,7 @@ Dependencies:
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 from typing import Optional
@@ -26,86 +27,274 @@ from typing import Optional
 from console_encoding import configure_utf8_stdio
 
 
-_REQUIRED_FILES = (
+_ACTIVE_CONTRACT_FILES = (
     "AGENTS.md",
     "CLAUDE.md",
+    "docs/faq.md",
+    "docs/roadmap.md",
+    "docs/technical-design.md",
     ".claude/skills/ppt-master/SKILL.md",
-    ".claude/skills/ppt-master/workflows/routing.md",
+    ".claude/skills/ppt-master/references/artifact-ownership.md",
+    ".claude/skills/ppt-master/references/executor-base.md",
+    ".claude/skills/ppt-master/references/executor-cheatcard.md",
+    ".claude/skills/ppt-master/references/svg-image-embedding.md",
+    ".claude/skills/ppt-master/scripts/README.md",
+    ".claude/skills/ppt-master/scripts/docs/svg-pipeline.md",
+    ".claude/skills/ppt-master/scripts/docs/troubleshooting.md",
+    ".claude/skills/ppt-master/scripts/check_runtime_contracts.py",
     ".claude/skills/ppt-master/scripts/verify_deck.py",
+    ".claude/skills/ppt-master/workflows/beautify-pptx.md",
+    ".claude/skills/ppt-master/workflows/live-preview.md",
+    ".claude/skills/ppt-master/workflows/resume-execute.md",
+    ".claude/skills/ppt-master/workflows/routing.md",
+    ".claude/skills/ppt-master/workflows/verify-charts.md",
+    ".claude/skills/ppt-master/workflows/verify-pptx-export.md",
+    ".claude/skills/ppt-master/workflows/visual-review.md",
 )
 
-_REQUIRED_ANCHORS = {
+_ACTIVE_MARKDOWN_GLOBS = (
+    "docs/*.md",
+    ".claude/skills/ppt-master/references/**/*.md",
+    ".claude/skills/ppt-master/scripts/docs/*.md",
+    ".claude/skills/ppt-master/workflows/*.md",
+)
+
+_SEMANTIC_REQUIREMENTS = {
     "AGENTS.md": (
-        "P01/P05/P09",
-        "verify_deck.py <project_path>",
-    ),
-    "CLAUDE.md": (
-        "finalize_svg.py <project_path>  # on-demand (deferred by default)",
-        "verify_deck.py <project_path>",
+        (
+            "milestone spec_lock cadence",
+            r"spec_lock.{0,240}P01\W*P05\W*P09.{0,160}context compaction",
+        ),
+        (
+            "routine no-render completion command",
+            r"verify_deck\.py\s+<project(?:_path)?>\s+--no-render",
+        ),
     ),
     ".claude/skills/ppt-master/SKILL.md": (
-        "**Step 7.2** — SVG post-processing",
-        "on-demand, deferred by default",
-        "Final deck verification (mandatory",
-        "P01, P05, P09",
+        (
+            "milestone spec_lock cadence",
+            r"SPEC_LOCK MILESTONE RE-READ.{0,300}P01\W*P05\W*P09"
+            r".{0,300}context compaction",
+        ),
+        (
+            "on-demand deferred Step 7.2",
+            r"Step 7\.2.{0,300}on-demand,\s*deferred by default",
+        ),
+        (
+            "mandatory final verification",
+            r"Final deck verification\s*\(mandatory",
+        ),
+        (
+            "routine no-render completion command",
+            r"verify_deck\.py\s+<project(?:_path)?>\s+--no-render",
+        ),
+    ),
+    ".claude/skills/ppt-master/references/artifact-ownership.md": (
+        (
+            "milestone spec_lock cadence",
+            r"spec_lock\.md.{0,500}P01\W*P05\W*P09.{0,200}context compaction",
+        ),
+    ),
+    ".claude/skills/ppt-master/references/executor-base.md": (
+        (
+            "on-demand svg_final preview",
+            r"svg_final/.{0,120}(?:only on demand|on-demand)",
+        ),
+    ),
+    ".claude/skills/ppt-master/references/svg-image-embedding.md": (
+        (
+            "direct native export boundary",
+            r"Native PPTX export reads.{0,120}svg_output/",
+        ),
+        (
+            "on-demand finalize boundary",
+            r"on-demand.{0,120}finalize_svg\.py|finalize_svg\.py.{0,120}on demand",
+        ),
+    ),
+    ".claude/skills/ppt-master/workflows/resume-execute.md": (
+        (
+            "milestone spec_lock cadence",
+            r"P01\W*P05\W*P09.{0,160}context compaction",
+        ),
+        (
+            "conditional finalize boundary",
+            r"finalize_svg.{0,160}only when",
+        ),
+    ),
+    "docs/technical-design.md": (
+        (
+            "milestone spec_lock cadence",
+            r"spec_lock\.md.{0,300}P01\W*P05\W*P09.{0,180}context compaction",
+        ),
+        (
+            "on-demand svg_final architecture",
+            r"svg_final/.{0,160}on-demand",
+        ),
+    ),
+    ".claude/skills/ppt-master/scripts/verify_deck.py": (
+        (
+            "no-render parser flag",
+            r"add_argument\(\s*[\"']--no-render[\"'].{0,160}action=[\"']store_true",
+        ),
+        (
+            "no-render runtime behavior",
+            r"officecli_checks\(project,\s*render=not args\.no_render\)",
+        ),
     ),
 }
 
-_FORBIDDEN_STALE_TEXT = {
-    "docs/faq.md": (
-        "finalize_svg.py remains a mandatory Step 7 operation",
+_STALE_PATTERNS = (
+    (
+        "per-page spec_lock read",
+        r"(?:per[- ]page\s+`?spec_lock(?:\.md)?`?\s+re-?read|"
+        r"spec_lock(?:\.md)?[^\n]{0,100}re-?reads?[^\n]{0,60}"
+        r"(?:every|each)\s+page|spec_lock(?:\.md)?[^\n]{0,100}"
+        r"before\s+(?:every|each)\s+page|reads?\s+it\s+per\s+page)",
     ),
-    "docs/technical-design.md": (
-        "Mandatory self-contained visual previews",
-        "This mandatory output feeds IDE/browser preview",
+    (
+        "mandatory svg_final/finalize",
+        r"(?:(?:mandatory|always|required (?:step|artifact|operation|preview))"
+        r"[^\n]{0,100}(?:svg_final|finalize_svg)|"
+        r"(?:svg_final|finalize_svg)[^\n]{0,40}(?:is mandatory|"
+        r"is required|remains mandatory)|"
+        r"(?:svg_final|finalize_svg)[^\n]{0,100}(?:mandatory "
+        r"(?:self-contained )?(?:visual )?(?:step|artifact|preview)|"
+        r"required (?:step|artifact|operation|preview)|"
+        r"always (?:runs|creates|generated)|every standard deck))",
     ),
-    ".claude/skills/ppt-master/scripts/README.md": (
-        "finalize_svg.py` remains mandatory",
-    ),
-    ".claude/skills/ppt-master/scripts/docs/svg-pipeline.md": (
-        "mandatory `finalize_svg.py` step",
-        "required Step 7.2 artifact",
-        "always creates `svg_final/` before export",
-    ),
-    ".claude/skills/ppt-master/scripts/docs/troubleshooting.md": (
-        "Keep all three steps",
-        "mandatory `svg_final/` visual preview",
-    ),
-}
+)
+
+_ROUTINE_FINALIZE_COMMAND_FILES = (
+    ".claude/skills/ppt-master/references/svg-image-embedding.md",
+    ".claude/skills/ppt-master/workflows/beautify-pptx.md",
+    ".claude/skills/ppt-master/workflows/live-preview.md",
+    ".claude/skills/ppt-master/workflows/verify-charts.md",
+    ".claude/skills/ppt-master/workflows/visual-review.md",
+)
+
+# These explicit visual/deep-verification workflows may intentionally invoke a
+# full render. Other active docs must use --no-render for a routine verify call.
+_FULL_RENDER_ALLOWLIST = frozenset({
+    ".claude/skills/ppt-master/workflows/verify-pptx-export.md",
+    ".claude/skills/ppt-master/workflows/visual-review.md",
+})
+
+_CONDITIONAL_FINALIZE = re.compile(
+    r"(?:only\s+when|on[- ]demand|if\s+.*(?:exists|requested)|"
+    r"when\s+.*(?:exists|requested))",
+    re.IGNORECASE,
+)
+
+
+def _read_contracts(repo_root: Path, findings: list[str]) -> dict[str, str]:
+    """Read active contract files once and report missing inputs."""
+    texts: dict[str, str] = {}
+    for relative in _ACTIVE_CONTRACT_FILES:
+        path = repo_root / relative
+        if not path.is_file():
+            findings.append(f"missing active contract file: {relative}")
+            continue
+        texts[relative] = path.read_text(encoding="utf-8", errors="replace")
+    for pattern in _ACTIVE_MARKDOWN_GLOBS:
+        for path in sorted(repo_root.glob(pattern)):
+            if not path.is_file():
+                continue
+            relative = path.relative_to(repo_root).as_posix()
+            if relative not in texts:
+                texts[relative] = path.read_text(
+                    encoding="utf-8", errors="replace"
+                )
+    return texts
+
+
+def _check_semantic_requirements(
+        texts: dict[str, str], findings: list[str]) -> None:
+    """Check meaning-bearing patterns without pinning prose formatting."""
+    for relative, requirements in _SEMANTIC_REQUIREMENTS.items():
+        text = texts.get(relative)
+        if text is None:
+            continue
+        for label, pattern in requirements:
+            if re.search(pattern, text, re.IGNORECASE | re.DOTALL) is None:
+                findings.append(f"{relative}: missing semantic contract: {label}")
+
+
+def _check_stale_contracts(
+        texts: dict[str, str], findings: list[str]) -> None:
+    """Reject known semantic forms of superseded runtime contracts."""
+    for relative, text in texts.items():
+        if relative.endswith("check_runtime_contracts.py"):
+            continue
+        for label, pattern in _STALE_PATTERNS:
+            if re.search(pattern, text, re.IGNORECASE) is not None:
+                findings.append(f"{relative}: stale runtime contract: {label}")
+
+        for line_number, line in enumerate(text.splitlines(), start=1):
+            lowered = line.lower()
+            has_sequence = re.search(
+                r"finalize_svg(?:\.py)?[^\n]{0,100}"
+                r"(?:→|\+|\bthen\b|\bbefore\b)[^\n]{0,100}svg_to_pptx",
+                line,
+                re.IGNORECASE,
+            )
+            if has_sequence is not None:
+                if _CONDITIONAL_FINALIZE.search(line) is None:
+                    findings.append(
+                        f"{relative}:{line_number}: unconditional finalize/export chain"
+                    )
+            if "verify_deck.py" in lowered and "<project" in lowered:
+                if ("--no-render" not in lowered
+                        and relative not in _FULL_RENDER_ALLOWLIST):
+                    findings.append(
+                        f"{relative}:{line_number}: routine verify must use --no-render"
+                    )
+
+
+def _check_finalize_commands(
+        texts: dict[str, str], findings: list[str]) -> None:
+    """Require explicit conditions on finalize commands in routine workflows."""
+    for relative in _ROUTINE_FINALIZE_COMMAND_FILES:
+        text = texts.get(relative)
+        if text is None:
+            continue
+        for line_number, line in enumerate(text.splitlines(), start=1):
+            if ("finalize_svg.py" in line and "<project" in line
+                    and _CONDITIONAL_FINALIZE.search(line) is None):
+                findings.append(
+                    f"{relative}:{line_number}: finalize command lacks on-demand condition"
+                )
+
+
+def _check_verify_remediation(
+        texts: dict[str, str], findings: list[str]) -> None:
+    """A stale export requires re-export, not the unrelated preview step."""
+    relative = ".claude/skills/ppt-master/scripts/verify_deck.py"
+    text = texts.get(relative)
+    if text is None:
+        return
+    match = re.search(
+        r"exports/\{newest\.name\} is older than svg_output/.{0,180}",
+        text,
+        re.DOTALL,
+    )
+    if match is None:
+        findings.append(f"{relative}: missing stale-export remediation")
+        return
+    remediation = match.group(0)
+    if "re-run svg_to_pptx.py" not in remediation:
+        findings.append(f"{relative}: stale export must request svg_to_pptx.py")
+    if "finalize_svg.py" in remediation:
+        findings.append(f"{relative}: stale export must not require finalize_svg.py")
 
 
 def check_contracts(repo_root: Path) -> list[str]:
     """Return stable contract drift findings for one repository root."""
     findings: list[str] = []
-    texts: dict[str, str] = {}
-
-    for relative in _REQUIRED_FILES:
-        path = repo_root / relative
-        if not path.is_file():
-            findings.append(f"missing required contract file: {relative}")
-
-    for relative, anchors in _REQUIRED_ANCHORS.items():
-        path = repo_root / relative
-        if not path.is_file():
-            continue
-        text = path.read_text(encoding="utf-8", errors="replace")
-        texts[relative] = text
-        for anchor in anchors:
-            if anchor not in text:
-                findings.append(f"{relative}: missing stable anchor: {anchor}")
-
-    for relative, stale_phrases in _FORBIDDEN_STALE_TEXT.items():
-        path = repo_root / relative
-        if not path.is_file():
-            findings.append(f"missing consumer document: {relative}")
-            continue
-        text = texts.get(relative)
-        if text is None:
-            text = path.read_text(encoding="utf-8", errors="replace")
-        for phrase in stale_phrases:
-            if phrase in text:
-                findings.append(f"{relative}: stale contract phrase: {phrase}")
-
+    texts = _read_contracts(repo_root, findings)
+    _check_semantic_requirements(texts, findings)
+    _check_stale_contracts(texts, findings)
+    _check_finalize_commands(texts, findings)
+    _check_verify_remediation(texts, findings)
     return findings
 
 
@@ -138,7 +327,7 @@ def main(argv: Optional[list[str]] = None) -> int:
             print(f"  - {finding}", file=sys.stderr)
         return 1
 
-    print("[runtime-contracts] PASS — stable cross-host anchors are aligned")
+    print("[runtime-contracts] PASS — active runtime contracts are aligned")
     return 0
 
 

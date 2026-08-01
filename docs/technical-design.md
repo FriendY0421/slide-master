@@ -216,7 +216,7 @@ Two converter design choices still shape the system:
 | `icons/` | project-local icon set copied by `icon_sync.py`, with global library fallback at export |
 | `templates/` | copied template specs / SVG references / non-image template assets |
 | `svg_output/` | the only hand-authored SVG source directory |
-| `svg_final/` | mandatory derived, self-contained SVGs for IDE/browser preview or manual insertion as SVG pictures; not a supported Convert-to-Shape path |
+| `svg_final/` | on-demand derived, self-contained SVGs for IDE/browser preview or manual insertion as SVG pictures; absent on a routine PPTX-only run and not a supported Convert-to-Shape path |
 | `live_preview/` | preview server state, edit history, and annotation logs |
 | `notes/` | `total.md` and split per-slide speaker notes |
 | `exports/` | timestamped native PPTX deliverables |
@@ -237,9 +237,9 @@ These invariants are stronger than ordinary implementation preferences. If a cha
 | `sources/` content-type files are the main-pipeline content contract | text, tables, and chart values come from content-type files in `sources/` (Markdown is primary, but `.txt` / `.csv` / `.json` / `.yaml` / … count too); known sidecars (`*.conversion_profile.json`, `*_files/image_manifest.json`) are excluded |
 | `analysis/` stores machine facts, not design contracts | `source_profile.json` and intake artifacts inform Strategist; they do not lock page count/order except in workflows that say so |
 | `design_spec.md` explains the design; `spec_lock.md` executes it | Executor reads locked values from `spec_lock.md`, not from prose memory |
-| `spec_lock.md` is re-read before every page | colors, fonts, icons, images, rhythm, layouts, and chart choices stay stable across long decks |
+| `spec_lock.md` is re-read at P01/P05/P09 milestones and after context compaction | colors, fonts, icons, images, rhythm, layouts, and chart choices stay stable across long decks without a per-page read tax |
 | `svg_output/` is the only hand-authored SVG directory | quality checks, manual edits, re-export, and `update_spec.py` target authored source |
-| `svg_final/` is mandatory but derived | it is regenerated from `svg_output/` for self-contained visual preview or manual insertion as an SVG picture; it does not become the native export source of truth, and PowerPoint Convert to Shape is outside the supported contract |
+| `svg_final/` is on-demand and derived | when requested, it is regenerated from `svg_output/` for self-contained visual preview or manual insertion as an SVG picture; it does not become the native export source of truth, and PowerPoint Convert to Shape is outside the supported contract |
 | Native PPTX export reads `svg_output/` by default | converter preserves icons, `preserveAspectRatio`, rounded rects, and native image crop metadata before finalization rewrites them |
 | Direct OOXML routes do not enter the SVG pipeline | preservation workflows patch native PPTX parts directly |
 | Image facts come from regenerated metadata | `analysis/image_analysis.csv` is re-derived from the live `images/` folder; agents do not inspect image pixels directly |
@@ -305,7 +305,7 @@ PPT Master uses **role switching within one main agent** rather than parallel su
 
 **Image analysis goes through regenerated metadata, not pixels.** When images exist, Strategist and Executor use `analyze_images.py` output (`analysis/image_analysis.csv`) rather than directly opening image files. The CSV is a regenerated view over the live `images/` folder, not a durable cache. Re-running it before image-sensitive decisions is the staleness strategy: user images, extracted images, web images, AI outputs, formulas, and sliced elements all converge into the same measured fact table.
 
-**Per-page spec_lock re-read** is the long-deck anti-drift mechanism — full rationale in § Spec Propagation below.
+**Milestone spec_lock re-read** at P01/P05/P09, …, plus immediately after context compaction, is the long-deck anti-drift mechanism — full rationale in § Spec Propagation below.
 
 ---
 
@@ -328,7 +328,7 @@ The Strategist phase produces two artifacts that look redundant but serve differ
 - `design_spec.md` — human-readable narrative; the "why" of the design (target audience, style objective, color rationale, page outline)
 - `spec_lock.md` — machine-readable execution contract; the "what" Executor must literally use (HEX colors, exact font family string, icon library choice, image resource list with status)
 
-Why both? Without `spec_lock.md`, the Executor would re-read `design_spec.md` per page during long decks and the LLM's context-compression drift would gradually mutate colors and fonts mid-deck. `spec_lock.md` is the **anti-drift mechanism** — the SKILL.md mandates `read_file <project>/spec_lock.md` before every page, so values stay verbatim across 20+ slides.
+Why both? Without `spec_lock.md`, the Executor would repeatedly return to the much larger `design_spec.md` during long decks and the LLM's context-compression drift would gradually mutate colors and fonts mid-deck. `spec_lock.md` is the **anti-drift mechanism** — SKILL.md mandates `read_file <project>/spec_lock.md` at P01/P05/P09 milestones and immediately after context compaction, while the last in-context copy remains authoritative between milestones.
 
 The lock is also the per-page routing table. Beyond global colors and typography, it carries `page_rhythm` (`anchor` / `dense` / `breathing`), `page_charts` (which chart template should be adapted), image rows with placement/cropping contracts, and the locked `mode` / `visual_style` references that decide which execution rule files are loaded. Structured deck/layout-template projects additionally carry `page_layouts` (which input template SVG each page inherits) and the `pptx_masters` / `pptx_layouts` output mappings; flat free-design/brand-only projects keep only `pptx_structure.mode: flat` and omit those sections entirely rather than writing empty values. Empty entries elsewhere are meaningful signals: no chart or no image is often a design decision rather than missing data.
 
@@ -464,7 +464,7 @@ These direct routes share some analysis primitives with the main pipeline, espec
 
 **Why imported and authored shape metadata are separate.** A lossless imported SVG may need native-shape metadata, hidden carriers, and preview fingerprints to recover an advanced PowerPoint shape. That representation stays in the temporary analysis workspace. `svg_authoring_view.py` creates a lightweight inspection projection without opaque payload or duplicate hidden carriers; the projection is never an export source. `standard` / `fidelity` use compact canonical metadata. Mirror materializes from the lossless source and may reuse converter-supported metadata on unchanged Slide-local/slot objects; fixed structural layers remain direct atoms, and unsupported or edited objects keep their current SVG fallback.
 
-**Why there is only one PPTX compiler route.** Native export reads authored SVGs and translates supported SVG elements into DrawingML shapes. The normal deck path reads `svg_output/`; when requested, create-template invokes the same structured compiler on validated template prototypes to produce `exports/<id>_template_preview.pptx` as review evidence. The project does not package whole-slide SVG media or alternate raster renderings into a second PPTX. `svg_final/` is still generated on every standard deck run, but it is a self-contained visual-preview artifact rather than a PPTX source; users may insert it as an SVG picture, while PowerPoint's manual Convert to Shape command remains outside the supported contract.
+**Why there is only one PPTX compiler route.** Native export reads authored SVGs and translates supported SVG elements into DrawingML shapes. The normal deck path reads `svg_output/`; when requested, create-template invokes the same structured compiler on validated template prototypes to produce `exports/<id>_template_preview.pptx` as review evidence. The project does not package whole-slide SVG media or alternate raster renderings into a second PPTX. `svg_final/` is generated only on demand as a self-contained visual-preview artifact rather than a PPTX source; users may insert it as an SVG picture, while PowerPoint's manual Convert to Shape command remains outside the supported contract.
 
 **Why structure is authored before visual generation on template routes.** Master and Layout are not post-processing discoveries. On a structured deck/layout-template route, the Strategist writes the Master roster and complete page mapping before SVG generation; the Executor writes those identities, fixed atoms, and slots while composing each page, and export only compiles declared structure. Free-design and brand-only decks make the opposite trade: they stay on `mode: flat`, keep every object Slide-local under the default Master and Blank Layout, and author no structure metadata — reusable structure is a template-route deliverable, not a free-design authoring tax. Legacy structured/template projects enter `restore-pptx-structure`; neither route triggers heuristic Master/Layout promotion or placeholder inference.
 

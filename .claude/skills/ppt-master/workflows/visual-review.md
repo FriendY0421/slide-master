@@ -136,8 +136,8 @@ If `brand_review.json` is non-empty, that's a single decision applied across the
 After the table is clean, continue to post-processing per [`SKILL.md`](../SKILL.md) Step 7:
 
 ```bash
-python3 .claude/skills/ppt-master/scripts/total_md_split.py <project_path>
-python3 .claude/skills/ppt-master/scripts/finalize_svg.py <project_path>
+python3 .claude/skills/ppt-master/scripts/total_md_split.py <project_path>  # only when notes were requested
+python3 .claude/skills/ppt-master/scripts/finalize_svg.py <project_path>  # only when svg_final/ is requested or already exists
 python3 .claude/skills/ppt-master/scripts/svg_to_pptx.py <project_path>
 ```
 

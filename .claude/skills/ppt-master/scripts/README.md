@@ -33,7 +33,7 @@ python3 scripts/total_md_split.py <project_path>  # only when speaker notes were
 python3 scripts/finalize_svg.py <project_path>  # on-demand: self-contained SVG previews only
 python3 scripts/animation_config.py scaffold <project_path>  # optional object-level animation overrides
 python3 scripts/svg_to_pptx.py <project_path>
-python3 scripts/verify_deck.py <project_path>  # final verification gate
+python3 scripts/verify_deck.py <project_path> --no-render  # routine final verification gate
 ```
 
 ## Run Telemetry and A/B Benchmarks
@@ -218,7 +218,7 @@ python3 scripts/update_repo.py
 | PPTX transitions | `pptx_transitions.py` | [docs/pptx-transitions.md](./docs/pptx-transitions.md) |
 | PPTX animations | `pptx_animations.py`, `animation_config.py` | [docs/pptx-animations.md](./docs/pptx-animations.md) |
 | Spec maintenance | `update_spec.py` | [docs/update_spec.md](./docs/update_spec.md) |
-| Pipeline gates | `preflight.py` (environment, after project init), `validate_spec.py` (planning artifacts, after Step 4 spec output), `verify_deck.py` (final deck verification, after Step 7; optional OfficeCLI OpenXML + contact-sheet layer) | script docstrings |
+| Pipeline gates | `preflight.py` (environment, after project init), `validate_spec.py` (planning artifacts, after Step 4 spec output), `verify_deck.py --no-render` (routine final deck verification after Step 7; omit `--no-render` only for an explicit deep/release contact-sheet pass) | script docstrings |
 | Run measurement | `run_telemetry.py`, `measure_run.py`, `benchmark_pipeline_ab.py` | section above; script docstrings |
 | Image tools | `image_gen.py`, `latex_render.py`, `analyze_images.py`, `gemini_watermark_remover.py` | [docs/image.md](./docs/image.md) |
 | Repo maintenance | `update_repo.py`, `sync_codex_stubs.py` (regenerate `.codex/skills` Codex discovery stubs after editing canonical skill frontmatter; `--check` is enforced by `preflight.py`), `check_runtime_contracts.py` (standalone contributor drift diagnostic; not a preflight gate) | README install/update section; script docstrings |

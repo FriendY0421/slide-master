@@ -986,7 +986,7 @@ animation playback in Keynote or other presentation applications.
 python3 ${SKILL_DIR}/scripts/verify_deck.py <project_path> --no-render
 ```
 
-> Default runs `--no-render`: it skips only the OfficeCLI contact-sheet render; OpenXML validation and every other check stay on. Drop the flag — full render + contact-sheet eyeball — when the user asks for deep verification, before a release hand-off, or whenever converter-level layout doubt exists. Exit 0 is required before completion is reported.
+> The routine command above uses `--no-render`: it skips only the OfficeCLI contact-sheet render; OpenXML validation and every other check stay on. Drop the flag only when the user asks for deep verification, before a release hand-off, or whenever converter-level layout doubt exists. Exit 0 is required before completion is reported.
 
 > **Post-export annotation window**: the preview service from Step 6 typically remains running after export. If the user submitted annotations in the browser (during Executor or after export) and now asks to apply them — they may quote the browser prompt (`Changes saved to svg_output...` / `修改已保存到 svg_output...`), say "apply my annotations" / "应用注解" / equivalent — run [`live-preview`](workflows/live-preview.md) Step 2 to apply and re-export. Annotations submitted during generation are also handled here, not earlier.
 
