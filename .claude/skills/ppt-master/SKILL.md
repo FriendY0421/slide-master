@@ -125,24 +125,11 @@ For complete tool documentation, see `${SKILL_DIR}/scripts/README.md`.
 
 ### Opt-in benchmark runtime
 
-Only for a pre-registered speed experiment, instrument both control and
-treatment from the same common base with an explicit run id. Record coarse
-run/stage boundaries in `analysis/run_events.jsonl`, emit one final fixed metric
-snapshot (input bytes/tokens, reads, SVG bytes/pages, tool turns, rewrites), and
-close the run by re-hashing the same repository and fixture. Report it with
-`measure_run.py --run-id`; start/end source or fixture drift and either dirty
-boundary are non-comparable. Record an unavailable host metric as
-`unavailable`, never as a fabricated zero. CLI boundary calls include Python
-startup and are not a short script timer; Python pipeline code should import
-`append_event()` and must first
-pre-register a median overhead ceiling of 2 ms on that machine. Decision-grade
-script timing and merge go/no-go use `benchmark_pipeline_ab.py` with clean
-committed arms, immutable fixtures, explicit quality mode, and a pre-registered
-`superiority` or `noninferiority` CI threshold contract. A `hit` case also
-pre-registers whether its cache is project-local or uses a separate cache
-directory.
-Normal deck production does not enable this instrumentation. Full commands and
-the strict benchmark-plan schema are in [`scripts/README.md`](scripts/README.md).
+Normal deck production does not enable instrumentation. Only for an explicit,
+pre-registered speed experiment, read the complete **Run Telemetry and A/B
+Benchmarks** contract in [`scripts/README.md`](scripts/README.md) and use the
+three measurement scripts above. That contract owns clean-arm, immutable
+fixture, quality-equivalence, cache-scope, metric, CI/MCID, and drift rules.
 
 ## Template Index
 
