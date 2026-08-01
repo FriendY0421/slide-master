@@ -1,334 +1,122 @@
 ---
 deck_id: mckinsey
 kind: deck
-native_structure_mode: structured
+category: scenario
 summary: McKinsey consulting-style strategy decks — 전략 보고서, 시장/산업 분석, 경영진 브리핑, 실행 로드맵
-canvas_format: ppt169
-page_count: 5
+keywords: [consulting, strategy, executive-summary, evidence-led, data-dense]
 primary_color: "#0F2A4A"
+theme_mode: mixed
+canvas_format: ppt169
+canvas_width: 1280
+canvas_height: 720
+canvas_viewbox: "0 0 1280 720"
+source_canvas_width: 1280
+source_canvas_height: 720
+source_viewbox: "0 0 1280 720"
+replication_mode: fidelity
+native_structure_mode: structured
+page_count: 10
 ---
 
-# McKinsey Consulting Style Deck - Design Specification
+# McKinsey Consulting Style Deck — Design Specification
 
-> Style homage benchmarked 2026-07-15 from the [seulee26/mckinsey-pptx](https://github.com/seulee26/mckinsey-pptx) generator (`theme.py` tokens + 40-template catalog, MIT). Not an official McKinsey identity — no trademark assets are bundled; color values are third-party approximations. Typography follows this repository's install-local Pretendard lock, reproducing the consulting hierarchy through weight/size only.
-
----
+> Style homage benchmarked from the MIT-licensed `seulee26/mckinsey-pptx` generator. This is not an official McKinsey identity and contains no trademark assets. Colors are third-party approximations; typography follows this repository's install-local Pretendard lock.
 
 ## I. Template Overview
 
-| Property | Description |
-| --- | --- |
-| **Template Name** | mckinsey |
-| **Display Name** | McKinsey Consulting Style Deck |
-| **Use Cases** | 전략 보고, 시장/산업 분석, 경영진 브리핑, 실행 로드맵, 투자 검토, 조직 진단 |
-| **Design Tone** | Restrained, hypothesis-driven, evidence-first — MBB consulting register |
-| **Theme Mode** | Light white pages + dark-navy structural pages (chapter / ending) |
+- **Use cases**: 전략 보고, 시장·산업 분석, 경영진 브리핑, 실행 로드맵, 투자 검토, 조직 진단.
+- **Tone**: restrained, hypothesis-driven, evidence-first.
+- **Theme**: white evidence pages with dark-navy chapter and ending pages.
+- **Recognition test**: action titles argue; bodies prove. Reading only the action titles must reconstruct the storyline.
+- **Anti-mood**: marketing keynote, gradient SaaS dashboard, decorative infographic, rounded-card gallery.
 
-**Anti-mood** (reject at design time): "marketing keynote", "gradient SaaS dashboard", "decorative infographics", "rounded-corner card deck".
+The content chrome is fixed to a 44px safe margin, a title rule at y=112, a content zone at x=44 / y=136 / w=1192 / h=524, and a footer rule at y=676. Dark structural pages use wide negative space rather than dense evidence.
 
-**Litmus test**: 페이지의 액션 타이틀만 연달아 읽어도 스토리라인(피라미드 구조)이 완결되면 통과. Titles argue; bodies prove.
+## II. Color Scheme
 
----
+| Role | HEX | Application |
+| --- | --- | --- |
+| Background | `#FFFFFF` | Evidence pages |
+| Primary navy | `#0F2A4A` | Structure, primary series, key numbers |
+| Deep navy | `#0A1F3D` | Chapter and ending backgrounds |
+| Accent | `#2E9BD6` | One focus entity, series, number, or pointer per page |
+| Blue mid | `#1F6FA8` | Secondary chart series |
+| Blue light | `#4FB2E5` | Tertiary series and dark-page secondary text |
+| Text | `#1A1A1A` | Primary text |
+| Secondary text | `#888888` | Labels, support, sources |
+| Title rule | `#999999` | Content-page title rule |
+| Grid | `#D0D0D0` | Chart grids and footer rule |
+| Border | `#E8E8E8` | Quiet dividers |
+| Surface | `#F2F2F2` | Table banding and neutral comparison shapes |
 
-## II. Canvas Specification
+- Navy carries hierarchy; cyan identifies exactly one analytical focus.
+- The same focus may repeat across exhibits, but unrelated items must not compete for accent.
+- Charts use the navy ladder; all remaining hierarchy is weight, banding, and hairlines.
+- Gradients, shadows, glow, 3D, and decorative traffic-light colors are outside this deck identity.
 
-| Property | Value |
-| --- | --- |
-| **Format** | Standard 16:9 (`ppt169`) |
-| **Dimensions** | 1280 × 720 px |
-| **viewBox** | `0 0 1280 720` |
-| **Page Margins** | Left/Right 44px (x: 44 → 1236), bottom reserve 44px |
-| **Title band** | Kicker + action title above the title rule (y=112) |
-| **Content Area** | x=44, y=136, w=1192, h=524 (content pages — below title rule, above footer rule) |
+## III. Signature Design Elements
 
-Geometry is an exact 96px/in mapping of the benchmark's 13.333×7.5in chrome: margins 0.45in→44px, title rule 1.15in→112px, body top 1.40in→136px, footer rule 7.05in→676px.
+### Action-title chrome
 
----
+Content pages use an optional 13.3px uppercase kicker, a declarative 32px action title, the y=112 title rule, a 12px source line, and a right-aligned page number. Label-only and question-form evidence titles are not part of this template.
 
-## III. Color Scheme — LOCKED
+### Executive-summary choices
 
-Navy structure + single cyan pointer. The ONLY hex values that may appear in any generated SVG:
+- **Keyword stack**: choose for 3–5 independent findings or when quantitative evidence is thin. Each row uses a 4px navy bar, a classification kicker, one finding sentence, one support line, and a hairline. This list-led pattern remains a first-class option.
+- **Thesis chain**: choose only when one conclusion follows from 2–4 connected drivers. Use one full-width thesis band, an integrated outcome comparison, one left-to-right causal chain, and one watchpoint. Do not turn it into a row of unrelated mini charts.
 
-| Role | HEX | Token | Purpose |
-| --- | --- | --- | --- |
-| Background | `#FFFFFF` | `--bg` | Page background (pure white) |
-| Primary navy | `#0F2A4A` | `--navy` | Structural anchor: cover band, kicker, table headers, key numbers, chart series 1 |
-| Deep navy | `#0A1F3D` | `--navy-deep` | Full-bleed background for chapter / ending pages |
-| Accent | `#2E9BD6` | `--accent` | Sole pointer: focus bar/series, emphasis rule, highlight number |
-| Blue mid | `#1F6FA8` | `--blue-mid` | Chart series 2 |
-| Blue light | `#4FB2E5` | `--blue-light` | Chart series 3, tint fills, secondary text on dark pages |
-| Text | `#1A1A1A` | `--text` | Body text (never pure `#000`) |
-| Text secondary | `#888888` | `--text-secondary` | Source line, page number, captions, secondary text |
-| Title rule | `#999999` | `--rule` | Title underline rule only |
-| Grid | `#D0D0D0` | `--grid` | Footer rule, chart gridlines |
-| Border | `#E8E8E8` | `--border` | Hairline dividers, table row rules |
-| Surface alt | `#F2F2F2` | `--surface-alt` | Table banding, quiet panel background |
-| Positive | `#4CAF50` | `--positive` | Traffic light "on track" — data context only |
-| Warning | `#F4C57A` | `--warning` | Traffic light "at risk" — data context only |
-| Negative | `#E04E5E` | `--negative` | Traffic light "off track" — data context only |
+### Visual-evidence family
 
-**Provenance**: all values `approx` — derived from the seulee26/mckinsey-pptx benchmark `theme.py`, not official McKinsey brand truth. The benchmark's `#2A2AE5` (royal blue) and `#BFBFBF` (placeholder gray) are deliberately excluded as single-use outliers that break the navy/cyan system.
+- The action title owns the primary takeaway. The body contains exhibits, chart labels, table labels, and at most one compact bottom `INSIGHT` strip—never a prose findings rail.
+- **Evidence matrix**: four exhibits must jointly prove one thesis; avoid four unrelated dashboard widgets.
+- **Trend + small multiples**: use one shared time-axis story above and four diagnostic views below.
+- **Primary + supporting exhibit**: limit the body to two major zones. The right zone contains one integrated supporting visualization and never another nested mini-grid.
+- `INSIGHT` is the label for analytical synthesis. `VERDICT` is reserved for genuine option selection, approval, or recommendation pages.
 
-### Color Rules
+### Metric and density discipline
 
-- **Navy is structure, accent is pointer**: `#0F2A4A` carries chrome and hierarchy; `#2E9BD6` marks the one thing the reader must see
-- **Single-focus accent rule**: accent points at exactly ONE focus per page (entity / series / number / cell). Repetition across exhibits is allowed only when marking the SAME focus — the focus series in chart A and that entity's row in table B count as one focus; highlighting two different targets on one page is forbidden
-- **Verdict rule is a separate structural account**: the 2px accent rule of a verdict band is a fixed structural convention — max 1 per page, inside the takeaway zone, not counted against the data focus
-- **Everything else stays achromatic**: remaining hierarchy is carried by weight, navy, banding, and hairlines — never by additional accent events
-- **Grayscale first**: every slide must read in grayscale before blue is applied
-- **Chart ladder**: multi-series charts use `#0F2A4A → #1F6FA8 → #4FB2E5` in that order; `#2E9BD6` is reserved for the single focus series/bar — and only when that series/bar is the page's single focus. Multi-hue palettes are forbidden
-- **Traffic lights are data-only**: `--positive` / `--warning` / `--negative` only when color encodes a status the reader must decode, always paired with a text label or shape (legible without color) — never decorative
-- **Dark pages** (chapter / ending) use `--navy-deep` full-bleed with white Display type, `--accent` rules, `--blue-light` secondary text
-- **Forbidden**: gradients (`<linearGradient>` / `<radialGradient>`), drop shadows, glow, 3D effects
-
----
+- Every emphasized number carries subject, metric, time, and unit in the same visual group. Place deltas beside their compared values; detached `+X`, `%`, or `%p` callouts are not allowed.
+- Dense exhibits use 12px microtext instead of shrinking below the ramp. When content does not fit, shorten copy or change layout.
+- **Font scale policy**: `fixed-no-upscale`. Empty space never triggers automatic type enlargement.
+- Same pattern may appear at most twice in succession; preserve the generic content shell for compositions outside the five authored variants.
 
 ## IV. Typography System
 
-Install-local Pretendard lock (see `references/strategist.md` §g). Weight cuts are authored as installed family names:
-
-| Weight | `font-family` attribute | `font-weight` |
-| --- | --- | --- |
-| 400 | `Pretendard, 'Malgun Gothic', sans-serif` | (none) |
-| 500 | `'Pretendard Medium', Pretendard, 'Malgun Gothic', sans-serif` | (none) |
-| 600 | `'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif` | (none) |
-| 700 | `Pretendard, 'Malgun Gothic', sans-serif` | `700` |
-| 800 | `'Pretendard ExtraBold', Pretendard, 'Malgun Gothic', sans-serif` | (none) |
-
-Type scale (exact pt→px conversions of the benchmark ramp; 1pt = 1.333px):
-
-| Role | Size (px) | Weight | Line-height | Letter-spacing | Use |
-| --- | --- | --- | --- | --- | --- |
-| Display | 48 | 700 | 1.10 | -0.96 | cover title, chapter title, closing message (white on dark pages) |
-| Display-sm | 40 | 700 | 1.10 | -0.8 | chapter number, hero stat anchor |
-| Action Title | 32 | 700 | 1.20 | -0.64 | content-page action title (= 24pt); up to 2 lines |
-| Title | 18.7 | 600 | 1.30 | 0 | exhibit / card titles, agenda items (= 14pt) |
-| Body | 16 | 400 | 1.50 | 0 | body text, table cells (= 12pt) |
-| Small | 13.3 | 500 | 1.40 | 0 | chart labels, axis text, annotations (= 10pt) |
-| Label | 13.3 | 600 | 1.40 | 0.6 | uppercase kicker / taxonomy (author label text ALREADY uppercase in SVG) |
-| Footer | 12 | 400 | 1.40 | 0 | source line, page number, confidentiality tag (= 9pt, `#888888`) |
-
-- **Display vs Action Title**: Display is reserved for cover / chapter / ending; content pages use Action Title
-- **Action Title may break into 2 lines** (bounds allow 68px); it is a full sentence, not a label — see §V
-- **Stat hero exception**: a single-number impact page may scale the number to 64–96px weight 700 `--navy`
-
----
-
-## V. Page Structure
-
-### Page anatomy (content pages, 1280×720)
-
-```
-┌──────────────────────────────────────────────────┐
-│ Kicker (optional)   (y≈32)  13.3/600 upper navy  │
-│ ACTION TITLE        (y≈68, line 2 ≈104)  32/700  │
-│ Title rule          (y=112) 1px #999999 44→1236  │
-│ Body                (y: 136–660, 1192×524)       │
-│ Footer rule         (y=676) 1px #D0D0D0 44→1236  │
-│ Source line (left, y≈698) 12px | Page # (right)  │
-└──────────────────────────────────────────────────┘
-```
-
-### Action title doctrine — non-negotiable
-
-- **The action title IS the governing message.** Every content-page title is a complete declarative sentence stating the so-what ("시장은 정체되어 있다", not "시장 현황"). There is no separate takeaway line — the bottom band belongs to the source convention
-- Reading the action titles in page order must reconstruct the full storyline (pyramid principle)
-- Forbidden: label-only titles on evidence pages, question-mark titles on evidence pages, direct address (여러분 / 우리는 / 함께해요)
-
-### Source line convention
-
-- **Every evidence page** carries a `Source:` / `자료:` line at bottom-left (12px, `#888888`) — data provenance, or explicitly `Source: 내부 분석`
-- Page number bottom-right, format `01 / 12` (12px, `#888888`)
-- Dark pages (chapter / ending) carry no source line; cover carries no page number
-
----
-
-## VI. Page Types
-
-### 1. Cover (01_cover.svg)
-
-Navy top band (8px full-width) + uppercase kicker + navy title rule block + Display title + Title subtitle + presenter/date line + bottom hairline + optional confidentiality tag (top-right) and organization line. No page number.
-
-### 2. Agenda (02_toc.svg)
-
-Action-title chrome without the full-width rule (short navy bar instead) + ruled agenda rows: hanging navy number (Display-sm) + item title (Title 18.7/600) + one-line description (Body 16/400 secondary). 3–5 rows; hairline between rows. **The agenda is the deck's only numbered surface** — see §VIII hanging-numbers rule.
-
-### 3. Chapter (02_chapter.svg)
-
-Full-bleed `--navy-deep` + accent chapter number (Display-sm, `#2E9BD6`) + accent rule + Display chapter title (white, left-aligned) + summary line (`#4FB2E5`) + page number. Insert every 4–6 body slides for decks ≥ 12 pages.
-
-### 4. Content (03_content.svg)
-
-Kicker + action title + title rule (y=112) + footer rule (y=676) + source line + page number; **body region (x=44, y=136, w=1192, h=524) is composed freely by the Executor** using §VIII patterns while preserving the chrome.
-
-### 5. Ending (04_ending.svg)
-
-Full-bleed `--navy-deep`, centered composition: uppercase closing label + accent rule + Display closing message (white, centered) + contact line + presenter/date footer. No source line.
-
----
-
-## VII. SVG Page Roster
-
-| File | Role | Description |
-| --- | --- | --- |
-| `01_cover.svg` | cover | Title slide; kicker, title, subtitle, presenter/date, confidentiality tag |
-| `02_toc.svg` | toc | Agenda; numbered ruled list of chapters |
-| `02_chapter.svg` | chapter | Dark-navy section divider; chapter number + title + summary |
-| `03_content.svg` | content | Action-title content shell; body composed freely by Executor |
-| `04_ending.svg` | ending | Dark-navy closing; centered message + contact |
-
----
-
-## VIII. Layout Patterns (Consulting Grammar)
-
-### Signature pattern ★
-
-**`keyword-kicker-stack`** ★ — executive-summary grammar: 3–5 full-sentence findings, each anchored by a 4px navy left bar (`--navy`, spanning kicker → support lines), a classification kicker (Label 13.3/600, letter-spacing 0.6, `#888888` — a 2–5 character taxonomy tag such as 채널 정체 / 시장 기회 / 최적 대안, never a sequence number), a bold one-line finding (Title 18.7/600), 1–2 supporting lines (Body 16/400 `#888888`), separated by hairlines (`#E8E8E8`). NO card boxes, NO rounded containment, NO hanging numbers.
-
-```
-채널 정체                                          ← 13.3/600 #888888 kicker
-▐ 주력 유통 채널은 구조적으로 정체됐다               ← 18.7/600 #1A1A1A (▐ = 4px navy bar)
-  B2B2C 채널 3년 CAGR 1.2%, 수수료율 23%→27%       ← 16/400 #888888
-──────────────────────────────────────            ← <line stroke="#E8E8E8"/>
-시장 기회
-▐ 식품 구독 시장은 진입 창이 열려 있다
-  ...
-```
-
-**`ballot-stack`** — resolution / board-asks grammar: 3–5 approval items, each with an 18×18px square outline (2px `--navy` stroke, no fill — a ballot box; never draw a checkmark inside), item title (Title 18.7/600), a right-edge category tag (13.3/600 `--navy`, letter-spacing 0.6, anchored at x=1236: 전략 / 투자 / 조직 / 일정), 1 supporting line (Body 16/400 `#888888`), hairlines between items. Use for board asks, decision requests, and approval checklists — the ballot square carries the "to be resolved" semantics that a number cannot.
-
-**Hanging numbers are agenda-only (hard rule)**: the Display-sm (40/700 `--navy`) hanging number is reserved for the agenda page (`02_toc.svg`) — the deck's only numbered surface. On every other page, sequence/emphasis is carried by keyword kickers, ballot squares, short navy rules (28×4px above column headers), or the rail's 6×6px square marks — never `01 / 02 / 03` text. The legacy `numbered-takeaway-stack` pattern is superseded by `keyword-kicker-stack`.
-
-### Evidence-page composition grammar (density doctrine)
-
-- **Two-zone minimum**: every evidence page is composed as exhibit zone + takeaway zone. The takeaway zone takes ONE of three forms — (a) `key-findings-rail` (right rail x=776→1236, separated by a 1px `#E8E8E8` hairline at x=758), (b) stacked takeaways right of the chart (the `chart-led-with-takeaway` pattern), (c) bottom verdict band. Single-zone pages are allowed only as declared exceptions: `stat-hero`, a full-width (x=44→1236) table, or a text pattern (`keyword-kicker-stack`) adopted under the conditional density floor's switch
-- **Multi-exhibit pairing**: when the source provides both a trend and a breakdown, pair a chart (A) with a detail table (B). On rail-form (a) pages the exhibit zone is x=44→740; on form (b) exhibits share the left ≈60% chart zone (per `chart-led-with-takeaway`); on form (c) exhibits use the full content width. Exhibit lettering `A ·` / `B ·` prefixes (15px/600 `#1A1A1A`) apply only when a page carries 2+ exhibits
-- **Detail-table promotion**: for multi-period / multi-entity quantitative content, a detail table (≥ 4 rows × 4 columns, §XII treatment, right-aligned numerics, 12px `#888888` footnote line) is the chart's first-choice companion — "chart + table" is the default form, not "chart or table"
-- **Framework mandate (deck level)**: a strategy deck whose source contains prioritization / causality / phasing structure surfaces at least ONE framework exhibit (2×2, tree, process — see the content-shape mapping below). Omission must be justified by source shape; omission for convenience is an anti-pattern (§XIII)
-- **Conditional density floor** — 증거가 있으면 펼치고, 없으면 패턴을 바꾼다: an evidence page targets ≥ 12 data points when the source provides them. When the source is thin, switch to a text pattern (`keyword-kicker-stack`) instead of padding a table. Fabricated figures and fake cells are absolutely forbidden
-
-### `key-findings-rail` pattern
-
-Right rail (x=776→1236): `KEY FINDINGS` label (13.3/600, letter-spacing 0.6, `#888888`) + 2–3 bullet findings (minimal marker: one 6×6px `--navy` square flush at the rail's left edge, optically centered on the title's x-height — **no hanging numbers in the rail**; finding title 16.5/600 `#1A1A1A` indented 20px from the marker + 1–2 evidence lines 13.3/400 `#888888` at the same indent, hairline `#E8E8E8` between findings) + verdict band (2px accent rule + `VERDICT` label 13.3/600 + judgment 18.7/600 `#1A1A1A` + support 14/400 `#888888`) + optional micro-KPI strip (2–4 KPIs: value 24/700 `--navy` + label 12 `#888888`, hairline above). A rail-format reduction of `keyword-kicker-stack` — same lineage (NO card boxes, NO rounded containment) but deliberately quieter: the rail carries sequence-free findings behind 6×6px square marks (hanging numbers are agenda-only deck-wide)
-
-### Content shape → first-choice pattern
-
-| Content shape | First choice | Composition |
-| --- | --- | --- |
-| Executive summary / key findings (3–5) | ★ `keyword-kicker-stack` | navy left bar + classification kicker + hairline rows |
-| Board asks / resolutions / approval checklist | `ballot-stack` | square-outline ballot + right category tag + hairline rows |
-| Status / KPI assessment | `traffic-light-table` | `templates/charts/consulting_table.svg`, `harvey_balls_table.svg`; status circle + label |
-| Prioritization / portfolio (2 axes) | 2×2 matrix / bubble | `templates/charts/matrix_2x2.svg`, `quadrant_bubble_scatter.svg` |
-| Phased roadmap / plan | gantt / chevron / timeline | `templates/charts/gantt_chart.svg`, `chevron_process.svg`, `timeline.svg` |
-| Quantified driver story | `chart-led-with-takeaway` | left chart ≈60% + right stacked takeaways; CAGR callout (§XII) |
-| Decomposition / issue tree | top-down tree | `templates/charts/top_down_tree.svg` |
-| Conversion / market sizing | funnel | `templates/charts/funnel_chart.svg` |
-| Bridge / variance | waterfall | `templates/charts/waterfall_chart.svg` |
-| Multi-metric overview | KPI cards | `templates/charts/kpi_cards.svg` |
-| Single-number impact | `stat-hero` | 64–96px navy number + context line + source |
-| Option comparison | comparison table + Harvey balls | `templates/charts/comparison_table.svg`, `harvey_balls_table.svg`; verdict column |
-| Dense quantified evidence (trend + breakdown) | chart (A) + detail table (B) + `key-findings-rail` | grouped/line chart + §XII detail table + right rail |
-
-Nearest visual-style kin: `references/visual-styles/swiss-minimal.md` (grid-locked, sharp, no decoration).
-
-### Variation discipline
-
-- Every body slide applies **exactly ONE intentional variation** of its pattern (accent focus column, hero first row, asymmetric split, one navy panel, verdict band) — or is consciously standard
-- Same pattern ≤ 2 consecutive slides; minimum 3 layout types per deck
-- Every chart pairs with a takeaway (stacked right or verdict band); a chart without a takeaway is rejected
-- Stats include context ("vs 업계 평균 3.2%"); bare numbers read as placeholder
-- The composition grammar above stacks on top of this discipline — variation, ≤ 2 consecutive same-pattern, chart-takeaway pairing, and minimum 3 layout types all still hold
-
----
-
-## IX. Spacing Specification
-
-| Element | Value |
-| --- | --- |
-| Grid | 4px 배수 (8px multiples preferred: 8 / 12 / 16 / 20 / 24 / 32 / 44) |
-| Slide outer margin | 44px L/R, 44px bottom reserve |
-| Panel padding | 20px |
-| Panel gap | 20px |
-| Corner radius | 0–4px max — consulting reads square; `rx="12"` cards are forbidden |
-| Hairline divider | 1px `#E8E8E8` |
-| Emphasis rule | 2px `#2E9BD6` |
-| Title underline rule | 1px `#999999` (y=112, full content width) |
-| Footer rule | 1px `#D0D0D0` (y=676, full content width) |
-
----
-
-## X. Placeholder Specification
-
-Templates use `{{PLACEHOLDER}}` tokens:
-
-| Shell | Placeholders |
-| --- | --- |
-| `01_cover.svg` | `{{KICKER}}`* `{{TITLE}}` `{{SUBTITLE}}` `{{PRESENTER}}` `{{DATE}}` `{{ORGANIZATION}}`* `{{CONFIDENTIALITY}}`* |
-| `02_toc.svg` | `{{PAGE_TITLE}}` `{{TOC_ITEM_n_TITLE}}` `{{TOC_ITEM_n_DESC}}` (n = 1…) `{{PAGE_NUM}}` |
-| `02_chapter.svg` | `{{CHAPTER_NUMBER}}` `{{CHAPTER_TITLE}}` `{{CHAPTER_SUMMARY}}`* `{{PAGE_NUM}}` |
-| `03_content.svg` | `{{KICKER}}`* `{{PAGE_TITLE}}` `{{SOURCE_LINE}}` `{{PAGE_NUM}}` |
-| `04_ending.svg` | `{{CLOSING_LABEL}}`* `{{CLOSING_MESSAGE}}` `{{CONTACT_LINE}}`* `{{PRESENTER}}` `{{DATE}}` |
-
-\* optional — delete the whole `<text>` element when unused. `{{PAGE_NUM}}` format: `01 / 12`. `{{SOURCE_LINE}}` format: `Source: <출처>` or `자료: <출처>`.
-
----
-
-## XI. Icon System
-
-- **Library lock**: `templates/icons/tabler-outline/` (2px stroke line-art). **Icons are rare in this style** — prefer rules, tables, and charts; use icons only when a taxonomy genuinely needs glyphs. **Forbidden**: `chunk` pack, emoji, unicode glyph icons, mixing packs
-- Usage: `<use data-icon="tabler-outline/<name>" x="…" y="…" width="…" height="…" fill="none" stroke="currentColor" stroke-width="2"/>` — `finalize_svg.py` resolves the glyph; do NOT inline SVG content
-- Search before use: `ls .claude/skills/ppt-master/templates/icons/tabler-outline/ | grep <keyword>` — cite verified filenames only
-- **Bare icons only**: no circle wrappers, no colored badges. Sizes: 24–28px in rows/cards, 16px inline
-- Sequential number badges are **agenda-only**; on every other page taxonomy is carried by keyword kickers, ballot squares, 6×6px square marks, or short navy rules (28×4px) — not icon circles, not `01–04` text
-
----
-
-## XII. Chart & Table Treatment
-
-### Charts
-
-- Series order: `#0F2A4A → #1F6FA8 → #4FB2E5`; the single focus series/bar takes `#2E9BD6` while others stay in the ladder or grayscale — accent here is governed by the §III single-focus rule (the CAGR callout included)
-- Axis labels and tick text: 13.3/500 `#888888`; gridlines 1px `#D0D0D0`; zero-line 1px `#999999`
-- **No legend chrome** — inline labels at the end of each line / beside each bar; data labels on the chart, accent for the focus value
-- **CAGR callout convention**: bracket or arrow spanning the growth range + `+X.X%` in `#2E9BD6` 13.3/600 — the benchmark's signature growth annotation
-- Forecast regions: dashed stroke + `#4FB2E5` at reduced saturation, split by a vertical dashed divider
-- No drop shadows, no 3D, no gradient fills
-
-### Tables
-
-- Header row: `#0F2A4A` background, white 13.3/600 uppercase text
-- Row banding: alternate `#F2F2F2`; row rules 1px `#E8E8E8`
-- Cell text: Body 16; numerics right-aligned
-- Traffic-light cell: 12px circle (`--positive` / `--warning` / `--negative`) + status text label beside it — never color alone
-- Comparison tables end with a **verdict column or row** (accent 2px border or `--navy` text) — a comparison without a winner is unfinished
-
----
-
-## XIII. Anti-Pattern Checklist (reject at authoring time)
-
-- [ ] Any hex outside §III table
-- [ ] Accent (`#2E9BD6`) pointing at two different focuses on one page
-- [ ] Label-only or question-mark title on an evidence page
-- [ ] Evidence page without a `Source:` line
-- [ ] Traffic-light color without a paired text label
-- [ ] Gradient / drop-shadow / glow / 3D
-- [ ] Corner radius > 4px ("SaaS card" look)
-- [ ] Multi-hue chart palette; chart without a takeaway
-- [ ] Emoji or unicode glyph icons; icon pack mixing
-- [ ] Same pattern 3+ consecutive slides
-- [ ] 여러분 / 우리는 / 함께해요 direct address
-- [ ] Hanging numbers or `01 / 02 / 03` sequence text on any page except the agenda (`02_toc.svg`)
-- [ ] Evidence page composed as a single zone without a declared exception (stat-hero / full-width table / density-floor text-pattern switch)
-- [ ] Source has multi-period / multi-entity figures but the page shows only summary numbers with no detail table
-- [ ] Source contains prioritization / causality / phasing structure but the deck has zero framework exhibits
-- [ ] Fake cells or unlabeled estimates added to fill density
-
----
-
-## XIV. Usage Instructions
-
-1. SKILL.md Step 3에 이 워크스페이스 경로를 명시적으로 전달: `.claude/skills/ppt-master/templates/decks/mckinsey/`
-2. deck kind이므로 Strategist가 identity + structure를 모두 잠근다; 확인 단계에서 template adherence(`strict` / `adaptive`)를 선택한다. Stage 2에서 이 스킨(색/타이포)이 추천 후보로 제시된다
-3. Executor는 `03_content.svg`의 콘텐츠 영역(x=44, y=136, w=1192, h=524)을 §VIII 문법으로 자유 구성하되 kicker / action title / title rule / source line / page-number 크롬을 보존한다
-4. Identity만 재사용하려면 brand 추출본 `.claude/skills/ppt-master/templates/brands/mckinsey/`을 다른 layout/deck과 융합한다
-5. **Delivery-purpose seeding**: 이 덱이 Step 3 템플릿으로 지정되면 Strategist는 Stage 1에서 `delivery_purpose: text`(read-close · dense)를 추천값으로 제시한다 — 컨설팅 덱은 발표용이 아니라 정독용 문서다. 사용자는 확인 단계에서 오버라이드할 수 있다(강제 아님). 주의: §IV가 이 덱의 타입 램프(Body 16px)를 잠그므로 `delivery_purpose`는 글자 크기가 아니라 페이지당 콘텐츠 분배량·`page_rhythm`·페이지 수 추천에 작용한다. dense 페이지는 수용량이 크므로 같은 소스에서 페이지 수 추천(strategist.md §b)을 한 단계 낮게 잡는 경향을 허용한다 (예: 12–14 → 10–12)
+Install-local Pretendard is the deck typeface. Weight cuts are authored as installed family names; `Malgun Gothic` is the Korean fallback.
+
+| Role | Size px | Weight | Use |
+| --- | ---: | ---: | --- |
+| Hero number | 64 | 700 | Single data hook only |
+| Display | 48 | 700 | Cover, chapter, ending |
+| Display small | 40 | 700 | Chapter marker, large comparison value |
+| Action title | 32 | 700 | Declarative content-page headline |
+| Compact KPI | 29 | 700 | Dense but prominent KPI |
+| Subtitle / block title | 18.7 | 600 | Summary and exhibit blocks |
+| Finding title | 16.5 | 600 | Compact finding or insight lead |
+| Body / insight | 16 | 400/600 | Body copy, table cells, insight sentence |
+| Exhibit title | 15 | 600 | A/B/C/D exhibit headers |
+| Annotation / label | 13.3 | 500/600 | Kicker, axis label, category, support |
+| Dense chart microtext | 12 | 400/600 | Dense axes, legends, data labels |
+| Dense table header | 12 | 600 | Compact table headers |
+| Footer | 12 | 400 | Source line and page number |
+
+`Action title 32 / Body 16 / Subtitle 18.7 / Annotation 13.3` is the default locked candidate when this deck is selected. Delivery purpose changes page density and rhythm, not this size ramp, unless the user explicitly overrides typography.
+
+## V. Page Roster
+
+All pages use Master `mckinsey-master`. Existing five prototypes remain unchanged; the five content variants are newly authored fidelity-mode layouts.
+
+| File | Role | Layout key | PowerPoint picker | Intended content and slot topology |
+| --- | --- | --- | --- | --- |
+| `01_cover.svg` | cover | `01_cover` | Cover | Asymmetric consulting cover |
+| `02_toc.svg` | toc | `02_toc` | Agenda | Four ruled agenda rows |
+| `02_chapter.svg` | chapter | `02_chapter` | Chapter | Dark-navy section reset |
+| `03_content.svg` | content | `03_content` | Content | Generic action-title shell; Executor composes the body |
+| `03a_content_keyword_stack.svg` | content | `03a_content_keyword_stack` | Executive Summary — Keyword Stack | One composite findings zone supporting 3–5 rows |
+| `03b_content_thesis_chain.svg` | content | `03b_content_thesis_chain` | Executive Summary — Thesis Chain | Thesis band, causal chain, watchpoint proxy zones |
+| `03c_content_evidence_matrix.svg` | content | `03c_content_evidence_matrix` | Evidence Matrix | Four exhibit proxy zones plus one INSIGHT zone |
+| `03d_content_trend_multiples.svg` | content | `03d_content_trend_multiples` | Trend + Small Multiples | One trend, four diagnostic proxy zones, one INSIGHT zone |
+| `03e_content_exhibit_split.svg` | content | `03e_content_exhibit_split` | Primary + Supporting Exhibit | One 65% primary exhibit, one 35% supporting exhibit, one INSIGHT zone |
+| `04_ending.svg` | ending | `04_ending` | Ending | Dark-navy centered closing |
+
+The composite zones intentionally use `object` proxy bindings because each contains several visible chart or text atoms. Their differing counts and bounds are the authored Layout contracts; they must not be collapsed into identical generic content Layouts.

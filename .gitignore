@@ -20,6 +20,11 @@ projects/*
 .preview/
 node_modules/
 
+# Local planning and handoff documents
+docs/.superpowers/
+docs/handoff/
+docs/superpowers/
+
 # OS
 .DS_Store
 Thumbs.db

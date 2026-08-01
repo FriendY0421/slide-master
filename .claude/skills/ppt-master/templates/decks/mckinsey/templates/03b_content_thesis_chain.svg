@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="mckinsey-master" data-pptx-master-name="McKinsey" data-pptx-layout="03b_content_thesis_chain" data-pptx-layout-name="Executive Summary — Thesis Chain">
+  <!-- McKinsey — Executive Summary / Thesis Chain -->
+
+  <rect id="master-bg" width="1280" height="720" fill="#FFFFFF" data-pptx-layer="master" data-pptx-editable="false"/>
+  <line id="layout-title-rule" x1="44" y1="112" x2="1236" y2="112" stroke="#999999" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+  <line id="layout-footer-rule" x1="44" y1="676" x2="1236" y2="676" stroke="#D0D0D0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+
+  <g id="title-slot" data-pptx-placeholder="title" data-pptx-placeholder-bounds="44 40 1192 68">
+    <text id="title-carrier" data-pptx-placeholder-carrier="true" x="44" y="68" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="32" font-weight="700" letter-spacing="-0.64" fill="#1A1A1A">{{PAGE_TITLE}}</text>
+  </g>
+  <g id="source-slot" data-pptx-placeholder="footer" data-pptx-placeholder-idx="2" data-pptx-placeholder-bounds="44 684 800 20">
+    <text id="source-carrier" data-pptx-placeholder-carrier="true" x="44" y="698" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="12" fill="#888888">{{SOURCE_LINE}}</text>
+  </g>
+  <g id="page-number-slot" data-pptx-placeholder="slide-number" data-pptx-placeholder-idx="3" data-pptx-placeholder-bounds="1100 684 136 20">
+    <text id="page-number-carrier" data-pptx-placeholder-carrier="true" x="1236" y="698" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="12" text-anchor="end" fill="#888888">{{PAGE_NUM}}</text>
+  </g>
+  <g id="page-kicker"><text x="44" y="32" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" letter-spacing="0.6" fill="#0F2A4A">{{KICKER}}</text></g>
+
+  <g id="thesis-band-slot" data-pptx-placeholder="object" data-pptx-placeholder-idx="10" data-pptx-placeholder-binding="proxy" data-pptx-placeholder-bounds="44 144 1192 154">
+    <rect x="44" y="144" width="1192" height="154" fill="#0F2A4A"/>
+    <text x="68" y="174" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" letter-spacing="0.6" fill="#4FB2E5">EXECUTIVE THESIS</text>
+    <text x="68" y="218" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="29" fill="#FFFFFF">핵심 역량이 성과의 순위를 바꿨다</text>
+    <text x="68" y="252" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="16" fill="#FFFFFF">양사 모두 성장했지만 성과 지수는 처음 역전</text>
+    <text x="68" y="278" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#4FB2E5">외형보다 고부가 포트폴리오가 수익성을 결정</text>
+    <line x1="610" y1="164" x2="610" y2="278" stroke="#1F6FA8" stroke-width="1"/>
+    <text x="640" y="174" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#4FB2E5">2025 성과 지수 · 기업 A</text>
+    <text x="640" y="224" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="40" font-weight="700" fill="#2E9BD6">120</text>
+    <line x1="850" y1="168" x2="850" y2="232" stroke="#1F6FA8" stroke-width="1"/>
+    <text x="882" y="174" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#4FB2E5">2025 성과 지수 · 기업 B</text>
+    <text x="882" y="224" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="40" font-weight="700" fill="#FFFFFF">95</text>
+    <line x1="640" y1="244" x2="1212" y2="244" stroke="#1F6FA8" stroke-width="1"/>
+    <text x="640" y="274" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="18.7" fill="#2E9BD6">기업 A 성과 지수 우위 +25</text>
+    <text x="1212" y="274" text-anchor="end" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#4FB2E5">120 vs 95 · 2025 기준</text>
+  </g>
+
+  <g id="causal-chain-slot" data-pptx-placeholder="object" data-pptx-placeholder-idx="11" data-pptx-placeholder-binding="proxy" data-pptx-placeholder-bounds="44 320 1192 176">
+    <text x="44" y="332" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="15" fill="#1A1A1A">성과를 바꾼 인과</text>
+    <g id="driver-capability">
+      <rect x="44" y="352" width="28" height="4" fill="#0F2A4A"/>
+      <text x="44" y="388" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="18.7" fill="#1A1A1A">선행 역량</text>
+      <text x="44" y="438" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="29" font-weight="700" fill="#2E9BD6">72</text>
+      <text x="96" y="438" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#888888">vs</text>
+      <text x="126" y="438" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="29" font-weight="700" fill="#0F2A4A">41</text>
+      <text x="44" y="468" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#888888">2025 역량 지수 · 기업 A vs 기업 B</text>
+    </g>
+    <g id="arrow-capability-margin">
+      <text x="390" y="392" text-anchor="middle" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="12" fill="#888888">고부가 믹스</text>
+      <line x1="348" y1="418" x2="422" y2="418" stroke="#D0D0D0" stroke-width="2"/>
+      <polygon points="432,418 420,411 420,425" fill="#0F2A4A"/>
+    </g>
+    <g id="driver-margin">
+      <rect x="460" y="352" width="28" height="4" fill="#0F2A4A"/>
+      <text x="460" y="388" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="18.7" fill="#1A1A1A">수익성 레버리지</text>
+      <text x="460" y="438" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="29" font-weight="700" fill="#2E9BD6">34%</text>
+      <text x="540" y="438" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#888888">vs</text>
+      <text x="570" y="438" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="29" font-weight="700" fill="#0F2A4A">18%</text>
+      <text x="460" y="468" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#888888">2025 영업이익률 · 기업 A vs 기업 B</text>
+    </g>
+    <g id="arrow-margin-outcome">
+      <text x="806" y="392" text-anchor="middle" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="12" fill="#888888">손익 반영</text>
+      <line x1="764" y1="418" x2="838" y2="418" stroke="#D0D0D0" stroke-width="2"/>
+      <polygon points="848,418 836,411 836,425" fill="#0F2A4A"/>
+    </g>
+    <g id="driver-outcome">
+      <rect x="876" y="352" width="28" height="4" fill="#0F2A4A"/>
+      <text x="876" y="388" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="18.7" fill="#1A1A1A">성과 역전</text>
+      <text x="876" y="438" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="29" font-weight="700" fill="#2E9BD6">120</text>
+      <text x="950" y="438" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#888888">&gt;</text>
+      <text x="980" y="438" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="29" font-weight="700" fill="#0F2A4A">95</text>
+      <text x="876" y="468" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#888888">2025 성과 지수 · 기업 A가 기업 B 추월</text>
+    </g>
+  </g>
+
+  <g id="watchpoint-slot" data-pptx-placeholder="object" data-pptx-placeholder-idx="12" data-pptx-placeholder-binding="proxy" data-pptx-placeholder-bounds="44 506 1192 106">
+    <line x1="44" y1="506" x2="1236" y2="506" stroke="#E8E8E8" stroke-width="1"/>
+    <rect x="44" y="532" width="4" height="80" fill="#2E9BD6"/>
+    <text x="68" y="548" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" letter-spacing="0.6" fill="#1F6FA8">향후 관전점</text>
+    <text x="68" y="584" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="18.7" fill="#1A1A1A">기업 B의 회복 속도가 다음 성과 지형을 결정한다</text>
+    <text x="68" y="610" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#888888">기업 A가 선두를 유지하지만 격차는 빠르게 축소</text>
+    <text x="866" y="548" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="12" fill="#888888">현재 · 기업 A : 기업 B</text>
+    <text x="866" y="580" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="18.7" fill="#1A1A1A">72 : 41</text>
+    <line x1="964" y1="574" x2="1032" y2="574" stroke="#D0D0D0" stroke-width="2"/>
+    <polygon points="1042,574 1030,567 1030,581" fill="#0F2A4A"/>
+    <text x="1070" y="548" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="12" fill="#888888">전망 · 기업 A : 기업 B</text>
+    <text x="1070" y="580" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="18.7" fill="#1A1A1A">65 : 50</text>
+    <text x="1236" y="610" text-anchor="end" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" fill="#2E9BD6">점유율 격차 31%p → 15%p</text>
+  </g>
+</svg>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="mckinsey-master" data-pptx-master-name="McKinsey" data-pptx-layout="03a_content_keyword_stack" data-pptx-layout-name="Executive Summary — Keyword Stack">
+  <!-- McKinsey — Executive Summary / Keyword Stack -->
+
+  <rect id="master-bg" width="1280" height="720" fill="#FFFFFF" data-pptx-layer="master" data-pptx-editable="false"/>
+  <line id="layout-title-rule" x1="44" y1="112" x2="1236" y2="112" stroke="#999999" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+  <line id="layout-footer-rule" x1="44" y1="676" x2="1236" y2="676" stroke="#D0D0D0" stroke-width="1" data-pptx-layer="layout" data-pptx-editable="false"/>
+
+  <g id="title-slot" data-pptx-placeholder="title" data-pptx-placeholder-bounds="44 40 1192 68">
+    <text id="title-carrier" data-pptx-placeholder-carrier="true" x="44" y="68" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="32" font-weight="700" letter-spacing="-0.64" fill="#1A1A1A">{{PAGE_TITLE}}</text>
+  </g>
+  <g id="source-slot" data-pptx-placeholder="footer" data-pptx-placeholder-idx="2" data-pptx-placeholder-bounds="44 684 800 20">
+    <text id="source-carrier" data-pptx-placeholder-carrier="true" x="44" y="698" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="12" fill="#888888">{{SOURCE_LINE}}</text>
+  </g>
+  <g id="page-number-slot" data-pptx-placeholder="slide-number" data-pptx-placeholder-idx="3" data-pptx-placeholder-bounds="1100 684 136 20">
+    <text id="page-number-carrier" data-pptx-placeholder-carrier="true" x="1236" y="698" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="12" text-anchor="end" fill="#888888">{{PAGE_NUM}}</text>
+  </g>
+  <g id="page-kicker"><text x="44" y="32" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" letter-spacing="0.6" fill="#0F2A4A">{{KICKER}}</text></g>
+
+  <g id="findings-zone-slot" data-pptx-placeholder="object" data-pptx-placeholder-idx="10" data-pptx-placeholder-binding="proxy" data-pptx-placeholder-bounds="44 136 1192 524">
+    <g id="finding-market">
+      <rect x="44" y="146" width="4" height="86" fill="#0F2A4A"/>
+      <text x="68" y="160" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" letter-spacing="0.6" fill="#888888">시장 변화</text>
+      <text x="68" y="191" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="18.7" fill="#1A1A1A">핵심 고객의 구매 기준이 가격에서 성과로 이동했다</text>
+      <text x="68" y="220" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="16" fill="#888888">2025 고객 조사 · 성과 기준 응답 42% → 61%</text>
+      <line x1="44" y1="250" x2="1236" y2="250" stroke="#E8E8E8" stroke-width="1"/>
+    </g>
+    <g id="finding-economics">
+      <rect x="44" y="268" width="4" height="86" fill="#0F2A4A"/>
+      <text x="68" y="282" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" letter-spacing="0.6" fill="#888888">수익 구조</text>
+      <text x="68" y="313" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="18.7" fill="#1A1A1A">고부가 포트폴리오가 외형보다 이익 성장을 앞당겼다</text>
+      <text x="68" y="342" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="16" fill="#888888">2025 영업이익률 · 기업 A 34% vs 기업 B 18%</text>
+      <line x1="44" y1="372" x2="1236" y2="372" stroke="#E8E8E8" stroke-width="1"/>
+    </g>
+    <g id="finding-capability">
+      <rect x="44" y="390" width="4" height="86" fill="#0F2A4A"/>
+      <text x="68" y="404" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" letter-spacing="0.6" fill="#888888">핵심 역량</text>
+      <text x="68" y="435" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="18.7" fill="#1A1A1A">선행 투자가 공급 안정성과 고객 전환을 동시에 높였다</text>
+      <text x="68" y="464" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="16" fill="#888888">납기 준수율 91% · 핵심 고객 전환율 28%</text>
+      <line x1="44" y1="494" x2="1236" y2="494" stroke="#E8E8E8" stroke-width="1"/>
+    </g>
+    <g id="finding-priority">
+      <rect x="44" y="512" width="4" height="86" fill="#2E9BD6"/>
+      <text x="68" y="526" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="13.3" letter-spacing="0.6" fill="#1F6FA8">최우선 과제</text>
+      <text x="68" y="557" font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif" font-size="18.7" fill="#1A1A1A">다음 성장 구간은 실행 속도와 채널 확장에서 결정된다</text>
+      <text x="68" y="586" font-family="Pretendard, 'Malgun Gothic', sans-serif" font-size="16" fill="#888888">향후 12개월 · 핵심 채널 3개 우선 확장</text>
+    </g>
+  </g>
+</svg>
