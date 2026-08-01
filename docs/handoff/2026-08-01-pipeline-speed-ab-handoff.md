@@ -135,9 +135,10 @@ Slot 1/2/3/4가 각각 3/1/2/4 non-pass를 기록했으므로, 네 벽시계 모
 
 full treatment `0bb7a94f`는 로컬 `main`에 한 번 머지됐지만 원격에는
 푸시되지 않았다. 최종 정리는 `origin/main`의 기준점 `6c0bbe08`에서
-안전한 변경만 다시 적용하는 방식으로 수행한다. 전체 treatment 상태는
-`backup/pipeline-speed-full-r2` 브랜치에 보존하고, 검증 완료 후 로컬
-`main`을 선택 통합 브랜치로 교체한다. `origin/main`은 변경하지 않는다.
+안전한 변경만 다시 적용하는 방식으로 수행했다. 전체 treatment 상태는
+`backup/pipeline-speed-full-r2` 브랜치에 보존했고, 선택 통합 트리는
+`c84ba801`에서 검증한 뒤 로컬 `main`으로 교체했다. `origin/main`은
+변경하지 않았다.
 
 | 분류 | 원래 커밋 | 선택 통합 커밋 | 처리 |
 |---|---|---|---|
@@ -194,3 +195,17 @@ packet 구현을 제외한 뒤 `AGENTS.md`에 남아 있던 post-packet P01 문�
 원시 `slot1r.jsonl`부터 `slot4.jsonl` 로그와 stderr/last 기록도 같은
 외부 증거 폴더에 남긴다. 보고서에 기록된 기존 프로젝트 worktree 경로는
 정리 후 복구 경로가 아니며, 위 ZIP이 정식 보존본이다.
+
+## 워크트리 정리 결과
+
+- cold A/B, 이전 full A/B, 구현·실험용 임시 worktree 17개를 제거했다.
+- 유효한 네 cold-run 프로젝트는 제거 전에 위 네 ZIP으로 보존했다.
+- 미커밋 상태였던 mixed implementation WIP는
+  `archive/pipeline-speed-mixed-wip-20260801`의 `8d1f1d6d`로 보존했다.
+- 미커밋 freshness WIP는
+  `archive/pipeline-speed-freshness-wip-20260801`의 `cfd15e09`로 보존했다.
+- 경로와 기록 PID가 모두 사라진 `pipeline-lite` stale worktree 등록을
+  unlock 후 prune했다. `step4-diet` 브랜치는 삭제하지 않았다.
+- 정리 후 등록된 worktree는 저장소 루트의 로컬 `main` 하나뿐이다.
+- `C:\tmp\slide-master-full-cold-ab-evidence-r2`는 worktree가 아닌 원시
+  증거 폴더이므로 삭제하지 않았다.
