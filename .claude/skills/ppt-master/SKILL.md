@@ -100,7 +100,9 @@ description: >
 | `${SKILL_DIR}/scripts/finalize_svg.py` | SVG post-processing (unified entry; on-demand — Step 7.2 is deferred by default) |
 | `${SKILL_DIR}/scripts/svg_to_pptx.py` | Export to PPTX |
 | `${SKILL_DIR}/scripts/verify_deck.py` | Final deck verification gate — stage parity/freshness, native PPTX integrity, plan + SVG re-check, optional OfficeCLI OpenXML validation + contact-sheet render (run after Step 7) |
-| `${SKILL_DIR}/scripts/measure_run.py` | Post-hoc run timing report from project artifact timestamps (stage durations + per-page cadence; A/B benchmarking) |
+| `${SKILL_DIR}/scripts/run_telemetry.py` | Opt-in explicit-run lifecycle + fixed low-variance metric telemetry for pre-registered benchmarks |
+| `${SKILL_DIR}/scripts/measure_run.py` | Explicit telemetry-run report; legacy artifact timestamps remain non-comparable diagnostics only |
+| `${SKILL_DIR}/scripts/benchmark_pipeline_ab.py` | Clean-worktree paired A/B harness with fixture/source integrity, quality guards, and pre-registered CI/MCID decisions |
 | `${SKILL_DIR}/scripts/native_enhance_pptx.py` | Existing PPTX enhancement project init / validation / direct OOXML patch export |
 | `${SKILL_DIR}/scripts/native_narration_pptx.py` | Backward-compatible entrypoint for existing PPTX notes / narration enhancement |
 | `${SKILL_DIR}/scripts/update_spec.py` | Propagate a `spec_lock.md` color / font_family change across all generated SVGs |
@@ -108,6 +110,27 @@ description: >
 For complete tool documentation, see `${SKILL_DIR}/scripts/README.md`.
 
 > **Windows note**: if a `python3 ...` command fails (common on python.org installs, which provide `python.exe` but not `python3.exe`), rerun the same command with `python` instead.
+
+### Opt-in benchmark runtime
+
+Only for a pre-registered speed experiment, instrument both control and
+treatment from the same common base with an explicit run id. Record coarse
+run/stage boundaries in `analysis/run_events.jsonl`, emit one final fixed metric
+snapshot (input bytes/tokens, reads, SVG bytes/pages, tool turns, rewrites), and
+close the run by re-hashing the same repository and fixture. Report it with
+`measure_run.py --run-id`; start/end source or fixture drift and either dirty
+boundary are non-comparable. Record an unavailable host metric as
+`unavailable`, never as a fabricated zero. CLI boundary calls include Python
+startup and are not a short script timer; Python pipeline code should import
+`append_event()` and must first
+pre-register a median overhead ceiling of 2 ms on that machine. Decision-grade
+script timing and merge go/no-go use `benchmark_pipeline_ab.py` with clean
+committed arms, immutable fixtures, explicit quality mode, and a pre-registered
+`superiority` or `noninferiority` CI threshold contract. A `hit` case also
+pre-registers whether its cache is project-local or uses a separate cache
+directory.
+Normal deck production does not enable this instrumentation. Full commands and
+the strict benchmark-plan schema are in [`scripts/README.md`](scripts/README.md).
 
 ## Template Index
 

@@ -36,6 +36,172 @@ python3 scripts/svg_to_pptx.py <project_path>
 python3 scripts/verify_deck.py <project_path>  # final verification gate
 ```
 
+## Run Telemetry and A/B Benchmarks
+
+Telemetry is opt-in and always uses an explicit run id. `start` hashes the Git
+commit/diff and fixture once; later events append one bounded JSON line to
+`<project>/analysis/run_events.jsonl`.
+
+```bash
+python3 scripts/run_telemetry.py start <project_path> --run-id run-001 \
+  --repo-root . --fixture <fixture_path> --route main --cache-condition cold
+python3 scripts/run_telemetry.py event <project_path> --run-id run-001 \
+  --stage spec --action start
+python3 scripts/run_telemetry.py event <project_path> --run-id run-001 \
+  --stage spec --action complete
+python3 scripts/run_telemetry.py metrics <project_path> --run-id run-001 \
+  --input-bytes unavailable --input-tokens unavailable --file-reads unavailable \
+  --duplicate-file-reads unavailable --svg-output-bytes 4096 --svg-pages 3 \
+  --tool-turns unavailable --rewrites 0
+python3 scripts/run_telemetry.py end <project_path> --run-id run-001 --outcome ok \
+  --repo-root . --fixture <fixture_path>
+python3 scripts/measure_run.py <project_path> --run-id run-001
+```
+
+The metric snapshot is cumulative and uses a fixed schema: input bytes/tokens,
+file reads/duplicate reads, SVG output bytes/pages, tool turns, and rewrites. A
+comparable run emits exactly one snapshot after the measured work and before
+`end`; zero or multiple snapshots make it diagnostic-only. A run from a dirty
+worktree is retained for diagnosis but is always non-comparable. Use
+`unavailable` (stored as JSON `null`) when the host cannot supply a metric;
+never encode missing instrumentation as zero. `measure_run.py` reports
+available and unavailable keys separately.
+
+`end` re-hashes the same repository and fixture recorded by `start`. A changed
+commit, diff/source identity, fixture, or dirty end state makes the run
+non-comparable. This closes the historical mixed-checkout failure mode where a
+merge or edit landed during a long run.
+
+CLI lifecycle calls are coarse diagnostics: Python process startup is part of
+their overhead and they must not be used to time a short script. Code already
+running in Python should import and reuse `append_event()`; pre-register an
+in-process median-overhead ceiling of 2 ms on the benchmark machine. The A/B
+harness below owns decision-grade subprocess timing.
+
+Without `--run-id`, `measure_run.py` retains the old artifact-mtime view only
+as a non-comparable diagnostic. It never infers the newest telemetry run.
+
+The A/B harness accepts a strict JSON plan whose commands are argv arrays
+(`shell=False`). Each case has one timed command plus optional untimed prepare
+and quality-guard hooks:
+
+```json
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "validate-spec",
+      "stage": "validate_spec",
+      "cache_condition": "none",
+      "quality_mode": "non-artifact",
+      "metric": {
+        "kind": "duration_ms",
+        "name": "validate_duration",
+        "unit": "ms"
+      },
+      "decision": {
+        "kind": "superiority",
+        "direction": "lower",
+        "relative_mcid": 0.10,
+        "absolute_mcid": 2.0
+      },
+      "command": [
+        "{python}",
+        "{repo}/.claude/skills/ppt-master/scripts/validate_spec.py",
+        "{project}"
+      ],
+      "guards": [
+        {
+          "name": "quality-exit-zero",
+          "command": [
+            "{python}",
+            "{repo}/.claude/skills/ppt-master/scripts/validate_spec.py",
+            "{project}"
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+```bash
+python3 scripts/benchmark_pipeline_ab.py benchmark_plan.json \
+  --control-repo <baseline_worktree> --treatment-repo <candidate_worktree> \
+  --fixture <fixture_path> --output pipeline_ab.json --pairs 10
+```
+
+Both arms must be clean committed Git worktrees. The harness checks the commit,
+tree, status, and fixture hash before and after every warmup/measured pair. It
+copies both arm projects and verifies both copies before either arm executes;
+source or fixture mutation makes the report non-comparable. Keep the plan,
+fixture, and output report outside both arm worktrees so the harness itself does
+not dirty an arm. Output inside either arm or the fixture, or output that
+overwrites the plan, harness, or telemetry dependency, fails before timing. The
+report records the exact plan, fixture, arm commit/tree, benchmark-harness, and
+local telemetry-dependency SHA-256 values and verifies their end-of-run
+identities.
+
+Every case pre-registers `quality_mode` and `decision`. Use `non-artifact` only
+when the command has no quality-bearing output. `equivalent` requires at least
+one `pair_guards` command that compares the two arm artifacts. `direction` is
+`lower` or `higher`, so positive paired improvement always favors treatment.
+Set decision `kind` to `superiority` and provide `relative_mcid` plus
+`absolute_mcid` to require a positive gain. Set it to `noninferiority` and
+provide `max_relative_regression` plus `max_absolute_regression` to allow a
+pre-registered regression ceiling; at least one threshold must be positive.
+For noninferiority, each paired-bootstrap 95% CI lower bound must be at least
+the negative of its allowed regression. For example, a lower-is-better runtime
+case allowing at most 5% and 500 ms regression uses:
+
+```json
+{
+  "kind": "noninferiority",
+  "direction": "lower",
+  "max_relative_regression": 0.05,
+  "max_absolute_regression": 500.0
+}
+```
+
+Report-level `all_go` is true only when every comparable case is `go`. Exit
+code 0 means the experiment is comparable, not that it passed; merge automation
+must also require `all_go: true`.
+
+`duration_ms` is the default primary metric. For a deterministic low-variance
+bytes/count measure, set metric `kind` to `stdout_number`; the timed command
+must write exactly one finite non-negative number to stdout. A zero treatment
+is valid (for example, zero rewrites); a zero control makes relative improvement
+undefined and the pair non-comparable. A common `command` and
+`prepare` remain the defaults. Explicit `control_command` /
+`treatment_command` and `control_prepare` / `treatment_prepare` arrays may
+override or extend them for pre-registered asymmetric mechanisms; there is no
+branch-name detection.
+
+The harness discards one warmup pair, requires an even count of at least 10
+measured pairs, balances first-arm order with ABBA/BAAB, and reports paired
+median improvement, MAD, and paired-bootstrap 95% confidence intervals. Cache
+conditions (`none`, `cold`, `miss`, `hit`) are summarized separately; a `hit`
+case requires `cache_scope` to be `project` or `cache-dir`. Both the effective
+prepare and timed command for each arm must reference the selected
+`{project}` or `{cache_dir}` placeholder. This prevents a fake cache marker
+outside the mechanism being measured. For example, project-local pass stamps
+pre-register:
+
+```json
+{
+  "cache_condition": "hit",
+  "cache_scope": "project",
+  "prepare": [["{python}", "prepare_stamp.py", "{project}"]],
+  "command": ["{python}", "check_stamp.py", "{project}"]
+}
+```
+
+Do not provide `cache_scope` for non-`hit` cases. The report records the
+normalized scope per case. No outlier is deleted or replaced, and any command,
+guard, or integrity failure makes the report non-comparable. Run the suite
+serially on one otherwise-idle host; the report records that host and runtime
+platform.
+
 Repository update:
 
 ```bash
@@ -53,6 +219,7 @@ python3 scripts/update_repo.py
 | PPTX animations | `pptx_animations.py`, `animation_config.py` | [docs/pptx-animations.md](./docs/pptx-animations.md) |
 | Spec maintenance | `update_spec.py` | [docs/update_spec.md](./docs/update_spec.md) |
 | Pipeline gates | `preflight.py` (environment, after project init), `validate_spec.py` (planning artifacts, after Step 4 spec output), `verify_deck.py` (final deck verification, after Step 7; optional OfficeCLI OpenXML + contact-sheet layer) | script docstrings |
+| Run measurement | `run_telemetry.py`, `measure_run.py`, `benchmark_pipeline_ab.py` | section above; script docstrings |
 | Image tools | `image_gen.py`, `latex_render.py`, `analyze_images.py`, `gemini_watermark_remover.py` | [docs/image.md](./docs/image.md) |
 | Repo maintenance | `update_repo.py`, `sync_codex_stubs.py` (regenerate `.codex/skills` Codex discovery stubs after editing canonical skill frontmatter; `--check` is enforced by `preflight.py`) | README install/update section; script docstrings |
 | Troubleshooting | validation, preview, export, dependency issues | [docs/troubleshooting.md](./docs/troubleshooting.md) |
