@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "experiment_id": "learning-strategies-full-agent-cold-ab-r2",
+  "status": "complete",
+  "verdict": "reject_or_rework",
+  "merge_recommendation": "do_not_push_or_merge_full_treatment_to_origin_main",
+  "control_commit": "6c0bbe08ebe3ddfb7ea5a91a25ec4ed6f2c99830",
+  "treatment_commit": "0bb7a94f17da6c2890d4c8ef09f2e4faac2009bb",
+  "runs": [
+    {
+      "slot": 1,
+      "arm": "control",
+      "run_id": "cold-r2-slot1r",
+      "packet_activated": null,
+      "bootstrap_unique_bytes": 33919,
+      "bootstrap_contract_initial_bytes": 33919,
+      "telemetry_ms": 1210082.928,
+      "full_cli_file_family_proxy_ms": 1512309.088,
+      "input_tokens": 23551841,
+      "cached_input_tokens": 23219712,
+      "output_tokens": 72979,
+      "reasoning_output_tokens": 26280,
+      "qc_nonpass": 3,
+      "rewrites": 1,
+      "svg_bytes": 29539,
+      "pptx_bytes": 53806,
+      "final_quality_pass": true,
+      "observer_comparable": false
+    },
+    {
+      "slot": 2,
+      "arm": "treatment",
+      "run_id": "cold-r2-slot2",
+      "packet_activated": false,
+      "packet_noop_reason": "visualization_declaration_not_empty",
+      "bootstrap_unique_bytes": 33283,
+      "bootstrap_contract_initial_bytes": 34404,
+      "telemetry_ms": 1336511.752,
+      "full_cli_file_family_proxy_ms": 1698203.581,
+      "input_tokens": 24793436,
+      "cached_input_tokens": 24465152,
+      "output_tokens": 79148,
+      "reasoning_output_tokens": 28564,
+      "qc_nonpass": 1,
+      "rewrites": 0,
+      "svg_bytes": 27721,
+      "pptx_bytes": 53423,
+      "final_quality_pass": true,
+      "observer_comparable": false
+    },
+    {
+      "slot": 3,
+      "arm": "treatment",
+      "run_id": "cold-r2-slot3",
+      "packet_activated": false,
+      "packet_noop_reason": "visualization_declaration_not_empty",
+      "bootstrap_unique_bytes": 139082,
+      "bootstrap_contract_initial_bytes": 140322,
+      "telemetry_ms": 1133024.776,
+      "full_cli_file_family_proxy_ms": 1489945.738,
+      "input_tokens": 24122277,
+      "cached_input_tokens": 23773696,
+      "output_tokens": 69228,
+      "reasoning_output_tokens": 24800,
+      "qc_nonpass": 2,
+      "rewrites": 1,
+      "svg_bytes": 25605,
+      "pptx_bytes": 52064,
+      "final_quality_pass": true,
+      "observer_comparable": false
+    },
+    {
+      "slot": 4,
+      "arm": "control",
+      "run_id": "cold-r2-slot4",
+      "packet_activated": null,
+      "bootstrap_unique_bytes": 34328,
+      "bootstrap_contract_initial_bytes": 34328,
+      "telemetry_ms": 1412399.674,
+      "full_cli_file_family_proxy_ms": 1719065.065,
+      "input_tokens": 23380624,
+      "cached_input_tokens": 23057152,
+      "output_tokens": 71711,
+      "reasoning_output_tokens": 25022,
+      "qc_nonpass": 4,
+      "rewrites": 3,
+      "svg_bytes": 28695,
+      "pptx_bytes": 52079,
+      "final_quality_pass": true,
+      "observer_comparable": false
+    }
+  ],
+  "arm_summary": {
+    "control": {
+      "bootstrap_unique_median_bytes": 34123.5,
+      "bootstrap_contract_initial_median_bytes": 34123.5,
+      "telemetry_median_ms": 1311241.301,
+      "full_cli_file_family_proxy_median_ms": 1615687.0765,
+      "input_tokens_median": 23466232.5
+    },
+    "treatment": {
+      "bootstrap_unique_median_bytes": 86182.5,
+      "bootstrap_contract_initial_median_bytes": 87363,
+      "telemetry_median_ms": 1234768.264,
+      "full_cli_file_family_proxy_median_ms": 1594074.6595,
+      "input_tokens_median": 24457856.5
+    }
+  },
+  "diagnostic_deltas": {
+    "treatment_bootstrap_contract_initial_median_change_pct": 156.020044837136,
+    "treatment_telemetry_median_improvement_pct": 5.832110149495666,
+    "treatment_full_cli_proxy_median_improvement_pct": 1.337661067811351,
+    "telemetry_pair1_improvement_pct": -10.447947084829877,
+    "telemetry_pair2_improvement_pct": 19.780158771121325,
+    "full_cli_pair1_improvement_pct": -12.292096534699924,
+    "full_cli_pair2_improvement_pct": 13.328135837604266,
+    "treatment_input_token_median_change_pct": 4.225748636897721
+  },
+  "decision_reasons": [
+    "packet_activation_0_of_2_treatment_runs",
+    "30_percent_executor_input_mcid_failed_in_both_pairs",
+    "treatment_bootstrap_path_unstable_cheatcard_vs_full_executor",
+    "wall_clock_pair_directions_mixed",
+    "10_percent_wall_clock_mcid_not_met",
+    "all_four_observer_runs_noncomparable_due_to_intermediate_qc_nonpass"
+  ],
+  "cold_scope": {
+    "agent_context_artifact_process_cold": true,
+    "os_page_cache_flushed": false,
+    "provider_prompt_cache_flushed": false
+  }
+}

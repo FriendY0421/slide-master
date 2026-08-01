@@ -64,8 +64,7 @@ following Codex enforcement remains mandatory for that route only:
   Confirm UI and only its documented staged-chat fallback.
 - Immediately run `validate_spec.py` on `design_spec.md` plus `spec_lock.md` and
   fix every error before SVG generation. Re-read `spec_lock.md` at P01/P05/P09
-  and after context compaction. On a valid execution-packet path, the immediate
-  post-packet read satisfies P01. Run the page-1 SVG quality gate before page 2
+  and after context compaction. Run the page-1 SVG quality gate before page 2
   and the full quality gate after the last page; fix every error.
 - Honor the confirmed image source and exact §VIII targets. The default `codex`
   AI path uses Codex built-in `image_gen`; legacy `host-native` reads as `auto`.
