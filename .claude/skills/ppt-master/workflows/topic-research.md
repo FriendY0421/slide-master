@@ -96,7 +96,13 @@ Two artifacts under `projects/`:
 | License | Wikimedia / public-domain / CC-licensed; avoid stock-aggregator watermarks and unsourced uploads |
 | Filename | descriptive English snake_case (`joe_hisaishi_concert.jpg`, not `image1.jpg`) |
 
+**Hard rule — no empty topic folders**: create `projects/<topic_slug>/` only
+immediately before saving the first retained research image. If no image passes
+the source/license/quality checks, do not create the folder. Never pre-create a
+topic-named directory merely because topic research started.
+
 ```bash
+# Run these only when at least one approved image will actually be saved.
 mkdir -p "projects/<topic_slug>"
 curl -L -o "projects/<topic_slug>/<descriptive_name>.<ext>" "<image_url>"
 ```
@@ -110,10 +116,10 @@ Output a checkpoint, then continue with the main pipeline. The artifacts feed di
 ```markdown
 ## ✅ Topic Research Complete
 - [x] Document: `projects/<topic_slug>.md` (N sections)
-- [x] Images: `projects/<topic_slug>/` (N files)
+- [x] Images: `projects/<topic_slug>/` (N files; omit this line when N=0 and the folder does not exist)
 - [ ] **Next**: SKILL.md Step 2 →
   `project_manager.py init <project_name> --format <format>`
-  `project_manager.py import-sources projects/<project_name> projects/<topic_slug>.md projects/<topic_slug>/*.* --move`
+  `project_manager.py import-sources projects/<project_name> projects/<topic_slug>.md [projects/<topic_slug>/*.* only when the image folder exists] --move`
 ```
 
 `<project_name>` is the user's chosen project identifier (typically `<format>_<topic_slug>`, e.g. `ppt169_joe_hisaishi`); `--move` removes the research artifacts from `projects/<topic_slug>` after they are imported.
