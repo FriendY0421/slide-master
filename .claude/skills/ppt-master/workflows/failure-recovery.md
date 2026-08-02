@@ -30,7 +30,7 @@ Central recovery rules for common PPT Master failures. Route-specific workflow f
 | Browser annotations submitted during generation | No | Defer application until after Step 7 | User asks to apply annotations | `live-preview` Step 2 |
 | `svg_quality_checker.py` error | Yes | Fix the affected SVG, then rerun checker | No unless required asset is missing | Step 6 Visual Construction |
 | `svg_quality_checker.py` warning | No | Fix when straightforward; otherwise acknowledge residual risk (text-geometry warnings: disposition each — fix or stated intent) | No | Step 6 warning handling |
-| Post-export visual defect (verify_deck contact sheet / user review) | No | Hand-edit the owning `svg_output/` page (main agent), rerun Step 7.2 (only if `svg_final/` exists — it is deferred by default) + 7.3 (export; verN auto-increments) | Only when the fix needs a content decision | Step 7.3 |
+| Suspected post-export visual defect (lightweight contact sheet / user review) | No | Report the suspect page/finding and recommend `verify-pptx-export`; do not auto-run its deep scan or repair loop | Explicit approval enters `verify-pptx-export`; confirmed defects are then fixed in the owning source | `verify-pptx-export` after approval |
 | Selective pixel check unavailable (playwright or preview server missing) | No | Skip silently — the static geometry gate already ran | No | Step 6 gate |
 | Missing `notes/total.md` (only when notes were requested in `design_spec.md §X`; absence is normal on the default no-notes path) | Yes | Generate speaker notes before Step 7 | No | Step 6 Logic Construction |
 | Step 7 image readiness missing manual files | Yes | None for user-drop assets; list each missing image's filename, purpose, and recommended size | Yes — user places chosen images at `images/<filename>` | Step 7 image readiness gate |
@@ -69,6 +69,6 @@ Central recovery rules for common PPT Master failures. Route-specific workflow f
 | Step 7.1 complete, export not complete | Step 7.2 |
 | Step 7.2 complete, PPTX not complete | Step 7.3 |
 | Browser annotations saved after export | [`live-preview`](./live-preview.md) Step 2 |
-| Visual defect found after export | Fix `svg_output/`, then Step 7.2 → 7.3 re-run (new verN) |
+| Visual defect suspected after export | Report it and recommend `verify-pptx-export`; after explicit approval, verify and fix the owning source, then re-export |
 
 **Default - resume at the owning failed step**: Do not restart the planning session or regenerate prior artifacts unless the owning source has changed.

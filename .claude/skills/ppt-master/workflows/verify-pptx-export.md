@@ -6,6 +6,8 @@ description: Post-export PPTX verification via OfficeCLI — package schema vali
 
 > Standalone post-export step. Runs OfficeCLI against an exported `.pptx` to catch what SVG-stage checks cannot see: package-level schema violations, text overflow in native frames, broken part references, and SVG-to-DrawingML conversion drift. Explicit-request only.
 
+The normal handoff may perform one lightweight exported-PPTX contact-sheet sanity scan and optionally use `issues --json` as a non-blocking suspicion signal. That scan is **not** this workflow. If it finds a possible issue, recommend this workflow to the user; enter only after the user explicitly approves the recommendation.
+
 This workflow is **independent**: it reads `<project>/exports/<file>.pptx` and the route-owned comparison source. For an SVG-pipeline deck, compare against `svg_output/`; generate `svg_final/` on demand only when a self-contained comparison view is useful. No upstream conversation context is required, so the workflow is safe to invoke in a fresh session.
 
 ## When to Run
@@ -17,7 +19,7 @@ This workflow is **independent**: it reads `<project>/exports/<file>.pptx` and t
 
 - No exported PPTX exists yet — finish the export first.
 - The user wants a pre-export SVG check — that is [`visual-review`](./visual-review.md) / [`verify-charts`](./verify-charts.md) territory.
-- Do not auto-invoke after every export; run only on explicit request.
+- Do not auto-invoke after every export or after a merely suspicious lightweight scan; run only on explicit request or explicit approval of the recommendation.
 
 ---
 

@@ -74,7 +74,11 @@ following Codex enforcement remains mandatory for that route only:
   were requested, `finalize_svg.py` only when a self-contained SVG preview is
   requested or a workflow explicitly needs `svg_final/`, then `svg_to_pptx.py`.
   Never replace finalize with a copy or use `-s final` for release. Require
-  `verify_deck.py <project> --no-render` exit 0 before declaring completion.
+  `verify_deck.py <project> --no-render` exit 0 before declaring completion,
+  then perform the main skill's single exported-PPTX contact-sheet sanity scan.
+  That lightweight scan is not `verify-pptx-export`: on a suspected issue,
+  report it and recommend the workflow, but never enter it without explicit
+  user approval.
 
 Direct-PPTX routes use only their own native validation loops and preserve their
 source fonts. Pretendard applies to SVG-authoring routes. `docs/rules/` style

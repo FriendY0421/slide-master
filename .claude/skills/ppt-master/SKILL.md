@@ -967,13 +967,19 @@ animation playback in Keynote or other presentation applications.
 > ❌ **NEVER** substitute `cp` for `finalize_svg.py` — finalize performs multiple critical processing steps
 > ❌ **NEVER** use `-s final` for a release export. It is a diagnostic comparison only; the supported native route reads `svg_output/`.
 
-**Final deck verification (mandatory — before declaring the deck done)**: one command re-checks stage parity/freshness (stale finalize or export), native PPTX integrity (zip, per-slide editable DrawingML, page count), the planning artifacts, and SVG quality; when OfficeCLI is installed it also validates OpenXML and renders a contact sheet of the exported PPTX to `<project_path>/_pptx_render/<stem>-grid.png` — Read that PNG to eyeball overflow / collisions in the converted deck (auto-skips when OfficeCLI is absent):
+**Final deck verification (mandatory structural gate — before declaring the deck done)**: one command re-checks stage parity/freshness (stale finalize or export), native PPTX integrity (zip, per-slide editable DrawingML, page count), the planning artifacts, and SVG quality; when OfficeCLI is installed it also validates OpenXML. Keep the routine speed path here — the visual sanity scan immediately below is a separate one-pass handoff check:
 
 ```bash
 python3 ${SKILL_DIR}/scripts/verify_deck.py <project_path> --no-render
 ```
 
-> The routine command above uses `--no-render`: it skips only the OfficeCLI contact-sheet render; OpenXML validation and every other check stay on. Drop the flag only when the user asks for deep verification, before a release hand-off, or whenever converter-level layout doubt exists. Exit 0 is required before completion is reported.
+> The routine command above uses `--no-render`: it skips only the OfficeCLI contact-sheet render; OpenXML validation and every other check stay on. Exit 0 is required before completion is reported.
+
+**Lightweight exported-PPTX visual sanity check (DEFAULT — one pass, not deep verification)**: after the structural command passes, render exactly one whole-deck contact sheet from the exported PPTX using the fastest exported-PPTX renderer already available (PowerPoint-native when available; otherwise the existing OfficeCLI grid renderer) and read it once for obvious text overflow/collision, missing assets, or font substitution. Open only visibly suspect pages at full resolution; do not render and compare every page individually by default. When OfficeCLI is already available, its `issues --json` scan MAY run alongside the contact-sheet render as a non-blocking suspicion signal.
+
+- Contact sheet clean and no suspicion signal: deliver immediately and state that the lightweight visual sanity check passed; the full [`verify-pptx-export`](workflows/verify-pptx-export.md) workflow was not run.
+- Visible or reported suspicion, or no usable exported-PPTX render: identify the page/finding and recommend [`verify-pptx-export`](workflows/verify-pptx-export.md) to the user. **Do not auto-enter that workflow or start its iterative repair loop.** Run it only after explicit user approval.
+- This one-pass check does not change the standalone workflow's explicit-request-only boundary.
 
 > **Post-export annotation window**: the preview service from Step 6 typically remains running after export. If the user submitted annotations in the browser (during Executor or after export) and now asks to apply them — they may quote the browser prompt (`Changes saved to svg_output...` / `修改已保存到 svg_output...`), say "apply my annotations" / "应用注解" / equivalent — run [`live-preview`](workflows/live-preview.md) Step 2 to apply and re-export. Annotations submitted during generation are also handled here, not earlier.
 

@@ -71,7 +71,7 @@
 - Fix every `error`. Disposition each `text geometry:` warning (fix, or state the intended balanced break). Clean block = silent pass.
 
 ## 9. Then export (SKILL.md Step 7 owns it)
-- No notes → skip 7.1. finalize (7.2) deferred by default. Export: `python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project>`. Verify: `verify_deck.py <project> --no-render` + `unzip -t`.
+- No notes → skip 7.1. finalize (7.2) deferred by default. Export: `python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project>`. Verify: `verify_deck.py <project> --no-render` + `unzip -t`, then read one exported-PPTX contact sheet. If it is suspicious, recommend `verify-pptx-export` and wait for explicit approval; never auto-run it.
 
 ---
 
