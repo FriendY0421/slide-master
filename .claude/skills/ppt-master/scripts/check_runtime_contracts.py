@@ -66,8 +66,12 @@ _SEMANTIC_REQUIREMENTS = {
             r"spec_lock.{0,240}P01\W*P05\W*P09.{0,160}context compaction",
         ),
         (
-            "routine no-render completion command",
-            r"verify_deck\.py\s+<project(?:_path)?>\s+--no-render",
+            "rendering completion command",
+            r"verify_deck\.py\s+<project(?:_path)?>`?(?!\s*--no-render)",
+        ),
+        (
+            "no-render iteration-only escape hatch",
+            r"--no-render[^\n]{0,120}iterat|iterat[^\n]{0,120}--no-render",
         ),
     ),
     ".claude/skills/ppt-master/SKILL.md": (
@@ -85,8 +89,12 @@ _SEMANTIC_REQUIREMENTS = {
             r"Final deck verification\s*\(mandatory",
         ),
         (
-            "routine no-render completion command",
-            r"verify_deck\.py\s+<project(?:_path)?>\s+--no-render",
+            "rendering completion command",
+            r"verify_deck\.py\s+<project(?:_path)?>`?(?!\s*--no-render)",
+        ),
+        (
+            "no-render iteration-only escape hatch",
+            r"--no-render[^\n]{0,120}iterat|iterat[^\n]{0,120}--no-render",
         ),
     ),
     ".claude/skills/ppt-master/references/artifact-ownership.md": (
@@ -172,12 +180,13 @@ _ROUTINE_FINALIZE_COMMAND_FILES = (
     ".claude/skills/ppt-master/workflows/visual-review.md",
 )
 
-# These explicit visual/deep-verification workflows may intentionally invoke a
-# full render. Other active docs must use --no-render for a routine verify call.
-_FULL_RENDER_ALLOWLIST = frozenset({
-    ".claude/skills/ppt-master/workflows/verify-pptx-export.md",
-    ".claude/skills/ppt-master/workflows/visual-review.md",
-})
+# The completion run renders one contact sheet. `--no-render` survives only as
+# the iteration escape hatch, so any doc line pairing it with a verify command
+# must say so on that line (usage synopses listing the flag are exempt).
+_ITERATION_ONLY = re.compile(
+    r"iterat|re-?export|repeated|skip only|\[--no-render\]",
+    re.IGNORECASE,
+)
 
 _CONDITIONAL_FINALIZE = re.compile(
     r"(?:only\s+when|on[- ]demand|if\s+.*(?:exists|requested)|"
@@ -243,10 +252,11 @@ def _check_stale_contracts(
                         f"{relative}:{line_number}: unconditional finalize/export chain"
                     )
             if "verify_deck.py" in lowered and "<project" in lowered:
-                if ("--no-render" not in lowered
-                        and relative not in _FULL_RENDER_ALLOWLIST):
+                if ("--no-render" in lowered
+                        and _ITERATION_ONLY.search(line) is None):
                     findings.append(
-                        f"{relative}:{line_number}: routine verify must use --no-render"
+                        f"{relative}:{line_number}: --no-render is the iteration "
+                        f"escape hatch only; the completion run renders"
                     )
 
 

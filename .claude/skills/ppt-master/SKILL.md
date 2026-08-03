@@ -967,15 +967,17 @@ animation playback in Keynote or other presentation applications.
 > ❌ **NEVER** substitute `cp` for `finalize_svg.py` — finalize performs multiple critical processing steps
 > ❌ **NEVER** use `-s final` for a release export. It is a diagnostic comparison only; the supported native route reads `svg_output/`.
 
-**Final deck verification (mandatory structural gate — before declaring the deck done)**: one command re-checks stage parity/freshness (stale finalize or export), native PPTX integrity (zip, per-slide editable DrawingML, page count), the planning artifacts, and SVG quality; when OfficeCLI is installed it also validates OpenXML. Keep the routine speed path here — the visual sanity scan immediately below is a separate one-pass handoff check:
+**Final deck verification (mandatory — before declaring the deck done)**: one command re-checks stage parity/freshness (stale finalize or export), native PPTX integrity (zip, per-slide editable DrawingML, page count), the planning artifacts, and SVG quality; when OfficeCLI is installed it also validates OpenXML and renders one whole-deck contact sheet of the exported PPTX to `<project_path>/_pptx_render/<stem>-grid.png` (auto-skips when OfficeCLI is absent):
 
 ```bash
-python3 ${SKILL_DIR}/scripts/verify_deck.py <project_path> --no-render
+python3 ${SKILL_DIR}/scripts/verify_deck.py <project_path>
 ```
 
-> The routine command above uses `--no-render`: it skips only the OfficeCLI contact-sheet render; OpenXML validation and every other check stay on. Exit 0 is required before completion is reported.
+> Exit 0 is required before completion is reported. The contact-sheet render is the only part `--no-render` turns off; every other check runs either way.
+>
+> **Iteration speed path**: while re-exporting repeatedly (fixing pages, re-running Step 7.2–7.3), add `--no-render` to skip the render — it costs roughly 7–13s per deck. Drop the flag for the final run before hand-off, so the deck is never delivered without one look at the converted pixels.
 
-**Lightweight exported-PPTX visual sanity check (DEFAULT — one pass, not deep verification)**: after the structural command passes, render exactly one whole-deck contact sheet from the exported PPTX using the fastest exported-PPTX renderer already available (PowerPoint-native when available; otherwise the existing OfficeCLI grid renderer) and read it once for obvious text overflow/collision, missing assets, or font substitution. Open only visibly suspect pages at full resolution; do not render and compare every page individually by default. When OfficeCLI is already available, its `issues --json` scan MAY run alongside the contact-sheet render as a non-blocking suspicion signal.
+**Lightweight exported-PPTX visual sanity check (DEFAULT — one pass, not deep verification)**: Read the `_pptx_render/<stem>-grid.png` the command above prints, once, for obvious text overflow/collision, missing assets, or font substitution. Open only visibly suspect pages at full resolution; do not render and compare every page individually by default. When OfficeCLI is available, its `issues --json` scan MAY run alongside as a non-blocking suspicion signal.
 
 - Contact sheet clean and no suspicion signal: deliver immediately and state that the lightweight visual sanity check passed; the full [`verify-pptx-export`](workflows/verify-pptx-export.md) workflow was not run.
 - Visible or reported suspicion, or no usable exported-PPTX render: identify the page/finding and recommend [`verify-pptx-export`](workflows/verify-pptx-export.md) to the user. **Do not auto-enter that workflow or start its iterative repair loop.** Run it only after explicit user approval.
