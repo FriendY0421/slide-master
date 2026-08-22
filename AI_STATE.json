@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "project_id": "SLIDE_MASTER",
+  "project_name": "Slide Master",
+  "repository": "FriendY0421/slide-master",
+  "updated_at_kst": "2026-08-22T23:17:00+09:00",
+  "state_sync_status": "CURRENT",
+  "latest_work": {
+    "work_id": "FAH-ONBOARD-SLIDE_MASTER",
+    "status": "REGISTERED_READ_ONLY_BASELINE",
+    "mode": "FAH_ONBOARDING_AUTHORITY_BOOTSTRAP",
+    "actor": "FAH",
+    "summary": "Initial durable authority created from reviewed FAH registration baseline.",
+    "history_file": "docs/session-handoff/LATEST.md"
+  },
+  "production": {},
+  "control": {
+    "engine": "FAH",
+    "capabilities": [
+      "GITHUB_MONITOR",
+      "DURABLE_AUTHORITY"
+    ],
+    "risk_policy": "LOW_AUTO;MEDIUM_APPROVAL;HIGH_APPROVAL",
+    "auto_deploy": "N",
+    "backup_policy": "PRE_DEPLOY_EXACT_BACKUP",
+    "health_check": "AUTO_DISCOVER_PENDING"
+  },
+  "prepared_changes": {},
+  "authority": {
+    "read_order": [
+      "AI_CONTEXT.md",
+      "AI_STATE.json",
+      "docs/session-handoff/LATEST.md"
+    ],
+    "latest_handoff": "docs/session-handoff/LATEST.md",
+    "session_handoff": "docs/session-handoff/LATEST.md",
+    "history_dir": "docs/ai-history/"
+  },
+  "fixed_rules": [
+    "Technical source of truth remains this repository.",
+    "FAH monitor uses durable CURRENT authority before stale Registry bootstrap values.",
+    "GitHub Actions require explicit current-request authorization.",
+    "Runtime deployment, backup and rollback are enabled only for supported declared capabilities.",
+    "Unknown or conflicting authority fails closed and must not be auto-rebaselined."
+  ],
+  "next_priority": "Read current repository authority before any FAH-controlled mutation."
+}
