@@ -3,17 +3,32 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-22T23:17:00+09:00",
+  "updated_at_kst": "2026-08-24T02:51:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "FAH-ONBOARD-SLIDE_MASTER",
-    "status": "REGISTERED_READ_ONLY_BASELINE",
-    "mode": "FAH_ONBOARDING_AUTHORITY_BOOTSTRAP",
-    "actor": "FAH",
-    "summary": "Initial durable authority created from reviewed FAH registration baseline.",
-    "history_file": "docs/session-handoff/LATEST.md"
+    "work_id": "SLIDE-MASTER-AUTHORITY-RESYNC-20260824-0251",
+    "status": "RECENT_TEMPLATE_SELECTION_SOURCE_RECONCILED_MONITOR_RECOVERY_PENDING",
+    "mode": "DURABLE_AUTHORITY_HISTORY_RECONCILIATION",
+    "actor": "ChatGPT",
+    "summary": "Reconciled 13 reviewed Slide Master source commits after the FAH onboarding authority head. The source work through 7ec83fef adds/enforces template selection, live template gallery routing and auto-resume after selection. AI_STATE and the latest handoff had remained at the initial onboarding bootstrap, causing repeated FAH SLIDE_MASTER source-change incidents. Durable state/history/handoff are now refreshed without source rollback, Registry rebaseline, alert-policy change, deployment enablement or GitHub Actions. Natural FAH monitor recovery remains to be verified on a subsequent monitor pass.",
+    "history_file": "docs/ai-history/2026-08-24-0251-slide-master-authority-resync.md"
   },
   "production": {},
+  "source_authority": {
+    "initial_fah_onboarding_head": "8c16976e2eeff1491f31afd7617b2a23efa96667",
+    "reconciled_source_head_before_state_sync": "7ec83fef2d3a826f9b1c870ddd60847f746f9418",
+    "commits_reconciled": 13,
+    "behind_by": 0,
+    "net_changed_paths": [
+      ".claude/skills/ppt-master/scripts/template_gallery.py",
+      ".claude/skills/ppt-master/templates/decks/decks_index.json",
+      ".claude/skills/ppt-master/workflows/routing.md",
+      ".claude/skills/ppt-master/workflows/template-selection.md",
+      "AGENTS.md"
+    ],
+    "authority_history_commit": "b9ccd693b7f0fda776f85f7394662cc4195fc7fb",
+    "authority_handoff_commit": "5df08da717a2e30c99273af1ff2d7c33f81f59dc"
+  },
   "control": {
     "engine": "FAH",
     "capabilities": [
@@ -25,12 +40,26 @@
     "backup_policy": "PRE_DEPLOY_EXACT_BACKUP",
     "health_check": "AUTO_DISCOVER_PENDING"
   },
-  "prepared_changes": {},
+  "prepared_changes": {
+    "fah_monitor_recovery": {
+      "status": "PENDING_NEXT_NATURAL_MONITOR_VERIFICATION",
+      "observed_incident_deliveries": 15,
+      "observed_waves_kst": [
+        "2026-08-24 00:02",
+        "2026-08-24 00:32",
+        "2026-08-24 01:03"
+      ],
+      "root_cause": "repository source advanced after reviewed work while durable AI_STATE/latest handoff remained at onboarding bootstrap",
+      "registry_rebaseline_performed": false,
+      "alert_policy_changed": false
+    }
+  },
   "authority": {
     "read_order": [
       "AI_CONTEXT.md",
       "AI_STATE.json",
-      "docs/session-handoff/LATEST.md"
+      "docs/session-handoff/LATEST.md",
+      "docs/ai-history/2026-08-24-0251-slide-master-authority-resync.md"
     ],
     "latest_handoff": "docs/session-handoff/LATEST.md",
     "session_handoff": "docs/session-handoff/LATEST.md",
@@ -41,7 +70,8 @@
     "FAH monitor uses durable CURRENT authority before stale Registry bootstrap values.",
     "GitHub Actions require explicit current-request authorization.",
     "Runtime deployment, backup and rollback are enabled only for supported declared capabilities.",
-    "Unknown or conflicting authority fails closed and must not be auto-rebaselined."
+    "Unknown or conflicting authority fails closed and must not be auto-rebaselined.",
+    "Every meaningful ChatGPT, Codex, Claude, automation or other tool modification must update durable latest state/history/handoff before completion so later agents share the exact modification state."
   ],
-  "next_priority": "Read current repository authority before any FAH-controlled mutation."
+  "next_priority": "Verify the next natural FAH monitor pass recognizes the refreshed Slide Master durable authority and stops repeated incident fanout. Continue preserving mandatory template selection/gallery behavior. Do not rebaseline Registry or change alert semantics solely to suppress alerts."
 }
