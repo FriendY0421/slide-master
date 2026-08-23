@@ -5,8 +5,8 @@ description: Mandatory template-selection gate for new Slide Master deck generat
 # Template Selection Gate
 
 This repository requires an explicit template choice before any **new deck generation** begins.
-The goal is simple: users must see what is actually available, inspect a representative preview,
-and choose the visual system themselves instead of silently falling into free design.
+The user must see what is actually registered, inspect representative previews, and choose the
+visual system before research, project initialization, SVG authoring, or PPTX generation continues.
 
 ## Scope
 
@@ -21,20 +21,42 @@ Do **not** apply this gate to:
 - `native-enhance-pptx` (content/layout remain stable);
 - resume/continue operations for a project that already has a confirmed template decision.
 
-## Mandatory behavior
+## Mandatory HTML gallery behavior
 
-1. Read `templates/decks/decks_index.json` live. Never use a hard-coded catalog.
-2. List **every currently registered deck template** plus `Free Design`.
-3. Mark up to three content-relevant templates as `Recommended`; recommendations never auto-select.
-4. Show each deck's display id/name, one-line summary, and workspace path.
-5. When a visual picker is available, show the existing SVG card preview from
-   `/api/template_preview/<deck_id>` before confirmation.
-6. Hard stop until the user chooses one option.
-7. A valid deck id/workspace path already named in the user's request counts as the user's selection;
-   acknowledge it and continue without asking the same question again.
-8. After a deck id is selected, resolve it to the exact registered workspace path and hand that
-   user-confirmed path to main Step 3. This must not trigger a second template-choice prompt.
-9. `Free Design` is allowed only when the user explicitly chooses it.
+1. If the user already named a valid registered deck id/workspace path, treat that as the explicit
+   choice and continue without opening the gallery or asking the same question again.
+2. Otherwise, launch the standalone HTML picker **before the main generation pipeline**:
+
+```bash
+python .claude/skills/ppt-master/scripts/template_gallery.py \
+  --source auto \
+  --lang <ko|en> \
+  --purpose "<short deck purpose>" \
+  --recommend <deck1,deck2,deck3>
+```
+
+   On Windows, use `python` when `python3` is unavailable.
+3. `template_gallery.py` refreshes `origin/main` without checking it out or modifying the working
+   tree. The gallery therefore reflects the latest GitHub-registered `decks_index.json` and template
+   SVGs. When GitHub is unavailable, `--source auto` falls back to the local checkout and labels the
+   fallback visibly.
+4. Show **every selection-ready registered deck** plus `Free Design` as 16:9 cards. Mark up to three
+   content-relevant decks as `Recommended`; recommendations never auto-select.
+5. Each card uses the deck's first representative SVG with localized sample copy. The user clicks a
+   card and then `이 템플릿 사용` / `Use this template`.
+6. Hard stop until the picker returns `TEMPLATE_SELECTED=...`. Do not continue because the browser
+   was merely opened, and never silently default to Free Design.
+7. After a deck id is selected, resolve its returned `workspace` to the exact registered workspace
+   path and hand that user-confirmed path to main Step 3. This must not trigger a second template
+   question.
+8. `Free Design` is allowed only when the user explicitly chooses it.
+
+## Catalog and user-added templates
+
+The catalog is **not hard-coded**. `decks_index.json` is the discovery source of truth. Therefore a
+future user/company template automatically joins the same HTML gallery after it is registered in
+GitHub and satisfies the preview contract below. No picker-code modification is required for each
+new template.
 
 ## Preview contract for newly registered templates
 
@@ -45,12 +67,21 @@ A library deck is not selection-ready until:
 - the lexicographically first SVG is a representative, self-contained preview shell (normally
   `01_title.svg` or `01_cover.svg`) with normal `{{TOKEN}}` placeholders where sample text is needed.
 
-The Confirm UI already renders this first SVG with localized sample copy. Therefore a newly
-registered template automatically appears with a preview when it satisfies this contract; no
-separate PNG/JPEG thumbnail is required.
+The gallery renders that first SVG with localized sample copy and serves any referenced workspace
+assets through its read-only asset endpoint. No separate PNG/JPEG thumbnail is required.
+
+## Fast validation / diagnostics
+
+Before release or while diagnosing catalog problems, run:
+
+```bash
+python .claude/skills/ppt-master/scripts/template_gallery.py --source local --list
+```
+
+This lists only templates that have a usable representative SVG and does not open a browser.
 
 ## Chat fallback
 
-If the visual Confirm UI cannot be opened, present the same catalog in chat and wait for the user's
-choice. Do not skip the gate because previews are unavailable. Mention that the visual preview is
-available in the local Confirm UI when the host supports it.
+If the HTML gallery cannot start or the host is truly headless, present the same live registered
+catalog in chat and wait for the user's choice. Do not skip the gate merely because visual previews
+are unavailable.
