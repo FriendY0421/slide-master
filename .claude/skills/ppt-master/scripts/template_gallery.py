@@ -76,7 +76,7 @@ def _resolve_source(mode: str) -> tuple[str | None, str]:
     if mode == "local":
         return None, "local checkout"
     try:
-        fetched = _git(["fetch", "origin", "main", "--quiet"], timeout=10)
+        fetched = _git(["fetch", "origin", "main:refs/remotes/origin/main", "--quiet"], timeout=10)
     except (OSError, subprocess.TimeoutExpired):
         fetched = None
     if fetched is not None and fetched.returncode == 0:
