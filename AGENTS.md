@@ -33,6 +33,12 @@ a deck from a document/topic/template):
    [`.claude/skills/ppt-master/workflows/routing.md`](.claude/skills/ppt-master/workflows/routing.md)
    first. Use its one discriminator question only for the ambiguity it defines;
    do not load competing full owners before the answer.
+   For any route that will generate a **new deck** through the main SVG family, immediately apply
+   [`template-selection.md`](.claude/skills/ppt-master/workflows/template-selection.md) before
+   entering the generation pipeline: show the live registered deck catalog plus Free Design,
+   surface up to three recommendations, show card previews when the Confirm UI is available,
+   and wait for the user's explicit selection. Never silently default to Free Design. A template
+   already named by the user counts as the explicit selection.
 2. **Load the selected owner(s) in full.** The router owns the complete matrix;
    this table is a compact Codex handoff summary:
 
