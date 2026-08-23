@@ -42,8 +42,11 @@ python .claude/skills/ppt-master/scripts/template_gallery.py \
    fallback visibly.
 4. Show **every selection-ready registered deck** plus `Free Design` as 16:9 cards. Mark up to three
    content-relevant decks as `Recommended`; recommendations never auto-select.
-5. Each card uses the deck's first representative SVG with localized sample copy. The user clicks a
-   card and then `이 템플릿 사용` / `Use this template`.
+5. Each card uses the deck's first representative SVG for fast scanning. Clicking a card opens a
+   large detail gallery with up to **6 representative layout types** automatically selected from
+   the registered SVG roster (cover/title, agenda/section, content, data/KPI, comparison/visual,
+   closing, with remaining slots filled by other distinct layouts). The user confirms only after
+   inspecting these layouts.
 6. Hard stop until the picker returns `TEMPLATE_SELECTED=...`. Do not continue because the browser
    was merely opened, and never silently default to Free Design.
 7. After a deck id is selected, resolve its returned `workspace` to the exact registered workspace
@@ -67,8 +70,11 @@ A library deck is not selection-ready until:
 - the lexicographically first SVG is a representative, self-contained preview shell (normally
   `01_title.svg` or `01_cover.svg`) with normal `{{TOKEN}}` placeholders where sample text is needed.
 
-The gallery renders that first SVG with localized sample copy and serves any referenced workspace
-assets through its read-only asset endpoint. No separate PNG/JPEG thumbnail is required.
+The gallery uses the first SVG as the summary-card thumbnail and automatically selects up to six
+representative SVGs for the detail view. Selection is semantic by filename and falls back to other
+available SVGs, so newly registered company/user templates automatically gain the same multi-layout
+preview without picker-code changes. Referenced workspace assets are served through the read-only
+asset endpoint. No separate PNG/JPEG thumbnail is required.
 
 ## Fast validation / diagnostics
 
