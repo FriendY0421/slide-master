@@ -31,6 +31,14 @@ cannot add gates.
 fill and native enhancement patch PowerPoint directly. Producing a `.pptx` does
 not make a direct route inherit the main SVG skill.
 
+**Hard rule — new-deck template choice**: Before routing any request that will create a new deck
+through `topic-research` + main SVG or directly through the main SVG pipeline, execute
+[`template-selection.md`](./template-selection.md). The catalog is live from `decks_index.json`;
+show all registered decks plus Free Design, recommend up to three, and hard-stop until the user
+chooses. A valid deck id/path already named by the user counts as the choice. Direct-PPTX routes
+(`ppt-template-fill`, strict 1:1 beautify, native enhancement) and resumed projects with an
+already-confirmed template are exempt.
+
 ---
 
 ## 1. Routing Discipline
@@ -107,7 +115,8 @@ not make a direct route inherit the main SVG skill.
 |---|---|
 | Explicit current brand/layout/deck workspace root containing `templates/design_spec.md` | Enter main Step 3 template option; use the workspace root, not its inner `templates/` directory |
 | Explicit legacy-flat root containing `design_spec.md` | Enter main Step 3 through the compatibility reader; flat packaging alone does not require structure restoration |
-| Explicit "use a template" intent, or a bare name matching a deck id in `decks_index.json` | Ask the single narrow disambiguation question (SKILL.md Step 3): matched deck path(s) + free design; a deck answer enters Step 3 as a confirmed explicit path |
+| Template-selection gate just confirmed a registered deck id | Resolve that user-confirmed id to its exact `templates/decks/<id>/` workspace path and enter main Step 3 with that explicit path; do not ask a second template question |
+| Explicit "use a template" intent, or a bare name matching a deck id in `decks_index.json` outside the mandatory new-deck selection gate | Ask the single narrow disambiguation question (SKILL.md Step 3): matched deck path(s) + free design; a deck answer enters Step 3 as a confirmed explicit path |
 | Bare layout/brand name or style label | Do not trigger Step 3; treat as style input for the Strategist confirmation stage (the Stage 1 template card still offers the deck library) |
 | User asks "what templates exist?" | Answer as Q&A by listing indexed paths; do not advance the pipeline |
 | Raw `.pptx` called a template | Route by §3, usually the `ppt-template-fill` skill; never treat it as a Step 3 template path |
