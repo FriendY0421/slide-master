@@ -38,8 +38,12 @@ a deck from a document/topic/template):
    research/project creation/generation. Unless the user already named a valid registered template,
    launch `.claude/skills/ppt-master/scripts/template_gallery.py`: it refreshes `origin/main`
    read-only, shows the live GitHub template catalog as HTML cards with SVG previews and up to three
-   recommendations, and returns only after the user explicitly chooses. Never silently default to
-   Free Design. A newly registered user/company deck appears automatically through `decks_index.json`.
+   recommendations, and returns only after the user explicitly chooses. Treat this as a **blocking
+   handshake**: do not end the current task/assistant turn after launching the gallery. Wait on the
+   picker process (or poll its result file when the tool host returns early); once `TEMPLATE_SELECTED`
+   arrives, immediately continue the same PPT request with the returned workspace. Never silently
+   default to Free Design. A newly registered user/company deck appears automatically through
+   `decks_index.json`.
 2. **Load the selected owner(s) in full.** The router owns the complete matrix;
    this table is a compact Codex handoff summary:
 

@@ -41,18 +41,26 @@ python .claude/skills/ppt-master/scripts/template_gallery.py \
    SVGs. When GitHub is unavailable, `--source auto` falls back to the local checkout and labels the
    fallback visibly.
 4. Show **every selection-ready registered deck** plus `Free Design` as 16:9 cards. Mark up to three
-   content-relevant decks as `Recommended`; recommendations never auto-select.
+   content-relevant decks as `Recommended`; recommendations never auto-select. The UI must clearly
+   distinguish **registered template count** from each template's internal **layout count**.
 5. Each card uses the deck's first representative SVG for fast scanning. Clicking a card opens a
    large detail gallery with up to **6 representative layout types** automatically selected from
    the registered SVG roster (cover/title, agenda/section, content, data/KPI, comparison/visual,
    closing, with remaining slots filled by other distinct layouts). The user confirms only after
    inspecting these layouts.
 6. Hard stop until the picker returns `TEMPLATE_SELECTED=...`. Do not continue because the browser
-   was merely opened, and never silently default to Free Design.
-7. After a deck id is selected, resolve its returned `workspace` to the exact registered workspace
+   was merely opened, and never silently default to Free Design. **The caller must keep the current
+   agent task/turn alive while the gallery is open.** If the command host returns control while the
+   gallery child process is still running, immediately wait on that process or poll the result file;
+   do not end the assistant response with a message telling the user to select and come back later.
+7. As soon as `TEMPLATE_SELECTED=...` is returned, **resume the same PPT request immediately in the
+   same task/turn**: consume the returned workspace, enter main Step 3, and continue research/design/
+   generation without requiring another user message. Only a true timeout, gallery failure, or host
+   limitation may break this automatic handshake.
+8. After a deck id is selected, resolve its returned `workspace` to the exact registered workspace
    path and hand that user-confirmed path to main Step 3. This must not trigger a second template
    question.
-8. `Free Design` is allowed only when the user explicitly chooses it.
+9. `Free Design` is allowed only when the user explicitly chooses it.
 
 ## Catalog and user-added templates
 
