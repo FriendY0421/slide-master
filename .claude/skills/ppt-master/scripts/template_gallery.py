@@ -175,23 +175,23 @@ def _html_page(entries: list[dict], recommended: set[str], source_label: str, pu
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Slide Master · 템플릿 선택</title>
 <style>
-:root{{--bg:#f4f6f8;--panel:#fff;--ink:#111827;--muted:#64748b;--line:#dbe2ea;--accent:#2563eb}}
-*{{box-sizing:border-box}} body{{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,"Malgun Gothic",Arial,sans-serif}}
-.wrap{{max-width:1420px;margin:auto;padding:34px 28px 48px}} h1{{font-size:30px;margin:0 0 8px}} .lead{{color:var(--muted);margin-bottom:8px}}
-.meta{{font-size:12px;color:#94a3b8;margin-bottom:24px}} .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}}
-.card{{position:relative;background:var(--panel);border:2px solid transparent;border-radius:18px;overflow:hidden;box-shadow:0 6px 20px #0f172a0d;cursor:pointer;transition:.15s}}
-.card:hover{{transform:translateY(-2px);box-shadow:0 10px 28px #0f172a18}} .card.selected{{border-color:var(--accent);box-shadow:0 0 0 3px #2563eb20}}
-.preview{{aspect-ratio:16/9;background:#eef2f7;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden}}
-.preview img{{width:100%;height:100%;object-fit:contain;background:#fff}} .free{{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(135deg,#fff,#edf2f7);color:#475569;font-weight:700}}
-.body{{padding:15px 16px 17px}} .title{{font-weight:800;font-size:18px;display:flex;align-items:center;gap:8px}} .desc{{font-size:13px;color:var(--muted);line-height:1.55;margin-top:7px;min-height:40px}}
-.chip{{display:inline-block;width:12px;height:12px;border-radius:999px;border:1px solid #0002}} .badge{{position:absolute;top:12px;left:12px;background:#111827;color:#fff;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:700;z-index:2}}
-.footer{{position:sticky;bottom:0;margin-top:26px;padding:16px;background:#ffffffee;backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:16px;display:flex;justify-content:space-between;gap:14px;align-items:center}}
-.choice{{font-weight:700}} button{{border:0;border-radius:12px;padding:12px 20px;font-weight:800;font-size:14px;cursor:pointer}} #confirm{{background:var(--accent);color:white}} #confirm:disabled{{opacity:.4;cursor:not-allowed}}
-@media(max-width:640px){{.wrap{{padding:22px 14px}} .grid{{grid-template-columns:1fr}} .footer{{align-items:stretch;flex-direction:column}}}}
+:root{{--bg:#eef2f7;--panel:#fff;--ink:#0f172a;--muted:#64748b;--line:#dbe4ee;--accent:#3157d5;--accent2:#7c3aed;--soft:#f8fafc}}
+*{{box-sizing:border-box}} body{{margin:0;background:radial-gradient(circle at 8% 0%,#dfe7ff 0,transparent 34%),radial-gradient(circle at 100% 12%,#eee7ff 0,transparent 30%),linear-gradient(180deg,#f7f9fc 0,#edf2f7 100%);color:var(--ink);font-family:Pretendard,"Malgun Gothic",Arial,sans-serif;min-height:100vh}}
+.wrap{{max-width:1480px;margin:auto;padding:36px 34px 58px}} .hero{{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;padding:26px 28px;margin-bottom:24px;border:1px solid #ffffffaa;border-radius:24px;background:linear-gradient(135deg,#0f172a 0,#172554 52%,#312e81 100%);color:#fff;box-shadow:0 18px 50px #1e293b24}} .brand{{font-size:12px;font-weight:800;letter-spacing:1.7px;color:#c7d2fe;margin-bottom:10px}} h1{{font-size:34px;line-height:1.15;margin:0 0 10px;letter-spacing:-1.1px}} .lead{{color:#dbeafe;margin:0;line-height:1.6}} .steps{{white-space:nowrap;font-size:12px;color:#cbd5e1;background:#ffffff12;border:1px solid #ffffff20;border-radius:999px;padding:9px 13px}}
+.meta{{display:flex;align-items:center;gap:8px;font-size:12px;color:#64748b;margin:0 4px 18px}} .meta:before{{content:'LIVE';font-size:9px;letter-spacing:.8px;font-weight:900;color:#166534;background:#dcfce7;border-radius:999px;padding:4px 7px}} .grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}}
+.card{{position:relative;background:linear-gradient(180deg,#fff 0,#fbfdff 100%);border:1px solid #dbe4ee;border-radius:22px;overflow:hidden;box-shadow:0 8px 26px #0f172a0c;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}}
+.card:hover{{transform:translateY(-5px);box-shadow:0 18px 42px #0f172a1c}} .card.selected{{border-color:var(--accent);box-shadow:0 0 0 4px #3157d51c,0 18px 42px #1d4ed820}} .card.selected:after{{content:'✓';position:absolute;right:14px;top:14px;z-index:3;display:grid;place-items:center;width:30px;height:30px;border-radius:999px;background:#3157d5;color:#fff;font-weight:900;box-shadow:0 6px 18px #1d4ed850}}
+.preview{{aspect-ratio:16/9;background:#eef2f7;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}}
+.preview img{{width:100%;height:100%;object-fit:contain;background:#fff;transition:transform .25s ease}} .card:hover .preview img{{transform:scale(1.025)}} .free{{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(135deg,#fff,#edf2f7);color:#475569;font-weight:700}}
+.body{{padding:17px 18px 19px}} .title{{font-weight:850;font-size:18px;display:flex;align-items:center;gap:9px;letter-spacing:-.3px}} .desc{{font-size:13px;color:var(--muted);line-height:1.58;margin-top:8px;min-height:42px}} .facts{{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}} .fact{{font-size:11px;color:#475569;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:999px;padding:5px 8px}}
+.chip{{display:inline-block;width:12px;height:12px;border-radius:999px;border:1px solid #0002;box-shadow:0 0 0 3px #00000008}} .badge{{position:absolute;top:14px;left:14px;background:linear-gradient(135deg,#111827,#312e81);color:#fff;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:800;z-index:2;box-shadow:0 7px 18px #0f172a30}}
+.footer{{position:sticky;bottom:18px;z-index:10;margin:28px auto 0;padding:14px 16px 14px 18px;background:#ffffffec;backdrop-filter:blur(14px);border:1px solid #d8e1eb;border-radius:18px;display:flex;justify-content:space-between;gap:14px;align-items:center;box-shadow:0 14px 38px #0f172a1e}}
+.choice{{font-weight:850;font-size:15px}} button{{border:0;border-radius:13px;padding:13px 22px;font-weight:850;font-size:14px;cursor:pointer;transition:.16s}} #confirm{{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;box-shadow:0 8px 20px #3157d540}} #confirm:not(:disabled):hover{{transform:translateY(-1px);box-shadow:0 12px 26px #3157d555}} #confirm:disabled{{opacity:.4;cursor:not-allowed}}
+@media(max-width:760px){{.wrap{{padding:18px 12px 34px}} .hero{{padding:22px 20px;align-items:flex-start;flex-direction:column}} h1{{font-size:28px}} .steps{{white-space:normal}} .grid{{grid-template-columns:1fr}} .footer{{bottom:8px;align-items:stretch;flex-direction:column}} #confirm{{width:100%}}}}
 </style></head><body><main class="wrap">
-<h1>어떤 템플릿으로 만들까요?</h1><div class="lead">{purpose_html} · 원하는 디자인을 먼저 선택하면 그 템플릿으로만 제작합니다.</div>
-<div class="meta">템플릿 기준본: {source_html} · 새로 등록된 템플릿도 자동 반영</div><section id="grid" class="grid"></section>
-<div class="footer"><div><div style="font-size:12px;color:#64748b">현재 선택</div><div id="choice" class="choice">선택하지 않음</div></div><button id="confirm" disabled>이 템플릿 사용</button></div>
+<section class="hero"><div><div class="brand">SLIDE MASTER · TEMPLATE GALLERY</div><h1>어떤 디자인으로 만들까요?</h1><p class="lead">{purpose_html}<br>실제 슬라이드 디자인을 확인한 뒤 원하는 템플릿을 선택하세요.</p></div><div class="steps">1 디자인 선택&nbsp;&nbsp;→&nbsp;&nbsp;2 내용 설계&nbsp;&nbsp;→&nbsp;&nbsp;3 PPT 생성</div></section>
+<div class="meta">GitHub 기준본 · {source_html} · 새 템플릿 자동 반영</div><section id="grid" class="grid"></section>
+<div class="footer"><div><div style="font-size:11px;color:#64748b;margin-bottom:3px">SELECTED TEMPLATE</div><div id="choice" class="choice">템플릿을 선택해주세요</div></div><button id="confirm" disabled>선택한 템플릿으로 계속 →</button></div>
 </main><script>
 const entries={cards}, recommended=new Set({rec}); let selected=null;
 function freePreview(){{return '<div class="free">FREE DESIGN<br><span style="font-size:12px;font-weight:500;margin-top:6px">템플릿 없이 자유 설계</span></div>'}}
@@ -199,7 +199,7 @@ const grid=document.getElementById('grid');
 entries.forEach(e=>{{const card=document.createElement('article');card.className='card';card.dataset.id=e.id;
  if(recommended.has(e.id)){{const b=document.createElement('div');b.className='badge';b.textContent='★ 추천';card.appendChild(b)}}
  const p=document.createElement('div');p.className='preview';p.innerHTML=e.id==='free'?freePreview():`<img loading="lazy" src="/preview/${{encodeURIComponent(e.id)}}" alt="${{e.id}} 미리보기">`;
- const body=document.createElement('div');body.className='body'; const title=document.createElement('div');title.className='title'; const chip=document.createElement('span');chip.className='chip';chip.style.background=e.primary_color||'#e2e8f0'; title.append(chip,document.createTextNode(e.name)); const desc=document.createElement('div');desc.className='desc';desc.textContent=e.summary||'';body.append(title,desc);
+ const body=document.createElement('div');body.className='body'; const title=document.createElement('div');title.className='title'; const chip=document.createElement('span');chip.className='chip';chip.style.background=e.primary_color||'#e2e8f0'; title.append(chip,document.createTextNode(e.name)); const desc=document.createElement('div');desc.className='desc';desc.textContent=e.summary||''; const facts=document.createElement('div');facts.className='facts'; if(e.page_count){{const f=document.createElement('span');f.className='fact';f.textContent=e.page_count+' layouts';facts.appendChild(f)}} const f2=document.createElement('span');f2.className='fact';f2.textContent=e.id==='free'?'Custom design':'Native PPTX';facts.appendChild(f2); body.append(title,desc,facts);
  card.append(p,body);card.onclick=()=>{{document.querySelectorAll('.card').forEach(x=>x.classList.remove('selected'));card.classList.add('selected');selected=e;document.getElementById('choice').textContent=e.name;document.getElementById('confirm').disabled=false}};grid.appendChild(card)}});
 document.getElementById('confirm').onclick=async()=>{{if(!selected)return;const r=await fetch('/select',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify({{template:selected.id}})}});if(r.ok){{document.querySelector('.footer').innerHTML='<div class="choice">✓ '+selected.name+' 선택 완료 · 채팅으로 돌아가세요.</div>'}}}};
 </script></body></html>"""
@@ -315,7 +315,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Open the Slide Master HTML template gallery")
     parser.add_argument("--source", choices=("auto", "github", "local"), default="auto")
     parser.add_argument("--recommend", default="", help="Comma-separated deck ids, max 3")
-    parser.add_argument("--purpose", default="")
+    parser.add_argument("--purpose", nargs="+", default=[])
     parser.add_argument("--lang", choices=("ko", "en"), default="ko")
     parser.add_argument("--port", type=int, default=0)
     parser.add_argument("--timeout", type=int, default=590)
@@ -340,7 +340,8 @@ def main(argv: list[str] | None = None) -> int:
     recommend = [x for x in recommend if x in catalog][:3]
     output = args.output or Path(tempfile.gettempdir()) / f"slide-master-template-selection-{os.getpid()}.json"
     state = GalleryState(catalog, ref, args.lang, output)
-    page = _html_page(entries, set(recommend), source_label, args.purpose)
+    purpose = " ".join(args.purpose).strip() if isinstance(args.purpose, list) else str(args.purpose or "")
+    page = _html_page(entries, set(recommend), source_label, purpose)
 
     GalleryHandler.state = state
     GalleryHandler.page_html = page
