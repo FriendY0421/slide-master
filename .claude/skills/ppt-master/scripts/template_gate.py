@@ -37,6 +37,8 @@ def validate_selection_record(data: dict) -> list[str]:
     if status == "exempt":
         if data.get("exempt_reason") not in EXEMPT_REASONS:
             errors.append("unknown template gate exemption reason")
+        if not data.get("recorded_at"):
+            errors.append("missing exemption recorded_at timestamp")
         return errors
     if status != "selected":
         errors.append("template selection status must be 'selected' or 'exempt'")
@@ -101,19 +103,49 @@ def validate_project_gate(project_path: str | Path) -> list[str]:
     return validate_selection_record(data)
 
 
+def _print_errors(errors: list[str]) -> int:
+    print("[template-gate] FAIL", file=sys.stderr)
+    for error in errors:
+        print(f"  - {error}", file=sys.stderr)
+    return 1
+
+
 def main(argv: list[str] | None = None) -> int:
     args = list(argv if argv is not None else sys.argv[1:])
-    if len(args) != 2 or args[0] != "validate":
-        print("usage: template_gate.py validate <project_path>", file=sys.stderr)
+    if not args:
+        print(
+            "usage: template_gate.py validate <project_path> | "
+            "record <project_path> <selection_result.json> | "
+            "exempt <project_path> <reason>",
+            file=sys.stderr,
+        )
         return 2
-    errors = validate_project_gate(args[1])
-    if errors:
-        print("[template-gate] FAIL", file=sys.stderr)
-        for error in errors:
-            print(f"  - {error}", file=sys.stderr)
-        return 1
-    print("[template-gate] PASS")
-    return 0
+
+    command = args[0]
+    try:
+        if command == "validate" and len(args) == 2:
+            errors = validate_project_gate(args[1])
+            if errors:
+                return _print_errors(errors)
+            print("[template-gate] PASS")
+            return 0
+
+        if command == "record" and len(args) == 3:
+            record = load_selection_result(args[2])
+            path = write_project_gate(args[1], record)
+            print(f"[template-gate] RECORDED — {path}")
+            return 0
+
+        if command == "exempt" and len(args) == 3:
+            record = make_exempt_record(args[2])
+            path = write_project_gate(args[1], record)
+            print(f"[template-gate] EXEMPT — {args[2]} — {path}")
+            return 0
+    except ValueError as exc:
+        return _print_errors([str(exc)])
+
+    print("invalid template_gate.py arguments", file=sys.stderr)
+    return 2
 
 
 if __name__ == "__main__":
