@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-24T22:08:46+09:00",
+  "updated_at_kst": "2026-08-25T00:13:47+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-EXECUTION-CONTRACT-PILOT-20260824",
-    "status": "EXECUTION_CONTRACT_PILOT_ACCEPTED_SOURCE_RUNTIME_PENDING",
-    "mode": "FAH_EXECUTION_CONTRACT_PILOT",
+    "work_id": "SLIDE-MASTER-EXECUTION-CONTRACT-RUNTIME45-ACCEPTED-20260825",
+    "status": "EXECUTION_CONTRACT_RUNTIME45_MONITOR_ACCEPTED",
+    "mode": "FAH_EXECUTION_CONTRACT_PRODUCTION_ACCEPTANCE",
     "actor": "ChatGPT",
-    "summary": "Registered the Slide Master project execution contract as durable authority. CREATE_PRESENTATION requires TEMPLATE_SELECTION before generation; BEAUTIFY_PRESENTATION remains exempt. Existing template_gate/new_deck_init/svg_to_pptx fail-closed guards remain the final local enforcement layer.",
-    "history_file": "docs/ai-history/2026-08-24-execution-contract-pilot.md"
+    "summary": "FAH Execution Contract is deployed on the existing FAH Web App at runtime @45. The natural FAH monitor at 2026-08-24 23:33:32 KST classified SLIDE_MASTER as HEALTHY / ACCEPTED_AUTHORITY_CURRENT with EXECUTION_CONTRACT capability and CONTRACT_CURRENT, alertWorthy=false. Contract SHA/version exactly match durable AI_STATE. Existing template_gate/new_deck_init/svg_to_pptx fail-closed guards remain the final local enforcement layer. Owner-only Web POST smoke testing remains optional because the current remote-tool security layer blocks credential-bearing HTTP execution; this is not a runtime blocker and does not justify another FAH runtime version.",
+    "history_file": "docs/ai-history/2026-08-25-execution-contract-runtime45-accepted.md"
   },
   "production": {},
   "source_authority": {
@@ -29,7 +29,10 @@
     "authority_history_commit": "b9ccd693b7f0fda776f85f7394662cc4195fc7fb",
     "authority_handoff_commit": "5df08da717a2e30c99273af1ff2d7c33f81f59dc",
     "execution_contract_pilot_commit": "6263fed2e3df7e333dda6e05074f9f6e38ff5dd2",
-    "execution_contract_blob_sha": "d8c24c26460cded0fe947df75b2e278488fd7641"
+    "execution_contract_pilot_merge": "7ea98e4696703c8d864237caf440df5a89376cd8",
+    "execution_contract_blob_sha": "d8c24c26460cded0fe947df75b2e278488fd7641",
+    "fah_execution_contract_runtime": "@45",
+    "fah_execution_contract_source_sha": "584412f8307cd9675a78f384684bee1152a5c1fe"
   },
   "control": {
     "engine": "FAH",
@@ -45,7 +48,7 @@
   },
   "prepared_changes": {
     "fah_monitor_recovery": {
-      "status": "PENDING_NEXT_NATURAL_MONITOR_VERIFICATION",
+      "status": "RECOVERY_CONFIRMED_CLOSED",
       "observed_incident_deliveries": 15,
       "observed_waves_kst": [
         "2026-08-24 00:02",
@@ -54,15 +57,27 @@
       ],
       "root_cause": "repository source advanced after reviewed work while durable AI_STATE/latest handoff remained at onboarding bootstrap",
       "registry_rebaseline_performed": false,
-      "alert_policy_changed": false
+      "alert_policy_changed": false,
+      "recovery_evidence": "Subsequent natural monitor returned HEALTHY / ACCEPTED_AUTHORITY_CURRENT before Execution Contract rollout."
     },
     "execution_contract_pilot": {
-      "status": "SOURCE_MERGE_READY_RUNTIME_PENDING",
-      "fah_source_merge_sha": "f466906a9d5ead2d556b88a36681a896b47beb5d",
+      "status": "RUNTIME_45_NATURAL_MONITOR_ACCEPTED",
+      "fah_engine_source_merge_sha": "f466906a9d5ead2d556b88a36681a896b47beb5d",
+      "fah_web_route_source_merge_sha": "584412f8307cd9675a78f384684bee1152a5c1fe",
+      "fah_runtime_version": "@45",
+      "unused_intermediate_version": "@44",
       "contract_version": "1.0",
       "contract_sha": "d8c24c26460cded0fe947df75b2e278488fd7641",
+      "natural_monitor_at_kst": "2026-08-24 23:33:32",
+      "natural_monitor_row": 754,
+      "natural_monitor_state": "HEALTHY",
+      "natural_monitor_classification": "ACCEPTED_AUTHORITY_CURRENT",
+      "contract_health": "CONTRACT_CURRENT",
+      "alert_worthy": false,
+      "owner_only_post_smoke": "OPTIONAL_PENDING_TOOL_TRANSPORT_LIMIT",
       "auto_deploy_changed": false,
-      "github_actions_used": false
+      "github_actions_used": false,
+      "rollback_needed": false
     }
   },
   "authority": {
@@ -72,7 +87,8 @@
       "docs/session-handoff/LATEST.md",
       "docs/ai-history/2026-08-24-0251-slide-master-authority-resync.md",
       ".fah/execution-contract.json",
-      "docs/ai-history/2026-08-24-execution-contract-pilot.md"
+      "docs/ai-history/2026-08-24-execution-contract-pilot.md",
+      "docs/ai-history/2026-08-25-execution-contract-runtime45-accepted.md"
     ],
     "latest_handoff": "docs/session-handoff/LATEST.md",
     "session_handoff": "docs/session-handoff/LATEST.md",
@@ -81,19 +97,24 @@
   "fixed_rules": [
     "Technical source of truth remains this repository.",
     "FAH monitor uses durable CURRENT authority before stale Registry bootstrap values.",
-    "GitHub Actions require explicit current-request authorization.",
+    "GitHub Actions are default-off to conserve usage; they may be used when the current user explicitly requests emergency deployment or explicitly requests GitHub Actions.",
     "Runtime deployment, backup and rollback are enabled only for supported declared capabilities.",
     "Unknown or conflicting authority fails closed and must not be auto-rebaselined.",
     "Every meaningful ChatGPT, Codex, Claude, automation or other tool modification must update durable latest state/history/handoff before completion so later agents share the exact modification state.",
-    "Before meaningful project execution, evaluate the declared FAH execution contract; decisions other than ALLOW or EXEMPT must not proceed."
+    "Before meaningful project execution, evaluate the declared FAH execution contract; decisions other than ALLOW or EXEMPT must not proceed.",
+    "Project-local fail-closed guards remain mandatory even when the FAH central contract returns ALLOW or EXEMPT."
   ],
-  "next_priority": "Deploy and read-only-accept the generic FAH Execution Contract engine, then verify CREATE_PRESENTATION WAIT/ALLOW and legacy no-contract compatibility in the live control plane.",
+  "next_priority": "No blocking Execution Contract rollout action remains. Use the FAH contract and local Slide Master guards in normal work. If an authorized non-secret-leaking transport becomes available, an owner-only Web POST smoke test may be performed without creating a new FAH runtime version.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",
     "sha": "d8c24c26460cded0fe947df75b2e278488fd7641",
     "status": "CURRENT",
     "central_engine": "FAH",
+    "central_runtime": "@45",
+    "central_source_sha": "584412f8307cd9675a78f384684bee1152a5c1fe",
+    "monitor_health": "CONTRACT_CURRENT",
+    "monitor_accepted_at_kst": "2026-08-24 23:33:32",
     "local_guard": "template_selection.json + svg_to_pptx.py",
     "fail_closed": true
   }
