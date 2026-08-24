@@ -31,10 +31,10 @@ cannot add gates.
 fill and native enhancement patch PowerPoint directly. Producing a `.pptx` does
 not make a direct route inherit the main SVG skill.
 
-**Hard rule — new-deck template choice**: Before routing any request that will create a new deck
+**Hard rule — new-deck template choice**: `PPT_REQUEST_GUARD.md` is the fail-closed entry authority. Before routing any request that will create a new deck
 through `topic-research` + main SVG or directly through the main SVG pipeline, execute
 [`template-selection.md`](./template-selection.md). The catalog is live from `decks_index.json`;
-show all registered decks plus Free Design, recommend up to three, and hard-stop until the user
+show all registered decks plus Free Design grouped by use category, recommend only genuinely relevant templates up to ten, and hard-stop until the user
 chooses. A valid deck id/path already named by the user counts as the choice. Direct-PPTX routes
 (`ppt-template-fill`, strict 1:1 beautify, native enhancement) and resumed projects with an
 already-confirmed template are exempt.

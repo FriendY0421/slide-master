@@ -233,8 +233,10 @@ inputs or directory inputs, `-o` is an output directory. Backend converter detai
 🚧 **GATE**: Step 1 complete; source content is ready (Markdown file, user-provided text, or requirements described in conversation are all valid).
 
 ```bash
-python3 ${SKILL_DIR}/scripts/project_manager.py init <project_name> --format <format>
+python3 ${SKILL_DIR}/scripts/new_deck_init.py <project_name> --format <format> --template-selection-result <template_result.json>
 ```
+
+**Fail-closed new-deck entry:** `<template_result.json>` must come from the mandatory HTML/GUI template-selection gate (or `record_template_choice.py` when the user explicitly named a registered template). A bare `project_manager.py init` is not a valid new-deck entry. Direct-PPTX/resume workflows use their own route and, when they hand off to shared SVG export, record a documented exemption with `template_gate.py exempt`.
 
 Format options must be named with concrete dimensions. Default: `ppt169` = `1280x720`, `viewBox="0 0 1280 720"`. Other examples: `ppt43` = `1024x768`, `story` = `1080x1920`, `banner` = `1920x1080`. For the full format list, see `references/canvas-formats.md`.
 
@@ -271,13 +273,13 @@ python3 ${SKILL_DIR}/scripts/preflight.py            # add --needs-images when t
 
 🚧 **GATE**: Step 2 complete; project directory structure is ready.
 
-**Default — free design.** Proceed directly to Step 4. Do NOT query any `*_index.json` unless triggered. Do NOT ask the user. Do NOT proactively suggest, hint at, or fuzzy-match any template based on content, slug-like words, or vague style descriptions.
+**Entry state comes from the mandatory template-selection gate.** For a new deck, Step 3 is never entered by silently defaulting to Free Design. The user-selected result in `template_selection.json` is authoritative: a registered deck installs that exact workspace; `template: free` means the user explicitly chose Free Design. Recommendations are context-aware but never auto-select. Older prose that implied a free-design default is superseded by `PPT_REQUEST_GUARD.md` and `workflows/template-selection.md`.
 
 **Hard boundary — raw PPTX template references are not Step 3 templates.** PPTX-as-source remains valid in Step 1 / Step 2, and raw PPTX template + generated PPTX routes to `template-fill`. But if the user wants the SVG/template-based generation route from that PPTX, stop before Step 3. The user must first run [`workflows/create-template.md`](workflows/create-template.md), then return with the generated template workspace path. Step 3 consumes an explicit workspace whose `templates/design_spec.md` declares `kind: brand` / `kind: layout` / `kind: deck`, or a compatible legacy-flat package whose root `design_spec.md` declares one of those kinds.
 
 Do **not** reinterpret this boundary as 1:1 redesign or free SVG generation. Use `template-fill` for raw PPTX template + generated PPTX requests; use `beautify` only when the source deck's page count, order, and wording are preserved.
 
-**Template flow triggers ONLY on explicit directory paths** supplied by the user in their initial message, plus one narrow workflow handoff: a project-scoped `create-template` run in the current conversation may pass its exact validated project workspace root directly into this Step. The trigger rule is mechanical, not interpretive:
+**Template flow accepts only confirmed sources**: (a) an explicit workspace path supplied by the user, (b) the exact workspace returned by the mandatory `template-selection.md` HTML/GUI handshake, or (c) the validated project workspace returned by a current `create-template` handoff. The trigger rule is mechanical, not interpretive:
 
 | User input contains | Step 3 action |
 |---|---|
@@ -288,7 +290,7 @@ Do **not** reinterpret this boundary as 1:1 redesign or free SVG generation. Use
 
 There is no fuzzy resolution into an install. A deck-id mention or explicit template intent triggers only the single disambiguation question below — never a direct install; every other name flows to free design. The path that enters the install is always one the user confirmed.
 
-**Narrow disambiguation (single question, only on the trigger above).** List the matched deck(s) — or, for pure intent with no name, up to 3 decks most relevant to the content — each with its workspace path (`templates/decks/<id>/`) and one-line summary from `decks_index.json`, plus a "free design" option. In Claude Code surface this with the AskUserQuestion tool; other hosts ask the same single question in chat. A deck answer confirms that explicit path (normal Step 3 install); free design skips Step 3 — the Step 4 template card still allows re-picking. Ask at most once per run, and never when the trigger did not fire.
+**Narrow disambiguation (single question, only on the trigger above).** List the matched deck(s) — or, for pure intent with no name outside the mandatory new-deck gate, up to 10 genuinely relevant decks — each with its workspace path (`templates/decks/<id>/`) and one-line summary from `decks_index.json`, plus a "free design" option. In Claude Code surface this with the AskUserQuestion tool; other hosts ask the same single question in chat. A deck answer confirms that explicit path (normal Step 3 install); free design skips Step 3 — the Step 4 template card still allows re-picking. Ask at most once per run, and never when the trigger did not fire.
 
 **Structured-template preflight (before copy)**: For every deck/layout workspace, inspect all SVG roots and slots under its normalized template source. Every page must declare root Master/Layout key and picker names; Master/Layout visuals must be direct atoms rather than `<g>`; every slot must be a top-level `<g>` with positive bounds and exactly one compatible carrier, or an explicit composite `object` proxy. A zero-slot Layout is valid. If the SVG package uses a legacy semantic contract, run [`restore-pptx-structure`](workflows/restore-pptx-structure.md) first and return to Step 3 with the migrated workspace. A legacy flat directory shape alone is read compatibility and does not trigger restoration.
 

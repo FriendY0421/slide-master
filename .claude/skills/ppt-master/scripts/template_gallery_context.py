@@ -102,7 +102,13 @@ def build_entries(catalog: dict[str, dict], ref: str | None, purpose: str) -> tu
         if score > 0:
             ranked.append((score, deck_id))
     ranked.sort(key=lambda item: (-item[0], item[1]))
-    return entries, [deck_id for _score, deck_id in ranked[:10]], inferred
+    if ranked:
+        top_score = ranked[0][0]
+        cutoff = max(3, int(top_score * 0.30 + 0.999))
+        recommended = [deck_id for score, deck_id in ranked if score >= cutoff][:10]
+    else:
+        recommended = []
+    return entries, recommended, inferred
 
 
 def _html_page(entries: list[dict], recommended: list[str], inferred: list[str], source_label: str, purpose: str) -> str:
