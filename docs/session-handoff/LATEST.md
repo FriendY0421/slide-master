@@ -1,57 +1,33 @@
 # Latest project handoff
 
-Updated checkpoint: 2026-08-24 02:51 KST
+Updated checkpoint: 2026-08-24 22:08 KST
 
 ## Current authority
 
 - project: `SLIDE_MASTER`
 - repository: `FriendY0421/slide-master`
 - management type: `GITHUB_CONTEXT`
-- capabilities: `GITHUB_MONITOR, DURABLE_AUTHORITY`
+- capabilities: `GITHUB_MONITOR, DURABLE_AUTHORITY, EXECUTION_CONTRACT`
+- execution contract: `.fah/execution-contract.json` v1.0
+- contract blob SHA: `d8c24c26460cded0fe947df75b2e278488fd7641`
 - deployment capability: none
 - auto deploy: `N`
-- GitHub Actions: `NOT_RUN_ACTIONS_NOT_REQUESTED`
+- GitHub Actions: `NOT_USED`
 
-## Latest reconciled source work
+## Execution safety model
 
-The initial FAH onboarding durable-authority head was `8c16976e2eeff1491f31afd7617b2a23efa96667`.
+Layer A is the FAH central execution contract gate. `CREATE_PRESENTATION` cannot proceed before `TEMPLATE_SELECTION`; valid evidence permits `ALLOW`, missing user interaction returns `WAIT_USER_ACTION`, and invalid evidence returns `BLOCK`. `BEAUTIFY_PRESENTATION` remains an explicit `EXEMPT` route.
 
-Before the current authority resync, repository `main` had advanced by 13 commits to source head:
+Layer B is the existing Slide Master local fail-closed guard. `template_gate.py`, `new_deck_init.py`, and guarded `svg_to_pptx.py` remain authoritative for local enforcement and were not replaced.
 
-`7ec83fef2d3a826f9b1c870ddd60847f746f9418`
+## Validation completed
 
-The net changed paths are the recent template-selection/gallery/routing improvements only:
+- FAH pure execution-contract tests: PASS.
+- Issue #42 durable-authority and comparator regression tests: PASS.
+- missing template selection at export: `EXPORT BLOCKED` PASS.
+- `beautify-pptx` exemption record/validation: PASS.
+- legacy project without a contract remains `NO_CONTRACT_LEGACY` compatible.
 
-- `.claude/skills/ppt-master/scripts/template_gallery.py`
-- `.claude/skills/ppt-master/templates/decks/decks_index.json`
-- `.claude/skills/ppt-master/workflows/routing.md`
-- `.claude/skills/ppt-master/workflows/template-selection.md`
-- `AGENTS.md`
+## FAH source state
 
-Current behavior includes mandatory template selection for new main-SVG deck generation, live GitHub template-gallery selection, and automatic continuation after the user chooses a template.
-
-## Why this resync was required
-
-`AI_STATE.json` and this handoff were still the 2026-08-22 onboarding bootstrap even though the above source work had already advanced `main`.
-
-WEATHER `FCM_DELIVERY_LOG` consequently recorded repeated FAH `SLIDE_MASTER` source-change incidents after midnight on 2026-08-24: 5 deliveries around 00:02, 5 around 00:32, and 5 around 01:03.
-
-This is an authority/history synchronization gap, not a WEATHER collector failure. The Slide Master source changes are preserved; no source rollback was performed.
-
-## Durable history
-
-`docs/ai-history/2026-08-24-0251-slide-master-authority-resync.md`
-
-## Guardrails preserved
-
-- repository-local technical source remains authoritative;
-- FAH monitor uses durable CURRENT authority before stale Registry bootstrap values;
-- `PROJECT_REGISTRY` is not auto-rebaselined from runtime/repository movement;
-- no alert recipient or alert-semantics change was made;
-- no runtime deployment capability was added;
-- GitHub Actions require explicit current-request authorization;
-- future ChatGPT, Codex, Claude, automation, or other tool changes must update durable latest state/history/handoff before completion.
-
-## Next verification
-
-Read the next natural FAH monitor result. Expected result after durable-authority synchronization is non-incident/accepted authority. Do not claim monitor recovery until that natural result is observed.
+Generic FAH Execution Contract source was merged to `FriendY0421/friendy-automation-hub` at `f466906a9d5ead2d556b88a36681a896b47beb5d`. The FAH Apps Script runtime is not yet changed by this Slide Master contract commit; runtime deployment/read-only acceptance is the next control-plane step.

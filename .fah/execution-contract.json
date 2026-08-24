@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "project_id": "SLIDE_MASTER",
+  "contract_version": "1.0",
+  "managed_by": "FAH",
+  "project_aliases": [
+    "slide-master",
+    "Slide Master",
+    "PPT Master",
+    "ppt-master"
+  ],
+  "required_authority": {
+    "ai_state_current": true
+  },
+  "actions": {
+    "CREATE_PRESENTATION": {
+      "aliases": [
+        "ppt",
+        "pptx",
+        "프레젠테이션",
+        "슬라이드",
+        "발표자료"
+      ],
+      "required_gates": [
+        {
+          "id": "TEMPLATE_SELECTION",
+          "type": "USER_INTERACTION",
+          "required": true,
+          "fail_closed": true,
+          "reason": "User template selection is required before new presentation generation.",
+          "next_action": "Launch the HTML/GUI Template Gallery and wait for the user's selection.",
+          "evidence": {
+            "context_key": "templateSelection",
+            "required_status": [
+              "selected"
+            ],
+            "required_fields": [
+              "template",
+              "selected_at"
+            ]
+          }
+        }
+      ],
+      "local_guard": {
+        "fail_closed": true,
+        "evidence_file": "template_selection.json",
+        "final_guard": ".claude/skills/ppt-master/scripts/svg_to_pptx.py"
+      }
+    },
+    "BEAUTIFY_PRESENTATION": {
+      "aliases": [
+        "beautify-pptx",
+        "기존 ppt 미화",
+        "ppt 다듬기",
+        "기존 ppt 개선"
+      ],
+      "default_decision": "EXEMPT",
+      "exemption_reason": "beautify-pptx",
+      "required_gates": []
+    }
+  }
+}
