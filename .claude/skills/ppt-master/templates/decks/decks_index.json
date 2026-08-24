@@ -5,6 +5,9 @@
     "canvas_format": "ppt169",
     "page_count": 13,
     "primary_color": "#1D1D1F",
+    "primary_category": "presentation",
+    "categories": ["presentation", "brand_story", "product", "report"],
+    "keywords": ["발표", "프레젠테이션", "제품", "서비스 소개", "브랜드", "스토리", "디자인", "키노트", "비전", "메시지"],
     "defaults": {
       "mode": "showcase",
       "visual_style": "swiss-minimal",
@@ -17,6 +20,9 @@
     "canvas_format": "ppt169",
     "page_count": 4,
     "primary_color": "#4633E3",
+    "primary_category": "education",
+    "categories": ["education", "presentation", "report"],
+    "keywords": ["교육", "학습", "강의", "워크숍", "사내교육", "설명", "튜토리얼", "가이드", "교안", "브리핑"],
     "defaults": {
       "mode": "instructional",
       "visual_style": "editorial",
@@ -29,6 +35,9 @@
     "canvas_format": "ppt169",
     "page_count": 10,
     "primary_color": "#0F2A4A",
+    "primary_category": "report",
+    "categories": ["report", "proposal", "data", "presentation"],
+    "keywords": ["보고", "보고서", "경영", "전략", "분석", "개선", "제안", "기획", "로드맵", "현황", "문제점", "바라는점", "요구사항", "의견"],
     "defaults": {
       "mode": "pyramid",
       "visual_style": "swiss-minimal",
@@ -41,6 +50,9 @@
     "canvas_format": "ppt169",
     "page_count": 7,
     "primary_color": "#03C75A",
+    "primary_category": "data",
+    "categories": ["data", "report", "presentation"],
+    "keywords": ["실적", "재무", "KPI", "성과", "지표", "분기", "투자", "IR", "데이터", "수치", "매출", "목표"],
     "defaults": {
       "mode": "briefing",
       "visual_style": "data-journalism",
