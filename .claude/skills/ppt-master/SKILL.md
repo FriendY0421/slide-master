@@ -279,18 +279,17 @@ python3 ${SKILL_DIR}/scripts/preflight.py            # add --needs-images when t
 
 Do **not** reinterpret this boundary as 1:1 redesign or free SVG generation. Use `template-fill` for raw PPTX template + generated PPTX requests; use `beautify` only when the source deck's page count, order, and wording are preserved.
 
-**Template flow accepts only confirmed sources**: (a) an explicit workspace path supplied by the user, (b) the exact workspace returned by the mandatory `template-selection.md` HTML/GUI handshake, or (c) the validated project workspace returned by a current `create-template` handoff. The trigger rule is mechanical, not interpretive:
+**Template flow accepts only confirmed sources**: Step 3 consumes the decision already proven by the entry gate. Valid inputs are:
 
-| User input contains | Step 3 action |
+| Confirmed source | Step 3 action |
 |---|---|
-| One or more explicit template workspace paths (each resolves to `templates/design_spec.md`, or to a compatible legacy-flat root `design_spec.md`, with `kind: brand` / `kind: layout` / `kind: deck` in YAML frontmatter) | Normalize each source directory, read its `kind`, dispatch per the kind matrix below, fuse if multiple |
-| Current `create-template` workflow just completed project scope and validated its exact `<project>/` workspace | Consume that single workspace in place; it cannot join multi-path fusion |
-| Explicit template-seeking intent without a path ("use a template", "想用个模板", "템플릿 써줘"), or a bare name matching a **deck** id in `decks_index.json` ("apple 템플릿으로") | Ask the single narrow disambiguation question below, then either consume the confirmed deck path as a normal explicit-path trigger or take free design |
-| Anything else — bare layout/brand names ("用 academic_defense", "anthropic"), style descriptions ("麦肯锡风格"), or silence | Skip Step 3, free design (the Step 4 template card still offers the deck library) |
+| `template_selection.json` selects a registered deck | Resolve and install exactly that registered deck workspace; never fuzzy-match or substitute another template |
+| `template_selection.json` selects `free` | Proceed with Free Design because the user explicitly chose it |
+| User supplied an explicit valid template workspace path and that choice was recorded by `record_template_choice.py` / gate record | Normalize the confirmed workspace and dispatch by kind |
+| Current `create-template` workflow completed and handed off its validated workspace | Consume that workspace in place under the documented route exemption/handoff |
+| No valid selection record | **STOP** and return to `workflows/template-selection.md`; do not initialize or continue a new deck |
 
-There is no fuzzy resolution into an install. A deck-id mention or explicit template intent triggers only the single disambiguation question below — never a direct install; every other name flows to free design. The path that enters the install is always one the user confirmed.
-
-**Narrow disambiguation (single question, only on the trigger above).** List the matched deck(s) — or, for pure intent with no name outside the mandatory new-deck gate, up to 10 genuinely relevant decks — each with its workspace path (`templates/decks/<id>/`) and one-line summary from `decks_index.json`, plus a "free design" option. In Claude Code surface this with the AskUserQuestion tool; other hosts ask the same single question in chat. A deck answer confirms that explicit path (normal Step 3 install); free design skips Step 3 — the Step 4 template card still allows re-picking. Ask at most once per run, and never when the trigger did not fire.
+Recommendations, category inference, and bare template-name resolution belong exclusively to the mandatory HTML/GUI selection gate. Step 3 must not ask a second template question, silently choose a recommendation, or fall back to Free Design.
 
 **Structured-template preflight (before copy)**: For every deck/layout workspace, inspect all SVG roots and slots under its normalized template source. Every page must declare root Master/Layout key and picker names; Master/Layout visuals must be direct atoms rather than `<g>`; every slot must be a top-level `<g>` with positive bounds and exactly one compatible carrier, or an explicit composite `object` proxy. A zero-slot Layout is valid. If the SVG package uses a legacy semantic contract, run [`restore-pptx-structure`](workflows/restore-pptx-structure.md) first and return to Step 3 with the migrated workspace. A legacy flat directory shape alone is read compatibility and does not trigger restoration.
 
@@ -404,17 +403,17 @@ Single-path Step 3 does **not** add provenance (the source is self-evident from 
 
 The fused frontmatter `kind` describes the resulting bundle: `deck` when both identity and structure are present, `layout` when only structure is present, and `brand` when only identity is present. Keep this field accurate; the Strategist confirmation server uses it to show template adherence only for bundles that actually own page structure.
 
-#### Deferred install — template card
+#### Template decision is already resolved
 
-When Step 3 took the free-design default, the Step 4 Confirm UI page still offers a decks-only template card (catalog synced live from `decks_index.json`; free design is the default). If the confirmed `result.json` carries `template: "<deck_id>"`, run this Step's install for `templates/decks/<deck_id>/` at that point — same kind matrix, same structured-template preflight, no bypass — in the same turn, before writing `design_spec.md` / `spec_lock.md` (the deck-declared skin then overrides the color / typography fields the user left at your original recommendation — Step 4 reconciliation). On preflight failure do NOT silently fall back to free design: report the error in chat and let the user re-pick (another deck or free design). `template: "free"` (or the field's absence) keeps the free-design path. When a template was already installed via an explicit path, the card renders locked (informational) and no deferred install happens.
+For every new deck, the template decision is complete before project initialization. Step 4 must not reopen a second template picker or override `template_selection.json`. If the record names a registered deck, Step 3 has installed that exact workspace. If it records `template: "free"`, Free Design proceeds explicitly. Resume/direct routes may carry a documented exemption, but they do not invent a new selection here.
 
-**✅ Checkpoint — Default path proceeds to Step 4 without user interaction. If the user supplied one or more explicit template paths, those have been copied, staged in place, or fused into `<project_path>/templates/` before advancing. A template-card selection installs later, at the Step 4 confirmation handoff (see Deferred install above).**
+**✅ Checkpoint — A valid `template_selection.json` (or documented route exemption) exists, and Step 3 has either installed the confirmed template workspace or recorded the user's explicit Free Design choice. Proceed to Step 4.**
 
 ---
 
 ### Step 4: Strategist Phase (MANDATORY — cannot be skipped)
 
-🚧 **GATE**: Step 3 complete; default free-design path taken, or (if triggered) template files copied or confirmed in place in the project.
+🚧 **GATE**: Step 3 complete; template-selection evidence is valid, and the confirmed template workspace is installed or the user explicitly selected Free Design.
 
 First, read the role definition:
 ```
