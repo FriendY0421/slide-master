@@ -6,7 +6,7 @@
     "page_count": 13,
     "primary_color": "#1D1D1F",
     "primary_category": "presentation",
-    "categories": ["presentation", "brand_story", "product", "report"],
+    "categories": ["presentation", "brand_story", "product"],
     "keywords": ["발표", "프레젠테이션", "제품", "서비스 소개", "브랜드", "스토리", "디자인", "키노트", "비전", "메시지"],
     "defaults": {
       "mode": "showcase",
@@ -21,7 +21,7 @@
     "page_count": 4,
     "primary_color": "#4633E3",
     "primary_category": "education",
-    "categories": ["education", "presentation", "report"],
+    "categories": ["education", "presentation"],
     "keywords": ["교육", "학습", "강의", "워크숍", "사내교육", "설명", "튜토리얼", "가이드", "교안", "브리핑"],
     "defaults": {
       "mode": "instructional",
