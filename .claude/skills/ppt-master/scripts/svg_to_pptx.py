@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 """PPT Master - SVG to PPTX Tool (guarded thin wrapper).
 
-Delegates to the svg_to_pptx package after validating the repository-level
-presentation entry gate. New decks must carry a real template selection record;
-direct/resume routes that legitimately bypass the picker must carry a documented
-exemption record instead.
+Validates the repository-level presentation entry gate **before** importing the
+PPTX conversion engine. This ordering is intentional: a missing dependency must
+never mask a missing template-selection record.
 
-``-s final`` remains a native-export diagnostic override; the standard pipeline
-reads ``svg_output/``:
-    python3 scripts/svg_to_pptx.py <project_path> -s final
+New decks must carry a real template selection record; direct/resume routes that
+legitimately bypass the picker must carry a documented exemption record instead.
 """
 
 import sys
@@ -19,7 +17,6 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 
 from console_encoding import configure_utf8_stdio
 from template_gate import validate_project_gate
-from svg_to_pptx import main
 
 configure_utf8_stdio()
 
@@ -46,4 +43,5 @@ if __name__ == '__main__':
     gate_status = _gate_project_from_argv(sys.argv[1:])
     if gate_status:
         raise SystemExit(gate_status)
+    from svg_to_pptx import main
     raise SystemExit(main())
