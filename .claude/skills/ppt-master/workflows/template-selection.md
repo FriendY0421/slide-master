@@ -7,6 +7,8 @@ description: Mandatory template-selection gate for new Slide Master deck generat
 This repository requires an explicit template choice before any **new deck generation** begins.
 The user must see what is actually registered, inspect representative previews, and choose the
 visual system before research, project initialization, SVG authoring, or PPTX generation continues.
+[`../../../..//PPT_REQUEST_GUARD.md`](../../../../PPT_REQUEST_GUARD.md) is the short fail-closed
+authority for this rule; this workflow owns the detailed picker behavior.
 
 ## Scope
 
@@ -15,59 +17,85 @@ Apply this gate to:
 - decks generated from PDF, DOCX, URL, Markdown, spreadsheet, conversation text, or other source material;
 - PPTX used as re-architectable source material when slide count/order may change.
 
-Do **not** apply this gate to:
+Do **not** apply the HTML picker to:
 - `ppt-template-fill` (the supplied PPTX is already the template);
 - strict 1:1 `beautify-pptx` (the source deck is the visual reference);
 - `native-enhance-pptx` (content/layout remain stable);
 - resume/continue operations for a project that already has a confirmed template decision.
 
-## Mandatory HTML gallery behavior
+Those exempt routes must still write a documented `template_selection.json` exemption when they
+enter any shared generated-deck export path. The purpose is auditability and fail-closed enforcement,
+not to force an irrelevant template choice onto a direct-PPTX workflow.
+
+## Mandatory context-aware HTML gallery behavior
 
 1. If the user already named a valid registered deck id/workspace path, treat that as the explicit
-   choice and continue without opening the gallery or asking the same question again.
-2. Otherwise, launch the standalone HTML picker **before the main generation pipeline**:
+   choice and continue without opening the gallery or asking the same question again. Record it with
+   `record_template_choice.py` so the project can carry machine-readable selection evidence.
+2. Otherwise, launch the standalone context-aware HTML picker **before research or project init**:
 
 ```bash
-python .claude/skills/ppt-master/scripts/template_gallery.py \
+python .claude/skills/ppt-master/scripts/template_gallery_context.py \
   --source auto \
   --lang <ko|en> \
-  --purpose "<short deck purpose>" \
-  --recommend <deck1,deck2,deck3>
+  --purpose "<the user's actual deck purpose/context>"
 ```
 
-   On Windows, use `python` when `python3` is unavailable.
-3. `template_gallery.py` refreshes `origin/main` without checking it out or modifying the working
-   tree. The gallery therefore reflects the latest GitHub-registered `decks_index.json` and template
-   SVGs. When GitHub is unavailable, `--source auto` falls back to the local checkout and labels the
-   fallback visibly.
-4. Show **every selection-ready registered deck** plus `Free Design` as 16:9 cards. Mark up to three
-   content-relevant decks as `Recommended`; recommendations never auto-select. The UI must clearly
-   distinguish **registered template count** from each template's internal **layout count**.
-5. Each card uses the deck's first representative SVG for fast scanning. Clicking a card opens a
-   large detail gallery with up to **6 representative layout types** automatically selected from
-   the registered SVG roster (cover/title, agenda/section, content, data/KPI, comparison/visual,
-   closing, with remaining slots filled by other distinct layouts). The user confirms only after
-   inspecting these layouts.
-6. Hard stop until the picker returns `TEMPLATE_SELECTED=...`. Do not continue because the browser
+   On Windows, use `python` when `python3` is unavailable. `--recommend` is optional and may add
+   already-known registered ids, but automatic context ranking is the default and total recommended
+   items remain capped at 10.
+3. The picker refreshes `origin/main` through the existing gallery core without checking it out or
+   modifying the working tree. The gallery therefore reflects the latest GitHub-registered
+   `decks_index.json` and template SVGs. When GitHub is unavailable, `--source auto` falls back to the
+   local checkout and labels the fallback visibly.
+4. The gallery interprets the user's purpose text and groups the complete catalog by use category,
+   including at least: **보고용**, **학습·교육용**, **공지·안내용**, **발표용**,
+   **제안·기획용**, **데이터·실적용**, **브랜드·스토리용**, and
+   **제품·서비스 소개용**. Future categories may be added through catalog metadata.
+5. Show **every selection-ready registered deck** plus `Free Design`. Mark only templates with genuine
+   contextual relevance as `Recommended`, up to **10**. This is a ceiling, not a quota: one strong
+   match may yield one recommendation; four relevant matches may yield four. Recommendations never
+   auto-select. The user still chooses the final visual system.
+6. Each card uses a real representative SVG. Clicking a template opens a detail gallery with up to
+   **6 representative layout types** selected from the registered SVG roster (cover/title,
+   agenda/section, content, data/KPI, comparison/visual, closing, with remaining slots filled by
+   other distinct layouts). The user confirms only after inspecting the layouts.
+7. Hard stop until the picker returns `TEMPLATE_SELECTED=...`. Do not continue because the browser
    was merely opened, and never silently default to Free Design. **The caller must keep the current
    agent task/turn alive while the gallery is open.** If the command host returns control while the
    gallery child process is still running, immediately wait on that process or poll the result file;
    do not end the assistant response with a message telling the user to select and come back later.
-7. As soon as `TEMPLATE_SELECTED=...` is returned, **resume the same PPT request immediately in the
-   same task/turn**: consume the returned workspace, enter main Step 3, and continue research/design/
-   generation without requiring another user message. Only a true timeout, gallery failure, or host
-   limitation may break this automatic handshake.
-8. After a deck id is selected, resolve its returned `workspace` to the exact registered workspace
-   path and hand that user-confirmed path to main Step 3. This must not trigger a second template
-   question.
-9. `Free Design` is allowed only when the user explicitly chooses it.
+8. As soon as `TEMPLATE_SELECTED=...` is returned, **resume the same PPT request immediately in the
+   same task/turn**. Initialize a new main-SVG deck with:
 
-## Catalog and user-added templates
+```bash
+python .claude/skills/ppt-master/scripts/new_deck_init.py <project_name> \
+  --format <format> \
+  --template-selection-result <result.json>
+```
 
-The catalog is **not hard-coded**. `decks_index.json` is the discovery source of truth. Therefore a
-future user/company template automatically joins the same HTML gallery after it is registered in
-GitHub and satisfies the preview contract below. No picker-code modification is required for each
-new template.
+   Do not use a bare `project_manager.py init` for a new deck. The resulting project must contain
+   `template_selection.json` before downstream work begins.
+9. After a registered deck id is selected, resolve its returned `workspace` to the exact registered
+   workspace path and hand that user-confirmed path to main Step 3. This must not trigger a second
+   template question.
+10. `Free Design` is allowed only when the user explicitly chooses it. The result is recorded exactly
+    like a registered selection, with `template: free` and no workspace.
+
+## Catalog taxonomy and context matching
+
+The catalog is **not hard-coded**. `templates/decks/decks_index.json` is the discovery source of truth.
+Every selection-ready deck should declare:
+
+- `primary_category`: its main gallery section;
+- `categories`: additional valid use categories;
+- `keywords`: user-language terms that identify suitable requests;
+- normal display fields such as `display_name`, `summary`, `primary_color`, and `page_count`.
+
+Current stable category ids are `report`, `education`, `notice`, `presentation`, `proposal`, `data`,
+`brand_story`, `product`, and `general`. Newly registered templates automatically participate in
+context ranking and categorized display when these fields are present. Do not edit picker code for
+each new template.
 
 ## Preview contract for newly registered templates
 
@@ -86,16 +114,29 @@ asset endpoint. No separate PNG/JPEG thumbnail is required.
 
 ## Fast validation / diagnostics
 
-Before release or while diagnosing catalog problems, run:
+Before release or while diagnosing catalog problems, run context examples without opening a browser:
 
 ```bash
-python .claude/skills/ppt-master/scripts/template_gallery.py --source local --list
+python .claude/skills/ppt-master/scripts/template_gallery_context.py \
+  --source local --purpose "경영진 개선 보고" --list
+
+python .claude/skills/ppt-master/scripts/template_gallery_context.py \
+  --source local --purpose "신입사원 AI 교육" --list
+
+python .claude/skills/ppt-master/scripts/template_gallery_context.py \
+  --source local --purpose "전 직원 안전 공지" --list
 ```
 
-This lists only templates that have a usable representative SVG and does not open a browser.
+Also validate the fail-closed evidence independently:
+
+```bash
+python .claude/skills/ppt-master/scripts/template_gate.py validate <project_path>
+```
 
 ## Chat fallback
 
 If the HTML gallery cannot start or the host is truly headless, present the same live registered
-catalog in chat and wait for the user's choice. Do not skip the gate merely because visual previews
-are unavailable.
+catalog grouped by the same categories in chat and wait for the user's explicit choice. Record that
+choice with `record_template_choice.py` before `new_deck_init.py`. Do not skip the gate merely because
+visual previews are unavailable, and do not replace a working GUI/HTML picker with a text list for
+convenience.
