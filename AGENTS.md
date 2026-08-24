@@ -6,6 +6,21 @@ standing repository conventions. Route selection belongs to
 After routing, the selected skill or workflow owns execution and gates. The rules
 below add Codex-side enforcement; they never override the selected owner.
 
+## PPT Request Guard — FIRST READ for every presentation request
+
+Before any presentation routing or generation work, read [`PPT_REQUEST_GUARD.md`](PPT_REQUEST_GUARD.md).
+For a **new deck**, this guard is fail-closed and overrides any older prose that says to default to
+Free Design or skip template choice. New-deck work may not start research, project initialization,
+SVG authoring, or export until the template-selection handshake is complete. The only valid paths are:
+
+- the user explicitly chose a registered template and the choice was recorded; or
+- `.claude/skills/ppt-master/scripts/template_gallery_context.py` returned `TEMPLATE_SELECTED`; or
+- a documented direct-PPTX/resume exemption was written to the project gate record.
+
+`template_selection.json` is the machine-readable evidence. Missing evidence is an execution failure,
+not a warning. New-deck initialization must use `new_deck_init.py`; generated-deck export validates the
+gate again so a missed conversational instruction cannot silently bypass this rule.
+
 ## Skill source (generated pointer stubs)
 
 - **`.claude/skills/` is canonical** (`ppt-master`, `ppt-template-fill`,
@@ -29,21 +44,22 @@ below add Codex-side enforcement; they never override the selected owner.
 When the user asks for a presentation ("PPT 만들어줘", "make slides", "生成PPT",
 a deck from a document/topic/template):
 
-1. **Route before full-load.** Read
-   [`.claude/skills/ppt-master/workflows/routing.md`](.claude/skills/ppt-master/workflows/routing.md)
-   first. Use its one discriminator question only for the ambiguity it defines;
-   do not load competing full owners before the answer.
-   For any route that will generate a **new deck** through the main SVG family, immediately apply
+1. **Guard, then route.** Read [`PPT_REQUEST_GUARD.md`](PPT_REQUEST_GUARD.md), then
+   [`.claude/skills/ppt-master/workflows/routing.md`](.claude/skills/ppt-master/workflows/routing.md).
+   Use the router's one discriminator question only for the ambiguity it defines; do not load
+   competing full owners before the answer. For any route that will generate a **new deck** through
+   the main SVG family, immediately apply
    [`template-selection.md`](.claude/skills/ppt-master/workflows/template-selection.md) before
    research/project creation/generation. Unless the user already named a valid registered template,
-   launch `.claude/skills/ppt-master/scripts/template_gallery.py`: it refreshes `origin/main`
-   read-only, shows the live GitHub template catalog as HTML cards with SVG previews and up to three
-   recommendations, and returns only after the user explicitly chooses. Treat this as a **blocking
-   handshake**: do not end the current task/assistant turn after launching the gallery. Wait on the
-   picker process (or poll its result file when the tool host returns early); once `TEMPLATE_SELECTED`
-   arrives, immediately continue the same PPT request with the returned workspace. Never silently
-   default to Free Design. A newly registered user/company deck appears automatically through
-   `decks_index.json`.
+   launch `.claude/skills/ppt-master/scripts/template_gallery_context.py`: it refreshes `origin/main`
+   read-only, understands the user's purpose text, groups the live GitHub catalog by use category,
+   shows real SVG previews, and marks only genuinely relevant templates as recommended — up to 10,
+   never filling a quota. Treat this as a **blocking handshake**: do not end the current task/assistant
+   turn after launching the gallery. Wait on the picker process (or poll its result file when the tool
+   host returns early); once `TEMPLATE_SELECTED` arrives, immediately continue the same PPT request
+   with the returned workspace. Never silently default to Free Design. A newly registered user/company
+   deck appears automatically through `decks_index.json` when its category/keyword metadata and preview
+   contract are valid. Use `new_deck_init.py --template-selection-result <result.json>` for project init.
 2. **Load the selected owner(s) in full.** The router owns the complete matrix;
    this table is a compact Codex handoff summary:
 
@@ -55,9 +71,10 @@ a deck from a document/topic/template):
    | Finished-PPTX native enhancement | [`native-enhance-pptx/SKILL.md`](.claude/skills/native-enhance-pptx/SKILL.md), then its required execution workflow |
    | Another standalone route | The selected workflow; load the next owner only at an explicit handoff |
 
-3. **Apply only owner-defined gates.** Confirmations, preflight, validation,
-   recovery, export, and completion checks come from the selected owner. Sharing
-   scripts does not import main SVG gates into a direct-PPTX route.
+3. **Apply only owner-defined gates plus the repository entry guard.** Confirmations, preflight,
+   validation, recovery, export, and completion checks come from the selected owner. The repository
+   entry guard does not import SVG-generation gates into direct-PPTX routes; those routes record a
+   documented exemption instead.
 4. **Return to routing when intent changes.** Do not keep executing the old owner
    after the request changes route family.
 
@@ -70,9 +87,9 @@ following Codex enforcement remains mandatory for that route only:
 - Keep phases serial. Do not batch pages, generate page SVGs by script, delegate
   SVG authoring, hand-build the PPTX outside `svg_to_pptx.py`, or substitute
   placeholder/solid-color images. Use `failure-recovery.md` on tool failure.
-- After project init, run main `preflight.py` (`--needs-images` when applicable)
-  and stop on failure. Every blocking confirmation is a hard stop; use the
-  Confirm UI and only its documented staged-chat fallback.
+- For a new deck, initialize through `new_deck_init.py`; after project init, run main `preflight.py`
+  (`--needs-images` when applicable) and stop on failure. Every blocking confirmation is a hard stop;
+  use the Confirm UI and only its documented staged-chat fallback.
 - Immediately run `validate_spec.py` on `design_spec.md` plus `spec_lock.md` and
   fix every error before SVG generation. Re-read `spec_lock.md` at P01/P05/P09
   and after context compaction. Run the page-1 SVG quality gate before page 2

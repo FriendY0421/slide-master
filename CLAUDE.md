@@ -4,7 +4,25 @@ This file is the project entry point for Claude Code. The ppt-master skill lives
 
 > **Cross-harness (dual-host)**: [`AGENTS.md`](AGENTS.md) is the Codex-side execution-rules layer — it references this file as SSOT and only adds enforcement, so content edits here do not need mirroring there. `.codex/skills/` holds **generated** Codex discovery stubs: after editing any `.claude/skills/<name>/SKILL.md` frontmatter, run `python3 .claude/skills/ppt-master/scripts/sync_codex_stubs.py` (never hand-edit stubs; `preflight.py` fails while they are stale). Skill content itself lives only in `.claude/skills/`.
 
-**Route before full-load (mandatory)**: for a presentation request, first read
+## PPT Request Guard — mandatory first read
+
+For **every presentation request**, read [`PPT_REQUEST_GUARD.md`](PPT_REQUEST_GUARD.md) before routing.
+For a new deck, the guard is fail-closed: do not begin research, project initialization, SVG authoring,
+or PPTX export until the user has explicitly selected a registered template or Free Design through the
+context-aware HTML/GUI gallery, or has already explicitly named a valid registered template. The result
+must be recorded as `template_selection.json`. Missing selection evidence is an execution failure.
+
+The normal new-deck entry is:
+
+`PPT request → PPT_REQUEST_GUARD.md → routing.md → template_gallery_context.py → user choice → new_deck_init.py → selected owner → export gate`
+
+The gallery groups the complete registered catalog by use category (report, education, notice,
+presentation, proposal, data, brand/story, product/service, etc.) and recommends only genuinely relevant
+templates based on the user's actual purpose/context, up to 10. Recommendations never auto-select.
+`svg_to_pptx.py` validates the gate again before importing the PPTX engine, so an earlier missed instruction
+cannot silently produce a new deck.
+
+**Route before full-load (mandatory)**: after the PPT Request Guard, read
 [`.claude/skills/ppt-master/workflows/routing.md`](.claude/skills/ppt-master/workflows/routing.md).
 Select the route there, then read only the selected execution owner(s) in full.
 Do not preload the main SVG skill for a direct-PPTX route. For a repository edit,
@@ -22,7 +40,8 @@ an existing PowerPoint package and use their own execution gates.
 
 **Route selection authority**:
 [`.claude/skills/ppt-master/workflows/routing.md`](.claude/skills/ppt-master/workflows/routing.md)
-owns the complete matrix and wins over every summary below.
+owns the complete matrix and wins over every route summary below. The repository-level
+[`PPT_REQUEST_GUARD.md`](PPT_REQUEST_GUARD.md) owns the pre-route new-deck entry requirement.
 
 | Selected family | Full execution owner(s) |
 |---|---|
@@ -38,12 +57,14 @@ re-architectable source. Do not load either full owner before that answer.
 
 ## Execution Ownership
 
-- The selected skill or workflow owns its confirmations, preflight, validation,
-  recovery, export, and completion gates. This root file adds none.
-- Shared scripts do not transfer gate ownership between SVG and direct-PPTX
-  families.
-- Topic research, template creation, and post-route workflows load the next
-  owner only when their own procedure declares a handoff.
+- The repository-level PPT Request Guard owns only the pre-route new-deck selection evidence and the
+  final generated-deck export check. The selected skill or workflow owns its normal confirmations,
+  preflight, validation, recovery, export behavior, and completion gates.
+- Direct-PPTX routes do not inherit an irrelevant template picker; when they enter a shared generated-deck
+  export path, they record a documented gate exemption instead.
+- Shared scripts do not transfer other gate ownership between SVG and direct-PPTX families.
+- Topic research, template creation, and post-route workflows load the next owner only when their own
+  procedure declares a handoff.
 
 ## Font Policy (install-local, standing preference)
 
@@ -63,7 +84,7 @@ re-architectable source. Do not load either full owner before that answer.
 - On conflict with a generic coding skill, prioritize the selected repo-local
   execution owner. The main [`ppt-master/SKILL.md`](.claude/skills/ppt-master/SKILL.md)
   has that role only when routing selected the main SVG family or an explicit
-  shared-SVG handoff.
+  shared-SVG handoff. The repository entry guard remains active for new-deck evidence.
 
 ## Execution Pointers
 
@@ -72,6 +93,7 @@ of treating a root-level command list as a gate checklist.
 
 | Work | Runtime authority |
 |---|---|
+| New-deck entry / template-selection evidence | [`PPT_REQUEST_GUARD.md`](PPT_REQUEST_GUARD.md) + [`template-selection.md`](.claude/skills/ppt-master/workflows/template-selection.md) |
 | Route selection | [`routing.md`](.claude/skills/ppt-master/workflows/routing.md) |
 | Main SVG generation and re-architecture | [`ppt-master/SKILL.md`](.claude/skills/ppt-master/SKILL.md) |
 | Strict 1:1 SVG beautify | [`beautify-pptx.md`](.claude/skills/ppt-master/workflows/beautify-pptx.md) and only the shared main steps it invokes |
@@ -81,6 +103,7 @@ of treating a root-level command list as a gate checklist.
 
 ## Core Directories
 
+- `PPT_REQUEST_GUARD.md` — fail-closed new-deck entry authority independent of model memory.
 - `.claude/skills/ppt-master/SKILL.md` — main SVG workflow authority.
 - `.claude/skills/ppt-template-fill/SKILL.md` — raw-template direct-PPTX authority.
 - `.claude/skills/native-enhance-pptx/SKILL.md` — finished-PPTX enhancement entry owner.
