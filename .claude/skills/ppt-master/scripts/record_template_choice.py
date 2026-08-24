@@ -11,6 +11,13 @@ import time
 from pathlib import Path
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+
+from console_encoding import configure_utf8_stdio  # noqa: E402
+
+configure_utf8_stdio()
+
 SKILL_DIR = SCRIPTS_DIR.parent
 INDEX_PATH = SKILL_DIR / "templates" / "decks" / "decks_index.json"
 DECKS_PREFIX = ".claude/skills/ppt-master/templates/decks"
