@@ -23,6 +23,6 @@ Required order:
 
 `PPT request → canonical SLIDE_MASTER repository lock → FAH Execution Contract evaluation → required TEMPLATE_SELECTION handshake → user explicit template choice → content research/generation → local fail-closed validation → PPTX`
 
-For a new deck, template selection is a blocking user-interaction gate. Missing selection evidence means execution must stop at `WAIT_USER_ACTION`/blocked state and the live HTML/GUI template gallery must be shown. Only the documented existing-PPT beautification route may use its contract exemption.
+For a new deck, template selection is a blocking user-interaction gate. Missing selection evidence means execution must stop at `WAIT_USER_ACTION`/blocked state. On ChatGPT and other conversational hosts that can render visuals, show the live registered templates and their actual representative previews **inside the current conversation first**, wait for the user's explicit choice, and record that choice as normal gate evidence. External/local HTML/GUI is fallback only when the current host cannot render the actual previews inline; plain text is last resort only when neither visual surface is technically possible. Only the documented existing-PPT beautification route may use its contract exemption.
 
 Read `PPT_REQUEST_GUARD.md` before any presentation research or generation work.
