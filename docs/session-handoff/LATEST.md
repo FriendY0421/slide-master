@@ -1,6 +1,31 @@
 # Latest project handoff
 
-Updated checkpoint: 2026-08-25 00:13 KST
+Updated checkpoint: 2026-08-25 10:10 KST
+
+## NEWEST CHECKPOINT — PPT ENTRY ROUTING HARDENED
+
+A ChatGPT presentation request previously entered upstream `byungjunjang/slide-master` before FriendY's FAH/Slide Master gate was evaluated. The existing FAH runtime @45 Execution Contract and local Slide Master fail-closed guards were healthy; the defect was at the earlier project/repository entry-routing layer.
+
+The durable correction is now recorded:
+
+- every FriendY new-PPT/presentation/slides request binds first to project `SLIDE_MASTER` and canonical repository `FriendY0421/slide-master`;
+- upstream `byungjunjang/slide-master` must not be used as FriendY's execution authority;
+- generic/host-native presentation generation must not bypass the canonical repository lock or FAH contract;
+- FAH Execution Contract evaluation occurs before presentation research/generation;
+- `CREATE_PRESENTATION` still requires the blocking `TEMPLATE_SELECTION` user-interaction gate;
+- missing valid selection evidence means stop at `WAIT_USER_ACTION`/blocked state, launch the live HTML/GUI template gallery, and wait for the user's explicit selection;
+- only after selection may research, project initialization, SVG authoring, and PPTX generation proceed;
+- existing `template_gate.py`, `new_deck_init.py`, and guarded `svg_to_pptx.py` remain the final local fail-closed layer.
+
+The accepted `.fah/execution-contract.json` was intentionally **not changed**. Its v1.0 blob SHA remains `d8c24c26460cded0fe947df75b2e278488fd7641`, preserving the accepted FAH @45 `CONTRACT_CURRENT` contract identity.
+
+Durable history: `docs/ai-history/2026-08-25-ppt-entry-routing-hardening.md`
+
+Expected user-visible flow:
+
+`PPT request → FriendY0421/slide-master lock → FAH contract evaluation → live template gallery → relevant template recommendations → user explicit selection → content analysis/research → deck generation → quality verification → PPTX handoff`
+
+---
 
 ## Current authority
 
@@ -36,6 +61,8 @@ Layer A is the FAH central execution contract gate. `CREATE_PRESENTATION` cannot
 
 Layer B is the existing Slide Master local fail-closed guard. `template_gate.py`, `new_deck_init.py`, and guarded `svg_to_pptx.py` remain authoritative for final local enforcement and were not replaced.
 
+Layer 0 is now the canonical presentation-entry lock: any FriendY new-deck request first resolves to `FriendY0421/slide-master` and then evaluates FAH. This prevents upstream/generic execution paths from occurring before Layers A and B.
+
 ## Validation completed
 
 - FAH execution-contract logic tests: PASS.
@@ -46,6 +73,7 @@ Layer B is the existing Slide Master local fail-closed guard. `template_gate.py`
 - FAH @45 source HEAD readback: PASS.
 - existing FAH Deployment @45 readback: PASS.
 - natural FAH monitor contract-health acceptance: PASS.
+- canonical repository entry rule: documented and durable in `AI_CONTEXT.md`, `AI_STATE.json`, and `PPT_REQUEST_GUARD.md`.
 
 ## Non-blocking optional follow-up
 
@@ -57,6 +85,10 @@ GitHub Actions are default-off to conserve usage. They may be used when the curr
 
 ## Durable history
 
-`docs/ai-history/2026-08-25-execution-contract-runtime45-accepted.md`
+Newest:
+- `docs/ai-history/2026-08-25-ppt-entry-routing-hardening.md`
 
-No blocking rollout action remains.
+Previous accepted contract rollout:
+- `docs/ai-history/2026-08-25-execution-contract-runtime45-accepted.md`
+
+No blocking runtime rollout action remains.
