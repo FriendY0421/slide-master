@@ -1,5 +1,5 @@
 ---
-description: Mandatory scalable two-stage template-selection gate for new Slide Master decks
+description: Mandatory scalable inline-interactive template-selection gate for new Slide Master decks
 ---
 
 # Template Selection Gate
@@ -17,7 +17,11 @@ Exempt only the documented direct-PPTX/resume routes:
 - `native-enhance-pptx`
 - resume of a project with already-confirmed template evidence
 
-## Runtime catalog
+## Host preparation is not generation permission
+
+A ChatGPT host may require `artifact_handoff` / presentation preparation before any other tool call. That call is **preparation only**. Immediately after it, enter this template-selection workflow. Do not research, initialize a project, author slides, or export PPTX until valid template-selection evidence exists.
+
+## Runtime catalog — latest GitHub every request
 
 Use the unified index-driven catalog:
 
@@ -27,41 +31,44 @@ It merges registered:
 - Decks from `templates/decks/decks_index.json`
 - Layouts from `templates/layouts/layouts_index.json`
 
-Do not hard-code template ids. New registered entries must appear automatically.
+Do not hard-code template ids or counts. New/updated registered entries must appear automatically on the next PPT request.
 Use collision-safe keys `deck:<id>` / `layout:<id>`.
 
-## ChatGPT / conversational host flow — PRIMARY INTERNAL CARD GALLERY
+For FriendY production PPT requests, refresh from GitHub `main` rather than silently relying on a stale local catalog.
 
-The **internal card-style gallery inside ChatGPT is the canonical and primary selection surface**. External/local HTML/GUI is auxiliary fallback only; do not prefer HTML merely because it offers richer click controls.
+## ChatGPT primary flow — SELF-CONTAINED INTERACTIVE HTML IN THE CONVERSATION
 
+The canonical selection surface is the **self-contained HTML gallery rendered interactively inside the ChatGPT conversation body**, matching the user-approved `preview(1).html` UX.
 
-### Stage 1 — shortlist
+Build it with:
 
-Run or reproduce the semantics of:
+`python .claude/skills/ppt-master/scripts/template_gallery_inline_html.py --source github --purpose "<actual purpose>" --page-size 12 --output <gallery.html>`
 
-`python .claude/skills/ppt-master/scripts/template_gallery_chat_manifest_v2.py --source auto --purpose "<actual purpose>" --limit 10`
+Then surface that HTML artifact in the same conversation. **Stop there.** Do not continue presentation generation until the user completes selection in the gallery and returns the selected id in chat.
 
-Rules:
-- If 10+ registered templates exist, render 10 actual registered template previews.
-- If fewer than 10 exist, render all and state the actual count.
-- Free Design is separate.
-- Use exact registered SVG source, not recreated approximations.
-- Recommendations are contextual, never auto-selected.
-- A user's Stage-1 choice is **tentative**, not final evidence.
+### Inline HTML UI contract
 
-### Stage 2 — selected-template details
+The generated gallery must:
 
-After the tentative choice:
-- Resolve the exact workspace through the unified catalog.
-- Render up to 6 real registered examples from that workspace.
-- Prefer cover/title, agenda/section, content, data/KPI, comparison/visual, closing where available.
-- Ask for final confirmation only after these detail previews are visible.
+- be self-contained; no localhost server dependency;
+- embed real registered SVG previews and package-local assets as data URIs;
+- show purpose-aware recommendations without auto-selecting;
+- expose the complete current GitHub registered catalog;
+- provide search by name/summary/id;
+- provide Deck/Layout filters;
+- paginate automatically when many templates exist (default 12 cards/page; presentation may adapt for usability);
+- provide Free Design separately;
+- open a clicked card in an in-page modal/dialog;
+- show up to 6 real examples from the exact selected workspace;
+- include `다른 템플릿 보기` and `이 템플릿 선택` controls;
+- display the final selected name/id at the top after confirmation;
+- tell the user to send the selected id back into chat.
 
-If a host cannot guarantee Korean glyph rendering while rasterizing previews, use English sample tokens inside the SVG preview and Korean labels outside the image. Never display broken glyphs as a valid preview.
+The UI pattern is fixed semantically, not visually: `gallery cards → click → detail modal → up to six real examples → 이 템플릿 선택 → selected id shown`. Styling may evolve as long as this interaction remains clear and polished.
 
-### Stage 3 — final selection evidence
+## Selection evidence
 
-Only after final user confirmation, record:
+The HTML button `이 템플릿 선택` is the final UI confirmation. When the user sends the selected id back in chat, record:
 
 `python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --purpose "<purpose>" --output <result.json> --confirmed`
 
@@ -69,33 +76,37 @@ Then initialize:
 
 `python .claude/skills/ppt-master/scripts/new_deck_init.py <project_name> --format <format> --template-selection-result <result.json>`
 
-A Stage-1 number/name alone must never be recorded as final selection evidence.
+Only after this succeeds may research/generation continue.
 
-## Clickable HTML/GUI path — AUXILIARY FALLBACK ONLY
+## Korean rendering
 
-Use this only when the internal ChatGPT card-style gallery cannot be rendered reliably or when recovery requires a separate browser surface. It must not become the normal first-choice path.
+The inline HTML should preserve Korean text whenever the browser artifact can render the declared Korean-capable font stack. Never present broken glyph boxes as valid previews. Registered SVG content remains the design source; do not recreate approximate thumbnails.
 
+## Fallback hierarchy
 
-When clickable cards/buttons are explicitly desired, or reliable in-chat visual rendering is unavailable, use:
+Use this exact order:
 
-`python .claude/skills/ppt-master/scripts/template_gallery_unified.py --source auto --lang ko --purpose "<actual purpose>" --limit 10`
+1. **Primary:** self-contained interactive HTML artifact inside the current ChatGPT conversation (`template_gallery_inline_html.py`).
+2. **Secondary:** conversation-native static/visual two-stage gallery only if the host cannot render the HTML artifact interactively.
+3. **Auxiliary last fallback:** external/local browser server (`template_gallery_unified.py`) only when both internal conversation surfaces are unavailable or recovery explicitly requires it.
 
-This is the canonical clickable fallback. It uses the same unified catalog, shows up to 10 shortlist candidates, exposes the full registered library, opens up to 6 real detail examples, and records final confirmation.
-
-The legacy Deck-only gallery is retained only for compatibility/rollback and is not the canonical new-PPT path.
+The external browser path must never become the default merely because its controls are richer.
 
 ## Hard failures
 
 Stop rather than proceed when any of these occurs:
-- 10+ templates exist but fewer than 10 are shown without explicit user request;
+
+- PPT generation starts after `artifact_handoff` but before template evidence;
+- a fixed/hard-coded template list is used instead of current GitHub indexes;
 - only names/numbers are shown;
-- preview is recreated instead of sourced from registered SVG;
-- static image is represented as clickable UI;
-- Stage-2 detail examples are skipped;
-- final evidence is written before Stage-2 confirmation;
+- Markdown `<img>` links are used as a substitute for the approved interactive gallery;
+- a static PNG is represented as interactive UI;
+- real registered previews are missing;
+- selected-template detail examples are skipped;
+- final evidence is written before the gallery's final selection is returned in chat;
 - broken Korean glyphs are visible;
 - valid selection evidence is missing.
 
 ## Downstream enforcement
 
-`template_selection.json`, `template_gate.py`, `new_deck_init.py`, and guarded `svg_to_pptx.py` remain fail-closed. The selection surface changes do not weaken the FAH `TEMPLATE_SELECTION` contract.
+`template_selection.json`, `template_gate.py`, `new_deck_init.py`, and guarded `svg_to_pptx.py` remain fail-closed. The selection-surface changes do not weaken the FAH `TEMPLATE_SELECTION` contract.
