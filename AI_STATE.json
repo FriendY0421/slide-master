@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-25T12:22:00+09:00",
+  "updated_at_kst": "2026-08-25T17:13:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-TEMPLATE-SELECTION-V2-E2E-VALIDATED-20260825",
-    "status": "TEMPLATE_SELECTION_V2_E2E_VALIDATED",
-    "mode": "INDEX_DRIVEN_TWO_STAGE_TEMPLATE_SELECTION",
+    "work_id": "SLIDE-MASTER-INLINE-INTERACTIVE-HTML-GALLERY-20260825",
+    "status": "INLINE_INTERACTIVE_HTML_GALLERY_CANONICAL",
+    "mode": "GITHUB_LIVE_SELF_CONTAINED_INLINE_HTML",
     "actor": "ChatGPT",
-    "summary": "Template Selection V2 was executed end to end on HOME-PC: syntax PASS, live Deck+Layout catalog 11, Stage-1 shortlist 10 with real previews, unconfirmed evidence blocked, confirmed layout selection PASS, new_deck_init PASS, template_gate PASS, unified HTML list/server PASS, and Deck/Layout preview HTTP endpoints returned 200. FAH runtime @45 contract remains unchanged. Primary selection surface is explicitly locked to the internal ChatGPT card-style gallery; external HTML/GUI is auxiliary fallback only.",
-    "history_file": "docs/ai-history/2026-08-25-template-selection-v2-e2e-validated.md"
+    "summary": "FriendY approved preview(1).html as the exact normal PPT template-selection UX. The canonical ChatGPT picker is now a self-contained interactive HTML artifact rebuilt for every PPT request from the latest GitHub main Deck+Layout indexes, with recommendations, full library, search, Deck/Layout filters, pagination, Free Design, card-click detail modal, up to six exact registered previews, and final selected-id display. artifact_handoff is preparation only; no generation before template evidence. Runtime generator verification passed on HOME-PC.",
+    "history_file": "docs/ai-history/2026-08-25-inline-interactive-html-gallery-authority.md"
   },
   "production": {},
   "source_authority": {
@@ -51,7 +51,10 @@
     "v2_guard_commit": "db53b626de629c1020557d86a1ca5041df695560",
     "v2_workflow_commit": "0834e1fbac0f578108b73e1dd3aef112089d37b2",
     "v2_history_commit": "181d6954cabe3393e0400d652fcd2c5c11fb8ee4",
-    "v2_context_commit": "c7d618731d3c00837cc009657b9826ffccdd3265"
+    "v2_context_commit": "c7d618731d3c00837cc009657b9826ffccdd3265",
+    "inline_html_generator_commit": "0e4499fdac351c625564c591961d99c78a64a036",
+    "inline_html_history_commit": "e78c5cb1bf140f3bab25dc293067b36da28e39bf",
+    "inline_html_latest_handoff_commit": "74d44d9dc58f386ab7afc03206a2cb138bc17039"
   },
   "control": {
     "engine": "FAH",
@@ -192,15 +195,61 @@
       "contract_preserved_sha": "d8c24c26460cded0fe947df75b2e278488fd7641"
     },
     "internal_card_gallery_primary": {
-      "status": "CURRENT",
-      "primary_surface": "CHATGPT_INTERNAL_CARD_GALLERY",
-      "html_gui_role": "AUXILIARY_FALLBACK_ONLY",
+      "status": "SUPERSEDED_BY_INLINE_INTERACTIVE_HTML_AUTHORITY",
+      "primary_surface": "CHATGPT_INLINE_SELF_CONTAINED_INTERACTIVE_HTML",
+      "html_gui_role": "EXTERNAL_BROWSER_AUXILIARY_FALLBACK_ONLY",
       "future_template_growth": "INDEX_DRIVEN",
       "github_actions_used": false
+    },
+    "inline_interactive_html_gallery": {
+      "status": "CURRENT_RUNTIME_VERIFIED",
+      "primary_surface": "CHATGPT_INLINE_SELF_CONTAINED_INTERACTIVE_HTML",
+      "generator": ".claude/skills/ppt-master/scripts/template_gallery_inline_html.py",
+      "catalog_helper": ".claude/skills/ppt-master/scripts/template_catalog.py",
+      "production_source": "GITHUB_MAIN_FAIL_CLOSED",
+      "dynamic_catalog": true,
+      "hard_coded_template_ids": false,
+      "recommendations": true,
+      "full_library": true,
+      "search": true,
+      "deck_layout_filters": true,
+      "pagination": true,
+      "default_page_size": 12,
+      "free_design_separate": true,
+      "detail_preview_max": 6,
+      "registered_svg_data_uri_embedding": true,
+      "package_asset_data_uri_embedding": true,
+      "localhost_required": false,
+      "artifact_handoff_role": "PREPARATION_ONLY",
+      "selection_evidence_required_before_generation": true,
+      "secondary_surface": "CONVERSATION_NATIVE_VISUAL_TWO_STAGE",
+      "auxiliary_surface": "EXTERNAL_LOCAL_BROWSER_HTML",
+      "runtime_validation": {
+        "result": "PASS",
+        "generated_file_bytes": 478079,
+        "registered_templates_snapshot": 11,
+        "decks_snapshot": 4,
+        "layouts_snapshot": 7,
+        "preview_min": 4,
+        "preview_max": 6,
+        "all_have_preview": true,
+        "self_contained": true,
+        "embedded_svg_data_uris": 58,
+        "search": true,
+        "filters": true,
+        "pagination": true,
+        "detail_button": true,
+        "free_design": true,
+        "note": "Counts are snapshot facts only; runtime discovery is index-driven and automatically changes as GitHub registrations change."
+      },
+      "github_actions_used": false,
+      "contract_changed": false,
+      "contract_preserved_sha": "d8c24c26460cded0fe947df75b2e278488fd7641"
     }
   },
   "authority": {
     "read_order": [
+      "docs/ai-history/2026-08-25-inline-interactive-html-gallery-authority.md",
       "AI_CONTEXT.md",
       "AI_STATE.json",
       "PPT_REQUEST_GUARD.md",
@@ -237,9 +286,14 @@
     "Static images must never be represented as clickable template selection UI; use template_gallery_unified.py when actual clickable cards/buttons are required.",
     "Broken Korean glyphs are an invalid preview; use verified Korean fonts or safe English sample tokens inside raster previews with Korean labels outside.",
     "Template Selection V2 is runtime-validated end to end on HOME-PC; use the index-driven Deck+Layout catalog, 10-candidate Stage-1 shortlist when available, Stage-2 detail review, final confirmation, and fail-closed evidence path.",
-    "For FriendY new-PPT requests, the ChatGPT internal card-style gallery is the primary and canonical template-selection surface; external HTML/GUI is auxiliary fallback only."
+    "For FriendY new-PPT requests, the ChatGPT internal card-style gallery is the primary and canonical template-selection surface; external HTML/GUI is auxiliary fallback only.",
+    "A host-required artifact_handoff/presentation-preparation call is preparation only and never authorizes research, deck initialization, slide authoring, or PPTX generation.",
+    "The canonical ChatGPT template-selection surface is a self-contained interactive HTML artifact rendered in the current conversation and generated by template_gallery_inline_html.py from the latest GitHub main Deck+Layout indexes.",
+    "Every new PPT request rebuilds the template gallery from GitHub; template ids/counts must not be hard-coded and new/updated/removed registered templates automatically change the next gallery.",
+    "The inline gallery must provide recommendations, the complete current library, search, Deck/Layout filters, pagination for large catalogs, Free Design, card detail modal with up to six exact registered previews, and final selected-id display.",
+    "External/local browser HTML is auxiliary last fallback only; Markdown image lists and static PNGs are invalid substitutes for the approved inline interactive HTML gallery."
   ],
-  "next_priority": "Normal operation: use the runtime-validated V2 path with the ChatGPT internal card-style gallery as the primary selection UI. External HTML/GUI is auxiliary fallback only. Future Deck/Layout registrations enter automatically through indexes; show 10 Stage-1 candidates when 10+ exist, then up to 6 detail previews, final confirmation, evidence, new_deck_init, and downstream gates.",
+  "next_priority": "Normal operation: for each FriendY new PPT request, perform host artifact preparation only if required, evaluate FAH, rebuild the self-contained interactive HTML gallery from latest GitHub main, surface it inside the current ChatGPT conversation, stop at WAIT_USER_ACTION until the user selects and returns the template id, record confirmed template evidence, and only then research/generate/QA/export PPTX.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",
