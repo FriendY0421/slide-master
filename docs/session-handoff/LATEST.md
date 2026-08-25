@@ -1,8 +1,42 @@
 # Latest project handoff
 
-Updated checkpoint: 2026-08-25 12:22 KST
+Updated checkpoint: 2026-08-25 17:13 KST
 
-## NEWEST CHECKPOINT — INTERNAL CARD GALLERY PRIMARY
+## NEWEST CHECKPOINT — INLINE INTERACTIVE HTML GALLERY CANONICAL
+
+FriendY supplied the previously working `preview(1).html` and confirmed that this interaction model is the exact desired normal PPT template-selection experience.
+
+The canonical ChatGPT selection surface is now:
+
+**self-contained interactive HTML artifact rendered inside the current conversation**
+
+Required user-visible flow:
+
+`PPT request → artifact_handoff preparation if host-required → FAH WAIT_USER_ACTION → latest GitHub catalog → inline HTML gallery → card click → up to 6 real detail examples → 이 템플릿 선택 → selected id shown → user returns id in chat → template_selection.json → generation/QA/PPTX`
+
+Durable rules:
+
+- `artifact_handoff` is preparation only and never generation permission.
+- `.claude/skills/ppt-master/scripts/template_gallery_inline_html.py` is the canonical primary picker for ChatGPT.
+- Production gallery builds use `--source github`; every new PPT request refreshes from current `FriendY0421/slide-master` `main`.
+- Deck/Layout discovery remains index-driven through `template_catalog.py`; no current ids/counts are hard-coded.
+- New, updated, or removed registered templates automatically change the next generated gallery.
+- The self-contained HTML embeds real registered SVG previews and package-local assets as data URIs; no localhost server is required.
+- Recommended templates are shown separately but never auto-selected.
+- The complete current registered library remains accessible.
+- Large libraries use search + Deck/Layout filters + pagination; default is 12 cards/page.
+- Card click opens an in-page dialog with up to 6 real registered examples from the exact workspace.
+- The final UI action is `이 템플릿 선택`; the selected name/id is shown and returned to chat by the user.
+- Only after that id returns may `record_template_choice_v2.py --confirmed` create evidence and `new_deck_init.py` proceed.
+- External/local browser HTML (`template_gallery_unified.py`) is auxiliary last fallback only.
+- Conversation-native static/visual two-stage display is secondary fallback only when the inline HTML artifact cannot render interactively.
+- Markdown `<img>` lists and static PNGs are invalid substitutes for the approved gallery.
+
+Durable history: `docs/ai-history/2026-08-25-inline-interactive-html-gallery-authority.md`
+
+---
+
+## PREVIOUS CHECKPOINT — INTERNAL CARD GALLERY PRIMARY
 
 - ChatGPT internal card-style template gallery is the **primary and canonical** selection surface.
 - External/local HTML/GUI gallery is **auxiliary fallback only** and must not become the normal first-choice path merely because it has richer click controls.
@@ -54,7 +88,7 @@ V2 is now the canonical FriendY new-PPT template-selection architecture.
 - No current template ids/counts are hard-coded into discovery logic.
 - New Deck/Layout registrations automatically become discoverable through their normal index.
 - Collision-safe keys use `deck:<id>` / `layout:<id>`.
-- At this checkpoint the repository happens to contain 4 Decks + 7 Layouts = 11 registered selectable templates, but that count is informational only and is not encoded into V2 behavior.
+- At this checkpoint the repository happened to contain 4 Decks + 7 Layouts = 11 registered selectable templates, but that count was informational only and is not encoded into V2 behavior.
 
 ### ChatGPT two-stage flow
 
@@ -65,10 +99,12 @@ V2 is now the canonical FriendY new-PPT template-selection architecture.
 5. Only after the user sees those examples and explicitly confirms may `record_template_choice_v2.py --confirmed` write selection evidence.
 6. Then `new_deck_init.py`, `template_gate.py`, and guarded `svg_to_pptx.py` continue the normal fail-closed pipeline.
 
+This previous conversational two-stage flow is now the **secondary fallback** when the canonical inline interactive HTML artifact cannot render.
+
 ### Clickable UI
 
-- `.claude/skills/ppt-master/scripts/template_gallery_unified.py` is the canonical HTML/GUI picker when actual clickable cards/buttons are wanted or reliable chat rendering is unavailable.
-- It uses the same unified Deck+Layout catalog, shows the 10-candidate shortlist, allows access to the full registered library, opens up to 6 real detail previews, and records final confirmation.
+- `.claude/skills/ppt-master/scripts/template_gallery_unified.py` remains the external/local browser picker for recovery/fallback.
+- It uses the same unified Deck+Layout catalog, exposes the registered library, opens up to 6 real detail examples, and records final confirmation.
 - A static image must never be described or treated as clickable UI.
 - Legacy Deck-only HTML/chat V1 paths remain rollback/compatibility paths only and are not FriendY new-PPT execution authority.
 
@@ -81,17 +117,12 @@ V2 is now the canonical FriendY new-PPT template-selection architecture.
 
 ### Control-plane status
 
-- `PPT_REQUEST_GUARD.md` and `workflows/template-selection.md` now point to V2.
-- `AI_CONTEXT.md` and `AI_STATE.json` record V2 as the current authority.
+- `PPT_REQUEST_GUARD.md` and `workflows/template-selection.md` now point to the current selection authority.
+- `AI_CONTEXT.md` records the current authority.
 - The accepted `.fah/execution-contract.json` remains intentionally unchanged: v1.0 / blob SHA `d8c24c26460cded0fe947df75b2e278488fd7641` / FAH runtime @45 `CONTRACT_CURRENT`.
 - GitHub Actions were not used.
-- HOME-PC ping passed; command-based runtime execution is not claimed because subsequent terminal/file-search calls were intermittently unresponsive and were not repeatedly forced.
 
 Durable history: `docs/ai-history/2026-08-25-template-selection-v2-scalable.md`
-
-Expected user-visible flow:
-
-`PPT request → FAH gate → unified live Deck+Layout catalog → 10 real Stage-1 previews when available → tentative choice → up to 6 real detail examples → final confirmation → template_selection.json → research/generation → QA → PPTX`
 
 ---
 
@@ -108,7 +139,7 @@ The durable rule remains active:
 - approximated/recreated thumbnails are forbidden;
 - selection evidence and downstream fail-closed guards remain mandatory.
 
-This checkpoint is extended/superseded by V2 where it conflicts with Deck-only discovery or single-stage selection.
+This checkpoint is extended/superseded by the current inline interactive HTML authority where it conflicts.
 
 ---
 
@@ -116,7 +147,7 @@ This checkpoint is extended/superseded by V2 where it conflicts with Deck-only d
 
 A new PPT request correctly reached the FAH `TEMPLATE_SELECTION` gate but did not show the chooser inside ChatGPT. Investigation confirmed that FAH runtime @45 and the execution contract were healthy. The defect was the host-specific selection surface.
 
-The durable intent remains active: ChatGPT uses the conversation as the first visual surface, while true clickable card/button UI uses the unified HTML/GUI path when required. Legacy V1 helper names from this checkpoint are superseded by V2 for new FriendY PPT requests.
+The durable intent remains active: ChatGPT uses the conversation as the first selection surface. The current implementation of that intent is the self-contained inline interactive HTML artifact.
 
 ---
 
@@ -132,9 +163,10 @@ The durable intent remains active: ChatGPT uses the conversation as the first vi
 - deployment capability for Slide Master: none
 - auto deploy: `N`
 - canonical template catalog: `template_catalog.py`
-- canonical chat manifest: `template_gallery_chat_manifest_v2.py`
+- canonical ChatGPT interactive picker: `template_gallery_inline_html.py`
 - canonical final recorder: `record_template_choice_v2.py`
-- canonical clickable picker: `template_gallery_unified.py`
+- secondary conversational fallback: `template_gallery_chat_manifest_v2.py`
+- auxiliary external/local browser fallback: `template_gallery_unified.py`
 
 ## GitHub Actions policy
 
