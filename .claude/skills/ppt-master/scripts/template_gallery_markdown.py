@@ -126,14 +126,14 @@ def check_gallery(source: str, output_path: Path) -> list[str]:
     for entry in catalog.values():
         if f"`{entry['key']}`" not in text:
             errors.append(f"missing selection id: {entry['key']}")
-        previews = catalog_core.preview_items(entry, ref, limit=1)
+        previews = catalog_core.preview_items(entry, ref, limit=6)
         if not previews:
             errors.append(f"missing registered preview: {entry['key']}")
             continue
-        representative, _ = previews[0]
-        link = _image_link(output_path, representative)
-        if link not in text:
-            errors.append(f"missing representative preview link: {entry['key']} -> {link}")
+        for preview_path, _ in previews:
+            link = _image_link(output_path, preview_path)
+            if link not in text:
+                errors.append(f"missing registered preview link: {entry['key']} -> {link}")
     if "`free`" not in text:
         errors.append("missing Free Design selection id")
     return errors
