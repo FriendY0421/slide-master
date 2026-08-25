@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "initial_state": "WAIT_TEMPLATE_DISPLAY",
+  "states": {
+    "WAIT_TEMPLATE_DISPLAY": {
+      "allowed": ["catalog_refresh", "recommend_templates", "show_stable_gallery"]
+    },
+    "WAIT_TEMPLATE_SELECTION": {
+      "allowed": ["wait_for_user_choice", "show_template_details", "show_stable_gallery"]
+    },
+    "TEMPLATE_CONFIRMED": {
+      "allowed": ["record_selection", "initialize_project", "research", "compose_content"]
+    },
+    "GENERATING": {
+      "allowed": ["author_slides", "export_pptx"]
+    },
+    "QA": {
+      "allowed": ["verify_deck", "render_contact_sheet", "fix_generation_errors"]
+    },
+    "COMPLETE": {
+      "allowed": ["deliver_pptx"]
+    }
+  },
+  "transitions": [
+    {
+      "from": "WAIT_TEMPLATE_DISPLAY",
+      "to": "WAIT_TEMPLATE_SELECTION",
+      "condition": "stable visual gallery link or verifiable registered previews were provided"
+    },
+    {
+      "from": "WAIT_TEMPLATE_SELECTION",
+      "to": "TEMPLATE_CONFIRMED",
+      "condition": "user explicitly returned deck:<id>, layout:<id>, or free"
+    },
+    {
+      "from": "TEMPLATE_CONFIRMED",
+      "to": "GENERATING",
+      "condition": "template_selection.json is valid"
+    },
+    {
+      "from": "GENERATING",
+      "to": "QA",
+      "condition": "PPTX export completed"
+    },
+    {
+      "from": "QA",
+      "to": "COMPLETE",
+      "condition": "verify_deck.py passes and final render sanity scan is acceptable"
+    }
+  ],
+  "hard_stops": [
+    "No template selection evidence",
+    "Invented template or preview",
+    "Claimed visible UI without verifiable output",
+    "Attempted generation while waiting for template choice"
+  ]
+}
