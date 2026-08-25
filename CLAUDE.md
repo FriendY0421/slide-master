@@ -8,14 +8,18 @@ This file is the project entry point for Claude Code. The ppt-master skill lives
 
 For **every presentation request**, read [`PPT_REQUEST_GUARD.md`](PPT_REQUEST_GUARD.md) before routing.
 For a new deck, the guard is fail-closed: do not begin research, project initialization, SVG authoring,
-or PPTX export until the user has explicitly selected a registered template or Free Design through the
-context-aware HTML/GUI gallery, or has already explicitly named a valid registered template. The result
-must be recorded as `template_selection.json`. Missing selection evidence is an execution failure.
+or PPTX export until the user has explicitly selected a registered template or Free Design, or has
+already explicitly named a valid registered template. On a conversational host with visual rendering,
+the real registered template previews must be shown **inside the current conversation first**. External
+HTML/GUI is fallback only when the host cannot render those previews in conversation. The result must
+be recorded as `template_selection.json`. Missing selection evidence is an execution failure.
 
-The normal new-deck entry is:
+The normal new-deck entry on a conversational host is:
 
-`PPT request → PPT_REQUEST_GUARD.md → routing.md → template_gallery_context.py → user choice → new_deck_init.py → selected owner → export gate`
+`PPT request → PPT_REQUEST_GUARD.md → routing.md → template_gallery_chat_manifest.py/equivalent live catalog read → in-conversation real previews → user choice → record_template_choice.py → new_deck_init.py → selected owner → export gate`
 
+When in-conversation visual rendering is technically unavailable, replace only the gallery surface with
+`template_gallery_context.py` HTML/GUI fallback; all selection/evidence requirements remain the same.
 The gallery groups the complete registered catalog by use category (report, education, notice,
 presentation, proposal, data, brand/story, product/service, etc.) and recommends only genuinely relevant
 templates based on the user's actual purpose/context, up to 10. Recommendations never auto-select.
