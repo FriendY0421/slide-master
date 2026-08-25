@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-25T00:13:47+09:00",
+  "updated_at_kst": "2026-08-25T10:10:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-EXECUTION-CONTRACT-RUNTIME45-ACCEPTED-20260825",
-    "status": "EXECUTION_CONTRACT_RUNTIME45_MONITOR_ACCEPTED",
-    "mode": "FAH_EXECUTION_CONTRACT_PRODUCTION_ACCEPTANCE",
+    "work_id": "SLIDE-MASTER-PPT-ENTRY-ROUTING-HARDENING-20260825",
+    "status": "PPT_ENTRY_ROUTING_HARDENED",
+    "mode": "FAH_ENTRY_ROUTING_HARDENING",
     "actor": "ChatGPT",
-    "summary": "FAH Execution Contract is deployed on the existing FAH Web App at runtime @45. The natural FAH monitor at 2026-08-24 23:33:32 KST classified SLIDE_MASTER as HEALTHY / ACCEPTED_AUTHORITY_CURRENT with EXECUTION_CONTRACT capability and CONTRACT_CURRENT, alertWorthy=false. Contract SHA/version exactly match durable AI_STATE. Existing template_gate/new_deck_init/svg_to_pptx fail-closed guards remain the final local enforcement layer. Owner-only Web POST smoke testing remains optional because the current remote-tool security layer blocks credential-bearing HTTP execution; this is not a runtime blocker and does not justify another FAH runtime version.",
-    "history_file": "docs/ai-history/2026-08-25-execution-contract-runtime45-accepted.md"
+    "summary": "Hardened the global entry route for FriendY presentation creation requests after a ChatGPT request entered upstream byungjunjang/slide-master before evaluating the FriendY FAH gate. New PPT requests now explicitly lock to FriendY0421/slide-master, evaluate the FAH Execution Contract before presentation work, and stop for the live template-selection handshake when evidence is missing. The accepted .fah/execution-contract.json v1.0 was intentionally not changed, preserving FAH runtime @45 CONTRACT_CURRENT compatibility.",
+    "history_file": "docs/ai-history/2026-08-25-ppt-entry-routing-hardening.md"
   },
   "production": {},
   "source_authority": {
@@ -32,7 +32,10 @@
     "execution_contract_pilot_merge": "7ea98e4696703c8d864237caf440df5a89376cd8",
     "execution_contract_blob_sha": "d8c24c26460cded0fe947df75b2e278488fd7641",
     "fah_execution_contract_runtime": "@45",
-    "fah_execution_contract_source_sha": "584412f8307cd9675a78f384684bee1152a5c1fe"
+    "fah_execution_contract_source_sha": "584412f8307cd9675a78f384684bee1152a5c1fe",
+    "ppt_entry_history_commit": "01f67f38319e89d6139b0bff5addfd1b8ab60d8e",
+    "ppt_entry_guard_commit": "b03c5d7d3e50d1b61d3d7fd5986802f00368f129",
+    "ppt_entry_context_commit": "cbf327105c9177039bf374f7953eaade9b69be5e"
   },
   "control": {
     "engine": "FAH",
@@ -78,13 +81,26 @@
       "auto_deploy_changed": false,
       "github_actions_used": false,
       "rollback_needed": false
+    },
+    "ppt_entry_routing_hardening": {
+      "status": "CURRENT",
+      "reason": "Prevent FriendY PPT requests from entering upstream or generic presentation execution before FAH evaluation.",
+      "canonical_repository": "FriendY0421/slide-master",
+      "forbidden_execution_authority": "byungjunjang/slide-master",
+      "first_gate": "FAH_EXECUTION_CONTRACT",
+      "new_deck_required_gate": "TEMPLATE_SELECTION",
+      "contract_changed": false,
+      "contract_preserved_sha": "d8c24c26460cded0fe947df75b2e278488fd7641",
+      "github_actions_used": false
     }
   },
   "authority": {
     "read_order": [
       "AI_CONTEXT.md",
       "AI_STATE.json",
+      "PPT_REQUEST_GUARD.md",
       "docs/session-handoff/LATEST.md",
+      "docs/ai-history/2026-08-25-ppt-entry-routing-hardening.md",
       "docs/ai-history/2026-08-24-0251-slide-master-authority-resync.md",
       ".fah/execution-contract.json",
       "docs/ai-history/2026-08-24-execution-contract-pilot.md",
@@ -102,9 +118,11 @@
     "Unknown or conflicting authority fails closed and must not be auto-rebaselined.",
     "Every meaningful ChatGPT, Codex, Claude, automation or other tool modification must update durable latest state/history/handoff before completion so later agents share the exact modification state.",
     "Before meaningful project execution, evaluate the declared FAH execution contract; decisions other than ALLOW or EXEMPT must not proceed.",
-    "Project-local fail-closed guards remain mandatory even when the FAH central contract returns ALLOW or EXEMPT."
+    "Project-local fail-closed guards remain mandatory even when the FAH central contract returns ALLOW or EXEMPT.",
+    "Every FriendY new-PPT request must first bind to canonical repository FriendY0421/slide-master; upstream byungjunjang/slide-master or generic presentation generators must not become execution authority before FAH evaluation.",
+    "For CREATE_PRESENTATION, missing valid TEMPLATE_SELECTION evidence is a blocking user-interaction state; show the live template gallery and wait for explicit user selection before research or generation."
   ],
-  "next_priority": "No blocking Execution Contract rollout action remains. Use the FAH contract and local Slide Master guards in normal work. If an authorized non-secret-leaking transport becomes available, an owner-only Web POST smoke test may be performed without creating a new FAH runtime version.",
+  "next_priority": "Normal operation: on every FriendY new presentation request, use the hardened canonical entry route, evaluate FAH first, require the live template-selection handshake, then generate and verify the deck. No FAH runtime deployment or contract SHA change is required for this routing hardening.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",
