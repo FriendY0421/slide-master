@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-25T10:56:00+09:00",
+  "updated_at_kst": "2026-08-25T11:15:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-CHAT-VISUAL-RENDER-FAIL-CLOSED-20260825",
-    "status": "CHAT_VISUAL_RENDER_FAIL_CLOSED",
-    "mode": "CHAT_FIRST_TEMPLATE_SELECTION",
+    "work_id": "SLIDE-MASTER-TEMPLATE-SELECTION-V2-SCALABLE-20260825",
+    "status": "TEMPLATE_SELECTION_V2_SCALABLE",
+    "mode": "INDEX_DRIVEN_TWO_STAGE_TEMPLATE_SELECTION",
     "actor": "ChatGPT",
-    "summary": "Closed the remaining inconsistency after a PPT request still produced template names/numbers instead of visible template previews. On conversational hosts with visual rendering capability, the TEMPLATE_SELECTION prompt is now incomplete unless at least one actual registered Slide Master preview is visibly rendered for every registered template offered. Names-only/prose-only selection prompts are explicit failures; inline rendering must retry once before external HTML fallback. The accepted FAH execution contract remains unchanged at runtime @45.",
-    "history_file": "docs/ai-history/2026-08-25-chat-template-visual-render-fail-closed.md"
+    "summary": "Replaced the incomplete Deck-only/static-image selection approach with a scalable V2 architecture. The canonical catalog now merges registered Deck and Layout indexes without hard-coded template ids. ChatGPT Stage 1 shows up to 10 real registered candidates when available, Stage 2 shows up to six real examples for the tentative choice, and final evidence can be recorded only after explicit confirmation. A unified HTML/GUI picker provides actual clickable cards/details when required. Korean preview safety forbids broken glyph output. The accepted FAH execution contract remains unchanged at runtime @45.",
+    "history_file": "docs/ai-history/2026-08-25-template-selection-v2-scalable.md"
   },
   "production": {},
   "source_authority": {
@@ -43,7 +43,15 @@
     "chat_inline_history_commit": "4ee07cd80e4f22336ff0e2c59f939b0f88b1b3d1",
     "visual_render_guard_commit": "6c9be702dd4bc68f4a5206ebcd00fc929fadc0ba",
     "visual_render_handoff_commit": "588590bbaaeb669edbaad195e8e6b75efbafecdf",
-    "visual_render_history_commit": "1ad97544f43f17d31e55e484679d05a9caca795e"
+    "visual_render_history_commit": "1ad97544f43f17d31e55e484679d05a9caca795e",
+    "v2_catalog_commit": "e5724176fca060a9413bffb1d129625aa9df2430",
+    "v2_chat_manifest_commit": "3728c31546612a972cea00136b7e4cbaae64a034",
+    "v2_selection_recorder_commit": "f44fbb20dcacea7617ac7707e823a51baf3acf7c",
+    "v2_html_gallery_commit": "a5c9e2aeff924cb98c7d955cc209a3862901c2fa",
+    "v2_guard_commit": "db53b626de629c1020557d86a1ca5041df695560",
+    "v2_workflow_commit": "0834e1fbac0f578108b73e1dd3aef112089d37b2",
+    "v2_history_commit": "181d6954cabe3393e0400d652fcd2c5c11fb8ee4",
+    "v2_context_commit": "c7d618731d3c00837cc009657b9826ffccdd3265"
   },
   "control": {
     "engine": "FAH",
@@ -102,8 +110,8 @@
       "github_actions_used": false
     },
     "chat_inline_template_gallery": {
-      "status": "CURRENT",
-      "reason": "Restore the previously working user experience where template previews and selection occur directly inside the ChatGPT conversation.",
+      "status": "SUPERSEDED_BY_V2",
+      "reason": "V1 established chat-first intent but remained Deck-only and did not enforce the two-stage detail confirmation required for reliable UX.",
       "primary_surface": "CONVERSATION_INLINE_VISUAL_GALLERY",
       "secondary_surface": "EXTERNAL_HTML_GUI_FALLBACK",
       "tertiary_surface": "PLAIN_TEXT_LAST_RESORT",
@@ -116,8 +124,8 @@
       "github_actions_used": false
     },
     "chat_visual_render_fail_closed": {
-      "status": "CURRENT",
-      "reason": "Prevent text-only template lists from being treated as a completed in-chat gallery.",
+      "status": "CURRENT_AND_EXTENDED_BY_V2",
+      "reason": "Prevent text-only or visually invalid template lists from being treated as a completed gallery.",
       "visual_preview_per_offered_template_required": true,
       "text_only_selection_prompt_valid": false,
       "prose_only_selection_prompt_valid": false,
@@ -128,6 +136,39 @@
       "contract_changed": false,
       "contract_preserved_sha": "d8c24c26460cded0fe947df75b2e278488fd7641",
       "github_actions_used": false
+    },
+    "template_selection_v2_scalable": {
+      "status": "CURRENT",
+      "reason": "Make template selection deterministic, scalable, future-proof, and faithful to the previously desired two-stage experience.",
+      "catalog_helper": ".claude/skills/ppt-master/scripts/template_catalog.py",
+      "chat_manifest": ".claude/skills/ppt-master/scripts/template_gallery_chat_manifest_v2.py",
+      "final_recorder": ".claude/skills/ppt-master/scripts/record_template_choice_v2.py",
+      "clickable_html_gallery": ".claude/skills/ppt-master/scripts/template_gallery_unified.py",
+      "catalog_sources": [
+        ".claude/skills/ppt-master/templates/decks/decks_index.json",
+        ".claude/skills/ppt-master/templates/layouts/layouts_index.json"
+      ],
+      "hard_coded_template_ids": false,
+      "selection_key_namespace": ["deck:<id>", "layout:<id>"],
+      "shortlist_target_when_available": 10,
+      "free_design_separate": true,
+      "detail_preview_max": 6,
+      "stage1_choice_final": false,
+      "final_confirmation_required": true,
+      "broken_korean_glyphs_allowed": false,
+      "static_image_may_claim_clickable_ui": false,
+      "legacy_v1_execution_authority": false,
+      "current_registered_fact_at_update": {
+        "decks": 4,
+        "layouts": 7,
+        "total": 11,
+        "note": "Informational only; V2 logic does not encode this count."
+      },
+      "home_pc_ping": "PASS",
+      "home_pc_runtime_test": "NOT_CLAIMED_TOOL_RESPONSIVENESS_LIMIT",
+      "github_actions_used": false,
+      "contract_changed": false,
+      "contract_preserved_sha": "d8c24c26460cded0fe947df75b2e278488fd7641"
     }
   },
   "authority": {
@@ -136,6 +177,7 @@
       "AI_STATE.json",
       "PPT_REQUEST_GUARD.md",
       "docs/session-handoff/LATEST.md",
+      "docs/ai-history/2026-08-25-template-selection-v2-scalable.md",
       "docs/ai-history/2026-08-25-chat-template-visual-render-fail-closed.md",
       "docs/ai-history/2026-08-25-chat-inline-template-gallery.md",
       "docs/ai-history/2026-08-25-ppt-entry-routing-hardening.md",
@@ -158,11 +200,14 @@
     "Before meaningful project execution, evaluate the declared FAH execution contract; decisions other than ALLOW or EXEMPT must not proceed.",
     "Project-local fail-closed guards remain mandatory even when the FAH central contract returns ALLOW or EXEMPT.",
     "Every FriendY new-PPT request must first bind to canonical repository FriendY0421/slide-master; upstream byungjunjang/slide-master or generic presentation generators must not become execution authority before FAH evaluation.",
-    "For CREATE_PRESENTATION, missing valid TEMPLATE_SELECTION evidence is a blocking user-interaction state; show the live template gallery and wait for explicit user selection before research or generation.",
-    "On ChatGPT and other conversational hosts with visual rendering capability, the live template gallery must be rendered inside the current conversation using the actual registered previews; external/local HTML GUI is fallback only when inline visual rendering is unavailable.",
-    "On a visual-capable conversational host, template names/numbers or prose descriptions without visible actual registered previews are an invalid template-selection surface and must fail closed rather than ask for a choice."
+    "For CREATE_PRESENTATION, missing valid TEMPLATE_SELECTION evidence is a blocking user-interaction state and generation must not start.",
+    "Template discovery is index-driven through template_catalog.py and must automatically include newly registered Decks and Layouts without hard-coded ids.",
+    "On ChatGPT, when at least ten registered templates exist, Stage 1 must visibly show ten real registered candidates and Free Design separately.",
+    "A Stage-1 template choice is tentative; up to six real detail examples must be shown before final confirmation and selection evidence.",
+    "Static images must never be represented as clickable template selection UI; use template_gallery_unified.py when actual clickable cards/buttons are required.",
+    "Broken Korean glyphs are an invalid preview; use verified Korean fonts or safe English sample tokens inside raster previews with Korean labels outside."
   ],
-  "next_priority": "Normal operation: on every FriendY new presentation request, bind to FriendY0421/slide-master, evaluate FAH first, visibly render at least one actual registered preview for every registered template offered inside the conversation, then wait for explicit selection and record template_selection.json evidence. Text-only lists are invalid. Retry inline visual rendering once before external HTML fallback. Then generate and verify the deck. No FAH runtime deployment or contract SHA change is required for this correction.",
+  "next_priority": "Use Template Selection V2 for the next actual PPT request as the end-to-end acceptance test: unified index-driven catalog, ten real Stage-1 candidates when available, up to six Stage-2 detail examples, final confirmation, then selection evidence and generation. Preserve the FAH @45 contract and downstream fail-closed guards. Do not claim the legacy Deck-only V1 gallery as canonical.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",
