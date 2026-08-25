@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a stable GitHub-rendered visual template catalog."""
+"""Generate or validate a stable GitHub-rendered visual template catalog."""
 
 from __future__ import annotations
 
@@ -116,6 +116,29 @@ def build_markdown(source: str, output_path: Path) -> str:
     return "\n".join(lines)
 
 
+def check_gallery(source: str, output_path: Path) -> list[str]:
+    if not output_path.is_file():
+        return [f"stable gallery is missing: {output_path}"]
+    ref, _ = legacy._resolve_source(source)
+    catalog = catalog_core.load_catalog(ref)
+    text = output_path.read_text(encoding="utf-8")
+    errors: list[str] = []
+    for entry in catalog.values():
+        if f"`{entry['key']}`" not in text:
+            errors.append(f"missing selection id: {entry['key']}")
+        previews = catalog_core.preview_items(entry, ref, limit=1)
+        if not previews:
+            errors.append(f"missing registered preview: {entry['key']}")
+            continue
+        representative, _ = previews[0]
+        link = _image_link(output_path, representative)
+        if link not in text:
+            errors.append(f"missing representative preview link: {entry['key']} -> {link}")
+    if "`free`" not in text:
+        errors.append("missing Free Design selection id")
+    return errors
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Generate the stable Slide Master visual gallery")
     parser.add_argument("--source", choices=("auto", "github", "local"), default="local")
@@ -126,18 +149,17 @@ def main(argv: list[str] | None = None) -> int:
     output_path = args.output
     if not output_path.is_absolute():
         output_path = (REPO_ROOT / output_path).resolve()
-    payload = build_markdown(args.source, output_path)
 
     if args.check:
-        if not output_path.is_file():
-            print(f"ERROR: stable gallery is missing: {output_path}")
-            return 2
-        if output_path.read_text(encoding="utf-8") != payload:
-            print(f"ERROR: stable gallery is stale: {output_path}")
+        errors = check_gallery(args.source, output_path)
+        if errors:
+            for error in errors:
+                print(f"ERROR: {error}")
             return 2
         print(f"TEMPLATE_GALLERY_OK={output_path}")
         return 0
 
+    payload = build_markdown(args.source, output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(payload, encoding="utf-8")
     print(f"TEMPLATE_GALLERY_WRITTEN={output_path}")
