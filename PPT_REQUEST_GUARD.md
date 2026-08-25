@@ -7,82 +7,97 @@ This file is the fail-closed authority for every **new presentation deck** reque
 For every FriendY new PPT/presentation/slides request:
 
 1. Bind first to project `SLIDE_MASTER` and repository `FriendY0421/slide-master`.
-2. Evaluate the FAH Execution Contract before research, project initialization, SVG authoring, or PPTX export.
-3. Only `ALLOW` or a documented route `EXEMPT` may proceed. Missing `TEMPLATE_SELECTION` evidence is `WAIT_USER_ACTION` and must stop execution.
-4. Upstream `byungjunjang/slide-master`, generic slide generators, and host-native artifact shortcuts must not bypass this gate.
+2. A host-required `artifact_handoff` / presentation-preparation call may occur first because the ChatGPT host requires it, but that call is **preparation only**. It is not template selection, not FAH `ALLOW`, and never permission to create a PPTX.
+3. Evaluate the FAH Execution Contract before research, project initialization, SVG authoring, or PPTX export.
+4. Missing `TEMPLATE_SELECTION` evidence is `WAIT_USER_ACTION` and must stop generation.
+5. Upstream `byungjunjang/slide-master`, generic slide generators, host-native artifact shortcuts, or a successful `artifact_handoff` call must not bypass this gate.
 
-## Scalable template catalog — no fixed template ids
+**Hard interpretation:** `artifact_handoff = prepare`; valid `template_selection.json = permission to generate`.
 
-Template discovery must be **index-driven**, never hard-coded to today's template names or counts.
+## Scalable live template catalog — never hard-code ids or counts
 
-Canonical runtime catalog:
+Template discovery is **GitHub-index-driven**. The production gallery must be rebuilt for every new PPT request from the latest `FriendY0421/slide-master` `main` state.
+
+Canonical catalog sources:
 
 - `.claude/skills/ppt-master/templates/decks/decks_index.json`
 - `.claude/skills/ppt-master/templates/layouts/layouts_index.json`
 - unified by `.claude/skills/ppt-master/scripts/template_catalog.py`
 
-Adding a new registered Deck or Layout to its normal index must make it discoverable automatically without editing picker code.
+Adding, updating, or removing a registered Deck/Layout in the normal GitHub indexes must automatically change the next generated gallery without picker-code edits.
 
-Selection keys are namespaced to avoid future collisions:
+Selection keys are collision-safe:
 
 - `deck:<id>`
 - `layout:<id>`
 
-Existing bare Deck ids remain backward-compatible only when they resolve unambiguously.
+Existing bare Deck ids remain backward-compatible only when unambiguous.
 
-## ChatGPT canonical flow — TWO STAGES
+## ChatGPT canonical surface — INLINE SELF-CONTAINED INTERACTIVE HTML
 
-On ChatGPT and other conversational hosts, the **internal card-style gallery is the primary and canonical selection surface**. External HTML/GUI is auxiliary fallback only. Do **not** pretend a static image is a clickable picker.
+For ChatGPT, the **primary/canonical template-selection surface is the self-contained interactive HTML artifact rendered inside the conversation body**, matching the user-approved `preview(1).html` interaction pattern.
 
-Use this deterministic flow:
+Generate it with:
 
-### Stage 1 — shortlist
+`template_gallery_inline_html.py --source github --purpose "<actual purpose>" --page-size 12 --output <gallery.html>`
 
-1. Read the unified live catalog using `template_gallery_chat_manifest_v2.py` or equivalent connected-GitHub reads.
-2. Rank templates by the user's actual PPT purpose.
-3. When at least 10 registered templates exist, visibly render **10 real registered template previews** in the conversation. When fewer than 10 exist, render all and state the actual count.
-4. `Free Design` is separate from the 10 registered-template shortlist.
-5. Mark genuinely relevant items as recommended, but never auto-select.
-6. Receive only a **tentative** user choice at this stage.
+`--source github` is the production default so GitHub refresh failure stops the normal path rather than silently showing a stale local catalog.
 
-### Stage 2 — detail review
+The inline HTML must be self-contained: registered SVG previews and package-local assets are embedded as data URIs; no localhost server or external browser is required for the primary path.
 
-1. For the tentative choice, render up to **6 actual registered layout examples** from that exact workspace: cover/title, agenda/section, content, data/KPI, comparison/visual, closing where available.
-2. The user must be able to inspect those real examples before final confirmation.
-3. Ask for final confirmation such as `이걸로 진행`.
-4. Do not create template-selection evidence merely because the Stage-1 number/name was chosen.
+### Required visible behavior
 
-### Stage 3 — evidence
+The inline gallery must provide all of the following in one interactive surface:
 
-After final confirmation only, record the choice with:
+1. Purpose-aware **recommended templates** at the top. Recommendation never auto-selects.
+2. **All currently registered GitHub templates**, not a fixed historical list.
+3. Search across template name, summary and selection id.
+4. Deck/Layout filters.
+5. Automatic pagination when the catalog is large; default is **12 cards per page** and may adapt for usability.
+6. Free Design as a separate explicit option.
+7. Each template card shows a real registered representative preview.
+8. Clicking a card opens an in-page dialog/modal with up to **6 real registered examples** from that exact workspace.
+9. The modal contains **`이 템플릿 선택`** and **`다른 템플릿 보기`** controls.
+10. Final selection displays the selected name/id in the HTML. The user then sends that id back to the chat, which is the explicit handoff for evidence recording.
 
-`record_template_choice_v2.py <deck:id|layout:id|free> --confirmed ...`
+This UI contract is modeled on the user-approved `preview(1).html`: card grid → card click → detail dialog → up to six example layouts → `이 템플릿 선택` → selected id displayed.
 
-Then initialize through `new_deck_init.py --template-selection-result <result.json>`.
+## Selection evidence and generation permission
 
-## Visual-render enforcement — FAIL CLOSED
+A card click is not enough. The HTML's **`이 템플릿 선택`** action is the final UI confirmation. After the selected id is returned in chat, record it through:
 
-The following are explicit failures:
+`record_template_choice_v2.py <deck:id|layout:id|free> --confirmed --purpose "<purpose>" --output <result.json>`
 
-- template names/numbers without real visual previews;
-- fewer than 10 registered candidates when 10+ are available, unless the user explicitly asks for fewer;
-- recreated/approximate thumbnails instead of the registered SVG source;
-- treating a static PNG as a clickable selection widget;
+Then initialize only through:
+
+`new_deck_init.py <project_name> --template-selection-result <result.json>`
+
+Only after this evidence exists may content research/generation begin.
+
+## Fail-closed UI rules
+
+The following are explicit failures and must stop the new-deck pipeline:
+
+- generating PPTX immediately after `artifact_handoff`;
+- showing only template names/numbers;
+- showing a static PNG while calling it an interactive gallery;
+- using Markdown `<img>` links as a substitute for the approved gallery;
+- using a fixed/hard-coded template list that ignores current GitHub indexes;
+- omitting real registered previews;
 - skipping the selected template's detail examples;
-- recording the selection before final Stage-2 confirmation;
-- showing broken Korean glyphs.
+- recording selection before the final HTML selection action is returned to chat;
+- broken Korean glyphs;
+- creating/researching the deck while the user is still choosing a template.
 
-For raster/headless rendering, Korean preview text may be used only when a Korean-capable font is positively available. Otherwise use safe English sample tokens **inside the template preview** and keep Korean names/explanations outside the image. Never show missing-glyph boxes as a valid preview.
+## Fallback hierarchy
 
-## HTML/GUI mode — AUXILIARY ONLY
+Use these surfaces in this order:
 
-External HTML/GUI must never replace the internal card-style gallery as the normal path. Use it only when the current ChatGPT host cannot provide reliable internal gallery rendering, or when a specific fallback/recovery case requires it. When that auxiliary path is needed, use:
+1. **Primary:** self-contained interactive HTML rendered inside the ChatGPT conversation (`template_gallery_inline_html.py`).
+2. **Secondary:** conversation-native visual two-stage gallery only when the host cannot render the inline HTML artifact.
+3. **Auxiliary last fallback:** external/local browser HTML server (`template_gallery_unified.py`) only when the internal conversation surfaces are technically unavailable or a recovery case specifically requires it.
 
-`template_gallery_unified.py`
-
-This unified HTML picker uses the same Deck+Layout catalog, shows the context-ranked shortlist, allows access to the full registered library, opens up to six real detail previews, and records the final confirmed selection.
-
-Do not use the legacy Deck-only HTML picker as the canonical path. Legacy scripts may remain temporarily for rollback/compatibility but are not execution authority for FriendY new-PPT requests.
+External HTML/GUI must never become the normal first-choice route merely because it offers richer browser controls.
 
 ## Fail-closed evidence
 
