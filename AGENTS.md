@@ -10,11 +10,15 @@ below add Codex-side enforcement; they never override the selected owner.
 
 Before any presentation routing or generation work, read [`PPT_REQUEST_GUARD.md`](PPT_REQUEST_GUARD.md).
 For a **new deck**, this guard is fail-closed and overrides any older prose that says to default to
-Free Design or skip template choice. New-deck work may not start research, project initialization,
-SVG authoring, or export until the template-selection handshake is complete. The only valid paths are:
+Free Design, skip template choice, or prefer an external browser over an available conversation UI.
+New-deck work may not start research, project initialization, SVG authoring, or export until the
+template-selection handshake is complete. The valid paths are:
 
 - the user explicitly chose a registered template and the choice was recorded; or
-- `.claude/skills/ppt-master/scripts/template_gallery_context.py` returned `TEMPLATE_SELECTED`; or
+- on a conversational host, the real registered templates were rendered in the current conversation,
+  the user explicitly chose one, and `record_template_choice.py` recorded the evidence; or
+- when in-conversation visual rendering is truly unavailable, `template_gallery_context.py` returned
+  `TEMPLATE_SELECTED`; or
 - a documented direct-PPTX/resume exemption was written to the project gate record.
 
 `template_selection.json` is the machine-readable evidence. Missing evidence is an execution failure,
@@ -50,15 +54,25 @@ a deck from a document/topic/template):
    competing full owners before the answer. For any route that will generate a **new deck** through
    the main SVG family, immediately apply
    [`template-selection.md`](.claude/skills/ppt-master/workflows/template-selection.md) before
-   research/project creation/generation. Unless the user already named a valid registered template,
-   launch `.claude/skills/ppt-master/scripts/template_gallery_context.py`: it refreshes `origin/main`
-   read-only, understands the user's purpose text, groups the live GitHub catalog by use category,
-   shows real SVG previews, and marks only genuinely relevant templates as recommended — up to 10,
-   never filling a quota. Treat this as a **blocking handshake**: do not end the current task/assistant
-   turn after launching the gallery. Wait on the picker process (or poll its result file when the tool
-   host returns early); once `TEMPLATE_SELECTED` arrives, immediately continue the same PPT request
-   with the returned workspace. Never silently default to Free Design. A newly registered user/company
-   deck appears automatically through `decks_index.json` when its category/keyword metadata and preview
+   research/project creation/generation.
+
+   On ChatGPT or another conversational host that can render visuals in the current conversation,
+   use `.claude/skills/ppt-master/scripts/template_gallery_chat_manifest.py` (or equivalent connected
+   GitHub reads) to obtain the live catalog, context ranking, exact workspace paths, and real SVG
+   preview paths. Render the **actual registered previews in the current conversation**, recommend
+   only genuinely relevant templates up to 10 without filling a quota, and wait for the user's
+   explicit in-chat choice. Record that choice with `record_template_choice.py` and continue with the
+   resulting evidence. Never redraw a template approximation and never silently default to Free Design.
+
+   Only when the current host truly cannot render the real registered previews inside the conversation
+   may it launch `.claude/skills/ppt-master/scripts/template_gallery_context.py` as the HTML/GUI
+   fallback. That fallback refreshes `origin/main` read-only, understands the user's purpose text,
+   groups the live GitHub catalog by use category, shows real SVG previews, and marks only genuinely
+   relevant templates as recommended — up to 10. Treat the fallback as the same **blocking handshake**:
+   do not end the current task/assistant turn after launching it. Wait on the picker process (or poll
+   its result file when the tool host returns early); once `TEMPLATE_SELECTED` arrives, immediately
+   continue the same PPT request with the returned workspace. A newly registered user/company deck
+   appears automatically through `decks_index.json` when its category/keyword metadata and preview
    contract are valid. Use `new_deck_init.py --template-selection-result <result.json>` for project init.
 2. **Load the selected owner(s) in full.** The router owns the complete matrix;
    this table is a compact Codex handoff summary:
