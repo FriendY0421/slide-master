@@ -10,15 +10,15 @@ below add Codex-side enforcement; they never override the selected owner.
 
 Before any presentation routing or generation work, read [`PPT_REQUEST_GUARD.md`](PPT_REQUEST_GUARD.md).
 For a **new deck**, this guard is fail-closed and overrides any older prose that says to default to
-Free Design, skip template choice, or prefer an external browser over an available conversation UI.
-New-deck work may not start research, project initialization, SVG authoring, or export until the
-template-selection handshake is complete. The valid paths are:
+Free Design, skip template choice, or require a fragile host-only picker. New-deck work may not start
+research, project initialization, SVG authoring, or export until the template-selection handshake is
+complete. The valid paths are:
 
 - the user explicitly chose a registered template and the choice was recorded; or
-- on a conversational host, the real registered templates were rendered in the current conversation,
-  the user explicitly chose one, and `record_template_choice.py` recorded the evidence; or
-- when in-conversation visual rendering is truly unavailable, `template_gallery_context.py` returned
-  `TEMPLATE_SELECTED`; or
+- the stable GitHub visual catalog was provided, the user explicitly returned a `deck:<id>`,
+  `layout:<id>`, or `free` choice, and `record_template_choice_v2.py` recorded the evidence; or
+- a verified conversation-native visual surface showed actual registered previews, the user explicitly
+  returned a final selection ID, and the same evidence was recorded; or
 - a documented direct-PPTX/resume exemption was written to the project gate record.
 
 `template_selection.json` is the machine-readable evidence. Missing evidence is an execution failure,
@@ -56,26 +56,25 @@ a deck from a document/topic/template):
    [`template-selection.md`](.claude/skills/ppt-master/workflows/template-selection.md) before
    research/project creation/generation.
 
-   On ChatGPT or another conversational host that can render visuals in the current conversation, the **internal card-style gallery is the primary canonical surface** and external HTML/GUI is auxiliary fallback only.
+   On ChatGPT and other conversational hosts, the **stable GitHub-rendered visual catalog is the
+   primary canonical selection surface**:
 
-   On ChatGPT or another conversational host that can render visuals in the current conversation,
-   use `.claude/skills/ppt-master/scripts/template_gallery_chat_manifest.py` (or equivalent connected
-   GitHub reads) to obtain the live catalog, context ranking, exact workspace paths, and real SVG
-   preview paths. Render the **actual registered previews in the current conversation**, recommend
-   only genuinely relevant templates up to 10 without filling a quota, and wait for the user's
-   explicit in-chat choice. Record that choice with `record_template_choice.py` and continue with the
-   resulting evidence. Never redraw a template approximation and never silently default to Free Design.
+   - `docs/template-gallery/README.md` is generated from the live Deck/Layout indexes.
+   - It displays actual registered representative SVG previews and up to six actual detail layouts
+     for each template.
+   - Recommend only genuinely relevant templates in chat, but never auto-select one.
+   - Give the user the stable gallery path/link, wait for an explicit `deck:<id>`, `layout:<id>`, or
+     `free` response, then record it with `record_template_choice_v2.py`.
+   - Never claim that an in-chat gallery, picker, modal, or image was shown unless the current turn
+     produced verifiable visible output.
 
-   Only when the current host truly cannot render the real registered previews inside the conversation
-   may it launch `.claude/skills/ppt-master/scripts/template_gallery_context.py` as the HTML/GUI
-   fallback. That fallback refreshes `origin/main` read-only, understands the user's purpose text,
-   groups the live GitHub catalog by use category, shows real SVG previews, and marks only genuinely
-   relevant templates as recommended — up to 10. Treat the fallback as the same **blocking handshake**:
-   do not end the current task/assistant turn after launching it. Wait on the picker process (or poll
-   its result file when the tool host returns early); once `TEMPLATE_SELECTED` arrives, immediately
-   continue the same PPT request with the returned workspace. A newly registered user/company deck
-   appears automatically through `decks_index.json` when its category/keyword metadata and preview
-   contract are valid. Use `new_deck_init.py --template-selection-result <result.json>` for project init.
+   Host-native visual cards or `template_gallery_inline_html.py` are optional convenience layers only
+   when the current host positively supports and visibly renders them. Failure of those richer surfaces
+   must fall back to the stable GitHub visual catalog, not skip template selection.
+   `template_gallery_unified.py` remains an auxiliary local/external recovery route. Use
+   `new_deck_init.py --template-selection-result <result.json>` only after the user returns the final
+   selection ID.
+
 2. **Load the selected owner(s) in full.** The router owns the complete matrix;
    this table is a compact Codex handoff summary:
 
