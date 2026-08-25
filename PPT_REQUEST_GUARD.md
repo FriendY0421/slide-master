@@ -2,6 +2,18 @@
 
 This file is the shortest fail-closed authority for every **new presentation deck** request. It exists so template selection does not depend on model memory or conversational recall.
 
+## Canonical entry routing — FIRST GATE
+
+For every FriendY presentation creation request, including generic phrases such as `PPT 만들어줘`, `ppt로 만들어줘`, `프레젠테이션 만들어줘`, `슬라이드 만들어줘`, or a request to turn a URL/document/topic into a deck:
+
+1. Bind the task to project `SLIDE_MASTER` and canonical repository `FriendY0421/slide-master` **before** any presentation research, SVG generation, project initialization, or PPTX export.
+2. Do **not** use the upstream `byungjunjang/slide-master` repository as FriendY's execution authority. It may be treated only as external/upstream reference when explicitly needed.
+3. Evaluate the FAH Execution Contract before presentation execution when FAH is available. If FAH evaluation is unavailable, read `.fah/execution-contract.json` directly as the durable fallback.
+4. Only `ALLOW` or the route-specific documented `EXEMPT` decision may proceed. `WAIT_USER_ACTION`, `BLOCK`, missing evaluation, or missing required evidence must stop execution.
+5. A host-native slide/PPT skill, artifact handoff, generic presentation generator, or earlier conversational shortcut must **not** bypass this canonical repository lock or the FAH gate.
+
+This routing rule exists specifically to prevent a new PPT request from entering an upstream/generic generation path before FriendY's FAH-controlled template-selection handshake.
+
 ## Non-negotiable entry sequence
 
 1. Read `workflows/routing.md` and this guard before any new-deck research, project initialization, SVG authoring, or PPTX export.
