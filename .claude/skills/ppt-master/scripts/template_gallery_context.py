@@ -135,6 +135,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Open context-aware categorized Slide Master template gallery")
     parser.add_argument("--source", choices=("auto", "github", "local"), default="auto")
     parser.add_argument("--purpose", nargs="+", default=[])
+    parser.add_argument("--purpose-file", type=Path, default=None, help="UTF-8 text file for purpose/context; preferred on Windows for non-ASCII text")
     parser.add_argument("--recommend", default="", help="Optional additional registered ids; total recommendations remain max 10")
     parser.add_argument("--lang", choices=("ko", "en"), default="ko")
     parser.add_argument("--port", type=int, default=0)
@@ -149,7 +150,7 @@ def main(argv: list[str] | None = None) -> int:
     except Exception as exc:
         print(f"ERROR: {exc}")
         return 2
-    purpose = " ".join(args.purpose).strip()
+    purpose = args.purpose_file.read_text(encoding="utf-8").strip() if args.purpose_file else " ".join(args.purpose).strip()
     entries, auto_rec, inferred = build_entries(catalog, ref, purpose)
     explicit = [x.strip() for x in args.recommend.split(",") if x.strip() and x.strip() in catalog]
     recommended = []

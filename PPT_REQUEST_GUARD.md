@@ -6,8 +6,8 @@ This file is the shortest fail-closed authority for every **new presentation dec
 
 1. Read `workflows/routing.md` and this guard before any new-deck research, project initialization, SVG authoring, or PPTX export.
 2. If the user already explicitly chose a valid registered deck id/workspace, record that choice through `record_template_choice.py`.
-3. Otherwise launch `template_gallery_context.py` in HTML/GUI mode with the user's actual purpose/context text and keep the task alive until it returns `TEMPLATE_SELECTED`.
-4. The HTML gallery shows the complete live registered catalog plus Free Design, grouped by use category.
+3. Otherwise launch `template_gallery_context.py` in HTML/GUI mode with the user's actual purpose/context text and keep the task alive until it returns `TEMPLATE_SELECTED`. If local/remote desktop execution is available, actually execute the launcher; do not substitute a prose list. On Windows or any host where non-ASCII CLI text may be damaged, write the purpose to a UTF-8 file and pass `--purpose-file <path>`.
+4. The HTML gallery shows the complete live registered catalog plus Free Design, grouped by use category. The normal selection-ready catalog target is at least 10 registered templates so the user can compare roughly ten real designs with previews.
 5. Recommend only templates that genuinely fit the user's purpose and context, **up to 10**. Do not fill a quota. Use relative relevance so weak secondary matches are not recommended merely because they share a broad category.
 6. Free Design is valid only when the user explicitly chooses it.
 7. New-deck project initialization must use `new_deck_init.py` with template-selection evidence. Missing selection evidence is a hard failure.

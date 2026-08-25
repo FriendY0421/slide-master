@@ -6,8 +6,23 @@
     "page_count": 13,
     "primary_color": "#1D1D1F",
     "primary_category": "presentation",
-    "categories": ["presentation", "brand_story", "product"],
-    "keywords": ["발표", "프레젠테이션", "제품", "서비스 소개", "브랜드", "스토리", "디자인", "키노트", "비전", "메시지"],
+    "categories": [
+      "presentation",
+      "brand_story",
+      "product"
+    ],
+    "keywords": [
+      "발표",
+      "프레젠테이션",
+      "제품",
+      "서비스 소개",
+      "브랜드",
+      "스토리",
+      "디자인",
+      "키노트",
+      "비전",
+      "메시지"
+    ],
     "defaults": {
       "mode": "showcase",
       "visual_style": "swiss-minimal",
@@ -21,8 +36,22 @@
     "page_count": 4,
     "primary_color": "#4633E3",
     "primary_category": "education",
-    "categories": ["education", "presentation"],
-    "keywords": ["교육", "학습", "강의", "워크숍", "사내교육", "설명", "튜토리얼", "가이드", "교안", "브리핑"],
+    "categories": [
+      "education",
+      "presentation"
+    ],
+    "keywords": [
+      "교육",
+      "학습",
+      "강의",
+      "워크숍",
+      "사내교육",
+      "설명",
+      "튜토리얼",
+      "가이드",
+      "교안",
+      "브리핑"
+    ],
     "defaults": {
       "mode": "instructional",
       "visual_style": "editorial",
@@ -36,8 +65,28 @@
     "page_count": 10,
     "primary_color": "#0F2A4A",
     "primary_category": "report",
-    "categories": ["report", "proposal", "data", "presentation"],
-    "keywords": ["보고", "보고서", "경영", "전략", "분석", "개선", "제안", "기획", "로드맵", "현황", "문제점", "바라는점", "요구사항", "의견"],
+    "categories": [
+      "report",
+      "proposal",
+      "data",
+      "presentation"
+    ],
+    "keywords": [
+      "보고",
+      "보고서",
+      "경영",
+      "전략",
+      "분석",
+      "개선",
+      "제안",
+      "기획",
+      "로드맵",
+      "현황",
+      "문제점",
+      "바라는점",
+      "요구사항",
+      "의견"
+    ],
     "defaults": {
       "mode": "pyramid",
       "visual_style": "swiss-minimal",
@@ -51,8 +100,184 @@
     "page_count": 7,
     "primary_color": "#03C75A",
     "primary_category": "data",
-    "categories": ["data", "report", "presentation"],
-    "keywords": ["실적", "재무", "KPI", "성과", "지표", "분기", "투자", "IR", "데이터", "수치", "매출", "목표"],
+    "categories": [
+      "data",
+      "report",
+      "presentation"
+    ],
+    "keywords": [
+      "실적",
+      "재무",
+      "KPI",
+      "성과",
+      "지표",
+      "분기",
+      "투자",
+      "IR",
+      "데이터",
+      "수치",
+      "매출",
+      "목표"
+    ],
+    "defaults": {
+      "mode": "briefing",
+      "visual_style": "data-journalism",
+      "delivery_purpose": "balanced"
+    }
+  },
+  "executive_teal": {
+    "display_name": "Executive Teal",
+    "summary": "보고·제안용 청록 전략 덱 — 경영진 보고, 개선안, 실행 로드맵",
+    "canvas_format": "ppt169",
+    "page_count": 10,
+    "primary_color": "#0F766E",
+    "primary_category": "report",
+    "categories": [
+      "report",
+      "proposal",
+      "data",
+      "presentation"
+    ],
+    "keywords": [
+      "보고",
+      "경영진",
+      "개선",
+      "전략",
+      "제안",
+      "로드맵",
+      "현황"
+    ],
+    "defaults": {
+      "mode": "pyramid",
+      "visual_style": "swiss-minimal",
+      "delivery_purpose": "text"
+    }
+  },
+  "strategy_burgundy": {
+    "display_name": "Strategy Burgundy",
+    "summary": "버건디 포인트 전략 보고 덱 — 이슈 분석, 의사결정, 실행계획",
+    "canvas_format": "ppt169",
+    "page_count": 10,
+    "primary_color": "#7F1D1D",
+    "primary_category": "report",
+    "categories": [
+      "report",
+      "proposal",
+      "presentation"
+    ],
+    "keywords": [
+      "전략",
+      "분석",
+      "의사결정",
+      "계획",
+      "이슈",
+      "개선안"
+    ],
+    "defaults": {
+      "mode": "pyramid",
+      "visual_style": "swiss-minimal",
+      "delivery_purpose": "text"
+    }
+  },
+  "learning_coral": {
+    "display_name": "Learning Coral",
+    "summary": "코랄 에디토리얼 교육 덱 — 사내교육, 워크숍, 가이드, 설명회",
+    "canvas_format": "ppt169",
+    "page_count": 4,
+    "primary_color": "#E85D5D",
+    "primary_category": "education",
+    "categories": [
+      "education",
+      "presentation"
+    ],
+    "keywords": [
+      "교육",
+      "학습",
+      "워크숍",
+      "가이드",
+      "강의",
+      "설명"
+    ],
+    "defaults": {
+      "mode": "instructional",
+      "visual_style": "editorial",
+      "delivery_purpose": "balanced"
+    }
+  },
+  "data_cobalt": {
+    "display_name": "Data Cobalt",
+    "summary": "코발트 데이터 브리핑 덱 — KPI, 성과, 실적, 수치 중심 보고",
+    "canvas_format": "ppt169",
+    "page_count": 7,
+    "primary_color": "#2563EB",
+    "primary_category": "data",
+    "categories": [
+      "data",
+      "report",
+      "presentation"
+    ],
+    "keywords": [
+      "데이터",
+      "KPI",
+      "실적",
+      "성과",
+      "지표",
+      "목표",
+      "분석"
+    ],
+    "defaults": {
+      "mode": "briefing",
+      "visual_style": "data-journalism",
+      "delivery_purpose": "balanced"
+    }
+  },
+  "premium_sand": {
+    "display_name": "Premium Sand",
+    "summary": "웜 샌드 미니멀 덱 — 브랜드 스토리, 제품·서비스 소개, 프리미엄 발표",
+    "canvas_format": "ppt169",
+    "page_count": 13,
+    "primary_color": "#8B6F47",
+    "primary_category": "presentation",
+    "categories": [
+      "presentation",
+      "brand_story",
+      "product"
+    ],
+    "keywords": [
+      "브랜드",
+      "스토리",
+      "제품",
+      "서비스",
+      "발표",
+      "프리미엄"
+    ],
+    "defaults": {
+      "mode": "showcase",
+      "visual_style": "swiss-minimal",
+      "delivery_purpose": "balanced"
+    }
+  },
+  "corporate_slate": {
+    "display_name": "Corporate Slate",
+    "summary": "슬레이트 기업 보고 덱 — 업무보고, 공지, 현황 공유, 운영 브리핑",
+    "canvas_format": "ppt169",
+    "page_count": 7,
+    "primary_color": "#334155",
+    "primary_category": "report",
+    "categories": [
+      "report",
+      "notice",
+      "presentation",
+      "data"
+    ],
+    "keywords": [
+      "업무보고",
+      "공지",
+      "현황",
+      "운영",
+      "브리핑",
+      "성과"
+    ],
     "defaults": {
       "mode": "briefing",
       "visual_style": "data-journalism",

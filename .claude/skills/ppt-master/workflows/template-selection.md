@@ -41,7 +41,7 @@ python .claude/skills/ppt-master/scripts/template_gallery_context.py \
   --purpose "<the user's actual deck purpose/context>"
 ```
 
-   On Windows, use `python` when `python3` is unavailable. `--recommend` is optional and may add
+   On Windows, use `python` when `python3` is unavailable. For Korean or other non-ASCII purpose text on Windows, prefer a UTF-8 purpose file and `--purpose-file <path>` instead of embedding the purpose in the shell command. `--recommend` is optional and may add
    already-known registered ids, but automatic context ranking is the default and total recommended
    items remain capped at 10.
 3. The picker refreshes `origin/main` through the existing gallery core without checking it out or
@@ -52,7 +52,7 @@ python .claude/skills/ppt-master/scripts/template_gallery_context.py \
    including at least: **보고용**, **학습·교육용**, **공지·안내용**, **발표용**,
    **제안·기획용**, **데이터·실적용**, **브랜드·스토리용**, and
    **제품·서비스 소개용**. Future categories may be added through catalog metadata.
-5. Show **every selection-ready registered deck** plus `Free Design`. Mark only templates with genuine
+5. Show **every selection-ready registered deck** plus `Free Design`. The maintained catalog should normally contain **at least 10** selection-ready registered decks; never hide a smaller catalog behind an invented text-only list. Mark only templates with genuine
    contextual relevance as `Recommended`, up to **10**. This is a ceiling, not a quota: one strong
    match may yield one recommendation; four relevant matches may yield four. Recommendations never
    auto-select. The user still chooses the final visual system.

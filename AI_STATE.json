@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-25T00:13:47+09:00",
+  "updated_at_kst": "2026-08-25T09:18:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-EXECUTION-CONTRACT-RUNTIME45-ACCEPTED-20260825",
-    "status": "EXECUTION_CONTRACT_RUNTIME45_MONITOR_ACCEPTED",
-    "mode": "FAH_EXECUTION_CONTRACT_PRODUCTION_ACCEPTANCE",
+    "work_id": "SLIDE-MASTER-GUI-GALLERY-10-ENFORCEMENT-20260825",
+    "status": "GUI_TEMPLATE_GALLERY_10_READY",
+    "mode": "FAH_EXECUTION_CONTRACT_GALLERY_ENFORCEMENT",
     "actor": "ChatGPT",
-    "summary": "FAH Execution Contract is deployed on the existing FAH Web App at runtime @45. The natural FAH monitor at 2026-08-24 23:33:32 KST classified SLIDE_MASTER as HEALTHY / ACCEPTED_AUTHORITY_CURRENT with EXECUTION_CONTRACT capability and CONTRACT_CURRENT, alertWorthy=false. Contract SHA/version exactly match durable AI_STATE. Existing template_gate/new_deck_init/svg_to_pptx fail-closed guards remain the final local enforcement layer. Owner-only Web POST smoke testing remains optional because the current remote-tool security layer blocks credential-bearing HTTP execution; this is not a runtime blocker and does not justify another FAH runtime version.",
-    "history_file": "docs/ai-history/2026-08-25-execution-contract-runtime45-accepted.md"
+    "summary": "Corrected the PPT entry path so a new deck must execute the context-aware HTML/GUI gallery when a local/desktop host is available. Expanded the live catalog from 4 to 10 registered previewable templates, added UTF-8 purpose-file transport for Windows Korean context, and strengthened Execution Contract v1.1 to require all registered templates + Free Design, up to 10 contextual recommendations, up to 6 detail previews, explicit user selection, and same-task resume into PPT generation.",
+    "history_file": "docs/ai-history/2026-08-25-template-gallery-10-gui-enforcement.md"
   },
   "production": {},
   "source_authority": {
@@ -30,7 +30,7 @@
     "authority_handoff_commit": "5df08da717a2e30c99273af1ff2d7c33f81f59dc",
     "execution_contract_pilot_commit": "6263fed2e3df7e333dda6e05074f9f6e38ff5dd2",
     "execution_contract_pilot_merge": "7ea98e4696703c8d864237caf440df5a89376cd8",
-    "execution_contract_blob_sha": "d8c24c26460cded0fe947df75b2e278488fd7641",
+    "execution_contract_blob_sha": "1006685bd234e4cd8d8db202b4aa8d99aee9e5d9",
     "fah_execution_contract_runtime": "@45",
     "fah_execution_contract_source_sha": "584412f8307cd9675a78f384684bee1152a5c1fe"
   },
@@ -78,6 +78,20 @@
       "auto_deploy_changed": false,
       "github_actions_used": false,
       "rollback_needed": false
+    },
+    "template_gallery_v2": {
+      "status": "GUI_CATALOG_10_ENFORCED",
+      "registered_template_count": 10,
+      "contract_version": "1.1",
+      "contract_sha": "1006685bd234e4cd8d8db202b4aa8d99aee9e5d9",
+      "launcher": ".claude/skills/ppt-master/scripts/template_gallery_context.py",
+      "detail_preview_limit": 6,
+      "recommendation_limit": 10,
+      "same_task_resume": true,
+      "chat_fallback_only_if_gui_unavailable": true,
+      "windows_korean_transport": "UTF8_PURPOSE_FILE",
+      "auto_deploy_changed": false,
+      "github_actions_used": false
     }
   },
   "authority": {
@@ -102,13 +116,16 @@
     "Unknown or conflicting authority fails closed and must not be auto-rebaselined.",
     "Every meaningful ChatGPT, Codex, Claude, automation or other tool modification must update durable latest state/history/handoff before completion so later agents share the exact modification state.",
     "Before meaningful project execution, evaluate the declared FAH execution contract; decisions other than ALLOW or EXEMPT must not proceed.",
-    "Project-local fail-closed guards remain mandatory even when the FAH central contract returns ALLOW or EXEMPT."
+    "Project-local fail-closed guards remain mandatory even when the FAH central contract returns ALLOW or EXEMPT.",
+    "For CREATE_PRESENTATION, execute the actual context-aware HTML/GUI gallery when a local or remote desktop host is available; do not substitute a prose template list.",
+    "The standard Slide Master selection catalog contains at least 10 previewable registered templates plus Free Design; user selection is mandatory and recommendations never auto-select.",
+    "After TEMPLATE_SELECTED evidence returns, resume the same PPT request immediately and initialize through new_deck_init.py; do not end the task at the selection prompt."
   ],
-  "next_priority": "No blocking Execution Contract rollout action remains. Use the FAH contract and local Slide Master guards in normal work. If an authorized non-secret-leaking transport becomes available, an owner-only Web POST smoke test may be performed without creating a new FAH runtime version.",
+  "next_priority": "Use the 10-template HTML/GUI gallery for the next new-deck request and resume generation immediately after explicit selection. No additional rollout work is required unless the GUI launcher itself fails.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
-    "version": "1.0",
-    "sha": "d8c24c26460cded0fe947df75b2e278488fd7641",
+    "version": "1.1",
+    "sha": "1006685bd234e4cd8d8db202b4aa8d99aee9e5d9",
     "status": "CURRENT",
     "central_engine": "FAH",
     "central_runtime": "@45",

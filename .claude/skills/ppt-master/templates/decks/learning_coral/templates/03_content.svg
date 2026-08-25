@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="jangpm-master" data-pptx-master-name="Jangpm" data-pptx-layout="03_content" data-pptx-layout-name="Content">
+  <!-- Jangpm — 03 Content (header/footer shell; body composed by Executor) -->
+
+  <rect id="master-bg" width="1280" height="720" fill="#FAFAF9" data-pptx-layer="master" data-pptx-editable="false"/>
+
+  <rect id="layout-headline-rule" x="56" y="140" width="48" height="2" fill="#E85D5D" data-pptx-layer="layout" data-pptx-editable="false"/>
+
+  <g id="title-slot" data-pptx-placeholder="title" data-pptx-placeholder-bounds="56 62 1168 46">
+    <text id="title-carrier" data-pptx-placeholder-carrier="true" x="56" y="96"
+          font-family="Pretendard, 'Malgun Gothic', sans-serif"
+          font-size="32" font-weight="700"
+          letter-spacing="-0.64"
+          fill="#1A1A1A">{{PAGE_TITLE}}</text>
+  </g>
+
+  <g id="page-number-slot" data-pptx-placeholder="slide-number" data-pptx-placeholder-idx="3" data-pptx-placeholder-bounds="1100 682 124 20">
+    <text id="page-number-carrier" data-pptx-placeholder-carrier="true" x="1224" y="696"
+          font-family="'Pretendard Medium', Pretendard, 'Malgun Gothic', sans-serif"
+          font-size="12.8"
+          text-anchor="end"
+          fill="#9CA3AF">{{PAGE_NUM}}</text>
+  </g>
+
+  <g id="page-eyebrow">
+    <text x="56" y="124"
+          font-family="'Pretendard SemiBold', Pretendard, 'Malgun Gothic', sans-serif"
+          font-size="12.8"
+          letter-spacing="0.64"
+          fill="#6B7280">{{PAGE_EYEBROW}}</text>
+  </g>
+
+  <!-- CONTENT AREA (Executor fills this region freely) -->
+  <!-- x=56, y=160, w=1168, h=480 — everything above GM, below headline -->
+
+  <g id="gm">
+    <text x="640" y="680"
+          font-family="Pretendard, 'Malgun Gothic', sans-serif"
+          font-size="15.2" font-weight="700"
+          text-anchor="middle"
+          fill="#6B7280">{{GOVERNING_MESSAGE}}</text>
+  </g>
+</svg>

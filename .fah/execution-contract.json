@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "project_id": "SLIDE_MASTER",
-  "contract_version": "1.0",
+  "contract_version": "1.1",
   "managed_by": "FAH",
   "project_aliases": [
     "slide-master",
@@ -28,7 +28,7 @@
           "required": true,
           "fail_closed": true,
           "reason": "User template selection is required before new presentation generation.",
-          "next_action": "Launch the HTML/GUI Template Gallery and wait for the user's selection.",
+          "next_action": "Execute the context-aware HTML/GUI Template Gallery from the latest GitHub catalog, show all registered templates plus Free Design (normally at least 10), let the user inspect representative previews, and wait for explicit selection. Resume the same PPT task immediately after selection.",
           "evidence": {
             "context_key": "templateSelection",
             "required_status": [
@@ -45,6 +45,19 @@
         "fail_closed": true,
         "evidence_file": "template_selection.json",
         "final_guard": ".claude/skills/ppt-master/scripts/svg_to_pptx.py"
+      },
+      "interaction": {
+        "required_mode": "HTML_GUI",
+        "launcher": ".claude/skills/ppt-master/scripts/template_gallery_context.py",
+        "source": "auto",
+        "catalog": "ALL_REGISTERED_PLUS_FREE",
+        "minimum_registered_templates": 10,
+        "recommendation_limit": 10,
+        "detail_preview_limit": 6,
+        "auto_select": false,
+        "same_task_resume": true,
+        "chat_fallback_only_if_gui_unavailable": true,
+        "windows_non_ascii_transport": "UTF8_PURPOSE_FILE"
       }
     },
     "BEAUTIFY_PRESENTATION": {
