@@ -14,16 +14,27 @@ For every FriendY presentation creation request, including generic phrases such 
 
 This routing rule exists specifically to prevent a new PPT request from entering an upstream/generic generation path before FriendY's FAH-controlled template-selection handshake.
 
+## Canonical template-selection surface — CHAT FIRST
+
+For conversational hosts such as ChatGPT, the **current conversation is the canonical template-selection surface**. The user must see the actual live registered templates and representative previews directly in the conversation and make the explicit choice there.
+
+The phrase `HTML/GUI Template Gallery` in the unchanged FAH Execution Contract is host-agnostic. On ChatGPT it means **host-native in-conversation GUI/preview rendering first**. It does **not** mean opening a separate PC/browser window when the current host can render the gallery in chat.
+
+External/local HTML or browser GUI is a fallback only when the current host truly cannot render real template previews inside the conversation. A plain text-only template-name list is a last-resort fallback and must never replace available visual previews merely for convenience.
+
 ## Non-negotiable entry sequence
 
 1. Read `workflows/routing.md` and this guard before any new-deck research, project initialization, SVG authoring, or PPTX export.
 2. If the user already explicitly chose a valid registered deck id/workspace, record that choice through `record_template_choice.py`.
-3. Otherwise launch `template_gallery_context.py` in HTML/GUI mode with the user's actual purpose/context text and keep the task alive until it returns `TEMPLATE_SELECTED`.
-4. The HTML gallery shows the complete live registered catalog plus Free Design, grouped by use category.
-5. Recommend only templates that genuinely fit the user's purpose and context, **up to 10**. Do not fill a quota. Use relative relevance so weak secondary matches are not recommended merely because they share a broad category.
-6. Free Design is valid only when the user explicitly chooses it.
-7. New-deck project initialization must use `new_deck_init.py` with template-selection evidence. Missing selection evidence is a hard failure.
-8. `svg_to_pptx.py` validates the project gate again before export. A missing or invalid gate blocks PPTX generation even if an earlier conversational step was skipped.
+3. Otherwise, on a conversational host, obtain the live catalog and exact registered preview paths through `template_gallery_chat_manifest.py` (or an equivalent connected-GitHub read of the same `decks_index.json` + registered SVGs), then render the real representative template previews **inside the current conversation**.
+4. Show the complete live registered catalog plus Free Design, grouped by use category. The first view may emphasize context-relevant recommendations, but the user must retain access to every selection-ready registered deck.
+5. For each template shown visually, use the actual registered SVG preview(s), not a recreated approximation. When the host supports multiple images/cards, show representative cover plus useful layout previews; when space is constrained, show the representative preview first and expose additional real layouts on request/selection detail.
+6. Recommend only templates that genuinely fit the user's purpose and context, **up to 10**. Do not fill a quota. Use relative relevance so weak secondary matches are not recommended merely because they share a broad category.
+7. Do not silently choose a recommended template. Wait for the user's explicit selection in the conversation. Free Design is valid only when the user explicitly chooses it.
+8. After the user chooses in chat, record the choice through `record_template_choice.py` and create the normal `template_selection.json` evidence. The selection surface may differ, but the evidence contract does not.
+9. If and only if the current host cannot render actual registered previews in conversation, fall back to `template_gallery_context.py` HTML/GUI mode with the user's actual purpose/context and keep the task alive until it returns `TEMPLATE_SELECTED`.
+10. New-deck project initialization must use `new_deck_init.py` with template-selection evidence. Missing selection evidence is a hard failure.
+11. `svg_to_pptx.py` validates the project gate again before export. A missing or invalid gate blocks PPTX generation even if an earlier conversational step was skipped.
 
 ## Context-aware catalog
 
@@ -38,4 +49,4 @@ Stable category ids include `report`, `education`, `notice`, `presentation`, `pr
 
 No `template_selection.json` (selected or approved route exemption) means the project did not pass the entry gate.
 
-Do not replace the HTML/GUI picker with a plain text list unless the picker truly cannot run in the host environment. Do not silently select a recommended template on the user's behalf.
+For ChatGPT and other conversational hosts, do not substitute an external browser window for an available in-conversation gallery. Do not substitute a plain text list for available visual previews. Do not silently select a recommended template on the user's behalf.
