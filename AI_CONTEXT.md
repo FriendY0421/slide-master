@@ -23,7 +23,7 @@ Required order:
 
 `PPT request → canonical SLIDE_MASTER repository lock → FAH Execution Contract evaluation → scalable two-stage TEMPLATE_SELECTION → final user confirmation → content research/generation → local fail-closed validation → PPTX`
 
-For a new deck, template selection is a blocking user-interaction gate. Missing selection evidence means execution must stop at `WAIT_USER_ACTION`/blocked state.
+For a new deck, template selection is a blocking user-interaction gate. The **primary selection UI on ChatGPT is the internal card-style gallery in the current conversation**; external HTML/GUI is auxiliary fallback only. Missing selection evidence means execution must stop at `WAIT_USER_ACTION`/blocked state.
 
 ### Canonical V2 selection behavior
 

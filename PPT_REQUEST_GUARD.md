@@ -32,7 +32,7 @@ Existing bare Deck ids remain backward-compatible only when they resolve unambig
 
 ## ChatGPT canonical flow — TWO STAGES
 
-On ChatGPT and other conversational hosts, do **not** pretend a static image is a clickable picker.
+On ChatGPT and other conversational hosts, the **internal card-style gallery is the primary and canonical selection surface**. External HTML/GUI is auxiliary fallback only. Do **not** pretend a static image is a clickable picker.
 
 Use this deterministic flow:
 
@@ -74,9 +74,9 @@ The following are explicit failures:
 
 For raster/headless rendering, Korean preview text may be used only when a Korean-capable font is positively available. Otherwise use safe English sample tokens **inside the template preview** and keep Korean names/explanations outside the image. Never show missing-glyph boxes as a valid preview.
 
-## HTML/GUI mode
+## HTML/GUI mode — AUXILIARY ONLY
 
-When the user wants clickable cards/check states/buttons, or when reliable in-chat visual rendering is unavailable, use:
+External HTML/GUI must never replace the internal card-style gallery as the normal path. Use it only when the current ChatGPT host cannot provide reliable internal gallery rendering, or when a specific fallback/recovery case requires it. When that auxiliary path is needed, use:
 
 `template_gallery_unified.py`
 

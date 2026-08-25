@@ -30,7 +30,10 @@ It merges registered:
 Do not hard-code template ids. New registered entries must appear automatically.
 Use collision-safe keys `deck:<id>` / `layout:<id>`.
 
-## ChatGPT / conversational host flow
+## ChatGPT / conversational host flow — PRIMARY INTERNAL CARD GALLERY
+
+The **internal card-style gallery inside ChatGPT is the canonical and primary selection surface**. External/local HTML/GUI is auxiliary fallback only; do not prefer HTML merely because it offers richer click controls.
+
 
 ### Stage 1 — shortlist
 
@@ -68,7 +71,10 @@ Then initialize:
 
 A Stage-1 number/name alone must never be recorded as final selection evidence.
 
-## Clickable HTML/GUI path
+## Clickable HTML/GUI path — AUXILIARY FALLBACK ONLY
+
+Use this only when the internal ChatGPT card-style gallery cannot be rendered reliably or when recovery requires a separate browser surface. It must not become the normal first-choice path.
+
 
 When clickable cards/buttons are explicitly desired, or reliable in-chat visual rendering is unavailable, use:
 

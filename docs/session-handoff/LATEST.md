@@ -1,8 +1,20 @@
 # Latest project handoff
 
-Updated checkpoint: 2026-08-25 12:19 KST
+Updated checkpoint: 2026-08-25 12:22 KST
 
-## NEWEST CHECKPOINT — TEMPLATE SELECTION V2 E2E VALIDATED
+## NEWEST CHECKPOINT — INTERNAL CARD GALLERY PRIMARY
+
+- ChatGPT internal card-style template gallery is the **primary and canonical** selection surface.
+- External/local HTML/GUI gallery is **auxiliary fallback only** and must not become the normal first-choice path merely because it has richer click controls.
+- Use HTML only when internal gallery rendering is unavailable/unreliable or a recovery case specifically requires it.
+- Template Selection V2 E2E validation remains valid: unified Deck+Layout discovery, 10-candidate Stage 1, up to 6 detail previews, final confirmation, and downstream fail-closed gates are unchanged.
+- Future template growth remains index-driven.
+
+Durable history: `docs/ai-history/2026-08-25-internal-card-gallery-primary.md`
+
+---
+
+## PREVIOUS CHECKPOINT — TEMPLATE SELECTION V2 E2E VALIDATED
 
 The scalable Template Selection V2 path has now been **executed end to end on HOME-PC**, not merely documented.
 
@@ -14,7 +26,7 @@ The scalable Template Selection V2 path has now been **executed end to end on HO
 - Stage-1-only selection could not create evidence without `--confirmed`;
 - confirmed `layout:ai_ops` selection recorded the correct namespaced key and workspace;
 - `new_deck_init.py` consumed that V2 selection record successfully;
-- `template_gate.py validated passed on the resulting project;
+- `template_gate.py validate` passed on the resulting project;
 - unified HTML mode reported 11 registered / 10 shortlisted and started successfully;
 - HTTP checks returned `200` for the gallery page, a Deck preview, and a Layout preview;
 - the accepted FAH execution contract remains unchanged at runtime @45 / SHA `d8c24c26460cded0fe947df75b2e278488fd7641`;
@@ -28,7 +40,7 @@ Expected production flow remains:
 
 ---
 
-## NEWEST CHECKPOINT — TEMPLATE SELECTION V2 SCALABLE
+## PREVIOUS CHECKPOINT — TEMPLATE SELECTION V2 SCALABLE
 
 The prior chat-first/visual-render corrections identified the right UX goal but still left structural gaps: the picker remained Deck-only, `up to 10 recommendations` was confused with actually showing 10 candidates, a static PNG was incorrectly used as a substitute for clickable selection UI, selected-template detail review was not enforced, and Korean raster previews could break when the rendering host lacked Korean fonts.
 

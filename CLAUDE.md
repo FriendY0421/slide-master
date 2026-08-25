@@ -9,7 +9,7 @@ This file is the project entry point for Claude Code. The ppt-master skill lives
 For **every presentation request**, read [`PPT_REQUEST_GUARD.md`](PPT_REQUEST_GUARD.md) before routing.
 For a new deck, the guard is fail-closed: do not begin research, project initialization, SVG authoring,
 or PPTX export until the user has explicitly selected a registered template or Free Design, or has
-already explicitly named a valid registered template. On a conversational host with visual rendering,
+already explicitly named a valid registered template. On a conversational host with visual rendering, the **internal card-style gallery in the current conversation is primary** and external HTML/GUI is auxiliary fallback only.
 the real registered template previews must be shown **inside the current conversation first**. External
 HTML/GUI is fallback only when the host cannot render those previews in conversation. The result must
 be recorded as `template_selection.json`. Missing selection evidence is an execution failure.

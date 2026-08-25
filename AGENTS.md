@@ -56,6 +56,8 @@ a deck from a document/topic/template):
    [`template-selection.md`](.claude/skills/ppt-master/workflows/template-selection.md) before
    research/project creation/generation.
 
+   On ChatGPT or another conversational host that can render visuals in the current conversation, the **internal card-style gallery is the primary canonical surface** and external HTML/GUI is auxiliary fallback only.
+
    On ChatGPT or another conversational host that can render visuals in the current conversation,
    use `.claude/skills/ppt-master/scripts/template_gallery_chat_manifest.py` (or equivalent connected
    GitHub reads) to obtain the live catalog, context ranking, exact workspace paths, and real SVG
