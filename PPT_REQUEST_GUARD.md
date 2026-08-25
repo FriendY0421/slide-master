@@ -22,17 +22,32 @@ The phrase `HTML/GUI Template Gallery` in the unchanged FAH Execution Contract i
 
 External/local HTML or browser GUI is a fallback only when the current host truly cannot render real template previews inside the conversation. A plain text-only template-name list is a last-resort fallback and must never replace available visual previews merely for convenience.
 
+## Visual-render enforcement — FAIL CLOSED
+
+For ChatGPT and other conversational hosts that can render images/files in the conversation, the template-selection step is **not considered displayed** unless at least one real visual preview is rendered for every selectable registered template presented to the user.
+
+The following are explicit failures and must not be treated as a completed template-selection prompt:
+
+- showing only template names/numbers;
+- showing only prose descriptions;
+- saying that previews are available without actually rendering them;
+- linking to an external gallery when in-conversation rendering is available;
+- inventing or recreating approximate thumbnails instead of using registered template SVGs;
+- asking the user to provide a template number before real previews were rendered.
+
+If visual rendering fails unexpectedly, do not fall through silently to a text list. Report the rendering failure, retry the inline render once using the exact registered SVG source, and only then use the documented fallback path if the host is genuinely unable to render visuals.
+
 ## Non-negotiable entry sequence
 
 1. Read `workflows/routing.md` and this guard before any new-deck research, project initialization, SVG authoring, or PPTX export.
 2. If the user already explicitly chose a valid registered deck id/workspace, record that choice through `record_template_choice.py`.
 3. Otherwise, on a conversational host, obtain the live catalog and exact registered preview paths through `template_gallery_chat_manifest.py` (or an equivalent connected-GitHub read of the same `decks_index.json` + registered SVGs), then render the real representative template previews **inside the current conversation**.
 4. Show the complete live registered catalog plus Free Design, grouped by use category. The first view may emphasize context-relevant recommendations, but the user must retain access to every selection-ready registered deck.
-5. For each template shown visually, use the actual registered SVG preview(s), not a recreated approximation. When the host supports multiple images/cards, show representative cover plus useful layout previews; when space is constrained, show the representative preview first and expose additional real layouts on request/selection detail.
+5. For each registered template offered for selection, render at least one actual registered SVG preview in the conversation. When the host supports multiple images/cards, show representative cover plus useful layout previews; when space is constrained, show the representative preview first and expose additional real layouts on request/selection detail.
 6. Recommend only templates that genuinely fit the user's purpose and context, **up to 10**. Do not fill a quota. Use relative relevance so weak secondary matches are not recommended merely because they share a broad category.
 7. Do not silently choose a recommended template. Wait for the user's explicit selection in the conversation. Free Design is valid only when the user explicitly chooses it.
 8. After the user chooses in chat, record the choice through `record_template_choice.py` and create the normal `template_selection.json` evidence. The selection surface may differ, but the evidence contract does not.
-9. If and only if the current host cannot render actual registered previews in conversation, fall back to `template_gallery_context.py` HTML/GUI mode with the user's actual purpose/context and keep the task alive until it returns `TEMPLATE_SELECTED`.
+9. If and only if the current host cannot render actual registered previews in conversation after one retry, fall back to `template_gallery_context.py` HTML/GUI mode with the user's actual purpose/context and keep the task alive until it returns `TEMPLATE_SELECTED`.
 10. New-deck project initialization must use `new_deck_init.py` with template-selection evidence. Missing selection evidence is a hard failure.
 11. `svg_to_pptx.py` validates the project gate again before export. A missing or invalid gate blocks PPTX generation even if an earlier conversational step was skipped.
 
