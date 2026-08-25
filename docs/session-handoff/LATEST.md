@@ -1,6 +1,32 @@
 # Latest project handoff
 
-Updated checkpoint: 2026-08-25 11:15 KST
+Updated checkpoint: 2026-08-25 12:19 KST
+
+## NEWEST CHECKPOINT — TEMPLATE SELECTION V2 E2E VALIDATED
+
+The scalable Template Selection V2 path has now been **executed end to end on HOME-PC**, not merely documented.
+
+- local clone was clean and safely fast-forwarded to current `origin/main`;
+- Python syntax checks passed for all new V2 runtime scripts;
+- live unified catalog detected 11 currently registered templates from Deck + Layout indexes;
+- Stage 1 generated exactly 10 candidates and every candidate had a real registered preview;
+- Layout templates were verified as first-class selectable candidates;
+- Stage-1-only selection could not create evidence without `--confirmed`;
+- confirmed `layout:ai_ops` selection recorded the correct namespaced key and workspace;
+- `new_deck_init.py` consumed that V2 selection record successfully;
+- `template_gate.py validated passed on the resulting project;
+- unified HTML mode reported 11 registered / 10 shortlisted and started successfully;
+- HTTP checks returned `200` for the gallery page, a Deck preview, and a Layout preview;
+- the accepted FAH execution contract remains unchanged at runtime @45 / SHA `d8c24c26460cded0fe947df75b2e278488fd7641`;
+- no GitHub Actions were used.
+
+Durable history: `docs/ai-history/2026-08-25-template-selection-v2-e2e-validated.md`
+
+Expected production flow remains:
+
+`PPT request → FAH gate → index-driven Deck+Layout catalog → 10 real Stage-1 previews when available → tentative choice → up to 6 real detail previews → final confirmation → selection evidence → new_deck_init → template gate → generation/QA/PPTX`
+
+---
 
 ## NEWEST CHECKPOINT — TEMPLATE SELECTION V2 SCALABLE
 

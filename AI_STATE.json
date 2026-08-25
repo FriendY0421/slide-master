@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-25T11:15:00+09:00",
+  "updated_at_kst": "2026-08-25T12:19:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-TEMPLATE-SELECTION-V2-SCALABLE-20260825",
-    "status": "TEMPLATE_SELECTION_V2_SCALABLE",
+    "work_id": "SLIDE-MASTER-TEMPLATE-SELECTION-V2-E2E-VALIDATED-20260825",
+    "status": "TEMPLATE_SELECTION_V2_E2E_VALIDATED",
     "mode": "INDEX_DRIVEN_TWO_STAGE_TEMPLATE_SELECTION",
     "actor": "ChatGPT",
-    "summary": "Replaced the incomplete Deck-only/static-image selection approach with a scalable V2 architecture. The canonical catalog now merges registered Deck and Layout indexes without hard-coded template ids. ChatGPT Stage 1 shows up to 10 real registered candidates when available, Stage 2 shows up to six real examples for the tentative choice, and final evidence can be recorded only after explicit confirmation. A unified HTML/GUI picker provides actual clickable cards/details when required. Korean preview safety forbids broken glyph output. The accepted FAH execution contract remains unchanged at runtime @45.",
-    "history_file": "docs/ai-history/2026-08-25-template-selection-v2-scalable.md"
+    "summary": "Template Selection V2 was executed end to end on HOME-PC: syntax PASS, live Deck+Layout catalog 11, Stage-1 shortlist 10 with real previews, unconfirmed evidence blocked, confirmed layout selection PASS, new_deck_init PASS, template_gate PASS, unified HTML list/server PASS, and Deck/Layout preview HTTP endpoints returned 200. FAH runtime @45 contract remains unchanged.",
+    "history_file": "docs/ai-history/2026-08-25-template-selection-v2-e2e-validated.md"
   },
   "production": {},
   "source_authority": {
@@ -149,7 +149,10 @@
         ".claude/skills/ppt-master/templates/layouts/layouts_index.json"
       ],
       "hard_coded_template_ids": false,
-      "selection_key_namespace": ["deck:<id>", "layout:<id>"],
+      "selection_key_namespace": [
+        "deck:<id>",
+        "layout:<id>"
+      ],
       "shortlist_target_when_available": 10,
       "free_design_separate": true,
       "detail_preview_max": 6,
@@ -169,6 +172,24 @@
       "github_actions_used": false,
       "contract_changed": false,
       "contract_preserved_sha": "d8c24c26460cded0fe947df75b2e278488fd7641"
+    },
+    "template_selection_v2_e2e_validation": {
+      "status": "PASS",
+      "validated_at_kst": "2026-08-25 12:19",
+      "registered_templates": 11,
+      "stage1_shortlist": 10,
+      "all_shortlist_previews_present": true,
+      "unconfirmed_recording_blocked": true,
+      "confirmed_layout_recording": "PASS",
+      "new_deck_init": "PASS",
+      "template_gate": "PASS",
+      "html_gallery": "PASS",
+      "html_status": 200,
+      "deck_preview_status": 200,
+      "layout_preview_status": 200,
+      "github_actions_used": false,
+      "contract_changed": false,
+      "contract_preserved_sha": "d8c24c26460cded0fe947df75b2e278488fd7641"
     }
   },
   "authority": {
@@ -177,6 +198,7 @@
       "AI_STATE.json",
       "PPT_REQUEST_GUARD.md",
       "docs/session-handoff/LATEST.md",
+      "docs/ai-history/2026-08-25-template-selection-v2-e2e-validated.md",
       "docs/ai-history/2026-08-25-template-selection-v2-scalable.md",
       "docs/ai-history/2026-08-25-chat-template-visual-render-fail-closed.md",
       "docs/ai-history/2026-08-25-chat-inline-template-gallery.md",
@@ -205,9 +227,10 @@
     "On ChatGPT, when at least ten registered templates exist, Stage 1 must visibly show ten real registered candidates and Free Design separately.",
     "A Stage-1 template choice is tentative; up to six real detail examples must be shown before final confirmation and selection evidence.",
     "Static images must never be represented as clickable template selection UI; use template_gallery_unified.py when actual clickable cards/buttons are required.",
-    "Broken Korean glyphs are an invalid preview; use verified Korean fonts or safe English sample tokens inside raster previews with Korean labels outside."
+    "Broken Korean glyphs are an invalid preview; use verified Korean fonts or safe English sample tokens inside raster previews with Korean labels outside.",
+    "Template Selection V2 is runtime-validated end to end on HOME-PC; use the index-driven Deck+Layout catalog, 10-candidate Stage-1 shortlist when available, Stage-2 detail review, final confirmation, and fail-closed evidence path."
   ],
-  "next_priority": "Use Template Selection V2 for the next actual PPT request as the end-to-end acceptance test: unified index-driven catalog, ten real Stage-1 candidates when available, up to six Stage-2 detail examples, final confirmation, then selection evidence and generation. Preserve the FAH @45 contract and downstream fail-closed guards. Do not claim the legacy Deck-only V1 gallery as canonical.",
+  "next_priority": "Normal operation: use the runtime-validated Template Selection V2 path for FriendY new-PPT requests. Future templates enter automatically through Deck/Layout indexes; show 10 Stage-1 candidates when 10+ exist, show up to 6 real detail previews for the tentative choice, record evidence only after final confirmation, then run new_deck_init and downstream gates.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",
