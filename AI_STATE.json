@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-25T10:10:00+09:00",
+  "updated_at_kst": "2026-08-25T10:31:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-PPT-ENTRY-ROUTING-HARDENING-20260825",
-    "status": "PPT_ENTRY_ROUTING_HARDENED",
-    "mode": "FAH_ENTRY_ROUTING_HARDENING",
+    "work_id": "SLIDE-MASTER-CHAT-INLINE-TEMPLATE-GALLERY-20260825",
+    "status": "CHAT_INLINE_GALLERY_HARDENED",
+    "mode": "CHAT_FIRST_TEMPLATE_SELECTION",
     "actor": "ChatGPT",
-    "summary": "Hardened the global entry route for FriendY presentation creation requests after a ChatGPT request entered upstream byungjunjang/slide-master before evaluating the FriendY FAH gate. New PPT requests now explicitly lock to FriendY0421/slide-master, evaluate the FAH Execution Contract before presentation work, and stop for the live template-selection handshake when evidence is missing. The accepted .fah/execution-contract.json v1.0 was intentionally not changed, preserving FAH runtime @45 CONTRACT_CURRENT compatibility.",
-    "history_file": "docs/ai-history/2026-08-25-ppt-entry-routing-hardening.md"
+    "summary": "Corrected the template-selection presentation surface after a new PPT request reached FAH WAIT_USER_ACTION without showing the picker inside ChatGPT. Conversational hosts now render the real live registered Slide Master previews in the current conversation first; external/local HTML GUI is fallback only when inline visual rendering is unavailable. Added template_gallery_chat_manifest.py so hosts can retrieve exact registered workspace and preview SVG paths without opening a browser. The accepted .fah/execution-contract.json v1.0 remains unchanged, preserving FAH runtime @45 CONTRACT_CURRENT compatibility.",
+    "history_file": "docs/ai-history/2026-08-25-chat-inline-template-gallery.md"
   },
   "production": {},
   "source_authority": {
@@ -35,7 +35,12 @@
     "fah_execution_contract_source_sha": "584412f8307cd9675a78f384684bee1152a5c1fe",
     "ppt_entry_history_commit": "01f67f38319e89d6139b0bff5addfd1b8ab60d8e",
     "ppt_entry_guard_commit": "b03c5d7d3e50d1b61d3d7fd5986802f00368f129",
-    "ppt_entry_context_commit": "cbf327105c9177039bf374f7953eaade9b69be5e"
+    "ppt_entry_context_commit": "cbf327105c9177039bf374f7953eaade9b69be5e",
+    "chat_inline_manifest_commit": "bf334b8a07cea4bb63b6809695ca3799806c662e",
+    "chat_inline_guard_commit": "2df2ffe2db589cace59e46eaa5987581f1550eee",
+    "chat_inline_workflow_commit": "a8a5f3657e9c66753de44ca35c3104877bc7a188",
+    "chat_inline_agents_commit": "29dc60b7256c4dacfdea9ad6ef1b05f9f8ef8c29",
+    "chat_inline_history_commit": "4ee07cd80e4f22336ff0e2c59f939b0f88b1b3d1"
   },
   "control": {
     "engine": "FAH",
@@ -92,6 +97,20 @@
       "contract_changed": false,
       "contract_preserved_sha": "d8c24c26460cded0fe947df75b2e278488fd7641",
       "github_actions_used": false
+    },
+    "chat_inline_template_gallery": {
+      "status": "CURRENT",
+      "reason": "Restore the previously working user experience where template previews and selection occur directly inside the ChatGPT conversation.",
+      "primary_surface": "CONVERSATION_INLINE_VISUAL_GALLERY",
+      "secondary_surface": "EXTERNAL_HTML_GUI_FALLBACK",
+      "tertiary_surface": "PLAIN_TEXT_LAST_RESORT",
+      "manifest_helper": ".claude/skills/ppt-master/scripts/template_gallery_chat_manifest.py",
+      "actual_registered_previews_required": true,
+      "explicit_user_selection_required": true,
+      "contract_changed": false,
+      "contract_preserved_sha": "d8c24c26460cded0fe947df75b2e278488fd7641",
+      "syntax_validation": "PASS",
+      "github_actions_used": false
     }
   },
   "authority": {
@@ -100,6 +119,7 @@
       "AI_STATE.json",
       "PPT_REQUEST_GUARD.md",
       "docs/session-handoff/LATEST.md",
+      "docs/ai-history/2026-08-25-chat-inline-template-gallery.md",
       "docs/ai-history/2026-08-25-ppt-entry-routing-hardening.md",
       "docs/ai-history/2026-08-24-0251-slide-master-authority-resync.md",
       ".fah/execution-contract.json",
@@ -120,9 +140,10 @@
     "Before meaningful project execution, evaluate the declared FAH execution contract; decisions other than ALLOW or EXEMPT must not proceed.",
     "Project-local fail-closed guards remain mandatory even when the FAH central contract returns ALLOW or EXEMPT.",
     "Every FriendY new-PPT request must first bind to canonical repository FriendY0421/slide-master; upstream byungjunjang/slide-master or generic presentation generators must not become execution authority before FAH evaluation.",
-    "For CREATE_PRESENTATION, missing valid TEMPLATE_SELECTION evidence is a blocking user-interaction state; show the live template gallery and wait for explicit user selection before research or generation."
+    "For CREATE_PRESENTATION, missing valid TEMPLATE_SELECTION evidence is a blocking user-interaction state; show the live template gallery and wait for explicit user selection before research or generation.",
+    "On ChatGPT and other conversational hosts with visual rendering capability, the live template gallery must be rendered inside the current conversation using the actual registered previews; external/local HTML GUI is fallback only when inline visual rendering is unavailable."
   ],
-  "next_priority": "Normal operation: on every FriendY new presentation request, use the hardened canonical entry route, evaluate FAH first, require the live template-selection handshake, then generate and verify the deck. No FAH runtime deployment or contract SHA change is required for this routing hardening.",
+  "next_priority": "Normal operation: on every FriendY new presentation request, bind to FriendY0421/slide-master, evaluate FAH first, render the live registered template gallery directly inside the current conversation, wait for explicit selection and record template_selection.json evidence, then generate and verify the deck. Use external HTML/GUI only when inline visual rendering is technically unavailable. No FAH runtime deployment or contract SHA change is required for this correction.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",
