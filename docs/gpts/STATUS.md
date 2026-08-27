@@ -1,0 +1,1 @@
+Branch status: constructing fail-closed interactive picker contract.
