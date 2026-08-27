@@ -19,6 +19,7 @@ projects/*
 .superpowers/
 .preview/
 node_modules/
+apps/slide-master-picker/web/dist/
 
 # Local planning and handoff documents
 docs/.superpowers/
