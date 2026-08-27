@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 import template_catalog as catalog_core
@@ -24,6 +25,38 @@ def _reason(entry: dict, inferred: list[str]) -> str:
     if entry.get("template_kind") == "deck":
         return "완성형 Deck이라 일관된 보고 흐름을 만들기 좋습니다."
     return "구조형 Layout이라 필요한 페이지 구성을 유연하게 조합하기 좋습니다."
+
+
+def _rank_presets(presets: list[dict], purpose: str, limit: int = 5) -> list[dict]:
+    compact = re.sub(r"\s+", "", str(purpose or "").lower())
+    ranked: list[tuple[int, int, dict]] = []
+    for index, preset in enumerate(presets):
+        if not isinstance(preset, dict) or not preset.get("id"):
+            continue
+        searchable = " ".join([
+            str(preset.get("id", "")), str(preset.get("display_name", "")),
+            str(preset.get("summary", "")), " ".join(str(x) for x in preset.get("best_for", [])),
+        ]).lower()
+        score = 0
+        for token in [x for x in re.split(r"[\s,/·→]+", searchable) if len(x) >= 2]:
+            if re.sub(r"\s+", "", token) in compact:
+                score += 2
+        if any(word in compact for word in ("문제", "개선", "원인", "제안")) and preset.get("id") == "storytelling_proposal":
+            score += 8
+        if any(word in compact for word in ("실적", "kpi", "voc", "데이터", "추이", "분석")) and preset.get("id") == "data_insight":
+            score += 8
+        if any(word in compact for word in ("교육", "매뉴얼", "사용법", "가이드")) and preset.get("id") == "training_guide":
+            score += 8
+        if any(word in compact for word in ("임원", "경영진", "의사결정")) and preset.get("id") == "executive_brief":
+            score += 8
+        if any(word in compact for word in ("제품", "서비스소개", "브랜드")) and preset.get("id") == "product_showcase":
+            score += 8
+        ranked.append((score, -index, dict(preset)))
+    ranked.sort(key=lambda item: (-item[0], -item[1]))
+    selected = [preset for _score, _order, preset in ranked[: max(3, min(limit, 5))]]
+    for idx, preset in enumerate(selected):
+        preset["recommended_rank"] = idx + 1
+    return selected
 
 
 def build_payload(source: str, purpose: str, limit: int = 10, lang: str = "ko") -> dict:
@@ -47,9 +80,10 @@ def build_payload(source: str, purpose: str, limit: int = 10, lang: str = "ko") 
         return payload
 
     presets_doc = json.loads(PRESETS_PATH.read_text(encoding="utf-8"))
-    presets = presets_doc.get("presets", presets_doc if isinstance(presets_doc, list) else [])
+    all_presets = presets_doc.get("presets", presets_doc if isinstance(presets_doc, list) else [])
+    presets = _rank_presets(all_presets, purpose, 5)
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "surface": "mcp_apps_picker",
         "source": source_label,
         "purpose": purpose,
@@ -59,6 +93,7 @@ def build_payload(source: str, purpose: str, limit: int = 10, lang: str = "ko") 
         "shortlist": [card(entry) for entry in shortlist],
         "all_templates": [card(entry) for entry in ranked],
         "presets": presets,
+        "all_presets": all_presets,
         "free_design": {"id": "free", "display_name": "Free Design"},
     }
 
