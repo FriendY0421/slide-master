@@ -10,10 +10,10 @@
 
 1. Refresh/read the live Deck/Layout indexes.
 2. Recommend only templates that genuinely fit the user's purpose.
-3. Provide the stable visual gallery: `docs/template-gallery/README.md`.
+3. Render the conversation-native App Block / GenUI picker when available; use lower-priority surfaces only with a recorded fallback reason.
 4. Do not invent template names, IDs, screenshots, or previews.
 5. Recommendation is not selection. Wait for an explicit `deck:<id>`, `layout:<id>`, or `free` response.
-6. Record the final choice with `record_template_choice_v2.py`.
+6. Record visible picker evidence with `picker_surface_gate.py`, then record the final choice with `record_template_choice_v2.py --picker-evidence`; use `--direct-template` only for an explicitly user-specified registered template.
 7. Initialize with `new_deck_init.py` only after valid selection evidence exists.
 8. Only then research, compose, author, and export the deck.
 9. Run owner-defined validation, including `verify_deck.py` and the final rendered contact-sheet sanity check when using the main SVG route.
@@ -21,11 +21,11 @@
 
 ## UI reliability rules
 
-- The stable GitHub-rendered visual gallery is the primary selection surface.
-- In-chat cards and interactive HTML are optional conveniences only when the current host visibly renders them.
+- App Block / GenUI is the primary selection surface when available.
+- Fallback order: native real-preview cards → inline HTML → GitHub visual gallery → external/local recovery → text last resort.
+- Every lower-priority surface requires a concrete fallback reason.
 - Never say a gallery, modal, image, or picker was shown unless visible output was actually produced.
-- Failure of a richer UI must fall back to the stable gallery; it never authorizes skipping template selection.
-- Text-only selection IDs are last-resort recovery and must be described as text-only, not as a visual gallery.
+- UI failure never authorizes skipping template selection.
 
 ## Hard stops
 
