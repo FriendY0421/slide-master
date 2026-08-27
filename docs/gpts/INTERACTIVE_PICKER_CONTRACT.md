@@ -6,16 +6,18 @@
 3. The tool renders the conversation-native MCP Apps picker with 5–10 relevant real templates (default 6), full ACTIVE catalog access, real previews, detail layouts, Free Design, and production presets.
 4. Card selection is tentative; show up to 6 real registered detail previews from the exact workspace.
 5. The final UI button sends `deck:<id> | preset:<id>` back into chat through the MCP Apps message bridge.
-6. Treat that returned user message as explicit final selection; record picker-surface evidence and then `record_template_choice_v2.py --picker-evidence --confirmed`.
-7. Initialize only through `new_deck_init.py`; only then research/generate/QA/export PPTX.
+6. Treat that returned user message as explicit final selection; record picker-surface evidence and run `record_template_choice_v2.py <template> --preset <preset> --picker-evidence <picker.json> --confirmed`.
+7. `template_selection.json` must preserve both the chosen template and `production_preset` when selected.
+8. Initialize only through `new_deck_init.py`; only then research/generate/QA/export PPTX.
 
 ## Direct-template flow
 When the user names a valid registered template before recommendation:
 1. Resolve the exact template.
 2. Lock it.
 3. The picker app is not required.
-4. Record with `record_template_choice_v2.py --direct-template --confirmed`.
-5. Continue generation.
+4. If the user also named a production preset, preserve it with `--preset <id>`.
+5. Record with `record_template_choice_v2.py --direct-template --confirmed`.
+6. Continue generation.
 
 ## Fallback flow
 If `open_slide_master_template_picker` is genuinely unavailable or fails to render:
@@ -32,4 +34,4 @@ Every non-primary path requires a concrete recorded fallback reason. A fallback 
 - Tool: `open_slide_master_template_picker` (read-only).
 
 ## Why this exists
-Earlier authority files disagreed about which selection surface was primary, so GPTS could return a prose list even when an interactive picker was desired. This contract makes the exact MCP Apps picker tool primary when connected and keeps the existing picker-evidence/template-selection gates fail-closed.
+Earlier authority files disagreed about which selection surface was primary, so GPTS could return a prose list even when an interactive picker was desired. This contract makes the exact MCP Apps picker tool primary when connected, preserves the production preset, and keeps the existing picker-evidence/template-selection gates fail-closed.
