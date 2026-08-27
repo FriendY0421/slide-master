@@ -16,26 +16,70 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
 import template_catalog as catalog_core  # noqa: E402
+from picker_surface_gate import load_picker_evidence  # noqa: E402
 
 configure_utf8_stdio()
+
+GATE_VERSION = 2
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Record final user-confirmed Slide Master template selection.")
-    parser.add_argument("template", help="namespaced key such as deck:mckinsey or layout:ai_ops; bare unique ids remain compatible; 'free' for Free Design")
+    parser.add_argument(
+        "template",
+        help=(
+            "namespaced key such as deck:mckinsey or layout:ai_ops; "
+            "bare unique ids remain compatible; 'free' for Free Design"
+        ),
+    )
     parser.add_argument("--purpose", default="")
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--confirmed", action="store_true", help="required final-confirmation flag after detail previews")
+    parser.add_argument("--confirmed", action="store_true", help="required final-confirmation flag")
+    parser.add_argument(
+        "--picker-evidence",
+        type=Path,
+        default=None,
+        help="required for recommendation flows after a visible picker rendered",
+    )
+    parser.add_argument(
+        "--direct-template",
+        action="store_true",
+        help="use only when the user directly specified this registered template before recommendation",
+    )
     args = parser.parse_args(argv)
 
     if not args.confirmed:
-        print("ERROR: final confirmation is required after detail previews; pass --confirmed only after the user confirms", file=sys.stderr)
+        print(
+            "ERROR: final confirmation is required; pass --confirmed only after the user confirms",
+            file=sys.stderr,
+        )
         return 2
+    if args.direct_template and args.picker_evidence is not None:
+        print("ERROR: use either --direct-template or --picker-evidence, not both", file=sys.stderr)
+        return 2
+    if not args.direct_template and args.picker_evidence is None:
+        print(
+            "ERROR: recommendation flow requires --picker-evidence from a visibly rendered picker",
+            file=sys.stderr,
+        )
+        return 2
+
+    picker = None
+    selection_surface = "direct_user_specified_template"
+    selection_method = "direct_user_specified_template"
+    if args.picker_evidence is not None:
+        try:
+            picker = load_picker_evidence(args.picker_evidence)
+        except ValueError as exc:
+            print(f"ERROR: invalid picker evidence ({exc})", file=sys.stderr)
+            return 2
+        selection_surface = picker["surface"]
+        selection_method = "picker_then_explicit_user_confirmation"
 
     choice = args.template.strip()
     if choice == "free":
         result = {
-            "gate_version": 1,
+            "gate_version": GATE_VERSION,
             "status": "selected",
             "template": "free",
             "template_kind": "free",
@@ -43,7 +87,9 @@ def main(argv: list[str] | None = None) -> int:
             "workspace": None,
             "summary": "Free Design",
             "purpose": args.purpose,
-            "selection_method": "two_stage_explicit_user_confirmation",
+            "selection_method": selection_method,
+            "selection_surface": selection_surface,
+            "picker_evidence": picker,
             "selected_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
             "source_ref": "registered-local-catalog-v2",
         }
@@ -58,7 +104,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"ERROR: unknown or ambiguous template choice: {choice}", file=sys.stderr)
             return 2
         result = {
-            "gate_version": 1,
+            "gate_version": GATE_VERSION,
             "status": "selected",
             "template": entry["key"],
             "template_kind": entry["template_kind"],
@@ -66,7 +112,9 @@ def main(argv: list[str] | None = None) -> int:
             "workspace": entry["workspace"],
             "summary": entry.get("summary", ""),
             "purpose": args.purpose,
-            "selection_method": "two_stage_explicit_user_confirmation",
+            "selection_method": selection_method,
+            "selection_surface": selection_surface,
+            "picker_evidence": picker,
             "selected_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
             "source_ref": "registered-local-catalog-v2",
         }
