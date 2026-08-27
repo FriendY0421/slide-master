@@ -1,16 +1,16 @@
 # Latest project handoff
 
-Updated checkpoint: 2026-08-27T20:32:18+09:00 KST
+Updated checkpoint: 2026-08-27T20:33:59+09:00 KST
 
 ## NEWEST CHECKPOINT — MCP APPS PICKER LOCAL PROTOCOL VALIDATED
 
 PR #6 (`feat/apps-sdk-template-picker-20260827`) implements the real conversation-native Slide Master picker. Local and GitHub-source MCP protocol smoke tests now pass.
 
-Current state: `LOCAL_MCP_PROTOCOL_VALIDATED_CHATGPT_HOST_SMOKE_PENDING`.
+Current state: `AWAITING_SECURE_TUNNEL_CREDENTIALS`.
 
 Validated: build/check, payload, `/mcp` initialize, tools/list, picker call, `ui://slide-master/template-picker-v1.html`, server-side final selection validation, picker evidence, production preset persistence, direct-template compatibility. GitHub Actions were not used.
 
-Remaining before merge: expose/connect the MCP endpoint to ChatGPT Developer Mode and verify the actual interactive UI plus `app.sendMessage` selection return inside ChatGPT.
+Remaining before merge: provision OpenAI Secure MCP Tunnel `CONTROL_PLANE_API_KEY` + `CONTROL_PLANE_TUNNEL_ID`, connect the MCP endpoint to ChatGPT Developer Mode, then verify the actual interactive UI plus `app.sendMessage` selection return. HOME-PC has no tunnel-client installed and the MCP server is stopped; no public endpoint was opened.
 
 Durable history: `docs/ai-history/2026-08-27-apps-sdk-template-picker.md`
 

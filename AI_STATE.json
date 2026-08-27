@@ -3,7 +3,7 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-27T20:32:18+09:00",
+  "updated_at_kst": "2026-08-27T20:33:59+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
     "work_id": "SLIDE-MASTER-MCP-APPS-PICKER-20260827",
@@ -303,7 +303,7 @@
       }
     },
     "apps_sdk_template_picker": {
-      "status": "LOCAL_MCP_PROTOCOL_VALIDATED",
+      "status": "AWAITING_SECURE_TUNNEL_CREDENTIALS",
       "branch": "feat/apps-sdk-template-picker-20260827",
       "pull_request": 6,
       "local_source_smoke": "PASS",
@@ -314,7 +314,7 @@
       "selection_validation": "PASS",
       "picker_gate_with_preset": "PASS",
       "direct_template_with_preset": "PASS",
-      "chatgpt_host_ui_message_bridge": "PENDING",
+      "chatgpt_host_ui_message_bridge": "BLOCKED_BY_TUNNEL_SETUP",
       "merge_ready": false,
       "github_actions_used": false,
       "previous_latest_work": {
@@ -324,6 +324,11 @@
         "actor": "ChatGPT",
         "summary": "Added company/user template onboarding, metadata lifecycle, production presets, and ACTIVE-only picker filtering while preserving legacy templates as ACTIVE by default.",
         "history_file": "docs/ai-history/2026-08-27-company-template-lifecycle.md"
+      },
+      "secure_tunnel_prerequisites": {
+        "CONTROL_PLANE_API_KEY": "MISSING",
+        "CONTROL_PLANE_TUNNEL_ID": "MISSING",
+        "tunnel_client_binary": "NOT_INSTALLED"
       }
     }
   },
@@ -379,7 +384,7 @@
     "Recommended-template selection records created under gate v2 require valid picker-surface evidence; non-primary picker surfaces require a concrete fallback reason.",
     "A user-directly-specified valid registered template may skip picker rendering and must be recorded through the direct-template selection path."
   ],
-  "next_priority": "Connect PR #6 MCP endpoint to ChatGPT Developer Mode, verify interactive UI and app.sendMessage selection return, then mark PR ready and merge.",
+  "next_priority": "Provision OpenAI Secure MCP Tunnel runtime API key + tunnel ID, connect PR #6 MCP server to ChatGPT Developer Mode, verify UI/sendMessage host smoke, then merge PR #6.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",

@@ -32,7 +32,7 @@ Replace inconsistent prose-only GPTS template recommendations with a determinist
 The server was refactored to create a fresh `McpServer` + stateless `StreamableHTTPServerTransport` per `/mcp` request, following the MCP SDK stateless pattern. It was also migrated to `registerAppTool` / `registerAppResource` and the standard MCP Apps resource MIME.
 
 ## Current status
-`LOCAL_MCP_PROTOCOL_VALIDATED_CHATGPT_HOST_SMOKE_PENDING`
+`AWAITING_SECURE_TUNNEL_CREDENTIALS`
 
 HOME-PC reconnected and the corrected server was re-run. Local MCP protocol validation now passes. Do **not** merge this branch to main until the remaining ChatGPT Developer Mode host smoke is completed.
 
@@ -58,3 +58,10 @@ HOME-PC reconnected and the corrected server was re-run. Local MCP protocol vali
 8. Repeat with `PICKER_SOURCE=github`.
 
 GitHub Actions were not used.
+
+### Secure Tunnel blocker
+- HOME-PC has no `tunnel-client` binary installed.
+- `CONTROL_PLANE_API_KEY` is not configured.
+- `CONTROL_PLANE_TUNNEL_ID` is not configured.
+- The MCP server was stopped after local validation; no public exposure was created.
+- Next step requires provisioning the runtime key and tunnel ID from OpenAI Platform before ChatGPT Developer Mode host smoke.
