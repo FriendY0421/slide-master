@@ -16,7 +16,26 @@ REPO_ROOT = Path(__file__).resolve().parents[4]
 PRESETS_PATH = REPO_ROOT / "docs" / "gpts" / "PRODUCTION_PRESETS.json"
 
 
-def _reason(entry: dict, inferred: list[str]) -> str:
+def _reason(entry: dict, inferred: list[str], purpose: str) -> str:
+    text = re.sub(r"\s+", "", str(purpose or "").lower())
+
+    def hits(field: str) -> list[str]:
+        out = []
+        for value in entry.get(field, []) or []:
+            norm = re.sub(r"\s+", "", str(value).lower())
+            if len(norm) >= 2 and norm in text:
+                out.append(str(value))
+        return out
+
+    brand = hits("brand_terms")
+    intent = hits("document_types") + hits("purpose")
+    audience = hits("audience")
+    if brand:
+        return f"요청의 조직/브랜드 표현 ‘{brand[0]}’과 직접 일치합니다."
+    if intent:
+        return f"요청 목적 ‘{intent[0]}’과 템플릿 활용 목적이 잘 맞습니다."
+    if audience:
+        return f"요청 대상 ‘{audience[0]}’에 맞춘 구성입니다."
     cats = [str(x) for x in entry.get("categories", [])]
     primary = str(entry.get("primary_category") or "general")
     matched = [x for x in inferred if x == primary or x in cats]
@@ -75,7 +94,7 @@ def build_payload(source: str, purpose: str, limit: int = 10, lang: str = "ko") 
             "status": entry.get("status", "ACTIVE"),
             "version": entry.get("version", "1.0"),
             "visibility": entry.get("visibility", "public"),
-            "reason": _reason(entry, inferred),
+            "reason": _reason(entry, inferred, purpose),
         })
         return payload
 

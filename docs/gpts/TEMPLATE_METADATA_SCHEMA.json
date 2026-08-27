@@ -15,10 +15,15 @@
     "audience": {"type": "array", "items": {"type": "string"}},
     "purpose": {"type": "array", "items": {"type": "string"}},
     "aliases": {"type": "array", "items": {"type": "string"}},
+    "organization": {"type": ["string", "null"]},
+    "brand_terms": {"type": "array", "items": {"type": "string"}},
+    "document_types": {"type": "array", "items": {"type": "string"}},
+    "tone": {"type": "array", "items": {"type": "string"}},
+    "avoid_for": {"type": "array", "items": {"type": "string"}},
     "defaults": {"type": "object"},
     "quality_score": {"type": "number", "minimum": 0, "maximum": 100},
     "approved_at": {"type": ["string", "null"]},
     "approval_note": {"type": ["string", "null"]}
   },
-  "recommended": ["display_name", "version", "status", "visibility", "source_type", "fidelity", "categories", "keywords"]
+  "recommended": ["display_name", "version", "status", "visibility", "source_type", "fidelity", "categories", "keywords", "purpose", "audience", "aliases", "organization", "brand_terms", "document_types", "tone", "avoid_for", "quality_score"]
 }
