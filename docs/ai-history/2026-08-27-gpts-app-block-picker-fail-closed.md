@@ -22,3 +22,5 @@ Root cause was authority drift:
 
 ## Expected user-visible flow
 `PPT request → FAH → live catalog → App Block/GenUI → card/detail navigation → production preset → final user id → picker evidence → template evidence → generation/QA/PPTX`
+
+Implementation commit: `b0234dd281dd733a5bdbc05a3106e4ddf74df4eb`

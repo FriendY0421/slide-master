@@ -54,7 +54,8 @@
     "v2_context_commit": "c7d618731d3c00837cc009657b9826ffccdd3265",
     "inline_html_generator_commit": "0e4499fdac351c625564c591961d99c78a64a036",
     "inline_html_history_commit": "e78c5cb1bf140f3bab25dc293067b36da28e39bf",
-    "inline_html_latest_handoff_commit": "74d44d9dc58f386ab7afc03206a2cb138bc17039"
+    "inline_html_latest_handoff_commit": "74d44d9dc58f386ab7afc03206a2cb138bc17039",
+    "gpts_app_block_picker_implementation_commit": "b0234dd281dd733a5bdbc05a3106e4ddf74df4eb"
   },
   "control": {
     "engine": "FAH",
@@ -280,7 +281,8 @@
         "legacy_v1_compatibility": "PASS",
         "new_deck_init_gate": "PASS",
         "github_actions_used": false
-      }
+      },
+      "implementation_commit": "b0234dd281dd733a5bdbc05a3106e4ddf74df4eb"
     }
   },
   "authority": {
