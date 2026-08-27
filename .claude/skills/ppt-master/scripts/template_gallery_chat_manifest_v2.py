@@ -37,12 +37,13 @@ def _entry_payload(entry: dict, ref: str | None, recommended: set[str]) -> dict:
 def build_manifest(source: str, purpose: str, recommend: str = "", limit: int = 10) -> dict:
     ref, source_label = legacy._resolve_source(source)
     catalog = catalog_core.load_catalog(ref)
+    selectable = catalog_core.selectable_catalog(catalog)
     inferred = context.infer_categories(purpose)
-    shortlist_entries, auto_recommended = catalog_core.shortlist(catalog, purpose, inferred, limit)
+    shortlist_entries, auto_recommended = catalog_core.shortlist(selectable, purpose, inferred, limit)
 
     explicit: list[str] = []
     for raw in recommend.split(","):
-        resolved = catalog_core.resolve_choice(raw.strip(), catalog)
+        resolved = catalog_core.resolve_choice(raw.strip(), selectable)
         if resolved:
             explicit.append(resolved["key"])
 
@@ -54,7 +55,7 @@ def build_manifest(source: str, purpose: str, recommend: str = "", limit: int = 
             break
     recommended_set = set(recommended)
 
-    all_payload = [_entry_payload(entry, ref, recommended_set) for entry in catalog.values()]
+    all_payload = [_entry_payload(entry, ref, recommended_set) for entry in selectable.values()]
     by_key = {entry["key"]: entry for entry in all_payload}
     shortlist_payload = [by_key[entry["key"]] for entry in shortlist_entries if entry["key"] in by_key]
 
@@ -63,7 +64,9 @@ def build_manifest(source: str, purpose: str, recommend: str = "", limit: int = 
         "surface": "conversation_inline_two_stage",
         "source": source_label,
         "purpose": purpose,
-        "registered_template_count": len(all_payload),
+        "registered_template_count": len(catalog),
+        "selectable_template_count": len(all_payload),
+        "inactive_template_count": len(catalog) - len(all_payload),
         "shortlist_target": limit,
         "shortlist_count": len(shortlist_payload),
         "recommended": recommended,

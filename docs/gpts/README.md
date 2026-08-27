@@ -7,6 +7,9 @@ This directory contains the GPTS-facing contract for Slide Master presentation c
 - `PPT_GPTS_CANONICAL_INSTRUCTIONS.md` — compact GPT Builder instruction source.
 - `INTERACTIVE_PICKER_CONTRACT.md` — App Block / GenUI picker behavior and fallback rules.
 - `ACCEPTANCE_TESTS.md` — required regression tests before changing the picker or template gate.
+- `COMPANY_TEMPLATE_REGISTRATION.md` — company/user PPT/PDF/image/photo onboarding and security policy.
+- `PRODUCTION_PRESETS.json` — reusable content-production presets shown after template choice.
+- `TEMPLATE_METADATA_SCHEMA.json` — status/version/source/fidelity metadata contract.
 
 ## Runtime authority
 

@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-27T18:33:49+09:00",
+  "updated_at_kst": "2026-08-27T18:51:28+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-GPTS-APP-BLOCK-PICKER-GATE-20260827",
-    "status": "GPTS_APP_BLOCK_PICKER_FAIL_CLOSED",
-    "mode": "CONVERSATION_NATIVE_INTERACTIVE_PICKER_FIRST",
+    "work_id": "SLIDE-MASTER-COMPANY-TEMPLATE-LIFECYCLE-20260827",
+    "status": "COMPANY_TEMPLATE_LIFECYCLE_VALIDATED",
+    "mode": "ACTIVE_ONLY_PICKER_GOVERNANCE",
     "actor": "ChatGPT",
-    "summary": "Resolved GPTS prose-only template recommendation regression by reconciling conflicting selection-surface authority. App Block/GenUI is primary when available; lower-priority surfaces require fallback reasons. Added machine picker-surface evidence and gate-v2 selection enforcement while preserving legacy v1 records and the accepted FAH execution contract.",
-    "history_file": "docs/ai-history/2026-08-27-gpts-app-block-picker-fail-closed.md"
+    "summary": "Added company/user template onboarding, metadata lifecycle, production presets, and ACTIVE-only picker filtering while preserving legacy templates as ACTIVE by default.",
+    "history_file": "docs/ai-history/2026-08-27-company-template-lifecycle.md"
   },
   "production": {},
   "source_authority": {
@@ -283,10 +283,29 @@
         "github_actions_used": false
       },
       "implementation_commit": "b0234dd281dd733a5bdbc05a3106e4ddf74df4eb"
+    },
+    "company_template_lifecycle": {
+      "status": "VALIDATED",
+      "candidate_hidden_from_picker": true,
+      "active_auto_recommended": true,
+      "deprecated_disabled_hidden": true,
+      "legacy_missing_status": "ACTIVE",
+      "metadata_frontmatter_passthrough": true,
+      "confidential_public_source_allowed": false,
+      "github_actions_used": false,
+      "previous_latest_work": {
+        "work_id": "SLIDE-MASTER-GPTS-APP-BLOCK-PICKER-GATE-20260827",
+        "status": "GPTS_APP_BLOCK_PICKER_FAIL_CLOSED",
+        "mode": "CONVERSATION_NATIVE_INTERACTIVE_PICKER_FIRST",
+        "actor": "ChatGPT",
+        "summary": "Resolved GPTS prose-only template recommendation regression by reconciling conflicting selection-surface authority. App Block/GenUI is primary when available; lower-priority surfaces require fallback reasons. Added machine picker-surface evidence and gate-v2 selection enforcement while preserving legacy v1 records and the accepted FAH execution contract.",
+        "history_file": "docs/ai-history/2026-08-27-gpts-app-block-picker-fail-closed.md"
+      }
     }
   },
   "authority": {
     "read_order": [
+      "docs/ai-history/2026-08-27-company-template-lifecycle.md",
       "docs/ai-history/2026-08-27-gpts-app-block-picker-fail-closed.md",
       "docs/ai-history/2026-08-25-inline-interactive-html-gallery-authority.md",
       "AI_CONTEXT.md",
@@ -335,7 +354,7 @@
     "Recommended-template selection records created under gate v2 require valid picker-surface evidence; non-primary picker surfaces require a concrete fallback reason.",
     "A user-directly-specified valid registered template may skip picker rendering and must be recorded through the direct-template selection path."
   ],
-  "next_priority": "Normal operation: FAH → latest GitHub catalog → App Block/GenUI picker when available → detail/preset → user final id → picker evidence → template evidence → generation/QA/PPTX.",
+  "next_priority": "Deploy updated PPT GPTS instructions/knowledge, then Preview-test interactive picker and company-template onboarding against current main.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",

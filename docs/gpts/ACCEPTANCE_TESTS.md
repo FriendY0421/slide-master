@@ -28,3 +28,11 @@ Expected: exit non-zero.
 ## E. Company template
 After a new company template becomes ACTIVE, repeat a relevant PPT request.
 Expected: it is automatically evaluated as a recommendation candidate without GPTS instruction edits.
+
+## Company template lifecycle
+- A newly registered CANDIDATE template must not appear in normal picker/recommendation inventory.
+- After the same template becomes ACTIVE, it must appear automatically on the next live catalog/picker request.
+- DEPRECATED and DISABLED templates must remain excluded from normal recommendations.
+- A user-explicit valid registered template may bypass recommendation, subject to direct-template validation.
+- PPTX/POTX imports are master-extraction candidates; PDF/image/photo imports must be labeled reference reconstruction.
+- Confidential company source assets must not be committed to the public repository.

@@ -22,6 +22,7 @@ CATALOG_SOURCES = (
     ("layout", LAYOUTS_PREFIX, f"{LAYOUTS_PREFIX}/layouts_index.json"),
 )
 SAFE_ID = re.compile(r"^[A-Za-z0-9_.-]+$")
+ACTIVE_STATUS = "ACTIVE"
 
 
 def selection_key(kind: str, template_id: str) -> str:
@@ -52,9 +53,27 @@ def load_catalog(ref: str | None) -> dict[str, dict]:
                 "categories": meta.get("categories", []),
                 "keywords": meta.get("keywords", []),
                 "page_types": meta.get("page_types", []),
+                "status": str(meta.get("status", ACTIVE_STATUS) or ACTIVE_STATUS).upper(),
+                "version": str(meta.get("version", "1.0")),
+                "visibility": meta.get("visibility", "public"),
+                "source_type": meta.get("source_type", "native"),
+                "fidelity": meta.get("fidelity", "native"),
+                "aliases": meta.get("aliases", []),
+                "audience": meta.get("audience", []),
+                "purpose": meta.get("purpose", []),
+                "defaults": meta.get("defaults", {}),
+                "quality_score": meta.get("quality_score"),
                 "raw_meta": meta,
             }
     return out
+
+
+def is_selectable(entry: dict) -> bool:
+    return str(entry.get("status", ACTIVE_STATUS) or ACTIVE_STATUS).upper() == ACTIVE_STATUS
+
+
+def selectable_catalog(catalog: dict[str, dict]) -> dict[str, dict]:
+    return {key: entry for key, entry in catalog.items() if is_selectable(entry)}
 
 
 def resolve_choice(choice: str, catalog: dict[str, dict]) -> dict | None:
@@ -156,7 +175,7 @@ def score_entry(entry: dict, purpose: str, inferred_categories: list[str] | None
 
 def shortlist(catalog: dict[str, dict], purpose: str, inferred_categories: list[str] | None = None, limit: int = 10) -> tuple[list[dict], list[str]]:
     ranked = []
-    for key, entry in catalog.items():
+    for key, entry in selectable_catalog(catalog).items():
         score = score_entry(entry, purpose, inferred_categories)
         ranked.append((score, 1 if entry["template_kind"] == "deck" else 0, key, entry))
     ranked.sort(key=lambda x: (-x[0], -x[1], x[2]))

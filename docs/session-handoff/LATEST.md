@@ -2,6 +2,18 @@
 
 Updated checkpoint: 2026-08-27 KST
 
+## NEWEST CHECKPOINT — COMPANY TEMPLATE LIFECYCLE VALIDATED
+
+Company/user PPT/POTX/PDF/image/photo onboarding is now governed as `CANDIDATE → preview approval → ACTIVE`. Normal picker/recommendation inventory includes ACTIVE templates only; legacy entries without status remain ACTIVE for backward compatibility. Confidential company source files stay out of the public repository.
+
+Validation: metadata passthrough PASS, ACTIVE/CANDIDATE filtering PASS, current catalog 11 total / 11 selectable / 0 inactive / shortlist 10, GitHub Actions not used.
+
+Durable history: `docs/ai-history/2026-08-27-company-template-lifecycle.md`
+
+---
+
+Updated checkpoint: 2026-08-27 KST
+
 ## NEWEST CHECKPOINT — GPTS APP BLOCK PICKER FAIL-CLOSED
 
 A real GPTS PPT request exposed a regression: it returned a prose template list instead of the approved interactive picker.

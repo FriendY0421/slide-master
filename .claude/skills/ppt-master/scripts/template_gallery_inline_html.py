@@ -90,14 +90,15 @@ def build_html(
 ) -> str:
     ref, source_label = legacy._resolve_source(source)
     catalog = catalog_core.load_catalog(ref)
+    selectable = catalog_core.selectable_catalog(catalog)
     inferred = context.infer_categories(purpose)
 
     # Recommendation is context-ranked, but the selectable library is always the complete live catalog.
     ranked, recommended = catalog_core.shortlist(
-        catalog,
+        selectable,
         purpose,
         inferred,
-        max(len(catalog), 1),
+        max(len(selectable), 1),
     )
     recommended_keys = recommended[: max(1, recommendation_limit)]
     recommended_set = set(recommended_keys)

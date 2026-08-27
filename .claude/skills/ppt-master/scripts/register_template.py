@@ -257,6 +257,24 @@ def _extract_entry(kind: str, template_id: str, template_dir: Path) -> dict:
     else:
         raise SpecParseError(f"unknown kind {kind!r}")
 
+    # Optional catalog metadata from design_spec.md frontmatter. Missing values
+    # remain backward-compatible; the catalog treats missing status as ACTIVE.
+    common_fields = (
+        "display_name", "version", "visibility", "source_type", "fidelity",
+        "categories", "keywords", "audience", "purpose", "aliases", "defaults",
+        "quality_score", "approved_at", "approval_note",
+    )
+    primary_category = fm.get("primary_category") or fm.get("category")
+    if primary_category not in (None, ""):
+        entry["primary_category"] = primary_category
+    status = fm.get("status")
+    if status not in (None, ""):
+        entry["status"] = str(status).upper()
+    for field in common_fields:
+        value = fm.get(field)
+        if value not in (None, "", [], {}):
+            entry[field] = value
+
     extras = OrderedDict(
         pages=pages,
         primary_color=str(primary_color),
