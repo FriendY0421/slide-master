@@ -1,0 +1,21 @@
+{
+  "name": "slide-master-picker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild web/src/app.js --bundle --format=esm --outfile=web/dist/app.js",
+    "check": "node --check src/server.js && node --check web/src/app.js",
+    "prestart": "npm run build",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/ext-apps": "^1.7.5",
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "express": "^5.1.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}
