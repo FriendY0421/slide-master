@@ -15,10 +15,11 @@ research, project initialization, SVG authoring, or export until the template-se
 complete. The valid paths are:
 
 - the user explicitly chose a registered template and the choice was recorded; or
-- the stable GitHub visual catalog was provided, the user explicitly returned a `deck:<id>`,
-  `layout:<id>`, or `free` choice, and `record_template_choice_v2.py` recorded the evidence; or
-- a verified conversation-native visual surface showed actual registered previews, the user explicitly
-  returned a final selection ID, and the same evidence was recorded; or
+- a verified conversation-native interactive picker (App Block / GenUI) showed actual registered
+  previews, the user explicitly returned a final selection id, picker evidence was recorded, and
+  `record_template_choice_v2.py` recorded the selection; or
+- a verified lower-priority visual fallback was used only after the interactive picker was unavailable,
+  its fallback reason and picker evidence were recorded, and the user explicitly returned the final id; or
 - a documented direct-PPTX/resume exemption was written to the project gate record.
 
 `template_selection.json` is the machine-readable evidence. Missing evidence is an execution failure,
@@ -56,24 +57,22 @@ a deck from a document/topic/template):
    [`template-selection.md`](.claude/skills/ppt-master/workflows/template-selection.md) before
    research/project creation/generation.
 
-   On ChatGPT and other conversational hosts, the **stable GitHub-rendered visual catalog is the
-   primary canonical selection surface**:
+   On ChatGPT/GPTS and other conversational hosts, the **conversation-native interactive picker is the
+   primary canonical selection surface when App Block / GenUI is available**:
 
-   - `docs/template-gallery/README.md` is generated from the live Deck/Layout indexes.
-   - It displays actual registered representative SVG previews and up to six actual detail layouts
-     for each template.
-   - Recommend only genuinely relevant templates in chat, but never auto-select one.
-   - Give the user the stable gallery path/link, wait for an explicit `deck:<id>`, `layout:<id>`, or
-     `free` response, then record it with `record_template_choice_v2.py`.
-   - Never claim that an in-chat gallery, picker, modal, or image was shown unless the current turn
-     produced verifiable visible output.
+   - Read the latest live Deck/Layout catalog every request.
+   - Use `template_gallery_chat_manifest_v2.py` as the host-native picker data contract.
+   - Render 5–10 relevant real registered candidates when available (default target 6, up to 10).
+   - Card selection is tentative; show up to six real detail layouts/examples before final confirmation.
+   - Do not answer with a prose-only template list first when App Block / GenUI is available.
+   - Record the visibly rendered surface with `picker_surface_gate.py`.
+   - Any lower-priority surface requires a concrete fallback reason.
+   - After the user returns the final id, record with `record_template_choice_v2.py --picker-evidence ... --confirmed`.
+   - If the user directly specified a valid template before recommendation, use `--direct-template`.
+   - Never claim that an in-chat gallery, picker, modal, or image was shown unless the current turn produced verifiable visible output.
 
-   Host-native visual cards or `template_gallery_inline_html.py` are optional convenience layers only
-   when the current host positively supports and visibly renders them. Failure of those richer surfaces
-   must fall back to the stable GitHub visual catalog, not skip template selection.
-   `template_gallery_unified.py` remains an auxiliary local/external recovery route. Use
-   `new_deck_init.py --template-selection-result <result.json>` only after the user returns the final
-   selection ID.
+   Fallback order: App Block/GenUI → native real-preview visual cards → inline HTML → GitHub visual catalog → external/local recovery → text-only ids last.
+   Use `new_deck_init.py --template-selection-result <result.json>` only after the user returns the final selection ID.
 
 2. **Load the selected owner(s) in full.** The router owns the complete matrix;
    this table is a compact Codex handoff summary:

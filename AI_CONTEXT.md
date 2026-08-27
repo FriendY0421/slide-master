@@ -21,34 +21,28 @@ A host-required `artifact_handoff` / presentation-preparation call may occur fir
 
 Required order:
 
-`PPT request → host preparation if required → canonical SLIDE_MASTER lock → FAH TEMPLATE_SELECTION → inline interactive HTML gallery → user final selection → template_selection.json → research/generation → local fail-closed validation → PPTX`
+`PPT request → host preparation if required → canonical SLIDE_MASTER lock → FAH TEMPLATE_SELECTION → latest GitHub catalog → conversation-native interactive picker → user final selection → picker/selection evidence → research/generation → local fail-closed validation → PPTX`
 
-## Canonical ChatGPT template-selection UI
+## Canonical ChatGPT/GPTS template-selection UI
 
-The **primary selection UI on ChatGPT is the self-contained interactive HTML gallery rendered inside the current conversation**, matching the user-approved `preview(1).html` behavior.
-
-Production gallery generation uses:
-
-`template_gallery_inline_html.py --source github --purpose "<actual purpose>" --page-size 12 --output <gallery.html>`
+The primary selection UI is the **conversation-native interactive picker (App Block / GenUI) when the current host supports it**.
 
 Rules:
 
-- Every new PPT request rebuilds the gallery from the latest GitHub `main` Deck/Layout indexes.
-- Discovery is index-driven through `template_catalog.py`; never hard-code current template ids/counts.
-- Registered Decks and Layouts are both valid candidates and future registered templates appear automatically.
-- The HTML is self-contained: registered SVG previews and package-local assets are embedded as data URIs.
-- Recommended templates are shown separately but never auto-selected.
-- The complete current template library remains accessible.
-- The gallery provides search, Deck/Layout filters, and automatic pagination when the library grows; default is 12 cards/page.
-- Card click opens an in-page dialog with up to 6 real examples from the exact workspace.
-- `이 템플릿 선택` is the final UI confirmation; the selected id is displayed in the HTML and returned to chat by the user.
-- Only after the selected id returns in chat may `record_template_choice_v2.py --confirmed` create evidence.
-- Missing selection evidence is `WAIT_USER_ACTION`; no research/generation may start.
-- External/local browser HTML (`template_gallery_unified.py`) is auxiliary fallback only, not the normal first-choice path.
-- Conversation-native static image galleries are secondary fallback only when inline interactive HTML cannot render.
-- Markdown `<img>` lists and static PNGs are not valid substitutes for the approved interactive gallery.
+- Every new PPT request refreshes from current GitHub `main` Deck/Layout indexes.
+- Discovery is index-driven through `template_catalog.py`; never hard-code current ids/counts.
+- `template_gallery_chat_manifest_v2.py` is the live data contract for host-native interactive rendering.
+- When suitable templates exist, show 5–10 real registered recommendation cards (default target 6, up to 10).
+- Card interaction must lead to up to 6 real detail examples from the exact workspace.
+- Free Design remains separate.
+- When useful, presentation-production presets are shown as a second interactive selection stage.
+- Recommendation or card click never auto-confirms.
+- The final selected id must return/be explicitly confirmed in chat unless the host supplies a verifiable equivalent selection event.
+- Recommended-template records require picker-surface evidence before `record_template_choice_v2.py --confirmed` may succeed.
+- A directly user-specified valid registered template uses `--direct-template` and does not require picker rendering.
+- Missing valid evidence is `WAIT_USER_ACTION`; no research/generation may start.
+- If App Block / GenUI cannot be used, record why and fall back in order: native visual cards → inline self-contained HTML → GitHub visual catalog → external/local recovery → text last resort.
+- Markdown `<img>` lists and static PNGs must not be represented as interactive UI.
 - Broken Korean glyphs are never acceptable.
 
-Only the documented existing-PPT beautification/direct-PPTX routes may use their contract exemptions.
-
-Read `PPT_REQUEST_GUARD.md` before any presentation research or generation work.
+`PPT_REQUEST_GUARD.md` is the first-read fail-closed authority for presentation generation.

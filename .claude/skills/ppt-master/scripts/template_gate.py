@@ -14,10 +14,11 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
+from picker_surface_gate import validate_picker_evidence  # noqa: E402
 
 configure_utf8_stdio()
 
-GATE_VERSION = 1
+GATE_VERSION = 2
 GATE_FILENAME = "template_selection.json"
 EXEMPT_REASONS = {
     "beautify-pptx",
@@ -39,6 +40,13 @@ def _read_json(path: Path) -> dict:
     return data
 
 
+def _record_version(data: dict) -> int:
+    try:
+        return int(data.get("gate_version", 1))
+    except (TypeError, ValueError):
+        return 1
+
+
 def validate_selection_record(data: dict) -> list[str]:
     errors: list[str] = []
     status = data.get("status", "selected")
@@ -51,6 +59,7 @@ def validate_selection_record(data: dict) -> list[str]:
     if status != "selected":
         errors.append("template selection status must be 'selected' or 'exempt'")
         return errors
+
     choice = str(data.get("template") or "").strip()
     if not choice:
         errors.append("missing template id")
@@ -61,6 +70,26 @@ def validate_selection_record(data: dict) -> list[str]:
             errors.append("Free Design selection must not carry a template workspace")
     elif not str(data.get("workspace") or "").strip():
         errors.append("registered template selection must carry its workspace")
+
+    # Gate v1 records remain valid for legacy/resume compatibility.
+    if _record_version(data) >= 2:
+        surface = str(data.get("selection_surface") or "").strip()
+        if not surface:
+            errors.append("gate v2 selection requires selection_surface")
+        elif surface == "direct_user_specified_template":
+            if data.get("selection_method") != "direct_user_specified_template":
+                errors.append(
+                    "direct template selection requires direct_user_specified_template method"
+                )
+        else:
+            picker = data.get("picker_evidence")
+            if not isinstance(picker, dict):
+                errors.append("gate v2 recommendation selection requires picker_evidence")
+            else:
+                picker_errors = validate_picker_evidence(picker)
+                errors.extend(f"picker: {err}" for err in picker_errors)
+                if picker.get("surface") != surface:
+                    errors.append("selection_surface does not match picker evidence surface")
     return errors
 
 
@@ -70,8 +99,8 @@ def load_selection_result(path: str | Path) -> dict:
     if errors:
         raise ValueError("; ".join(errors))
     record = dict(data)
-    record["gate_version"] = GATE_VERSION
-    record["status"] = "selected"
+    record["gate_version"] = _record_version(data)
+    record["status"] = data.get("status", "selected")
     return record
 
 
@@ -92,7 +121,11 @@ def write_project_gate(project_path: str | Path, record: dict) -> Path:
         raise ValueError("; ".join(errors))
     target = Path(project_path) / GATE_FILENAME
     payload = dict(record)
-    payload["gate_version"] = GATE_VERSION
+    payload["gate_version"] = (
+        _record_version(record)
+        if record.get("status", "selected") == "selected"
+        else GATE_VERSION
+    )
     target.parent.mkdir(parents=True, exist_ok=True)
     tmp = target.with_suffix(target.suffix + ".tmp")
     tmp.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

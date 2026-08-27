@@ -25,7 +25,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--template-selection-result",
         required=True,
-        help="JSON result returned by template_gallery.py or record_template_choice.py",
+        help="validated JSON result from record_template_choice_v2.py (picker evidence or direct-template path)",
     )
     args = parser.parse_args(argv)
 

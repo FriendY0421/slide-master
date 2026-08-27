@@ -1,5 +1,29 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-27 KST
+
+## NEWEST CHECKPOINT — GPTS APP BLOCK PICKER FAIL-CLOSED
+
+A real GPTS PPT request exposed a regression: it returned a prose template list instead of the approved interactive picker.
+
+Current canonical rule: **App Block / GenUI first when available; never prose-first.**
+
+Required flow:
+`PPT request → artifact preparation if required → FAH → latest GitHub catalog → App Block/GenUI picker → real detail previews → user final selection → picker evidence → template_selection.json → generation/QA/PPTX`
+
+Machine hardening:
+- new `picker_surface_gate.py` records visible picker-surface evidence;
+- recommendation flows require `record_template_choice_v2.py --picker-evidence`;
+- direct user-specified templates use `--direct-template`;
+- gate v1 remains valid for legacy/resume compatibility;
+- non-primary picker surfaces require a fallback reason;
+- FAH execution contract remains v1.0 / unchanged;
+- GitHub Actions were not used.
+
+Durable history: `docs/ai-history/2026-08-27-gpts-app-block-picker-fail-closed.md`
+
+---
+
 Updated checkpoint: 2026-08-25 17:13 KST
 
 ## NEWEST CHECKPOINT — INLINE INTERACTIVE HTML GALLERY CANONICAL
@@ -171,3 +195,5 @@ The durable intent remains active: ChatGPT uses the conversation as the first se
 ## GitHub Actions policy
 
 GitHub Actions are default-off to conserve usage. They may be used only when the current user explicitly requests emergency deployment or explicitly requests GitHub Actions.
+
+Implementation commit: `b0234dd281dd733a5bdbc05a3106e4ddf74df4eb`
