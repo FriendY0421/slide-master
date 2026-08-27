@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Record a final user-confirmed deck/layout/free template choice."""
-
+"""Record a final user-confirmed template choice and optional production preset."""
 from __future__ import annotations
 
 import argparse
@@ -19,49 +18,50 @@ import template_catalog as catalog_core  # noqa: E402
 from picker_surface_gate import load_picker_evidence  # noqa: E402
 
 configure_utf8_stdio()
-
 GATE_VERSION = 2
+REPO_ROOT = SCRIPTS_DIR.parents[3]
+PRESETS_PATH = REPO_ROOT / "docs" / "gpts" / "PRODUCTION_PRESETS.json"
+
+
+def load_preset(preset_id: str) -> dict | None:
+    preset_id = str(preset_id or "").strip()
+    if not preset_id:
+        return None
+    try:
+        doc = json.loads(PRESETS_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(f"cannot read production presets ({exc})") from exc
+    presets = doc.get("presets", []) if isinstance(doc, dict) else []
+    matches = [p for p in presets if isinstance(p, dict) and p.get("id") == preset_id]
+    if len(matches) != 1:
+        raise ValueError(f"unknown production preset: {preset_id}")
+    return matches[0]
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Record final user-confirmed Slide Master template selection.")
-    parser.add_argument(
-        "template",
-        help=(
-            "namespaced key such as deck:mckinsey or layout:ai_ops; "
-            "bare unique ids remain compatible; 'free' for Free Design"
-        ),
-    )
+    parser.add_argument("template", help="deck:<id>, layout:<id>, a unique bare id, or 'free'")
     parser.add_argument("--purpose", default="")
+    parser.add_argument("--preset", default="", help="optional production preset id from docs/gpts/PRODUCTION_PRESETS.json")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--confirmed", action="store_true", help="required final-confirmation flag")
-    parser.add_argument(
-        "--picker-evidence",
-        type=Path,
-        default=None,
-        help="required for recommendation flows after a visible picker rendered",
-    )
-    parser.add_argument(
-        "--direct-template",
-        action="store_true",
-        help="use only when the user directly specified this registered template before recommendation",
-    )
+    parser.add_argument("--picker-evidence", type=Path, default=None, help="required for recommendation flows after a visible picker rendered")
+    parser.add_argument("--direct-template", action="store_true", help="only when the user directly specified this registered template before recommendation")
     args = parser.parse_args(argv)
 
     if not args.confirmed:
-        print(
-            "ERROR: final confirmation is required; pass --confirmed only after the user confirms",
-            file=sys.stderr,
-        )
+        print("ERROR: final confirmation is required; pass --confirmed only after the user confirms", file=sys.stderr)
         return 2
     if args.direct_template and args.picker_evidence is not None:
         print("ERROR: use either --direct-template or --picker-evidence, not both", file=sys.stderr)
         return 2
     if not args.direct_template and args.picker_evidence is None:
-        print(
-            "ERROR: recommendation flow requires --picker-evidence from a visibly rendered picker",
-            file=sys.stderr,
-        )
+        print("ERROR: recommendation flow requires --picker-evidence from a visibly rendered picker", file=sys.stderr)
+        return 2
+    try:
+        preset = load_preset(args.preset)
+    except ValueError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
         return 2
 
     picker = None
@@ -78,21 +78,7 @@ def main(argv: list[str] | None = None) -> int:
 
     choice = args.template.strip()
     if choice == "free":
-        result = {
-            "gate_version": GATE_VERSION,
-            "status": "selected",
-            "template": "free",
-            "template_kind": "free",
-            "template_id": "free",
-            "workspace": None,
-            "summary": "Free Design",
-            "purpose": args.purpose,
-            "selection_method": selection_method,
-            "selection_surface": selection_surface,
-            "picker_evidence": picker,
-            "selected_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-            "source_ref": "registered-local-catalog-v2",
-        }
+        template_fields = {"template": "free", "template_kind": "free", "template_id": "free", "workspace": None, "summary": "Free Design"}
     else:
         try:
             catalog = catalog_core.load_catalog(None)
@@ -103,22 +89,24 @@ def main(argv: list[str] | None = None) -> int:
         if not entry:
             print(f"ERROR: unknown or ambiguous template choice: {choice}", file=sys.stderr)
             return 2
-        result = {
-            "gate_version": GATE_VERSION,
-            "status": "selected",
-            "template": entry["key"],
-            "template_kind": entry["template_kind"],
-            "template_id": entry["template_id"],
-            "workspace": entry["workspace"],
+        template_fields = {
+            "template": entry["key"], "template_kind": entry["template_kind"],
+            "template_id": entry["template_id"], "workspace": entry["workspace"],
             "summary": entry.get("summary", ""),
-            "purpose": args.purpose,
-            "selection_method": selection_method,
-            "selection_surface": selection_surface,
-            "picker_evidence": picker,
-            "selected_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-            "source_ref": "registered-local-catalog-v2",
         }
 
+    result = {
+        "gate_version": GATE_VERSION,
+        "status": "selected",
+        **template_fields,
+        "purpose": args.purpose,
+        "production_preset": preset,
+        "selection_method": selection_method,
+        "selection_surface": selection_surface,
+        "picker_evidence": picker,
+        "selected_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "source_ref": "registered-local-catalog-v2",
+    }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     tmp = args.output.with_suffix(args.output.suffix + ".tmp")
     tmp.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
