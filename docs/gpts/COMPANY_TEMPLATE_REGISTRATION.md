@@ -58,3 +58,36 @@ Do not present `reference_reconstructed` as an exact extracted master.
 
 ## Direct-use rule
 If the user explicitly names an existing registered template, validate that template and use it directly; do not force the recommendation picker. A deprecated template may be used only when the user's explicit request resolves unambiguously to it.
+
+## Recommendation profile policy
+An imported company/user template is not ready for ACTIVE merely because its visuals render correctly. It must also carry enough semantic metadata for safe recommendation.
+
+For imported ACTIVE templates, define at minimum:
+- `display_name`, `categories`, `keywords`, and `purpose`;
+- for `private_company` or `public_sanitized`, at least one of `organization` or `brand_terms`;
+- recommended: `audience`, `aliases`, `document_types`, `tone`, `quality_score`;
+- use `avoid_for` for topics where the template should explicitly lose recommendation priority.
+
+Recommendation metadata should describe reusable intent, not one presentation's transient content. Examples:
+- `brand_terms`: organization/product names users are likely to type;
+- `document_types`: problem report, improvement proposal, executive report, training guide, KPI review;
+- `audience`: executive, manager, employee, customer;
+- `tone`: corporate, formal, concise, visual, data-heavy;
+- `avoid_for`: investor pitch, academic defense, consumer lifestyle, or other clearly unsuitable contexts.
+
+## Recommendation acceptance before registration close
+After approval and ACTIVE registration, FAH/registration automation should run representative prompt checks before declaring the onboarding complete.
+
+Use `template_recommendation_audit.py` with several positive-fit prompts and at least one clearly unsuitable prompt when applicable. A company template should rank highly only when the user's organization, purpose, audience, document type, or related keywords actually match.
+
+Example:
+```bash
+python .claude/skills/ppt-master/scripts/template_recommendation_audit.py \
+  --template deck:company_service \
+  --prompt "삼성전자서비스 센터 문제점 개선안 관리자 보고" \
+  --prompt "삼성서비스 VOC 개선 결과 보고" \
+  --avoid-prompt "AI 스타트업 투자자 피치덱" \
+  --top-n 3
+```
+
+Do not hard-code a company template as globally preferred. The recommendation engine must prefer a general template when the company template is a poorer fit for the actual request.
