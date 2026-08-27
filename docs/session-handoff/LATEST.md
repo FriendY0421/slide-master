@@ -1,5 +1,21 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-27T20:32:18+09:00 KST
+
+## NEWEST CHECKPOINT — MCP APPS PICKER LOCAL PROTOCOL VALIDATED
+
+PR #6 (`feat/apps-sdk-template-picker-20260827`) implements the real conversation-native Slide Master picker. Local and GitHub-source MCP protocol smoke tests now pass.
+
+Current state: `LOCAL_MCP_PROTOCOL_VALIDATED_CHATGPT_HOST_SMOKE_PENDING`.
+
+Validated: build/check, payload, `/mcp` initialize, tools/list, picker call, `ui://slide-master/template-picker-v1.html`, server-side final selection validation, picker evidence, production preset persistence, direct-template compatibility. GitHub Actions were not used.
+
+Remaining before merge: expose/connect the MCP endpoint to ChatGPT Developer Mode and verify the actual interactive UI plus `app.sendMessage` selection return inside ChatGPT.
+
+Durable history: `docs/ai-history/2026-08-27-apps-sdk-template-picker.md`
+
+---
+
 Updated checkpoint: 2026-08-27 KST
 
 ## NEWEST CHECKPOINT — COMPANY TEMPLATE LIFECYCLE VALIDATED

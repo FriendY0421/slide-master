@@ -32,9 +32,22 @@ Replace inconsistent prose-only GPTS template recommendations with a determinist
 The server was refactored to create a fresh `McpServer` + stateless `StreamableHTTPServerTransport` per `/mcp` request, following the MCP SDK stateless pattern. It was also migrated to `registerAppTool` / `registerAppResource` and the standard MCP Apps resource MIME.
 
 ## Current status
-`IMPLEMENTED_AWAITING_FINAL_LIVE_MCP_SMOKE`
+`LOCAL_MCP_PROTOCOL_VALIDATED_CHATGPT_HOST_SMOKE_PENDING`
 
-HOME-PC/Remote Desktop Commander disconnected before the corrected server could be re-run. Do **not** merge this branch to main until the following pass on a live runtime:
+HOME-PC reconnected and the corrected server was re-run. Local MCP protocol validation now passes. Do **not** merge this branch to main until the remaining ChatGPT Developer Mode host smoke is completed.
+
+### Validation completed after reconnect
+- `npm install`, bundle build and JavaScript checks: PASS.
+- Python payload/selection scripts compile: PASS.
+- `PICKER_SOURCE=local`: initialize, tools/list, picker call, UI resource read and final selection validation: PASS.
+- `PICKER_SOURCE=github`: same MCP smoke: PASS.
+- Picker result: 11 selectable / 6 shortlist / `deck:mckinsey` first / 5 production presets / 6 detail previews.
+- Picker evidence + `--preset storytelling_proposal` selection record + template gate: PASS.
+- Direct-template + preset compatibility: PASS.
+- UI resource size during smoke: about 589 KB, bundled module present.
+
+### Remaining host validation
+
 1. `npm install && npm run build && npm run check`.
 2. Start with `PICKER_SOURCE=local npm start`.
 3. MCP client/Inspector can initialize `/mcp`.

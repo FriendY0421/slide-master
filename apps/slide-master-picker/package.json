@@ -7,7 +7,8 @@
     "build": "esbuild web/src/app.js --bundle --format=esm --outfile=web/dist/app.js",
     "check": "node --check src/server.js && node --check web/src/app.js",
     "prestart": "npm run build",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "smoke": "node scripts/mcp-smoke.mjs"
   },
   "dependencies": {
     "@modelcontextprotocol/ext-apps": "^1.7.5",

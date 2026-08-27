@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-27T18:51:28+09:00",
+  "updated_at_kst": "2026-08-27T20:32:18+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-COMPANY-TEMPLATE-LIFECYCLE-20260827",
-    "status": "COMPANY_TEMPLATE_LIFECYCLE_VALIDATED",
-    "mode": "ACTIVE_ONLY_PICKER_GOVERNANCE",
+    "work_id": "SLIDE-MASTER-MCP-APPS-PICKER-20260827",
+    "status": "LOCAL_MCP_VALIDATED_HOST_SMOKE_PENDING",
+    "mode": "MCP_APPS_REMOTE_CONNECT_PENDING",
     "actor": "ChatGPT",
-    "summary": "Added company/user template onboarding, metadata lifecycle, production presets, and ACTIVE-only picker filtering while preserving legacy templates as ACTIVE by default.",
-    "history_file": "docs/ai-history/2026-08-27-company-template-lifecycle.md"
+    "summary": "PR #6 implements the real Slide Master MCP Apps picker. Local and GitHub-source Streamable HTTP MCP smoke tests pass, including tools/list, picker call, UI resource read, final selection validation, picker evidence, preset persistence, and direct-template compatibility. ChatGPT Developer Mode UI/message-bridge smoke remains before merge.",
+    "history_file": "docs/ai-history/2026-08-27-apps-sdk-template-picker.md"
   },
   "production": {},
   "source_authority": {
@@ -301,10 +301,35 @@
         "summary": "Resolved GPTS prose-only template recommendation regression by reconciling conflicting selection-surface authority. App Block/GenUI is primary when available; lower-priority surfaces require fallback reasons. Added machine picker-surface evidence and gate-v2 selection enforcement while preserving legacy v1 records and the accepted FAH execution contract.",
         "history_file": "docs/ai-history/2026-08-27-gpts-app-block-picker-fail-closed.md"
       }
+    },
+    "apps_sdk_template_picker": {
+      "status": "LOCAL_MCP_PROTOCOL_VALIDATED",
+      "branch": "feat/apps-sdk-template-picker-20260827",
+      "pull_request": 6,
+      "local_source_smoke": "PASS",
+      "github_source_smoke": "PASS",
+      "tools_list": "PASS",
+      "picker_call": "PASS",
+      "ui_resource_read": "PASS",
+      "selection_validation": "PASS",
+      "picker_gate_with_preset": "PASS",
+      "direct_template_with_preset": "PASS",
+      "chatgpt_host_ui_message_bridge": "PENDING",
+      "merge_ready": false,
+      "github_actions_used": false,
+      "previous_latest_work": {
+        "work_id": "SLIDE-MASTER-COMPANY-TEMPLATE-LIFECYCLE-20260827",
+        "status": "COMPANY_TEMPLATE_LIFECYCLE_VALIDATED",
+        "mode": "ACTIVE_ONLY_PICKER_GOVERNANCE",
+        "actor": "ChatGPT",
+        "summary": "Added company/user template onboarding, metadata lifecycle, production presets, and ACTIVE-only picker filtering while preserving legacy templates as ACTIVE by default.",
+        "history_file": "docs/ai-history/2026-08-27-company-template-lifecycle.md"
+      }
     }
   },
   "authority": {
     "read_order": [
+      "docs/ai-history/2026-08-27-apps-sdk-template-picker.md",
       "docs/ai-history/2026-08-27-company-template-lifecycle.md",
       "docs/ai-history/2026-08-27-gpts-app-block-picker-fail-closed.md",
       "docs/ai-history/2026-08-25-inline-interactive-html-gallery-authority.md",
@@ -354,7 +379,7 @@
     "Recommended-template selection records created under gate v2 require valid picker-surface evidence; non-primary picker surfaces require a concrete fallback reason.",
     "A user-directly-specified valid registered template may skip picker rendering and must be recorded through the direct-template selection path."
   ],
-  "next_priority": "Deploy updated PPT GPTS instructions/knowledge, then Preview-test interactive picker and company-template onboarding against current main.",
+  "next_priority": "Connect PR #6 MCP endpoint to ChatGPT Developer Mode, verify interactive UI and app.sendMessage selection return, then mark PR ready and merge.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",

@@ -1,0 +1,20 @@
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+
+const client = new Client({ name: "slide-master-picker-smoke", version: "1.0.0" });
+const transport = new StreamableHTTPClientTransport(new URL("http://127.0.0.1:3000/mcp"));
+await client.connect(transport);
+const tools = await client.listTools();
+console.log("TOOLS", tools.tools.map((t) => t.name).join(","));
+const purpose = "삼성전자서비스 천안센터 문제점";
+const picker = await client.callTool({ name: "open_slide_master_template_picker", arguments: { purpose, recommendation_limit: 6 } });
+const sc = picker.structuredContent || {};
+console.log("PICKER", sc.selectable_total, sc.shortlist?.length, sc.shortlist?.[0]?.id, sc.presets?.length);
+const resources = await client.listResources();
+console.log("RESOURCES", resources.resources.map((r) => r.uri).join(","));
+const ui = await client.readResource({ uri: "ui://slide-master/template-picker-v1.html" });
+const html = ui.contents?.[0]?.text || "";
+console.log("UI", html.length, html.includes("<script type=\"module\">"));
+const valid = await client.callTool({ name: "validate_slide_master_selection", arguments: { purpose, template_id: "deck:mckinsey", preset_id: "storytelling_proposal" } });
+console.log("VALIDATE", valid.isError === true ? "ERROR" : valid.structuredContent?.valid, valid.structuredContent?.selection_token || "");
+await client.close();
