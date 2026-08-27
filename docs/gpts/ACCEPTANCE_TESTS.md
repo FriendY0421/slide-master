@@ -9,7 +9,8 @@ Expected:
 - detail navigation shows up to 6 real layouts/examples;
 - production presets are selectable in the same app;
 - final app button sends `deck:<id> | preset:<id>` into chat;
-- picker evidence + template selection evidence exist before generation.
+- picker evidence + template selection evidence exist before generation;
+- `template_selection.json.production_preset.id` matches the user's selected preset.
 
 ## B. MCP Apps protocol
 Expected:
@@ -18,22 +19,24 @@ Expected:
 - tool is annotated read-only/non-destructive;
 - tool result has lightweight `structuredContent` plus full UI payload in `_meta.pickerPayload`;
 - `ui://slide-master/template-picker-v1.html` resolves with MIME `text/html;profile=mcp-app`;
-- ChatGPT UI can receive the result and render real previews.
+- ChatGPT UI can receive the result and render real previews;
+- final UI interaction can update model context and send a user message back to chat.
 
 ## C. Direct template
 Input: `McKinsey Strategy로 천안센터 문제점 PPT`
 Expected:
 - exact registered template is resolved and locked;
 - recommendation picker is skipped;
-- `--direct-template` evidence path is used.
+- `--direct-template` evidence path is used;
+- an explicitly supplied valid `--preset` is preserved.
 
 ## D. Fallback
 Simulate unavailable Slide Master Picker app/App Block.
 Expected: next visual surface is used, fallback reason is recorded, and text is only the last resort.
 
-## E. Invalid evidence
-Call `record_template_choice_v2.py ... --confirmed` without `--picker-evidence` and without `--direct-template`.
-Expected: exit non-zero.
+## E. Invalid evidence / preset
+- `record_template_choice_v2.py ... --confirmed` without `--picker-evidence` and without `--direct-template` must exit non-zero.
+- an unknown `--preset` id must exit non-zero.
 
 ## F. Company template lifecycle
 - A newly registered CANDIDATE template must not appear in normal picker/recommendation inventory.
