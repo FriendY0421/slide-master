@@ -1,5 +1,5 @@
 ---
-description: Mandatory scalable inline-interactive template-selection gate for new Slide Master decks
+description: Mandatory scalable conversation-interactive template-selection gate for new Slide Master decks
 ---
 
 # Template Selection Gate
@@ -11,66 +11,97 @@ Every new deck requires explicit template selection before research, project ini
 
 Apply to new decks from topics, URLs, documents, spreadsheets, conversation content, or re-architectable PPTX source.
 
-Exempt only the documented direct-PPTX/resume routes:
+Exempt only documented direct-PPTX/resume routes:
 - `ppt-template-fill`
 - strict 1:1 `beautify-pptx`
 - `native-enhance-pptx`
 - resume of a project with already-confirmed template evidence
 
+A user who directly specifies a valid registered template does not need the picker, but still requires explicit selection recording.
+
 ## Host preparation is not generation permission
 
-A ChatGPT host may require `artifact_handoff` / presentation preparation before any other tool call. That call is **preparation only**. Immediately after it, enter this template-selection workflow. Do not research, initialize a project, author slides, or export PPTX until valid template-selection evidence exists.
+A ChatGPT host may require `artifact_handoff` / presentation preparation before any other tool call. That call is preparation only. Immediately after it, enter this workflow. Do not research, initialize, author slides, or export PPTX until valid selection evidence exists.
 
 ## Runtime catalog — latest GitHub every request
 
-Use the unified index-driven catalog:
-
-`template_catalog.py`
-
-It merges registered:
+Use `template_catalog.py`, which merges:
 - Decks from `templates/decks/decks_index.json`
 - Layouts from `templates/layouts/layouts_index.json`
 
-Do not hard-code template ids or counts. New/updated registered entries must appear automatically on the next PPT request.
+Do not hard-code ids or counts. New/updated registered entries must appear automatically on the next PPT request.
 Use collision-safe keys `deck:<id>` / `layout:<id>`.
 
-For FriendY production PPT requests, refresh from GitHub `main` rather than silently relying on a stale local catalog.
+For FriendY production PPT requests, refresh from GitHub `main` rather than silently relying on stale local state.
 
-## ChatGPT primary flow — SELF-CONTAINED INTERACTIVE HTML IN THE CONVERSATION
+## Stage 1 — conversation-native interactive picker first
 
-The canonical selection surface is the **self-contained HTML gallery rendered interactively inside the ChatGPT conversation body**, matching the user-approved `preview(1).html` UX.
+On ChatGPT/GPTS, if App Block / GenUI is available, it is mandatory as the first selection surface.
 
-Build it with:
+Use `template_gallery_chat_manifest_v2.py` as the live data contract for the picker:
 
-`python .claude/skills/ppt-master/scripts/template_gallery_inline_html.py --source github --purpose "<actual purpose>" --page-size 12 --output <gallery.html>`
+`python .claude/skills/ppt-master/scripts/template_gallery_chat_manifest_v2.py --source github --purpose "<actual purpose>" --limit 10 --output <manifest.json>`
 
-Then surface that HTML artifact in the same conversation. **Stop there.** Do not continue presentation generation until the user completes selection in the gallery and returns the selected id in chat.
+Render the shortlist into the host-native interactive UI. Do not first answer with a prose list of template ids.
 
-### Inline HTML UI contract
+The picker must:
+- show 5–10 relevant real registered candidates when available;
+- use actual registered representative previews;
+- expose recommendation reasons;
+- allow card/page navigation;
+- preserve a tentative selected state;
+- expose Free Design separately;
+- permit return to other templates.
 
-The generated gallery must:
+Default recommendation display target is 6; up to 10 candidates may be shown when useful.
 
-- be self-contained; no localhost server dependency;
-- embed real registered SVG previews and package-local assets as data URIs;
-- show purpose-aware recommendations without auto-selecting;
-- expose the complete current GitHub registered catalog;
-- provide search by name/summary/id;
-- provide Deck/Layout filters;
-- paginate automatically when many templates exist (default 12 cards/page; presentation may adapt for usability);
-- provide Free Design separately;
-- open a clicked card in an in-page modal/dialog;
-- show up to 6 real examples from the exact selected workspace;
-- include `다른 템플릿 보기` and `이 템플릿 선택` controls;
-- display the final selected name/id at the top after confirmation;
-- tell the user to send the selected id back into chat.
+## Stage 2 — selected-template detail
 
-The UI pattern is fixed semantically, not visually: `gallery cards → click → detail modal → up to six real examples → 이 템플릿 선택 → selected id shown`. Styling may evolve as long as this interaction remains clear and polished.
+After a tentative card choice, show up to 6 real examples from that exact workspace:
+- Cover
+- TOC / Section
+- Content
+- Data / Chart
+- Comparison / Before-After
+- Ending
 
-## Selection evidence
+The Stage-1 choice is tentative. Do not write selection evidence yet.
 
-The HTML button `이 템플릿 선택` is the final UI confirmation. When the user sends the selected id back in chat, record:
+## Stage 3 — presentation-production preset
 
-`python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --purpose "<purpose>" --output <result.json> --confirmed`
+When the request benefits from it, present 3–5 relevant production presets using the same card interaction pattern.
+Examples include Balanced Report, Executive Brief, Storytelling Proposal, Data Insight, Training & Guide, and Product/Service Showcase.
+
+The template and preset are separate decisions. A recommended combination may be highlighted but never auto-confirmed.
+
+## Stage 4 — final confirmation
+
+Display a final selection token such as:
+
+`deck:mckinsey | preset:storytelling_proposal`
+
+If the interactive UI's state is local to the app, instruct the user to return/confirm the template id in chat.
+Only an explicit user confirmation is final.
+
+## Picker render evidence
+
+After the visible picker renders, record its surface:
+
+`python .claude/skills/ppt-master/scripts/picker_surface_gate.py record <picker.json> --surface app_block --purpose "<purpose>" --source-ref "github:main" --candidate-count <n> --detail-preview-max 6 --rendered`
+
+For `genui`, use `--surface genui`.
+
+If App Block / GenUI is unavailable, use the fallback hierarchy below. Every non-primary surface requires `--fallback-reason "<why primary could not be used>"`.
+
+## Final selection evidence
+
+Recommended-template flow:
+
+`python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --purpose "<purpose>" --picker-evidence <picker.json> --output <result.json> --confirmed`
+
+Direct user-specified template flow:
+
+`python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --purpose "<purpose>" --direct-template --output <result.json> --confirmed`
 
 Then initialize:
 
@@ -78,35 +109,48 @@ Then initialize:
 
 Only after this succeeds may research/generation continue.
 
-## Korean rendering
-
-The inline HTML should preserve Korean text whenever the browser artifact can render the declared Korean-capable font stack. Never present broken glyph boxes as valid previews. Registered SVG content remains the design source; do not recreate approximate thumbnails.
-
 ## Fallback hierarchy
 
 Use this exact order:
 
-1. **Primary:** self-contained interactive HTML artifact inside the current ChatGPT conversation (`template_gallery_inline_html.py`).
-2. **Secondary:** conversation-native static/visual two-stage gallery only if the host cannot render the HTML artifact interactively.
-3. **Auxiliary last fallback:** external/local browser server (`template_gallery_unified.py`) only when both internal conversation surfaces are unavailable or recovery explicitly requires it.
+1. conversation-native interactive App Block / GenUI;
+2. another conversation-native real-preview visual/card surface;
+3. self-contained interactive HTML in the conversation (`template_gallery_inline_html.py`);
+4. stable GitHub-rendered visual catalog (`docs/template-gallery/README.md`);
+5. external/local browser recovery (`template_gallery_unified.py`);
+6. text-only ids as last resort.
 
-The external browser path must never become the default merely because its controls are richer.
+A lower-priority path requires a recorded fallback reason. No fallback may bypass explicit user confirmation.
+
+## Self-contained HTML fallback contract
+
+When the HTML fallback is needed, build:
+
+`python .claude/skills/ppt-master/scripts/template_gallery_inline_html.py --source github --purpose "<actual purpose>" --page-size 12 --output <gallery.html>`
+
+It must remain self-contained, embed real registered previews, provide search/filters/pagination, Free Design, card detail modal, up to 6 exact examples, and final selected-id display.
+
+## Korean rendering
+
+Never present broken glyph boxes as valid previews. Use a verified Korean-capable font stack or safe English sample tokens inside raster previews with Korean labels outside.
 
 ## Hard failures
 
 Stop rather than proceed when any of these occurs:
 
-- PPT generation starts after `artifact_handoff` but before template evidence;
-- a fixed/hard-coded template list is used instead of current GitHub indexes;
-- only names/numbers are shown;
-- Markdown `<img>` links are used as a substitute for the approved interactive gallery;
+- generation starts before template evidence;
+- a fixed/hard-coded template list replaces the current GitHub indexes;
+- App Block / GenUI is available but the assistant answers with only names/ids;
+- only names/numbers are shown and treated as a completed visual selection step;
 - a static PNG is represented as interactive UI;
 - real registered previews are missing;
-- selected-template detail examples are skipped;
-- final evidence is written before the gallery's final selection is returned in chat;
+- selected-template detail review is skipped for recommendation flows;
+- picker evidence is missing for a recommended-template final record;
+- a fallback is used without its reason;
+- final evidence is written before explicit user confirmation;
 - broken Korean glyphs are visible;
 - valid selection evidence is missing.
 
 ## Downstream enforcement
 
-`template_selection.json`, `template_gate.py`, `new_deck_init.py`, and guarded `svg_to_pptx.py` remain fail-closed. The selection-surface changes do not weaken the FAH `TEMPLATE_SELECTION` contract.
+`picker_surface_gate.py`, `template_selection.json`, `template_gate.py`, `new_deck_init.py`, and guarded `svg_to_pptx.py` remain fail-closed. The UI change strengthens rather than weakens the FAH `TEMPLATE_SELECTION` contract.
