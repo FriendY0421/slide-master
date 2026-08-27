@@ -14,6 +14,8 @@
 - Lower-priority surfaces require a recorded reason why the primary picker was unavailable.
 - A user-directly-specified valid template skips the picker and is locked for generation.
 - New ACTIVE registered company/user templates automatically join future recommendations.
+- Company/user template onboarding follows `docs/gpts/COMPANY_TEMPLATE_REGISTRATION.md`; new imports start as CANDIDATE and require preview approval before ACTIVE.
+- Production-style selection follows `docs/gpts/PRODUCTION_PRESETS.json`.
 - Never store company confidential source files in the public repository.
 
 ## Required interaction order

@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "presets": [
+    {
+      "id": "balanced_report",
+      "display_name": "Balanced Report",
+      "summary": "보고·공유에 가장 범용적인 균형형",
+      "slide_range": "10-15",
+      "content_density": "balanced",
+      "visual_ratio": {"text": 40, "visual": 60},
+      "best_for": ["업무보고", "현황공유", "개선활동", "프로젝트 결과"]
+    },
+    {
+      "id": "executive_brief",
+      "display_name": "Executive Brief",
+      "summary": "핵심 결론과 의사결정 포인트를 빠르게 전달",
+      "slide_range": "6-10",
+      "content_density": "low",
+      "visual_ratio": {"text": 30, "visual": 70},
+      "best_for": ["임원보고", "의사결정", "핵심 KPI", "요약보고"]
+    },
+    {
+      "id": "storytelling_proposal",
+      "display_name": "Storytelling Proposal",
+      "summary": "문제→원인→해결→효과로 설득하는 제안형",
+      "slide_range": "12-18",
+      "content_density": "balanced",
+      "visual_ratio": {"text": 35, "visual": 65},
+      "best_for": ["개선안", "제안서", "신규 프로젝트", "변화관리"]
+    },
+    {
+      "id": "data_insight",
+      "display_name": "Data Insight",
+      "summary": "수치·KPI·트렌드·비교를 중심으로 분석",
+      "slide_range": "10-15",
+      "content_density": "high",
+      "visual_ratio": {"text": 25, "visual": 75},
+      "best_for": ["실적", "품질", "VOC", "트렌드", "성과분석"]
+    },
+    {
+      "id": "training_guide",
+      "display_name": "Training & Guide",
+      "summary": "단계별 설명과 예시 중심의 교육형",
+      "slide_range": "15-25",
+      "content_density": "medium_high",
+      "visual_ratio": {"text": 45, "visual": 55},
+      "best_for": ["교육", "매뉴얼", "사용법", "사내 가이드"]
+    },
+    {
+      "id": "product_showcase",
+      "display_name": "Product / Service Showcase",
+      "summary": "제품·서비스·브랜드 스토리를 시각적으로 전달",
+      "slide_range": "8-14",
+      "content_density": "low_medium",
+      "visual_ratio": {"text": 25, "visual": 75},
+      "best_for": ["제품소개", "서비스소개", "브랜드", "행사 발표"]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Slide Master Template Metadata",
+  "type": "object",
+  "properties": {
+    "display_name": {"type": "string"},
+    "version": {"type": "string"},
+    "status": {"enum": ["CANDIDATE", "ACTIVE", "DEPRECATED", "DISABLED"]},
+    "visibility": {"enum": ["public", "public_sanitized", "private_company", "private_user"]},
+    "source_type": {"enum": ["native", "pptx", "potx", "pdf_reference", "image_reference", "photo_reference"]},
+    "fidelity": {"enum": ["native", "master_extracted", "reference_reconstructed"]},
+    "primary_category": {"type": "string"},
+    "categories": {"type": "array", "items": {"type": "string"}},
+    "keywords": {"type": "array", "items": {"type": "string"}},
+    "audience": {"type": "array", "items": {"type": "string"}},
+    "purpose": {"type": "array", "items": {"type": "string"}},
+    "aliases": {"type": "array", "items": {"type": "string"}},
+    "defaults": {"type": "object"},
+    "quality_score": {"type": "number", "minimum": 0, "maximum": 100},
+    "approved_at": {"type": ["string", "null"]},
+    "approval_note": {"type": ["string", "null"]}
+  },
+  "recommended": ["display_name", "version", "status", "visibility", "source_type", "fidelity", "categories", "keywords"]
+}
