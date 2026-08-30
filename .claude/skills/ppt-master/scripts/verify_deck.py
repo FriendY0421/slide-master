@@ -342,6 +342,12 @@ def run_checks(project: Path) -> tuple[list[str], list[str]]:
     elif _run_script("svg_quality_checker.py", [str(project)]) != 0:
         failures.append("svg_quality_checker.py reported errors on svg_output/")
 
+    # 6b. design-quality heuristics: technically valid SVGs can still look
+    # cramped, card-heavy, visually tiny, or monotonous. This lightweight
+    # gate catches those composition/readability failure patterns.
+    if _run_script("design_quality_gate.py", [str(project)]) != 0:
+        failures.append("design_quality_gate.py reported composition/readability errors")
+
     # 7. notes mapping (opt-in artifact; only checked when present)
     notes = [p for p in (project / "notes").glob("*.md")
              if p.name != "total.md"] if (project / "notes").is_dir() else []

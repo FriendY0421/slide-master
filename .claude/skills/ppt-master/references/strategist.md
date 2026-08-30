@@ -488,6 +488,8 @@ Read the relevant `_index.md` at confirmation `d` (Layer 1 / Layer 2) for its ca
 
 ## 4. Layout Pattern Library
 
+> **Design System V3 gate — mandatory for new PPTs:** read `docs/ppt-project/DESIGN_SYSTEM_V3.md` before finalizing §IX. Plan every content slide as **one assertion + one focal visual + supporting evidence**. Prefer 1–3 primary regions; 5+ equal cards are a split/regroup signal. For text+visual pages, prefer an asymmetric 60:40 or 65:35 weight unless the content is a true comparison. Treat the 6×7 convention as an upper-density warning for projected slides, not a target.
+
 > **Principle — proportion follows information weight, not preset ratios.** Combine patterns, break the grid for `breathing` pages, or propose new patterns. Defaulting every page to symmetric grid produces the "AI-generated" look.
 
 | Pattern | Suitable Scenarios | PPT 16:9 Reference Dimensions |

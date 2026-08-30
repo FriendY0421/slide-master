@@ -12,7 +12,7 @@ For every FriendY new PPT/presentation/slides request:
 4. Missing `TEMPLATE_SELECTION` evidence is `WAIT_USER_ACTION` and must stop generation.
 5. Upstream `byungjunjang/slide-master`, generic slide generators, host-native artifact shortcuts, or a successful `artifact_handoff` call must not bypass this gate.
 
-**Hard interpretation:** `artifact_handoff = prepare`; valid gate-v3 `template_selection.json = permission to research`; explicit storyline approval = permission to generate.
+**Hard interpretation:** `artifact_handoff = prepare`; valid gate-v3 `template_selection.json = permission to research`; explicit storyline approval = permission to generate. A Picker handoff carrying `NEXT_STATE=WAIT_STORYLINE_PREVIEW` or `GENERATION_ALLOWED=false` explicitly blocks generation even though template+preset selection is complete.
 
 ## Standard user-visible PPT workflow - MUST FOLLOW
 

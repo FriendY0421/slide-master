@@ -159,6 +159,8 @@ It returns the checker-identical verdict per block: width wrap (`CHECKER_FLAG`/`
 
 If a page needs a value not in `spec_lock.md`, surface it — do not silently invent one.
 
+**Design System V3 execution contract:** `docs/ppt-project/DESIGN_SYSTEM_V3.md` is the visual-readability authority for new non-preservation decks. Geometry must support the locked type rather than shrink it. Normal content slides prefer 1–3 primary regions, meaningful visuals at roughly 35–60% of the content area when visuals are part of the message, 28–36px horizontal card padding, 20–30px vertical padding, and body line-height around 1.35–1.50×. Five or more equal rounded cards, tiny decorative imagery, or a dense center island surrounded by unused space are repair signals, not acceptable defaults. Do not repeat the same dense card-grid composition for three consecutive content slides unless the storyline genuinely requires it.
+
 **Per-page layout rhythm — `page_rhythm` section**:
 
 Before drawing each page, look up its entry in `page_rhythm` (key format `P<NN>` matching the page index in §IX of `design_spec.md`) and apply the corresponding layout discipline:

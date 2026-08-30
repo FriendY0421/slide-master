@@ -1,5 +1,23 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-30 22:30 KST
+
+## NEWEST CHECKPOINT — SLIDE DESIGN SYSTEM V3 / RECOGNIZED-SOURCE QUALITY GATE
+
+The real 20-slide Samsung future-strategy test exposed a host-flow bypass plus weak visual heuristics. New Slide Design V3 formalizes one-slide/one-assertion hierarchy, 28/34/40px typography, 1.35–1.50x body line spacing, 28–36px horizontal card padding, 1–3 primary regions, meaningful 35–60% visuals, asymmetric 60:40/65:35 composition, and long-deck rhythm rules.
+
+A new `design_quality_gate.py` is wired into `verify_deck.py` to catch cramped multiline text, 6+ card walls, tiny/decorative imagery, dense center islands, and repeated dense layout signatures. External design references are authority-filtered: official Microsoft/Duarte/Presentation Zen first; GitHub references normally require >=1,000 stars, active maintenance, and presentation relevance.
+
+Picker handoff values `NEXT_STATE=WAIT_STORYLINE_PREVIEW` / `GENERATION_ALLOWED=false` are now explicitly treated as generation blockers by the main workflow. The Apps SDK feature branch separately fixes the stale final Picker message that previously said to continue PPT production immediately.
+
+Durable handoff: `docs/session-handoff/20260830_SLIDE_DESIGN_SYSTEM_V3.md`
+
+Detailed history: `docs/ai-history/2026-08-30-slide-design-system-v3.md`
+
+GitHub Actions were not used.
+
+---
+
 Updated checkpoint: 2026-08-30 22:14 KST
 
 ## NEWEST CHECKPOINT ? USER-EDITABLE STORYLINE + LAYOUT READABILITY V2

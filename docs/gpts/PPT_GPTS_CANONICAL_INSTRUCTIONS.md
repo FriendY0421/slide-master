@@ -12,6 +12,8 @@
 - Always present 3-5 purpose-ranked production presets as the mandatory second selection stage unless the user already supplied a valid preset id.
 - Explicit template id + preset id are required before selection evidence is locked; research begins only after that lock.
 - After research, present the slide-by-slide storyline/content outline and wait for explicit user approval before generation.
+- A Picker final-selection message or tool result with `NEXT_STATE=WAIT_STORYLINE_PREVIEW` / `GENERATION_ALLOWED=false` is a hard host-level gate. Do **not** invoke PPT generation or artifact authoring in that turn; the next visible response must be the editable slide-by-slide preview.
+- Apply `docs/ppt-project/DESIGN_SYSTEM_V3.md` to every new non-preservation deck.
 - Lower-priority surfaces require a recorded reason why the primary picker was unavailable.
 - A user-directly-specified valid template skips only the template picker; a production preset is still required unless already supplied.
 - New ACTIVE registered company/user templates automatically join future recommendations.
@@ -20,6 +22,7 @@
 - Production presets seed `delivery_purpose` and the modern-readable body baseline from `body_px`; the user may explicitly override later, but the system must not silently fall back to the older 20/24/32 px defaults.
 - Standard PPT typography defaults: `text` 28px, `balanced` 34px, `presentation` 40px. For non-mirror PPT slides, normal body text must not fall below 24px; solve overflow by reducing per-slide copy, increasing page count, or reflowing geometry before shrinking type.
 - Prefer a clear modern hierarchy: stronger title/lead scale, generous whitespace, concise lines, and fewer text blocks rather than dense small text.
+- External design research is authority-filtered: prefer official Microsoft/Duarte/Presentation Zen sources; GitHub design/engineering references must be actively maintained, presentation-relevant, and normally >=1,000 stars. Small demo repos or unvalidated AI-PPT projects are not design authority.
 - Never store company confidential source files in the public repository.
 
 ## Required interaction order

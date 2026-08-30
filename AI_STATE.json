@@ -3,16 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-30T22:22:00+09:00",
+  "updated_at_kst": "2026-08-30T22:30:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-STORYLINE-LAYOUT-READABILITY-V2-20260830",
-    "status": "CURRENT_ON_MAIN",
-    "mode": "USER_EDITABLE_STORYLINE_FAIL_CLOSED_AND_READABILITY_V2",
+    "work_id": "SLIDE-MASTER-DESIGN-SYSTEM-V3-20260830",
+    "status": "IMPLEMENTED_VALIDATED_COMMIT_PENDING",
+    "mode": "RECOGNIZED_SOURCE_DESIGN_AUTHORITY_AND_MACHINE_QUALITY_GATE",
     "actor": "ChatGPT",
-    "summary": "Added user-editable full slide-by-slide preview approval evidence before generation; raised PPT typography defaults to 28/34/40px; added natural card padding/line-spacing/content-occupancy rules; validated 20/30-slide flows and export blocking.",
-    "history_file": "docs/ai-history/2026-08-30-storyline-layout-readability-v2.md",
-    "implementation_commit": "fabf6b60afe99de9114ab8eecb718a4bdfe01438"
+    "summary": "Added Slide Design System V3 based on mature recognized presentation sources; added one-slide/one-assertion composition rules and a machine design-quality gate for cramped spacing, card walls, weak imagery, dead-space imbalance and repeated layouts; host workflow explicitly blocks generation when Picker says WAIT_STORYLINE_PREVIEW.",
+    "history_file": "docs/ai-history/2026-08-30-slide-design-system-v3.md"
   },
   "production": {},
   "source_authority": {
@@ -384,7 +383,7 @@
     "Standard non-mirror PPT typography recommendations are text 28px, balanced 34px, presentation 40px; 24px is an emergency floor, not the normal default.",
     "Body-bearing cards use natural inner padding/line spacing and content regions must be rebalanced before shrinking type; avoid dense small boxes surrounded by unexplained empty space."
   ],
-  "next_priority": "Validate the next real generated PPT visually with the user: first show/edit/approve the full slide-by-slide preview, then confirm larger 28/34/40 typography and natural card padding/line spacing/content occupancy in the exported deck.",
+  "next_priority": "Real host acceptance: Picker must hand off to a full editable slide-by-slide preview before any generation; after explicit approval, validate the exported deck against Slide Design System V3 and design_quality_gate.py.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",
