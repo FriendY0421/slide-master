@@ -33,3 +33,5 @@ Real ChatGPT test rendered the Slide Master Picker surface but the final selecti
 
 ## Operating rule
 Do not diagnose visible Picker UI as failed solely from the initial `host_ui_rendered` field. For final-selection failures, inspect the confirm bridge first. A transient Tunnel/server-validation error must not erase a valid template+preset selection already present in the server-issued Picker payload.
+
+Implementation commit: `71c93082088a9dd826481d581d8c5d1fd3e38257`

@@ -33,3 +33,5 @@ The UI bundle is read from disk by the running server resource handler, so the c
 5. only then investigate host app rendering/bridge behavior.
 
 GitHub Actions remain opt-in only and were not used.
+
+Implementation commit: `71c93082088a9dd826481d581d8c5d1fd3e38257`

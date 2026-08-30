@@ -7,12 +7,12 @@
   "state_sync_status": "CURRENT",
   "latest_work": {
     "work_id": "SLIDE-MASTER-PICKER-CONFIRM-RELIABILITY-20260831",
-    "status": "VALIDATED_PENDING_NORMAL_SERVER_RESTART_FOR_METADATA_ONLY",
+    "status": "CURRENT_ON_FEATURE_BRANCH_UI_LIVE_SERVER_METADATA_ON_NEXT_NORMAL_RESTART",
     "mode": "PAYLOAD_PRIMARY_CONFIRM_WITH_ADVISORY_SERVER_REVALIDATION",
     "actor": "ChatGPT",
     "summary": "Hardened final Picker confirmation after real host evidence showed intermittent Tunnel HTTP 502. Server-issued picker payload is now the primary selection authority; validation-call failure no longer resets/blocks confirmation, sendMessage has a visible/copyable fallback, and initial host render state is modeled as pending/null rather than failure false. Storyline preview remains mandatory before PPT generation.",
     "history_file": "docs/ai-history/2026-08-31-picker-confirm-reliability.md",
-    "implementation_commit": "PENDING_CURRENT_COMMIT"
+    "implementation_commit": "71c93082088a9dd826481d581d8c5d1fd3e38257"
   },
   "production": {},
   "source_authority": {
