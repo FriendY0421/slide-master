@@ -29,6 +29,17 @@ Environment variables:
 Health endpoint: `GET /health`
 MCP endpoint: `POST/GET /mcp`
 
+## Windows reinstall / recovery
+
+For a Windows format, PC replacement, or complete local rebuild, use the repository recovery package instead of reconstructing the setup from chat history:
+
+- full runbook: `docs/ops/SLIDE_MASTER_PICKER_WINDOWS_RECOVERY.md`
+- bootstrap installer: `ops/windows/Install_SlideMasterPicker_Runtime.bat`
+- daily one-click launcher: `ops/windows/Start_SlideMasterPicker.bat`
+- Picker/Tunnel helpers and safe tunnel profile example: `ops/windows/`
+
+Secrets are intentionally not included. The OpenAI Runtime API Key must be recreated/stored locally and referenced through the tunnel profile's `file:` secret path.
+
 ## ChatGPT connection
 
 ChatGPT does not connect directly to a localhost MCP server. For development, expose the `/mcp` endpoint through OpenAI Secure MCP Tunnel or another trusted HTTPS deployment, then create/enable the custom app in ChatGPT Developer Mode and run **Scan Tools**.
@@ -46,6 +57,7 @@ Run:
 ```text
 npm run build
 npm run check
+npm run smoke
 ```
 
 Then use an MCP client/Inspector against `http://localhost:3000/mcp`. Validate that the tool is discoverable, returns shortlist metadata, and the UI resource MIME is `text/html;profile=mcp-app`.
