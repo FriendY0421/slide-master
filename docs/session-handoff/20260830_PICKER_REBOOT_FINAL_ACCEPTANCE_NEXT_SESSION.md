@@ -5,7 +5,7 @@ Repository: `FriendY0421/slide-master`
 Runtime branch: `feat/apps-sdk-template-picker-20260827`
 Baseline HEAD before acceptance fix: `1146659d9db845f2a256f5e4096b9f7e97cd4f71`
 PR: #6 (Draft)
-Status: LOCAL COLD-START ACCEPTANCE PASS / CHATGPT HOST ACCEPTANCE PENDING
+Status: LOCAL COLD-START ACCEPTANCE PASS / CHATGPT HOST ACCEPTANCE BLOCKED BY CONVERSATION CAPABILITY
 
 ## Why this handoff exists
 
@@ -119,3 +119,19 @@ Evidence captured directly from HOME-PC logs:
 Conclusion: the reboot cold-start ordering and payload-buffer defects are accepted as fixed in the real reboot environment. No process termination was required. GitHub Actions were not used.
 
 Remaining acceptance is host-side only: issue exactly one real ChatGPT Slide Master Picker request and verify cards/images render and a user selection returns through the app. PR #6 remains Draft until that host acceptance passes.
+## ChatGPT host acceptance — blocked by conversation capability
+
+After the second reboot cold-start acceptance passed locally, exactly one real ChatGPT host Picker invocation was attempted from the conversation.
+
+Result:
+- tool invocation reached the ChatGPT host;
+- host returned `FORBIDDEN: This conversation does not support developer MCPs`;
+- no repeated retry was performed;
+- therefore this is not evidence of a local Picker, Tunnel, CSP, template, port, or validation regression.
+
+Current classification:
+- local cold-start acceptance: PASS;
+- MCP protocol/resource/validation smoke: PASS;
+- ChatGPT host rendering acceptance: BLOCKED by current conversation Developer MCP capability.
+
+Next investigation must focus only on ChatGPT host/conversation Developer MCP enablement or using a conversation surface that supports the developer MCP. Do not repeat the earlier local startup diagnostics without new evidence.
