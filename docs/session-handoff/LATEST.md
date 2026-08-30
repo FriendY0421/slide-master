@@ -2,6 +2,14 @@
 
 Updated checkpoint: 2026-08-30 KST
 
+## CROSS-BRANCH PICKER RUNTIME POINTER — READ BEFORE PICKER MODIFICATION
+
+The current `main` workflow/catalog authority and the draft Apps SDK Picker runtime are intentionally split. Before any Picker startup/Tunnel/MCP/launcher modification, read `docs/session-handoff/20260830_PICKER_FEATURE_RUNTIME_POINTER.md` and the referenced feature-branch operational baseline at verified HEAD `2efa7c6338137ed0c788e6abe803e3ca1a6bb167`.
+
+Do not repeat already-closed CSP/template/port/tunnel/startup-order/default-buffer diagnosis without fresh evidence. User-approved runtime remains two foreground CMD windows (Picker 3000 + Tunnel 8080) kept running/minimized during use. PR #6 remains Draft pending full PPT E2E acceptance.
+
+---
+
 ## NEWEST CHECKPOINT - STANDARD PPT WORKFLOW LOCKED
 
 User-approved canonical order is now: `request -> template picker -> explicit template id -> production preset picker -> explicit preset id -> lock template+preset -> latest evidence/research -> slide-by-slide storyline proposal -> explicit storyline approval -> production -> QA -> PPTX`. This order applies across ChatGPT/GPTS, FAH/Codex handoffs, and Developer-MCP fallback.
