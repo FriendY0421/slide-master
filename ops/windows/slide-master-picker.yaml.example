@@ -1,0 +1,20 @@
+config_version: 1
+control_plane:
+  base_url: "https://api.openai.com"
+  # Current known tunnel id as of 2026-08-30. Reuse it if it still exists;
+  # otherwise replace it with the new tunnel id created in OpenAI Platform.
+  tunnel_id: "tunnel_6a9024fa8a808191991fffb6092c66e3"
+  # NEVER place the actual API key in this file or in GitHub.
+  # Replace <WINDOWS_USER> with the Windows account folder name.
+  api_key: "file:C:/Users/<WINDOWS_USER>/AppData/Local/OpenAI/SlideMasterTunnel/runtime_key.txt"
+health:
+  listen_addr: "127.0.0.1:8080"
+admin_ui:
+  open_browser: false
+log:
+  level: info
+  format: json
+mcp:
+  server_urls:
+    - channel: main
+      url: "http://127.0.0.1:3000/mcp"
