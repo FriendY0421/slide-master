@@ -10,7 +10,7 @@
       "visual_ratio": {"text": 40, "visual": 60},
       "best_for": ["업무보고", "현황공유", "개선활동", "프로젝트 결과"],
       "delivery_purpose": "balanced",
-      "body_px": 30,
+      "body_px": 34,
       "typography_profile": "modern_readable"
     },
     {
@@ -22,7 +22,7 @@
       "visual_ratio": {"text": 30, "visual": 70},
       "best_for": ["임원보고", "의사결정", "핵심 KPI", "요약보고"],
       "delivery_purpose": "presentation",
-      "body_px": 36,
+      "body_px": 40,
       "typography_profile": "modern_readable"
     },
     {
@@ -34,7 +34,7 @@
       "visual_ratio": {"text": 35, "visual": 65},
       "best_for": ["개선안", "제안서", "신규 프로젝트", "변화관리"],
       "delivery_purpose": "balanced",
-      "body_px": 30,
+      "body_px": 34,
       "typography_profile": "modern_readable"
     },
     {
@@ -46,7 +46,7 @@
       "visual_ratio": {"text": 25, "visual": 75},
       "best_for": ["실적", "품질", "VOC", "트렌드", "성과분석"],
       "delivery_purpose": "balanced",
-      "body_px": 30,
+      "body_px": 34,
       "typography_profile": "modern_readable"
     },
     {
@@ -58,7 +58,7 @@
       "visual_ratio": {"text": 45, "visual": 55},
       "best_for": ["교육", "매뉴얼", "사용법", "사내 가이드"],
       "delivery_purpose": "balanced",
-      "body_px": 30,
+      "body_px": 34,
       "typography_profile": "modern_readable"
     },
     {
@@ -70,7 +70,7 @@
       "visual_ratio": {"text": 25, "visual": 75},
       "best_for": ["제품소개", "서비스소개", "브랜드", "행사 발표"],
       "delivery_purpose": "presentation",
-      "body_px": 36,
+      "body_px": 40,
       "typography_profile": "modern_readable"
     }
   ]

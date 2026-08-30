@@ -67,3 +67,12 @@ Expected:
 Fallback regression:
 - developer-MCP `FORBIDDEN` automatically switches to template HTML then preset HTML;
 - the same stage order and gate-v3 evidence still apply.
+
+## Storyline preview + readability acceptance ? 2026-08-30
+- 20-slide and 30-slide requested counts can be represented and explicitly approved without filler.
+- `new_deck_init.py` fails when `--storyline-approval-result` is missing for a new gate-v3 deck.
+- Approved initialization writes both `template_selection.json` and `storyline_approval.json`.
+- `svg_to_pptx.py` blocks gate-v3 export when storyline approval evidence is missing.
+- `validate_spec.py` detects slide-count/title/core-message drift from the approved storyline snapshot.
+- Normal non-mirror PPT body recommendations are `text=28px`, `balanced=34px`, `presentation=40px`; 24px remains the hard emergency floor, not the normal default.
+- Card/body layout review checks inner padding, line height, semantic spacing, content-area occupancy, image/visual authority, and avoids the ?dense small box + large unused outer whitespace? pattern.

@@ -17,6 +17,10 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 
 from console_encoding import configure_utf8_stdio
 from template_gate import validate_project_gate
+from storyline_gate import (
+    project_requires_storyline_gate,
+    validate_project_gate as validate_storyline_project_gate,
+)
 
 configure_utf8_stdio()
 
@@ -26,17 +30,32 @@ def _gate_project_from_argv(argv: list[str]) -> int:
         return 0
     project_path = argv[0]
     errors = validate_project_gate(project_path)
-    if not errors:
-        return 0
-    print("[template-gate] EXPORT BLOCKED", file=sys.stderr)
-    for error in errors:
-        print(f"  - {error}", file=sys.stderr)
-    print(
-        "  Complete the HTML/GUI template selection for a new deck, or record a "
-        "documented route exemption with template_gate.py before export.",
-        file=sys.stderr,
+    if errors:
+        print("[template-gate] EXPORT BLOCKED", file=sys.stderr)
+        for error in errors:
+            print(f"  - {error}", file=sys.stderr)
+        print(
+            "  Complete the template + production-preset selection gate before export.",
+            file=sys.stderr,
+        )
+        return 1
+
+    storyline_errors = (
+        validate_storyline_project_gate(project_path)
+        if project_requires_storyline_gate(project_path)
+        else []
     )
-    return 1
+    if storyline_errors:
+        print("[storyline-gate] EXPORT BLOCKED", file=sys.stderr)
+        for error in storyline_errors:
+            print(f"  - {error}", file=sys.stderr)
+        print(
+            "  Present the slide-by-slide storyline/content preview, apply user revisions, "
+            "and record explicit user approval before export.",
+            file=sys.stderr,
+        )
+        return 1
+    return 0
 
 
 if __name__ == '__main__':

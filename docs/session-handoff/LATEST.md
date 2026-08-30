@@ -1,10 +1,24 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-30 22:14 KST
+
+## NEWEST CHECKPOINT ? USER-EDITABLE STORYLINE + LAYOUT READABILITY V2
+
+New FriendY PPT flow is now fail-closed at the slide-by-slide content preview: template + preset ? research ? full per-slide preview (title/core message/content points/visual/layout) ? user edits ? explicit approval ? generation. `storyline_approval.json` stores the approved snapshot/hash; new-deck init and gate-v3 export block without it, and `validate_spec.py` detects drift from the approved plan.
+
+Typography/readability V2 raises standard recommendations to `text=28px`, `balanced=34px`, `presentation=40px`; card padding, line-height, content occupancy, and meaningful visual sizing are now explicit execution contracts. User-requested 20/30+ slide decks are supported when real content/evidence supports the count; filler is forbidden.
+
+Durable handoff: `docs/session-handoff/20260830_STORYLINE_LAYOUT_READABILITY_V2.md`
+
+Detailed history: `docs/ai-history/2026-08-30-storyline-layout-readability-v2.md`
+
+---
+
 Updated checkpoint: 2026-08-30 21:22 KST
 
 ## NEWEST CHECKPOINT - PPT TYPOGRAPHY READABILITY MODERNIZED
 
-Generated PPT text was judged too small overall. Generic PPT body baselines are now `text=24px`, `balanced=30px`, `presentation=36px`; standard non-mirror PPT body text has a 24px hard floor. Production presets now seed `delivery_purpose` + `body_px` + `modern_readable`, and overflow must be handled by copy reduction, page redistribution, or geometry reflow before shrinking type.
+Generated PPT text was judged too small overall. Generic PPT body baselines are now `text=28px`, `balanced=34px`, `presentation=40px`; standard non-mirror PPT body text has a 24px hard floor. Production presets now seed `delivery_purpose` + `body_px` + `modern_readable`, and overflow must be handled by copy reduction, page redistribution, or geometry reflow before shrinking type.
 
 Static/runtime-config smoke passed, including a future-strategy preset test that rendered Executive Brief as `presentation | body 36px`. Mirror/source-faithful typography contracts remain explicit exceptions. The next real generated PPT is the visual acceptance; do not revert globally to 20/24/32px to solve a local overflow.
 

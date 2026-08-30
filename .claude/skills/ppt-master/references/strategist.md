@@ -274,7 +274,7 @@ See [`../templates/icons/README.md`](../templates/icons/README.md) for the curre
 |---|---:|---|
 | `text` · read-close (report, data-dense brief, leave-behind file) | 24px | screen / handout reading at arm's length |
 | `balanced` · business (presented **and** read; roadshow, review) — **default** | 30px | mixed projection + reading |
-| `presentation` (projected, sparse; keynote, launch, classroom) | 36px | room projection, glance from the back |
+| `presentation` (projected, sparse; keynote, launch, classroom) | 40px | room projection, glance from the back |
 
 The body baseline is **purely a function of delivery purpose** — density and visual style do **not** nudge it within a range. Body size is the reading-distance proxy; density is orthogonal and shows in **how much text per page, page count, and `page_rhythm`** (§6.1), the *other* roles, and decoration — never in growing or shrinking the body baseline. One purpose → one body size, identical across the deck. (The user may still override the value in confirmation; absent an override, this fixed value is the recommendation.)
 
@@ -282,7 +282,7 @@ The body baseline is **purely a function of delivery purpose** — density and v
 
 | Canvas | Height | Body baseline | Unit |
 |---|---|---|---|
-| PPT 16:9 / 4:3 | 720 / 768 | 24 / 30 / 36 (by delivery purpose) | **px** |
+| PPT 16:9 / 4:3 | 720 / 768 | 28 / 34 / 40 (by delivery purpose) | **px** |
 | Instagram card news | 1080×1350 | 34–45 | px |
 | Xiaohongshu | 1242×1660 | 40–55 | px |
 | WeChat / IG 1:1 | 1080×1080 | 27–36 | px |
@@ -293,20 +293,20 @@ The body baseline is **purely a function of delivery purpose** — density and v
 
 > **Confirmed values win — never recompute over them.** The user's confirmed sizes are authoritative. **Confirm UI path**: take `result.json` `typography.body_size` / `sizes` (already px) **verbatim** — do **not** re-derive from the canvas even if the user changed it. The page auto-rescales the per-role sizes proportionally when the user edits the **body baseline** (each role keeps its own ratio-to-body), but never rewrites sizes on canvas / delivery-purpose changes (hint only) — either way `result.json` already reflects the user's intent; recomputing here would silently override their choice. **Chat-fallback path** (no `result.json`): take the px body baseline for the confirmed canvas + delivery purpose directly from the table above (no conversion). The `body_size` in `recommendations.json` is only a stale hint once the canvas changes — use the confirmed value, not the recommendation.
 
-| Level | Ratio to body | 36px baseline (`presentation`) | 30px baseline (`balanced`) |
+| Level | Ratio to body | 40px baseline (`presentation`) | 34px baseline (`balanced`) |
 |-------|---------------|---------------|---------------|
-| Cover title (hero headline) | 2.5-5x | 90-180px | 75-150px |
-| Chapter / section opener | 2-2.5x | 72-90px | 60-75px |
-| Page title | 1.5-2x | 54-72px | 45-60px |
-| Hero number (consulting KPIs) | 1.5-2x | 54-72px | 45-60px |
-| Subtitle | 1.2-1.5x | 43-54px | 36-45px |
-| Lead-in / intro | 1.1-1.4x | 40-50px | 33-42px |
-| Subheading | 1.1-1.3x | 40-47px | 33-39px |
-| **Body** | **1x** | **36px** | **30px** |
-| Annotation / caption | 0.7-0.85x | 25-31px | 21-26px |
-| Page number / footnote | 0.5-0.65x | 18-23px | 15-20px |
+| Cover title (hero headline) | 2.5-5x | 100-200px | 86-170px |
+| Chapter / section opener | 2-2.5x | 80-100px | 68-86px |
+| Page title | 1.5-2x | 60-80px | 52-68px |
+| Hero number (consulting KPIs) | 1.5-2x | 60-80px | 52-68px |
+| Subtitle | 1.2-1.5x | 48-60px | 42-52px |
+| Lead-in / intro | 1.1-1.4x | 44-56px | 38-48px |
+| Subheading | 1.1-1.3x | 44-52px | 38-44px |
+| **Body** | **1x** | **40px** | **34px** |
+| Annotation / caption | 0.7-0.85x | 28-34px | 24-29px |
+| Page number / footnote | 0.5-0.65x | 20-26px | 18-22px |
 
-> Two baseline columns are illustrative only — for any other `body` px value (24 / 30 / 36 / ...), multiply the row's ratio. Structural roles (page title / body / subtitle / annotation / footnote) take their locked slot value and stay there on every page — not a per-page pick. In-band freedom without pre-declaring is for special / feature elements (hero number, display title, one-off emphasis); a recurring special size should be declared as its own slot. The subtitle / lead / subheading bands overlap on purpose — pick by role, not size, then hold each at one size deck-wide. Values outside **every** band require lock extension first.
+> Two baseline columns are illustrative only ? for any other `body` px value (28 / 34 / 40 / ...), multiply the row's ratio. Structural roles (page title / body / subtitle / annotation / footnote) take their locked slot value and stay there on every page ? not a per-page pick. In-band freedom without pre-declaring is for special / feature elements (hero number, display title, one-off emphasis); a recurring special size should be declared as its own slot. The subtitle / lead / subheading bands overlap on purpose ? pick by role, not size, then hold each at one size deck-wide. Values outside **every** band require lock extension first.
 
 > **Round recommended sizes to clean even px — don't ship ratio leftovers.** The ratios are a guide; lock each role at a **clean even px**, not the raw product. For `body` 30px that means **title 52 · subtitle 40 · lead 36 · annotation 22 · footnote 16** — never `32.4` / `18.7` / odd tails, which read as unprofessional. Snap the ratio output to the nearest even px (…14, 16, 18, 20, 24, 28, 32, 36, 42, 48…), then lock that. (The Confirm UI already snaps its per-role suggestions this way; match it on the chat-fallback path.)
 
@@ -505,6 +505,19 @@ Read the relevant `_index.md` at confirmation `d` (Layer 1 / Layer 2) for its ca
 | Negative-space-driven | Single element in 40-60% whitespace | One idea, weight through emptiness |
 
 **PPT 16:9 (1280x720) key dimensions**: Safe area 1200x640 (40px margins); Title area 1200x100; Content area 1200x500; Footer area 1200x40.
+
+
+**Content occupancy and natural-spacing contract (PPT 16:9, non-mirror):**
+- Normal content pages should use roughly **72?88% of the usable content area** with meaningful text, visuals, tables, or whitespace that is compositionally intentional. Avoid the failure pattern ?tiny dense card in the middle + large unused outer space.?
+- Default outer safe margins are **56?72px horizontal** and **40?56px vertical**; do not increase both outer margin and inner card padding at the same time unless the page is intentionally `breathing`.
+- A card/panel that carries body text reserves **24?32px horizontal padding** and **18?28px vertical padding**. Text must never visually touch the box edge, but the padding must not consume more area than the content itself.
+- Card heading ? body gap: about **14?22px**. Related paragraphs/bullet groups: **10?18px** separation. Body line-height: **1.35?1.5?**; lead/subtitle: **1.25?1.4?**. Use a larger gap between semantic groups rather than inserting empty decorative space.
+- When a visual is meaningful, give it enough authority to matter: typically **35?55%** of the content area for a text+visual slide. Do not use a tiny image as decoration while leaving a large empty field.
+- Prefer 1?3 strong content regions. Four equal cards are acceptable only when the comparison itself is the message and each card remains readable; otherwise regroup, use a 2?2 hierarchy, or split the page.
+- Use color hierarchy inside cards: title/keyword in `primary` or `accent`, body in `body_text`, support text in the locked secondary text role. Do not render every line at the same weight/color.
+- If copy cannot fit with the locked type and spacing, **redistribute content or add pages before shrinking type**.
+
+**Requested long decks are valid.** A user may explicitly request **20, 30, or more slides**. Treat the requested count as a target/constraint during the storyline stage, not as a reason to create filler. Expand by splitting genuine ideas, evidence, examples, process steps, comparisons, FAQs, implementation phases, or appendices. If the available source/research cannot support the requested count without repetition or invention, say so in the storyline preview and propose the closest evidence-supported count.
 
 ---
 

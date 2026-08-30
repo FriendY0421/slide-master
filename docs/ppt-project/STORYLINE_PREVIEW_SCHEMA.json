@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "purpose": "User-editable slide-by-slide preview before PPT generation",
+  "requested_slide_count": 20,
+  "slides": [
+    {
+      "number": 1,
+      "title": "Example title",
+      "core_message": "One assertion this slide must land.",
+      "content_points": ["Point 1", "Point 2"],
+      "visual_plan": "hero image / diagram / chart / table / text-led",
+      "layout_plan": "one strong region / split layout / comparison / timeline",
+      "source_notes": "Optional evidence/source note"
+    }
+  ]
+}

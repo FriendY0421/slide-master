@@ -41,7 +41,12 @@
       "allowed": [
         "present_storyline",
         "revise_storyline",
-        "wait_for_user_approval"
+        "wait_for_user_approval",
+        "edit_storyline",
+        "reorder_slides",
+        "change_slide_count",
+        "approve_storyline",
+        "record_storyline_approval"
       ]
     },
     "GENERATING": {
@@ -95,7 +100,7 @@
     {
       "from": "WAIT_STORYLINE_APPROVAL",
       "to": "GENERATING",
-      "condition": "user explicitly approves the presented storyline or an approved revision"
+      "condition": "user explicitly approves the currently presented/edited slide-by-slide storyline and a matching storyline_approval.json evidence record exists"
     },
     {
       "from": "GENERATING",
@@ -117,6 +122,8 @@
     "Research attempted before template+preset lock",
     "Generation attempted before storyline approval",
     "Silent template or preset substitution after lock",
-    "QA failure"
+    "QA failure",
+    "No valid storyline_approval.json matching the currently approved preview",
+    "Storyline changed after approval without re-approval"
   ]
 }

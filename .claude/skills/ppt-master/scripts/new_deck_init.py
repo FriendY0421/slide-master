@@ -13,6 +13,7 @@ if str(_SCRIPTS_DIR) not in sys.path:
 
 from project_manager import ProjectManager  # noqa: E402
 from template_gate import load_selection_result, write_project_gate  # noqa: E402
+from storyline_gate import load_storyline_approval, write_project_gate as write_storyline_gate  # noqa: E402
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -27,10 +28,16 @@ def main(argv: list[str] | None = None) -> int:
         required=True,
         help="validated gate-v3 JSON result from record_template_choice_v2.py (template + production preset)",
     )
+    parser.add_argument(
+        "--storyline-approval-result",
+        required=True,
+        help="user-approved slide-by-slide storyline approval JSON from storyline_gate.py",
+    )
     args = parser.parse_args(argv)
 
     try:
         record = load_selection_result(args.template_selection_result)
+        storyline_approval = load_storyline_approval(args.storyline_approval_result)
     except ValueError as exc:
         print(f"[new-deck-init] FAIL — {exc}", file=sys.stderr)
         return 2
@@ -39,12 +46,14 @@ def main(argv: list[str] | None = None) -> int:
     try:
         project_path = manager.init_project(args.project_name, args.format, base_dir=args.dir)
         gate_path = write_project_gate(project_path, record)
+        storyline_gate_path = write_storyline_gate(project_path, storyline_approval)
     except Exception as exc:
         print(f"[new-deck-init] FAIL — {exc}", file=sys.stderr)
         return 1
 
     print(f"[new-deck-init] PASS — {project_path}")
     print(f"TEMPLATE_GATE_FILE={gate_path}")
+    print(f"STORYLINE_GATE_FILE={storyline_gate_path}")
     return 0
 
 

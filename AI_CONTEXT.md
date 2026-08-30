@@ -47,3 +47,8 @@ Rules:
 - Broken Korean glyphs are never acceptable.
 
 `PPT_REQUEST_GUARD.md` is the first-read fail-closed authority for presentation generation.
+
+## User-editable slide-by-slide preview gate ? 2026-08-30
+Before any new-deck project initialization or slide authoring, present the **full proposed slide sequence** in chat (or an equivalent visible review surface). Every slide preview must show: slide number, title, core message, 2?5 main content points, and proposed visual/layout treatment. The user may delete, add, merge, split, reorder, retitle, rewrite, change visuals, or request a new total slide count (including 20/30+). Apply those edits to the preview and show the revised affected slides or full sequence as appropriate.
+
+Generation permission requires the user to explicitly approve the **current revision**. Record that exact approved snapshot through `storyline_gate.py`; `new_deck_init.py` requires both `--template-selection-result` and `--storyline-approval-result`. If the storyline changes after approval, the old approval is stale and generation must stop until the revised preview is approved again. `validate_spec.py` checks the generated ?IX slide count/titles/core messages against the approved snapshot, and gate-v3 SVG export is blocked without storyline approval evidence.

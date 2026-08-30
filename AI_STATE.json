@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-30T21:22:00+09:00",
+  "updated_at_kst": "2026-08-30T22:14:37+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-TYPOGRAPHY-READABILITY-20260830",
-    "status": "TYPOGRAPHY_MODERN_READABILITY_HARDENED",
-    "mode": "MODERN_READABLE_24_30_36",
+    "work_id": "SLIDE-MASTER-STORYLINE-LAYOUT-READABILITY-V2-20260830",
+    "status": "VALIDATED_READY_FOR_MAIN",
+    "mode": "USER_EDITABLE_STORYLINE_FAIL_CLOSED_AND_READABILITY_V2",
     "actor": "ChatGPT",
-    "summary": "Raised generic PPT delivery-purpose body defaults from 20/24/32px to 24/30/36px, added a 24px non-mirror PPT body floor, seeded production presets with typography intent, and prioritized whitespace/content redistribution over shrinking type. Static/runtime-config smoke passed; next real PPT is the visual acceptance.",
-    "history_file": "docs/ai-history/2026-08-30-ppt-typography-readability-modernization.md"
+    "summary": "Added user-editable full slide-by-slide preview approval evidence before generation; raised PPT typography defaults to 28/34/40px; added natural card padding/line-spacing/content-occupancy rules; validated 20/30-slide flows and export blocking.",
+    "history_file": "docs/ai-history/2026-08-30-storyline-layout-readability-v2.md"
   },
   "production": {},
   "source_authority": {
@@ -301,6 +301,28 @@
         "summary": "Resolved GPTS prose-only template recommendation regression by reconciling conflicting selection-surface authority. App Block/GenUI is primary when available; lower-priority surfaces require fallback reasons. Added machine picker-surface evidence and gate-v2 selection enforcement while preserving legacy v1 records and the accepted FAH execution contract.",
         "history_file": "docs/ai-history/2026-08-27-gpts-app-block-picker-fail-closed.md"
       }
+    },
+    "storyline_layout_readability_v2": {
+      "status": "VALIDATED",
+      "storyline_gate": "storyline_gate.py",
+      "storyline_approval_required_for_new_deck": true,
+      "storyline_export_gate_v3": true,
+      "validate_spec_alignment": true,
+      "supported_user_requested_slide_counts": "20/30+ when evidence supports count",
+      "body_px": {
+        "text": 28,
+        "balanced": 34,
+        "presentation": 40,
+        "hard_floor_non_mirror": 24
+      },
+      "card_padding_px": {
+        "horizontal": "24-32",
+        "vertical": "18-28"
+      },
+      "body_line_height": "1.35-1.5x",
+      "content_occupancy_target": "72-88% normal content pages",
+      "meaningful_visual_share": "35-55% on text+visual pages",
+      "github_actions_used": false
     }
   },
   "authority": {
@@ -353,9 +375,14 @@
     "For FriendY GPTS new-PPT requests, conversation-native App Block / GenUI is the primary template-selection surface whenever the host exposes it; do not answer with a prose-only recommendation list first.",
     "Recommended-template selection records created under gate v2 require valid picker-surface evidence; non-primary picker surfaces require a concrete fallback reason.",
     "Standard non-mirror PPT typography defaults are text 24px, balanced 30px, presentation 36px with a 24px body hard floor; solve density through copy/page/layout reflow before type reduction.",
-    "A user-directly-specified valid registered template may skip picker rendering and must be recorded through the direct-template selection path."
+    "A user-directly-specified valid registered template may skip picker rendering and must be recorded through the direct-template selection path.",
+    "Every new FriendY deck must show the full slide-by-slide content preview before generation; title-only lists are insufficient.",
+    "The user may edit/add/delete/merge/split/reorder slides and request 20/30+ pages; the current revision must be explicitly re-approved after any change.",
+    "Current gate-v3 new-deck initialization/export requires storyline_approval.json matching the approved preview.",
+    "Standard non-mirror PPT typography recommendations are text 28px, balanced 34px, presentation 40px; 24px is an emergency floor, not the normal default.",
+    "Body-bearing cards use natural inner padding/line spacing and content regions must be rebalanced before shrinking type; avoid dense small boxes surrounded by unexplained empty space."
   ],
-  "next_priority": "Generate the next real PPT with the new 24/30/36px typography defaults and visually inspect readability, hierarchy, whitespace, and overflow; adjust only evidenced roles/templates while preserving the 24px standard non-mirror body floor.",
+  "next_priority": "Run the next real FriendY PPT through template/preset -> research -> editable full storyline preview -> approval -> generation, then visually validate 28/34/40 typography, card padding, line spacing, content occupancy, and image/text balance.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",

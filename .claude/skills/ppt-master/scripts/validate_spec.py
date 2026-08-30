@@ -48,6 +48,10 @@ if str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
+from storyline_gate import (  # noqa: E402
+    load_storyline_approval,
+    project_requires_storyline_gate,
+)
 
 CHARTS_INDEX = _SCRIPTS_DIR.parent / "templates" / "charts" / "charts_index.json"
 RHYTHM_VALUES = {"anchor", "dense", "breathing"}
@@ -82,9 +86,13 @@ def parse_slides(design_spec: str) -> list[dict]:
         end = matches[i + 1].start() if i + 1 < len(matches) else len(section)
         block = section[sm.start():end]
         heading = block.splitlines()[0]
+        title_match = re.search(r"^-\s+\*\*Title\*\*:\s*(.+)$", block, re.MULTILINE)
+        core_match = re.search(r"^-\s+\*\*Core message\*\*:\s*(.+)$", block, re.MULTILINE)
         slides.append({
             "number": int(sm.group(1)),
             "heading": heading,
+            "title": _norm_ws(title_match.group(1)) if title_match else "",
+            "core_text": _norm_ws(core_match.group(1)) if core_match else "",
             "core": "**Core message**" in block,
             "cover_impact": "**Cover impact**" in block,
             "closing_impact": "**Closing impact**" in block,
@@ -167,6 +175,40 @@ def check_slides(slides: list[dict]) -> tuple[list[str], list[str]]:
             f"needs its one assertion sentence, or merge/cut the page")
     return errors, warnings
 
+
+
+def check_storyline_alignment(project_path: Path, slides: list[dict]) -> tuple[list[str], list[str]]:
+    errors: list[str] = []
+    warnings: list[str] = []
+    if not project_requires_storyline_gate(project_path):
+        return errors, warnings
+    approval_path = project_path / "storyline_approval.json"
+    try:
+        approval = load_storyline_approval(approval_path)
+    except ValueError as exc:
+        return [f"storyline approval invalid: {exc}"], warnings
+    approved = approval.get("storyline", {}).get("slides", [])
+    if len(approved) != len(slides):
+        errors.append(
+            f"approved storyline has {len(approved)} slides but design_spec.md has {len(slides)} ? "
+            "revise the preview and obtain approval again before generation"
+        )
+        return errors, warnings
+    for idx, (approved_slide, spec_slide) in enumerate(zip(approved, slides), 1):
+        approved_title = _norm_ws(str(approved_slide.get("title") or ""))
+        spec_title = _norm_ws(str(spec_slide.get("title") or ""))
+        if approved_title and approved_title != spec_title:
+            errors.append(
+                f"Slide {idx:02d} title differs from the user-approved preview: "
+                f"approved={approved_title!r}, design_spec={spec_title!r}"
+            )
+        approved_core = _norm_ws(str(approved_slide.get("core_message") or ""))
+        spec_core = _norm_ws(str(spec_slide.get("core_text") or ""))
+        if idx > 1 and approved_core and spec_core and approved_core != spec_core:
+            errors.append(
+                f"Slide {idx:02d} core message differs from the user-approved preview"
+            )
+    return errors, warnings
 
 def check_vii(rows: list[dict], charts: dict[str, str]) -> tuple[list[str], list[str]]:
     errors: list[str] = []
@@ -319,10 +361,11 @@ def main(argv: Optional[list[str]] = None) -> int:
     sections = parse_spec_lock(spec_lock)
 
     errors, warnings = check_slides(slides)
+    e_story, w_story = check_storyline_alignment(project, slides)
     e2, w2 = check_vii(vii_rows, charts)
     e3, w3 = check_spec_lock(sections, len(slides), charts, vii_rows)
-    errors += e2 + e3
-    warnings += w2 + w3
+    errors += e_story + e2 + e3
+    warnings += w_story + w2 + w3
 
     for w in warnings:
         print(f"  ! WARN {w}", file=sys.stderr)
