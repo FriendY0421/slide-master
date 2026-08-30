@@ -262,6 +262,7 @@ def _extract_entry(kind: str, template_id: str, template_dir: Path) -> dict:
     common_fields = (
         "display_name", "version", "visibility", "source_type", "fidelity",
         "categories", "keywords", "audience", "purpose", "aliases", "defaults",
+        "organization", "brand_terms", "document_types", "tone", "avoid_for",
         "quality_score", "approved_at", "approval_note",
     )
     primary_category = fm.get("primary_category") or fm.get("category")
@@ -274,6 +275,23 @@ def _extract_entry(kind: str, template_id: str, template_dir: Path) -> dict:
         value = fm.get(field)
         if value not in (None, "", [], {}):
             entry[field] = value
+
+    # Imported/company templates may be incomplete while CANDIDATE, but an ACTIVE
+    # template must have enough recommendation metadata to be matched safely.
+    effective_status = str(entry.get("status", "ACTIVE") or "ACTIVE").upper()
+    source_type = str(entry.get("source_type", "native") or "native")
+    visibility = str(entry.get("visibility", "public") or "public")
+    if effective_status == "ACTIVE" and source_type != "native":
+        required = ("display_name", "categories", "keywords", "purpose")
+        missing = [name for name in required if not entry.get(name)]
+        if visibility in ("private_company", "public_sanitized"):
+            if not entry.get("organization") and not entry.get("brand_terms"):
+                missing.append("organization_or_brand_terms")
+        if missing:
+            raise SpecParseError(
+                "ACTIVE imported template lacks recommendation metadata: " + ", ".join(missing) +
+                ". Keep it CANDIDATE until the recommendation profile is complete."
+            )
 
     extras = OrderedDict(
         pages=pages,

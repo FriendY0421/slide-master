@@ -1,5 +1,33 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-30 KST
+
+## NEWEST CHECKPOINT — PICKER CSP / HOST RENDER HARDENED
+
+Local MCP + Secure Tunnel regression PASS after CSP/host-render hardening. Payload preparation and visible host UI are now separate states; stale port-3000 runtime detection is a mandatory first diagnostic. PR #6 remains Draft pending real ChatGPT visible-card/image + final app.sendMessage acceptance.
+
+Durable handoff: docs/session-handoff/20260830_PICKER_CSP_HOST_RENDER_CHECKPOINT.md
+
+Detailed history: docs/ai-history/2026-08-30-picker-csp-host-render-hardening.md
+
+---
+
+Updated checkpoint: 2026-08-27T20:33:59+09:00 KST
+
+## NEWEST CHECKPOINT — MCP APPS PICKER LOCAL PROTOCOL VALIDATED
+
+PR #6 (`feat/apps-sdk-template-picker-20260827`) implements the real conversation-native Slide Master picker. Local and GitHub-source MCP protocol smoke tests now pass.
+
+Current state: `AWAITING_SECURE_TUNNEL_CREDENTIALS`.
+
+Validated: build/check, payload, `/mcp` initialize, tools/list, picker call, `ui://slide-master/template-picker-v1.html`, server-side final selection validation, picker evidence, production preset persistence, direct-template compatibility. GitHub Actions were not used.
+
+Remaining before merge: provision OpenAI Secure MCP Tunnel `CONTROL_PLANE_API_KEY` + `CONTROL_PLANE_TUNNEL_ID`, connect the MCP endpoint to ChatGPT Developer Mode, then verify the actual interactive UI plus `app.sendMessage` selection return. HOME-PC has no tunnel-client installed and the MCP server is stopped; no public endpoint was opened.
+
+Durable history: `docs/ai-history/2026-08-27-apps-sdk-template-picker.md`
+
+---
+
 Updated checkpoint: 2026-08-27 KST
 
 ## NEWEST CHECKPOINT — COMPANY TEMPLATE LIFECYCLE VALIDATED

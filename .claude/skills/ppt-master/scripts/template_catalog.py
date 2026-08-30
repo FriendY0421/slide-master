@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Unified discovery and preview helpers for Slide Master selectable templates.
 
 The catalog is index-driven. Adding a new deck/layout entry to its normal index
@@ -61,6 +61,11 @@ def load_catalog(ref: str | None) -> dict[str, dict]:
                 "aliases": meta.get("aliases", []),
                 "audience": meta.get("audience", []),
                 "purpose": meta.get("purpose", []),
+                "organization": meta.get("organization"),
+                "brand_terms": meta.get("brand_terms", []),
+                "document_types": meta.get("document_types", []),
+                "tone": meta.get("tone", []),
+                "avoid_for": meta.get("avoid_for", []),
                 "defaults": meta.get("defaults", {}),
                 "quality_score": meta.get("quality_score"),
                 "raw_meta": meta,
@@ -147,10 +152,24 @@ def preview_svg(entry: dict, svg_path: str, lang: str, ref: str | None) -> str:
     return legacy.HREF_RE.sub(rewrite, raw)
 
 
+def _norm_text(value: object) -> str:
+    return re.sub(r"\s+", "", str(value or "").lower())
+
+
+def _term_hits(terms: list, purpose: str, weight: int) -> int:
+    text = _norm_text(purpose)
+    score = 0
+    for term in terms or []:
+        norm = _norm_text(term)
+        if len(norm) >= 2 and norm in text:
+            score += weight
+    return score
+
+
 def score_entry(entry: dict, purpose: str, inferred_categories: list[str] | None = None) -> int:
-    text = re.sub(r"\s+", "", str(purpose or "").lower())
+    text = _norm_text(purpose)
     inferred = inferred_categories or []
-    score = 3 if entry["template_kind"] == "deck" else 0
+    score = 0
     primary = str(entry.get("primary_category") or "general")
     categories = [str(x) for x in entry.get("categories", [])]
     if inferred:
@@ -159,17 +178,33 @@ def score_entry(entry: dict, purpose: str, inferred_categories: list[str] | None
         for idx, category in enumerate(inferred):
             if category in categories:
                 score += max(2, 7 - idx)
+
+    # High-value semantic fields. Brand/org matches are strong, but only when
+    # the user's request actually contains them.
+    score += _term_hits(entry.get("brand_terms", []), purpose, 8)
+    organization = entry.get("organization")
+    if organization and len(_norm_text(organization)) >= 2 and _norm_text(organization) in text:
+        score += 8
+    score += _term_hits(entry.get("document_types", []), purpose, 5)
+    score += _term_hits(entry.get("purpose", []), purpose, 5)
+    score += _term_hits(entry.get("audience", []), purpose, 4)
+    score += _term_hits(entry.get("aliases", []), purpose, 4)
+    score += _term_hits(entry.get("tone", []), purpose, 2)
+    score += _term_hits(entry.get("keywords", []), purpose, 3)
+
     searchable = " ".join([
-        entry.get("template_id", ""),
-        entry.get("display_name", ""),
-        entry.get("summary", ""),
-        " ".join(str(x) for x in entry.get("keywords", [])),
-        " ".join(str(x) for x in entry.get("page_types", [])),
+        entry.get("template_id", ""), entry.get("display_name", ""),
+        entry.get("summary", ""), " ".join(str(x) for x in entry.get("page_types", [])),
     ]).lower()
-    compact_searchable = re.sub(r"\s+", "", searchable)
+    compact_searchable = _norm_text(searchable)
     for token in [x for x in re.split(r"[\s,/·]+", str(purpose or "")) if len(x) >= 2]:
-        if re.sub(r"\s+", "", token.lower()) in compact_searchable:
+        if _norm_text(token) in compact_searchable:
             score += 2
+
+    # Explicit negative-fit terms prevent a branded template from being
+    # recommended just because it has high general quality.
+    if _term_hits(entry.get("avoid_for", []), purpose, 1):
+        return -1000
     return score
 
 
@@ -177,10 +212,15 @@ def shortlist(catalog: dict[str, dict], purpose: str, inferred_categories: list[
     ranked = []
     for key, entry in selectable_catalog(catalog).items():
         score = score_entry(entry, purpose, inferred_categories)
-        ranked.append((score, 1 if entry["template_kind"] == "deck" else 0, key, entry))
-    ranked.sort(key=lambda x: (-x[0], -x[1], x[2]))
-    selected = [entry for _score, _deck_bonus, _key, entry in ranked[: max(1, limit)]]
-    positive = [(score, entry["key"]) for score, _b, _k, entry in ranked if score > 0]
+        quality = entry.get("quality_score")
+        try:
+            quality_value = float(quality) if quality is not None else 0.0
+        except (TypeError, ValueError):
+            quality_value = 0.0
+        ranked.append((score, quality_value, 1 if entry["template_kind"] == "deck" else 0, key, entry))
+    ranked.sort(key=lambda x: (-x[0], -x[1], -x[2], x[3]))
+    selected = [entry for _score, _quality, _deck_bonus, _key, entry in ranked[: max(1, limit)]]
+    positive = [(score, entry["key"]) for score, _q, _b, _k, entry in ranked if score > 0]
     if positive:
         top = positive[0][0]
         cutoff = max(3, int(top * 0.30 + 0.999))
