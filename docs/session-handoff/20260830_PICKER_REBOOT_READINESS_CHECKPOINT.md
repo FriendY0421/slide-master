@@ -32,9 +32,11 @@ At the last non-disruptive check, ports 3000 and 8080 were both not listening. T
 5. Only then issue one `@Slide Master Template Picker ...` request in ChatGPT.
 6. If the launcher reports `NOT READY` or `ACTION REQUIRED`, do not loop ChatGPT retries; inspect `runtime.verify.status.json` first.
 
-## Remaining documentation sync
+## Documentation sync
 
-`docs/ops/SLIDE_MASTER_PICKER_WINDOWS_RECOVERY.md` was write-locked by another process during this session. Do not terminate that process. The new history and this handoff are the newest authority until the recovery runbook is synchronized after the user-controlled restart.
+The active runtime checkout had write-locked existing documentation files while the user had other work running. No process was terminated. The existing recovery runbook and `docs/session-handoff/LATEST.md` were therefore updated safely from a separate temporary clone and pushed to the same PR branch.
+
+The active runtime checkout is intentionally not pulled/replaced during the user's concurrent work. After the user-controlled Windows restart, synchronize the runtime checkout before final cold-start acceptance if it is behind the branch HEAD.
 
 ## Merge policy
 

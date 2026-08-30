@@ -2,6 +2,19 @@
 
 Updated checkpoint: 2026-08-30 KST
 
+## NEWEST CHECKPOINT — REBOOT STARTUP READINESS HARDENED
+
+A real Windows reboot reproduced `Failed to fetch template` during runtime warm-up, with repeated retries later surfacing 404/429 behavior. The launcher is now fail-closed and non-destructive: it never terminates an existing process, verifies an existing runtime first, starts new components only when ports 3000/8080 are free, and requires continuous stable health plus a real MCP smoke before `[READY]`.
+
+Final cold-start acceptance is intentionally pending a user-controlled Windows restart after unrelated work is finished. Do not restart or terminate processes automatically.
+
+Durable handoff: `docs/session-handoff/20260830_PICKER_REBOOT_READINESS_CHECKPOINT.md`
+
+Detailed history: `docs/ai-history/2026-08-30-reboot-startup-readiness-hardening.md`
+
+---
+Updated checkpoint: 2026-08-30 KST
+
 ## NEWEST CHECKPOINT — PICKER CSP / HOST RENDER HARDENED
 
 Local MCP + Secure Tunnel regression PASS after CSP/host-render hardening. Payload preparation and visible host UI are now separate states; stale port-3000 runtime detection is a mandatory first diagnostic. PR #6 remains Draft pending real ChatGPT visible-card/image + final app.sendMessage acceptance.

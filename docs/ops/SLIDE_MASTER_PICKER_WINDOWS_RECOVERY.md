@@ -54,10 +54,14 @@ The files below are intentionally committed so a new Windows installation can re
   - runs `npm ci`, syntax checks and UI build;
   - copies the one-click launcher to the Desktop.
 - `ops/windows/Start_SlideMasterPicker.bat`
-  - checks ports 3000 and 8080;
-  - starts only components that are stopped;
-  - avoids duplicate Picker/Tunnel processes;
-  - waits for `/readyz = ready`.
+  - first verifies an already-running Picker/Tunnel without restarting anything;
+  - never terminates an existing process;
+  - fails closed when verification fails and port 3000 or 8080 is already occupied;
+  - starts Picker/Tunnel only when both ports are free;
+  - returns `[READY]` only after stable health and a full MCP protocol smoke.
+- `ops/windows/Verify_SlideMasterPicker_Runtime.ps1`
+  - validates TCP 3000/8080, tunnel health/ready, continuous stability, MCP smoke markers, and post-smoke health;
+  - writes machine-readable PASS/FAIL status under `%LOCALAPPDATA%\OpenAI\SlideMasterTunnel\logs`.
 - `ops/windows/Run_Picker_Server.cmd`
   - starts the MCP Picker with `PICKER_SOURCE=github`.
 - `ops/windows/Run_Secure_Tunnel.cmd`
@@ -183,16 +187,29 @@ Double-click:
 
 `%USERPROFILE%\Desktop\Start_SlideMasterPicker.bat`
 
-Expected console result:
+The launcher is fail-closed and non-destructive. It NEVER terminates an existing process.
+
+Normal outcomes:
 
 ```text
-[1/4] Checking Picker MCP...
-[2/4] Checking Secure Tunnel...
-[3/4] Waiting for READY...
-[4/4] READY - Slide Master Template Picker is available.
+[READY] Existing Picker runtime is healthy.
+Nothing was restarted or terminated.
 ```
 
-The launcher is idempotent: if ports 3000/8080 are already listening, it does not deliberately start duplicate copies.
+or, after a clean reboot when ports 3000 and 8080 are free:
+
+```text
+[2/4] Ports are free. Starting Picker MCP...
+[3/4] Starting Secure Tunnel...
+[4/4] Waiting for stable end-to-end readiness...
+[READY] Picker + tunnel + MCP smoke all passed.
+```
+
+READY now requires continuous local stability plus a real MCP protocol smoke. Port-open or `/readyz` alone is not sufficient.
+
+If verification fails while port 3000 or 8080 already has a listener, the launcher exits with `ACTION REQUIRED` and does not kill, replace, or restart that process. Finish other work first and perform a user-controlled Windows restart when safe.
+
+Do not repeatedly press ChatGPT `Retry` before the launcher prints `[READY]`; repeated calls during tunnel warm-up can produce misleading 404/429 failures.
 
 ## 11. Validation after reinstall
 
@@ -273,14 +290,33 @@ The Windows recovery package described here restores the Picker runtime only. It
 
 ## 16. Stale runtime / CSP host-render diagnostic rule (2026-08-30)
 
-A healthy tunnel does not prove the latest Picker build is running. `/healthz=live` and `/readyz=ready` only prove tunnel/runtime connectivity.
+A healthy tunnel does not prove the latest Picker build is running. `/healthz=live` and `/readyz=ready` only prove local tunnel/runtime connectivity.
 
 After any `server.js`, `app.js`, MCP metadata, CSP, or UI build change:
 
-1. identify and stop the existing Node process listening on port 3000;
-2. run `npm run check` and `npm run build`;
-3. restart the Picker from the stable runtime checkout;
-4. run `npm run smoke` against the live port-3000 process;
-5. only then test through ChatGPT.
+1. run syntax/build checks without disturbing the active runtime;
+2. identify the process currently listening on port 3000 and record its runtime branch/HEAD;
+3. if a restart is required, wait for an explicit maintenance window or user approval; never terminate an unrelated or currently needed process automatically;
+4. after the user-controlled restart, run `Verify_SlideMasterPicker_Runtime.ps1` and require continuous stable health plus the full MCP smoke;
+5. only after `[READY]` test through ChatGPT once.
 
-The smoke must validate tool UI metadata, resource load, explicit CSP, picker payload, current catalog ranking, and final template/preset validation. A source-code diff without this live-process smoke is insufficient.
+The launcher must never contain `taskkill`, `Stop-Process`, or equivalent automatic termination logic. A source-code diff, an open port, or tunnel `/readyz` alone is insufficient evidence of a usable Picker.
+
+## 17. Reboot startup readiness rule (2026-08-30)
+
+A real Windows reboot exposed a startup race: the local process/tunnel can still be warming up while ChatGPT tries to fetch the app template. Repeated retries during this period can produce `Failed to fetch template`, 404, and then 429 responses.
+
+Canonical reboot flow:
+
+`Windows restart -> run Start_SlideMasterPicker.bat -> wait for [READY] -> issue exactly one ChatGPT Picker request`
+
+`[READY]` is valid only when all of the following pass:
+
+- TCP port 3000 is reachable;
+- TCP port 8080 is reachable;
+- `/healthz` returns `live`;
+- `/readyz` returns `ready`;
+- those conditions remain continuously stable for the configured stability window;
+- `scripts/mcp-smoke.mjs` passes and confirms tools, picker payload, resource metadata, UI resource, and final validation.
+
+If any step fails, do not loop ChatGPT retries. Use `%LOCALAPPDATA%\OpenAI\SlideMasterTunnel\logs\runtime.verify.status.json` and resolve the runtime first.
