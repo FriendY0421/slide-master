@@ -12,6 +12,8 @@ Durable handoff: `docs/session-handoff/20260830_STORYLINE_LAYOUT_READABILITY_V2.
 
 Detailed history: `docs/ai-history/2026-08-30-storyline-layout-readability-v2.md`
 
+Implementation commit: `fabf6b60afe99de9114ab8eecb718a4bdfe01438`
+
 ---
 
 Updated checkpoint: 2026-08-30 21:22 KST

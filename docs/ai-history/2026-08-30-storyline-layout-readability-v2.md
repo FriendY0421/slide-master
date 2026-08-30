@@ -41,3 +41,9 @@ Explicit user counts such as 20 or 30 slides are supported. Expand through real 
 - JSON/JS/Python parse and `git diff --check`: PASS.
 - Production preset picker smoke shows business body 34px and presentation body 40px.
 - GitHub Actions not used.
+
+## GitHub implementation
+- Implementation commit: `fabf6b60afe99de9114ab8eecb718a4bdfe01438`
+- Branch retained: `fix/ppt-layout-spacing-20260830`
+- Implementation was fast-forwarded to `main` after confirming remote main had not moved.
+- GitHub Actions were not used.

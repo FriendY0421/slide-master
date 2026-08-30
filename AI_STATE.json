@@ -3,15 +3,16 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-30T22:14:37+09:00",
+  "updated_at_kst": "2026-08-30T22:22:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
     "work_id": "SLIDE-MASTER-STORYLINE-LAYOUT-READABILITY-V2-20260830",
-    "status": "VALIDATED_READY_FOR_MAIN",
+    "status": "CURRENT_ON_MAIN",
     "mode": "USER_EDITABLE_STORYLINE_FAIL_CLOSED_AND_READABILITY_V2",
     "actor": "ChatGPT",
     "summary": "Added user-editable full slide-by-slide preview approval evidence before generation; raised PPT typography defaults to 28/34/40px; added natural card padding/line-spacing/content-occupancy rules; validated 20/30-slide flows and export blocking.",
-    "history_file": "docs/ai-history/2026-08-30-storyline-layout-readability-v2.md"
+    "history_file": "docs/ai-history/2026-08-30-storyline-layout-readability-v2.md",
+    "implementation_commit": "fabf6b60afe99de9114ab8eecb718a4bdfe01438"
   },
   "production": {},
   "source_authority": {
@@ -55,7 +56,8 @@
     "inline_html_generator_commit": "0e4499fdac351c625564c591961d99c78a64a036",
     "inline_html_history_commit": "e78c5cb1bf140f3bab25dc293067b36da28e39bf",
     "inline_html_latest_handoff_commit": "74d44d9dc58f386ab7afc03206a2cb138bc17039",
-    "gpts_app_block_picker_implementation_commit": "b0234dd281dd733a5bdbc05a3106e4ddf74df4eb"
+    "gpts_app_block_picker_implementation_commit": "b0234dd281dd733a5bdbc05a3106e4ddf74df4eb",
+    "storyline_layout_readability_v2_commit": "fabf6b60afe99de9114ab8eecb718a4bdfe01438"
   },
   "control": {
     "engine": "FAH",
@@ -382,7 +384,7 @@
     "Standard non-mirror PPT typography recommendations are text 28px, balanced 34px, presentation 40px; 24px is an emergency floor, not the normal default.",
     "Body-bearing cards use natural inner padding/line spacing and content regions must be rebalanced before shrinking type; avoid dense small boxes surrounded by unexplained empty space."
   ],
-  "next_priority": "Run the next real FriendY PPT through template/preset -> research -> editable full storyline preview -> approval -> generation, then visually validate 28/34/40 typography, card padding, line spacing, content occupancy, and image/text balance.",
+  "next_priority": "Validate the next real generated PPT visually with the user: first show/edit/approve the full slide-by-slide preview, then confirm larger 28/34/40 typography and natural card padding/line spacing/content occupancy in the exported deck.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",
