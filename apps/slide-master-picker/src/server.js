@@ -118,7 +118,8 @@ function createMcpServer() {
           purpose: payload.purpose,
           source: payload.source,
           payload_ready: true,
-          host_ui_rendered: false,
+          host_ui_rendered: null,
+          host_ui_render_status: "pending_app_signal",
           selectable_total: payload.selectable_total,
           recommended_keys: payload.recommended_keys,
           shortlist: payload.shortlist.map((item) => ({
@@ -134,7 +135,7 @@ function createMcpServer() {
             recommended_rank: item.recommended_rank,
           })),
         },
-        content: [{ type: "text", text: `Slide Master picker payload prepared: ${payload.selectable_total} ACTIVE templates. Host UI rendering is NOT confirmed by this result. Do not tell the user the gallery is visible unless the app view reports SLIDE_MASTER_PICKER_UI_RENDERED.` }],
+        content: [{ type: "text", text: `Slide Master picker payload prepared: ${payload.selectable_total} ACTIVE templates. Host UI rendering is pending app confirmation. host_ui_rendered:null is not a failure signal. Do not infer render failure from the initial tool result; use the app view signal or visible UI.` }],
         _meta: { pickerPayload: payload },
       };
     },

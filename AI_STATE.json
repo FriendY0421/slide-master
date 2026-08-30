@@ -3,16 +3,16 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-30T22:35:00+09:00",
+  "updated_at_kst": "2026-08-31T00:14:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-PICKER-STORYLINE-HANDOFF-20260830",
-    "status": "CURRENT_ON_FEATURE_BRANCH",
-    "mode": "WAIT_STORYLINE_PREVIEW_FAIL_CLOSED",
+    "work_id": "SLIDE-MASTER-PICKER-CONFIRM-RELIABILITY-20260831",
+    "status": "VALIDATED_PENDING_NORMAL_SERVER_RESTART_FOR_METADATA_ONLY",
+    "mode": "PAYLOAD_PRIMARY_CONFIRM_WITH_ADVISORY_SERVER_REVALIDATION",
     "actor": "ChatGPT",
-    "summary": "Corrected the Apps SDK Picker final host bridge so template+preset selection no longer tells ChatGPT to generate immediately; selection validation now returns WAIT_STORYLINE_PREVIEW with generation_allowed=false and requires a full user-editable slide plan plus explicit approval before generation.",
-    "history_file": "docs/ai-history/2026-08-30-picker-storyline-handoff-fail-closed.md",
-    "implementation_commit": "fc62c951dc4b1300b5279552e416c5461efa5692"
+    "summary": "Hardened final Picker confirmation after real host evidence showed intermittent Tunnel HTTP 502. Server-issued picker payload is now the primary selection authority; validation-call failure no longer resets/blocks confirmation, sendMessage has a visible/copyable fallback, and initial host render state is modeled as pending/null rather than failure false. Storyline preview remains mandatory before PPT generation.",
+    "history_file": "docs/ai-history/2026-08-31-picker-confirm-reliability.md",
+    "implementation_commit": "PENDING_CURRENT_COMMIT"
   },
   "production": {},
   "source_authority": {

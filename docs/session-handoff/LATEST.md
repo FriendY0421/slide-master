@@ -1,5 +1,21 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-31 00:14 KST
+
+## NEWEST CHECKPOINT — PICKER CONFIRM RELIABILITY HARDENED
+
+Real ChatGPT selection-confirm failure is now classified more precisely: local MCP/resource/CSP remained healthy, while Tunnel logs recorded intermittent HTTP 502 on MCP `tools/call`/`initialize`. The Picker previously made an extra server validation call a single point of failure. It now treats the server-issued Picker payload as primary selection authority and server revalidation as advisory; a transient 502 no longer discards or blocks the valid template+preset choice.
+
+Initial tool render state is now `host_ui_rendered:null` + `pending_app_signal`, not boolean failure. Do not infer host-render failure from the initial field. If automatic chat delivery fails, the app displays the full official selection/storyline handoff text and attempts clipboard copy. The next state remains `WAIT_STORYLINE_PREVIEW / GENERATION_ALLOWED=false` until the user approves the editable slide-by-slide preview.
+
+Durable handoff: `docs/session-handoff/20260831_PICKER_CONFIRM_RELIABILITY.md`
+
+Detailed history: `docs/ai-history/2026-08-31-picker-confirm-reliability.md`
+
+GitHub Actions were not used. PR #6 remains Draft pending real host confirm-roundtrip acceptance.
+
+---
+
 Updated checkpoint: 2026-08-30 22:35 KST
 
 ## NEWEST CHECKPOINT — PICKER STORYLINE HANDOFF FAIL-CLOSED

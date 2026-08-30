@@ -115,27 +115,35 @@ function renderPresets() {
 const localToken = () => `${selectedTemplate.id} | preset:${selectedPreset.id}`;
 
 async function confirmSelection() {
+  // The picker payload itself came from the MCP server and is the primary
+  // selection authority. Server-side revalidation is useful, but must not
+  // make the UI unusable when the host/tunnel has a transient 502.
   let token = localToken();
+  let validationMode = "local_payload";
   try {
     const validated = await app.callServerTool({
       name: "validate_slide_master_selection",
       arguments: { purpose: payload.purpose, template_id: selectedTemplate.id, preset_id: selectedPreset.id },
     });
     token = validated?.structuredContent?.selection_token || token;
+    validationMode = "server_validated";
   } catch (error) {
-    root.innerHTML = `<section class="picker-shell final warning"><h2>선택 검증에 실패했습니다</h2><p>템플릿 목록을 새로 열어 다시 선택해주세요.</p><small>${esc(error?.message || "selection validation failed")}</small></section>`;
-    return;
+    console.warn("selection server validation unavailable; using payload-backed local token", error);
   }
 
-  const bodyPx = validated?.structuredContent?.production_profile?.body_px || selectedPreset?.body_px || 34;
-  const message = `PPT 템플릿/프리셋 최종 선택 확정: ${token}.\n\n중요: 지금 PPTX를 만들거나 슬라이드 제작을 시작하지 마세요. 다음 단계는 반드시 장표별 내용 미리보기입니다. 필요한 자료조사/사실확인을 한 뒤, 요청한 장수(또는 더 자연스러운 권장 장수)를 기준으로 모든 장표를 채팅에 먼저 보여주세요. 각 장표는 [번호 | 제목 | 핵심 메시지 | 주요 내용 | 이미지/차트·배치 계획]을 포함해야 합니다. 사용자가 특정 장표의 수정·삭제·추가·순서변경·장수변경을 할 수 있게 하고, 수정된 전체 장표안을 다시 보여준 뒤 명시적 승인을 기다리세요. 승인 전에는 PPT 생성/내보내기 금지입니다. 디자인 기준은 ${bodyPx}px 본문 기준의 큰 타이포그래피, 충분한 행간/박스 패딩, 한 장표 한 핵심 아이디어, 반복 카드그리드 최소화, 텍스트와 이미지의 자연스러운 비대칭 균형입니다.`;
+  const countMatch = String(payload?.purpose || "").match(/(\d{1,3})\s*(?:장|슬라이드|slides?)/i);
+  const requestedSlideCount = countMatch ? Number(countMatch[1]) : null;
+  const previewScope = requestedSlideCount ? `${requestedSlideCount}장 전체` : "전체 장표";
+  const message = `PPT 템플릿 최종 선택: ${token}. 선택을 확정하되 아직 PPT를 생성하지 마. NEXT_STATE=WAIT_STORYLINE_PREVIEW, GENERATION_ALLOWED=false. 먼저 필요한 자료조사/검증을 한 뒤 ${previewScope}의 장표별 번호·제목·핵심 메시지·주요 내용·권장 시각화/배치안을 대화창에 보여줘. 사용자가 장표 추가/삭제/병합/분리/순서변경/문구수정/시각화변경을 할 수 있게 하고, 수정된 최신 버전에 대해 명시적 승인을 받은 뒤에만 PPTX를 제작해. 디자인은 Slide Design System V3와 28/34/40px 타이포그래피, 충분한 행간/박스 패딩, 한 장표 한 핵심 메시지, 반복 카드그리드 최소화를 적용해.`;
+  const contextText = `선택된 PPT 구성: ${token}. selection_validation=${validationMode}. NEXT_STATE=WAIT_STORYLINE_PREVIEW. GENERATION_ALLOWED=false. 초기 tool 결과의 host_ui_rendered=false/null은 실패 판정이 아니라 앱 렌더 신호 전의 초기/미확인 상태일 뿐이므로, 현재 이 앱 화면이 보이고 있다면 그 값을 근거로 렌더 실패라고 판단하지 마. 사용자 수정 가능한 장표별 미리보기와 명시적 승인 전 PPT 생성 금지.`;
   try {
-    await app.updateModelContext({ content: [{ type: "text", text: `선택된 PPT 구성: ${token}. NEXT_STATE=WAIT_STORYLINE_PREVIEW. GENERATION_ALLOWED=false. 사용자 수정 가능한 장표별 미리보기와 명시적 승인 전 PPT 생성 금지.` }] });
+    await app.updateModelContext({ content: [{ type: "text", text: contextText }] });
     const result = await app.sendMessage({ role: "user", content: [{ type: "text", text: message }] });
     if (result?.isError) throw new Error("host rejected selection message");
-    root.innerHTML = `<section class="picker-shell final success"><h2>선택이 채팅에 전달되었습니다</h2><code>${esc(token)}</code><p>이제 PPT를 만들기 전에 장표별 제목·핵심 메시지·주요 내용·시각/배치 계획을 먼저 보여주고 수정·승인을 받는 단계로 진행됩니다.</p></section>`;
+    root.innerHTML = `<section class="picker-shell final success"><h2>선택이 확정되었습니다</h2><code>${esc(token)}</code><p>다음 단계는 PPT 생성이 아니라 ${esc(previewScope)}의 장표안 미리보기입니다. 대화창에서 장표별 내용을 확인·수정한 뒤 승인해 주세요.</p><small>validation: ${esc(validationMode)}</small></section>`;
   } catch (error) {
-    root.innerHTML = `<section class="picker-shell final warning"><h2>자동 전달을 사용할 수 없습니다</h2><p>아래 선택값을 채팅에 보내주세요.</p><code>${esc(token)}</code><small>${esc(error?.message || "host message bridge unavailable")}</small></section>`;
+    try { await navigator.clipboard?.writeText?.(message); } catch (_) {}
+    root.innerHTML = `<section class="picker-shell final warning"><h2>선택값의 자동 채팅 전달이 제한되었습니다</h2><p>선택 자체는 유지됩니다. 아래 내용을 복사해 채팅에 보내면 동일한 공식 선택 확정으로 처리됩니다.</p><code>${esc(message)}</code><small>${esc(error?.message || "host message bridge unavailable")}</small></section>`;
   }
 }
 
