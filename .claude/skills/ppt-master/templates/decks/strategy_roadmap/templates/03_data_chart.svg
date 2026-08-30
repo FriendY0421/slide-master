@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="strategy_roadmap-master" data-pptx-master-name="Strategy Roadmap" data-pptx-layout="03_content" data-pptx-layout-name="Content">
+<rect width="1280" height="720" fill="#F5F7F7" data-pptx-layer="slide" data-pptx-editable="false" id="slide-bg" />
+<rect x="0" y="0" width="96" height="720" fill="#173B3A" />
+<circle cx="48" cy="92" r="18" fill="#F59E0B" />
+<circle cx="48" cy="628" r="8" fill="#0D9488" />
+<text x="132" y="72" fill="#0D9488" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1.2">DATA / KPI</text>
+<g id="page-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="132 88 1040 66"><text x="132" y="120" fill="#1C2B2A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="32" font-weight="700" text-anchor="start" data-pptx-placeholder-carrier="true">{{PAGE_TITLE}}</text></g>
+<line x1="132" y1="158" x2="1188" y2="158" stroke="#667574" stroke-width="1" opacity="0.28" />
+<rect x="132" y="205" width="210" height="108" rx="16" fill="#FFFFFF" stroke="#DDE5EE" />
+<text x="150" y="235" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="10" font-weight="700" text-anchor="start" letter-spacing="1">CURRENT</text>
+<text x="150" y="283" fill="#0D9488" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="34" font-weight="700" text-anchor="start">87%</text>
+<rect x="362" y="205" width="210" height="108" rx="16" fill="#FFFFFF" stroke="#DDE5EE" />
+<text x="380" y="235" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="10" font-weight="700" text-anchor="start" letter-spacing="1">TARGET</text>
+<text x="380" y="283" fill="#1C2B2A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="34" font-weight="700" text-anchor="start">92%</text>
+<rect x="592" y="205" width="210" height="108" rx="16" fill="#FFFFFF" stroke="#DDE5EE" />
+<text x="610" y="235" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="10" font-weight="700" text-anchor="start" letter-spacing="1">GAP</text>
+<text x="610" y="283" fill="#1C2B2A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="34" font-weight="700" text-anchor="start">-5%</text>
+<rect x="132" y="347" width="700" height="250" rx="18" fill="#FFFFFF" stroke="#DDE5EE" />
+<text x="154" y="381" fill="#0D9488" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1">TREND</text>
+<line x1="162" y1="417" x2="792" y2="417" stroke="#667574" stroke-width="1" opacity="0.18" />
+<line x1="162" y1="451" x2="792" y2="451" stroke="#667574" stroke-width="1" opacity="0.18" />
+<line x1="162" y1="485" x2="792" y2="485" stroke="#667574" stroke-width="1" opacity="0.18" />
+<line x1="162" y1="519" x2="792" y2="519" stroke="#667574" stroke-width="1" opacity="0.18" />
+<line x1="162" y1="553" x2="792" y2="553" stroke="#667574" stroke-width="1" opacity="0.18" />
+<circle cx="180" cy="530" r="5" fill="#0D9488" />
+<circle cx="273" cy="500" r="5" fill="#0D9488" />
+<circle cx="366" cy="510" r="5" fill="#0D9488" />
+<circle cx="459" cy="470" r="5" fill="#0D9488" />
+<circle cx="552" cy="480" r="5" fill="#0D9488" />
+<circle cx="645" cy="445" r="5" fill="#0D9488" />
+<circle cx="738" cy="435" r="5" fill="#0D9488" />
+<polyline points="180,530 273,500 366,510 459,470 552,480 645,445 738,435" fill="none" stroke="#0D9488" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="862" y="205" width="380" height="392" rx="18" fill="#FFFFFF" stroke="#DDE5EE" />
+<text x="886" y="241" fill="#F59E0B" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="700" text-anchor="start" letter-spacing="1">DRIVERS</text>
+<text x="886" y="301" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">A</text>
+<rect x="920" y="287" width="250" height="18" rx="9" fill="#667574" opacity="0.14" />
+<rect x="920" y="287" width="220" height="18" rx="9" fill="#F59E0B" opacity="0.95" />
+<text x="1194" y="301" fill="#1C2B2A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="end">88%</text>
+<text x="886" y="367" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">B</text>
+<rect x="920" y="353" width="250" height="18" rx="9" fill="#667574" opacity="0.14" />
+<rect x="920" y="353" width="180" height="18" rx="9" fill="#F59E0B" opacity="0.83" />
+<text x="1194" y="367" fill="#1C2B2A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="end">72%</text>
+<text x="886" y="433" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">C</text>
+<rect x="920" y="419" width="250" height="18" rx="9" fill="#667574" opacity="0.14" />
+<rect x="920" y="419" width="145" height="18" rx="9" fill="#F59E0B" opacity="0.71" />
+<text x="1194" y="433" fill="#1C2B2A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="end">58%</text>
+<text x="886" y="499" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">D</text>
+<rect x="920" y="485" width="250" height="18" rx="9" fill="#667574" opacity="0.14" />
+<rect x="920" y="485" width="115" height="18" rx="9" fill="#F59E0B" opacity="0.59" />
+<text x="1194" y="499" fill="#1C2B2A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="end">46%</text>
+<text x="886" y="559" fill="#1C2B2A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="14" font-weight="600" text-anchor="start">{{BODY_1}}</text>
+<text x="886" y="583" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start">{{BODY_2}}</text>
+<text x="74" y="690" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="start">SLIDE MASTER</text><text x="1200" y="690" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="end">04</text>
+</svg>

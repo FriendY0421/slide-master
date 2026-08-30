@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="future_tech-master" data-pptx-master-name="Future Tech" data-pptx-layout="02_toc" data-pptx-layout-name="Agenda">
+<rect width="1280" height="720" fill="#070B18" data-pptx-layer="slide" data-pptx-editable="false" id="slide-bg" />
+<line x1="0" y1="0" x2="0" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="128" y1="0" x2="128" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="256" y1="0" x2="256" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="384" y1="0" x2="384" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="512" y1="0" x2="512" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="640" y1="0" x2="640" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="768" y1="0" x2="768" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="896" y1="0" x2="896" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="1024" y1="0" x2="1024" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="1152" y1="0" x2="1152" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="1280" y1="0" x2="1280" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="0" x2="1280" y2="0" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="90" x2="1280" y2="90" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="180" x2="1280" y2="180" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="270" x2="1280" y2="270" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="360" x2="1280" y2="360" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="450" x2="1280" y2="450" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="540" x2="1280" y2="540" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="630" x2="1280" y2="630" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="720" x2="1280" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<circle cx="1130" cy="110" r="72" fill="none" stroke="#5EE7F7" stroke-width="2" opacity="0.32" />
+<circle cx="1130" cy="110" r="48" fill="none" stroke="#8B5CF6" stroke-width="2" opacity="0.28" />
+<text x="76" y="86" fill="#5EE7F7" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1.4">AGENDA</text>
+<g id="toc-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="76 108 820 70"><text x="76" y="144" fill="#EDF4FF" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="36" font-weight="700" text-anchor="start" data-pptx-placeholder-carrier="true">{{TITLE}}</text></g>
+<text x="76" y="248" fill="#5EE7F7" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="17" font-weight="700" text-anchor="start">01</text>
+<line x1="130" y1="242" x2="1160" y2="242" stroke="#8FA3C2" stroke-width="1" opacity="0.30" />
+<text x="152" y="250" fill="#EDF4FF" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="21" font-weight="600" text-anchor="start">{{BODY_1}}</text>
+<text x="1160" y="250" fill="#8B5CF6" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="600" text-anchor="end">→</text>
+<text x="76" y="340" fill="#5EE7F7" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="17" font-weight="700" text-anchor="start">02</text>
+<line x1="130" y1="334" x2="1160" y2="334" stroke="#8FA3C2" stroke-width="1" opacity="0.30" />
+<text x="152" y="342" fill="#EDF4FF" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="21" font-weight="600" text-anchor="start">{{BODY_2}}</text>
+<text x="1160" y="342" fill="#8B5CF6" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="600" text-anchor="end">→</text>
+<text x="76" y="432" fill="#5EE7F7" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="17" font-weight="700" text-anchor="start">03</text>
+<line x1="130" y1="426" x2="1160" y2="426" stroke="#8FA3C2" stroke-width="1" opacity="0.30" />
+<text x="152" y="434" fill="#EDF4FF" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="21" font-weight="600" text-anchor="start">{{BODY_3}}</text>
+<text x="1160" y="434" fill="#8B5CF6" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="600" text-anchor="end">→</text>
+<text x="76" y="524" fill="#5EE7F7" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="17" font-weight="700" text-anchor="start">04</text>
+<line x1="130" y1="518" x2="1160" y2="518" stroke="#8FA3C2" stroke-width="1" opacity="0.30" />
+<text x="152" y="526" fill="#EDF4FF" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="21" font-weight="600" text-anchor="start">{{BODY_4}}</text>
+<text x="1160" y="526" fill="#8B5CF6" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="600" text-anchor="end">→</text>
+<text x="74" y="690" fill="#8FA3C2" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="start">SLIDE MASTER</text><text x="1200" y="690" fill="#8FA3C2" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="end">02</text>
+</svg>

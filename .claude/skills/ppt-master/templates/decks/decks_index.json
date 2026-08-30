@@ -6,13 +6,270 @@
     "page_count": 13,
     "primary_color": "#1D1D1F",
     "primary_category": "presentation",
-    "categories": ["presentation", "brand_story", "product"],
-    "keywords": ["발표", "프레젠테이션", "제품", "서비스 소개", "브랜드", "스토리", "디자인", "키노트", "비전", "메시지"],
+    "categories": [
+      "presentation",
+      "brand_story",
+      "product"
+    ],
+    "keywords": [
+      "발표",
+      "프레젠테이션",
+      "제품",
+      "서비스 소개",
+      "브랜드",
+      "스토리",
+      "디자인",
+      "키노트",
+      "비전",
+      "메시지"
+    ],
     "defaults": {
       "mode": "showcase",
       "visual_style": "swiss-minimal",
       "delivery_purpose": "balanced"
     }
+  },
+  "consulting_clarity": {
+    "summary": "메시지 중심의 컨설팅·전략 보고용. 액션 타이틀, 근거, 비교와 로드맵을 빠르게 읽히게 구성합니다.",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "primary_color": "#1E4D8F",
+    "primary_category": "report",
+    "status": "ACTIVE",
+    "display_name": "Consulting Clarity",
+    "version": "1.0",
+    "visibility": "public",
+    "source_type": "native",
+    "fidelity": "native",
+    "categories": [
+      "report",
+      "proposal",
+      "data"
+    ],
+    "keywords": [
+      "컨설팅",
+      "전략",
+      "경영보고",
+      "문제분석",
+      "개선안",
+      "executive",
+      "consulting"
+    ],
+    "audience": [
+      "임원",
+      "관리자",
+      "의사결정자"
+    ],
+    "purpose": [
+      "전략 보고",
+      "문제점 분석",
+      "개선 제안",
+      "경영진 브리핑"
+    ],
+    "aliases": [
+      "컨설팅 클린",
+      "전략 보고서",
+      "consulting clarity"
+    ],
+    "document_types": [
+      "strategy_report",
+      "improvement_proposal",
+      "executive_brief"
+    ],
+    "tone": [
+      "formal",
+      "concise",
+      "evidence-led"
+    ],
+    "avoid_for": [
+      "어린이",
+      "축하",
+      "웨딩"
+    ],
+    "quality_score": 96
+  },
+  "data_insight_pro": {
+    "summary": "KPI·실적·VOC·트렌드 분석을 위한 데이터 스토리텔링 중심의 다크 대시보드형 템플릿입니다.",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "primary_color": "#22D3EE",
+    "primary_category": "data",
+    "status": "ACTIVE",
+    "display_name": "Data Insight Pro",
+    "version": "1.0",
+    "visibility": "public",
+    "source_type": "native",
+    "fidelity": "native",
+    "categories": [
+      "data",
+      "report",
+      "presentation"
+    ],
+    "keywords": [
+      "데이터",
+      "KPI",
+      "실적",
+      "VOC",
+      "추이",
+      "통계",
+      "분석",
+      "dashboard"
+    ],
+    "audience": [
+      "관리자",
+      "분석가",
+      "임원"
+    ],
+    "purpose": [
+      "데이터 분석",
+      "실적 보고",
+      "KPI 리뷰",
+      "VOC 분석"
+    ],
+    "aliases": [
+      "데이터 인사이트",
+      "KPI 대시보드",
+      "data insight"
+    ],
+    "document_types": [
+      "data_report",
+      "kpi_review",
+      "performance_report"
+    ],
+    "tone": [
+      "analytical",
+      "modern",
+      "data-heavy"
+    ],
+    "avoid_for": [
+      "사진앨범",
+      "축하",
+      "웨딩"
+    ],
+    "quality_score": 96
+  },
+  "executive_boardroom": {
+    "summary": "임원회의·경영현안·의사결정 보고에 적합한 절제된 보드룸 스타일입니다.",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "primary_color": "#B38B3F",
+    "primary_category": "report",
+    "status": "ACTIVE",
+    "display_name": "Executive Boardroom",
+    "version": "1.0",
+    "visibility": "public",
+    "source_type": "native",
+    "fidelity": "native",
+    "categories": [
+      "report",
+      "presentation",
+      "proposal"
+    ],
+    "keywords": [
+      "임원",
+      "경영진",
+      "이사회",
+      "의사결정",
+      "경영현안",
+      "boardroom"
+    ],
+    "audience": [
+      "임원",
+      "경영진",
+      "이사회"
+    ],
+    "purpose": [
+      "임원 보고",
+      "경영 현안",
+      "의사결정",
+      "중장기 전략"
+    ],
+    "aliases": [
+      "보드룸",
+      "임원보고",
+      "executive boardroom"
+    ],
+    "document_types": [
+      "executive_brief",
+      "board_report",
+      "decision_memo"
+    ],
+    "tone": [
+      "premium",
+      "formal",
+      "restrained"
+    ],
+    "avoid_for": [
+      "어린이",
+      "캐주얼",
+      "게임"
+    ],
+    "quality_score": 95
+  },
+  "future_tech": {
+    "summary": "AI·반도체·IT·미래전략·기술 로드맵 발표에 적합한 하이테크 다크 템플릿입니다.",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "primary_color": "#5EE7F7",
+    "primary_category": "presentation",
+    "status": "ACTIVE",
+    "display_name": "Future Tech",
+    "version": "1.0",
+    "visibility": "public",
+    "source_type": "native",
+    "fidelity": "native",
+    "categories": [
+      "presentation",
+      "product",
+      "proposal",
+      "data"
+    ],
+    "keywords": [
+      "AI",
+      "반도체",
+      "IT",
+      "기술",
+      "미래",
+      "혁신",
+      "디지털",
+      "tech"
+    ],
+    "audience": [
+      "경영진",
+      "기술팀",
+      "고객",
+      "투자자"
+    ],
+    "purpose": [
+      "AI 전략",
+      "기술 발표",
+      "미래 전략",
+      "제품 기술 소개",
+      "반도체 발표"
+    ],
+    "aliases": [
+      "퓨처 테크",
+      "AI 테크",
+      "future tech",
+      "미래",
+      "미래 기술"
+    ],
+    "document_types": [
+      "technology_strategy",
+      "innovation_deck",
+      "tech_product"
+    ],
+    "tone": [
+      "futuristic",
+      "technical",
+      "premium"
+    ],
+    "avoid_for": [
+      "전통 행정문서",
+      "법무",
+      "어린이"
+    ],
+    "quality_score": 95
   },
   "jangpm": {
     "display_name": "JangPM Editorial",
@@ -21,8 +278,22 @@
     "page_count": 4,
     "primary_color": "#4633E3",
     "primary_category": "education",
-    "categories": ["education", "presentation"],
-    "keywords": ["교육", "학습", "강의", "워크숍", "사내교육", "설명", "튜토리얼", "가이드", "교안", "브리핑"],
+    "categories": [
+      "education",
+      "presentation"
+    ],
+    "keywords": [
+      "교육",
+      "학습",
+      "강의",
+      "워크숍",
+      "사내교육",
+      "설명",
+      "튜토리얼",
+      "가이드",
+      "교안",
+      "브리핑"
+    ],
     "defaults": {
       "mode": "instructional",
       "visual_style": "editorial",
@@ -36,13 +307,93 @@
     "page_count": 10,
     "primary_color": "#0F2A4A",
     "primary_category": "report",
-    "categories": ["report", "proposal", "data", "presentation"],
-    "keywords": ["보고", "보고서", "경영", "전략", "분석", "개선", "제안", "기획", "로드맵", "현황", "문제점", "바라는점", "요구사항", "의견"],
+    "categories": [
+      "report",
+      "proposal",
+      "data",
+      "presentation"
+    ],
+    "keywords": [
+      "보고",
+      "보고서",
+      "경영",
+      "전략",
+      "분석",
+      "개선",
+      "제안",
+      "기획",
+      "로드맵",
+      "현황",
+      "문제점",
+      "바라는점",
+      "요구사항",
+      "의견"
+    ],
     "defaults": {
       "mode": "pyramid",
       "visual_style": "swiss-minimal",
       "delivery_purpose": "text"
     }
+  },
+  "modern_corporate_blue": {
+    "summary": "범용 회사 보고·회의·소개 자료에 쓰기 쉬운 깔끔한 블루 코퍼레이트 템플릿입니다.",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "primary_color": "#146FE8",
+    "primary_category": "report",
+    "status": "ACTIVE",
+    "display_name": "Modern Corporate Blue",
+    "version": "1.0",
+    "visibility": "public",
+    "source_type": "native",
+    "fidelity": "native",
+    "categories": [
+      "report",
+      "presentation",
+      "notice",
+      "proposal"
+    ],
+    "keywords": [
+      "회사",
+      "기업",
+      "업무보고",
+      "회의",
+      "현황",
+      "소개",
+      "corporate"
+    ],
+    "audience": [
+      "직원",
+      "관리자",
+      "고객",
+      "임원"
+    ],
+    "purpose": [
+      "업무 보고",
+      "현황 공유",
+      "회사 소개",
+      "회의 자료"
+    ],
+    "aliases": [
+      "코퍼레이트 블루",
+      "회사 보고",
+      "modern corporate"
+    ],
+    "document_types": [
+      "business_report",
+      "company_profile",
+      "meeting_deck"
+    ],
+    "tone": [
+      "clean",
+      "professional",
+      "balanced"
+    ],
+    "avoid_for": [
+      "아트 포트폴리오",
+      "웨딩"
+    ],
+    "quality_score": 95
   },
   "naver_ir": {
     "display_name": "NAVER IR",
@@ -51,12 +402,329 @@
     "page_count": 7,
     "primary_color": "#03C75A",
     "primary_category": "data",
-    "categories": ["data", "report", "presentation"],
-    "keywords": ["실적", "재무", "KPI", "성과", "지표", "분기", "투자", "IR", "데이터", "수치", "매출", "목표"],
+    "categories": [
+      "data",
+      "report",
+      "presentation"
+    ],
+    "keywords": [
+      "실적",
+      "재무",
+      "KPI",
+      "성과",
+      "지표",
+      "분기",
+      "투자",
+      "IR",
+      "데이터",
+      "수치",
+      "매출",
+      "목표"
+    ],
     "defaults": {
       "mode": "briefing",
       "visual_style": "data-journalism",
       "delivery_purpose": "balanced"
     }
+  },
+  "service_improvement": {
+    "summary": "서비스 품질·VOC·재서비스·센터 문제점과 개선대책을 진단→원인→실행으로 연결하는 실무형 템플릿입니다.",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "primary_color": "#1D70B7",
+    "primary_category": "report",
+    "status": "ACTIVE",
+    "display_name": "Service Improvement",
+    "version": "1.0",
+    "visibility": "public",
+    "source_type": "native",
+    "fidelity": "native",
+    "categories": [
+      "report",
+      "proposal",
+      "data"
+    ],
+    "keywords": [
+      "VOC",
+      "센터",
+      "품질",
+      "문제점",
+      "원인",
+      "개선",
+      "재서비스",
+      "고객불만"
+    ],
+    "audience": [
+      "센터장",
+      "관리자",
+      "기술리더",
+      "임원"
+    ],
+    "purpose": [
+      "서비스 개선",
+      "문제점 분석",
+      "VOC 개선",
+      "품질 개선",
+      "센터 보고"
+    ],
+    "aliases": [
+      "서비스 개선",
+      "문제점 개선",
+      "service improvement"
+    ],
+    "document_types": [
+      "service_review",
+      "root_cause_report",
+      "improvement_plan"
+    ],
+    "tone": [
+      "practical",
+      "evidence-led",
+      "action-oriented"
+    ],
+    "avoid_for": [
+      "투자 피치",
+      "웨딩",
+      "예술 포트폴리오"
+    ],
+    "quality_score": 97
+  },
+  "startup_pitch_bold": {
+    "summary": "스타트업·신사업·아이디어 제안에 적합한 대담한 피치덱 스타일입니다.",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "primary_color": "#5B4BFF",
+    "primary_category": "proposal",
+    "status": "ACTIVE",
+    "display_name": "Startup Pitch Bold",
+    "version": "1.0",
+    "visibility": "public",
+    "source_type": "native",
+    "fidelity": "native",
+    "categories": [
+      "proposal",
+      "presentation",
+      "product"
+    ],
+    "keywords": [
+      "스타트업",
+      "피치덱",
+      "신사업",
+      "투자",
+      "아이디어",
+      "제품",
+      "pitch"
+    ],
+    "audience": [
+      "투자자",
+      "경영진",
+      "파트너"
+    ],
+    "purpose": [
+      "사업 제안",
+      "투자 피치",
+      "신사업 제안",
+      "제품 소개"
+    ],
+    "aliases": [
+      "스타트업 피치",
+      "피치덱",
+      "startup pitch"
+    ],
+    "document_types": [
+      "pitch_deck",
+      "business_proposal",
+      "product_pitch"
+    ],
+    "tone": [
+      "bold",
+      "persuasive",
+      "modern"
+    ],
+    "avoid_for": [
+      "감사보고",
+      "법무",
+      "규정",
+      "정책"
+    ],
+    "quality_score": 94
+  },
+  "strategy_roadmap": {
+    "summary": "전략·프로젝트·변화관리의 단계와 우선순위를 명확하게 보여주는 로드맵 특화 템플릿입니다.",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "primary_color": "#0D9488",
+    "primary_category": "proposal",
+    "status": "ACTIVE",
+    "display_name": "Strategy Roadmap",
+    "version": "1.0",
+    "visibility": "public",
+    "source_type": "native",
+    "fidelity": "native",
+    "categories": [
+      "proposal",
+      "report",
+      "presentation"
+    ],
+    "keywords": [
+      "로드맵",
+      "전략",
+      "계획",
+      "프로젝트",
+      "일정",
+      "우선순위",
+      "roadmap"
+    ],
+    "audience": [
+      "관리자",
+      "프로젝트팀",
+      "경영진"
+    ],
+    "purpose": [
+      "전략 로드맵",
+      "프로젝트 계획",
+      "실행 계획",
+      "변화 관리"
+    ],
+    "aliases": [
+      "로드맵",
+      "전략계획",
+      "strategy roadmap"
+    ],
+    "document_types": [
+      "roadmap",
+      "project_plan",
+      "transformation_plan"
+    ],
+    "tone": [
+      "structured",
+      "action-oriented",
+      "clear"
+    ],
+    "avoid_for": [
+      "사진 포트폴리오",
+      "축하"
+    ],
+    "quality_score": 94
+  },
+  "training_playbook": {
+    "summary": "교육·매뉴얼·사용법·워크숍에 적합한 단계형 학습 플레이북 템플릿입니다.",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "primary_color": "#F4B942",
+    "primary_category": "education",
+    "status": "ACTIVE",
+    "display_name": "Training Playbook",
+    "version": "1.0",
+    "visibility": "public",
+    "source_type": "native",
+    "fidelity": "native",
+    "categories": [
+      "education",
+      "presentation",
+      "notice"
+    ],
+    "keywords": [
+      "교육",
+      "매뉴얼",
+      "가이드",
+      "사용법",
+      "워크숍",
+      "프로세스",
+      "training"
+    ],
+    "audience": [
+      "직원",
+      "신입",
+      "교육생",
+      "현장인력"
+    ],
+    "purpose": [
+      "교육 자료",
+      "사용법 안내",
+      "업무 매뉴얼",
+      "워크숍"
+    ],
+    "aliases": [
+      "교육 플레이북",
+      "매뉴얼",
+      "training playbook"
+    ],
+    "document_types": [
+      "training_deck",
+      "manual",
+      "how_to_guide"
+    ],
+    "tone": [
+      "friendly",
+      "structured",
+      "instructional"
+    ],
+    "avoid_for": [
+      "투자 IR",
+      "재무 보고",
+      "감사보고"
+    ],
+    "quality_score": 93
+  },
+  "visual_story": {
+    "summary": "한 장 한 메시지, 큰 숫자와 강한 문장으로 전달하는 스토리텔링·비전 발표 템플릿입니다.",
+    "canvas_format": "ppt169",
+    "page_count": 6,
+    "primary_color": "#D14D32",
+    "primary_category": "brand_story",
+    "status": "ACTIVE",
+    "display_name": "Visual Story",
+    "version": "1.0",
+    "visibility": "public",
+    "source_type": "native",
+    "fidelity": "native",
+    "categories": [
+      "brand_story",
+      "presentation",
+      "product"
+    ],
+    "keywords": [
+      "스토리",
+      "비전",
+      "브랜드",
+      "메시지",
+      "키노트",
+      "발표",
+      "storytelling"
+    ],
+    "audience": [
+      "고객",
+      "직원",
+      "대중",
+      "경영진"
+    ],
+    "purpose": [
+      "비전 발표",
+      "브랜드 스토리",
+      "핵심 메시지",
+      "제품 스토리"
+    ],
+    "aliases": [
+      "비주얼 스토리",
+      "키노트",
+      "visual story"
+    ],
+    "document_types": [
+      "brand_story",
+      "keynote",
+      "vision_deck"
+    ],
+    "tone": [
+      "visual",
+      "minimal",
+      "emotional"
+    ],
+    "avoid_for": [
+      "상세 KPI",
+      "감사보고",
+      "밀집 데이터"
+    ],
+    "quality_score": 93
   }
 }

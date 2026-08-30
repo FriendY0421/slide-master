@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="executive_boardroom-master" data-pptx-master-name="Executive Boardroom" data-pptx-layout="01_cover" data-pptx-layout-name="Cover">
+<rect width="1280" height="720" fill="#F7F2E8" data-pptx-layer="slide" data-pptx-editable="false" id="slide-bg" />
+<rect x="0" y="0" width="1280" height="14" fill="#B38B3F" />
+<rect x="1120" y="0" width="160" height="720" fill="#17352B" opacity="0.06" />
+<line x1="84" y1="650" x2="1190" y2="650" stroke="#B38B3F" stroke-width="2" />
+<text x="96" y="108" fill="#B38B3F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1.5">EXECUTIVE BRIEF</text>
+<g id="cover-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="96 218 900 126"><text x="96" y="272" fill="#17352B" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="54" font-weight="700" text-anchor="start" data-pptx-placeholder-carrier="true">{{TITLE}}</text></g>
+<g id="cover-subtitle" data-pptx-placeholder="subtitle" data-pptx-placeholder-bounds="98 362 760 72"><text x="98" y="383" fill="#706A5F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="21" font-weight="400" text-anchor="start" data-pptx-placeholder-carrier="true">{{SUBTITLE}}</text></g>
+<text x="98" y="606" fill="#17352B" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="15" font-weight="600" text-anchor="start">{{ORGANIZATION}}</text>
+<text x="98" y="634" fill="#706A5F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start">{{DATE}}</text>
+<rect x="920" y="186" width="220" height="280" rx="4" fill="#17352B" />
+<rect x="950" y="216" width="160" height="220" fill="none" stroke="#B38B3F" stroke-width="2" />
+<text x="1030" y="345" fill="#F7F2E8" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="62" font-weight="700" text-anchor="middle">01</text>
+</svg>

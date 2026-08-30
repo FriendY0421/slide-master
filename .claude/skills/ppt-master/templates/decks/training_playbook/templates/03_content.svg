@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="training_playbook-master" data-pptx-master-name="Training Playbook" data-pptx-layout="03_content" data-pptx-layout-name="Content">
+<rect width="1280" height="720" fill="#FFF9ED" data-pptx-layer="slide" data-pptx-editable="false" id="slide-bg" />
+<rect x="0" y="0" width="1280" height="18" fill="#F4B942" />
+<rect x="1110" y="18" width="170" height="104" fill="#F4B942" opacity="0.20" />
+<circle cx="1195" cy="70" r="24" fill="#2D6A8A" opacity="0.16" />
+<text x="76" y="72" fill="#F4B942" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1.2">KEY MESSAGE</text>
+<g id="page-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="76 88 1040 66"><text x="76" y="120" fill="#243447" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="32" font-weight="700" text-anchor="start" data-pptx-placeholder-carrier="true">{{PAGE_TITLE}}</text></g>
+<line x1="76" y1="158" x2="1188" y2="158" stroke="#677487" stroke-width="1" opacity="0.28" />
+<rect x="76" y="206" width="245" height="310" rx="22" fill="#FFFFFF" stroke="#E9DFC6" />
+<circle cx="124" cy="260" r="26" fill="#F4B942" />
+<text x="124" y="268" fill="#23445A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle">1</text>
+<text x="100" y="338" fill="#243447" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="700" text-anchor="start">{{BODY_1}}</text>
+<text x="100" y="388" fill="#677487" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start">{{BODY_5}}</text>
+<rect x="346" y="206" width="245" height="310" rx="22" fill="#FFFFFF" stroke="#E9DFC6" />
+<circle cx="394" cy="260" r="26" fill="#F4B942" />
+<text x="394" y="268" fill="#23445A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle">2</text>
+<text x="370" y="338" fill="#243447" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="700" text-anchor="start">{{BODY_2}}</text>
+<text x="370" y="388" fill="#677487" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start">{{BODY_6}}</text>
+<rect x="616" y="206" width="245" height="310" rx="22" fill="#FFFFFF" stroke="#E9DFC6" />
+<circle cx="664" cy="260" r="26" fill="#F4B942" />
+<text x="664" y="268" fill="#23445A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle">3</text>
+<text x="640" y="338" fill="#243447" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="700" text-anchor="start">{{BODY_3}}</text>
+<text x="640" y="388" fill="#677487" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start">{{BODY_7}}</text>
+<rect x="886" y="206" width="245" height="310" rx="22" fill="#FFFFFF" stroke="#E9DFC6" />
+<circle cx="934" cy="260" r="26" fill="#F4B942" />
+<text x="934" y="268" fill="#23445A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle">4</text>
+<text x="910" y="338" fill="#243447" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="18" font-weight="700" text-anchor="start">{{BODY_4}}</text>
+<text x="910" y="388" fill="#677487" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="400" text-anchor="start">{{BODY_8}}</text>
+<text x="74" y="690" fill="#677487" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="start">SLIDE MASTER</text><text x="1200" y="690" fill="#677487" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="end">03</text>
+</svg>
