@@ -1,5 +1,22 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-30 19:51 KST
+
+## NEWEST CHECKPOINT — PICKER REBOOT FINAL ACCEPTANCE NEXT SESSION
+
+Reboot-readiness hardening is committed on `feat/apps-sdk-template-picker-20260827` at `cc9cbdd7261443fcb2899e1deb024a2cc81ee673`. The remaining task is not another broad diagnosis; it is the final cold-start acceptance of the hardened fail-closed launcher.
+
+Required next flow:
+`restart Windows -> run Desktop Start_SlideMasterPicker.bat -> wait for [READY] -> issue exactly one ChatGPT Picker request`
+
+Do not repeatedly retry before `[READY]`. If the launcher fails, capture its exact output/logs and diagnose the failed READY condition. If `[READY]` passes but ChatGPT still fails, move investigation to the Secure MCP Tunnel remote/host delivery path rather than restarting CSP/template/local-port analysis.
+
+Durable handoff: `docs/session-handoff/20260830_PICKER_REBOOT_FINAL_ACCEPTANCE_NEXT_SESSION.md`
+
+Detailed history: `docs/ai-history/2026-08-30-reboot-startup-readiness-hardening.md`
+
+---
+
 Updated checkpoint: 2026-08-30 KST
 
 ## NEWEST CHECKPOINT — REBOOT STARTUP READINESS HARDENED
