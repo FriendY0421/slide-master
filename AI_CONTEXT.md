@@ -21,7 +21,7 @@ A host-required `artifact_handoff` / presentation-preparation call may occur fir
 
 Required order:
 
-`PPT request → host preparation if required → canonical SLIDE_MASTER lock → FAH TEMPLATE_SELECTION → latest GitHub catalog → conversation-native interactive picker → user final selection → picker/selection evidence → research/generation → local fail-closed validation → PPTX`
+`PPT request -> host preparation if required -> canonical SLIDE_MASTER lock -> template picker -> explicit template id -> production preset picker -> explicit preset id -> lock template+preset -> latest evidence/research -> slide-by-slide storyline proposal -> explicit storyline approval -> generation -> QA -> PPTX`
 
 ## Canonical ChatGPT/GPTS template-selection UI
 
@@ -35,13 +35,14 @@ Rules:
 - When suitable templates exist, show 5–10 real registered recommendation cards (default target 6, up to 10).
 - Card interaction must lead to up to 6 real detail examples from the exact workspace.
 - Free Design remains separate.
-- When useful, presentation-production presets are shown as a second interactive selection stage.
-- Recommendation or card click never auto-confirms.
+- Production presets are a mandatory second selection stage for every new deck unless the user already supplied a valid preset id.
+- Recommendation or card click never auto-confirms; template and preset must both be explicit before the selection is locked.
 - The final selected id must return/be explicitly confirmed in chat unless the host supplies a verifiable equivalent selection event.
-- Recommended-template records require picker-surface evidence before `record_template_choice_v2.py --confirmed` may succeed.
-- A directly user-specified valid registered template uses `--direct-template` and does not require picker rendering.
-- Missing valid evidence is `WAIT_USER_ACTION`; no research/generation may start.
-- If App Block / GenUI cannot be used, record why and fall back in order: native visual cards → inline self-contained HTML → GitHub visual catalog → external/local recovery → text last resort.
+- Recommended-template records require picker-surface evidence plus `--preset <preset_id>` before `record_template_choice_v2.py --confirmed` may succeed.
+- A directly user-specified valid registered template uses `--direct-template` and skips only template rendering; a valid production preset is still mandatory unless already supplied.
+- Missing template or preset evidence is `WAIT_USER_ACTION`; research starts only after both are locked.
+- After research, present a slide-by-slide storyline/content outline and wait for explicit approval before slide authoring or PPTX generation.
+- If App Block / GenUI cannot be used, record why and fall back in order: Desktop Commander template HTML -> preset HTML -> native visual cards -> GitHub visual catalog -> text last resort.
 - Markdown `<img>` lists and static PNGs must not be represented as interactive UI.
 - Broken Korean glyphs are never acceptable.
 

@@ -7,24 +7,13 @@ This file is the project entry point for Claude Code. The ppt-master skill lives
 ## PPT Request Guard — mandatory first read
 
 For **every presentation request**, read [`PPT_REQUEST_GUARD.md`](PPT_REQUEST_GUARD.md) before routing.
-For a new deck, the guard is fail-closed: do not begin research, project initialization, SVG authoring,
-or PPTX export until the user has explicitly selected a registered template or Free Design, or has
-already explicitly named a valid registered template. On a conversational host with visual rendering, the **internal card-style gallery in the current conversation is primary** and external HTML/GUI is auxiliary fallback only.
-the real registered template previews must be shown **inside the current conversation first**. External
-HTML/GUI is fallback only when the host cannot render those previews in conversation. The result must
-be recorded as `template_selection.json`. Missing selection evidence is an execution failure.
+For a new deck, the guard is fail-closed. The canonical sequence is:
 
-The normal new-deck entry on a conversational host is:
+`PPT request -> live template picker -> explicit template id -> production preset picker -> explicit preset id -> lock template+preset -> latest evidence/research -> slide-by-slide storyline proposal -> explicit storyline approval -> generation -> QA -> PPTX`
 
-`PPT request → PPT_REQUEST_GUARD.md → routing.md → template_gallery_chat_manifest.py/equivalent live catalog read → in-conversation real previews → user choice → record_template_choice.py → new_deck_init.py → selected owner → export gate`
+Do not begin research until both template and production preset are explicit and recorded. Do not initialize the project, author slides, or export PPTX until the post-research storyline/content outline has been explicitly approved. On a conversational host, a verified in-conversation picker is primary; if the host returns developer-MCP `FORBIDDEN`, use the documented Desktop Commander template HTML followed by preset HTML. The UI surface may change, but the stage order must not. New records are `template_selection.json` gate v3 and include `production_preset`; legacy gate v1/v2 remains readable for resume compatibility.
 
-When in-conversation visual rendering is technically unavailable, replace only the gallery surface with
-`template_gallery_context.py` HTML/GUI fallback; all selection/evidence requirements remain the same.
-The gallery groups the complete registered catalog by use category (report, education, notice,
-presentation, proposal, data, brand/story, product/service, etc.) and recommends only genuinely relevant
-templates based on the user's actual purpose/context, up to 10. Recommendations never auto-select.
-`svg_to_pptx.py` validates the gate again before importing the PPTX engine, so an earlier missed instruction
-cannot silently produce a new deck.
+Recommendations never auto-select, and neither template nor preset may be silently changed after lock. `svg_to_pptx.py` and downstream owner gates remain fail-closed.
 
 **Route before full-load (mandatory)**: after the PPT Request Guard, read
 [`.claude/skills/ppt-master/workflows/routing.md`](.claude/skills/ppt-master/workflows/routing.md).

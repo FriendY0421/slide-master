@@ -1,41 +1,101 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "initial_state": "WAIT_TEMPLATE_DISPLAY",
   "states": {
     "WAIT_TEMPLATE_DISPLAY": {
-      "allowed": ["catalog_refresh", "recommend_templates", "show_stable_gallery"]
+      "allowed": [
+        "catalog_refresh",
+        "recommend_templates",
+        "show_template_picker"
+      ]
     },
     "WAIT_TEMPLATE_SELECTION": {
-      "allowed": ["wait_for_user_choice", "show_template_details", "show_stable_gallery"]
+      "allowed": [
+        "wait_for_template_choice",
+        "show_template_details",
+        "show_template_picker"
+      ]
     },
-    "TEMPLATE_CONFIRMED": {
-      "allowed": ["record_selection", "initialize_project", "research", "compose_content"]
+    "WAIT_PRESET_SELECTION": {
+      "allowed": [
+        "rank_presets",
+        "show_preset_picker",
+        "wait_for_preset_choice"
+      ]
+    },
+    "SELECTION_LOCKED": {
+      "allowed": [
+        "record_template_and_preset",
+        "research",
+        "verify_sources"
+      ]
+    },
+    "RESEARCHING": {
+      "allowed": [
+        "research",
+        "verify_sources",
+        "build_storyline"
+      ]
+    },
+    "WAIT_STORYLINE_APPROVAL": {
+      "allowed": [
+        "present_storyline",
+        "revise_storyline",
+        "wait_for_user_approval"
+      ]
     },
     "GENERATING": {
-      "allowed": ["author_slides", "export_pptx"]
+      "allowed": [
+        "initialize_project",
+        "compose_content",
+        "author_slides",
+        "export_pptx"
+      ]
     },
     "QA": {
-      "allowed": ["verify_deck", "render_contact_sheet", "fix_generation_errors"]
+      "allowed": [
+        "verify_deck",
+        "render_contact_sheet",
+        "fix_generation_errors",
+        "source_date_check"
+      ]
     },
     "COMPLETE": {
-      "allowed": ["deliver_pptx"]
+      "allowed": [
+        "deliver_pptx"
+      ]
     }
   },
   "transitions": [
     {
       "from": "WAIT_TEMPLATE_DISPLAY",
       "to": "WAIT_TEMPLATE_SELECTION",
-      "condition": "stable visual gallery link or verifiable registered previews were provided"
+      "condition": "real registered template picker/previews were visibly provided"
     },
     {
       "from": "WAIT_TEMPLATE_SELECTION",
-      "to": "TEMPLATE_CONFIRMED",
-      "condition": "user explicitly returned deck:<id>, layout:<id>, or free"
+      "to": "WAIT_PRESET_SELECTION",
+      "condition": "user explicitly returned a valid template id"
     },
     {
-      "from": "TEMPLATE_CONFIRMED",
+      "from": "WAIT_PRESET_SELECTION",
+      "to": "SELECTION_LOCKED",
+      "condition": "user explicitly returned a valid production preset id and gate-v3 template+preset selection is recordable"
+    },
+    {
+      "from": "SELECTION_LOCKED",
+      "to": "RESEARCHING",
+      "condition": "template_selection.json gate v3 is valid"
+    },
+    {
+      "from": "RESEARCHING",
+      "to": "WAIT_STORYLINE_APPROVAL",
+      "condition": "evidence review is complete and slide-by-slide storyline/content outline is ready"
+    },
+    {
+      "from": "WAIT_STORYLINE_APPROVAL",
       "to": "GENERATING",
-      "condition": "template_selection.json is valid"
+      "condition": "user explicitly approves the presented storyline or an approved revision"
     },
     {
       "from": "GENERATING",
@@ -45,13 +105,18 @@
     {
       "from": "QA",
       "to": "COMPLETE",
-      "condition": "verify_deck.py passes and final render sanity scan is acceptable"
+      "condition": "owner-defined QA passes and final render sanity scan is acceptable"
     }
   ],
   "hard_stops": [
-    "No template selection evidence",
-    "Invented template or preview",
+    "No explicit template selection",
+    "No explicit production preset selection",
+    "No valid gate-v3 template+preset selection evidence",
+    "Invented template, preset, or preview",
     "Claimed visible UI without verifiable output",
-    "Attempted generation while waiting for template choice"
+    "Research attempted before template+preset lock",
+    "Generation attempted before storyline approval",
+    "Silent template or preset substitution after lock",
+    "QA failure"
   ]
 }

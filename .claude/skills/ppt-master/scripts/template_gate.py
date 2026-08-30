@@ -18,7 +18,9 @@ from picker_surface_gate import validate_picker_evidence  # noqa: E402
 
 configure_utf8_stdio()
 
-GATE_VERSION = 2
+GATE_VERSION = 3
+REPO_ROOT = Path(__file__).resolve().parents[4]
+PRESETS_PATH = REPO_ROOT / "docs" / "gpts" / "PRODUCTION_PRESETS.json"
 GATE_FILENAME = "template_selection.json"
 EXEMPT_REASONS = {
     "beautify-pptx",
@@ -28,6 +30,15 @@ EXEMPT_REASONS = {
     "resume-confirmed-project",
     "legacy-project",
 }
+
+
+def _valid_preset_ids() -> set[str]:
+    try:
+        doc = json.loads(PRESETS_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return set()
+    presets = doc.get("presets", []) if isinstance(doc, dict) else []
+    return {str(item.get("id") or "").strip() for item in presets if isinstance(item, dict) and item.get("id")}
 
 
 def _read_json(path: Path) -> dict:
@@ -71,7 +82,16 @@ def validate_selection_record(data: dict) -> list[str]:
     elif not str(data.get("workspace") or "").strip():
         errors.append("registered template selection must carry its workspace")
 
-    # Gate v1 records remain valid for legacy/resume compatibility.
+    # Gate v1/v2 records remain valid for legacy/resume compatibility.
+    if _record_version(data) >= 3:
+        preset = str(data.get("production_preset") or "").strip()
+        if not preset:
+            errors.append("gate v3 selection requires production_preset")
+        else:
+            valid_presets = _valid_preset_ids()
+            if valid_presets and preset not in valid_presets:
+                errors.append(f"unknown production_preset: {preset}")
+
     if _record_version(data) >= 2:
         surface = str(data.get("selection_surface") or "").strip()
         if not surface:
