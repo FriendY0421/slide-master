@@ -14,6 +14,15 @@ import template_gallery_inline_html as inline
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
 PRESETS_PATH = REPO_ROOT / "docs" / "gpts" / "PRODUCTION_PRESETS.json"
+SOURCE_VALUES = {"auto", "github", "local"}
+
+
+def normalize_source(value: str) -> str:
+    normalized = str(value or "github").strip().lower()
+    if normalized not in SOURCE_VALUES:
+        allowed = ", ".join(sorted(SOURCE_VALUES))
+        raise argparse.ArgumentTypeError(f"invalid source {value!r}; choose one of: {allowed}")
+    return normalized
 
 
 def _reason(entry: dict, inferred: list[str], purpose: str) -> str:
@@ -79,6 +88,7 @@ def _rank_presets(presets: list[dict], purpose: str, limit: int = 5) -> list[dic
 
 
 def build_payload(source: str, purpose: str, limit: int = 10, lang: str = "ko") -> dict:
+    source = normalize_source(source)
     ref, source_label = legacy._resolve_source(source)
     full_catalog = catalog_core.load_catalog(ref)
     catalog = catalog_core.selectable_catalog(full_catalog)
@@ -119,7 +129,7 @@ def build_payload(source: str, purpose: str, limit: int = 10, lang: str = "ko") 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Emit Slide Master MCP Apps picker payload")
-    parser.add_argument("--source", choices=("auto", "github", "local"), default="github")
+    parser.add_argument("--source", type=normalize_source, default="github")
     parser.add_argument("--purpose", required=True)
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument("--lang", default="ko")
