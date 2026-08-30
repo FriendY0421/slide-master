@@ -1,5 +1,20 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-30 21:22 KST
+
+## NEWEST CHECKPOINT - PPT TYPOGRAPHY READABILITY MODERNIZED
+
+Generated PPT text was judged too small overall. Generic PPT body baselines are now `text=24px`, `balanced=30px`, `presentation=36px`; standard non-mirror PPT body text has a 24px hard floor. Production presets now seed `delivery_purpose` + `body_px` + `modern_readable`, and overflow must be handled by copy reduction, page redistribution, or geometry reflow before shrinking type.
+
+Static/runtime-config smoke passed, including a future-strategy preset test that rendered Executive Brief as `presentation | body 36px`. Mirror/source-faithful typography contracts remain explicit exceptions. The next real generated PPT is the visual acceptance; do not revert globally to 20/24/32px to solve a local overflow.
+
+Durable handoff: `docs/session-handoff/20260830_PPT_TYPOGRAPHY_READABILITY.md`
+
+Durable history: `docs/ai-history/2026-08-30-ppt-typography-readability-modernization.md`
+
+GitHub Actions were not used.
+
+---
 Updated checkpoint: 2026-08-30 KST
 
 ## CROSS-BRANCH PICKER RUNTIME POINTER — READ BEFORE PICKER MODIFICATION

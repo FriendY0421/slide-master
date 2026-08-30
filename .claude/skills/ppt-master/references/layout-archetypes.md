@@ -8,7 +8,7 @@
 >
 > **These encode geometry, NOT skin.** Re-skin every color/font from `spec_lock.md`
 > (tokens below name the role, e.g. `{{ACCENT}}`, `{{TITLE_STACK}}`). Sizes shown
-> are the `balanced` ramp (body 24); if the deck's `body` differs, scale the ramp.
+> are geometry placeholders only. The current `balanced` baseline is body 30; always replace every text role with the locked `spec_lock.md` value and reflow geometry instead of inheriting these placeholder sizes.
 > **Run `text_fit.py` ONCE per page as a `--batch` page object** (blocks +
 > obstacles; §4 of the cheat-card) covering the filled risk lines — not one
 > call per line, and skip trivially-short lines. For another canvas size,

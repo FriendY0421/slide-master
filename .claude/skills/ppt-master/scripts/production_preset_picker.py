@@ -55,7 +55,7 @@ def build_html(purpose: str, limit: int = 5) -> str:
             f'''<button class="card" onclick="pick('{_esc(p['id'])}', '{_esc(p['display_name'])}')">
             <div class="rank">#{rank}</div><h2>{_esc(p['display_name'])}</h2>
             <p>{_esc(p.get('summary'))}</p>
-            <div class="meta">{_esc(p.get('slide_range'))} slides · {_esc(p.get('content_density'))}</div>
+            <div class="meta">{_esc(p.get('slide_range'))} slides | {_esc(p.get('content_density'))} | {_esc(p.get('delivery_purpose'))} | body {_esc(p.get('body_px'))}px</div>
             <small>{_esc(best)}</small></button>'''
         )
     cards_html = "\n".join(cards)

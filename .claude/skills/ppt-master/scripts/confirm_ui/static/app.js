@@ -1470,9 +1470,9 @@
     // the 1280×720 PPT canvas. No pt layer, no conversion. `def` is the fixed
     // recommendation; lo/hi are a sanity envelope for the out-of-range flag only.
     function deliveryBodyPx(purposeId) {
-        if (purposeId === "text") return { lo: 18, hi: 21, def: 20 };
-        if (purposeId === "presentation") return { lo: 28, hi: 32, def: 32 };
-        return { lo: 22, hi: 25, def: 24 }; // balanced — the default
+        if (purposeId === "text") return { lo: 24, hi: 26, def: 24 };
+        if (purposeId === "presentation") return { lo: 34, hi: 40, def: 36 };
+        return { lo: 28, hi: 32, def: 30 }; // balanced — the default
     }
 
     function defaultBodySizeForCanvas(canvasVal, purposeId) {
@@ -1967,7 +1967,7 @@
             var sacc = hexOr(pal.secondary_accent, acc);
             var txt = hexOr(pal.body_text, "#1d2430");
             // body_size is px everywhere — preview it directly, no conversion.
-            var rawSize = parseFloat(typ.body_size) || (isPptCanvas(STATE.canvas) ? 24 : 18);
+            var rawSize = parseFloat(typ.body_size) || (isPptCanvas(STATE.canvas) ? 30 : 18);
             var bodyPx = Math.max(12, Math.min(34, rawSize));
             var headStack = previewFontStack(head.cjk, head.css);
             var headLatStack = previewFontStack(head.latin, head.css);

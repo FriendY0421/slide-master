@@ -17,6 +17,9 @@
 - New ACTIVE registered company/user templates automatically join future recommendations.
 - Company/user template onboarding follows `docs/gpts/COMPANY_TEMPLATE_REGISTRATION.md`; new imports start as CANDIDATE and require preview approval before ACTIVE.
 - Production-style selection follows `docs/gpts/PRODUCTION_PRESETS.json`.
+- Production presets seed `delivery_purpose` and the modern-readable body baseline from `body_px`; the user may explicitly override later, but the system must not silently fall back to the older 20/24/32 px defaults.
+- Standard PPT typography defaults: `text` 24px, `balanced` 30px, `presentation` 36px. For non-mirror PPT slides, normal body text must not fall below 24px; solve overflow by reducing per-slide copy, increasing page count, or reflowing geometry before shrinking type.
+- Prefer a clear modern hierarchy: stronger title/lead scale, generous whitespace, concise lines, and fewer text blocks rather than dense small text.
 - Never store company confidential source files in the public repository.
 
 ## Required interaction order

@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-27T18:51:28+09:00",
+  "updated_at_kst": "2026-08-30T21:22:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-COMPANY-TEMPLATE-LIFECYCLE-20260827",
-    "status": "COMPANY_TEMPLATE_LIFECYCLE_VALIDATED",
-    "mode": "ACTIVE_ONLY_PICKER_GOVERNANCE",
+    "work_id": "SLIDE-MASTER-TYPOGRAPHY-READABILITY-20260830",
+    "status": "TYPOGRAPHY_MODERN_READABILITY_HARDENED",
+    "mode": "MODERN_READABLE_24_30_36",
     "actor": "ChatGPT",
-    "summary": "Added company/user template onboarding, metadata lifecycle, production presets, and ACTIVE-only picker filtering while preserving legacy templates as ACTIVE by default.",
-    "history_file": "docs/ai-history/2026-08-27-company-template-lifecycle.md"
+    "summary": "Raised generic PPT delivery-purpose body defaults from 20/24/32px to 24/30/36px, added a 24px non-mirror PPT body floor, seeded production presets with typography intent, and prioritized whitespace/content redistribution over shrinking type. Static/runtime-config smoke passed; next real PPT is the visual acceptance.",
+    "history_file": "docs/ai-history/2026-08-30-ppt-typography-readability-modernization.md"
   },
   "production": {},
   "source_authority": {
@@ -352,9 +352,10 @@
     "External/local browser HTML is auxiliary last fallback only; Markdown image lists and static PNGs are invalid substitutes for the approved inline interactive HTML gallery.",
     "For FriendY GPTS new-PPT requests, conversation-native App Block / GenUI is the primary template-selection surface whenever the host exposes it; do not answer with a prose-only recommendation list first.",
     "Recommended-template selection records created under gate v2 require valid picker-surface evidence; non-primary picker surfaces require a concrete fallback reason.",
+    "Standard non-mirror PPT typography defaults are text 24px, balanced 30px, presentation 36px with a 24px body hard floor; solve density through copy/page/layout reflow before type reduction.",
     "A user-directly-specified valid registered template may skip picker rendering and must be recorded through the direct-template selection path."
   ],
-  "next_priority": "Deploy updated PPT GPTS instructions/knowledge, then Preview-test interactive picker and company-template onboarding against current main.",
+  "next_priority": "Generate the next real PPT with the new 24/30/36px typography defaults and visually inspect readability, hierarchy, whitespace, and overflow; adjust only evidenced roles/templates while preserving the 24px standard non-mirror body floor.",
   "execution_contract": {
     "path": ".fah/execution-contract.json",
     "version": "1.0",

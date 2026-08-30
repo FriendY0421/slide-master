@@ -135,20 +135,20 @@ Two views on the same font decisions — fill both, keep them consistent:
 > **Unit boundary (HARD rule).** Author this section in **unitless px** — the system's only unit, every canvas. There is no pt layer and no conversion: the confirmed value is already px. Never write `pt`, `px`, `em`, or any unit in `spec_lock.md` or SVG. Geometry (margins / gaps / card sizes) is px everywhere.
 > **Baseline selection**: **delivery purpose** sets the body baseline to **one fixed value** (not a range); content density and visual style drive page treatment / rhythm / the *other* roles, **not** the body size.
 
-**Baseline (unitless px)**: Body font size = [fill in]. For PPT 16:9, the confirmed delivery-purpose value is **one fixed px per purpose, not a range**: **`text` / read-close** `20`, **`balanced` / business** `24` (default), **`presentation`** `32`. The body baseline is purely a function of delivery purpose — density and visual style drive page treatment / rhythm / the other roles, never the body size. The user may also pin individual role sizes (`title` / `subtitle` / `annotation`) directly in the Confirm UI — a confirmed per-role value (`result.json typography.sizes`) is already px and becomes the locked slot for that role; the rest derive from the ramp. For non-PPT canvases, author px from the confirmed canvas scale (see [strategist.md §g](../references/strategist.md) per-canvas table).
+**Baseline (unitless px)**: Body font size = [fill in]. For PPT 16:9, the confirmed delivery-purpose value is **one fixed px per purpose, not a range**: **`text` / read-close** `24`, **`balanced` / business** `30` (default), **`presentation`** `36`. The body baseline is purely a function of delivery purpose — density and visual style drive page treatment / rhythm / the other roles, never the body size. The user may also pin individual role sizes (`title` / `subtitle` / `annotation`) directly in the Confirm UI — a confirmed per-role value (`result.json typography.sizes`) is already px and becomes the locked slot for that role; the rest derive from the ramp. For non-PPT canvases, author px from the confirmed canvas scale (see [strategist.md §g](../references/strategist.md) per-canvas table).
 
-| Purpose | Ratio to body | Example @ body=32 (`presentation`) | Example @ body=24 (`balanced`) | Weight |
+| Purpose | Ratio to body | Example @ body=36 (`presentation`) | Example @ body=30 (`balanced`) | Weight |
 | ------- | ------------- | --------------------------- | ------------------------- | ------ |
 | Cover title (hero headline) | 2.5-5x | 80-160 | 60-120 | Bold / Heavy |
-| Chapter / section opener | 2-2.5x | 64-80 | 48-60 | Bold |
-| Page title | 1.5-2x | 48-64 | 36-48 | Bold |
+| Chapter / section opener | 2-2.5x | 72-90 | 60-75 | Bold |
+| Page title | 1.5-2x | 54-72 | 45-60 | Bold |
 | Hero number (consulting KPIs) | 1.5-2x | 48-64 | 36-48 | Bold |
-| Subtitle | 1.2-1.5x | 38-48 | 29-36 | SemiBold |
-| Lead-in / intro | 1.1-1.4x | 35-45 | 26-34 | Regular / Medium |
-| Subheading | 1.1-1.3x | 35-42 | 26-31 | SemiBold |
-| **Body content** | **1x** | **32** | **24** | Regular |
-| Annotation / caption | 0.7-0.85x | 22-27 | 17-20 | Regular |
-| Page number / footnote | 0.5-0.65x | 16-21 | 12-16 | Regular |
+| Subtitle | 1.2-1.5x | 43-54 | 36-45 | SemiBold |
+| Lead-in / intro | 1.1-1.4x | 40-50 | 33-42 | Regular / Medium |
+| Subheading | 1.1-1.3x | 40-47 | 33-39 | SemiBold |
+| **Body content** | **1x** | **36** | **30** | Regular |
+| Annotation / caption | 0.7-0.85x | 25-31 | 21-26 | Regular |
+| Page number / footnote | 0.5-0.65x | 18-23 | 15-20 | Regular |
 
 > **Subtitle / lead-in / subheading bands overlap by design** — choose among them by *role*, not size: `subtitle` sits under a title, `lead` is a lead-in / pull-quote in the body flow, `subheading` labels a block inside the content area. Each is its own slot, declared only when the deck uses it, and then held at one size deck-wide like any structural role. Font stays at the **family** level (no new typeface per role): `subheading` → heading / `title_family`, `lead` → `body_family` or `emphasis_family` — size + weight carry the hierarchy.
 > The two px columns are illustrations for common baselines. For any other `body` value, multiply by each row's ratio. All size values here and in `spec_lock.md` are px (no pt anywhere). The checker (`svg_quality_checker._check_spec_lock_drift`) reads the live `body` (px) from `spec_lock.md` and applies the bands, so no code change is needed for a different baseline.

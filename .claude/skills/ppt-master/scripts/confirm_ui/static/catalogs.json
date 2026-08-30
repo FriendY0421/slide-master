@@ -707,10 +707,10 @@
       "label_en": "text / read-close",
       "label_ja": "文書型・近距離閲覧",
       "label_ko": "문서형 · 근거리 읽기",
-      "desc_zh": "当文件读、近距离看（报告、数据密集 brief、留底材料）。正文 20px。",
-      "desc_en": "Read close as a file (report, data-dense brief, leave-behind). Body 20px.",
-      "desc_ja": "資料として手元で読む用途（報告書、データ密度の高いブリーフ、配布資料）。本文20px。",
-      "desc_ko": "파일로 가까이서 읽는 용도 (보고서, 데이터 밀도 높은 브리프, 배포 자료). 본문 20px."
+      "desc_zh": "当文件读、近距离看（报告、数据密集 brief、留底材料）。正文 24px。",
+      "desc_en": "Read close as a file (report, data-dense brief, leave-behind). Body 24px.",
+      "desc_ja": "資料として手元で読む用途（報告書、データ密度の高いブリーフ、配布資料）。本文24px。",
+      "desc_ko": "파일로 가까이서 읽는 용도 (보고서, 데이터 밀도 높은 브리프, 배포 자료). 본문 24px."
     },
     {
       "id": "balanced",
@@ -719,10 +719,10 @@
       "label_en": "balanced / business",
       "label_ja": "バランス型・ビジネス",
       "label_ko": "균형형 · 비즈니스",
-      "desc_zh": "既投影也阅读（路演、业务评审）。默认档，正文 24px。",
-      "desc_en": "Both projected and read (roadshow, business review). The default option, body 24px.",
-      "desc_ja": "投影でも閲覧でも使う用途（ロードショー、事業レビュー）。デフォルトの選択、本文24px。",
-      "desc_ko": "투영과 읽기를 겸하는 용도 (로드쇼, 사업 리뷰). 기본 옵션, 본문 24px."
+      "desc_zh": "既投影也阅读（路演、业务评审）。默认档，正文 30px。",
+      "desc_en": "Both projected and read (roadshow, business review). The default option, body 30px.",
+      "desc_ja": "投影でも閲覧でも使う用途（ロードショー、事業レビュー）。デフォルトの選択、本文30px。",
+      "desc_ko": "투영과 읽기를 겸하는 용도 (로드쇼, 사업 리뷰). 기본 옵션, 본문 30px."
     },
     {
       "id": "presentation",
@@ -731,10 +731,10 @@
       "label_en": "presentation / keynote",
       "label_ja": "プレゼン型・講演",
       "label_ko": "발표형 · 프레젠테이션",
-      "desc_zh": "投影、远距离扫一眼、内容稀疏（keynote、发布、课堂）。正文 32px。",
-      "desc_en": "Projected, glanced from the back, sparse (keynote, launch, classroom). Body 32px.",
-      "desc_ja": "投影用で後方からも一目で分かる、情報量を絞った構成（キーノート、発表会、講義）。本文32px。",
-      "desc_ko": "투영해서 뒤에서도 한눈에 읽히는 절제된 구성 (키노트, 발표회, 강의). 본문 32px."
+      "desc_zh": "投影、远距离扫一眼、内容稀疏（keynote、发布、课堂）。正文 36px。",
+      "desc_en": "Projected, glanced from the back, sparse (keynote, launch, classroom). Body 36px.",
+      "desc_ja": "投影用で後方からも一目で分かる、情報量を絞った構成（キーノート、発表会、講義）。本文36px。",
+      "desc_ko": "투영해서 뒤에서도 한눈에 읽히는 절제된 구성 (키노트, 발표회, 강의). 본문 36px."
     }
   ]
 }

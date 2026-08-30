@@ -272,15 +272,17 @@ See [`../templates/icons/README.md`](../templates/icons/README.md) for the curre
 
 | Delivery purpose (PPT 16:9) | Body (px) | Reads as |
 |---|---:|---|
-| `text` · read-close (report, data-dense brief, leave-behind file) | 20px | screen / handout reading at arm's length |
-| `balanced` · business (presented **and** read; roadshow, review) — **default** | 24px | mixed projection + reading |
-| `presentation` (projected, sparse; keynote, launch, classroom) | 32px | room projection, glance from the back |
+| `text` · read-close (report, data-dense brief, leave-behind file) | 24px | screen / handout reading at arm's length |
+| `balanced` · business (presented **and** read; roadshow, review) — **default** | 30px | mixed projection + reading |
+| `presentation` (projected, sparse; keynote, launch, classroom) | 36px | room projection, glance from the back |
 
 The body baseline is **purely a function of delivery purpose** — density and visual style do **not** nudge it within a range. Body size is the reading-distance proxy; density is orthogonal and shows in **how much text per page, page count, and `page_rhythm`** (§6.1), the *other* roles, and decoration — never in growing or shrinking the body baseline. One purpose → one body size, identical across the deck. (The user may still override the value in confirmation; absent an override, this fixed value is the recommendation.)
 
+> **Readability floor for standard PPT (non-mirror):** normal body text must not go below **24px** (18pt after export). If the confirmed page count cannot carry the content at the locked baseline, fix the Strategist plan first: shorten slide copy without losing meaning, redistribute content across more pages, or choose a lower-density composition. Do not use small type as the density escape hatch. Mirror/source-faithful templates keep their explicit source typography contract.
+
 | Canvas | Height | Body baseline | Unit |
 |---|---|---|---|
-| PPT 16:9 / 4:3 | 720 / 768 | 20 / 24 / 32 (by delivery purpose) | **px** |
+| PPT 16:9 / 4:3 | 720 / 768 | 24 / 30 / 36 (by delivery purpose) | **px** |
 | Instagram card news | 1080×1350 | 34–45 | px |
 | Xiaohongshu | 1242×1660 | 40–55 | px |
 | WeChat / IG 1:1 | 1080×1080 | 27–36 | px |
@@ -291,22 +293,22 @@ The body baseline is **purely a function of delivery purpose** — density and v
 
 > **Confirmed values win — never recompute over them.** The user's confirmed sizes are authoritative. **Confirm UI path**: take `result.json` `typography.body_size` / `sizes` (already px) **verbatim** — do **not** re-derive from the canvas even if the user changed it. The page auto-rescales the per-role sizes proportionally when the user edits the **body baseline** (each role keeps its own ratio-to-body), but never rewrites sizes on canvas / delivery-purpose changes (hint only) — either way `result.json` already reflects the user's intent; recomputing here would silently override their choice. **Chat-fallback path** (no `result.json`): take the px body baseline for the confirmed canvas + delivery purpose directly from the table above (no conversion). The `body_size` in `recommendations.json` is only a stale hint once the canvas changes — use the confirmed value, not the recommendation.
 
-| Level | Ratio to body | 32px baseline (`presentation`) | 24px baseline (`balanced`) |
+| Level | Ratio to body | 36px baseline (`presentation`) | 30px baseline (`balanced`) |
 |-------|---------------|---------------|---------------|
-| Cover title (hero headline) | 2.5-5x | 80-160px | 60-120px |
-| Chapter / section opener | 2-2.5x | 64-80px | 48-60px |
-| Page title | 1.5-2x | 48-64px | 36-48px |
-| Hero number (consulting KPIs) | 1.5-2x | 48-64px | 36-48px |
-| Subtitle | 1.2-1.5x | 38-48px | 29-36px |
-| Lead-in / intro | 1.1-1.4x | 35-45px | 26-34px |
-| Subheading | 1.1-1.3x | 35-42px | 26-31px |
-| **Body** | **1x** | **32px** | **24px** |
-| Annotation / caption | 0.7-0.85x | 22-27px | 17-20px |
-| Page number / footnote | 0.5-0.65x | 16-21px | 12-16px |
+| Cover title (hero headline) | 2.5-5x | 90-180px | 75-150px |
+| Chapter / section opener | 2-2.5x | 72-90px | 60-75px |
+| Page title | 1.5-2x | 54-72px | 45-60px |
+| Hero number (consulting KPIs) | 1.5-2x | 54-72px | 45-60px |
+| Subtitle | 1.2-1.5x | 43-54px | 36-45px |
+| Lead-in / intro | 1.1-1.4x | 40-50px | 33-42px |
+| Subheading | 1.1-1.3x | 40-47px | 33-39px |
+| **Body** | **1x** | **36px** | **30px** |
+| Annotation / caption | 0.7-0.85x | 25-31px | 21-26px |
+| Page number / footnote | 0.5-0.65x | 18-23px | 15-20px |
 
-> Two baseline columns are illustrative only — for any other `body` px value (20 / 24 / 32 / ...), multiply the row's ratio. Structural roles (page title / body / subtitle / annotation / footnote) take their locked slot value and stay there on every page — not a per-page pick. In-band freedom without pre-declaring is for special / feature elements (hero number, display title, one-off emphasis); a recurring special size should be declared as its own slot. The subtitle / lead / subheading bands overlap on purpose — pick by role, not size, then hold each at one size deck-wide. Values outside **every** band require lock extension first.
+> Two baseline columns are illustrative only — for any other `body` px value (24 / 30 / 36 / ...), multiply the row's ratio. Structural roles (page title / body / subtitle / annotation / footnote) take their locked slot value and stay there on every page — not a per-page pick. In-band freedom without pre-declaring is for special / feature elements (hero number, display title, one-off emphasis); a recurring special size should be declared as its own slot. The subtitle / lead / subheading bands overlap on purpose — pick by role, not size, then hold each at one size deck-wide. Values outside **every** band require lock extension first.
 
-> **Round recommended sizes to clean even px — don't ship ratio leftovers.** The ratios are a guide; lock each role at a **clean even px**, not the raw product. For `body` 24px that means **title 42 · subtitle 32 · lead 30 · annotation 18 · footnote 16** — never `32.4` / `18.7` / odd tails, which read as unprofessional. Snap the ratio output to the nearest even px (…14, 16, 18, 20, 24, 28, 32, 36, 42, 48…), then lock that. (The Confirm UI already snaps its per-role suggestions this way; match it on the chat-fallback path.)
+> **Round recommended sizes to clean even px — don't ship ratio leftovers.** The ratios are a guide; lock each role at a **clean even px**, not the raw product. For `body` 30px that means **title 52 · subtitle 40 · lead 36 · annotation 22 · footnote 16** — never `32.4` / `18.7` / odd tails, which read as unprofessional. Snap the ratio output to the nearest even px (…14, 16, 18, 20, 24, 28, 32, 36, 42, 48…), then lock that. (The Confirm UI already snaps its per-role suggestions this way; match it on the chat-fallback path.)
 
 > **px is literal — write the locked number verbatim (Mandatory).** `result.json` / `design_spec.md` / `spec_lock.md` / SVG all carry px as-is; there is no conversion anywhere. The size you confirm is the size you write. The Executor's `font-size` MUST be the **exact px from `spec_lock.typography`** — if `body` is `24`, write `24`; never a "rounder" or PowerPoint-familiar number (`20` / `18` / `36`). Writing a remembered pt-style value as px is the silent drift that renders a whole deck the wrong size (e.g. a `24`px body emitted as `20` ships ~17% small); the checker's spec-lock drift guard backstops it, but author it right. Per role: honor any size the user pinned as that slot's locked value; derive the rest from the ramp and snap to clean even px. (At export the px is turned back into pt by `× 0.75`, rounded to 1 decimal — that is the only place pt ever appears, and it is automatic.)
 
