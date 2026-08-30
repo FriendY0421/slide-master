@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="startup_pitch_bold-master" data-pptx-master-name="Startup Pitch Bold" data-pptx-layout="04_ending" data-pptx-layout-name="Ending">
+<rect width="1280" height="720" fill="#191632" data-pptx-layer="slide" data-pptx-editable="false" id="slide-bg" />
+<circle cx="1142" cy="104" r="120" fill="#5B4BFF" opacity="0.10" />
+<circle cx="1195" cy="154" r="60" fill="#FF6B6B" opacity="0.14" />
+<rect x="0" y="0" width="18" height="720" fill="#5B4BFF" />
+<text x="640" y="176" fill="#5B4BFF" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="1.6">THANK YOU</text>
+<g id="ending-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="220 244 840 120"><text x="640.0" y="294" fill="#FFFFFF" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="50" font-weight="700" text-anchor="middle" data-pptx-placeholder-carrier="true">{{TITLE}}</text></g>
+<g id="ending-subtitle" data-pptx-placeholder="subtitle" data-pptx-placeholder-bounds="280 382 720 72"><text x="640.0" y="401" fill="#D4D8DF" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="19" font-weight="400" text-anchor="middle" data-pptx-placeholder-carrier="true">{{SUBTITLE}}</text></g>
+<rect x="550" y="520" width="180" height="5" rx="2" fill="#5B4BFF" />
+<text x="640" y="590" fill="#C5CBD3" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="500" text-anchor="middle">{{ORGANIZATION}}  ·  {{DATE}}</text>
+</svg>

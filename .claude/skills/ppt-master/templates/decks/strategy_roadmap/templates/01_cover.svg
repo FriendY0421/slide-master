@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="strategy_roadmap-master" data-pptx-master-name="Strategy Roadmap" data-pptx-layout="01_cover" data-pptx-layout-name="Cover">
+<rect width="1280" height="720" fill="#F5F7F7" data-pptx-layer="slide" data-pptx-editable="false" id="slide-bg" />
+<rect x="0" y="0" width="96" height="720" fill="#173B3A" />
+<circle cx="48" cy="92" r="18" fill="#F59E0B" />
+<circle cx="48" cy="628" r="8" fill="#0D9488" />
+<text x="132" y="98" fill="#0D9488" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1.4">STRATEGY / ROADMAP</text>
+<g id="cover-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="132 215 840 126"><text x="132" y="267" fill="#1C2B2A" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="52" font-weight="700" text-anchor="start" data-pptx-placeholder-carrier="true">{{TITLE}}</text></g>
+<g id="cover-subtitle" data-pptx-placeholder="subtitle" data-pptx-placeholder-bounds="134 360 760 72"><text x="134" y="380" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="400" text-anchor="start" data-pptx-placeholder-carrier="true">{{SUBTITLE}}</text></g>
+<text x="134" y="616" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="14" font-weight="500" text-anchor="start">{{ORGANIZATION}}  ·  {{DATE}}</text>
+<line x1="840" y1="560" x2="1170" y2="560" stroke="#0D9488" stroke-width="5" />
+<circle cx="860" cy="560" r="11" fill="#0D9488" />
+<text x="860" y="602" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle">01</text>
+<circle cx="956" cy="560" r="11" fill="#0D9488" />
+<text x="956" y="602" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle">02</text>
+<circle cx="1052" cy="560" r="11" fill="#0D9488" />
+<text x="1052" y="602" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle">03</text>
+<circle cx="1148" cy="560" r="11" fill="#F59E0B" />
+<text x="1148" y="602" fill="#667574" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="middle">04</text>
+</svg>

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="future_tech-master" data-pptx-master-name="Future Tech" data-pptx-layout="01_cover" data-pptx-layout-name="Cover">
+<rect width="1280" height="720" fill="#070B18" data-pptx-layer="slide" data-pptx-editable="false" id="slide-bg" />
+<line x1="0" y1="0" x2="0" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="128" y1="0" x2="128" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="256" y1="0" x2="256" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="384" y1="0" x2="384" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="512" y1="0" x2="512" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="640" y1="0" x2="640" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="768" y1="0" x2="768" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="896" y1="0" x2="896" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="1024" y1="0" x2="1024" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="1152" y1="0" x2="1152" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="1280" y1="0" x2="1280" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="0" x2="1280" y2="0" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="90" x2="1280" y2="90" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="180" x2="1280" y2="180" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="270" x2="1280" y2="270" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="360" x2="1280" y2="360" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="450" x2="1280" y2="450" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="540" x2="1280" y2="540" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="630" x2="1280" y2="630" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<line x1="0" y1="720" x2="1280" y2="720" stroke="#1B2B4A" stroke-width="1" opacity="0.32" />
+<circle cx="1130" cy="110" r="72" fill="none" stroke="#5EE7F7" stroke-width="2" opacity="0.32" />
+<circle cx="1130" cy="110" r="48" fill="none" stroke="#8B5CF6" stroke-width="2" opacity="0.28" />
+<text x="78" y="92" fill="#5EE7F7" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1.2">FUTURE / INSIGHT</text>
+<g id="cover-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="78 210 770 130"><text x="78" y="262" fill="#EDF4FF" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="52" font-weight="700" text-anchor="start" data-pptx-placeholder-carrier="true">{{TITLE}}</text></g>
+<g id="cover-subtitle" data-pptx-placeholder="subtitle" data-pptx-placeholder-bounds="80 360 650 70"><text x="80" y="380" fill="#8FA3C2" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="400" text-anchor="start" data-pptx-placeholder-carrier="true">{{SUBTITLE}}</text></g>
+<text x="80" y="620" fill="#8FA3C2" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="14" font-weight="500" text-anchor="start">{{ORGANIZATION}}  ·  {{DATE}}</text>
+<rect x="900" y="438" width="38" height="92" rx="8" fill="#5EE7F7" opacity="0.32" transform="translate(0 0)" />
+<rect x="900" y="382" width="38" height="148" rx="8" fill="#5EE7F7" opacity="0.44" transform="translate(55 0)" />
+<rect x="900" y="456" width="38" height="74" rx="8" fill="#5EE7F7" opacity="0.56" transform="translate(110 0)" />
+<rect x="900" y="346" width="38" height="184" rx="8" fill="#5EE7F7" opacity="0.6799999999999999" transform="translate(165 0)" />
+<rect x="900" y="404" width="38" height="126" rx="8" fill="#5EE7F7" opacity="0.8" transform="translate(220 0)" />
+</svg>

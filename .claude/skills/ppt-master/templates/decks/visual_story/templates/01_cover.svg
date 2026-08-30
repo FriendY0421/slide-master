@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="visual_story-master" data-pptx-master-name="Visual Story" data-pptx-layout="01_cover" data-pptx-layout-name="Cover">
+<rect width="1280" height="720" fill="#F7F7F5" data-pptx-layer="slide" data-pptx-editable="false" id="slide-bg" />
+<rect x="0" y="0" width="36" height="720" fill="#D14D32" />
+<circle cx="1150" cy="110" r="92" fill="#D14D32" opacity="0.08" />
+<rect x="36" y="0" width="430" height="720" fill="#171717" />
+<text x="92" y="120" fill="#FFFFFF" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1.3">STORY / 01</text>
+<text x="92" y="290" fill="#D14D32" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="120" font-weight="700" text-anchor="start">“</text>
+<g id="cover-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="520 185 650 150"><text x="520" y="243" fill="#171717" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="58" font-weight="700" text-anchor="start" data-pptx-placeholder-carrier="true">{{TITLE}}</text></g>
+<g id="cover-subtitle" data-pptx-placeholder="subtitle" data-pptx-placeholder-bounds="524 365 580 70"><text x="524" y="386" fill="#707070" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="21" font-weight="400" text-anchor="start" data-pptx-placeholder-carrier="true">{{SUBTITLE}}</text></g>
+<text x="524" y="610" fill="#707070" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="14" font-weight="500" text-anchor="start">{{ORGANIZATION}}  ·  {{DATE}}</text>
+</svg>

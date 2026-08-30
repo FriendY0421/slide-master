@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="training_playbook-master" data-pptx-master-name="Training Playbook" data-pptx-layout="01_cover" data-pptx-layout-name="Cover">
+<rect width="1280" height="720" fill="#FFF9ED" data-pptx-layer="slide" data-pptx-editable="false" id="slide-bg" />
+<rect x="0" y="0" width="1280" height="18" fill="#F4B942" />
+<rect x="1110" y="18" width="170" height="104" fill="#F4B942" opacity="0.20" />
+<circle cx="1195" cy="70" r="24" fill="#2D6A8A" opacity="0.16" />
+<text x="82" y="98" fill="#F4B942" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="13" font-weight="700" text-anchor="start" letter-spacing="1.3">PROFESSIONAL PRESENTATION</text>
+<g id="cover-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="82 210 820 130"><text x="82" y="262" fill="#243447" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="52" font-weight="700" text-anchor="start" data-pptx-placeholder-carrier="true">{{TITLE}}</text></g>
+<g id="cover-subtitle" data-pptx-placeholder="subtitle" data-pptx-placeholder-bounds="84 360 700 72"><text x="84" y="380" fill="#677487" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="400" text-anchor="start" data-pptx-placeholder-carrier="true">{{SUBTITLE}}</text></g>
+<text x="84" y="620" fill="#677487" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="14" font-weight="500" text-anchor="start">{{ORGANIZATION}}  ·  {{DATE}}</text>
+<rect x="930" y="204" width="230" height="300" rx="24" fill="#FFFFFF" stroke="#F4B942" stroke-width="2" />
+<rect x="958" y="240" width="174" height="12" rx="6" fill="#F4B942" />
+<rect x="958" y="278" width="126" height="8" rx="4" fill="#2D6A8A" opacity="0.75" />
+<rect x="958" y="342" width="146" height="20" rx="10" fill="#F4B942" opacity="0.18" />
+<rect x="958" y="384" width="118" height="20" rx="10" fill="#F4B942" opacity="0.26" />
+<rect x="958" y="426" width="162" height="20" rx="10" fill="#F4B942" opacity="0.33999999999999997" />
+</svg>

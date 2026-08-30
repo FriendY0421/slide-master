@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="consulting_clarity-master" data-pptx-master-name="Consulting Clarity" data-pptx-layout="03_content" data-pptx-layout-name="Content">
+<rect width="1280" height="720" fill="#FFFFFF" data-pptx-layer="slide" data-pptx-editable="false" id="slide-bg" />
+<rect x="48" y="48" width="5" height="624" fill="#1E4D8F" />
+<circle cx="1180" cy="90" r="62" fill="none" stroke="#22A6B3" stroke-width="8" opacity="0.20" />
+<text x="76" y="72" fill="#1E4D8F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1.2">KEY MESSAGE</text>
+<g id="page-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="76 88 1040 66"><text x="76" y="120" fill="#172033" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="32" font-weight="700" text-anchor="start" data-pptx-placeholder-carrier="true">{{PAGE_TITLE}}</text></g>
+<line x1="76" y1="158" x2="1188" y2="158" stroke="#6B7280" stroke-width="1" opacity="0.28" />
+<rect x="76" y="206" width="700" height="330" fill="#F4F6F8" />
+<text x="104" y="250" fill="#1E4D8F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1.1">THESIS</text>
+<text x="104" y="298" fill="#172033" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start">{{BODY_1}}</text>
+<text x="104" y="344" fill="#6B7280" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" font-weight="400" text-anchor="start">{{BODY_2}}</text>
+<rect x="106" y="400" width="5" height="24" fill="#22A6B3" />
+<text x="126" y="418" fill="#172033" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="15" font-weight="500" text-anchor="start">{{BODY_3}}</text>
+<rect x="106" y="442" width="5" height="24" fill="#22A6B3" />
+<text x="126" y="460" fill="#172033" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="15" font-weight="500" text-anchor="start">{{BODY_4}}</text>
+<rect x="106" y="484" width="5" height="24" fill="#22A6B3" />
+<text x="126" y="502" fill="#172033" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="15" font-weight="500" text-anchor="start">{{BODY_5}}</text>
+<rect x="804" y="206" width="382" height="330" fill="#FFFFFF" stroke="#D8DEE8" />
+<text x="834" y="250" fill="#1E4D8F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">EVIDENCE</text>
+<text x="834" y="312" fill="#1E4D8F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="54" font-weight="700" text-anchor="start">72%</text>
+<text x="834" y="346" fill="#6B7280" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="14" font-weight="500" text-anchor="start">{{BODY_6}}</text>
+<text x="74" y="690" fill="#6B7280" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="start">SLIDE MASTER</text><text x="1200" y="690" fill="#6B7280" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="end">03</text>
+</svg>
