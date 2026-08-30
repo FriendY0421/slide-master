@@ -5,7 +5,7 @@ Repository: `FriendY0421/slide-master`
 Runtime branch: `feat/apps-sdk-template-picker-20260827`
 Baseline HEAD before acceptance fix: `1146659d9db845f2a256f5e4096b9f7e97cd4f71`
 PR: #6 (Draft)
-Status: STARTUP-ORDER + PAYLOAD-BUFFER HARDENED / SECOND POST-REBOOT ACCEPTANCE PENDING
+Status: LOCAL COLD-START ACCEPTANCE PASS / CHATGPT HOST ACCEPTANCE PENDING
 
 ## Why this handoff exists
 
@@ -63,7 +63,7 @@ GitHub Actions must not be used unless the user explicitly requests them.
 
 ## Next-session first action
 
-Read this file and `docs/ai-history/2026-08-30-reboot-startup-readiness-hardening.md`, verify current HEAD/status, then continue only from `SECOND POST-REBOOT ACCEPTANCE PENDING` and the acceptance-fix sections appended below.
+Read this file and `docs/ai-history/2026-08-30-reboot-startup-readiness-hardening.md`, verify current HEAD/status, then continue only from `LOCAL COLD-START ACCEPTANCE PASS / CHATGPT HOST ACCEPTANCE PENDING` and the latest acceptance section appended below.
 
 ## Post-reboot acceptance attempt #1 — 2026-08-30
 
@@ -104,3 +104,18 @@ Non-disruptive validation completed:
 `controlled Windows reboot -> Desktop Start_SlideMasterPicker.bat -> confirm LOCAL_MCP_READY=PASS occurs before Tunnel startup -> wait for [READY] -> send exactly one ChatGPT Picker request`
 
 Do not repeatedly retry ChatGPT before `[READY]`. GitHub Actions remain prohibited unless the user explicitly requests them.
+
+## Post-reboot acceptance attempt #2 — PASS — 2026-08-30 20:51 KST
+
+The second controlled Windows reboot acceptance passed on the hardened launcher/runtime.
+
+Evidence captured directly from HOME-PC logs:
+- `pre_tunnel_ready.stdout.log`: `MCP_READY PASS`;
+- `runtime.verify.status.json`: `ok=true`, `stage=ready`, `attempt=1`;
+- verifier message: `All checks passed. branch=feat/apps-sdk-template-picker-20260827 head=a63a95078ef3`;
+- full smoke: required tools present, Picker payload returned, UI resource loaded, `RESOURCE_META` present, CSP present, `VALIDATE true`;
+- `verify_exit.txt`: `0`.
+
+Conclusion: the reboot cold-start ordering and payload-buffer defects are accepted as fixed in the real reboot environment. No process termination was required. GitHub Actions were not used.
+
+Remaining acceptance is host-side only: issue exactly one real ChatGPT Slide Master Picker request and verify cards/images render and a user selection returns through the app. PR #6 remains Draft until that host acceptance passes.

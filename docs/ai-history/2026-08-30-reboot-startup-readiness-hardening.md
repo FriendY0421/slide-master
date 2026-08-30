@@ -1,7 +1,7 @@
 # Slide Master Picker reboot startup readiness hardening
 
 Date: 2026-08-30 KST
-Status: STARTUP-ORDER + PAYLOAD-BUFFER HARDENED / SECOND POST-REBOOT ACCEPTANCE PENDING
+Status: LOCAL COLD-START ACCEPTANCE PASS / CHATGPT HOST ACCEPTANCE PENDING
 
 ## Incident
 
@@ -92,3 +92,16 @@ Validation after the follow-up hardening:
 The temporary 3001 test server was created only for isolated verification and was removed afterward. No unrelated port owner was terminated. GitHub Actions were not used.
 
 Pending acceptance remains one controlled reboot and one real ChatGPT host request after launcher `[READY]`. PR #6 remains Draft until real cards/images render and the final selection returns through the ChatGPT app.
+
+## Second real post-reboot acceptance — PASS
+
+At 2026-08-30 20:51:04 KST, the hardened runtime passed the second real Windows cold-start acceptance on HOME-PC.
+
+Observed acceptance evidence:
+- pre-tunnel local MCP protocol gate: `MCP_READY PASS`;
+- runtime verifier: `ok=true`, `stage=ready`, `attempt=1`;
+- branch/HEAD in verifier: `feat/apps-sdk-template-picker-20260827` / `a63a95078ef3`;
+- smoke markers: `TOOLS`, `PICKER`, `UI`, `RESOURCE_META`, `CSP`, and `VALIDATE true`;
+- verifier exit code: `0`.
+
+This closes the local reboot/startup acceptance. The only remaining acceptance is the real ChatGPT host rendering/selection round trip. PR #6 remains Draft until that host-side acceptance succeeds. GitHub Actions were not used.
