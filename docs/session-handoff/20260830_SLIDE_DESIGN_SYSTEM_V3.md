@@ -1,7 +1,7 @@
 # Slide Master handoff — Design System V3
 
 Updated: 2026-08-30 KST
-Status: DESIGN V3 IMPLEMENTED / MAIN COMMIT PENDING
+Status: DESIGN V3 CURRENT ON MAIN
 
 ## Resume authority
 Repository: `FriendY0421/slide-master`
@@ -43,3 +43,5 @@ GitHub references must normally be >=1,000 stars, actively maintained, and prese
 ## Next acceptance
 The next real ChatGPT test must prove both layers together:
 `Picker -> template+preset -> WAIT_STORYLINE_PREVIEW -> full editable slide plan -> user edits/approval -> generation -> Design V3 QA -> PPTX`.
+
+Implementation commit: `c23328ebe065edc2854148c72f2b2e5d09759cb1`

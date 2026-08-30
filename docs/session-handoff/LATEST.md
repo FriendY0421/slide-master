@@ -14,6 +14,8 @@ Durable handoff: `docs/session-handoff/20260830_SLIDE_DESIGN_SYSTEM_V3.md`
 
 Detailed history: `docs/ai-history/2026-08-30-slide-design-system-v3.md`
 
+Implementation commit: `c23328ebe065edc2854148c72f2b2e5d09759cb1`
+
 GitHub Actions were not used.
 
 ---
