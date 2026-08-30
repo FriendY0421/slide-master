@@ -3,15 +3,15 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-30T21:20:00+09:00",
+  "updated_at_kst": "2026-08-30T22:35:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-PICKER-OPERATIONAL-BASELINE-20260830",
-    "status": "OPERATING_BASELINE_ACCEPTED_FULL_PPT_E2E_PENDING",
-    "mode": "FOREGROUND_PICKER_AND_SECURE_TUNNEL",
+    "work_id": "SLIDE-MASTER-PICKER-STORYLINE-HANDOFF-20260830",
+    "status": "IMPLEMENTED_VALIDATED_COMMIT_PENDING",
+    "mode": "WAIT_STORYLINE_PREVIEW_FAIL_CLOSED",
     "actor": "ChatGPT",
-    "summary": "Real Windows cold-start passes; MCP/UI/resource/validation smoke passes; user reports normal ChatGPT Picker flow operating. User chose to retain two visible/minimized runtime CMD windows. Full PPT E2E completion is not yet claimed.",
-    "history_file": "docs/ai-history/2026-08-30-picker-operational-baseline-final.md"
+    "summary": "Corrected the Apps SDK Picker final host bridge so template+preset selection no longer tells ChatGPT to generate immediately; selection validation now returns WAIT_STORYLINE_PREVIEW with generation_allowed=false and requires a full user-editable slide plan plus explicit approval before generation.",
+    "history_file": "docs/ai-history/2026-08-30-picker-storyline-handoff-fail-closed.md"
   },
   "production": {},
   "source_authority": {

@@ -38,12 +38,30 @@ function validateSelection(payload, templateId, presetId) {
   if (!template) throw new Error(`Unknown or inactive template: ${templateId}`);
   const preset = payload.presets.find((item) => item.id === presetId);
   if (!preset) throw new Error(`Unknown production preset: ${presetId}`);
+  const deliveryPurpose = preset.delivery_purpose || "balanced";
+  const bodyPx = Number(preset.body_px || (deliveryPurpose === "presentation" ? 40 : deliveryPurpose === "text" ? 28 : 34));
   return {
     template_id: template.id,
     template_name: template.name || template.display_name,
     preset_id: preset.id,
     preset_name: preset.display_name,
     selection_token: `${template.id} | preset:${preset.id}`,
+    production_profile: {
+      delivery_purpose: deliveryPurpose,
+      body_px: bodyPx,
+      typography_profile: preset.typography_profile || "modern_readable",
+      content_density: preset.content_density || "balanced",
+      visual_ratio: preset.visual_ratio || null,
+    },
+    workflow_contract: {
+      next_state: "WAIT_STORYLINE_PREVIEW",
+      generation_allowed: false,
+      storyline_preview_required: true,
+      user_revision_supported: true,
+      explicit_storyline_approval_required: true,
+      required_preview_fields: ["slide_number", "title", "core_message", "key_content", "visual_layout_plan"],
+      rule: "Do not create or export PPTX yet. Research/verify as needed, then show the complete slide-by-slide preview in chat, let the user revise any slide, and wait for explicit approval before generation.",
+    },
   };
 }
 
@@ -51,7 +69,7 @@ function createMcpServer() {
   const server = new McpServer(
     { name: "slide-master-template-picker", version: "1.0.0" },
     {
-      instructions: "For a new PPT request without a directly specified registered template, call open_slide_master_template_picker before giving template recommendations. A successful tool result confirms only that picker data was prepared; it does NOT prove the host rendered the interactive UI. Never tell the user that the gallery is visible until the app view reports SLIDE_MASTER_PICKER_UI_RENDERED. Do not replace the picker with a prose list when the interactive UI is available.",
+      instructions: "For a new PPT request without a directly specified registered template, call open_slide_master_template_picker before giving template recommendations. A successful tool result confirms only that picker data was prepared; it does NOT prove the host rendered the interactive UI. Never tell the user that the gallery is visible until the app view reports SLIDE_MASTER_PICKER_UI_RENDERED. Do not replace the picker with a prose list when the interactive UI is available. After the app validates the final template+preset selection, DO NOT generate or export PPTX. The next required state is WAIT_STORYLINE_PREVIEW: research/verify as needed, then present the complete slide-by-slide preview (slide number, title, core message, key content, visual/layout plan), allow user edits/reordering/count changes, and wait for explicit approval. Only that approval permits PPT generation.",
       capabilities: { tools: {}, resources: {} },
     },
   );
@@ -127,7 +145,7 @@ function createMcpServer() {
     "validate_slide_master_selection",
     {
       title: "Validate Slide Master selection",
-      description: "App-only final validation for a selected template and production preset.",
+      description: "App-only final validation for a selected template and production preset. Returns a fail-closed workflow contract: selection validation never authorizes PPT generation; the next required step is a user-editable slide-by-slide storyline preview and explicit approval.",
       inputSchema: {
         purpose: z.string().min(1),
         template_id: z.string().min(1),
@@ -141,7 +159,7 @@ function createMcpServer() {
       const selection = validateSelection(payload, template_id, preset_id);
       return {
         structuredContent: { valid: true, ...selection },
-        content: [{ type: "text", text: selection.selection_token }],
+        content: [{ type: "text", text: `${selection.selection_token}\nNEXT_STATE=${selection.workflow_contract.next_state}\nGENERATION_ALLOWED=false\nDo not create PPTX yet. Show the complete slide-by-slide preview in chat and wait for explicit user approval after revisions.` }],
       };
     },
   );

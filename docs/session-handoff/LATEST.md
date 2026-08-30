@@ -1,5 +1,21 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-30 22:35 KST
+
+## NEWEST CHECKPOINT — PICKER STORYLINE HANDOFF FAIL-CLOSED
+
+Real host testing proved the Picker still sent a legacy “continue PPT production” message after template+preset confirmation. That bridge is corrected: final selection now hands off to `WAIT_STORYLINE_PREVIEW` with `GENERATION_ALLOWED=false`; ChatGPT must show the full user-editable slide-by-slide plan and wait for explicit approval before generation.
+
+Isolated 3001 MCP smoke passed with `WORKFLOW WAIT_STORYLINE_PREVIEW false true 34`. Current 3000/8080 foreground runtime was not terminated.
+
+Durable handoff: `docs/session-handoff/20260830_PICKER_STORYLINE_HANDOFF_FAIL_CLOSED.md`
+
+Detailed history: `docs/ai-history/2026-08-30-picker-storyline-handoff-fail-closed.md`
+
+GitHub Actions were not used; PR #6 remains Draft pending real host E2E acceptance.
+
+---
+
 Updated checkpoint: 2026-08-30 KST
 
 ## NEWEST CHECKPOINT — PICKER OPERATING BASELINE ACCEPTED

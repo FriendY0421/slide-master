@@ -127,12 +127,13 @@ async function confirmSelection() {
     return;
   }
 
-  const message = `PPT 템플릿 최종 선택: ${token}. 이 선택을 확정하고 Slide Master 게이트에 템플릿과 제작 프리셋을 기록한 뒤 PPT 제작을 계속 진행해줘.`;
+  const bodyPx = validated?.structuredContent?.production_profile?.body_px || selectedPreset?.body_px || 34;
+  const message = `PPT 템플릿/프리셋 최종 선택 확정: ${token}.\n\n중요: 지금 PPTX를 만들거나 슬라이드 제작을 시작하지 마세요. 다음 단계는 반드시 장표별 내용 미리보기입니다. 필요한 자료조사/사실확인을 한 뒤, 요청한 장수(또는 더 자연스러운 권장 장수)를 기준으로 모든 장표를 채팅에 먼저 보여주세요. 각 장표는 [번호 | 제목 | 핵심 메시지 | 주요 내용 | 이미지/차트·배치 계획]을 포함해야 합니다. 사용자가 특정 장표의 수정·삭제·추가·순서변경·장수변경을 할 수 있게 하고, 수정된 전체 장표안을 다시 보여준 뒤 명시적 승인을 기다리세요. 승인 전에는 PPT 생성/내보내기 금지입니다. 디자인 기준은 ${bodyPx}px 본문 기준의 큰 타이포그래피, 충분한 행간/박스 패딩, 한 장표 한 핵심 아이디어, 반복 카드그리드 최소화, 텍스트와 이미지의 자연스러운 비대칭 균형입니다.`;
   try {
-    await app.updateModelContext({ content: [{ type: "text", text: `선택된 PPT 구성: ${token}` }] });
+    await app.updateModelContext({ content: [{ type: "text", text: `선택된 PPT 구성: ${token}. NEXT_STATE=WAIT_STORYLINE_PREVIEW. GENERATION_ALLOWED=false. 사용자 수정 가능한 장표별 미리보기와 명시적 승인 전 PPT 생성 금지.` }] });
     const result = await app.sendMessage({ role: "user", content: [{ type: "text", text: message }] });
     if (result?.isError) throw new Error("host rejected selection message");
-    root.innerHTML = `<section class="picker-shell final success"><h2>선택이 채팅에 전달되었습니다</h2><code>${esc(token)}</code><p>이 선택값을 기준으로 다음 PPT 제작 단계가 진행됩니다.</p></section>`;
+    root.innerHTML = `<section class="picker-shell final success"><h2>선택이 채팅에 전달되었습니다</h2><code>${esc(token)}</code><p>이제 PPT를 만들기 전에 장표별 제목·핵심 메시지·주요 내용·시각/배치 계획을 먼저 보여주고 수정·승인을 받는 단계로 진행됩니다.</p></section>`;
   } catch (error) {
     root.innerHTML = `<section class="picker-shell final warning"><h2>자동 전달을 사용할 수 없습니다</h2><p>아래 선택값을 채팅에 보내주세요.</p><code>${esc(token)}</code><small>${esc(error?.message || "host message bridge unavailable")}</small></section>`;
   }
@@ -143,7 +144,7 @@ function renderFinal() {
   root.innerHTML = `<section class="picker-shell final">
     <button type="button" data-back>← 제작 방식 다시 선택</button><h2>선택 내용 확인</h2>
     <dl><dt>템플릿</dt><dd>${esc(selectedTemplate.name || selectedTemplate.id)}</dd><dt>제작 방식</dt><dd>${esc(selectedPreset.display_name)}</dd><dt>선택 ID</dt><dd><code>${esc(token)}</code></dd></dl>
-    <button type="button" class="primary confirm" data-confirm>이 구성으로 PPT 제작</button>
+    <button type="button" class="primary confirm" data-confirm>선택 확정 → 장표안 미리보기</button>
   </section>`;
   bind("[data-back]", () => renderPresets());
   bind("[data-confirm]", () => confirmSelection());
@@ -167,7 +168,7 @@ app.ontoolresult = (result) => {
   }
   renderGallery();
   app.updateModelContext({
-    content: [{ type: "text", text: `SLIDE_MASTER_PICKER_UI_RENDERED: ${payload.selectable_total} ACTIVE templates are visibly rendered for purpose: ${payload.purpose}. Wait for the user's explicit template and preset confirmation before continuing PPT production.` }],
+    content: [{ type: "text", text: `SLIDE_MASTER_PICKER_UI_RENDERED: ${payload.selectable_total} ACTIVE templates are visibly rendered for purpose: ${payload.purpose}. Wait for explicit template+preset confirmation. After confirmation, do NOT generate PPTX; next show a complete user-editable slide-by-slide preview and wait for explicit storyline approval.` }],
   }).catch(() => {});
 };
 

@@ -22,6 +22,7 @@ const templateId = sc.shortlist?.[0]?.id;
 const presetId = sc.presets?.[0]?.id;
 const valid = await client.callTool({ name: "validate_slide_master_selection", arguments: { purpose, template_id: templateId, preset_id: presetId } });
 console.log("VALIDATE", valid.isError === true ? "ERROR" : valid.structuredContent?.valid, valid.structuredContent?.selection_token || "");
+console.log("WORKFLOW", valid.structuredContent?.workflow_contract?.next_state || "", valid.structuredContent?.workflow_contract?.generation_allowed, valid.structuredContent?.workflow_contract?.storyline_preview_required, valid.structuredContent?.production_profile?.body_px || "");
 if (valid.isError === true) console.log("VALIDATE_ERROR_DETAIL", JSON.stringify(valid));
-if (!openTool || !templateId || !presetId || valid.isError === true || !valid.structuredContent?.selection_token) process.exitCode = 1;
+if (!openTool || !templateId || !presetId || valid.isError === true || !valid.structuredContent?.selection_token || valid.structuredContent?.workflow_contract?.next_state !== "WAIT_STORYLINE_PREVIEW" || valid.structuredContent?.workflow_contract?.generation_allowed !== false || valid.structuredContent?.workflow_contract?.storyline_preview_required !== true) process.exitCode = 1;
 await client.close();
