@@ -1,5 +1,24 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-30 KST
+
+## NEWEST CHECKPOINT — PICKER OPERATING BASELINE ACCEPTED
+
+Cold-start after Windows reboot now passes. Local MCP readiness and full tools/picker/UI/resource/selection-validation smoke pass, and the user reports the Picker flow in a new normal ChatGPT conversation is operating normally. Full PPT file end-to-end completion is not yet claimed.
+
+The user explicitly chose to keep the current foreground runtime model: keep both the Picker server CMD window (TCP 3000) and Secure MCP Tunnel CMD window (TCP 8080) running/minimized while the Picker/PPT workflow is in use. Do not convert to a background service unless requested later.
+
+Do not repeat closed CSP/template/port/tunnel/startup-order/default-buffer diagnosis without new evidence. Classify any new failure by the stage that actually fails.
+
+Durable operational history: `docs/ai-history/2026-08-30-picker-operational-baseline-final.md`
+
+Durable handoff: `docs/session-handoff/20260830_PICKER_OPERATIONAL_BASELINE_FINAL.md`
+
+GitHub Actions remain opt-in only. PR #6 remains Draft pending confirmed selection return and full PPT path.
+
+---
+
+
 Updated checkpoint: 2026-08-30 19:51 KST
 
 ## NEWEST CHECKPOINT — PICKER REBOOT FINAL ACCEPTANCE NEXT SESSION
