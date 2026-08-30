@@ -117,14 +117,13 @@ Only after this evidence exists may content research/generation begin.
 
 Use this exact order:
 
-1. **Primary:** conversation-native interactive App Block / GenUI.
-2. **Secondary:** another conversation-native real-preview visual/card surface.
-3. **Fallback:** self-contained interactive HTML in the conversation (`template_gallery_inline_html.py`).
+1. **Primary:** conversation-native interactive App Block / GenUI on a host that actually supports the app.
+2. **Automatic host-rejection fallback:** when the real tool call returns `FORBIDDEN` / `does not support developer MCPs` and Remote Desktop Commander is available, run `ops/windows/Open_SlideMasterPicker_Fallback.bat <purpose>` and open the self-contained GitHub-backed HTML picker.
+3. **Secondary:** another conversation-native real-preview visual/card surface when available.
 4. **Recovery:** stable GitHub-rendered visual catalog (`docs/template-gallery/README.md`).
-5. **Auxiliary recovery:** external/local HTML (`template_gallery_unified.py`) when specifically useful.
-6. **Last resort:** text-only IDs, with explicit visual-unavailable explanation and recorded fallback reason.
+5. **Last resort:** text-only IDs, with explicit visual-unavailable explanation and recorded fallback reason.
 
-A lower-priority path may be used only after the higher-priority path is genuinely unavailable or fails to render. Failure must not bypass explicit user selection.
+`FORBIDDEN` / developer-MCP host rejection is a product-surface classification. Do not restart CSP, preview-image, port-3000, or Tunnel debugging for the same exact rejection unless separate runtime evidence changed. A lower-priority path still requires explicit user selection and picker evidence.
 
 ## Fail-closed UI and execution rules
 
@@ -135,6 +134,7 @@ The following are explicit failures and must stop the new-deck pipeline:
 - using a fixed/hard-coded template list that ignores the current GitHub indexes;
 - listing template names/IDs in prose when an App Block / GenUI picker is available;
 - claiming a gallery, modal, image, or picker was displayed when the current turn did not visibly render it;
+- saying `Picker를 열었습니다` after a `FORBIDDEN` / developer-MCP host rejection instead of switching to the documented fallback;
 - recording a recommended-template selection without valid picker evidence;
 - using a lower-priority picker without a fallback reason;
 - recording selection before the user explicitly returns a final id;

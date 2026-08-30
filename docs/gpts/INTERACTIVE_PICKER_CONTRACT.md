@@ -24,4 +24,10 @@ Primary:
 `picker_surface_gate.py record picker.json --surface app_block --purpose "천안센터 문제점" --source-ref "github:main" --candidate-count 6 --detail-preview-max 6 --rendered`
 
 Fallback:
-`picker_surface_gate.py record picker.json --surface inline_html --purpose "천안센터 문제점" --source-ref "github:main" --candidate-count 6 --detail-preview-max 6 --fallback-reason "host_app_block_unavailable" --rendered`
+`picker_surface_gate.py record picker.json --surface inline_html --purpose "천안센터 문제점" --source-ref "github:main" --candidate-count 6 --detail-preview-max 6 --fallback-reason "developer_mcp_forbidden" --rendered`
+## Host rejection policy
+- An actual tool error containing `FORBIDDEN` / `does not support developer MCPs` is authoritative evidence that the current conversation surface cannot run the developer MCP app.
+- Do not re-diagnose that exact condition as CSP, preview-image, GitHub catalog, port 3000, or Tunnel failure unless separate runtime checks show a new fault.
+- If Remote Desktop Commander is available, execute `ops/windows/Open_SlideMasterPicker_Fallback.bat <purpose>` and open the self-contained HTML picker automatically.
+- The fallback still uses the live GitHub catalog and explicit user selection; it never authorizes skipping the template-selection gate.
+- Selecting a card copies its namespaced template id to the clipboard. Record the returned id with fallback picker evidence before PPT generation.

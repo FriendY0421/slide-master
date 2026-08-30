@@ -1,5 +1,19 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-30 KST
+
+## NEWEST CHECKPOINT — DEVELOPER MCP FORBIDDEN FALLBACK
+
+Direct `Slide Master Template Picker` invocation returned `FORBIDDEN: This conversation does not support developer MCPs`. This exact error is now classified as a ChatGPT host/product-surface limitation; do not restart CSP/image/Tunnel debugging for the same error without new lower-layer evidence.
+
+Canonical flow is now conditional: supported host → Apps SDK picker; unsupported developer-MCP host + Desktop Commander available → `ops/windows/Open_SlideMasterPicker_Fallback.bat <purpose>` → self-contained GitHub-backed HTML picker → explicit selected id → picker evidence (`developer_mcp_forbidden`) → generation.
+
+Recommendation-governance V2 is separated from the draft MCP app in this mainline change so MCP and HTML fallback share the same ranking logic. Current catalog: 21 selectable templates. Audits pass for strategy roadmap, future tech, and service improvement use cases. GitHub Actions were not used.
+
+Durable history: `docs/ai-history/2026-08-30-developer-mcp-forbidden-fallback.md`
+
+---
+
 Updated checkpoint: 2026-08-27 KST
 
 ## NEWEST CHECKPOINT — COMPANY TEMPLATE LIFECYCLE VALIDATED
