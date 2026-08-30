@@ -15,7 +15,12 @@ const PICKER_SCRIPT = path.join(REPO_ROOT, ".claude", "skills", "ppt-master", "s
 const BUNDLE_PATH = path.join(APP_ROOT, "web", "dist", "app.js");
 const TEMPLATE_URI = "ui://slide-master/template-picker-v1.html";
 const PYTHON = process.env.PYTHON || "python";
-const SOURCE = process.env.PICKER_SOURCE || "github";
+const SOURCE_VALUES = new Set(["auto", "github", "local"]);
+const RAW_SOURCE = String(process.env.PICKER_SOURCE ?? "github");
+const SOURCE = RAW_SOURCE.trim().toLowerCase();
+if (!SOURCE_VALUES.has(SOURCE)) {
+  throw new Error(`Invalid PICKER_SOURCE=${JSON.stringify(RAW_SOURCE)}. Allowed: auto, github, local.`);
+}
 const PORT = Number(process.env.PORT || 3000);
 
 function loadPayload(purpose, limit) {
@@ -78,17 +83,27 @@ function createMcpServer() {
     },
     async ({ purpose, recommendation_limit = 6 }) => {
       const payload = loadPayload(purpose, recommendation_limit);
-      const light = (items) => items.map((t) => ({
-        id: t.id, name: t.name, template_kind: t.template_kind, summary: t.summary,
-        reason: t.reason, recommended: Boolean(t.rec), preview_count: t.previews?.length || 0,
-      }));
       return {
         structuredContent: {
-          purpose: payload.purpose, source: payload.source,
-          registered_total: payload.registered_total, selectable_total: payload.selectable_total,
-          shortlist: light(payload.shortlist), presets: payload.presets, free_design: payload.free_design,
+          schema_version: payload.schema_version,
+          purpose: payload.purpose,
+          source: payload.source,
+          selectable_total: payload.selectable_total,
+          recommended_keys: payload.recommended_keys,
+          shortlist: payload.shortlist.map((item) => ({
+            id: item.id,
+            key: item.key,
+            name: item.name,
+            reason: item.reason,
+          })),
+          presets: payload.presets.map((item) => ({
+            id: item.id,
+            display_name: item.display_name,
+            summary: item.summary,
+            recommended_rank: item.recommended_rank,
+          })),
         },
-        content: [{ type: "text", text: `Slide Master 템플릿 ${payload.shortlist.length}개를 인터랙티브 선택 화면에 표시했습니다.` }],
+        content: [{ type: "text", text: `Slide Master picker ready: ${payload.selectable_total} ACTIVE templates.` }],
         _meta: { pickerPayload: payload },
       };
     },
@@ -99,7 +114,7 @@ function createMcpServer() {
     "validate_slide_master_selection",
     {
       title: "Validate Slide Master selection",
-      description: "Validate a template/preset selection from the interactive picker before it is sent back to chat.",
+      description: "App-only final validation for a selected template and production preset.",
       inputSchema: {
         purpose: z.string().min(1),
         template_id: z.string().min(1),
@@ -112,7 +127,7 @@ function createMcpServer() {
       const payload = loadPayload(purpose, 10);
       const selection = validateSelection(payload, template_id, preset_id);
       return {
-        structuredContent: selection,
+        structuredContent: { valid: true, ...selection },
         content: [{ type: "text", text: selection.selection_token }],
       };
     },
@@ -122,24 +137,24 @@ function createMcpServer() {
 }
 
 const app = express();
-app.use(express.json({ limit: "12mb" }));
-app.get("/health", (_req, res) => res.json({ ok: true, app: "slide-master-template-picker", source: SOURCE }));
+app.use(express.json({ limit: "2mb" }));
+app.get("/health", (_req, res) => res.json({ ok: true, source: SOURCE }));
 app.all("/mcp", async (req, res) => {
   const server = createMcpServer();
   const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
   res.on("close", () => {
-    void transport.close().catch(() => {});
-    void server.close().catch(() => {});
+    transport.close().catch(() => {});
+    server.close().catch(() => {});
   });
   try {
     await server.connect(transport);
     await transport.handleRequest(req, res, req.body);
   } catch (error) {
-    console.error(error);
-    if (!res.headersSent) res.status(500).json({ error: "MCP request failed" });
+    if (!res.headersSent) res.status(500).json({ error: String(error?.message || error) });
   }
 });
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Slide Master Template Picker MCP listening on http://localhost:${PORT}/mcp`);
+  if (RAW_SOURCE !== SOURCE) console.log(`Normalized PICKER_SOURCE ${JSON.stringify(RAW_SOURCE)} -> ${SOURCE}`);
 });
