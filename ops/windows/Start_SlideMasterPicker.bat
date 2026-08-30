@@ -1,65 +1,81 @@
 @echo off
-setlocal EnableExtensions
-title Slide Master Template Picker Launcher
+setlocal EnableExtensions EnableDelayedExpansion
+title Slide Master Template Picker - Safe Launcher
 
 set "RUNTIME=%USERPROFILE%\Tools\slide-master-picker-runtime"
 set "PICKER_HELPER=%RUNTIME%\ops\windows\Run_Picker_Server.cmd"
 set "TUNNEL_HELPER=%RUNTIME%\ops\windows\Run_Secure_Tunnel.cmd"
+set "VERIFY=%RUNTIME%\ops\windows\Verify_SlideMasterPicker_Runtime.ps1"
 set "LOG_DIR=%LOCALAPPDATA%\OpenAI\SlideMasterTunnel\logs"
 
 if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
-if not exist "%PICKER_HELPER%" goto missing_picker
-if not exist "%TUNNEL_HELPER%" goto missing_tunnel
+if not exist "%PICKER_HELPER%" goto missing_runtime
+if not exist "%TUNNEL_HELPER%" goto missing_runtime
+if not exist "%VERIFY%" goto missing_runtime
 
-echo [1/4] Checking Picker MCP...
-netstat -ano | findstr /R /C:":3000 .*LISTENING" >nul
-if errorlevel 1 (
-  echo       Starting Picker MCP...
-  start "" /min "%PICKER_HELPER%"
-  ping 127.0.0.1 -n 3 >nul
-) else (
-  echo       Picker MCP is already running.
+echo ============================================================
+echo Slide Master Template Picker - Safe Startup
+ echo Never terminates an existing process.
+echo ============================================================
+echo.
+echo [1/4] Checking existing runtime without restarting anything...
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%VERIFY%" -TimeoutSeconds 12 -StableSeconds 3 -SmokeAttempts 1
+if not errorlevel 1 goto already_ready
+
+echo.
+echo Existing runtime is not fully healthy. Checking port ownership...
+set "PORT_BUSY=0"
+for %%P in (3000 8080) do (
+    netstat -ano | findstr /R /C:":%%P .*LISTENING" >nul
+    if not errorlevel 1 (
+        echo [ACTION REQUIRED] Port %%P already has a listener.
+        set "PORT_BUSY=1"
+    )
 )
+if "!PORT_BUSY!"=="1" goto busy_runtime
 
-echo [2/4] Checking Secure Tunnel...
-netstat -ano | findstr /R /C:":8080 .*LISTENING" >nul
-if errorlevel 1 (
-  echo       Starting Secure Tunnel...
-  start "" /min "%TUNNEL_HELPER%"
-) else (
-  echo       Secure Tunnel is already running.
-)
+echo [2/4] Ports are free. Starting Picker MCP...
+start "Slide Master Picker Server" /min cmd /c ""%PICKER_HELPER%""
 
-echo [3/4] Waiting for READY...
-set /a TRY=0
-:wait_ready
-set /a TRY+=1
-curl.exe -fsS --max-time 2 http://127.0.0.1:8080/readyz 2>nul | findstr /I /C:"ready" >nul
-if not errorlevel 1 goto ready
-if %TRY% GEQ 15 goto not_ready
-ping 127.0.0.1 -n 2 >nul
-goto wait_ready
+echo [3/4] Starting Secure Tunnel...
+start "Slide Master Secure Tunnel" /min cmd /c ""%TUNNEL_HELPER%""
 
-:ready
-echo [4/4] READY - Slide Master Template Picker is available.
-echo       Use @Slide Master Template Picker in ChatGPT.
-ping 127.0.0.1 -n 4 >nul
+echo [4/4] Waiting for stable end-to-end readiness...
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%VERIFY%" -TunnelStarted -TimeoutSeconds 120 -StableSeconds 10 -SmokeAttempts 3
+if errorlevel 1 goto not_ready
+
+echo.
+echo [READY] Picker + tunnel + MCP smoke all passed.
+echo Use ChatGPT only after this READY message.
+pause
 exit /b 0
 
+:already_ready
+echo.
+echo [READY] Existing Picker runtime is healthy.
+echo Nothing was restarted or terminated.
+pause
+exit /b 0
+:busy_runtime
+echo.
+echo [NOT READY] Existing listener detected while verification failed.
+echo This launcher will NOT terminate or replace any process.
+echo Finish other work and restart Windows when it is safe, then run this file again.
+echo Verification log: %LOG_DIR%\runtime.verify.status.json
+pause
+exit /b 40
+
 :not_ready
-echo ERROR: Secure Tunnel did not become READY within 15 seconds.
-echo Check log: %LOG_DIR%\tunnel.log
+echo.
+echo [NOT READY] Startup completed but end-to-end verification did not pass.
+echo Do NOT repeatedly retry the ChatGPT app.
+echo Verification log: %LOG_DIR%\runtime.verify.status.json
 pause
-exit /b 2
+exit /b 50
 
-:missing_picker
-echo ERROR: Picker helper is missing.
-echo %PICKER_HELPER%
+:missing_runtime
+echo.
+echo [ERROR] Required Slide Master runtime file is missing.
+echo Runtime: %RUNTIME%
 pause
-exit /b 3
-
-:missing_tunnel
-echo ERROR: Tunnel helper is missing.
-echo %TUNNEL_HELPER%
-pause
-exit /b 4
+exit /b 60

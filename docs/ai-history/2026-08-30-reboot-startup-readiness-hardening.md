@@ -1,0 +1,63 @@
+# Slide Master Picker reboot startup readiness hardening
+
+Date: 2026-08-30 KST
+Status: CODE HARDENED / POST-REBOOT ACCEPTANCE PENDING
+
+## Incident
+
+After a real Windows shutdown/restart, ChatGPT showed repeated `Failed to fetch template` errors. The observed sequence included an initial 404 followed by 429 responses after repeated retries. The Picker selection gate correctly prevented PPT generation, but the runtime readiness path was not reliable enough after reboot.
+
+The Desktop launcher also produced an error. During investigation, the in-progress repository launcher was found truncated at 37 lines, which is an independent direct launcher defect.
+
+## Confirmed root causes
+
+1. Startup readiness race: local process/tunnel warm-up can lag behind a ChatGPT app request.
+2. `/readyz=ready` or an open port alone is weaker than full MCP usability.
+3. Repeated ChatGPT retries before stable readiness can turn the original failure into misleading 404/429 sequences.
+4. Automatic port-process termination is unsafe because the user may have unrelated or concurrent work running.
+5. The launcher working copy had been partially written and was therefore incomplete.
+
+## Safety decision
+
+The launcher is now fail-closed and non-destructive. It MUST NOT use `taskkill`, `Stop-Process`, or equivalent automatic process termination.
+
+## New launcher behavior
+
+1. Verify an already-running runtime first.
+2. If it is healthy, return `[READY]` without restarting anything.
+3. If verification fails and port 3000 or 8080 is already occupied, return `ACTION REQUIRED` and stop there.
+4. Only when both ports are free may the launcher start the Picker and Tunnel helpers.
+5. After startup, require continuous stable health and a real MCP protocol smoke before returning `[READY]`.
+
+The verifier now requires:
+
+- TCP 3000 reachable;
+- TCP 8080 reachable;
+- `/healthz = live`;
+- `/readyz = ready`;
+- the above conditions continuously stable for the configured window;
+- `scripts/mcp-smoke.mjs` exit code 0;
+- smoke markers for tools, picker payload, resource metadata, UI resource, and final validation;
+- a final post-smoke runtime health check.
+
+## Non-disruptive validation completed
+
+- PowerShell verifier parse: PASS.
+- automatic process-termination command scan: PASS / none found.
+- repository launcher copied to Desktop and SHA-256 matched.
+- Current runtime check at the time of hardening found both ports 3000 and 8080 not listening. No process was terminated by this work.
+- Because the user had other work running, no Picker/Tunnel startup, shutdown, or Windows restart was performed.
+
+## Pending acceptance
+
+A user-controlled Windows restart is still required for the final cold-start acceptance test.
+
+Required acceptance flow:
+
+`restart Windows -> run Desktop Start_SlideMasterPicker.bat -> wait for [READY] -> issue one ChatGPT Picker request`
+
+Do not repeatedly retry the ChatGPT app before `[READY]`.
+
+The Apps SDK PR #6 remains Draft until the real ChatGPT host renders the template cards/images and the final selection returns to the conversation.
+
+GitHub Actions were not used.
