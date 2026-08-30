@@ -2,7 +2,8 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 
 const client = new Client({ name: "slide-master-picker-smoke", version: "1.0.0" });
-const transport = new StreamableHTTPClientTransport(new URL("http://127.0.0.1:3000/mcp"));
+const mcpUrl = process.env.MCP_URL || "http://127.0.0.1:3000/mcp";
+const transport = new StreamableHTTPClientTransport(new URL(mcpUrl));
 await client.connect(transport);
 const tools = await client.listTools();
 const openTool = tools.tools.find((t) => t.name === "open_slide_master_template_picker");
@@ -15,6 +16,7 @@ console.log("PICKER", sc.selectable_total, sc.shortlist?.length, sc.shortlist?.[
 const ui = await client.readResource({ uri: "ui://slide-master/template-picker-v1.html" });
 const resource = ui.contents?.[0] || {};
 console.log("UI", resource.text?.length || 0, resource.text?.includes("<script type=\"module\">") === true);
+console.log("RESOURCE_META", resource.uri || "", resource.mimeType || "", resource._meta?.ui?.domain || "");
 console.log("CSP", JSON.stringify(resource._meta?.ui?.csp || null));
 const templateId = sc.shortlist?.[0]?.id;
 const presetId = sc.presets?.[0]?.id;

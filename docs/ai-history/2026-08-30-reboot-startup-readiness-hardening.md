@@ -1,7 +1,7 @@
 # Slide Master Picker reboot startup readiness hardening
 
 Date: 2026-08-30 KST
-Status: CODE HARDENED / POST-REBOOT ACCEPTANCE PENDING
+Status: STARTUP-ORDER + PAYLOAD-BUFFER HARDENED / SECOND POST-REBOOT ACCEPTANCE PENDING
 
 ## Incident
 
@@ -61,3 +61,34 @@ Do not repeatedly retry the ChatGPT app before `[READY]`.
 The Apps SDK PR #6 remains Draft until the real ChatGPT host renders the template cards/images and the final selection returns to the conversation.
 
 GitHub Actions were not used.
+
+## Real post-reboot acceptance result and follow-up hardening
+
+The first real cold-start acceptance was executed on 2026-08-30 after Windows had rebooted. It failed safely rather than producing a false READY.
+
+Evidence:
+- Picker/Tunnel ports were initially free;
+- Tunnel started before Picker MCP had completed its build/start path;
+- Tunnel's first MCP initialize/probe received `ECONNREFUSED 127.0.0.1:3000`;
+- Picker later listened on 3000;
+- Tunnel stayed `/healthz=live` but `/readyz=503`;
+- stable end-to-end readiness was never established within the launcher timeout.
+
+A second defect was exposed while validating the full smoke path: `validate_slide_master_selection` reloads the payload with limit 10, whose JSON can exceed Node child-process default buffering. The subprocess output was truncated at roughly the 1 MiB boundary and surfaced as an MCP tool error. This was not a bad template/preset selection.
+
+Follow-up hardening:
+- the launcher now waits for a dedicated lightweight local MCP readiness probe before starting Secure Tunnel;
+- the probe verifies both required Picker MCP tools;
+- Picker payload spawning now uses a 16 MiB `maxBuffer`;
+- the full smoke emits `RESOURCE_META` and supports an override MCP URL for isolated testing;
+- verifier marker matching is literal and deterministic.
+
+Validation after the follow-up hardening:
+- local MCP readiness probe: PASS on first attempt;
+- isolated patched server on port 3001: started successfully;
+- full open/resource/validate smoke against 3001: PASS, `VALIDATE true`, exit 0;
+- JavaScript, PowerShell, and Git diff checks: PASS.
+
+The temporary 3001 test server was created only for isolated verification and was removed afterward. No unrelated port owner was terminated. GitHub Actions were not used.
+
+Pending acceptance remains one controlled reboot and one real ChatGPT host request after launcher `[READY]`. PR #6 remains Draft until real cards/images render and the final selection returns through the ChatGPT app.

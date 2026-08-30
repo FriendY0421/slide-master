@@ -6,12 +6,14 @@ set "RUNTIME=%USERPROFILE%\Tools\slide-master-picker-runtime"
 set "PICKER_HELPER=%RUNTIME%\ops\windows\Run_Picker_Server.cmd"
 set "TUNNEL_HELPER=%RUNTIME%\ops\windows\Run_Secure_Tunnel.cmd"
 set "VERIFY=%RUNTIME%\ops\windows\Verify_SlideMasterPicker_Runtime.ps1"
+set "WAIT_LOCAL=%RUNTIME%\ops\windows\Wait_SlideMasterPicker_LocalMcp.ps1"
 set "LOG_DIR=%LOCALAPPDATA%\OpenAI\SlideMasterTunnel\logs"
 
 if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
 if not exist "%PICKER_HELPER%" goto missing_runtime
 if not exist "%TUNNEL_HELPER%" goto missing_runtime
 if not exist "%VERIFY%" goto missing_runtime
+if not exist "%WAIT_LOCAL%" goto missing_runtime
 
 echo ============================================================
 echo Slide Master Template Picker - Safe Startup
@@ -36,6 +38,9 @@ if "!PORT_BUSY!"=="1" goto busy_runtime
 
 echo [2/4] Ports are free. Starting Picker MCP...
 start "Slide Master Picker Server" /min cmd /c ""%PICKER_HELPER%""
+echo [2a/4] Waiting for Picker MCP before starting Secure Tunnel...
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%WAIT_LOCAL%" -TimeoutSeconds 60
+if errorlevel 1 goto picker_not_ready
 
 echo [3/4] Starting Secure Tunnel...
 start "Slide Master Secure Tunnel" /min cmd /c ""%TUNNEL_HELPER%""
@@ -64,6 +69,14 @@ echo Finish other work and restart Windows when it is safe, then run this file a
 echo Verification log: %LOG_DIR%\runtime.verify.status.json
 pause
 exit /b 40
+
+:picker_not_ready
+echo.
+echo [NOT READY] Picker started but local MCP protocol readiness did not pass.
+echo Secure Tunnel was NOT started.
+echo Pre-tunnel readiness stderr: %LOG_DIR%\pre_tunnel_ready.stderr.log
+pause
+exit /b 45
 
 :not_ready
 echo.

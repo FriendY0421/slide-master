@@ -25,7 +25,7 @@ const PORT = Number(process.env.PORT || 3000);
 
 function loadPayload(purpose, limit) {
   const proc = spawnSync(PYTHON, [PICKER_SCRIPT, "--source", SOURCE, "--purpose", purpose, "--limit", String(limit)], {
-    cwd: REPO_ROOT, encoding: "utf8", timeout: 30000,
+    cwd: REPO_ROOT, encoding: "utf8", timeout: 30000, maxBuffer: 16 * 1024 * 1024,
   });
   if (proc.status !== 0) throw new Error((proc.stderr || proc.stdout || "picker payload failed").trim());
   return JSON.parse(proc.stdout);

@@ -84,7 +84,7 @@ for($try=1;$try -le $SmokeAttempts;$try++) {
     $lastSmoke | Set-Content -Path (Join-Path $LogDir 'smoke.log') -Encoding utf8
     $markersOk=$true
     foreach($marker in @('TOOLS ','PICKER ','RESOURCE_META ','UI ','VALIDATE ')) {
-        if($lastSmoke -notmatch [regex]::Escape($marker)){ $markersOk=$false; break }
+        if(-not $lastSmoke.Contains($marker)){ $markersOk=$false; break }
     }
     if($proc.ExitCode -eq 0 -and $markersOk){ $smokePassed=$true; break }
     if($try -lt $SmokeAttempts){ Start-Sleep -Seconds 3 }
