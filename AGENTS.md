@@ -11,15 +11,14 @@ below add Codex-side enforcement; they never override the selected owner.
 Before any presentation routing or generation work, read [`PPT_REQUEST_GUARD.md`](PPT_REQUEST_GUARD.md).
 For a **new deck**, this guard is fail-closed and overrides any older prose that says to default to
 Free Design, skip template choice, or require a fragile host-only picker. New-deck work may not start
-research, project initialization, SVG authoring, or export until the template-selection handshake is
-complete. The valid paths are:
+research until the template + production-preset handshake is complete. Project initialization, SVG authoring, and export additionally require explicit approval of the post-research storyline/content outline. The valid paths are:
 
-- the user explicitly chose a registered template and the choice was recorded; or
+- the user explicitly chose a registered template and production preset and the pair was recorded; or
 - a verified conversation-native interactive picker (App Block / GenUI) showed actual registered
-  previews, the user explicitly returned a final selection id, picker evidence was recorded, and
-  `record_template_choice_v2.py` recorded the selection; or
+  previews, the user explicitly returned a template id and production preset id, picker evidence was recorded, and
+  `record_template_choice_v2.py` recorded the pair; or
 - a verified lower-priority visual fallback was used only after the interactive picker was unavailable,
-  its fallback reason and picker evidence were recorded, and the user explicitly returned the final id; or
+  its fallback reason and picker evidence were recorded, and the user explicitly returned both template and preset ids; or
 - a documented direct-PPTX/resume exemption was written to the project gate record.
 
 `template_selection.json` is the machine-readable evidence. Missing evidence is an execution failure,
@@ -67,12 +66,14 @@ a deck from a document/topic/template):
    - Do not answer with a prose-only template list first when App Block / GenUI is available.
    - Record the visibly rendered surface with `picker_surface_gate.py`.
    - Any lower-priority surface requires a concrete fallback reason.
-   - After the user returns the final id, record with `record_template_choice_v2.py --picker-evidence ... --confirmed`.
-   - If the user directly specified a valid template before recommendation, use `--direct-template`.
+   - After the user returns the template id, immediately run the production-preset stage and require an explicit preset id.
+   - Record the locked pair with `record_template_choice_v2.py --preset <preset_id> --picker-evidence ... --confirmed`.
+   - If the user directly specified a valid template before recommendation, use `--direct-template`, but still require a preset unless the user already provided one.
+   - Only after template+preset lock may research begin; after research, present the storyline/slide plan and wait for explicit user approval before generation.
    - Never claim that an in-chat gallery, picker, modal, or image was shown unless the current turn produced verifiable visible output.
 
-   Fallback order: App Block/GenUI → native real-preview visual cards → inline HTML → GitHub visual catalog → external/local recovery → text-only ids last.
-   Use `new_deck_init.py --template-selection-result <result.json>` only after the user returns the final selection ID.
+   Fallback order: App Block/GenUI -> Desktop Commander template HTML -> preset HTML -> native real-preview visual cards -> GitHub visual catalog -> text-only ids last. The fallback changes the UI surface only; the template -> preset -> research -> storyline approval -> generation order never changes.
+   Use `new_deck_init.py --template-selection-result <result.json>` only after template+preset evidence exists and the post-research storyline has been explicitly approved.
 
 2. **Load the selected owner(s) in full.** The router owns the complete matrix;
    this table is a compact Codex handoff summary:

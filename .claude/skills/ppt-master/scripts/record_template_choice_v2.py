@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Record a final user-confirmed deck/layout/free template choice."""
+"""Record a final user-confirmed template + production-preset choice."""
 
 from __future__ import annotations
 
@@ -20,11 +20,25 @@ from picker_surface_gate import load_picker_evidence  # noqa: E402
 
 configure_utf8_stdio()
 
-GATE_VERSION = 2
+GATE_VERSION = 3
+REPO_ROOT = Path(__file__).resolve().parents[4]
+PRESETS_PATH = REPO_ROOT / "docs" / "gpts" / "PRODUCTION_PRESETS.json"
+
+
+def _load_preset(preset_id: str) -> dict | None:
+    try:
+        doc = json.loads(PRESETS_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    presets = doc.get("presets", []) if isinstance(doc, dict) else []
+    for preset in presets:
+        if isinstance(preset, dict) and str(preset.get("id") or "").strip() == preset_id:
+            return dict(preset)
+    return None
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Record final user-confirmed Slide Master template selection.")
+    parser = argparse.ArgumentParser(description="Record final user-confirmed Slide Master template + production preset selection.")
     parser.add_argument(
         "template",
         help=(
@@ -33,6 +47,7 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
     parser.add_argument("--purpose", default="")
+    parser.add_argument("--preset", required=True, help="production preset id from docs/gpts/PRODUCTION_PRESETS.json")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--confirmed", action="store_true", help="required final-confirmation flag")
     parser.add_argument(
@@ -53,6 +68,11 @@ def main(argv: list[str] | None = None) -> int:
             "ERROR: final confirmation is required; pass --confirmed only after the user confirms",
             file=sys.stderr,
         )
+        return 2
+    preset_id = str(args.preset or "").strip()
+    preset = _load_preset(preset_id)
+    if not preset:
+        print(f"ERROR: unknown production preset: {preset_id}", file=sys.stderr)
         return 2
     if args.direct_template and args.picker_evidence is not None:
         print("ERROR: use either --direct-template or --picker-evidence, not both", file=sys.stderr)
@@ -87,6 +107,8 @@ def main(argv: list[str] | None = None) -> int:
             "workspace": None,
             "summary": "Free Design",
             "purpose": args.purpose,
+            "production_preset": preset_id,
+            "production_preset_profile": preset,
             "selection_method": selection_method,
             "selection_surface": selection_surface,
             "picker_evidence": picker,
@@ -112,6 +134,8 @@ def main(argv: list[str] | None = None) -> int:
             "workspace": entry["workspace"],
             "summary": entry.get("summary", ""),
             "purpose": args.purpose,
+            "production_preset": preset_id,
+            "production_preset_profile": preset,
             "selection_method": selection_method,
             "selection_surface": selection_surface,
             "picker_evidence": picker,

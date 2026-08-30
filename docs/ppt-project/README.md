@@ -11,6 +11,6 @@ This directory documents the host-independent PPT production path.
 
 ## Default path
 
-`PPT request → live catalog → stable visual gallery → explicit user selection → selection evidence → deck generation → QA → delivery`
+`PPT request -> live template picker -> explicit template id -> production preset picker -> explicit preset id -> lock -> research/verification -> slide-by-slide storyline -> explicit approval -> generation -> QA -> delivery`
 
-The flow must not depend on inline HTML rendering. Rich pickers may be used only as optional convenience layers when their visible output is positively verified.
+The preferred UI is a verified conversation-native picker when the host supports it. If the host rejects developer MCPs, use the Desktop Commander template HTML followed by preset HTML. The surface may change; the stage order and fail-closed checkpoints do not.

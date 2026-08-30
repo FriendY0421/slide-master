@@ -17,7 +17,7 @@ from template_gate import load_selection_result, write_project_gate  # noqa: E40
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Initialize a new deck only after template selection is proven.",
+        description="Initialize a new deck only after template + production-preset selection is proven.",
     )
     parser.add_argument("project_name")
     parser.add_argument("--format", default="ppt169")
@@ -25,7 +25,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--template-selection-result",
         required=True,
-        help="validated JSON result from record_template_choice_v2.py (picker evidence or direct-template path)",
+        help="validated gate-v3 JSON result from record_template_choice_v2.py (template + production preset)",
     )
     args = parser.parse_args(argv)
 

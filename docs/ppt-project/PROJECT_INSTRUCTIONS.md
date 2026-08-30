@@ -8,16 +8,17 @@
 
 ## New-deck flow
 
-1. Refresh/read the live Deck/Layout indexes.
-2. Recommend only templates that genuinely fit the user's purpose.
-3. Render the conversation-native App Block / GenUI picker when available; use lower-priority surfaces only with a recorded fallback reason.
-4. Do not invent template names, IDs, screenshots, or previews.
-5. Recommendation is not selection. Wait for an explicit `deck:<id>`, `layout:<id>`, or `free` response.
-6. Record visible picker evidence with `picker_surface_gate.py`, then record the final choice with `record_template_choice_v2.py --picker-evidence`; use `--direct-template` only for an explicitly user-specified registered template.
-7. Initialize with `new_deck_init.py` only after valid selection evidence exists.
-8. Only then research, compose, author, and export the deck.
-9. Run owner-defined validation, including `verify_deck.py` and the final rendered contact-sheet sanity check when using the main SVG route.
-10. Deliver only after QA passes.
+1. Understand the request purpose/audience/constraints.
+2. Refresh/read the live Deck/Layout indexes and render the best available template picker.
+3. Wait for an explicit template id; recommendation is never selection.
+4. Immediately render 3-5 purpose-ranked production presets and wait for an explicit preset id.
+5. Lock and record `template + preset`; `template_selection.json` gate v3 is the machine evidence.
+6. Only after that lock, research/verify current sources and facts when needed.
+7. Present the proposed slide count, slide-by-slide storyline, and core message for user review.
+8. Wait for explicit storyline approval or revisions. Do not initialize/author/export the deck before approval.
+9. After approval, initialize with `new_deck_init.py`, compose final content, author and export with the locked template/preset.
+10. Run owner-defined validation including `verify_deck.py` and the final rendered contact-sheet sanity check for the main SVG route.
+11. Deliver only after QA passes.
 
 ## UI reliability rules
 
@@ -32,9 +33,11 @@
 Stop generation when any of these is true:
 
 - no explicit final template choice;
+- no explicit production preset choice;
 - no valid `template_selection.json` or documented route exemption;
 - template/previews were invented or cannot be verified;
-- the user is still choosing a template;
+- the user is still choosing a template or preset;
+- the post-research storyline/content outline has not been explicitly approved;
 - QA failed or the final render shows a material issue.
 
 ## Repository operations

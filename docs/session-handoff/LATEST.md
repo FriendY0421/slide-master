@@ -2,6 +2,18 @@
 
 Updated checkpoint: 2026-08-30 KST
 
+## NEWEST CHECKPOINT - STANDARD PPT WORKFLOW LOCKED
+
+User-approved canonical order is now: `request -> template picker -> explicit template id -> production preset picker -> explicit preset id -> lock template+preset -> latest evidence/research -> slide-by-slide storyline proposal -> explicit storyline approval -> production -> QA -> PPTX`. This order applies across ChatGPT/GPTS, FAH/Codex handoffs, and Developer-MCP fallback.
+
+The fallback UI may change (App Block/GenUI vs Desktop Commander HTML), but the stage order must not. New selection records use gate v3 and require a production preset while gate v1/v2 remains readable for legacy/resume compatibility. GitHub Actions remain unused.
+
+Durable history: `docs/ai-history/2026-08-30-standard-ppt-workflow.md`.
+
+---
+
+Updated checkpoint: 2026-08-30 KST
+
 ## NEWEST CHECKPOINT — DEVELOPER MCP FORBIDDEN FALLBACK
 
 Direct `Slide Master Template Picker` invocation returned `FORBIDDEN: This conversation does not support developer MCPs`. This exact error is now classified as a ChatGPT host/product-surface limitation; do not restart CSP/image/Tunnel debugging for the same error without new lower-layer evidence.

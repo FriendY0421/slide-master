@@ -4,7 +4,7 @@ description: Mandatory scalable conversation-interactive template-selection gate
 
 # Template Selection Gate
 
-Every new deck requires explicit template selection before research, project initialization, SVG authoring, or PPTX generation.
+Every new deck requires explicit template + production-preset selection before research. Project initialization, slide authoring, SVG work, or PPTX generation additionally requires explicit approval of the post-research storyline/content outline.
 `PPT_REQUEST_GUARD.md` owns the fail-closed entry rule; this workflow owns execution details.
 
 ## Scope
@@ -17,11 +17,11 @@ Exempt only documented direct-PPTX/resume routes:
 - `native-enhance-pptx`
 - resume of a project with already-confirmed template evidence
 
-A user who directly specifies a valid registered template does not need the picker, but still requires explicit selection recording.
+A user who directly specifies a valid registered template does not need the template picker, but still requires an explicit production preset (unless already supplied) and gate-v3 selection recording.
 
 ## Host preparation is not generation permission
 
-A ChatGPT host may require `artifact_handoff` / presentation preparation before any other tool call. That call is preparation only. Immediately after it, enter this workflow. Do not research, initialize, author slides, or export PPTX until valid selection evidence exists.
+A ChatGPT host may require `artifact_handoff` / presentation preparation before any other tool call. That call is preparation only. Immediately after it, enter this workflow. Do not research until valid template+preset evidence exists. Do not initialize, author slides, or export PPTX until the post-research storyline/content outline is explicitly approved.
 
 ## Runtime catalog — latest GitHub every request
 
@@ -67,12 +67,11 @@ After a tentative card choice, show up to 6 real examples from that exact worksp
 
 The Stage-1 choice is tentative. Do not write selection evidence yet.
 
-## Stage 3 — presentation-production preset
+## Stage 3 - mandatory presentation-production preset
 
-When the request benefits from it, present 3–5 relevant production presets using the same card interaction pattern.
-Examples include Balanced Report, Executive Brief, Storytelling Proposal, Data Insight, Training & Guide, and Product/Service Showcase.
+Present 3-5 purpose-ranked production presets for every new deck unless the user already provided a valid preset id. Examples include Balanced Report, Executive Brief, Storytelling Proposal, Data Insight, Training & Guide, and Product/Service Showcase.
 
-The template and preset are separate decisions. A recommended combination may be highlighted but never auto-confirmed.
+The template and preset are separate decisions. A recommended combination may be highlighted but never auto-confirmed. On developer-MCP fallback, use `production_preset_picker.py` or `ops/windows/Open_SlideMasterPreset_Fallback.bat`.
 
 ## Stage 4 — final confirmation
 
@@ -81,7 +80,7 @@ Display a final selection token such as:
 `deck:mckinsey | preset:storytelling_proposal`
 
 If the interactive UI's state is local to the app, instruct the user to return/confirm the template id in chat.
-Only an explicit user confirmation is final.
+Only explicit user confirmation of both template and preset is final.
 
 ## Picker render evidence
 
@@ -97,30 +96,30 @@ If App Block / GenUI is unavailable, use the fallback hierarchy below. Every non
 
 Recommended-template flow:
 
-`python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --purpose "<purpose>" --picker-evidence <picker.json> --output <result.json> --confirmed`
+`python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --preset <preset_id> --purpose "<purpose>" --picker-evidence <picker.json> --output <result.json> --confirmed`
 
 Direct user-specified template flow:
 
-`python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --purpose "<purpose>" --direct-template --output <result.json> --confirmed`
+`python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --preset <preset_id> --purpose "<purpose>" --direct-template --output <result.json> --confirmed`
 
-Then initialize:
+Only after the gate-v3 template+preset record succeeds may research begin. After research, present a slide-by-slide storyline/content outline and wait for explicit approval. Only after that approval initialize through:
 
 `python .claude/skills/ppt-master/scripts/new_deck_init.py <project_name> --format <format> --template-selection-result <result.json>`
 
-Only after this succeeds may research/generation continue.
+Then continue generation.
 
 ## Fallback hierarchy
 
-Use this exact order:
+Use this exact order while preserving the same stage sequence:
 
 1. conversation-native interactive App Block / GenUI;
-2. another conversation-native real-preview visual/card surface;
-3. self-contained interactive HTML in the conversation (`template_gallery_inline_html.py`);
-4. stable GitHub-rendered visual catalog (`docs/template-gallery/README.md`);
-5. external/local browser recovery (`template_gallery_unified.py`);
+2. on developer-MCP `FORBIDDEN`, Desktop Commander self-contained template HTML;
+3. production preset HTML immediately after the template id;
+4. another conversation-native real-preview visual/card surface when available;
+5. stable GitHub-rendered visual catalog;
 6. text-only ids as last resort.
 
-A lower-priority path requires a recorded fallback reason. No fallback may bypass explicit user confirmation.
+A lower-priority path requires a recorded fallback reason. No fallback may bypass explicit template choice, preset choice, research/storyline review, or user approval.
 
 ## Self-contained HTML fallback contract
 
@@ -138,7 +137,8 @@ Never present broken glyph boxes as valid previews. Use a verified Korean-capabl
 
 Stop rather than proceed when any of these occurs:
 
-- generation starts before template evidence;
+- research starts before template+preset evidence;
+- generation starts before storyline approval;
 - a fixed/hard-coded template list replaces the current GitHub indexes;
 - App Block / GenUI is available but the assistant answers with only names/ids;
 - only names/numbers are shown and treated as a completed visual selection step;
@@ -147,7 +147,7 @@ Stop rather than proceed when any of these occurs:
 - selected-template detail review is skipped for recommendation flows;
 - picker evidence is missing for a recommended-template final record;
 - a fallback is used without its reason;
-- final evidence is written before explicit user confirmation;
+- final evidence is written before explicit template + preset confirmation;
 - broken Korean glyphs are visible;
 - valid selection evidence is missing.
 
