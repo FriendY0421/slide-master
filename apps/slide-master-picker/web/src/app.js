@@ -153,15 +153,26 @@ const style = document.createElement("style");
 style.textContent = `:root{font-family:Inter,Pretendard,"Malgun Gothic",system-ui,sans-serif;color:#172033}*{box-sizing:border-box}body{margin:0;background:transparent}.picker-shell{padding:12px;min-width:0}header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}header strong{font-size:20px}header p{margin:4px 0;color:#657086;font-size:13px}.tabs,.filters,.pager{display:flex;gap:6px;align-items:center}.tabs button,header button,.free button,.actions button,.final button,.filters button,.pager button{border:1px solid #d5dbe7;background:#fff;border-radius:10px;padding:9px 12px;cursor:pointer}.tabs .active,.filters .active,.primary{background:#3157d5!important;color:#fff!important;border-color:#3157d5!important}.toolbar{display:grid;grid-template-columns:minmax(180px,1fr) auto;gap:8px;margin-bottom:8px}.toolbar input{min-height:42px;border:1px solid #d5dbe7;border-radius:10px;padding:8px 11px;font-size:16px}.summary{color:#667085;font-size:12px;margin:6px 0 10px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.template-card,.preset-card{border:1px solid #dce2ec;background:#fff;border-radius:14px;padding:0;text-align:left;overflow:hidden;cursor:pointer}.template-card.selected,.preset-card.selected{outline:3px solid #3157d533;border-color:#3157d5}.preview{aspect-ratio:16/9;background:#f1f4f8;display:flex;align-items:center;justify-content:center}.preview img{width:100%;height:100%;object-fit:contain;background:#fff}.card-body{padding:12px}.card-title{font-weight:800}.badge,.rank{font-size:10px;background:#e8edff;color:#3157d5;border-radius:999px;padding:3px 6px;margin-right:6px}.card-id{font:11px ui-monospace,monospace;color:#758197;margin-top:4px}.card-body p{font-size:13px;line-height:1.45;margin:8px 0}.card-body small{display:block;color:#667085;line-height:1.4}.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.detail-grid figure{margin:0;border:1px solid #dce2ec;border-radius:12px;overflow:hidden;background:#fff}.detail-grid img{width:100%;aspect-ratio:16/9;object-fit:contain}.detail-grid figcaption{padding:8px;font-size:12px}.preset-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}.preset-card{padding:13px;display:flex;flex-direction:column;gap:5px}.preset-card span,.preset-card small{color:#667085}.actions,.free{display:flex;justify-content:flex-end;margin-top:14px}.pager{justify-content:center;margin-top:14px}.pager button:disabled,.actions button:disabled{opacity:.45;cursor:not-allowed}.empty{text-align:center;padding:24px;border:1px dashed #d5dbe7;border-radius:12px;color:#667085}.final{display:grid;gap:12px}.final dl{display:grid;grid-template-columns:90px 1fr;gap:8px;margin:0}.final dt{color:#667085}.final dd{margin:0;font-weight:700}.final code{display:block;padding:10px;background:#f3f5f9;border-radius:9px;overflow-wrap:anywhere}.confirm{min-height:44px}.success{border-left:4px solid #1a8f5a}.warning{border-left:4px solid #c47700}@media(max-width:620px){header{flex-direction:column}.toolbar{grid-template-columns:1fr}.filters{flex-wrap:wrap}.grid,.detail-grid,.preset-grid{grid-template-columns:1fr}.final dl{grid-template-columns:1fr}}`;
 document.head.appendChild(style);
 
+let initialPayloadTimer = null;
 app.ontoolresult = (result) => {
-  payload = result?._meta?.pickerPayload || result?.structuredContent?.pickerPayload || null;
-  if (!payload) { root.innerHTML = '<section class="picker-shell warning">템플릿 데이터를 불러오지 못했습니다.</section>'; return; }
+  const incomingPayload = result?._meta?.pickerPayload || result?.structuredContent?.pickerPayload || null;
+  // App-only validation tool results do not contain pickerPayload. Ignore those
+  // instead of replacing a working picker with a false "data missing" error.
+  if (!incomingPayload) return;
+  payload = incomingPayload;
+  if (initialPayloadTimer) clearTimeout(initialPayloadTimer);
   const prior = window.openai?.widgetState;
   if (prior) {
     mode = prior.mode || mode; kind = prior.kind || kind; query = prior.query || query; page = prior.page || page;
   }
   renderGallery();
+  app.updateModelContext({
+    content: [{ type: "text", text: `SLIDE_MASTER_PICKER_UI_RENDERED: ${payload.selectable_total} ACTIVE templates are visibly rendered for purpose: ${payload.purpose}. Wait for the user's explicit template and preset confirmation before continuing PPT production.` }],
+  }).catch(() => {});
 };
 
 root.innerHTML = '<section class="picker-shell">최신 Slide Master 템플릿을 불러오는 중입니다…</section>';
 await app.connect();
+initialPayloadTimer = setTimeout(() => {
+  if (!payload) root.innerHTML = '<section class="picker-shell warning"><h2>템플릿 화면을 불러오지 못했습니다</h2><p>Picker 서버 응답은 연결됐지만 ChatGPT 호스트가 템플릿 데이터를 UI로 전달하지 못했습니다.</p><small>앱을 새로고침한 뒤 다시 호출해 주세요. 이 상태에서는 PPT 제작을 진행하지 않습니다.</small></section>';
+}, 8000);

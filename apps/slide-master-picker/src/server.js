@@ -51,7 +51,7 @@ function createMcpServer() {
   const server = new McpServer(
     { name: "slide-master-template-picker", version: "1.0.0" },
     {
-      instructions: "For a new PPT request without a directly specified registered template, call open_slide_master_template_picker before giving template recommendations. Do not replace it with a prose list when the interactive UI is available.",
+      instructions: "For a new PPT request without a directly specified registered template, call open_slide_master_template_picker before giving template recommendations. A successful tool result confirms only that picker data was prepared; it does NOT prove the host rendered the interactive UI. Never tell the user that the gallery is visible until the app view reports SLIDE_MASTER_PICKER_UI_RENDERED. Do not replace the picker with a prose list when the interactive UI is available.",
       capabilities: { tools: {}, resources: {} },
     },
   );
@@ -63,7 +63,14 @@ function createMcpServer() {
         uri: TEMPLATE_URI,
         mimeType: RESOURCE_MIME_TYPE,
         text: `<div id="root"></div><script type="module">${bundle}</script>`,
-        _meta: { ui: { prefersBorder: false } },
+        _meta: {
+          ui: {
+            prefersBorder: false,
+            csp: { connectDomains: [], resourceDomains: ["data:"] },
+          },
+          "openai/widgetCSP": { connect_domains: [], resource_domains: ["data:"] },
+          "openai/widgetPrefersBorder": false,
+        },
       }],
     };
   });
@@ -79,7 +86,11 @@ function createMcpServer() {
         recommendation_limit: z.number().int().min(5).max(10).optional().default(6),
       },
       annotations: { readOnlyHint: true, destructiveHint: false, openWorldHint: false },
-      _meta: { ui: { resourceUri: TEMPLATE_URI, visibility: ["model", "app"] } },
+      _meta: {
+        ui: { resourceUri: TEMPLATE_URI, visibility: ["model", "app"] },
+        "openai/outputTemplate": TEMPLATE_URI,
+        "openai/widgetAccessible": true,
+      },
     },
     async ({ purpose, recommendation_limit = 6 }) => {
       const payload = loadPayload(purpose, recommendation_limit);
@@ -88,6 +99,8 @@ function createMcpServer() {
           schema_version: payload.schema_version,
           purpose: payload.purpose,
           source: payload.source,
+          payload_ready: true,
+          host_ui_rendered: false,
           selectable_total: payload.selectable_total,
           recommended_keys: payload.recommended_keys,
           shortlist: payload.shortlist.map((item) => ({
@@ -103,7 +116,7 @@ function createMcpServer() {
             recommended_rank: item.recommended_rank,
           })),
         },
-        content: [{ type: "text", text: `Slide Master picker ready: ${payload.selectable_total} ACTIVE templates.` }],
+        content: [{ type: "text", text: `Slide Master picker payload prepared: ${payload.selectable_total} ACTIVE templates. Host UI rendering is NOT confirmed by this result. Do not tell the user the gallery is visible unless the app view reports SLIDE_MASTER_PICKER_UI_RENDERED.` }],
         _meta: { pickerPayload: payload },
       };
     },

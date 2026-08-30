@@ -1,5 +1,17 @@
 # Latest project handoff
 
+Updated checkpoint: 2026-08-30 KST
+
+## NEWEST CHECKPOINT — PICKER CSP / HOST RENDER HARDENED
+
+Local MCP + Secure Tunnel regression PASS after CSP/host-render hardening. Payload preparation and visible host UI are now separate states; stale port-3000 runtime detection is a mandatory first diagnostic. PR #6 remains Draft pending real ChatGPT visible-card/image + final app.sendMessage acceptance.
+
+Durable handoff: docs/session-handoff/20260830_PICKER_CSP_HOST_RENDER_CHECKPOINT.md
+
+Detailed history: docs/ai-history/2026-08-30-picker-csp-host-render-hardening.md
+
+---
+
 Updated checkpoint: 2026-08-27T20:33:59+09:00 KST
 
 ## NEWEST CHECKPOINT — MCP APPS PICKER LOCAL PROTOCOL VALIDATED

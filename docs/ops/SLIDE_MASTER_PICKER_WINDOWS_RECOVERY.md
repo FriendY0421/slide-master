@@ -270,3 +270,17 @@ The Windows recovery package described here restores the Picker runtime only. It
 - [ ] `open_slide_master_template_picker` discovered
 - [ ] real Picker UI test passed
 - [ ] final template/preset return path tested
+
+## 16. Stale runtime / CSP host-render diagnostic rule (2026-08-30)
+
+A healthy tunnel does not prove the latest Picker build is running. `/healthz=live` and `/readyz=ready` only prove tunnel/runtime connectivity.
+
+After any `server.js`, `app.js`, MCP metadata, CSP, or UI build change:
+
+1. identify and stop the existing Node process listening on port 3000;
+2. run `npm run check` and `npm run build`;
+3. restart the Picker from the stable runtime checkout;
+4. run `npm run smoke` against the live port-3000 process;
+5. only then test through ChatGPT.
+
+The smoke must validate tool UI metadata, resource load, explicit CSP, picker payload, current catalog ranking, and final template/preset validation. A source-code diff without this live-process smoke is insufficient.

@@ -56,3 +56,17 @@ For an imported company template promoted to ACTIVE:
 - Deck format alone must not create a positive recommendation score;
 - `template_recommendation_audit.py` must pass representative positive-fit prompts;
 - when a negative-fit prompt is supplied, the template must not receive the recommendation badge.
+
+## H. Host-render truthfulness / CSP regression
+For the MCP Apps picker:
+- a successful `open_slide_master_template_picker` call proves payload preparation only;
+- `payload_ready=true` must not be interpreted as visible UI;
+- server-stage `host_ui_rendered` remains false until the app view actually renders;
+- the model must not say the gallery/images are visible until the view reports `SLIDE_MASTER_PICKER_UI_RENDERED`;
+- the UI resource must expose explicit CSP compatible with embedded `data:` SVG previews;
+- app-only validation tool results without `pickerPayload` must not clear or replace the rendered picker;
+- missing host payload delivery must fail closed with a visible UI error rather than silently hanging;
+- after server/UI edits, the port-3000 process must be restarted before smoke testing to prevent stale-build false results.
+
+Current regression command: `cd apps/slide-master-picker && npm run smoke`.
+Expected current smoke for `삼성전자서비스 미래 대응 전략`: 21 ACTIVE, 6 shortlist, `layout:future_tech` first, 5 presets, CSP resource domain `data:`, final selection validation PASS.
