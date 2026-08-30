@@ -7,11 +7,12 @@
   "state_sync_status": "CURRENT",
   "latest_work": {
     "work_id": "SLIDE-MASTER-PICKER-STORYLINE-HANDOFF-20260830",
-    "status": "IMPLEMENTED_VALIDATED_COMMIT_PENDING",
+    "status": "CURRENT_ON_FEATURE_BRANCH",
     "mode": "WAIT_STORYLINE_PREVIEW_FAIL_CLOSED",
     "actor": "ChatGPT",
     "summary": "Corrected the Apps SDK Picker final host bridge so template+preset selection no longer tells ChatGPT to generate immediately; selection validation now returns WAIT_STORYLINE_PREVIEW with generation_allowed=false and requires a full user-editable slide plan plus explicit approval before generation.",
-    "history_file": "docs/ai-history/2026-08-30-picker-storyline-handoff-fail-closed.md"
+    "history_file": "docs/ai-history/2026-08-30-picker-storyline-handoff-fail-closed.md",
+    "implementation_commit": "fc62c951dc4b1300b5279552e416c5461efa5692"
   },
   "production": {},
   "source_authority": {

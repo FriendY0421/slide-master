@@ -12,6 +12,8 @@ Durable handoff: `docs/session-handoff/20260830_PICKER_STORYLINE_HANDOFF_FAIL_CL
 
 Detailed history: `docs/ai-history/2026-08-30-picker-storyline-handoff-fail-closed.md`
 
+Implementation commit: `fc62c951dc4b1300b5279552e416c5461efa5692`
+
 GitHub Actions were not used; PR #6 remains Draft pending real host E2E acceptance.
 
 ---
