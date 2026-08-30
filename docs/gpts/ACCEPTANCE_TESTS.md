@@ -36,3 +36,14 @@ Expected: it is automatically evaluated as a recommendation candidate without GP
 - A user-explicit valid registered template may bypass recommendation, subject to direct-template validation.
 - PPTX/POTX imports are master-extraction candidates; PDF/image/photo imports must be labeled reference reconstruction.
 - Confidential company source assets must not be committed to the public repository.
+
+## G. Recommendation-fit quality gate
+For an imported company template promoted to ACTIVE:
+- registration fails if required recommendation metadata is missing;
+- organization/brand terms influence ranking only when the request actually matches them;
+- `purpose`, `audience`, `aliases`, `document_types`, `tone`, and `keywords` contribute contextual fit;
+- `quality_score` is a tie-breaker, not a reason to recommend an unrelated template;
+- `avoid_for` can suppress a clearly unsuitable template;
+- Deck format alone must not create a positive recommendation score;
+- `template_recommendation_audit.py` must pass representative positive-fit prompts;
+- when a negative-fit prompt is supplied, the template must not receive the recommendation badge.

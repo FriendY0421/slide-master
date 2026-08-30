@@ -22,7 +22,15 @@
 `request → FAH → live catalog → App Block/GenUI picker → detail → preset → user final id → picker/selection evidence → generation → QA → PPTX`
 
 ## Fallback order
-`App Block/GenUI → native visual cards → inline HTML → GitHub visual gallery → external/local recovery → text last resort`
+`App Block/GenUI → Desktop Commander self-contained HTML → native visual cards → GitHub visual gallery → text last resort`
+
+### Developer MCP / host-surface failure rule
+- `FORBIDDEN`, `does not support developer MCPs`, or equivalent host-surface rejection is a product-surface limitation, not a CSP/image/Tunnel defect.
+- Do not repeat CSP, image, or Tunnel debugging after this exact host rejection unless independent runtime evidence has changed.
+- Never say the picker was opened merely because a tool call was attempted or picker payload was prepared.
+- If Remote Desktop Commander is available, run `ops/windows/Open_SlideMasterPicker_Fallback.bat <purpose>` automatically and open the self-contained HTML picker on HOME-PC.
+- The HTML picker uses the current GitHub catalog, shows real previews, and copies the selected template id to the clipboard; the user returns that id to chat before generation continues.
+- Record the fallback reason as `developer_mcp_forbidden` and treat the visibly opened HTML picker as valid fallback picker evidence.
 
 ## Prohibited
 - prose-only recommendation before trying an available App Block/GenUI picker;
