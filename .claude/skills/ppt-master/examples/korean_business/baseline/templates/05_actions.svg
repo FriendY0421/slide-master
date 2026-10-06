@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="consulting_clarity-master" data-pptx-master-name="Consulting Clarity" data-pptx-layout="03_content" data-pptx-layout-name="Content">
+<rect width="1280" height="720" fill="#FFFFFF" data-pptx-layer="slide" data-pptx-editable="false" id="slide-bg" />
+<rect x="48" y="48" width="5" height="624" fill="#1E4D8F" />
+<circle cx="1180" cy="90" r="62" fill="none" stroke="#22A6B3" stroke-width="8" opacity="0.20" />
+<text x="76" y="72" fill="#1E4D8F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1.2">SYNTHETIC BASELINE</text>
+<g id="page-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="76 88 1040 66"><text x="76" y="120" fill="#172033" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="32" font-weight="700" text-anchor="start" data-pptx-placeholder-carrier="true">담당·기한·검증 기준을 함께 관리한다</text></g>
+<line x1="76" y1="158" x2="1188" y2="158" stroke="#6B7280" stroke-width="1" opacity="0.28" />
+<rect x="76" y="206" width="700" height="330" fill="#F4F6F8" />
+<text x="104" y="250" fill="#1E4D8F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start" letter-spacing="1.1">THESIS</text>
+<text x="104" y="298" fill="#172033" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="25" font-weight="700" text-anchor="start">가상 실행 과제 3개</text>
+<text x="104" y="344" fill="#6B7280" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="16" font-weight="400" text-anchor="start">담당자는 역할명으로 표시</text>
+<rect x="106" y="400" width="5" height="24" fill="#22A6B3" />
+<text x="126" y="418" fill="#172033" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="15" font-weight="500" text-anchor="start">방문 전 진단 표준화 / 기술팀 / 2주차 / 체크리스트 적용</text>
+<rect x="106" y="442" width="5" height="24" fill="#22A6B3" />
+<text x="126" y="460" fill="#172033" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="15" font-weight="500" text-anchor="start">핵심 부품 사전 확보 / 자재팀 / 6주차 / 부품 준비율 95%</text>
+<rect x="106" y="484" width="5" height="24" fill="#22A6B3" />
+<text x="126" y="502" fill="#172033" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="15" font-weight="500" text-anchor="start">재방문 원인 주간 점검 / 품질팀 / 12주차 / 재방문율 3.6%</text>
+<rect x="804" y="206" width="382" height="330" fill="#FFFFFF" stroke="#D8DEE8" />
+<text x="834" y="250" fill="#1E4D8F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start">EVIDENCE</text>
+<text x="834" y="312" fill="#1E4D8F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="54" font-weight="700" text-anchor="start">3개</text>
+<text x="834" y="346" fill="#6B7280" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="14" font-weight="500" text-anchor="start">과제·담당·기한·검증 기준</text>
+<text x="74" y="690" fill="#6B7280" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="start">합성자료 · 실제 회사 실적 아님</text><text x="1200" y="690" fill="#6B7280" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="11" font-weight="600" text-anchor="end">05</text>
+</svg>

@@ -20,6 +20,17 @@
 10. Run owner-defined validation including `verify_deck.py` and the final rendered contact-sheet sanity check for the main SVG route.
 11. Deliver only after QA passes.
 
+## Optional business quality evidence
+
+When the approved design explicitly adopts a business quality profile, follow
+[Korean Business Quality](KOREAN_BUSINESS_QUALITY.md): declare page-purpose/role
+capacities, require actual native data objects where requested, render with the
+declared fonts, inspect every final slide, and bind the review to final PPTX and
+source hashes. Pass the profile, render manifest and review receipt to
+`verify_deck.py` for final checking. Existing production gates remain mandatory;
+the synthetic contributor example is not an ACTIVE registered template or a
+global typography override. A source/shared-style/font change invalidates review.
+
 ## UI reliability rules
 
 - App Block / GenUI is the primary selection surface when available.

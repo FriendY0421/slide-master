@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "id": "korean_business_read_close_v1",
+  "description": "Opt-in synthetic business evidence example; not a registered template or a global typography override",
+  "font_family": "Pretendard",
+  "shared_inputs": ["content.json", "render_review.mjs", "finalize_review.mjs"],
+  "font_files": [
+    "../../assets/fonts/Pretendard/Pretendard-Regular.otf",
+    "../../assets/fonts/Pretendard/Pretendard-Bold.otf"
+  ],
+  "slide_count": 6,
+  "view_box": [0, 0, 1280, 720],
+  "required_disclosure": "합성자료 · 실제 회사 실적 아님",
+  "roles": {
+    "title": {"min_px": 44, "max_chars": 44},
+    "body": {"min_px": 28, "max_chars": 42},
+    "heading": {"min_px": 28, "max_chars": 32},
+    "number": {"min_px": 56, "max_chars": 18},
+    "label": {"min_px": 22, "max_chars": 32},
+    "footnote": {"min_px": 16, "max_chars": 75}
+  },
+  "page_types": {
+    "strategy": {"max_body_lines": 6},
+    "kpi": {"max_body_lines": 4},
+    "causes": {"max_body_lines": 4},
+    "roadmap": {"max_body_lines": 6},
+    "actions": {"max_body_lines": 2},
+    "risks": {"max_body_lines": 3}
+  },
+  "required_native": {"charts": [2, 3], "tables": [5, 6]}
+}
