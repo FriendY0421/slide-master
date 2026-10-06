@@ -29,7 +29,8 @@ from .chart_fill import (
     _max_embedding_part_number,
 )
 from .clone import _make_part_allocator, deep_clone_slide_private_parts
-from .notes import _find_notes_master_target, _slide_rels_with_notes
+from .fidelity import validate_source_lock, validate_slide_fidelity, validate_shared_parts
+from .notes import _find_notes_master_target, _slide_rels_with_notes, _preserve_cloned_notes
 from .ooxml import NS, REL_NS, SLIDE_REL_TYPE, _parse_slide_refs, _qn, _xml_bytes
 from .package import (
     _add_notes_override,
@@ -60,6 +61,7 @@ def apply_plan(
     transition_duration: float = DEFAULT_TRANSITION_DURATION,
 ) -> None:
     """Create a filled PPTX by cloning selected source slides and replacing text."""
+    fidelity = validate_source_lock(pptx_path, plan, transition)
     plan_slides = plan.get("slides")
     if not isinstance(plan_slides, list) or not plan_slides:
         raise RuntimeError("Plan must contain a non-empty 'slides' list")
@@ -67,6 +69,7 @@ def apply_plan(
     with zipfile.ZipFile(pptx_path) as zf:
         entries = {info.filename: zf.read(info.filename) for info in zf.infolist() if not info.is_dir()}
         slide_refs = {slide.index: slide for slide in _parse_slide_refs(zf)}
+    original_entries = entries.copy() if fidelity else None
     notes_master_target = _find_notes_master_target(entries)
 
     pres_root = ET.fromstring(entries["ppt/presentation.xml"])
@@ -172,14 +175,21 @@ def apply_plan(
             raise RuntimeError(
                 f'Slide {source_slide} object animations changed during template fill'
             )
+        if fidelity:
+            validate_slide_fidelity(parse_source_xml(source_slide_xml),
+                                    parse_source_xml(serialized_slide), source_slide, item)
         entries[new_part] = serialized_slide
         notes_text = str(item.get("notes") or item.get("speaker_notes") or "")
-        entries[new_rels], note_entries = _slide_rels_with_notes(
-            _xml_bytes(slide_rels_root),
-            slide_number=new_slide_number,
-            notes_text=notes_text,
-            notes_master_target=notes_master_target,
-        )
+        if fidelity:
+            _preserve_cloned_notes(slide_rels_root, entries, new_part, content_root, allocate_part)
+            entries[new_rels], note_entries = _xml_bytes(slide_rels_root), {}
+        else:
+            entries[new_rels], note_entries = _slide_rels_with_notes(
+                _xml_bytes(slide_rels_root),
+                slide_number=new_slide_number,
+                notes_text=notes_text,
+                notes_master_target=notes_master_target,
+            )
         entries.update(note_entries)
         _add_slide_override(content_root, new_part)
         if note_entries:
@@ -204,6 +214,8 @@ def apply_plan(
     entries["ppt/_rels/presentation.xml.rels"] = _xml_bytes(pres_rels_root)
     _prune_unreferenced_parts(entries, content_root)
     entries["[Content_Types].xml"] = _xml_bytes(content_root)
+    if fidelity:
+        validate_shared_parts(original_entries, entries)
     if wrote_auto_advance:
         try:
             set_package_use_timings(entries)

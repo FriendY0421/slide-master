@@ -48,6 +48,14 @@ def _chart_selectors(chart_edit: dict[str, Any]) -> list[str]:
 
 
 def _replacement_text(replacement: dict[str, Any]) -> str:
+    if "paragraph_run_texts" in replacement:
+        values = replacement["paragraph_run_texts"]
+        if (not isinstance(values, list) or any(not isinstance(row, list)
+                or any(not isinstance(text, str) for text in row) for row in values)):
+            raise RuntimeError("paragraph_run_texts must be a list of string lists")
+        if "text" in replacement or "paragraphs" in replacement:
+            raise RuntimeError("Use paragraph_run_texts without text/paragraphs")
+        return "\n".join("".join(row) for row in values)
     if "paragraphs" in replacement:
         paragraphs = replacement["paragraphs"]
         if not isinstance(paragraphs, list):
@@ -57,6 +65,8 @@ def _replacement_text(replacement: dict[str, Any]) -> str:
 
 
 def _table_cell_text(cell_edit: dict[str, Any]) -> str:
+    if "paragraph_run_texts" in cell_edit:
+        return _replacement_text(cell_edit)
     if "paragraphs" in cell_edit:
         paragraphs = cell_edit["paragraphs"]
         if not isinstance(paragraphs, list):

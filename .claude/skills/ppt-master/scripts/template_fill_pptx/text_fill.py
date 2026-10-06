@@ -117,6 +117,31 @@ def _set_container_text(container: ET.Element, text: str) -> None:
         node.text = ""
 
 
+def _set_paragraph_run_texts(container: ET.Element, values: Any) -> None:
+    """Replace existing run text only, preserving all paragraph/run formatting.
+
+    Exact topology is required: no new run, paragraph, field or line break is
+    inferred. This supports company samples whose emphasis uses mixed sizes,
+    colours or fonts. Empty spacer paragraphs are represented by empty lists.
+    """
+    paragraphs = container.findall(".//a:p", NS)
+    if not isinstance(values, list) or len(values) != len(paragraphs):
+        raise RuntimeError("paragraph_run_texts must match every source paragraph")
+    pending = []
+    for paragraph, texts in zip(paragraphs, values):
+        if paragraph.find("a:fld", NS) is not None:
+            raise RuntimeError("paragraph_run_texts cannot edit dynamic fields")
+        nodes = paragraph.findall("a:r/a:t", NS)
+        if not isinstance(texts, list) or len(texts) != len(nodes):
+            raise RuntimeError("paragraph_run_texts must match every existing run")
+        for node, text in zip(nodes, texts):
+            if not isinstance(text, str) or any(c in text for c in ("\n", "\r", "\t")):
+                raise RuntimeError("Run text must be a string without newlines or tabs")
+            pending.append((node, text))
+    for node, text in pending:
+        node.text = text
+
+
 def _apply_replacements_to_slide(
     slide_root: ET.Element,
     *,
@@ -139,6 +164,11 @@ def _apply_replacements_to_slide(
                 continue
             errors.append(", ".join(selectors) or "<missing selector>")
             continue
-        _set_container_text(container, _replacement_text(replacement))
+        if "paragraph_run_texts" in replacement:
+            if "text" in replacement or "paragraphs" in replacement:
+                raise RuntimeError("Use paragraph_run_texts without text/paragraphs")
+            _set_paragraph_run_texts(container, replacement["paragraph_run_texts"])
+        else:
+            _set_container_text(container, _replacement_text(replacement))
     if errors:
         raise RuntimeError(f"Missing replacement target(s) on slide {source_slide}: {'; '.join(errors)}")

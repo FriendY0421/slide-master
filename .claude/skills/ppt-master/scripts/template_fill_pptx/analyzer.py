@@ -72,6 +72,10 @@ def _analyze_tables(slide_root: ET.Element, source_slide: int) -> list[dict[str,
                         "row": row_index,
                         "col": col_index,
                         "text": "\n".join(_paragraph_texts(cell)),
+                        "paragraph_run_texts": [
+                            [node.text or "" for node in paragraph.findall("a:r/a:t", NS)]
+                            for paragraph in cell.findall(".//a:p", NS)
+                        ],
                         **merge_info,
                     }
                 )
@@ -233,6 +237,30 @@ def _fill_risk(
     }
 
 
+def _paragraph_run_styles(container: ET.Element) -> list[list[dict]]:
+    """Report direct OOXML values in pt; None means inherited, not a default.
+
+    Effective inheritance through paragraphs/placeholders/layout/master/theme is
+    deliberately not guessed from the first font-size sample.
+    """
+    result = []
+    for paragraph in container.findall(".//a:p", NS):
+        runs = []
+        for run in paragraph.findall("a:r", NS):
+            props = run.find("a:rPr", NS)
+            size = props.get("sz") if props is not None else None
+            family = lambda tag: props.find("a:" + tag, NS) if props is not None else None
+            latin, east_asian = family("latin"), family("ea")
+            runs.append({"font_size_pt": float(size) / 100 if size else None,
+                         "latin_family": latin.get("typeface") if latin is not None else None,
+                         "east_asian_family": east_asian.get("typeface") if east_asian is not None else None,
+                         "bold": props.get("b") if props is not None else None,
+                         "italic": props.get("i") if props is not None else None,
+                         "basis": "direct_run_properties; missing values are inherited"})
+        result.append(runs)
+    return result
+
+
 def analyze_pptx(pptx_path: Path) -> dict[str, Any]:
     """Extract a slide library with text replacement slots."""
     with zipfile.ZipFile(pptx_path) as zf:
@@ -264,6 +292,11 @@ def analyze_pptx(pptx_path: Path) -> dict[str, Any]:
                         "paragraph_count": len(paragraphs),
                         "geometry": geometry,
                         "text_metrics": _text_metrics(container, len(paragraphs)),
+                        "paragraph_run_texts": [
+                            [node.text or "" for node in paragraph.findall("a:r/a:t", NS)]
+                            for paragraph in container.findall(".//a:p", NS)
+                        ],
+                        "paragraph_run_styles": _paragraph_run_styles(container),
                     }
                 )
 

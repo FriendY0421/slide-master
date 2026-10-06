@@ -4,6 +4,18 @@ This file is the fail-closed authority for every **new presentation deck** reque
 
 ## Canonical entry routing
 
+### 작업 시작 모드 (task-scoped)
+
+사용자는 매 작업에서 **기본 제공 템플릿** 또는 **사용자 정의 템플릿**을 선택한다.
+기본 제공은 아래 기존 등록 템플릿/프리셋/스토리라인 gate를 그대로 따른다.
+사용자 정의 원본 PPTX+내용은 routing.md의 native `ppt-template-fill` 경로이며,
+직접 PPTX exemption을 기록하고 그 경로의 입력/계획확인 gate를 따른다.
+등록 템플릿 선택으로 회사 원본을 강제로 대체하지 않는다.
+이번 글꼴/pt 크기/샘플/작성 기준은 작업별 brief에만 기록하고 영구 기본값으로 만들지 않는다.
+입력완전성 검사와 빠진 필수 항목의 묶음 질문은
+[`TEMPLATE_FIRST_WORKFLOW.md`](docs/ppt-project/TEMPLATE_FIRST_WORKFLOW.md)를 따른다.
+이 모드 선택은 승인 gate를 생략하거나 사용자 승인을 생성하지 않는다.
+
 For every FriendY new PPT/presentation/slides request:
 
 1. Bind first to project `SLIDE_MASTER` and repository `FriendY0421/slide-master`.

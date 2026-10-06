@@ -1,0 +1,99 @@
+{
+  "schema": "template_fill_pptx_plan.v1",
+  "status": "confirmed",
+  "source_pptx": "sources/template-source.pptx",
+  "template_fidelity": {
+    "schema_version": 1,
+    "source_sha256": "d91eec48745dff0a1f249c6630b75fcc8fd6ed434b43177caef71921aac70d65"
+  },
+  "authorization": "User-authorized synthetic feature smoke only; not production approval",
+  "slides": [
+    {
+      "source_slide": 1,
+      "editable_targets": {
+        "slots": [
+          "s01_sh2"
+        ],
+        "table_cells": []
+      },
+      "replacements": [
+        {
+          "slot_id": "s01_sh2",
+          "paragraph_run_texts": [
+            [
+              "이번 작업",
+              " 결과 보고"
+            ]
+          ]
+        }
+      ],
+      "table_edits": []
+    },
+    {
+      "source_slide": 2,
+      "editable_targets": {
+        "slots": [],
+        "table_cells": []
+      },
+      "replacements": [],
+      "table_edits": []
+    },
+    {
+      "source_slide": 3,
+      "editable_targets": {
+        "slots": [],
+        "table_cells": []
+      },
+      "replacements": [],
+      "table_edits": []
+    },
+    {
+      "source_slide": 4,
+      "editable_targets": {
+        "slots": [],
+        "table_cells": []
+      },
+      "replacements": [],
+      "table_edits": []
+    },
+    {
+      "source_slide": 5,
+      "editable_targets": {
+        "slots": [],
+        "table_cells": [
+          {
+            "table_id": "s05_tbl6",
+            "row": 1,
+            "col": 1
+          }
+        ]
+      },
+      "replacements": [],
+      "table_edits": [
+        {
+          "table_id": "s05_tbl6",
+          "cells": [
+            {
+              "row": 1,
+              "col": 1,
+              "paragraph_run_texts": [
+                [
+                  "지원팀"
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source_slide": 6,
+      "editable_targets": {
+        "slots": [],
+        "table_cells": []
+      },
+      "replacements": [],
+      "table_edits": []
+    }
+  ]
+}

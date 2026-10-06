@@ -11,7 +11,7 @@ from xml.etree import ElementTree as ET
 from .edit_safety import _table_cell_merge_info
 from .ooxml import NS, _shape_identity, _table_containers
 from .selectors import _table_cell_text, _table_selectors
-from .text_fill import _set_container_text
+from .text_fill import _set_container_text, _set_paragraph_run_texts
 
 
 def _table_key_maps(slide_root: ET.Element, source_slide: int) -> dict[str, ET.Element]:
@@ -33,7 +33,7 @@ def _apply_table_edits_to_slide(
 ) -> None:
     maps = _table_key_maps(slide_root, source_slide)
     errors: list[str] = []
-    pending_edits: list[tuple[ET.Element, str]] = []
+    pending_edits: list[tuple[ET.Element, dict]] = []
     for table_edit in table_edits:
         selectors = _table_selectors(table_edit)
         table_frame = next((maps[key] for key in selectors if key in maps), None)
@@ -64,8 +64,12 @@ def _apply_table_edits_to_slide(
                     "[table_cell_is_merge_slave]; edit the merge anchor instead"
                 )
                 continue
-            pending_edits.append((target_cell, _table_cell_text(cell_edit)))
+            pending_edits.append((target_cell, cell_edit))
     if errors:
         raise RuntimeError(f"Invalid table edit target(s) on slide {source_slide}: {'; '.join(errors)}")
-    for target_cell, text in pending_edits:
-        _set_container_text(target_cell, text)
+    for target_cell, cell_edit in pending_edits:
+        if "paragraph_run_texts" in cell_edit:
+            _table_cell_text(cell_edit)  # Validate mutually exclusive text forms.
+            _set_paragraph_run_texts(target_cell, cell_edit["paragraph_run_texts"])
+        else:
+            _set_container_text(target_cell, _table_cell_text(cell_edit))

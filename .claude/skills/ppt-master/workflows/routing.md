@@ -4,6 +4,16 @@ description: Deterministic route selection rules for PPT Master requests
 
 # Routing Rules
 
+## Per-task mode intake
+
+At each task start support builtin template selection or custom user template.
+Builtin retains the registered template/preset/storyline sequence. Custom raw
+PPTX + new content routes deterministically to `ppt-template-fill`; collect that
+task's original/sample/font/pt/writing rules, validate `design_brief.json` with
+`scripts/presentation_brief.py`, and ask only missing required inputs together.
+See `docs/ppt-project/TEMPLATE_FIRST_WORKFLOW.md` from repo root. Never persist
+private company files or task-specific values as public/global defaults.
+
 Route selection authority for PPT Master. Load this dispatcher before any full
 skill or standalone workflow.
 

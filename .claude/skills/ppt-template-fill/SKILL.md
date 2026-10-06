@@ -62,6 +62,17 @@ directly and uses its own plan, apply, OfficeCLI, and native-render gates.
 
 ## Step 1: Inputs
 
+For custom mode, collect a per-task design brief with original PPTX, selected
+reference samples (or explicit none), content, font/pt policy and writing rules.
+Original-preservation policies are valid explicit inputs. Ask all missing required
+items once; do not freeze task values as company defaults. Validate using
+`presentation_brief.py`; it checks intake, never replaces this skill's plan gate.
+See repo `docs/ppt-project/TEMPLATE_FIRST_WORKFLOW.md`. When exact original style
+is requested, use the opt-in `template_fidelity` source hash + editable-target
+contract and `paragraph_run_texts`, then apply with `--transition keep`.
+Specified font/pt values conflicting with the source require an explicit style
+change decision; native-fill v1 must not silently rewrite them.
+
 🚧 **GATE**: The user has provided:
 
 | Input | Required | Notes |
