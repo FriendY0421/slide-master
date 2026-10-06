@@ -15,6 +15,9 @@ from pathlib import Path
 
 
 def validate_brief(brief: dict, base: Path) -> dict:
+    if brief.get("workflow_version") == 2:
+        from presentation_intake import validate_intake
+        return validate_intake(brief, base)
     missing, errors = [], []
     mode = brief.get("mode")
     if brief.get("schema_version") != 1:
@@ -97,14 +100,31 @@ def main():
     parser.add_argument("brief", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--check-environment", action="store_true")
+    parser.add_argument("--planned-slide-count", type=int)
+    parser.add_argument("--output-slide-count", type=int)
     args = parser.parse_args()
     try:
         brief = json.loads(args.brief.read_text(encoding="utf-8"))
         if not isinstance(brief, dict):
             raise ValueError("Brief must be an object")
         report = validate_brief(brief, args.brief.resolve().parent)
+        if args.planned_slide_count is not None:
+            from presentation_intake import validate_slide_count
+            report["slide_count_errors"] = validate_slide_count(brief, args.planned_slide_count, args.output_slide_count)
+            report["errors"].extend(report["slide_count_errors"])
+            if report["slide_count_errors"]:
+                report["input_complete"] = report["ready_for_plan"] = False
+        elif args.output_slide_count is not None:
+            raise ValueError("--output-slide-count requires --planned-slide-count")
         if args.check_environment:
             report["environment"] = check_environment(brief, args.brief.resolve().parent)
+            if not report["environment"]["ok"]:
+                report["ready_for_plan"] = False
+                exact = report["environment"].get("exact_fonts")
+                if exact and not exact["ok"]:
+                    report["missing_required"].append(exact.get("question") or "확인 가능한 폰트 파일과 라이선스")
+                    report["input_complete"] = False
+                    report["question"] = "이번 단계에서 다음 항목만 함께 확인해 주세요: " + "; ".join(report["missing_required"])
         output = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
         if args.output:
             args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -149,9 +169,15 @@ def check_environment(brief: dict, base: Path) -> dict:
         failures.append("font_families must be a list of names")
         families = []
     installed = {f: _system_font_status(f, font_installed) for f in families}
-    if not files and (not families or any(found is not True for found in installed.values())):
+    if brief.get("workflow_version") != 2 and not files and (not families or any(found is not True for found in installed.values())):
         failures.append("Declare available font files or verify every required system family")
-    return {"ok": not failures, "errors": failures, "supplied_runtime": runtime,
+    exact_fonts = None
+    if brief.get("workflow_version") == 2:
+        from private_font_cache import font_availability
+        exact_fonts = font_availability(brief, base)
+        if not exact_fonts["ok"]:
+            failures.append(exact_fonts.get("question") or "Required fonts not verified")
+    return {"ok": not failures, "errors": failures, "exact_fonts": exact_fonts, "supplied_runtime": runtime,
             "font_files": available_files, "system_font_families": installed,
             "delivery_font_warnings": ["Required receiving-system font is missing or unknown: " + f
                                        for f, found in installed.items() if found is not True],

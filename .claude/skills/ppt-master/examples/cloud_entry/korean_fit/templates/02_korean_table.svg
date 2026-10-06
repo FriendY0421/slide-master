@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="72" y="118" font-family="Pretendard" font-size="48" font-weight="700" fill="#172C36">긴 센터명·장문 표 검증</text>
+<text x="72" y="174" font-family="Pretendard" font-size="22" fill="#536771">합성 센터명 · 원문 3문단 유지 · 영문/% 혼합 · native 표와 강조 run</text>
+<g data-pptx-native="table" data-pptx-fallback-sha256="5c6c701723cf613353cf7e3639c15d5d73a69e606a66c1ce2bbfe54e761a83a4">
+<metadata data-pptx-native="table">{"x":72,"y":240,"width":1136,"height":390,"columns":["가상 센터 검토 내용"],"rows":[[{"paragraphs":[{"text":"천안서북아산통합서비스전문지원센터"},{"text":"가상 품질 개선팀은 접수 단계의 진단 기준을 정비하고 필요한 부품을 수리 전에 확인한다. 담당자는 점검 결과를 기록하며 기술팀과 자재팀이 같은 기준으로 진행 상태를 확인한다."},{"runs":[{"text":"2026Q3","bold":true},{"text":" 합성 최초 해결률은 84%이고 목표는 90%다. KPI 분석은 수치의 기준과 기간을 함께 표시하며 개선 효과는 다음 보고에서 확인한다."}]},{"text":"한글 장문은 어절을 유지하고 줄간격과 문단간격을 구분한다. 보고 내용이 상자에 맞지 않으면 사용자와 요약이나 분할을 확인하고 전체 장수와 핵심 정보를 유지한다."}]}]],"strict_grid":true,"column_widths":[1136],"row_heights":[1,5.5],"style":{"font_family":"Pretendard","font_size":28,"header_font_size":24,"header_fill":"#172C36","header_text":"#FFFFFF","body_fill":"#FFFFFF","body_text":"#172C36","border_color":"#CBD5DB","border_width":1,"padding":16,"band_row":false,"lang":"ko-KR","valign":"top"}}</metadata>
+<rect x="72" y="240" width="1136" height="60" fill="#172C36"/>
+<rect x="72" y="300" width="1136" height="330" fill="#FFFFFF" stroke="#CBD5DB"/>
+<text x="88" y="278" font-family="Pretendard" font-size="24" fill="#FFFFFF">가상 센터 검토 내용</text>
+<text x="88" y="335" font-family="Pretendard" font-size="28" fill="#172C36">천안서북아산통합서비스전문지원센터</text>
+<text x="88" y="375" font-family="Pretendard" font-size="28" fill="#172C36">가상 품질 개선팀은 접수 단계의 진단 기준을 정비하고 필요한 부품을 수리 전에 확인한다.</text>
+<text x="88" y="415" font-family="Pretendard" font-size="28" fill="#172C36">담당자는 점검 결과를 기록하며 기술팀과 자재팀이 같은 기준으로 진행 상태를 확인한다.</text>
+<text x="88" y="455" font-family="Pretendard" font-size="28" fill="#172C36">2026Q3 합성 최초 해결률은 84%이고 목표는 90%다. KPI 분석은 수치의 기준과 기간을</text>
+<text x="88" y="495" font-family="Pretendard" font-size="28" fill="#172C36">함께 표시하며 개선 효과는 다음 보고에서 확인한다.</text>
+<text x="88" y="535" font-family="Pretendard" font-size="28" fill="#172C36">한글 장문은 어절을 유지하고 줄간격과 문단간격을 구분한다. 보고 내용이 상자에 맞지 않으면</text>
+<text x="88" y="575" font-family="Pretendard" font-size="28" fill="#172C36">사용자와 요약이나 분할을 확인하고 전체 장수와 핵심 정보를 유지한다.</text>
+</g>
+<text x="72" y="694" font-family="Pretendard" font-size="16" fill="#536771">합성 검증자료 · 실제 센터/회사 자료 아님 · 표의 원문·문단·강조 유지</text>
+</svg>

@@ -148,6 +148,20 @@ def validate_native_pptx(path: Path, expected_slides: int) -> list[str]:
     return failures
 
 
+def requested_slide_count_errors(project: Path, actual_count: int) -> list[str]:
+    """Enforce an opt-in requested count carried by current intake approval."""
+    approval_path = project / "storyline_approval.json"
+    if not approval_path.is_file():
+        return []
+    from storyline_gate import load_storyline_approval
+    try:
+        approval = load_storyline_approval(approval_path)
+    except ValueError as exc:
+        return [str(exc)]
+    expected = approval.get("requested_slide_count")
+    return [f"output page count {actual_count} != requested {expected}"] if expected is not None and actual_count != expected else []
+
+
 def image_is_placeholder(path: Path) -> bool:
     """Tiny OR near-uniform opaque image ⇒ placeholder suspect.
 
@@ -301,6 +315,7 @@ def run_checks(project: Path) -> tuple[list[str], list[str]]:
         failures.append("no native .pptx in exports/ — run svg_to_pptx.py")
     else:
         newest = max(natives, key=lambda p: p.stat().st_mtime)
+        failures.extend(requested_slide_count_errors(project, len(pages)))
         errs = validate_native_pptx(newest, len(pages))
         if errs:
             failures.append(f"exports/{newest.name}: " + "; ".join(errs))

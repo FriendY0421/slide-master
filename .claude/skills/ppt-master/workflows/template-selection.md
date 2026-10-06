@@ -96,15 +96,15 @@ If App Block / GenUI is unavailable, use the fallback hierarchy below. Every non
 
 Recommended-template flow:
 
-`python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --preset <preset_id> --purpose "<purpose>" --picker-evidence <picker.json> --output <result.json> --confirmed`
+`python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --source github --preset <preset_id> --purpose "<purpose>" --picker-evidence <picker.json> --output <result.json> --confirmed`
 
 Direct user-specified template flow:
 
-`python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --preset <preset_id> --purpose "<purpose>" --direct-template --output <result.json> --confirmed`
+`python .claude/skills/ppt-master/scripts/record_template_choice_v2.py <deck:id|layout:id|free> --source github --preset <preset_id> --purpose "<purpose>" --direct-template --output <result.json> --confirmed`
 
 Only after the gate-v3 template+preset record succeeds may research begin. After research, present a slide-by-slide storyline/content outline and wait for explicit approval. Only after that approval initialize through:
 
-`python .claude/skills/ppt-master/scripts/new_deck_init.py <project_name> --format <format> --template-selection-result <result.json>`
+`python .claude/skills/ppt-master/scripts/new_deck_init.py <project_name> --format <format> --template-selection-result <result.json> --storyline-approval-result <approval.json>`
 
 Then continue generation.
 

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "workflow_version": 2,
+  "scope": "task",
+  "mode": "custom",
+  "content_text": "합성 KPI 84%,목표90%",
+  "font_policy": {
+    "basis": "specified",
+    "values": {
+      "body": "Pretendard"
+    }
+  },
+  "font_size_policy": {
+    "basis": "specified",
+    "values": {
+      "title": 36,
+      "body": 24
+    }
+  },
+  "slide_count": 1,
+  "writing_rules": [
+    "합성자료임을 표시",
+    "편집가능 차트"
+  ],
+  "inputs_confirmed": true,
+  "authorization": "Synthetic contract fixture, not actual user approval",
+  "sample_files": [
+    "../korean_business/visual_revision_02/review/improved-03.png"
+  ],
+  "reference_review": {
+    "de531d03eaff97ba2183fdf0625933399517f032d7a3a0944120e868cdabc7ec": {
+      "pixels_inspected": true,
+      "perspective_confirmed": true,
+      "crop_confirmed": true,
+      "text_confirmed": true,
+      "aspect_confirmed": true,
+      "reviewer": "agent:Codex synthetic fixture",
+      "observations": "Observed flat complete 16:9 render. Read title/labels/footer manually; no OCR engine claimed. Real photo not supplied."
+    }
+  }
+}

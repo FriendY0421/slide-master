@@ -65,6 +65,10 @@ def apply_plan(
     plan_slides = plan.get("slides")
     if not isinstance(plan_slides, list) or not plan_slides:
         raise RuntimeError("Plan must contain a non-empty 'slides' list")
+    if "requested_slide_count" in plan:
+        requested = plan["requested_slide_count"]
+        if type(requested) is not int or requested <= 0 or len(plan_slides) != requested:
+            raise RuntimeError("Native fill plan differs from requested slide count")
 
     with zipfile.ZipFile(pptx_path) as zf:
         entries = {info.filename: zf.read(info.filename) for info in zf.infolist() if not info.is_dir()}

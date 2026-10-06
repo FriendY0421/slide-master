@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "synthetic_only": true,
+  "source_file": "../korean_business/visual_revision_02/review/improved-03.png",
+  "input_sha256": "de531d03eaff97ba2183fdf0625933399517f032d7a3a0944120e868cdabc7ec",
+  "frame_bbox": [0, 0, 1280, 720],
+  "regions": [
+    {"id": "title", "bbox": [72, 100, 850, 80], "type": "text", "confidence": "high", "z_order": 1, "verbatim_text": "12주 실행 로드맵", "font_pt_basis": "estimated", "manual_required": false},
+    {"id": "message", "bbox": [72, 190, 1100, 55], "type": "text", "confidence": "high", "z_order": 1, "verbatim_text": "진단 기준 정비 후 두 팀 시범 운영으로 효과를 확인", "font_pt_basis": "estimated", "manual_required": false},
+    {"id": "phase1", "bbox": [380, 313, 126.6667, 50], "type": "shape", "confidence": "high", "z_order": 1, "manual_required": false},
+    {"id": "phase1label", "bbox": [410, 324, 84, 35], "type": "text", "confidence": "high", "z_order": 2, "verbatim_text": "정비", "font_pt_basis": "estimated", "manual_required": false},
+    {"id": "goal", "bbox": [320, 620, 840, 45], "type": "text", "confidence": "high", "z_order": 1, "verbatim_text": "재방문율 목표 3.6% 도달 여부", "font_pt_basis": "estimated", "manual_required": false}
+  ],
+  "fully_editable_reproduction_verified": false,
+  "review": {"reviewer": "agent:Codex", "scope": "Selected observed regions only, not a complete reconstruction plan", "pixels_inspected": true, "text_confirmed": true, "perspective": "flat synthetic render, not a real photo", "crop": "complete 1280x720 synthetic frame", "aspect": "16:9", "actual_photo_or_ocr_service_used": false}
+}

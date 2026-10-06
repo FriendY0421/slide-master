@@ -16,18 +16,17 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
 import template_catalog as catalog_core  # noqa: E402
+import template_gallery as catalog_reader  # noqa: E402
 from picker_surface_gate import load_picker_evidence  # noqa: E402
 
 configure_utf8_stdio()
 
 GATE_VERSION = 3
-REPO_ROOT = Path(__file__).resolve().parents[4]
-PRESETS_PATH = REPO_ROOT / "docs" / "gpts" / "PRODUCTION_PRESETS.json"
 
 
-def _load_preset(preset_id: str) -> dict | None:
+def _load_preset(preset_id: str, ref: str | None = None) -> dict | None:
     try:
-        doc = json.loads(PRESETS_PATH.read_text(encoding="utf-8"))
+        doc = json.loads(catalog_reader._read_text("docs/gpts/PRODUCTION_PRESETS.json", ref))
     except (OSError, json.JSONDecodeError):
         return None
     presets = doc.get("presets", []) if isinstance(doc, dict) else []
@@ -49,6 +48,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--purpose", default="")
     parser.add_argument("--preset", required=True, help="production preset id from docs/gpts/PRODUCTION_PRESETS.json")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--source", choices=("local", "github"), default="local",
+                        help="production requests use github; local is retained for offline/resume compatibility")
+    parser.add_argument("--expected-source-commit", default="",
+                        help="manifest source_commit; reject a changed catalog instead of recording stale preview selection")
     parser.add_argument("--confirmed", action="store_true", help="required final-confirmation flag")
     parser.add_argument(
         "--picker-evidence",
@@ -70,7 +73,15 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 2
     preset_id = str(args.preset or "").strip()
-    preset = _load_preset(preset_id)
+    try:
+        source_ref, source_label = catalog_core.catalog_source(args.source)
+    except (OSError, RuntimeError) as exc:
+        print(f"ERROR: cannot refresh catalog ({exc})", file=sys.stderr)
+        return 2
+    if args.expected_source_commit and args.expected_source_commit != source_ref:
+        print("ERROR: catalog commit changed; refresh previews and confirm the current selection", file=sys.stderr)
+        return 2
+    preset = _load_preset(preset_id, source_ref)
     if not preset:
         print(f"ERROR: unknown production preset: {preset_id}", file=sys.stderr)
         return 2
@@ -117,7 +128,7 @@ def main(argv: list[str] | None = None) -> int:
         }
     else:
         try:
-            catalog = catalog_core.load_catalog(None)
+            catalog = catalog_core.selectable_catalog(catalog_core.load_catalog(source_ref))
         except Exception as exc:
             print(f"ERROR: cannot read unified template catalog ({exc})", file=sys.stderr)
             return 2
@@ -143,6 +154,9 @@ def main(argv: list[str] | None = None) -> int:
             "source_ref": "registered-local-catalog-v2",
         }
 
+    result["source_ref"] = "github:" + source_ref if source_ref else "registered-local-catalog-v2"
+    result["source_commit"] = source_ref
+    result["catalog_source"] = source_label
     args.output.parent.mkdir(parents=True, exist_ok=True)
     tmp = args.output.with_suffix(args.output.suffix + ".tmp")
     tmp.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

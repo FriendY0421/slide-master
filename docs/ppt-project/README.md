@@ -2,6 +2,10 @@
 
 This directory documents the host-independent PPT production path.
 
+For short builtin/custom requests and current cloud connectivity, see
+[the Korean cloud guide](SIMPLE_CLOUD_WORKFLOW.md). It is a PR review candidate,
+not a claim that the connected plugin or main has been updated.
+
 ## Core files
 
 - [PPT Request Guard](../../PPT_REQUEST_GUARD.md) — fail-closed entry authority.

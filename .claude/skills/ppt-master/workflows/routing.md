@@ -6,11 +6,19 @@ description: Deterministic route selection rules for PPT Master requests
 
 ## Per-task mode intake
 
-At each task start support builtin template selection or custom user template.
+At each task start expose a supported two-option builtin/custom mode selector;
+never claim an unavailable UI was displayed. Use workflow_version 2 task intake.
 Builtin retains the registered template/preset/storyline sequence. Custom raw
 PPTX + new content routes deterministically to `ppt-template-fill`; collect that
-task's original/sample/font/pt/writing rules, validate `design_brief.json` with
+task's original/sample/font/pt/slide-count/writing rules, validate `design_brief.json` with
 `scripts/presentation_brief.py`, and ask only missing required inputs together.
+Custom example PPTX alone may supply the native shell; do not require a second
+original or impose builtin presets. POTX requires actual master/layout extraction
+and confirmed normalization. Image/PDF/photo references use the project-private
+reference/create-template reconstruction workflow, not native PPTX filling.
+Inspect pixels, perspective/crop, text and aspect; mark unverified font/pt as
+estimates and require the current plan approval. Raster backgrounds do not prove
+full editability. This intake contract does not complete that rendering handoff.
 See `docs/ppt-project/TEMPLATE_FIRST_WORKFLOW.md` from repo root. Never persist
 private company files or task-specific values as public/global defaults.
 

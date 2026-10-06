@@ -1,0 +1,39 @@
+{
+  "gate_version": 3,
+  "status": "selected",
+  "template": "deck:executive_boardroom",
+  "template_kind": "deck",
+  "template_id": "executive_boardroom",
+  "workspace": ".claude/skills/ppt-master/templates/decks/executive_boardroom",
+  "summary": "임원회의·경영현안·의사결정 보고에 적합한 절제된 보드룸 스타일입니다.",
+  "purpose": "SYNTHETIC audit fixture; not production/user approval",
+  "production_preset": "executive_brief",
+  "production_preset_profile": {
+    "id": "executive_brief",
+    "display_name": "Executive Brief",
+    "summary": "핵심 결론과 의사결정 포인트를 빠르게 전달",
+    "slide_range": "6-10",
+    "content_density": "low",
+    "visual_ratio": {
+      "text": 30,
+      "visual": 70
+    },
+    "best_for": [
+      "임원보고",
+      "의사결정",
+      "핵심 KPI",
+      "요약보고"
+    ],
+    "delivery_purpose": "presentation",
+    "body_px": 40,
+    "typography_profile": "modern_readable"
+  },
+  "selection_method": "direct_user_specified_template",
+  "selection_surface": "direct_user_specified_template",
+  "picker_evidence": null,
+  "selected_at": "2026-10-06T13:36:38+0000",
+  "source_ref": "github:0578dba7ddf56cf5d7024cf574063c4db7332a3e",
+  "source_commit": "0578dba7ddf56cf5d7024cf574063c4db7332a3e",
+  "catalog_source": "GitHub origin/main",
+  "authorization": "Synthetic audit fixture only; not actual user template approval"
+}

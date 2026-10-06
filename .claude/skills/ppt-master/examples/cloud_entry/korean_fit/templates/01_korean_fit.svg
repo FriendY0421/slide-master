@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#FFFFFF"/>
+<text x="72" y="118" font-family="Pretendard" font-size="48" font-weight="700" fill="#172C36">한글 장문·간격 검증</text>
+<text x="72" y="174" font-family="Pretendard" font-size="22" fill="#536771">합성 3문단 · 본문 21pt · 줄간격 30pt · 문단간격 9pt · 자간 0.3pt</text>
+<rect x="72" y="220" width="1136" height="440" fill="#FFFFFF" stroke="#CBD5DB"/>
+<g font-family="Pretendard" font-size="28" letter-spacing="0.4" fill="#172C36">
+<text x="96" y="262.75">가상 품질 개선팀은 접수 단계의 진단 기준을 정비하고 필요한 부품을 수리 전에 확인한다. 담당자는</text>
+<text x="96" y="302.75">점검 결과를 기록하며 기술팀과 자재팀이 같은 기준으로 진행 상태를 확인한다.</text>
+<text x="96" y="354.75">합성자료의 2026Q3 최초 해결률은 84%이고 목표는 90%다. KPI 분석은 수치의 기준과 기간을</text>
+<text x="96" y="394.75">함께 표시하며 개선 효과는 다음 보고에서 확인한다.</text>
+<text x="96" y="446.75">한글 장문은 어절을 유지하고 줄간격과 문단간격을 구분한다. 보고 내용이 상자에 맞지 않으면</text>
+<text x="96" y="486.75">사용자와 요약이나 분할을 확인하고 전체 장수와 핵심 정보를 유지한다.</text>
+</g>
+<text x="72" y="694" font-family="Pretendard" font-size="16" fill="#536771">합성 검증자료 · 실회사 보고서/사진 템플릿 아님 · 전체 문장과 지정 장수 유지</text>
+</svg>

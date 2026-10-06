@@ -1,0 +1,91 @@
+{
+  "method": "actual Pillow FreeType glyph advance/bbox at 4x scale; not native PowerPoint wrapping",
+  "source_text_sha256": "3be9c58758984edb6e2daac210931218e1b6bc9ac5ebbc1c6b4deedb1fd3f57f",
+  "font": {
+    "verification_level": "hash_verified",
+    "renderer_support": "unverified",
+    "family_aliases": [
+      "Pretendard"
+    ],
+    "style_aliases": [
+      "Regular"
+    ],
+    "family": "Pretendard",
+    "style": "Regular",
+    "version": "Version 1.309;Glyphs 3.2 (3225)",
+    "sha256": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+    "bytes": 1574352,
+    "fsType": 0
+  },
+  "parameters": {
+    "text": "가상 품질 개선팀은 접수 단계의 진단 기준을 정비하고 필요한 부품을 수리 전에 확인한다. 담당자는 점검 결과를 기록하며 기술팀과 자재팀이 같은 기준으로 진행 상태를 확인한다.\n합성자료의 2026Q3 최초 해결률은 84%이고 목표는 90%다. KPI 분석은 수치의 기준과 기간을 함께 표시하며 개선 효과는 다음 보고에서 확인한다.\n한글 장문은 어절을 유지하고 줄간격과 문단간격을 구분한다. 보고 내용이 상자에 맞지 않으면 사용자와 요약이나 분할을 확인하고 전체 장수와 핵심 정보를 유지한다.",
+    "font_file": "../../../assets/fonts/Pretendard/Pretendard-Regular.otf",
+    "font_size_pt": 21,
+    "line_spacing_pt": 30,
+    "paragraph_spacing_pt": 9,
+    "letter_spacing_pt": 0.3,
+    "box_px": {
+      "width": 1136,
+      "height": 440
+    },
+    "margins_px": {
+      "left": 24,
+      "right": 24,
+      "top": 16,
+      "bottom": 16
+    },
+    "role": "body"
+  },
+  "lines": [
+    {
+      "paragraph": 0,
+      "text": "가상 품질 개선팀은 접수 단계의 진단 기준을 정비하고 필요한 부품을 수리 전에 확인한다. 담당자는",
+      "baseline_px": 42.75,
+      "width_px": 1087.59453125
+    },
+    {
+      "paragraph": 0,
+      "text": "점검 결과를 기록하며 기술팀과 자재팀이 같은 기준으로 진행 상태를 확인한다.",
+      "baseline_px": 82.75,
+      "width_px": 861.13046875
+    },
+    {
+      "paragraph": 1,
+      "text": "합성자료의 2026Q3 최초 해결률은 84%이고 목표는 90%다. KPI 분석은 수치의 기준과 기간을",
+      "baseline_px": 134.75,
+      "width_px": 1070.23828125
+    },
+    {
+      "paragraph": 1,
+      "text": "함께 표시하며 개선 효과는 다음 보고에서 확인한다.",
+      "baseline_px": 174.75,
+      "width_px": 568.25703125
+    },
+    {
+      "paragraph": 2,
+      "text": "한글 장문은 어절을 유지하고 줄간격과 문단간격을 구분한다. 보고 내용이 상자에 맞지 않으면",
+      "baseline_px": 226.75,
+      "width_px": 1023.54140625
+    },
+    {
+      "paragraph": 2,
+      "text": "사용자와 요약이나 분할을 확인하고 전체 장수와 핵심 정보를 유지한다.",
+      "baseline_px": 266.75,
+      "width_px": 779.90546875
+    }
+  ],
+  "usable_width_px": 1088,
+  "usable_height_px": 408,
+  "measured_ink_height_px": 253.25,
+  "missing_glyphs": [],
+  "oversized_words": [],
+  "line_spacing_overlap": false,
+  "overflow": false,
+  "text_tokens_preserved": true,
+  "automatic_font_shrink": false,
+  "content_omitted": false,
+  "slide_count_changed": false,
+  "next_action": "Render final PPTX and visually inspect every page",
+  "final_render_verified": false,
+  "native_application_verified": false
+}

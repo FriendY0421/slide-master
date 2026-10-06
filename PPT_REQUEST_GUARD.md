@@ -8,10 +8,14 @@ This file is the fail-closed authority for every **new presentation deck** reque
 
 사용자는 매 작업에서 **기본 제공 템플릿** 또는 **사용자 정의 템플릿**을 선택한다.
 기본 제공은 아래 기존 등록 템플릿/프리셋/스토리라인 gate를 그대로 따른다.
-사용자 정의 원본 PPTX+내용은 routing.md의 native `ppt-template-fill` 경로이며,
+사용자 정의는 원본 또는 예제 PPTX/POTX/PDF/사진·스크린샷을 먼저 받는다.
+실제 PPTX+내용은 routing.md의 native `ppt-template-fill` 경로이며,
 직접 PPTX exemption을 기록하고 그 경로의 입력/계획확인 gate를 따른다.
 등록 템플릿 선택으로 회사 원본을 강제로 대체하지 않는다.
 이번 글꼴/pt 크기/샘플/작성 기준은 작업별 brief에만 기록하고 영구 기본값으로 만들지 않는다.
+POTX는 실제 Master/Layout 추출·확인한 정규화가 필요하다. 이미지/PDF/사진은
+원형 보존과 구분한 참조 재구성이며 픽셀·원근/크롭·텍스트·화면비를 먼저 확인한다.
+현재 작업 brief는 workflow_version 2로 글꼴·크기·장수·작성 기준을 한 번에 확인한다.
 입력완전성 검사와 빠진 필수 항목의 묶음 질문은
 [`TEMPLATE_FIRST_WORKFLOW.md`](docs/ppt-project/TEMPLATE_FIRST_WORKFLOW.md)를 따른다.
 이 모드 선택은 승인 gate를 생략하거나 사용자 승인을 생성하지 않는다.
@@ -132,15 +136,15 @@ A preview view, card click, recommendation, `artifact_handoff` call, or tentativ
 
 Recommended-template flow:
 
-`record_template_choice_v2.py <deck:id|layout:id|free> --preset <preset_id> --confirmed --purpose "<purpose>" --picker-evidence <picker.json> --output <result.json>`
+`record_template_choice_v2.py <deck:id|layout:id|free> --source github --preset <preset_id> --confirmed --purpose "<purpose>" --picker-evidence <picker.json> --output <result.json>`
 
 Direct user-specified registered template flow:
 
-`record_template_choice_v2.py <deck:id|layout:id|free> --preset <preset_id> --confirmed --purpose "<purpose>" --direct-template --output <result.json>`
+`record_template_choice_v2.py <deck:id|layout:id|free> --source github --preset <preset_id> --confirmed --purpose "<purpose>" --direct-template --output <result.json>`
 
 Only after template + production-preset evidence exists may research begin. After the post-research storyline/content outline is explicitly approved, initialize only through:
 
-`new_deck_init.py <project_name> --template-selection-result <result.json>`
+`new_deck_init.py <project_name> --template-selection-result <result.json> --storyline-approval-result <approval.json>`
 
 Slide authoring/export remains blocked until that approval.
 
