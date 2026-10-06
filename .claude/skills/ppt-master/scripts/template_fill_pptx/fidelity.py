@@ -13,6 +13,36 @@ from xml.etree import ElementTree as ET
 from .ooxml import NS
 from .text_fill import _shape_key_maps
 from .table_fill import _table_key_maps
+from .selectors import _replacement_text, _replacement_selectors, _table_selectors
+
+
+def validate_requested_run_texts(root, source_slide, item):
+    """Compare each requested paragraph/run at its exact output target."""
+    def check(target, edit):
+        if "paragraph_run_texts" not in edit:
+            return
+        _replacement_text(edit)  # Validate the nested string contract.
+        if target is None:
+            raise RuntimeError("Requested run-text target missing from output")
+        actual = [[run.findtext("a:t", default="", namespaces=NS)
+                   for run in paragraph.findall("a:r", NS)]
+                  for paragraph in target.findall(".//a:p", NS)]
+        if actual != edit["paragraph_run_texts"]:
+            raise RuntimeError("Requested paragraph/run text differs from final output")
+
+    slots = _shape_key_maps(root, source_slide)
+    for replacement in item.get("replacements", []):
+        target = next((slots[key] for key in _replacement_selectors(replacement) if key in slots), None)
+        check(target, replacement)
+    tables = _table_key_maps(root, source_slide)
+    for table in item.get("table_edits", []):
+        frame = next((tables[key] for key in _table_selectors(table) if key in tables), None)
+        rows = frame.findall(".//a:tbl/a:tr", NS) if frame is not None else []
+        for cell in table.get("cells", []):
+            row, col = cell.get("row"), cell.get("col")
+            cells = rows[row].findall("a:tc", NS) if type(row) is int and 0 <= row < len(rows) else []
+            target = cells[col] if type(col) is int and 0 <= col < len(cells) else None
+            check(target, cell)
 
 
 def validate_source_lock(pptx_path, plan, transition):
@@ -91,6 +121,7 @@ def _mask_editable_text(root, source_slide, item):
 
 
 def validate_slide_fidelity(before, after, source_slide, item):
+    validate_requested_run_texts(after, source_slide, item)
     before, after = copy.deepcopy(before), copy.deepcopy(after)
     _mask_editable_text(before, source_slide, item)
     _mask_editable_text(after, source_slide, item)

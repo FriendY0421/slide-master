@@ -2,13 +2,20 @@
 
 from __future__ import annotations
 
+import hashlib
 import re
 import subprocess
 import sys
+import zipfile
 from pathlib import Path
 from typing import Any
 
-from .ooxml import _load_json, _write_json
+from pptx_transitions import parse_source_xml
+
+from .ooxml import _load_json, _write_json, _parse_slide_refs
+from .fidelity import validate_requested_run_texts
+from .selectors import _replacement_text, _table_cell_text
+from .task_contract import validate_task_count
 
 
 _SCRIPTS_DIR = Path(__file__).resolve().parents[1]
@@ -77,7 +84,7 @@ def _title_texts(plan: dict[str, Any], role_lookup: dict[tuple[int, str], str]) 
         for replacement in replacements:
             if not isinstance(replacement, dict):
                 continue
-            text = str(replacement.get("text") or "").strip()
+            text = _replacement_text(replacement).strip()
             if not text:
                 continue
             if not first_text:
@@ -97,7 +104,7 @@ def _table_tokens(plan: dict[str, Any]) -> list[tuple[int, str]]:
     for plan_slide, slide in enumerate(plan.get("slides", []), start=1):
         for table_edit in slide.get("table_edits", []) or []:
             for cell in table_edit.get("cells", []) or []:
-                text = str(cell.get("text") or "").strip()
+                text = _table_cell_text(cell).strip()
                 if text:
                     tokens.append((plan_slide, text))
     return tokens
@@ -149,7 +156,7 @@ def _append_token_checks(
         )
 
 
-def validate_project(project_path: Path) -> dict[str, Any]:
+def validate_project(project_path: Path, *, design_brief: Path | None = None) -> dict[str, Any]:
     """Run read-back validation for a template-fill project."""
     project_path = project_path.expanduser().resolve()
     plan_path = project_path / "analysis" / "fill_plan.json"
@@ -158,6 +165,7 @@ def validate_project(project_path: Path) -> dict[str, Any]:
 
     plan = _load_json(plan_path)
     output_path = _latest_export(project_path)
+    output_sha256 = hashlib.sha256(output_path.read_bytes()).hexdigest()
     validation_dir = project_path / "validation"
     validation_dir.mkdir(parents=True, exist_ok=True)
     readback_path = validation_dir / "readback.md"
@@ -182,6 +190,32 @@ def validate_project(project_path: Path) -> dict[str, Any]:
     markdown = readback_path.read_text(encoding="utf-8", errors="replace")
     results: list[dict[str, Any]] = []
     summary = {"ok": 0, "warn": 0, "error": 0}
+    task_binding = {}
+    if design_brief is None:
+        implicit = project_path / 'analysis' / 'design_brief.json'
+        design_brief = implicit if implicit.is_file() else None
+    try:
+        task_binding = validate_task_count(plan, design_brief,
+                                           _readback_slide_count(markdown))
+    except RuntimeError as exc:
+        summary['error'] += 1
+        results.append({'status': 'ERROR', 'code': 'task_requested_count_mismatch', 'message': str(exc)})
+
+    with zipfile.ZipFile(output_path) as package:
+        refs = _parse_slide_refs(package)
+        for index, item in enumerate(plan.get("slides", [])):
+            try:
+                if index >= len(refs):
+                    raise RuntimeError("Requested output slide missing")
+                root = parse_source_xml(package.read(refs[index].part_name))
+                validate_requested_run_texts(root, int(item["source_slide"]), item)
+                summary["ok"] += 1
+            except RuntimeError as exc:
+                summary["error"] += 1
+                results.append({"status": "ERROR", "code": "requested_run_text_mismatch",
+                                "plan_slide": index + 1, "message": str(exc)})
+    if hashlib.sha256(output_path.read_bytes()).hexdigest() != output_sha256:
+        raise RuntimeError("Export changed during read-back; validate exact final artifact again")
 
     expected_slides = len(plan.get("slides", []) or [])
     actual_slides = _readback_slide_count(markdown)
@@ -261,6 +295,8 @@ def validate_project(project_path: Path) -> dict[str, Any]:
         "schema": "template_fill_pptx_validate.v1",
         "project": str(project_path),
         "export": str(output_path),
+        "export_sha256": output_sha256,
+        "task_binding": task_binding,
         "readback": str(readback_path),
         "summary": summary,
         "results": results,

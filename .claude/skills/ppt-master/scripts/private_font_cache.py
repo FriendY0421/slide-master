@@ -236,6 +236,21 @@ def font_availability(brief: dict, base: Path) -> dict:
     if not isinstance(requests,list) or any(not isinstance(r,dict) or not isinstance(r.get('family'),str) or not r['family'].strip() for r in requests):
         return {'ok':False,'errors':['Declare required family/style'], 'question':'사용할 글꼴 family/style과 폰트 파일을 확인해 주세요.'}
     requests=[dict(request) for request in requests]
+    # The current policy is authoritative even when an older font_requests list
+    # remains in the brief. Additional exact face constraints still apply.
+    required_families = list(families)
+    if policy.get('basis') == 'specified':
+        required_families.extend(policy.get('values', {}).values())
+    for family in required_families:
+        if not isinstance(family, str) or not family.strip():
+            return {'ok': False, 'errors': ['Invalid effective font family'],
+                    'question': '현재 지정 글꼴을 확인해 주세요.'}
+        if not any(_label(r['family']) == _label(family) for r in requests):
+            requests.append({'family': family})
+    effective_requests = [dict(request) for request in requests]
+    requirement_sha256 = hashlib.sha256(json.dumps(
+        {'font_policy': policy, 'requests': effective_requests},
+        ensure_ascii=False, sort_keys=True).encode()).hexdigest()
     paths=[];errors=[];records=[];licensed=set();library_candidates=[];alias_resolutions=[]
     for raw in brief.get('font_files',[]): paths.append(Path(raw) if Path(raw).is_absolute() else base/raw)
     caches=list(brief.get('font_cache_roots',[]))
@@ -298,7 +313,7 @@ def font_availability(brief: dict, base: Path) -> dict:
             if any(r['family'].casefold() in [v.casefold() for v in record['family_aliases']] for r in requests):
                 records.append({**record,'source':'system-file','file':str(path)})
         if seen>FONT_SCAN_CAP: break
-    missing=[]
+    missing=[]; verified_faces=[]
     for request in requests:
         def matches(record):
             for key, value in request.items():
@@ -309,6 +324,8 @@ def font_availability(brief: dict, base: Path) -> dict:
                     return False
             return True
         matched=[record for record in records if matches(record)]
+        verified_faces.extend({k: record[k] for k in ('family', 'style', 'version', 'sha256')}
+                              for record in matched if record['sha256'] in licensed)
         if not matched: missing.append(request)
         elif not any(record['sha256'] in licensed for record in matched): errors.append('Font license review required: '+request['family'])
         if _label(request['family']) in {'고딕','견고딕'} and not request.get('sha256'):
@@ -320,6 +337,8 @@ def font_availability(brief: dict, base: Path) -> dict:
             errors.append('Multiple versions/vendors require preview and first confirmation: '+request['family'])
     if not requests: errors.append('Source/inherited font families have not been identified; request/confirm actual font files')
     return {'ok':bool(requests) and not errors and not missing, 'endpoint':brief.get('endpoint','cloud'),
+            'effective_requests': effective_requests, 'requirement_sha256': requirement_sha256,
+            'verified_faces': verified_faces,
             'records':records,'licensed_font_sha256':sorted(licensed),'font_library_candidates':library_candidates,'alias_resolutions':alias_resolutions,'missing_fonts':missing,'errors':errors,'scan_truncated':seen>FONT_SCAN_CAP,
             'question':'누락되거나 확인할 수 없는 글꼴의 폰트 파일과 사용 라이선스를 추가해 주세요.' if missing or errors else None,
             'render_activated':False,'system_installation_performed':False,'silent_fallback':False,'library_status':'missing' if missing else 'license_review_required' if errors else 'available'}

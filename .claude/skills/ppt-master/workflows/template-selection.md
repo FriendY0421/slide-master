@@ -86,7 +86,7 @@ Only explicit user confirmation of both template and preset is final.
 
 After the visible picker renders, record its surface:
 
-`python .claude/skills/ppt-master/scripts/picker_surface_gate.py record <picker.json> --surface app_block --purpose "<purpose>" --source-ref "github:main" --candidate-count <n> --detail-preview-max 6 --rendered`
+`python .claude/skills/ppt-master/scripts/picker_surface_gate.py record <picker.json> --surface app_block --purpose "<purpose>" --source-ref "github:<manifest_SHA>" --manifest <manifest.json> --candidate-keys <shown_keys_csv> --candidate-count <n> --selected-template <confirmed_template> --selected-preset <confirmed_preset> --confirmed --detail-preview-max 6 --rendered`
 
 For `genui`, use `--surface genui`.
 
@@ -159,3 +159,5 @@ Stop rather than proceed when any of these occurs:
 Before any new-deck project initialization or slide authoring, present the **full proposed slide sequence** in chat (or an equivalent visible review surface). Every slide preview must show: slide number, title, core message, 2?5 main content points, and proposed visual/layout treatment. The user may delete, add, merge, split, reorder, retitle, rewrite, change visuals, or request a new total slide count (including 20/30+). Apply those edits to the preview and show the revised affected slides or full sequence as appropriate.
 
 Generation permission requires the user to explicitly approve the **current revision**. Record that exact approved snapshot through `storyline_gate.py`; `new_deck_init.py` requires both `--template-selection-result` and `--storyline-approval-result`. If the storyline changes after approval, the old approval is stale and generation must stop until the revised preview is approved again. `validate_spec.py` checks the generated ?IX slide count/titles/core messages against the approved snapshot, and gate-v3 SVG export is blocked without storyline approval evidence.
+
+New picker evidence v2 binds the actual displayed manifest hash, immutable catalog commit, displayed candidate keys and explicit final template/preset pair. Record it after final confirmation; rendering alone is insufficient. Newly recorded recommendations reject unbound v1 evidence. Existing legacy resume records without a pinned source retain compatibility.

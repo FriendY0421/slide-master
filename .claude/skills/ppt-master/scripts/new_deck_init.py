@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import hashlib
 import sys
 from pathlib import Path
 
@@ -44,6 +45,8 @@ def main(argv: list[str] | None = None) -> int:
             from presentation_brief import validate_brief
             from presentation_intake import validate_slide_count
             brief = json.loads(args.design_brief.read_text(encoding="utf-8"))
+            if not isinstance(brief, dict):
+                raise ValueError('Current task brief must be a JSON object')
             report = validate_brief(brief, args.design_brief.resolve().parent)
             if brief.get("workflow_version") != 2 or brief.get("mode") != "builtin" or not report["ready_for_plan"]:
                 raise ValueError("Require complete confirmed workflow_version 2 builtin brief")
@@ -52,6 +55,15 @@ def main(argv: list[str] | None = None) -> int:
             errors = validate_slide_count(brief, storyline_approval["slide_count"])
             if errors:
                 raise ValueError("; ".join(errors))
+            from private_font_cache import font_availability
+            fonts = font_availability(brief, args.design_brief.resolve().parent)
+            if not fonts['ok']:
+                raise ValueError(fonts.get('question') or 'Current task fonts not verified')
+            storyline_approval['font_verification'] = {
+                'requirement_sha256': fonts['requirement_sha256'],
+                'verified_faces': fonts['verified_faces'],
+                'design_brief_sha256': hashlib.sha256(args.design_brief.read_bytes()).hexdigest(),
+            }
             storyline_approval["requested_slide_count"] = brief["slide_count"]
     except (OSError, ValueError) as exc:
         print(f"[new-deck-init] FAIL — {exc}", file=sys.stderr)

@@ -79,8 +79,8 @@ POTX는 실제 Master/Layout 추출 후 확인한 정규화가 필요하다. 사
 
 6. 사용자정의 PPTX는 `ppt-template-fill` owner로 들어간다. 사진/PDF는 참조 재구성 owner의
    분석·확인·project-private 템플릿 핸드오프가 필요하며, 이번 감사는 생성까지 연결됐다고 주장하지 않는다. 직접 PPTX exemption, source SHA,
-   원본 분석, 편집 allowlist, 실제 확인한 fill plan을 기록한다. native plan의
-   `requested_slide_count`를 brief의 장수와 연결한다. 계획·출력 장수도 read-back으로 확인한다. 기존 native apply·read-back·OfficeCLI·렌더 gate를 따른다.
+   원본 분석, 편집 allowlist, 실제 확인한 fill plan을 기록한다. native apply/validate는 별도 `analysis/design_brief.json` 또는 `--design-brief`의 확인 장수를 읽는다. plan의
+   `requested_slide_count`만으로 장수 확인을 대신하지 않는다. 계획·출력 장수도 read-back으로 확인한다. 기존 native apply·read-back·OfficeCLI·렌더 gate를 따른다.
    main SVG의 선택·초기화·QA 도구를 이 경로에 강제로 적용하지 않는다.
 7. local/cloud 각 endpoint에서 요청한 font family/style/version/hash를 확인한다. 없다면
    폰트 파일·라이선스를 요청하며 조용한 대체를 하지 않는다. [비공개 폰트 재사용 계약](PRIVATE_FONT_LIBRARY.md)을 따른다.

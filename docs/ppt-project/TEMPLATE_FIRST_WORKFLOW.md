@@ -106,3 +106,15 @@ Windows는 읽기 전용 글꼴 registry 조회로 요청한 family의 설치 �
 font 파일 존재 확인은 등록/렌더의 대체 검증이 아니다. 지원 runtime 등록 후 별도로
 전 페이지를 검수한다. 합성 예제는 다른 Linux root에서 동일 파트 바이트로 재현됐으나
 Windows/macOS에서 실행하지 않았으므로 모든 OS 지원이라고 표시하지 않는다.
+
+## 독립검토 반례 수정 — 2026-10-06
+
+- strict 출력 검증은 전체 문서의 문자열 포함 여부로 끝내지 않는다. 각 output slide의 지정 slot/표 셀에서 모든 문단·run 문자열을 정확히 비교하고 최종 PPTX SHA256을 기록한다. 미반영·다른 위치의 같은 문구는 오류다.
+- 기본 초기화의 `--design-brief`는 현재 `font_policy.values`와 실제 face/style/version/hash/사용권을 다시 확인한다. 오래된 `font_requests`나 성공 결과로 현재 지정 글꼴의 누락을 숨길 수 없다. 확인한 요구 fingerprint·face metadata·brief SHA를 승인 기록에 결합한다.
+- 새 추천 선택은 picker evidence v2의 manifest hash·동일 catalog SHA·실제 표시 후보·확정 template/preset과 결합한다. 실제 UI를 보이지 않고 렌더 evidence를 만들면 안 된다.
+- 현재 native 작업은 별도 `<project>/analysis/design_brief.json`의 사용자 확인 장수를 사용한다. `apply`/`validate`가 이 파일을 자동 읽으며 다른 경로는 `--design-brief`로 지정한다. plan의 `requested_slide_count`만으로 통과하지 않는다. v2 brief의 장수와 계획·실제 출력이 모두 같아야 한다. 승인 시 `task_brief_sha256`도 plan에 기록하면 brief 변경을 거부한다. 장수가 없는 기존 v1 재개만 호환한다.
+
+```bash
+python3 .claude/skills/ppt-master/scripts/template_fill_pptx.py apply <source.pptx> <fill_plan.json> --design-brief <current_custom_brief.json> --transition keep -o <project>/exports/result.pptx
+python3 .claude/skills/ppt-master/scripts/template_fill_pptx.py validate <project> --design-brief <current_custom_brief.json>
+```

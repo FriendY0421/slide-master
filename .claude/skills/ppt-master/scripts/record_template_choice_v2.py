@@ -17,7 +17,7 @@ if str(SCRIPTS_DIR) not in sys.path:
 from console_encoding import configure_utf8_stdio  # noqa: E402
 import template_catalog as catalog_core  # noqa: E402
 import template_gallery as catalog_reader  # noqa: E402
-from picker_surface_gate import load_picker_evidence  # noqa: E402
+from picker_surface_gate import load_picker_evidence, validate_picker_binding  # noqa: E402
 
 configure_utf8_stdio()
 
@@ -157,6 +157,11 @@ def main(argv: list[str] | None = None) -> int:
     result["source_ref"] = "github:" + source_ref if source_ref else "registered-local-catalog-v2"
     result["source_commit"] = source_ref
     result["catalog_source"] = source_label
+    if picker is not None:
+        errors = validate_picker_binding(picker, result['template'], preset_id, source_ref)
+        if errors:
+            print('ERROR: ' + '; '.join(errors), file=sys.stderr)
+            return 2
     args.output.parent.mkdir(parents=True, exist_ok=True)
     tmp = args.output.with_suffix(args.output.suffix + ".tmp")
     tmp.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

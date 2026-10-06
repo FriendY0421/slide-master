@@ -43,6 +43,7 @@ from .package import (
     _prune_unreferenced_parts,
 )
 from .table_fill import _apply_table_edits_to_slide
+from .task_contract import validate_task_count
 from .text_fill import _apply_replacements_to_slide
 from .transitions import (
     DEFAULT_TRANSITION,
@@ -59,9 +60,14 @@ def apply_plan(
     *,
     transition: str | None = DEFAULT_TRANSITION,
     transition_duration: float = DEFAULT_TRANSITION_DURATION,
+    design_brief: Path | None = None,
 ) -> None:
     """Create a filled PPTX by cloning selected source slides and replacing text."""
     fidelity = validate_source_lock(pptx_path, plan, transition)
+    if design_brief is None:
+        implicit = output_path.parent.parent / 'analysis' / 'design_brief.json'
+        design_brief = implicit if implicit.is_file() else None
+    validate_task_count(plan, design_brief)
     plan_slides = plan.get("slides")
     if not isinstance(plan_slides, list) or not plan_slides:
         raise RuntimeError("Plan must contain a non-empty 'slides' list")
@@ -240,6 +246,8 @@ def apply_plan(
             for name, data in entries.items():
                 out.writestr(name, data)
         try:
+            with zipfile.ZipFile(candidate_path) as package:
+                validate_task_count(plan, design_brief, len(_parse_slide_refs(package)))
             validate_pptx_transition_package(
                 candidate_path,
                 require_use_timings=wrote_auto_advance,
