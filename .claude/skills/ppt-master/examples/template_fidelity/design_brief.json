@@ -19,5 +19,6 @@
     "../../assets/fonts/Pretendard/Pretendard-Regular.otf",
     "../../assets/fonts/Pretendard/Pretendard-Bold.otf"
   ],
+  "font_families": ["Pretendard"],
   "authorization": "Synthetic engineering fixture approved in task scope; not company input approval"
 }

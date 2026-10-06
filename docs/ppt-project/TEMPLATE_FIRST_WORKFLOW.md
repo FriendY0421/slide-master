@@ -87,6 +87,11 @@ XML 서식 보존은 폰트 설치나 동일 줄바꿈을 보장하지 않는다
 권장하고 repo-relative 폴더 구조를 유지한다. 실행 시 `presentation_brief.py ...
 --check-environment`로 기존 준비 probe를 재사용해 Python 의존성, 제공된 runtime,
 이번 작업의 `font_files` 또는 `font_families`, OfficeCLI 여부를 기록한다.
+Windows는 읽기 전용 글꼴 registry 조회로 요청한 family의 설치 상태를 표시한다.
+조회 실패는 unknown으로 남긴다. 글꼴 파일이 있어 클라우드 실행이 가능해도
+`delivery_font_warnings`는 수신 시스템의 누락을 따로 알린다. 지정값은 가족 이름으로
+사전검사에 포함하고 원본 유지 모드는 intake에서 확인한 실제 family를 선언한다.
+임의 설치/대체는 하지 않는다. 시스템 설치 확인도 PowerPoint 렌더 검증 자체가 아니다.
 실행환경이 없으면 임의 글로벌 패키지를 설치/대체하지 않고 blocker를 보고한다.
 font 파일 존재 확인은 등록/렌더의 대체 검증이 아니다. 지원 runtime 등록 후 별도로
 전 페이지를 검수한다. 합성 예제는 다른 Linux root에서 동일 파트 바이트로 재현됐으나

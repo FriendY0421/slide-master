@@ -141,16 +141,54 @@ def check_environment(brief: dict, base: Path) -> dict:
         if not found:
             failures.append("Declared font file missing: " + raw)
     families = brief.get("font_families", [])
+    if not families and isinstance(brief.get("font_policy"), dict):
+        policy = brief["font_policy"]
+        if policy.get("basis") == "specified" and isinstance(policy.get("values"), dict):
+            families = list(dict.fromkeys(v for v in policy["values"].values() if isinstance(v, str)))
     if not isinstance(families, list) or not all(isinstance(f, str) for f in families):
         failures.append("font_families must be a list of names")
         families = []
-    installed = {f: font_installed(f) for f in families}
+    installed = {f: _system_font_status(f, font_installed) for f in families}
     if not files and (not families or any(found is not True for found in installed.values())):
         failures.append("Declare available font files or verify every required system family")
     return {"ok": not failures, "errors": failures, "supplied_runtime": runtime,
             "font_files": available_files, "system_font_families": installed,
+            "delivery_font_warnings": ["Required receiving-system font is missing or unknown: " + f
+                                       for f, found in installed.items() if found is not True],
+            "font_policy": "Preserve requested/source family; never install or substitute automatically",
+            "font_file_readiness_is_not_receiving_powerpoint_readiness": True,
             "font_render_verified": False, "officecli_available": shutil.which("officecli") is not None,
             "native_application_verified": False}
+
+
+def _system_font_status(family: str, existing_probe):
+    """Reuse normal probes, plus read-only Windows registered-family checks.
+
+    Registry failure is unknown, not an invented installation. Font files for a
+    cloud renderer do not prove that receiving PowerPoint has the same fonts.
+    """
+    if os.name != "nt":
+        return existing_probe(family)
+    import winreg
+    successes = 0
+    expected = family.casefold().strip()
+    for hive in (winreg.HKEY_LOCAL_MACHINE, winreg.HKEY_CURRENT_USER):
+        try:
+            with winreg.OpenKey(hive, r"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts") as key:
+                successes += 1
+                index = 0
+                while True:
+                    try:
+                        name, _value, _kind = winreg.EnumValue(key, index)
+                    except OSError:
+                        break
+                    label = name.casefold().split("(")[0].strip()
+                    if label == expected or label.startswith(expected + " "):
+                        return True
+                    index += 1
+        except OSError:
+            continue
+    return False if successes else None
 
 
 if __name__ == "__main__":

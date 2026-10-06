@@ -7,13 +7,13 @@ canvas_format: ppt169
 page_count: 3
 ---
 
-# Visual research only, paused for template-first priority
+# Visual research and builtin improvement comparison
 
-This is an unfinished design study, not a reusable template workspace or final
-PPTX. After reference inspection and one draft SVG, the user redirected priority
-to per-task builtin/custom template intake and native template fidelity. No style
-is approved, no three-page deck was completed, and no production catalog changes
-were made. The initial six-page rendered critique follows.
+The study was briefly paused for task-scoped native template fidelity, then the
+user explicitly requested completion of the builtin improvement example as well.
+The three-page comparison is now in README.md. It is not an approved company
+style or ACTIVE registered template; no production catalog changes were made.
+The initial six-page rendered critique follows.
 
 - Similar top title/subtitle positions make the sequence monotonous.
 - Strategy numbers do not clearly establish the target as the main focal point.
@@ -22,7 +22,8 @@ were made. The initial six-page rendered critique follows.
 - Tables are editable and legible, but both data pages repeat the same table style.
 - Unused lower area adds weak whitespace rather than useful grouping.
 
-Potential changes below remain candidates until actual company references arrive.
+This builtin design example is separate from future private company template
+fidelity. Company-specific style remains subject to its actual reference inputs.
 
 User explicitly authorized redesign of strategy, KPI and roadmap from the existing
 six-page contributor fixture. This is a resumed engineering review example, not a
@@ -41,13 +42,17 @@ No photos, illustrations, borrowed logos, copied source code or new dependencies
 | Slide | Title | Layout |
 | --- | --- | --- |
 | 1 | 재방문 감소 전략 | Large target on left, two ruled priorities on right |
-| 2 | 최초 해결률, 목표 대비 6%p 부족 | Horizontal native bar chart, directly labeled values, separate gap |
+| 2 | 최초 해결률은 목표보다 6%p 낮다 | Fixed0–100% native column chart, directly labeled values, separate gap |
 | 3 | 12주 실행 로드맵 | Proportional Gantt, owners at left, checkpoint evidence below |
 
 References inspected: Presenton Momentum and Executive actual README galleries;
 upstream ppt-master-examples Apple annual review and EV strategy thumbnails.
 Only hierarchy, flat alignment and varied information forms inform this original
 composition. Source links and inspection hashes are in README.md.
+
+The existing exporter rejects explicit axes on horizontal bars. The completed
+KPI example therefore keeps a supported native column chart with an explicit
+0–100% axis. No new chart engine or rendering contract was introduced.
 
 ## Actual reference links inspected on 2026-10-06
 

@@ -115,7 +115,14 @@
         "available": true
       }
     ],
-    "system_font_families": {},
+    "system_font_families": {
+      "Pretendard": false
+    },
+    "delivery_font_warnings": [
+      "Required receiving-system font is missing or unknown: Pretendard"
+    ],
+    "font_policy": "Preserve requested/source family; never install or substitute automatically",
+    "font_file_readiness_is_not_receiving_powerpoint_readiness": true,
     "font_render_verified": false,
     "officecli_available": false,
     "native_application_verified": false
@@ -182,5 +189,11 @@
       "bytes": 38591,
       "sha256": "d91eec48745dff0a1f249c6630b75fcc8fd6ed434b43177caef71921aac70d65"
     }
+  },
+  "delivery_font_probe_smoke": {
+    "specified_family_respected": true,
+    "simulated_windows_registry_missing_found_unknown": true,
+    "real_windows_execution": false,
+    "font_install_or_substitution": false
   }
 }
