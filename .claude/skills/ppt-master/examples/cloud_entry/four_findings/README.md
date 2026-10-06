@@ -29,8 +29,10 @@ positive/rejection checks using existing CLI/library calls in the gitignored
 - A six-slide plan with its own `requested_slide_count=6` ignored a separate
   one-slide task request. Current native apply/validate read the separate current
   confirmed custom brief, compare plan and actual output counts, and reject a
-  self-reported count without that external brief. Optional approved brief SHA
-  rejects stale task revisions. Legacy v1 no-count resume remains compatible.
+  self-reported count without that external brief. At that historical review HEAD, approved brief SHA was optional and v1
+  no-count resume was accepted. The later
+  [required count-binding follow-up](../count_binding_required/README.md) removes
+  that omission fallback; current creation and resume require all bindings.
 
 The normal six-slide native result regenerated with identical ZIP-part bytes to
 [the prior reviewed result](../../template_fidelity/review/filled.pptx).

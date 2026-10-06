@@ -302,6 +302,8 @@ Interpret the report:
 
 ⛔ **BLOCKING GATE**: The user has reviewed the planned output order, omitted pages, reused pages, and material-to-layout fit. Set `<project_dir>/analysis/fill_plan.json` top-level `status` to `"confirmed"` only after that review. `apply` rejects an unconfirmed plan by default; `--force` exists only for deliberate recovery/debug use.
 
+A complete confirmed workflow_version 2 custom brief is required for creation and resume. Store it at `<project_dir>/analysis/design_brief.json` (automatically discovered) or pass `--design-brief`. After actual approval, bind the plan with `requested_slide_count` and `task_brief_sha256` of the exact brief bytes. Missing/stale brief, count or hash blocks apply and readback; omission never implies legacy/resume. `--force` cannot bypass this task binding.
+
 Run:
 
 ```bash

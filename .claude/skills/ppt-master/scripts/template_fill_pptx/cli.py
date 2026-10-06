@@ -105,7 +105,8 @@ def build_parser() -> argparse.ArgumentParser:
     apply = subparsers.add_parser("apply", help="Apply fill plan and write a new PPTX")
     apply.add_argument("pptx_file", help="Source PPTX file")
     apply.add_argument("plan_json", help="Fill plan JSON")
-    apply.add_argument('--design-brief', type=Path, help='separate current custom task brief')
+    apply.add_argument('--design-brief', type=Path,
+                       help='required approved v2 custom brief; defaults to analysis/design_brief.json')
     apply.add_argument(
         "-o",
         "--output",
@@ -135,7 +136,7 @@ def build_parser() -> argparse.ArgumentParser:
     apply.add_argument(
         "--force",
         action="store_true",
-        help="apply without a confirmed fill plan (deliberate recovery/debug only)",
+        help="compatibility flag; current task/plan approval binding remains required",
     )
 
     validate = subparsers.add_parser("validate", help="Read back and validate the latest project export")
