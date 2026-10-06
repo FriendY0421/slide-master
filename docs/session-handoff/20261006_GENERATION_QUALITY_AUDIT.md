@@ -9,6 +9,11 @@ The subsequent user instruction authorized a minimal profile, synthetic six-page
 before/after comparison, local smoke checks and a new draft PR. This follow-up
 supersedes the initial report's implementation-pending status below.
 
+Draft PR: https://github.com/FriendY0421/slide-master/pull/10
+Branch: `feat/korean-business-quality-20261006`
+Implementation commit: `aba622a2a8b2165851f049f1c2f4cbae2909f727`
+The PR remains Draft for the explicitly documented desktop acceptance boundary.
+
 - Added an opt-in `business_quality.py` profile/coverage/review check and optional
   evidence arguments on `verify_deck.py`. Existing gates/default behavior remain.
 - Added `--native-charts-and-tables` as an alias to the existing fork option;
