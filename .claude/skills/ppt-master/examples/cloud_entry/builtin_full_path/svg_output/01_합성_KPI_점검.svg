@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-pptx-master="executive_boardroom-master" data-pptx-master-name="Executive Boardroom" data-pptx-layout="kpi-content-chart" data-pptx-layout-name="KPI Content Chart">
+<rect id="slide-bg" width="1280" height="720" fill="#F7F2E8" data-pptx-layer="slide" data-pptx-editable="false"/>
+<rect id="layout-top" x="0" y="0" width="1280" height="14" fill="#B38B3F" data-pptx-layer="layout"/>
+<rect id="layout-side" x="1120" y="0" width="160" height="720" fill="#17352B" opacity="0.06" data-pptx-layer="layout"/>
+<line id="layout-bottom" x1="84" y1="650" x2="1190" y2="650" stroke="#B38B3F" stroke-width="2" data-pptx-layer="layout"/>
+<line id="layout-header-rule" x1="76" y1="178" x2="1188" y2="178" stroke="#706A5F" stroke-width="1" opacity="0.28" data-pptx-layer="layout"/>
+<rect id="layout-message-band" x="76" y="206" width="1110" height="92" fill="#17352B" data-pptx-layer="layout"/>
+<line id="layout-current-rule" x1="76" y1="482" x2="396" y2="482" stroke="#B38B3F" stroke-width="2" data-pptx-layer="layout"/>
+<line id="layout-target-rule" x1="446" y1="482" x2="766" y2="482" stroke="#B38B3F" stroke-width="2" data-pptx-layer="layout"/>
+<line id="layout-gap-rule" x1="816" y1="482" x2="1136" y2="482" stroke="#B38B3F" stroke-width="2" data-pptx-layer="layout"/>
+<g id="page-title" data-pptx-placeholder="title" data-pptx-placeholder-bounds="76 80 1040 90"><text id="title-carrier" x="76" y="140" fill="#17352B" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="64" font-weight="700" data-pptx-placeholder-carrier="true">합성 KPI 점검</text></g>
+<g id="page-footer" data-pptx-placeholder="footer" data-pptx-placeholder-idx="1" data-pptx-placeholder-bounds="74 665 1000 40"><text id="footer-carrier" x="74" y="690" fill="#706A5F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" data-pptx-placeholder-carrier="true">합성자료 · 실제 회사자료 아님</text></g>
+<g id="page-number" data-pptx-placeholder="slide-number" data-pptx-placeholder-idx="2" data-pptx-placeholder-bounds="1140 665 60 40"><text id="number-carrier" x="1200" y="690" fill="#706A5F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" text-anchor="end" data-pptx-placeholder-carrier="true">01</text></g>
+<g id="header-label"><text x="76" y="64" fill="#B38B3F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" font-weight="700">KEY MESSAGE</text></g>
+<g id="core-message"><text x="106" y="264" fill="#FFFDF8" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="48" font-weight="700">현재 84%, 목표 90%</text></g>
+<g id="current-metric"><text x="76" y="356" fill="#B38B3F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="28" font-weight="700">01</text><text x="76" y="408" fill="#17352B" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="40" font-weight="700">84%</text><text x="76" y="452" fill="#706A5F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="28">현재</text></g>
+<g id="target-metric"><text x="446" y="356" fill="#B38B3F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="28" font-weight="700">02</text><text x="446" y="408" fill="#17352B" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="40" font-weight="700">90%</text><text x="446" y="452" fill="#706A5F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="28">목표</text></g>
+<g id="gap-metric"><text x="816" y="356" fill="#B38B3F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="28" font-weight="700">03</text><text x="816" y="408" fill="#17352B" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="40" font-weight="700">-6%p</text><text x="816" y="452" fill="#706A5F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="28">격차</text></g>
+<!-- chart-plot-area: x=106 y=520 width=600 height=90 -->
+<g id="kpi-chart" data-pptx-native="chart" data-pptx-fallback-sha256="7ab848db47eef75e362731124e98515b347bc41a90d446a16caddc9c67c52069">
+<text x="94" y="520" fill="#706A5F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" text-anchor="end">100%</text>
+<text x="94" y="610" fill="#706A5F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" text-anchor="end">0%</text>
+<metadata data-pptx-native="chart">{"x":76,"y":495,"width":700,"height":145,"type":"column","categories":["합성 KPI"],"series":[{"name":"현재","values":[84],"color":"#B38B3F"},{"name":"목표","values":[90],"color":"#315E52"}],"show_legend":false,"show_value_axis_labels":true,"axes":{"value":{"minimum":0,"maximum":100,"major_unit":50,"number_format":"0\"%\"","major_gridlines":false}},"data_labels":{"show_value":true,"position":"outside_end","number_format":"0\"%\"","font_size":28,"font_family":"Pretendard","color":"#17352B"},"style":{"colors":["#B38B3F","#315E52"],"font_family":"Pretendard","font_size":28,"axis_font_size":20,"text_color":"#706A5F","axis_color":"#706A5F","grid_color":"#F7F2E8","chart_area_fill":"#F7F2E8","plot_area_fill":"#F7F2E8"}}</metadata>
+<line x1="106" y1="610" x2="706" y2="610" stroke="#706A5F" stroke-width="1"/>
+<rect x="240" y="534.4" width="120" height="75.6" fill="#B38B3F"/><rect x="410" y="529" width="120" height="81" fill="#315E52"/>
+<text x="300" y="526" fill="#17352B" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="28" text-anchor="middle">84%</text><text x="470" y="521" fill="#17352B" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="28" text-anchor="middle">90%</text>
+<text x="406" y="637" fill="#706A5F" font-family="Pretendard, 'Malgun Gothic', Arial, sans-serif" font-size="20" text-anchor="middle">합성 KPI</text>
+</g>
+</svg>

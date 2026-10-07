@@ -1,0 +1,384 @@
+{
+  "schema": "slide-master.builtin-full-path-engineering-review.v1",
+  "date": "2026-10-07",
+  "source_sha": "07c781d53f1eb327671af0d2ed9f4cb8ac9bd425",
+  "approved_main_catalog_sha": "0578dba7ddf56cf5d7024cf574063c4db7332a3e",
+  "synthetic_only": true,
+  "actual_user_approval": false,
+  "live_fah_allow_claimed": false,
+  "new_template_registered": false,
+  "functional_source_changed": false,
+  "source_files": {
+    ".fah/execution-contract.json": "625a8ce146c4c9c2142df9742be200fd244125f9e2fd33a7b8ecbc4fbae72950",
+    "PPT_REQUEST_GUARD.md": "56f0aaa75467cbd0ced1b3cab776e33546801f5ba8b9f12683dcb49000ca9d58",
+    ".claude/skills/ppt-master/examples/cloud_entry/selection-fixture.json": "004fff782a853e26953d2f6860d95ce459c70f726400ef4c0e33a767c067587f",
+    ".claude/skills/ppt-master/examples/cloud_entry/storyline-fixture.json": "f2333071be47e26f355d94c67f5197f624e4a9acba04bacb2d2e2e62bfc746f9",
+    ".claude/skills/ppt-master/examples/cloud_entry/builtin-brief.json": "4e5de0d9f9c1374f723ffb6c9a9c091fc6e68be625d36ee7da5c5c2fcbe9beb8",
+    ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/03_content.svg": "870adf281c841d1c81f3a9ff1cff7d9be6c6867b98cb8ad715a2ac4fa533b3ee"
+  },
+  "stages": [
+    {
+      "stage": "guard / local FAH contract / routing",
+      "status": "policy-read; synthetic local validators used",
+      "notes": "Durable repository-local FAH fallback read; live authority/ALLOW not queried or certified. Existing synthetic selection/storyline records are engineering fixtures only."
+    },
+    {
+      "stage": "current main catalog and selected source",
+      "status": "verified",
+      "notes": "Remote main SHA matches selected source commit; registered Executive Boardroom package is unchanged between main and tested PR source."
+    },
+    {
+      "stage": "new_deck_init and standard source import",
+      "status": "pass",
+      "exit_code": 0,
+      "notes": "Separate complete licensed-font v2 builtin brief, count1; new_deck_init plus import-sources --move in gitignored scratch."
+    },
+    {
+      "stage": "preflight",
+      "status": "exit0_with_4_warnings",
+      "exit_code": 0,
+      "warnings": [
+        "flask missing",
+        "requests missing",
+        "system/user Pretendard not registered",
+        "officecli absent"
+      ]
+    },
+    {
+      "stage": "actual template/preset/storyline/Strategist UI user confirmation",
+      "status": "not_exercised",
+      "notes": "Synthetic confirmations represent fixture fields only; not real approvals or a passed user workflow."
+    },
+    {
+      "stage": "design_spec/spec_lock and validate_spec --strict",
+      "status": "pass",
+      "exit_code": 0,
+      "page_count": 1,
+      "visualization_rows": 1,
+      "warnings": 0
+    },
+    {
+      "stage": "live preview launch",
+      "status": "failed",
+      "exit_code": 1,
+      "error": "ModuleNotFoundError: No module named flask",
+      "notes": "No server, no visible live UI claim, no dependency installed."
+    },
+    {
+      "stage": "pre-draw text_fit",
+      "status": "pass_with_footnote_advisory",
+      "notes": "All six planned blocks STACK_OK; footer occupies bottom5% intentionally; no reduction of locked sizes."
+    },
+    {
+      "stage": "P01 SVG QA",
+      "status": "initial_warning_then_clean_pass",
+      "exit_code": 0,
+      "notes": "Initial missing native fallback hash warning corrected using existing svg_native_fallback_fingerprint; final 0 errors/0 warnings."
+    },
+    {
+      "stage": "full SVG QA",
+      "status": "pass",
+      "exit_code": 0,
+      "warnings": 0,
+      "pages": 1
+    },
+    {
+      "stage": "verify-charts",
+      "status": "pass",
+      "notes": "Grouped bars decomposable-calc: two existing calculator calls; 0-100 scale; (240,534.4,120,75.6) and (410,529,120,81) match hand-authored SVG."
+    },
+    {
+      "stage": "image acquisition / notes / finalize_svg",
+      "status": "not_applicable",
+      "notes": "No image rows or notes requested; svg_final is deferred by owner. No copy-to-final shortcut."
+    },
+    {
+      "stage": "svg_to_pptx --native-objects",
+      "status": "pass_with_documented_editable_first_warning",
+      "exit_code": 0,
+      "notes": "Normal svg_output source; 1 Master, 1 Layout, 8 Layout atoms, 3 placeholders, 1 chart/workbook; no review exporter or visual-only."
+    },
+    {
+      "stage": "verify_deck final invocation",
+      "status": "exit0; native optional layer unexecuted",
+      "exit_code": 0,
+      "notes": "No --no-render flag; stage parity/native integrity pass. Its validate_spec and SVG subcalls were cached/skipped from unchanged clean recorded passes, not new executions. OfficeCLI/OpenXML/contact sheet auto-skipped because absent."
+    },
+    {
+      "stage": "shared finalization / font/layout/chart/workbook/import",
+      "status": "pass",
+      "notes": "Exact candidate copied to distinct final-v2; 1 requested slide and native chart/workbook owner1."
+    },
+    {
+      "stage": "supported runtime final render and individual visual inspection",
+      "status": "pass",
+      "page_count": 1,
+      "notes": "Final all1 pages inspected; no glyph/clipping/overflow observed. Initial series color defaulting was corrected in fixture metadata using documented style.colors; not a production engine defect."
+    },
+    {
+      "stage": "native PowerPoint / Edit Data / two PCs / company files / actual UI / private delivery",
+      "status": "not_exercised"
+    }
+  ],
+  "fixture_corrections": [
+    "Added actual rendering-relevant fallback hash using existing helper",
+    "Replaced ineffective fixture series.color intent with documented style.colors; candidate re-export/finalization/render repeated only after that visual finding"
+  ],
+  "claim_boundary": "One-page synthetic mechanical main SVG path, not all-template/long-deck coverage, production/user confirmation completion, or native application certification.",
+  "python_version": "3.12.14",
+  "versions": {
+    "python-pptx": "1.0.2",
+    "Pillow": "12.3.0",
+    "fonttools": "4.61.1",
+    "lxml": "6.1.1"
+  },
+  "native_readback": {
+    "chart_cache_values": [
+      84.0,
+      90.0
+    ],
+    "series_theme_slots": [
+      "accent2",
+      "accent3"
+    ],
+    "resolved_series_colors": [
+      "B38B3F",
+      "315E52"
+    ],
+    "workbook_count": 1,
+    "workbook_numeric_cells": {
+      "B2": "84",
+      "C2": "90"
+    },
+    "final_sha256": "9d6f65c864aaaaecb29549b7448fad876ab8bce88f69245dc91aa962282ef08e",
+    "candidate_bytes_equal": true,
+    "actual_chart_catalog_count": 76
+  },
+  "shared_finalization": {
+    "schemaVersion": "presentation-finalization.v1",
+    "finalSha256": "9d6f65c864aaaaecb29549b7448fad876ab8bce88f69245dc91aa962282ef08e",
+    "byteCount": 20451,
+    "packageIntegrity": {
+      "chart_count": 1,
+      "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
+      "finding_count": 0,
+      "findings": [],
+      "notes_parts_skipped": 0,
+      "relationship_part_count": 6,
+      "slide_count": 1,
+      "status": "pass",
+      "exitCode": 0,
+      "findingCount": 0,
+      "warnings": []
+    },
+    "presentationLayout": {
+      "finding_count": 0,
+      "findings": [],
+      "font_policy": {
+        "checked_text_script_count": 20,
+        "native_font_rendering_verified": false,
+        "observed_font_families": [
+          "Pretendard"
+        ],
+        "observed_font_use_counts": {
+          "Pretendard": 20
+        },
+        "passed": true,
+        "performed": true
+      },
+      "slide_count": 1,
+      "slide_size_in": [
+        13.3333,
+        7.5
+      ],
+      "warning_count": 0,
+      "warnings": [],
+      "exitCode": 0,
+      "findingCount": 0,
+      "fontPolicy": {
+        "checked_text_script_count": 20,
+        "native_font_rendering_verified": false,
+        "observed_font_families": [
+          "Pretendard"
+        ],
+        "observed_font_use_counts": {
+          "Pretendard": 20
+        },
+        "passed": true,
+        "performed": true
+      }
+    },
+    "fontSelection": {
+      "basis": "design",
+      "approvedFamilies": [
+        "Pretendard"
+      ],
+      "scriptFonts": {},
+      "referenceSha256": null,
+      "referenceFontsVerifiedInEncodedText": false,
+      "checked_text_script_count": 20,
+      "native_font_rendering_verified": false,
+      "observed_font_families": [
+        "Pretendard"
+      ],
+      "observed_font_use_counts": {
+        "Pretendard": 20
+      },
+      "passed": true,
+      "performed": true
+    },
+    "firstPartyImport": {
+      "performed": true,
+      "passed": true,
+      "slideCount": 1,
+      "sha256": "9d6f65c864aaaaecb29549b7448fad876ab8bce88f69245dc91aa962282ef08e",
+      "runtimeNodeModules": "$SUPPLIED_RUNTIME/dependencies/node/node_modules",
+      "nodeExecutable": "$SUPPLIED_RUNTIME/dependencies/node/bin/node"
+    },
+    "nativeTableArithmetic": {
+      "performed": true,
+      "checked_column_count": 0,
+      "checks": [],
+      "claim_boundary": "Displayed-value arithmetic with rounding tolerance; not source-data verification.",
+      "eligible_table_count": 0,
+      "finding_count": 0,
+      "findings": [],
+      "native_table_count": 0,
+      "passed": true,
+      "schema_version": "presentation-native-table-arithmetic.v1",
+      "skipped_tables": [],
+      "slide_count": 1,
+      "warning_count": 0,
+      "warnings": []
+    },
+    "nativeChartTitles": {
+      "performed": true,
+      "checks": [
+        {
+          "chart": 1,
+          "slide": 1,
+          "status": "absent"
+        }
+      ],
+      "finding_count": 0,
+      "findings": [],
+      "native_chart_count": 1,
+      "native_powerpoint_verified": false,
+      "passed": true,
+      "presentation_sha256": "9d6f65c864aaaaecb29549b7448fad876ab8bce88f69245dc91aa962282ef08e",
+      "schema_version": "presentation-native-chart-titles.v1",
+      "slide_count": 1,
+      "source_text_emitted": false,
+      "unresolved_linked_title_count": 0
+    },
+    "sourceDerivedPolicyFlags": [
+      "--expected-slide-size-emu",
+      "12192000,6858000",
+      "--validate-heading-fit",
+      "--cover-role",
+      "none",
+      "--expected-slide-count",
+      "1",
+      "--approved-font-family",
+      "Pretendard"
+    ],
+    "nativeChartValidation": {
+      "detectedOwnerSlides": [
+        1
+      ],
+      "detectedChartCount": 1,
+      "targetApplication": "portable",
+      "sourceChartOwnersExplicitlyDeclared": true,
+      "validatorRan": true,
+      "passed": true
+    },
+    "nativeQuantitativeCharts": {
+      "report": {
+        "claim_boundary": "OOXML/workbook structural validation only; source provenance and native PowerPoint opening remain separate checks.",
+        "expected_quantitative_chart_slides": [
+          1
+        ],
+        "failed_slide_count": 0,
+        "failed_slides": [],
+        "formal_human_reviewed": false,
+        "native_application_open_verified": false,
+        "package_sha256": "9d6f65c864aaaaecb29549b7448fad876ab8bce88f69245dc91aa962282ef08e",
+        "passed": true,
+        "required_embedded_workbook_slides": [
+          1
+        ],
+        "results": [
+          {
+            "approved_source_figure_exception": false,
+            "charts": [
+              {
+                "cache_reference_ranges_verified": true,
+                "embedded_workbook_count": 1,
+                "embedded_workbook_sheet_count": 1,
+                "native_chart_types": [
+                  "barChart"
+                ],
+                "numeric_cache_point_count": 2,
+                "series_formula_count": 6,
+                "workbook_numeric_cell_count": 2
+              }
+            ],
+            "failure_codes": [],
+            "native_chart_count": 1,
+            "raster_picture_count": 0,
+            "required_native_chart_count": 1,
+            "slide_number": 1,
+            "status": "passed"
+          }
+        ],
+        "schema_version": "owner-private.quantitative-chart-native-gate.v1",
+        "slide_count": 1,
+        "source_attachments_accessed": false,
+        "target_application": "portable",
+        "validated_slide_count": 1
+      },
+      "exitCode": 0,
+      "validatedSlideCount": 1,
+      "requiredOwnerSlides": [
+        1
+      ],
+      "approvedSourceFigureExceptionSlides": [],
+      "requiredEmbeddedWorkbookChartOwnerSlides": [
+        1
+      ]
+    }
+  },
+  "render_manifest": {
+    "renderer": "shared Presentations runtime / artifact-tool importPptx + export png",
+    "artifact_tool_version": "2.8.59",
+    "node_version": "v24.19.0",
+    "pptx_sha256": "9d6f65c864aaaaecb29549b7448fad876ab8bce88f69245dc91aa962282ef08e",
+    "registered_fonts": {
+      "$CHECKOUT/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Regular.otf": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+      "$CHECKOUT/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Bold.otf": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7"
+    },
+    "images": [
+      {
+        "slide": 1,
+        "path": "slide-1.png",
+        "sha256": "462aa45ca94b334c99204be4835af472d8e05c58c1aa9030a0e3bd2d3ef74a9d"
+      }
+    ]
+  },
+  "artifacts": {
+    "facts.md": "3e9f60c3c76259128315ef41e76ff240c3c73192dc5d0c9c13d1aa9c3d28066c",
+    "design_spec.md": "34de11bdb295008b618919a55514c09965ebac6ff9d5b0a3fed2d060f370d370",
+    "spec_lock.md": "72d28c5d7838044e8cd91adaab19f63b89a1e578bd39129a7533aafa1ac48bd9",
+    "README.md": "c31cbb45ffaa93d1f0eda5cc4f6d0d478dbcf3db5996a49c59f0b9eaa5e87bba",
+    "task-brief.json": "63fe2bf0c281d2bc04aaaef9b28cd5bf8c2e1fe0a5ab520455bb283078497b43",
+    "review/slide-1.png": "462aa45ca94b334c99204be4835af472d8e05c58c1aa9030a0e3bd2d3ef74a9d",
+    "review/builtin-full.pptx": "9d6f65c864aaaaecb29549b7448fad876ab8bce88f69245dc91aa962282ef08e",
+    "svg_output/01_합성_KPI_점검.svg": "a832ef873dc147bd7ec318badec6cb44e008d8e4bf795030b4bde32f387afb81"
+  },
+  "published_fixture_checks": {
+    "rebased_public_brief_and_exact_OFL_font_paths": "pass",
+    "new_relative_links": "pass",
+    "final_byte_hash": "pass",
+    "actual_user_confirmation": "not_exercised"
+  }
+}

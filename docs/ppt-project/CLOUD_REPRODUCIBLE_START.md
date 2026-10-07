@@ -185,3 +185,7 @@ await fs.writeFile(path.join(work,'shared-review.json'),JSON.stringify(records,n
 경로 이동 검토는 **다른 빈 checkout**에도 동일한 두 스크립트와 공급 runtime을 사용한다. 폰트/라이선스 경로는 코드가 각 brief 기준으로 다시 계산한다. audit.json의 checks 19개, exact readback, receipt의 fontSelection/package/layout/chart 통과, candidate bytes 보존, 전체 8개 렌더의 픽셀을 비교한다. 생성 시간이 다른 기본 PPTX는 docProps/core.xml의 created/modified만 달라질 수 있다. 이 외 차이는 원인을 확인한다.
 
 단일 체크아웃에서 명령이 통과한 것과 다른 PC 검증은 구분한다. 운영 승인/사용자 확인/실제 native 앱 gate 없이 샘플 성공을 배포 승인으로 읽지 않는다. 다음 별도 리뷰 대상은 이 문서의 재현 명령과 검증 기록의 범위·비밀정보 미포함이며, 기능 기준 58a25ce의 재개발은 포함하지 않는다.
+
+## 2026-10-07 후속 기본 SVG 정상 경로 검증
+
+별도 [합성 1장 전체 경로 검증](../../.claude/skills/ppt-master/examples/cloud_entry/builtin_full_path/README.md)은 source 07c781d에서 design_spec/spec_lock, strict planning, 손작성 SVG page/full QA, 정상 svg_to_pptx, verify_deck와 지원 공유 finalization/render까지 실행했다. 위 2장 review exporter 근거와 구분한다. Planning 누락 경고는 없었다. live preview 실패, verify 내부 cached skip과 OfficeCLI/실제 사용자 UI·PowerPoint 미실행은 별도 기록했다. 기능/운영 변경을 의미하지 않는다.
