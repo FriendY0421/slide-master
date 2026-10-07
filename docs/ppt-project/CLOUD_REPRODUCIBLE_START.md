@@ -189,3 +189,7 @@ await fs.writeFile(path.join(work,'shared-review.json'),JSON.stringify(records,n
 ## 2026-10-07 후속 기본 SVG 정상 경로 검증
 
 별도 [합성 1장 전체 경로 검증](../../.claude/skills/ppt-master/examples/cloud_entry/builtin_full_path/README.md)은 source 07c781d에서 design_spec/spec_lock, strict planning, 손작성 SVG page/full QA, 정상 svg_to_pptx, verify_deck와 지원 공유 finalization/render까지 실행했다. 위 2장 review exporter 근거와 구분한다. Planning 누락 경고는 없었다. live preview 실패, verify 내부 cached skip과 OfficeCLI/실제 사용자 UI·PowerPoint 미실행은 별도 기록했다. 기능/운영 변경을 의미하지 않는다.
+
+### 기존 합성 프로젝트 미리보기 환경 후속 확인
+
+[Flask 격리 환경 후속 근거](../../.claude/skills/ppt-master/examples/cloud_entry/builtin_full_path/preview_followup/README.md)는 source b832fe9에서 기존 선언 Flask를 공식 PyPI로 작업 전용 venv에 준비하고 post-export plain preview의 시작·브라우저 1장 표시·UI 종료를 확인했다. 공급 runtime 라이브러리를 읽고 global 환경은 수정하지 않았다. 당시 전체 생성 실행의 실패 기록은 유지하며 전체 생성/실제 승인/PowerPoint 검증 성공으로 확대하지 않는다.
