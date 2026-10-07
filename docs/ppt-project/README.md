@@ -18,3 +18,6 @@ not a claim that the connected plugin or main has been updated.
 `PPT request -> live template picker -> explicit template id -> production preset picker -> explicit preset id -> lock -> research/verification -> slide-by-slide storyline -> explicit approval -> generation -> QA -> delivery`
 
 The preferred UI is a verified conversation-native picker when the host supports it. If the host rejects developer MCPs, use the Desktop Commander template HTML followed by preset HTML. The surface may change; the stage order and fail-closed checkpoints do not.
+
+For the pinned synthetic portability audit and supplied-runtime startup commands, see
+[the reproducible cloud start guide](CLOUD_REPRODUCIBLE_START.md).

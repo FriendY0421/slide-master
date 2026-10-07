@@ -1,0 +1,1881 @@
+{
+  "schema": "slide-master.cloud-portability-review.v1",
+  "review_date": "2026-10-07",
+  "source_head": "58a25cede9ebbaf44cd76a216ae522cdc2caf7fb",
+  "scope": "Two tracked checkouts in one supplied Linux runtime; synthetic/public inputs only; no deployment",
+  "checks_per_checkout": 19,
+  "rendered_pages": 16,
+  "cross_checkout_pairs": 8,
+  "officecli_available": false,
+  "native_powerpoint_open_verified": false,
+  "visual_review": {
+    "inspected_primary_pages": 8,
+    "relocated_pages": "8 pixel-equal pairs; no separate native app inspection",
+    "result": "No visible clipping, missing Korean glyphs, changed chart/table layout, or unexpected style changes in the reviewed public fixtures"
+  },
+  "comparison": [
+    {
+      "mode": "builtin",
+      "slide": 1,
+      "cross_checkout_pixels_equal": true,
+      "existing_review_pixels_equal": true,
+      "primary_render_sha256": "ac3cbab34a28e433998cbfbcffa705ef938e79da46583a0a57bbf2f164ce1e2f",
+      "existing_review": ".claude/skills/ppt-master/examples/cloud_entry/korean_fit/review/slide-1.png"
+    },
+    {
+      "mode": "builtin",
+      "slide": 2,
+      "cross_checkout_pixels_equal": true,
+      "existing_review_pixels_equal": true,
+      "primary_render_sha256": "9dc7408c31d2eacf8bb3135a237c81134630b84985b5236343340dbd156db0c3",
+      "existing_review": ".claude/skills/ppt-master/examples/cloud_entry/korean_fit/review/slide-2.png"
+    },
+    {
+      "mode": "custom",
+      "slide": 1,
+      "cross_checkout_pixels_equal": true,
+      "existing_review_pixels_equal": true,
+      "primary_render_sha256": "6218713ac73857c196dc2e1593bc5feab55d2fd7671af6c9b322546de40649b0",
+      "existing_review": ".claude/skills/ppt-master/examples/template_fidelity/review/filled-01.png"
+    },
+    {
+      "mode": "custom",
+      "slide": 2,
+      "cross_checkout_pixels_equal": true,
+      "existing_review_pixels_equal": true,
+      "primary_render_sha256": "be1df218f358f4c6239a7c95cd44b6a2709d440571f6f22e46f57cf48d15ffd3",
+      "existing_review": ".claude/skills/ppt-master/examples/template_fidelity/review/filled-02.png"
+    },
+    {
+      "mode": "custom",
+      "slide": 3,
+      "cross_checkout_pixels_equal": true,
+      "existing_review_pixels_equal": true,
+      "primary_render_sha256": "79dd21183f5830796c3586ed3ea39298e51c1a410bea3cceeabd7be7cb2f6654",
+      "existing_review": ".claude/skills/ppt-master/examples/template_fidelity/review/filled-03.png"
+    },
+    {
+      "mode": "custom",
+      "slide": 4,
+      "cross_checkout_pixels_equal": true,
+      "existing_review_pixels_equal": true,
+      "primary_render_sha256": "f727193d026d96f17a079efcc1dc85222a923098782c7cb0d31ae8465c1eb04c",
+      "existing_review": ".claude/skills/ppt-master/examples/template_fidelity/review/filled-04.png"
+    },
+    {
+      "mode": "custom",
+      "slide": 5,
+      "cross_checkout_pixels_equal": true,
+      "existing_review_pixels_equal": true,
+      "primary_render_sha256": "c1ff2166be97cfa1fcd6501dba1611f310a54448a7c69ccf36a3d80e17456336",
+      "existing_review": ".claude/skills/ppt-master/examples/template_fidelity/review/filled-05.png"
+    },
+    {
+      "mode": "custom",
+      "slide": 6,
+      "cross_checkout_pixels_equal": true,
+      "existing_review_pixels_equal": true,
+      "primary_render_sha256": "58e0aff08b1850f6aca0a7bdfbe92f91c814087ab053596dae2b2487539e87a1",
+      "existing_review": ".claude/skills/ppt-master/examples/template_fidelity/review/filled-06.png"
+    }
+  ],
+  "runs": [
+    {
+      "checkout": "primary",
+      "audit": {
+        "reviewed_head": "58a25cede9ebbaf44cd76a216ae522cdc2caf7fb",
+        "synthetic_only": true,
+        "actual_user_approval": false,
+        "actual_picker_rendered": false,
+        "independent_67_pass": "reported by parent, not rerun here",
+        "checks": [
+          {
+            "name": "exact reviewed source commit",
+            "passed": true
+          },
+          {
+            "name": "complete builtin keeps font/pt/count/rules, asks nothing twice",
+            "passed": true
+          },
+          {
+            "name": "mode stage asks only supported mode choice",
+            "passed": true
+          },
+          {
+            "name": "builtin template before missing settings",
+            "passed": true
+          },
+          {
+            "name": "missing four settings bundled",
+            "passed": true
+          },
+          {
+            "name": "no UI rendering invented",
+            "passed": true
+          },
+          {
+            "name": "supplied runtime and exact licensed font available",
+            "passed": true
+          },
+          {
+            "name": "both exact OFL font faces verified",
+            "passed": true
+          },
+          {
+            "name": "effective font has no silent fallback",
+            "passed": true
+          },
+          {
+            "name": "missing supplied runtime is blocked without install/fallback",
+            "passed": true
+          },
+          {
+            "name": "live main snapshot is immutable",
+            "passed": true
+          },
+          {
+            "name": "real registered source previews resolve at pinned main",
+            "passed": true
+          },
+          {
+            "name": "entry project records approved synthetic count2",
+            "passed": true
+          },
+          {
+            "name": "builtin slide/design/table parts preserved; only creation timestamps vary",
+            "passed": true
+          },
+          {
+            "name": "builtin metadata differences limited to created/modified times",
+            "passed": true
+          },
+          {
+            "name": "complete custom asks no builtin selection or duplicate inputs",
+            "passed": true
+          },
+          {
+            "name": "native exact readback and external approval binding pass",
+            "passed": true
+          },
+          {
+            "name": "custom native reviewed ZIP parts preserved",
+            "passed": true
+          },
+          {
+            "name": "sources and public font paths stay inside this checkout",
+            "passed": true
+          }
+        ],
+        "commands": [
+          {
+            "script": "template_gallery_chat_manifest_v2.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "record_template_choice_v2.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "record_template_choice_v2.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "record_template_choice_v2.py",
+            "exit_code": 2,
+            "expected_success": false
+          },
+          {
+            "script": "new_deck_init.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "template_preview_pptx.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "project_manager.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "presentation_brief.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "template_fill_pptx.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "template_fill_pptx.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "template_fill_pptx.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "template_fill_pptx.py",
+            "exit_code": 1,
+            "expected_success": false
+          },
+          {
+            "script": "template_fill_pptx.py",
+            "exit_code": 1,
+            "expected_success": false
+          }
+        ],
+        "versions": {
+          "python-pptx": "1.0.2",
+          "Pillow": "12.3.0",
+          "fonttools": "4.61.1",
+          "lxml": "6.1.1",
+          "jsonschema": "4.26.0"
+        },
+        "python_version": "3.12.14",
+        "runtime_available": {
+          "CODEX_PRIMARY_RUNTIME_NODE": true,
+          "CODEX_PRIMARY_RUNTIME_NODE_MODULES": true,
+          "CODEX_PRIMARY_RUNTIME": true,
+          "CODEX_PRIMARY_RUNTIME_PYTHON": true
+        },
+        "font_faces": [
+          {
+            "family": "Pretendard",
+            "style": "Regular",
+            "version": "Version 1.309;Glyphs 3.2 (3225)",
+            "sha256": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93"
+          },
+          {
+            "family": "Pretendard",
+            "style": "Bold",
+            "version": "Version 1.309;Glyphs 3.2 (3225)",
+            "sha256": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7"
+          }
+        ],
+        "source_main_sha": "0578dba7ddf56cf5d7024cf574063c4db7332a3e",
+        "registered_source_preview_count": 60,
+        "preview_sources": [
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/01_cover.svg",
+            "sha256": "0a3d6ced02c2058d84da988af594e65dbe31a3911939f2e22b710815cba3faaf"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/02_toc.svg",
+            "sha256": "ce1634840e63fb0a7fe5bfdbcb5a073c94bd39252c44b58dc6f2245040c6f9c0"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/03_content.svg",
+            "sha256": "a8cf769e9b72e221fb3c4f2a1a1bcc4db290c320e013d9a5342b4e85498b7210"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/03_data_chart.svg",
+            "sha256": "faff852acd42183338d215c4809136f3af6e7e4810b06ac25c4026b64ffdb630"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/03_comparison.svg",
+            "sha256": "e7f09e44d515a16900b5ba2e92e72801f30c36a4cf4fc5d1c41420b458817444"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/04_ending.svg",
+            "sha256": "6bc20d0cd202d24a9e2c07543e5f8e73573c8001da3da1cb485468c4e237a294"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/01_cover.svg",
+            "sha256": "cf9a903b86f17b6f2067444d3716fec6a6a5048b29e8346c129db1f4bc4f68c6"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/02_toc.svg",
+            "sha256": "560d5bed5128f25c57504f8c46112545028e1d010f4bc469b2841518a654e908"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/03_content.svg",
+            "sha256": "979947d927d6f6c20367181f9fe5c8d23b746fafaa2e1fc62e7147a1462d38e7"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/03_data_chart.svg",
+            "sha256": "570f9c7ed645a90f86c1d5266d464bdf9d80679a6fe513a259a5749009db8889"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/03_comparison.svg",
+            "sha256": "d85db04d450a7caa67624d3cd5ea71657a759243e3ab47ff2ea5989c415ade08"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/04_ending.svg",
+            "sha256": "e8b8481fd2b726e96bc1827e463f62acb3b7b4a386d78dfda7138469526f5599"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/01_cover.svg",
+            "sha256": "28b53d83613d4d4e0a0fd4429737f26e70472b6e6cfadabdfd000b75792255ee"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/02_toc.svg",
+            "sha256": "0dcf670dd2210a98cbfd7f1c3f19fb0bcd976e0920247d322c380dc38f696432"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/03_content.svg",
+            "sha256": "f7e7ec5adbbe675b062ca0edde008ca24d20cc1f805e96b64441d7ba65be458a"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/03_data_chart.svg",
+            "sha256": "470106388c0b81d866599a115b76ff03c1d2a76013f00492cd2993dcd851fe3c"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/03_comparison.svg",
+            "sha256": "2b1333dcf45b82e6c02df874ac6fb158f8d079499d96df52a288619771f05659"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/04_ending.svg",
+            "sha256": "35070d61ae4236be26c212ab6362ee9585a3b5039b2dec1ba3f6fc1eb57c9939"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/01_cover.svg",
+            "sha256": "8cab348174f67802de1aa1d219357aa6b0d2e784bc2aab22e2d61b89932222dc"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/02_toc.svg",
+            "sha256": "1564c1717355e48083de71f926733e1a62aebf6f8a1a6b2fc49dad5c597552f7"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/03_content.svg",
+            "sha256": "870adf281c841d1c81f3a9ff1cff7d9be6c6867b98cb8ad715a2ac4fa533b3ee"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/03_data_chart.svg",
+            "sha256": "52b54515c238a529ba2b964a5cf06cf5e28abaadbf8545c24ae021c438b28c4a"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/03_comparison.svg",
+            "sha256": "2d311c2cf009bc64218fc7575e0b0e43e189a016c0848a43f68a8422008e0b75"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/04_ending.svg",
+            "sha256": "12c250d147c52d12afb9eb51a21cbcf98830421f392a18513d61e9058d202640"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/01_cover.svg",
+            "sha256": "94038aac2c5d1c01b84f3a21db3bfc91b5697aa37ba1da7f124163ba6ea188c7"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/02_toc.svg",
+            "sha256": "d7f11dcaed4a7ddf45ad180a91adb5f0f1050c6b91eb3ade978954cc7c3eeeb1"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/03_content.svg",
+            "sha256": "783d9ce51849fa206c76f09eae6bc94364b2af499eed26bc70c38515bfda4b1a"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/03_data_chart.svg",
+            "sha256": "844ae79373e20fc8f9c8926f959507ae4365b4bbfa53d569f3feb114ae217371"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/03_comparison.svg",
+            "sha256": "39e8bc943113988f300d6f0abc7c7a67906a20a5ae7cded4d90f8ef6fc40a3cd"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/04_ending.svg",
+            "sha256": "f4d172f78f44489ba57a95a366b8057ddaff1e5f905d42e5a1dcbc31890cf396"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/01_cover.svg",
+            "sha256": "b69574d6295410ba206be63d3e5536ac4cc8de141d164c50410fa1806b4de6d3"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/02_toc.svg",
+            "sha256": "87ff9f2840f267ab035e1ec1602f480a9f64d14757e98306ed4c530010cfcaeb"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/03_content.svg",
+            "sha256": "fafc17641f5e00b611bc06ff4517416c26e9682a1190a313da97865db5639045"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/03_data_chart.svg",
+            "sha256": "f163851a748cc623eda58647a1e091b353a9a8c9aa869ce9bfffb8924d30155b"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/03_comparison.svg",
+            "sha256": "4cc18328b21d283d0fafd312bf02b6e13a612bc0473663dc50590faf21f9650d"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/04_ending.svg",
+            "sha256": "3ffad6eafd7e482d47291a93a71b88f1fdef3d70d4ed6749ab33217f70c8a86d"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/01_cover.svg",
+            "sha256": "29c05c0f5fc6528991a03997100cbaaf87bafdac5fe902df80e2c4d12ae12cbe"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/02_toc.svg",
+            "sha256": "2f9284019c26ea09a8b2393145ddadfe3e2caf1d2ecb417f2fce2540eeb5b661"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/03_content.svg",
+            "sha256": "a048fbe4e00b006783a50fd5872298da2ab0a4de35aaf6dfdb6c4d641748b9a9"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/03_data_chart.svg",
+            "sha256": "75f7b7c14311b077dd2e2894d7a113f40a724266ed235b25208f0146edc10bb1"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/03_comparison.svg",
+            "sha256": "640ba819bc8f3b770bcdd46b13f8cdb8ae78ac26edef4ae91665a06c847bcf5d"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/04_ending.svg",
+            "sha256": "c2b3b48f8a4ad4d4869e7032d464b6a812aec34178036798e3b1a32959d35af3"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/01_cover.svg",
+            "sha256": "2ef9d35b168473cb71220d53352bef0e8a0feff4d8adcb7b25bf5a77ee83058b"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/02_toc.svg",
+            "sha256": "37411f4c03664b4185449037309a784d60dfbb7a7253db2bcd1ad3c3cba89dba"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/03_content.svg",
+            "sha256": "f353b3a0d0980d8b9245e82c72b1b9b83d3ffa54c71091dd3281446ea7d68116"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/03_data_chart.svg",
+            "sha256": "1b201b489bbe2ed1bcb5e910c346d651565109952d7162ae917be52b9ca504ce"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/03_comparison.svg",
+            "sha256": "27a4372565286874533d8243a314a50823fe5c2b4925c4e891c03224fe0bc252"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/04_ending.svg",
+            "sha256": "ed6f05b62113c9de406e6586c0e568ee200b8fda1828f7702e7c61de06189c4c"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/01_cover.svg",
+            "sha256": "eae21f4e68d6e713d8e88f727f9700c982e44a0f784b1245ccca68ed9a813b63"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/02_toc.svg",
+            "sha256": "3740b6a23dafaa6d9715d867d28b321a2949d42d19ed436873a73046a72e713d"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/03_content.svg",
+            "sha256": "77fc5274d7dfeef148045f05accd535682f3252b3d5d6cc0aedeb79a8fbf57f7"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/03_data_chart.svg",
+            "sha256": "f05100d959a3e2fbfab145343b8ea8d75b3651dbb42406690ad4027bd43d86f5"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/03_comparison.svg",
+            "sha256": "5746b82df4990370ec8f451c646f43ae3f165105ccbd46c99717e725262da7bd"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/04_ending.svg",
+            "sha256": "96925c1b9c065b469fe080ea6ebbc2d2f652e4d0b850816d7346699976128f4a"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/01_cover.svg",
+            "sha256": "30daa24174613ee29982f5e22953830f5a87b5bd8a893a68291034a8e29703e3"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/02_toc.svg",
+            "sha256": "e488d1945f508130d06c3b022ce12498db96090142457b2a65850e38191d2cb4"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/03_content.svg",
+            "sha256": "03fb2e49afad475b71dcd1460e5aa28694c7dafdce2e4d89a24258933702b4f6"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/03_data_chart.svg",
+            "sha256": "62529600eddc5b93dff90d7db5399b49439a638773a1ab391a54498503033079"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/03_comparison.svg",
+            "sha256": "cef8883e90b5ae9141c06b876733468f21e0f01b8ea66c3454abe2c8801f8c8d"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/04_ending.svg",
+            "sha256": "946f098b738844cad8ff06dc1569b574415cc7f8786bc8426a972cc28a423d3e"
+          }
+        ],
+        "builtin_project": "projects/_smoke_cloud_portability/builtin/20261007_builtin_portable",
+        "custom_project": "projects/_smoke_cloud_portability/custom/20261007_custom_portable",
+        "limits": [
+          "Two checkout paths in one supplied Linux environment, not two real PCs",
+          "Builtin intake/selection/init plus existing review exporter, not full main SVG production workflow",
+          "OfficeCLI/PowerPoint unavailable; native application gate not certified",
+          "Actual host UI/private delivery/real company/private fonts not exercised"
+        ]
+      },
+      "shared_review": [
+        {
+          "mode": "builtin",
+          "slide_count": 2,
+          "final_sha256": "822c0c2ecf813f54c17f3395c4d52386593d480f988a494daea85e36173c2213",
+          "candidate_bytes_preserved": true,
+          "finalization": {
+            "schemaVersion": "presentation-finalization.v1",
+            "finalSha256": "822c0c2ecf813f54c17f3395c4d52386593d480f988a494daea85e36173c2213",
+            "byteCount": 31822,
+            "packageIntegrity": {
+              "chart_count": 0,
+              "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
+              "finding_count": 0,
+              "findings": [],
+              "notes_parts_skipped": 0,
+              "relationship_part_count": 16,
+              "slide_count": 2,
+              "status": "pass",
+              "exitCode": 0,
+              "findingCount": 0,
+              "warnings": []
+            },
+            "presentationLayout": {
+              "finding_count": 0,
+              "findings": [],
+              "font_policy": {
+                "checked_text_script_count": 31,
+                "native_font_rendering_verified": false,
+                "observed_font_families": [
+                  "Pretendard"
+                ],
+                "observed_font_use_counts": {
+                  "Pretendard": 31
+                },
+                "passed": true,
+                "performed": true
+              },
+              "slide_count": 2,
+              "slide_size_in": [
+                13.3333,
+                7.5
+              ],
+              "warning_count": 0,
+              "warnings": [],
+              "exitCode": 0,
+              "findingCount": 0,
+              "fontPolicy": {
+                "checked_text_script_count": 31,
+                "native_font_rendering_verified": false,
+                "observed_font_families": [
+                  "Pretendard"
+                ],
+                "observed_font_use_counts": {
+                  "Pretendard": 31
+                },
+                "passed": true,
+                "performed": true
+              }
+            },
+            "fontSelection": {
+              "basis": "design",
+              "approvedFamilies": [
+                "Pretendard"
+              ],
+              "scriptFonts": {},
+              "referenceSha256": null,
+              "referenceFontsVerifiedInEncodedText": false,
+              "checked_text_script_count": 31,
+              "native_font_rendering_verified": false,
+              "observed_font_families": [
+                "Pretendard"
+              ],
+              "observed_font_use_counts": {
+                "Pretendard": 31
+              },
+              "passed": true,
+              "performed": true
+            },
+            "firstPartyImport": {
+              "performed": true,
+              "passed": true,
+              "slideCount": 2,
+              "sha256": "822c0c2ecf813f54c17f3395c4d52386593d480f988a494daea85e36173c2213",
+              "runtimeNodeModules": "$SUPPLIED_RUNTIME/dependencies/node/node_modules",
+              "nodeExecutable": "$SUPPLIED_RUNTIME/dependencies/node/bin/node"
+            },
+            "nativeTableArithmetic": {
+              "performed": true,
+              "checked_column_count": 0,
+              "checks": [],
+              "claim_boundary": "Displayed-value arithmetic with rounding tolerance; not source-data verification.",
+              "eligible_table_count": 0,
+              "finding_count": 0,
+              "findings": [],
+              "native_table_count": 1,
+              "passed": true,
+              "schema_version": "presentation-native-table-arithmetic.v1",
+              "skipped_tables": [
+                {
+                  "reason": "insufficient_rows",
+                  "slide": 2,
+                  "table": 1
+                }
+              ],
+              "slide_count": 2,
+              "warning_count": 0,
+              "warnings": []
+            },
+            "nativeChartTitles": {
+              "performed": true,
+              "checks": [],
+              "finding_count": 0,
+              "findings": [],
+              "native_chart_count": 0,
+              "native_powerpoint_verified": false,
+              "passed": true,
+              "presentation_sha256": "822c0c2ecf813f54c17f3395c4d52386593d480f988a494daea85e36173c2213",
+              "schema_version": "presentation-native-chart-titles.v1",
+              "slide_count": 2,
+              "source_text_emitted": false,
+              "unresolved_linked_title_count": 0
+            },
+            "sourceDerivedPolicyFlags": [
+              "--expected-slide-size-emu",
+              "12192000,6858000",
+              "--validate-heading-fit",
+              "--require-native-table-slide",
+              "2",
+              "--cover-role",
+              "none",
+              "--expected-slide-count",
+              "2",
+              "--approved-font-family",
+              "Pretendard"
+            ],
+            "nativeChartValidation": {
+              "detectedOwnerSlides": [],
+              "detectedChartCount": 0,
+              "targetApplication": "portable",
+              "sourceChartOwnersExplicitlyDeclared": true,
+              "validatorRan": false,
+              "passed": true
+            }
+          },
+          "render_manifest": {
+            "renderer": "shared Presentations runtime / artifact-tool importPptx + export png",
+            "artifact_tool_version": "2.8.59",
+            "node_version": "v24.19.0",
+            "pptx_sha256": "822c0c2ecf813f54c17f3395c4d52386593d480f988a494daea85e36173c2213",
+            "registered_fonts": {
+              "$CHECKOUT/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Regular.otf": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+              "$CHECKOUT/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Bold.otf": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7"
+            },
+            "images": [
+              {
+                "slide": 1,
+                "path": "slide-1.png",
+                "sha256": "ac3cbab34a28e433998cbfbcffa705ef938e79da46583a0a57bbf2f164ce1e2f"
+              },
+              {
+                "slide": 2,
+                "path": "slide-2.png",
+                "sha256": "9dc7408c31d2eacf8bb3135a237c81134630b84985b5236343340dbd156db0c3"
+              }
+            ]
+          }
+        },
+        {
+          "mode": "custom",
+          "slide_count": 6,
+          "final_sha256": "3dada84f4a693dca6064db23f674070979891e74cacea0dd57e4ba758176eed9",
+          "candidate_bytes_preserved": true,
+          "finalization": {
+            "schemaVersion": "presentation-finalization.v1",
+            "finalSha256": "3dada84f4a693dca6064db23f674070979891e74cacea0dd57e4ba758176eed9",
+            "byteCount": 38549,
+            "packageIntegrity": {
+              "chart_count": 2,
+              "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
+              "finding_count": 0,
+              "findings": [],
+              "notes_parts_skipped": 1,
+              "relationship_part_count": 13,
+              "slide_count": 6,
+              "status": "pass",
+              "exitCode": 0,
+              "findingCount": 0,
+              "warnings": []
+            },
+            "presentationLayout": {
+              "finding_count": 0,
+              "findings": [],
+              "font_policy": {
+                "checked_text_script_count": 110,
+                "native_font_rendering_verified": false,
+                "observed_font_families": [
+                  "Pretendard"
+                ],
+                "observed_font_use_counts": {
+                  "Pretendard": 110
+                },
+                "passed": true,
+                "performed": true
+              },
+              "slide_count": 6,
+              "slide_size_in": [
+                13.3333,
+                7.5
+              ],
+              "warning_count": 0,
+              "warnings": [],
+              "exitCode": 0,
+              "findingCount": 0,
+              "fontPolicy": {
+                "checked_text_script_count": 110,
+                "native_font_rendering_verified": false,
+                "observed_font_families": [
+                  "Pretendard"
+                ],
+                "observed_font_use_counts": {
+                  "Pretendard": 110
+                },
+                "passed": true,
+                "performed": true
+              }
+            },
+            "fontSelection": {
+              "basis": "reference",
+              "approvedFamilies": [
+                "Pretendard"
+              ],
+              "scriptFonts": {},
+              "referenceSha256": "d91eec48745dff0a1f249c6630b75fcc8fd6ed434b43177caef71921aac70d65",
+              "referenceFontsVerifiedInEncodedText": true,
+              "checked_text_script_count": 110,
+              "native_font_rendering_verified": false,
+              "observed_font_families": [
+                "Pretendard"
+              ],
+              "observed_font_use_counts": {
+                "Pretendard": 110
+              },
+              "passed": true,
+              "performed": true
+            },
+            "firstPartyImport": {
+              "performed": true,
+              "passed": true,
+              "slideCount": 6,
+              "sha256": "3dada84f4a693dca6064db23f674070979891e74cacea0dd57e4ba758176eed9",
+              "runtimeNodeModules": "$SUPPLIED_RUNTIME/dependencies/node/node_modules",
+              "nodeExecutable": "$SUPPLIED_RUNTIME/dependencies/node/bin/node"
+            },
+            "nativeTableArithmetic": {
+              "performed": true,
+              "checked_column_count": 0,
+              "checks": [],
+              "claim_boundary": "Displayed-value arithmetic with rounding tolerance; not source-data verification.",
+              "eligible_table_count": 0,
+              "finding_count": 0,
+              "findings": [],
+              "native_table_count": 2,
+              "passed": true,
+              "schema_version": "presentation-native-table-arithmetic.v1",
+              "skipped_tables": [
+                {
+                  "reason": "no_numeric_amounts",
+                  "slide": 5,
+                  "table": 1
+                },
+                {
+                  "reason": "no_numeric_amounts",
+                  "slide": 6,
+                  "table": 1
+                }
+              ],
+              "slide_count": 6,
+              "warning_count": 0,
+              "warnings": []
+            },
+            "nativeChartTitles": {
+              "performed": true,
+              "checks": [
+                {
+                  "chart": 1,
+                  "slide": 2,
+                  "status": "absent"
+                },
+                {
+                  "chart": 1,
+                  "slide": 3,
+                  "status": "absent"
+                }
+              ],
+              "finding_count": 0,
+              "findings": [],
+              "native_chart_count": 2,
+              "native_powerpoint_verified": false,
+              "passed": true,
+              "presentation_sha256": "3dada84f4a693dca6064db23f674070979891e74cacea0dd57e4ba758176eed9",
+              "schema_version": "presentation-native-chart-titles.v1",
+              "slide_count": 6,
+              "source_text_emitted": false,
+              "unresolved_linked_title_count": 0
+            },
+            "sourceDerivedPolicyFlags": [
+              "--expected-slide-size-emu",
+              "12192000,6858000",
+              "--validate-heading-fit",
+              "--require-native-table-slide",
+              "5",
+              "--require-native-table-slide",
+              "6",
+              "--cover-role",
+              "none",
+              "--expected-slide-count",
+              "6",
+              "--approved-font-family",
+              "Pretendard"
+            ],
+            "nativeChartValidation": {
+              "detectedOwnerSlides": [
+                2,
+                3
+              ],
+              "detectedChartCount": 2,
+              "targetApplication": "portable",
+              "sourceChartOwnersExplicitlyDeclared": true,
+              "validatorRan": true,
+              "passed": true
+            },
+            "nativeQuantitativeCharts": {
+              "report": {
+                "claim_boundary": "OOXML/workbook structural validation only; source provenance and native PowerPoint opening remain separate checks.",
+                "expected_quantitative_chart_slides": [
+                  2,
+                  3
+                ],
+                "failed_slide_count": 0,
+                "failed_slides": [],
+                "formal_human_reviewed": false,
+                "native_application_open_verified": false,
+                "package_sha256": "3dada84f4a693dca6064db23f674070979891e74cacea0dd57e4ba758176eed9",
+                "passed": true,
+                "required_embedded_workbook_slides": [
+                  2,
+                  3
+                ],
+                "results": [
+                  {
+                    "approved_source_figure_exception": false,
+                    "charts": [
+                      {
+                        "cache_reference_ranges_verified": true,
+                        "embedded_workbook_count": 1,
+                        "embedded_workbook_sheet_count": 1,
+                        "native_chart_types": [
+                          "barChart"
+                        ],
+                        "numeric_cache_point_count": 2,
+                        "series_formula_count": 3,
+                        "workbook_numeric_cell_count": 2
+                      }
+                    ],
+                    "failure_codes": [],
+                    "native_chart_count": 1,
+                    "raster_picture_count": 0,
+                    "required_native_chart_count": 1,
+                    "slide_number": 2,
+                    "status": "passed"
+                  },
+                  {
+                    "approved_source_figure_exception": false,
+                    "charts": [
+                      {
+                        "cache_reference_ranges_verified": true,
+                        "embedded_workbook_count": 1,
+                        "embedded_workbook_sheet_count": 1,
+                        "native_chart_types": [
+                          "barChart"
+                        ],
+                        "numeric_cache_point_count": 3,
+                        "series_formula_count": 3,
+                        "workbook_numeric_cell_count": 3
+                      }
+                    ],
+                    "failure_codes": [],
+                    "native_chart_count": 1,
+                    "raster_picture_count": 0,
+                    "required_native_chart_count": 1,
+                    "slide_number": 3,
+                    "status": "passed"
+                  }
+                ],
+                "schema_version": "owner-private.quantitative-chart-native-gate.v1",
+                "slide_count": 6,
+                "source_attachments_accessed": false,
+                "target_application": "portable",
+                "validated_slide_count": 2
+              },
+              "exitCode": 0,
+              "validatedSlideCount": 2,
+              "requiredOwnerSlides": [
+                2,
+                3
+              ],
+              "approvedSourceFigureExceptionSlides": [],
+              "requiredEmbeddedWorkbookChartOwnerSlides": [
+                2,
+                3
+              ]
+            }
+          },
+          "render_manifest": {
+            "renderer": "shared Presentations runtime / artifact-tool importPptx + export png",
+            "artifact_tool_version": "2.8.59",
+            "node_version": "v24.19.0",
+            "pptx_sha256": "3dada84f4a693dca6064db23f674070979891e74cacea0dd57e4ba758176eed9",
+            "registered_fonts": {
+              "$CHECKOUT/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Regular.otf": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+              "$CHECKOUT/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Bold.otf": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7"
+            },
+            "images": [
+              {
+                "slide": 1,
+                "path": "slide-1.png",
+                "sha256": "6218713ac73857c196dc2e1593bc5feab55d2fd7671af6c9b322546de40649b0"
+              },
+              {
+                "slide": 2,
+                "path": "slide-2.png",
+                "sha256": "be1df218f358f4c6239a7c95cd44b6a2709d440571f6f22e46f57cf48d15ffd3"
+              },
+              {
+                "slide": 3,
+                "path": "slide-3.png",
+                "sha256": "79dd21183f5830796c3586ed3ea39298e51c1a410bea3cceeabd7be7cb2f6654"
+              },
+              {
+                "slide": 4,
+                "path": "slide-4.png",
+                "sha256": "f727193d026d96f17a079efcc1dc85222a923098782c7cb0d31ae8465c1eb04c"
+              },
+              {
+                "slide": 5,
+                "path": "slide-5.png",
+                "sha256": "c1ff2166be97cfa1fcd6501dba1611f310a54448a7c69ccf36a3d80e17456336"
+              },
+              {
+                "slide": 6,
+                "path": "slide-6.png",
+                "sha256": "58e0aff08b1850f6aca0a7bdfbe92f91c814087ab053596dae2b2487539e87a1"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "checkout": "relocated",
+      "audit": {
+        "reviewed_head": "58a25cede9ebbaf44cd76a216ae522cdc2caf7fb",
+        "synthetic_only": true,
+        "actual_user_approval": false,
+        "actual_picker_rendered": false,
+        "independent_67_pass": "reported by parent, not rerun here",
+        "checks": [
+          {
+            "name": "exact reviewed source commit",
+            "passed": true
+          },
+          {
+            "name": "complete builtin keeps font/pt/count/rules, asks nothing twice",
+            "passed": true
+          },
+          {
+            "name": "mode stage asks only supported mode choice",
+            "passed": true
+          },
+          {
+            "name": "builtin template before missing settings",
+            "passed": true
+          },
+          {
+            "name": "missing four settings bundled",
+            "passed": true
+          },
+          {
+            "name": "no UI rendering invented",
+            "passed": true
+          },
+          {
+            "name": "supplied runtime and exact licensed font available",
+            "passed": true
+          },
+          {
+            "name": "both exact OFL font faces verified",
+            "passed": true
+          },
+          {
+            "name": "effective font has no silent fallback",
+            "passed": true
+          },
+          {
+            "name": "missing supplied runtime is blocked without install/fallback",
+            "passed": true
+          },
+          {
+            "name": "live main snapshot is immutable",
+            "passed": true
+          },
+          {
+            "name": "real registered source previews resolve at pinned main",
+            "passed": true
+          },
+          {
+            "name": "entry project records approved synthetic count2",
+            "passed": true
+          },
+          {
+            "name": "builtin slide/design/table parts preserved; only creation timestamps vary",
+            "passed": true
+          },
+          {
+            "name": "builtin metadata differences limited to created/modified times",
+            "passed": true
+          },
+          {
+            "name": "complete custom asks no builtin selection or duplicate inputs",
+            "passed": true
+          },
+          {
+            "name": "native exact readback and external approval binding pass",
+            "passed": true
+          },
+          {
+            "name": "custom native reviewed ZIP parts preserved",
+            "passed": true
+          },
+          {
+            "name": "sources and public font paths stay inside this checkout",
+            "passed": true
+          }
+        ],
+        "commands": [
+          {
+            "script": "template_gallery_chat_manifest_v2.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "record_template_choice_v2.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "record_template_choice_v2.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "record_template_choice_v2.py",
+            "exit_code": 2,
+            "expected_success": false
+          },
+          {
+            "script": "new_deck_init.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "template_preview_pptx.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "project_manager.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "presentation_brief.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "template_fill_pptx.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "template_fill_pptx.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "template_fill_pptx.py",
+            "exit_code": 0,
+            "expected_success": true
+          },
+          {
+            "script": "template_fill_pptx.py",
+            "exit_code": 1,
+            "expected_success": false
+          },
+          {
+            "script": "template_fill_pptx.py",
+            "exit_code": 1,
+            "expected_success": false
+          }
+        ],
+        "versions": {
+          "python-pptx": "1.0.2",
+          "Pillow": "12.3.0",
+          "fonttools": "4.61.1",
+          "lxml": "6.1.1",
+          "jsonschema": "4.26.0"
+        },
+        "python_version": "3.12.14",
+        "runtime_available": {
+          "CODEX_PRIMARY_RUNTIME_NODE": true,
+          "CODEX_PRIMARY_RUNTIME_NODE_MODULES": true,
+          "CODEX_PRIMARY_RUNTIME": true,
+          "CODEX_PRIMARY_RUNTIME_PYTHON": true
+        },
+        "font_faces": [
+          {
+            "family": "Pretendard",
+            "style": "Regular",
+            "version": "Version 1.309;Glyphs 3.2 (3225)",
+            "sha256": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93"
+          },
+          {
+            "family": "Pretendard",
+            "style": "Bold",
+            "version": "Version 1.309;Glyphs 3.2 (3225)",
+            "sha256": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7"
+          }
+        ],
+        "source_main_sha": "0578dba7ddf56cf5d7024cf574063c4db7332a3e",
+        "registered_source_preview_count": 60,
+        "preview_sources": [
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/01_cover.svg",
+            "sha256": "0a3d6ced02c2058d84da988af594e65dbe31a3911939f2e22b710815cba3faaf"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/02_toc.svg",
+            "sha256": "ce1634840e63fb0a7fe5bfdbcb5a073c94bd39252c44b58dc6f2245040c6f9c0"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/03_content.svg",
+            "sha256": "a8cf769e9b72e221fb3c4f2a1a1bcc4db290c320e013d9a5342b4e85498b7210"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/03_data_chart.svg",
+            "sha256": "faff852acd42183338d215c4809136f3af6e7e4810b06ac25c4026b64ffdb630"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/03_comparison.svg",
+            "sha256": "e7f09e44d515a16900b5ba2e92e72801f30c36a4cf4fc5d1c41420b458817444"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/service_improvement/templates/04_ending.svg",
+            "sha256": "6bc20d0cd202d24a9e2c07543e5f8e73573c8001da3da1cb485468c4e237a294"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/01_cover.svg",
+            "sha256": "cf9a903b86f17b6f2067444d3716fec6a6a5048b29e8346c129db1f4bc4f68c6"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/02_toc.svg",
+            "sha256": "560d5bed5128f25c57504f8c46112545028e1d010f4bc469b2841518a654e908"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/03_content.svg",
+            "sha256": "979947d927d6f6c20367181f9fe5c8d23b746fafaa2e1fc62e7147a1462d38e7"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/03_data_chart.svg",
+            "sha256": "570f9c7ed645a90f86c1d5266d464bdf9d80679a6fe513a259a5749009db8889"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/03_comparison.svg",
+            "sha256": "d85db04d450a7caa67624d3cd5ea71657a759243e3ab47ff2ea5989c415ade08"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/04_ending.svg",
+            "sha256": "e8b8481fd2b726e96bc1827e463f62acb3b7b4a386d78dfda7138469526f5599"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/01_cover.svg",
+            "sha256": "28b53d83613d4d4e0a0fd4429737f26e70472b6e6cfadabdfd000b75792255ee"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/02_toc.svg",
+            "sha256": "0dcf670dd2210a98cbfd7f1c3f19fb0bcd976e0920247d322c380dc38f696432"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/03_content.svg",
+            "sha256": "f7e7ec5adbbe675b062ca0edde008ca24d20cc1f805e96b64441d7ba65be458a"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/03_data_chart.svg",
+            "sha256": "470106388c0b81d866599a115b76ff03c1d2a76013f00492cd2993dcd851fe3c"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/03_comparison.svg",
+            "sha256": "2b1333dcf45b82e6c02df874ac6fb158f8d079499d96df52a288619771f05659"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/data_insight_pro/templates/04_ending.svg",
+            "sha256": "35070d61ae4236be26c212ab6362ee9585a3b5039b2dec1ba3f6fc1eb57c9939"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/01_cover.svg",
+            "sha256": "8cab348174f67802de1aa1d219357aa6b0d2e784bc2aab22e2d61b89932222dc"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/02_toc.svg",
+            "sha256": "1564c1717355e48083de71f926733e1a62aebf6f8a1a6b2fc49dad5c597552f7"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/03_content.svg",
+            "sha256": "870adf281c841d1c81f3a9ff1cff7d9be6c6867b98cb8ad715a2ac4fa533b3ee"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/03_data_chart.svg",
+            "sha256": "52b54515c238a529ba2b964a5cf06cf5e28abaadbf8545c24ae021c438b28c4a"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/03_comparison.svg",
+            "sha256": "2d311c2cf009bc64218fc7575e0b0e43e189a016c0848a43f68a8422008e0b75"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/executive_boardroom/templates/04_ending.svg",
+            "sha256": "12c250d147c52d12afb9eb51a21cbcf98830421f392a18513d61e9058d202640"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/01_cover.svg",
+            "sha256": "94038aac2c5d1c01b84f3a21db3bfc91b5697aa37ba1da7f124163ba6ea188c7"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/02_toc.svg",
+            "sha256": "d7f11dcaed4a7ddf45ad180a91adb5f0f1050c6b91eb3ade978954cc7c3eeeb1"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/03_content.svg",
+            "sha256": "783d9ce51849fa206c76f09eae6bc94364b2af499eed26bc70c38515bfda4b1a"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/03_data_chart.svg",
+            "sha256": "844ae79373e20fc8f9c8926f959507ae4365b4bbfa53d569f3feb114ae217371"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/03_comparison.svg",
+            "sha256": "39e8bc943113988f300d6f0abc7c7a67906a20a5ae7cded4d90f8ef6fc40a3cd"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/future_tech/templates/04_ending.svg",
+            "sha256": "f4d172f78f44489ba57a95a366b8057ddaff1e5f905d42e5a1dcbc31890cf396"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/01_cover.svg",
+            "sha256": "b69574d6295410ba206be63d3e5536ac4cc8de141d164c50410fa1806b4de6d3"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/02_toc.svg",
+            "sha256": "87ff9f2840f267ab035e1ec1602f480a9f64d14757e98306ed4c530010cfcaeb"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/03_content.svg",
+            "sha256": "fafc17641f5e00b611bc06ff4517416c26e9682a1190a313da97865db5639045"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/03_data_chart.svg",
+            "sha256": "f163851a748cc623eda58647a1e091b353a9a8c9aa869ce9bfffb8924d30155b"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/03_comparison.svg",
+            "sha256": "4cc18328b21d283d0fafd312bf02b6e13a612bc0473663dc50590faf21f9650d"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/modern_corporate_blue/templates/04_ending.svg",
+            "sha256": "3ffad6eafd7e482d47291a93a71b88f1fdef3d70d4ed6749ab33217f70c8a86d"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/01_cover.svg",
+            "sha256": "29c05c0f5fc6528991a03997100cbaaf87bafdac5fe902df80e2c4d12ae12cbe"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/02_toc.svg",
+            "sha256": "2f9284019c26ea09a8b2393145ddadfe3e2caf1d2ecb417f2fce2540eeb5b661"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/03_content.svg",
+            "sha256": "a048fbe4e00b006783a50fd5872298da2ab0a4de35aaf6dfdb6c4d641748b9a9"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/03_data_chart.svg",
+            "sha256": "75f7b7c14311b077dd2e2894d7a113f40a724266ed235b25208f0146edc10bb1"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/03_comparison.svg",
+            "sha256": "640ba819bc8f3b770bcdd46b13f8cdb8ae78ac26edef4ae91665a06c847bcf5d"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/startup_pitch_bold/templates/04_ending.svg",
+            "sha256": "c2b3b48f8a4ad4d4869e7032d464b6a812aec34178036798e3b1a32959d35af3"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/01_cover.svg",
+            "sha256": "2ef9d35b168473cb71220d53352bef0e8a0feff4d8adcb7b25bf5a77ee83058b"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/02_toc.svg",
+            "sha256": "37411f4c03664b4185449037309a784d60dfbb7a7253db2bcd1ad3c3cba89dba"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/03_content.svg",
+            "sha256": "f353b3a0d0980d8b9245e82c72b1b9b83d3ffa54c71091dd3281446ea7d68116"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/03_data_chart.svg",
+            "sha256": "1b201b489bbe2ed1bcb5e910c346d651565109952d7162ae917be52b9ca504ce"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/03_comparison.svg",
+            "sha256": "27a4372565286874533d8243a314a50823fe5c2b4925c4e891c03224fe0bc252"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/strategy_roadmap/templates/04_ending.svg",
+            "sha256": "ed6f05b62113c9de406e6586c0e568ee200b8fda1828f7702e7c61de06189c4c"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/01_cover.svg",
+            "sha256": "eae21f4e68d6e713d8e88f727f9700c982e44a0f784b1245ccca68ed9a813b63"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/02_toc.svg",
+            "sha256": "3740b6a23dafaa6d9715d867d28b321a2949d42d19ed436873a73046a72e713d"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/03_content.svg",
+            "sha256": "77fc5274d7dfeef148045f05accd535682f3252b3d5d6cc0aedeb79a8fbf57f7"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/03_data_chart.svg",
+            "sha256": "f05100d959a3e2fbfab145343b8ea8d75b3651dbb42406690ad4027bd43d86f5"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/03_comparison.svg",
+            "sha256": "5746b82df4990370ec8f451c646f43ae3f165105ccbd46c99717e725262da7bd"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/training_playbook/templates/04_ending.svg",
+            "sha256": "96925c1b9c065b469fe080ea6ebbc2d2f652e4d0b850816d7346699976128f4a"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/01_cover.svg",
+            "sha256": "30daa24174613ee29982f5e22953830f5a87b5bd8a893a68291034a8e29703e3"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/02_toc.svg",
+            "sha256": "e488d1945f508130d06c3b022ce12498db96090142457b2a65850e38191d2cb4"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/03_content.svg",
+            "sha256": "03fb2e49afad475b71dcd1460e5aa28694c7dafdce2e4d89a24258933702b4f6"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/03_data_chart.svg",
+            "sha256": "62529600eddc5b93dff90d7db5399b49439a638773a1ab391a54498503033079"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/03_comparison.svg",
+            "sha256": "cef8883e90b5ae9141c06b876733468f21e0f01b8ea66c3454abe2c8801f8c8d"
+          },
+          {
+            "path": ".claude/skills/ppt-master/templates/decks/visual_story/templates/04_ending.svg",
+            "sha256": "946f098b738844cad8ff06dc1569b574415cc7f8786bc8426a972cc28a423d3e"
+          }
+        ],
+        "builtin_project": "projects/_smoke_cloud_portability/builtin/20261007_builtin_portable",
+        "custom_project": "projects/_smoke_cloud_portability/custom/20261007_custom_portable",
+        "limits": [
+          "Two checkout paths in one supplied Linux environment, not two real PCs",
+          "Builtin intake/selection/init plus existing review exporter, not full main SVG production workflow",
+          "OfficeCLI/PowerPoint unavailable; native application gate not certified",
+          "Actual host UI/private delivery/real company/private fonts not exercised"
+        ]
+      },
+      "shared_review": [
+        {
+          "mode": "builtin",
+          "slide_count": 2,
+          "final_sha256": "653eea68d1a47f779320ed0d7e11fb034212e2ad92debf75312a770916c3137b",
+          "candidate_bytes_preserved": true,
+          "finalization": {
+            "schemaVersion": "presentation-finalization.v1",
+            "finalSha256": "653eea68d1a47f779320ed0d7e11fb034212e2ad92debf75312a770916c3137b",
+            "byteCount": 31822,
+            "packageIntegrity": {
+              "chart_count": 0,
+              "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
+              "finding_count": 0,
+              "findings": [],
+              "notes_parts_skipped": 0,
+              "relationship_part_count": 16,
+              "slide_count": 2,
+              "status": "pass",
+              "exitCode": 0,
+              "findingCount": 0,
+              "warnings": []
+            },
+            "presentationLayout": {
+              "finding_count": 0,
+              "findings": [],
+              "font_policy": {
+                "checked_text_script_count": 31,
+                "native_font_rendering_verified": false,
+                "observed_font_families": [
+                  "Pretendard"
+                ],
+                "observed_font_use_counts": {
+                  "Pretendard": 31
+                },
+                "passed": true,
+                "performed": true
+              },
+              "slide_count": 2,
+              "slide_size_in": [
+                13.3333,
+                7.5
+              ],
+              "warning_count": 0,
+              "warnings": [],
+              "exitCode": 0,
+              "findingCount": 0,
+              "fontPolicy": {
+                "checked_text_script_count": 31,
+                "native_font_rendering_verified": false,
+                "observed_font_families": [
+                  "Pretendard"
+                ],
+                "observed_font_use_counts": {
+                  "Pretendard": 31
+                },
+                "passed": true,
+                "performed": true
+              }
+            },
+            "fontSelection": {
+              "basis": "design",
+              "approvedFamilies": [
+                "Pretendard"
+              ],
+              "scriptFonts": {},
+              "referenceSha256": null,
+              "referenceFontsVerifiedInEncodedText": false,
+              "checked_text_script_count": 31,
+              "native_font_rendering_verified": false,
+              "observed_font_families": [
+                "Pretendard"
+              ],
+              "observed_font_use_counts": {
+                "Pretendard": 31
+              },
+              "passed": true,
+              "performed": true
+            },
+            "firstPartyImport": {
+              "performed": true,
+              "passed": true,
+              "slideCount": 2,
+              "sha256": "653eea68d1a47f779320ed0d7e11fb034212e2ad92debf75312a770916c3137b",
+              "runtimeNodeModules": "$SUPPLIED_RUNTIME/dependencies/node/node_modules",
+              "nodeExecutable": "$SUPPLIED_RUNTIME/dependencies/node/bin/node"
+            },
+            "nativeTableArithmetic": {
+              "performed": true,
+              "checked_column_count": 0,
+              "checks": [],
+              "claim_boundary": "Displayed-value arithmetic with rounding tolerance; not source-data verification.",
+              "eligible_table_count": 0,
+              "finding_count": 0,
+              "findings": [],
+              "native_table_count": 1,
+              "passed": true,
+              "schema_version": "presentation-native-table-arithmetic.v1",
+              "skipped_tables": [
+                {
+                  "reason": "insufficient_rows",
+                  "slide": 2,
+                  "table": 1
+                }
+              ],
+              "slide_count": 2,
+              "warning_count": 0,
+              "warnings": []
+            },
+            "nativeChartTitles": {
+              "performed": true,
+              "checks": [],
+              "finding_count": 0,
+              "findings": [],
+              "native_chart_count": 0,
+              "native_powerpoint_verified": false,
+              "passed": true,
+              "presentation_sha256": "653eea68d1a47f779320ed0d7e11fb034212e2ad92debf75312a770916c3137b",
+              "schema_version": "presentation-native-chart-titles.v1",
+              "slide_count": 2,
+              "source_text_emitted": false,
+              "unresolved_linked_title_count": 0
+            },
+            "sourceDerivedPolicyFlags": [
+              "--expected-slide-size-emu",
+              "12192000,6858000",
+              "--validate-heading-fit",
+              "--require-native-table-slide",
+              "2",
+              "--cover-role",
+              "none",
+              "--expected-slide-count",
+              "2",
+              "--approved-font-family",
+              "Pretendard"
+            ],
+            "nativeChartValidation": {
+              "detectedOwnerSlides": [],
+              "detectedChartCount": 0,
+              "targetApplication": "portable",
+              "sourceChartOwnersExplicitlyDeclared": true,
+              "validatorRan": false,
+              "passed": true
+            }
+          },
+          "render_manifest": {
+            "renderer": "shared Presentations runtime / artifact-tool importPptx + export png",
+            "artifact_tool_version": "2.8.59",
+            "node_version": "v24.19.0",
+            "pptx_sha256": "653eea68d1a47f779320ed0d7e11fb034212e2ad92debf75312a770916c3137b",
+            "registered_fonts": {
+              "$CHECKOUT/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Regular.otf": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+              "$CHECKOUT/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Bold.otf": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7"
+            },
+            "images": [
+              {
+                "slide": 1,
+                "path": "slide-1.png",
+                "sha256": "ac3cbab34a28e433998cbfbcffa705ef938e79da46583a0a57bbf2f164ce1e2f"
+              },
+              {
+                "slide": 2,
+                "path": "slide-2.png",
+                "sha256": "9dc7408c31d2eacf8bb3135a237c81134630b84985b5236343340dbd156db0c3"
+              }
+            ]
+          }
+        },
+        {
+          "mode": "custom",
+          "slide_count": 6,
+          "final_sha256": "d1c2c2e10464f277314e599a3f125d73a4943d231d4a735e4a787cbf991fa11f",
+          "candidate_bytes_preserved": true,
+          "finalization": {
+            "schemaVersion": "presentation-finalization.v1",
+            "finalSha256": "d1c2c2e10464f277314e599a3f125d73a4943d231d4a735e4a787cbf991fa11f",
+            "byteCount": 38549,
+            "packageIntegrity": {
+              "chart_count": 2,
+              "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
+              "finding_count": 0,
+              "findings": [],
+              "notes_parts_skipped": 1,
+              "relationship_part_count": 13,
+              "slide_count": 6,
+              "status": "pass",
+              "exitCode": 0,
+              "findingCount": 0,
+              "warnings": []
+            },
+            "presentationLayout": {
+              "finding_count": 0,
+              "findings": [],
+              "font_policy": {
+                "checked_text_script_count": 110,
+                "native_font_rendering_verified": false,
+                "observed_font_families": [
+                  "Pretendard"
+                ],
+                "observed_font_use_counts": {
+                  "Pretendard": 110
+                },
+                "passed": true,
+                "performed": true
+              },
+              "slide_count": 6,
+              "slide_size_in": [
+                13.3333,
+                7.5
+              ],
+              "warning_count": 0,
+              "warnings": [],
+              "exitCode": 0,
+              "findingCount": 0,
+              "fontPolicy": {
+                "checked_text_script_count": 110,
+                "native_font_rendering_verified": false,
+                "observed_font_families": [
+                  "Pretendard"
+                ],
+                "observed_font_use_counts": {
+                  "Pretendard": 110
+                },
+                "passed": true,
+                "performed": true
+              }
+            },
+            "fontSelection": {
+              "basis": "reference",
+              "approvedFamilies": [
+                "Pretendard"
+              ],
+              "scriptFonts": {},
+              "referenceSha256": "d91eec48745dff0a1f249c6630b75fcc8fd6ed434b43177caef71921aac70d65",
+              "referenceFontsVerifiedInEncodedText": true,
+              "checked_text_script_count": 110,
+              "native_font_rendering_verified": false,
+              "observed_font_families": [
+                "Pretendard"
+              ],
+              "observed_font_use_counts": {
+                "Pretendard": 110
+              },
+              "passed": true,
+              "performed": true
+            },
+            "firstPartyImport": {
+              "performed": true,
+              "passed": true,
+              "slideCount": 6,
+              "sha256": "d1c2c2e10464f277314e599a3f125d73a4943d231d4a735e4a787cbf991fa11f",
+              "runtimeNodeModules": "$SUPPLIED_RUNTIME/dependencies/node/node_modules",
+              "nodeExecutable": "$SUPPLIED_RUNTIME/dependencies/node/bin/node"
+            },
+            "nativeTableArithmetic": {
+              "performed": true,
+              "checked_column_count": 0,
+              "checks": [],
+              "claim_boundary": "Displayed-value arithmetic with rounding tolerance; not source-data verification.",
+              "eligible_table_count": 0,
+              "finding_count": 0,
+              "findings": [],
+              "native_table_count": 2,
+              "passed": true,
+              "schema_version": "presentation-native-table-arithmetic.v1",
+              "skipped_tables": [
+                {
+                  "reason": "no_numeric_amounts",
+                  "slide": 5,
+                  "table": 1
+                },
+                {
+                  "reason": "no_numeric_amounts",
+                  "slide": 6,
+                  "table": 1
+                }
+              ],
+              "slide_count": 6,
+              "warning_count": 0,
+              "warnings": []
+            },
+            "nativeChartTitles": {
+              "performed": true,
+              "checks": [
+                {
+                  "chart": 1,
+                  "slide": 2,
+                  "status": "absent"
+                },
+                {
+                  "chart": 1,
+                  "slide": 3,
+                  "status": "absent"
+                }
+              ],
+              "finding_count": 0,
+              "findings": [],
+              "native_chart_count": 2,
+              "native_powerpoint_verified": false,
+              "passed": true,
+              "presentation_sha256": "d1c2c2e10464f277314e599a3f125d73a4943d231d4a735e4a787cbf991fa11f",
+              "schema_version": "presentation-native-chart-titles.v1",
+              "slide_count": 6,
+              "source_text_emitted": false,
+              "unresolved_linked_title_count": 0
+            },
+            "sourceDerivedPolicyFlags": [
+              "--expected-slide-size-emu",
+              "12192000,6858000",
+              "--validate-heading-fit",
+              "--require-native-table-slide",
+              "5",
+              "--require-native-table-slide",
+              "6",
+              "--cover-role",
+              "none",
+              "--expected-slide-count",
+              "6",
+              "--approved-font-family",
+              "Pretendard"
+            ],
+            "nativeChartValidation": {
+              "detectedOwnerSlides": [
+                2,
+                3
+              ],
+              "detectedChartCount": 2,
+              "targetApplication": "portable",
+              "sourceChartOwnersExplicitlyDeclared": true,
+              "validatorRan": true,
+              "passed": true
+            },
+            "nativeQuantitativeCharts": {
+              "report": {
+                "claim_boundary": "OOXML/workbook structural validation only; source provenance and native PowerPoint opening remain separate checks.",
+                "expected_quantitative_chart_slides": [
+                  2,
+                  3
+                ],
+                "failed_slide_count": 0,
+                "failed_slides": [],
+                "formal_human_reviewed": false,
+                "native_application_open_verified": false,
+                "package_sha256": "d1c2c2e10464f277314e599a3f125d73a4943d231d4a735e4a787cbf991fa11f",
+                "passed": true,
+                "required_embedded_workbook_slides": [
+                  2,
+                  3
+                ],
+                "results": [
+                  {
+                    "approved_source_figure_exception": false,
+                    "charts": [
+                      {
+                        "cache_reference_ranges_verified": true,
+                        "embedded_workbook_count": 1,
+                        "embedded_workbook_sheet_count": 1,
+                        "native_chart_types": [
+                          "barChart"
+                        ],
+                        "numeric_cache_point_count": 2,
+                        "series_formula_count": 3,
+                        "workbook_numeric_cell_count": 2
+                      }
+                    ],
+                    "failure_codes": [],
+                    "native_chart_count": 1,
+                    "raster_picture_count": 0,
+                    "required_native_chart_count": 1,
+                    "slide_number": 2,
+                    "status": "passed"
+                  },
+                  {
+                    "approved_source_figure_exception": false,
+                    "charts": [
+                      {
+                        "cache_reference_ranges_verified": true,
+                        "embedded_workbook_count": 1,
+                        "embedded_workbook_sheet_count": 1,
+                        "native_chart_types": [
+                          "barChart"
+                        ],
+                        "numeric_cache_point_count": 3,
+                        "series_formula_count": 3,
+                        "workbook_numeric_cell_count": 3
+                      }
+                    ],
+                    "failure_codes": [],
+                    "native_chart_count": 1,
+                    "raster_picture_count": 0,
+                    "required_native_chart_count": 1,
+                    "slide_number": 3,
+                    "status": "passed"
+                  }
+                ],
+                "schema_version": "owner-private.quantitative-chart-native-gate.v1",
+                "slide_count": 6,
+                "source_attachments_accessed": false,
+                "target_application": "portable",
+                "validated_slide_count": 2
+              },
+              "exitCode": 0,
+              "validatedSlideCount": 2,
+              "requiredOwnerSlides": [
+                2,
+                3
+              ],
+              "approvedSourceFigureExceptionSlides": [],
+              "requiredEmbeddedWorkbookChartOwnerSlides": [
+                2,
+                3
+              ]
+            }
+          },
+          "render_manifest": {
+            "renderer": "shared Presentations runtime / artifact-tool importPptx + export png",
+            "artifact_tool_version": "2.8.59",
+            "node_version": "v24.19.0",
+            "pptx_sha256": "d1c2c2e10464f277314e599a3f125d73a4943d231d4a735e4a787cbf991fa11f",
+            "registered_fonts": {
+              "$CHECKOUT/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Regular.otf": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+              "$CHECKOUT/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Bold.otf": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7"
+            },
+            "images": [
+              {
+                "slide": 1,
+                "path": "slide-1.png",
+                "sha256": "6218713ac73857c196dc2e1593bc5feab55d2fd7671af6c9b322546de40649b0"
+              },
+              {
+                "slide": 2,
+                "path": "slide-2.png",
+                "sha256": "be1df218f358f4c6239a7c95cd44b6a2709d440571f6f22e46f57cf48d15ffd3"
+              },
+              {
+                "slide": 3,
+                "path": "slide-3.png",
+                "sha256": "79dd21183f5830796c3586ed3ea39298e51c1a410bea3cceeabd7be7cb2f6654"
+              },
+              {
+                "slide": 4,
+                "path": "slide-4.png",
+                "sha256": "f727193d026d96f17a079efcc1dc85222a923098782c7cb0d31ae8465c1eb04c"
+              },
+              {
+                "slide": 5,
+                "path": "slide-5.png",
+                "sha256": "c1ff2166be97cfa1fcd6501dba1611f310a54448a7c69ccf36a3d80e17456336"
+              },
+              {
+                "slide": 6,
+                "path": "slide-6.png",
+                "sha256": "58e0aff08b1850f6aca0a7bdfbe92f91c814087ab053596dae2b2487539e87a1"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "documentation_checks": {
+    "inline_python_exact_to_executed_runner": true,
+    "inline_javascript_exact_to_executed_runner": true,
+    "inline_python_ast": true,
+    "inline_javascript_node_syntax": true,
+    "new_document_relative_links": true,
+    "runtime_contracts": "PASS",
+    "generated_codex_stubs": "current",
+    "functional_source_changes": false,
+    "previous_sample_or_font_changes": false
+  }
+}
