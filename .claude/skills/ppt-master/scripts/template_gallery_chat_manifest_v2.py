@@ -7,7 +7,6 @@ import argparse
 import json
 from pathlib import Path
 
-import template_gallery as legacy
 import template_gallery_context as context
 import template_catalog as catalog_core
 
@@ -35,7 +34,7 @@ def _entry_payload(entry: dict, ref: str | None, recommended: set[str]) -> dict:
 
 
 def build_manifest(source: str, purpose: str, recommend: str = "", limit: int = 10) -> dict:
-    ref, source_label = legacy._resolve_source(source)
+    ref, source_label = catalog_core.catalog_source(source)
     catalog = catalog_core.load_catalog(ref)
     selectable = catalog_core.selectable_catalog(catalog)
     inferred = context.infer_categories(purpose)
@@ -63,6 +62,7 @@ def build_manifest(source: str, purpose: str, recommend: str = "", limit: int = 
         "schema_version": "2.0",
         "surface": "conversation_inline_two_stage",
         "source": source_label,
+        "source_commit": ref,
         "purpose": purpose,
         "registered_template_count": len(catalog),
         "selectable_template_count": len(all_payload),
@@ -83,7 +83,9 @@ def build_manifest(source: str, purpose: str, recommend: str = "", limit: int = 
         "selection_flow": {
             "stage_1": "Render up to 10 real registered previews and receive a tentative choice.",
             "stage_2": "Render up to 6 real layouts for that choice and receive final confirmation.",
-            "stage_3": "Only then record template selection evidence and continue generation.",
+            "stage_3": "Receive the explicit production preset and record the confirmed template + preset pair.",
+            "stage_4": "Research only after selection lock, then present the full slide-by-slide storyline.",
+            "stage_5": "Generate only after explicit approval of the current storyline; QA before delivery.",
         },
         "render_rule": (
             "Use exact registered SVG sources. If Korean font availability is not positively verified on a raster host, "

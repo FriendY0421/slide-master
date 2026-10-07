@@ -1,0 +1,19 @@
+{
+  "text": "가상 품질 개선팀은 접수 단계의 진단 기준을 정비하고 필요한 부품을 수리 전에 확인한다. 담당자는 점검 결과를 기록하며 기술팀과 자재팀이 같은 기준으로 진행 상태를 확인한다.\n합성자료의 2026Q3 최초 해결률은 84%이고 목표는 90%다. KPI 분석은 수치의 기준과 기간을 함께 표시하며 개선 효과는 다음 보고에서 확인한다.\n한글 장문은 어절을 유지하고 줄간격과 문단간격을 구분한다. 보고 내용이 상자에 맞지 않으면 사용자와 요약이나 분할을 확인하고 전체 장수와 핵심 정보를 유지한다.",
+  "font_file": "../../../assets/fonts/Pretendard/Pretendard-Regular.otf",
+  "font_size_pt": 21,
+  "line_spacing_pt": 30,
+  "paragraph_spacing_pt": 9,
+  "letter_spacing_pt": 0.3,
+  "box_px": {
+    "width": 1136,
+    "height": 440
+  },
+  "margins_px": {
+    "left": 24,
+    "right": 24,
+    "top": 16,
+    "bottom": 16
+  },
+  "role": "body"
+}

@@ -86,6 +86,10 @@ def validate_approval(data: dict) -> list[str]:
         errors.append("storyline snapshot hash mismatch")
     if data.get("slide_count") != len(storyline.get("slides", [])):
         errors.append("slide_count does not match approved storyline")
+    if "requested_slide_count" in data:
+        requested = data["requested_slide_count"]
+        if type(requested) is not int or requested <= 0 or requested != data.get("slide_count"):
+            errors.append("approved storyline differs from requested slide count")
     return errors
 
 

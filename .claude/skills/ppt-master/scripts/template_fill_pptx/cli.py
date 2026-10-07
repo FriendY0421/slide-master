@@ -105,6 +105,8 @@ def build_parser() -> argparse.ArgumentParser:
     apply = subparsers.add_parser("apply", help="Apply fill plan and write a new PPTX")
     apply.add_argument("pptx_file", help="Source PPTX file")
     apply.add_argument("plan_json", help="Fill plan JSON")
+    apply.add_argument('--design-brief', type=Path,
+                       help='required approved v2 custom brief; defaults to analysis/design_brief.json')
     apply.add_argument(
         "-o",
         "--output",
@@ -134,11 +136,12 @@ def build_parser() -> argparse.ArgumentParser:
     apply.add_argument(
         "--force",
         action="store_true",
-        help="apply without a confirmed fill plan (deliberate recovery/debug only)",
+        help="compatibility flag; current task/plan approval binding remains required",
     )
 
     validate = subparsers.add_parser("validate", help="Read back and validate the latest project export")
     validate.add_argument("project_path", help="Template-fill project directory")
+    validate.add_argument('--design-brief', type=Path, help='defaults to analysis/design_brief.json')
 
     return parser
 
@@ -190,18 +193,22 @@ def main(argv: list[str] | None = None) -> int:
                 )
                 return 1
             output_path = _timestamped_pptx_path(Path(args.output).expanduser().resolve())
+            design_brief = args.design_brief or Path(args.plan_json).resolve().parent / 'design_brief.json'
+            if args.design_brief is None and not design_brief.is_file():
+                design_brief = None
             apply_plan(
                 pptx_path,
                 plan,
                 output_path,
                 transition=args.transition,
                 transition_duration=args.transition_duration,
+                design_brief=design_brief,
             )
             print(f"Template-filled PPTX -> {output_path}", file=sys.stderr)
             return 0
 
         if args.command == "validate":
-            report = validate_project(Path(args.project_path))
+            report = validate_project(Path(args.project_path), design_brief=args.design_brief)
             print_validate_report(report)
             return 0 if report["summary"]["error"] == 0 else 1
     except RuntimeError as exc:

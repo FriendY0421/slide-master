@@ -1,0 +1,23 @@
+{
+  "gate_version": 1,
+  "status": "approved",
+  "approved_by": "user",
+  "approved_at": "2026-10-06T13:36:38+0000",
+  "approval_note": "SYNTHETIC fixture only; not actual user approval",
+  "slide_count": 1,
+  "storyline_sha256": "7db2e3677425334306c76196da32b900728b560eda040728abd50db22ff22947",
+  "storyline": {
+    "slides": [
+      {
+        "title": "합성 KPI 점검",
+        "core_message": "현재 84%, 목표 90%",
+        "content_points": [
+          "합성자료",
+          "격차 -6%p"
+        ],
+        "visual_treatment": "Native chart"
+      }
+    ]
+  },
+  "authorization": "Synthetic audit fixture only; not actual user template approval"
+}

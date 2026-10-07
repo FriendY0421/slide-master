@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "scope": "task",
+  "mode": "builtin",
+  "template_id": "deck:executive_boardroom",
+  "production_preset_id": "executive_brief",
+  "content_text": "합성 KPI 84%, 목표 90%. 실제 회사자료 아님.",
+  "inputs_confirmed": true,
+  "authorization": "Synthetic audit fixture only; not actual user template approval"
+}

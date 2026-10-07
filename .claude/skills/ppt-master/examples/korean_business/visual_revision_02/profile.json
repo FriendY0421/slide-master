@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "builtin_visual_revision_02",
+  "description": "Synthetic builtin design example, not a company style or ACTIVE template",
+  "font_family": "Pretendard",
+  "shared_inputs": ["../content.json", "../render_review.mjs", "finalize_review.mjs"],
+  "font_files": ["../../../assets/fonts/Pretendard/Pretendard-Regular.otf", "../../../assets/fonts/Pretendard/Pretendard-Bold.otf"],
+  "slide_count": 3,
+  "view_box": [0, 0, 1280, 720],
+  "required_disclosure": "합성자료 · 실제 회사 실적 아님",
+  "roles": {
+    "title": {"min_px": 48, "max_chars": 44},
+    "body": {"min_px": 28, "max_chars": 42},
+    "heading": {"min_px": 28, "max_chars": 32},
+    "number": {"min_px": 56, "max_chars": 18},
+    "label": {"min_px": 22, "max_chars": 48},
+    "footnote": {"min_px": 16, "max_chars": 80}
+  },
+  "page_types": {"strategy": {"max_body_lines": 6}, "kpi": {"max_body_lines": 4}, "roadmap": {"max_body_lines": 6}},
+  "required_native": {"charts": [2], "tables": []}
+}

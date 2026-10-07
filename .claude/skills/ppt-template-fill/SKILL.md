@@ -62,6 +62,17 @@ directly and uses its own plan, apply, OfficeCLI, and native-render gates.
 
 ## Step 1: Inputs
 
+For custom mode, collect a per-task design brief with original PPTX, selected
+reference samples (or explicit none), content, font/pt policy and writing rules.
+Original-preservation policies are valid explicit inputs. Ask all missing required
+items once; do not freeze task values as company defaults. Validate using
+`presentation_brief.py`; it checks intake, never replaces this skill's plan gate.
+See repo `docs/ppt-project/TEMPLATE_FIRST_WORKFLOW.md`. When exact original style
+is requested, use the opt-in `template_fidelity` source hash + editable-target
+contract and `paragraph_run_texts`, then apply with `--transition keep`.
+Specified font/pt values conflicting with the source require an explicit style
+change decision; native-fill v1 must not silently rewrite them.
+
 🚧 **GATE**: The user has provided:
 
 | Input | Required | Notes |
@@ -290,6 +301,8 @@ Interpret the report:
 ## Step 6: Apply the Plan
 
 ⛔ **BLOCKING GATE**: The user has reviewed the planned output order, omitted pages, reused pages, and material-to-layout fit. Set `<project_dir>/analysis/fill_plan.json` top-level `status` to `"confirmed"` only after that review. `apply` rejects an unconfirmed plan by default; `--force` exists only for deliberate recovery/debug use.
+
+A complete confirmed workflow_version 2 custom brief is required for creation and resume. Store it at `<project_dir>/analysis/design_brief.json` (automatically discovered) or pass `--design-brief`. After actual approval, bind the plan with `requested_slide_count` and `task_brief_sha256` of the exact brief bytes. Missing/stale brief, count or hash blocks apply and readback; omission never implies legacy/resume. `--force` cannot bypass this task binding.
 
 Run:
 

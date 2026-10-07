@@ -321,7 +321,8 @@ Recorded narration:
                         help='Write a JSON diagnostics report next to the native PPTX '
                              '(<output>.trace.json). Records per-slide SVG element '
                              'conversion decisions for debugging.')
-    parser.add_argument('--native-objects', action='store_true', default=False,
+    parser.add_argument('--native-objects', '--native-charts-and-tables',
+                        dest='native_objects', action='store_true', default=False,
                         help='Opt in to converting explicit data-pptx-native table/chart '
                              'markers into editable PowerPoint objects. This editable-first '
                              'replacement may normalize styling or omit unmodeled marker-local '

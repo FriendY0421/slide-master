@@ -1,0 +1,128 @@
+{
+  "schema": "slide-master.preview-followup.v1",
+  "date": "2026-10-07",
+  "tested_source_sha": "b832fe90d3e5e90886955b3e45f7b69cff79e9d8",
+  "synthetic_only": true,
+  "functional_source_changed": false,
+  "existing_declared_requirement": "flask>=3.0.0",
+  "dependency_source": "Official PyPI https://pypi.org/simple (wheels on files.pythonhosted.org)",
+  "installation_scope": "gitignored task-specific venv; system-site-packages reads supplied runtime dependencies; no global write",
+  "python_version": "3.12.14",
+  "packages": [
+    {
+      "name": "Flask",
+      "version": "3.1.3",
+      "wheel_url": "https://files.pythonhosted.org/packages/7f/9c/34f6962f9b9e9c71f6e5ed806e0d0ff03c9d1b0b2340088a0cf4bce09b18/flask-3.1.3-py3-none-any.whl",
+      "sha256": "f4bcbefc124291925f1a26446da31a5178f9483862233b23c0c96a20701f670c"
+    },
+    {
+      "name": "blinker",
+      "version": "1.9.0",
+      "wheel_url": "https://files.pythonhosted.org/packages/10/cb/f2ad4230dc2eb1a74edf38f1a38b9b52277f75bef262d8908e60d957e13c/blinker-1.9.0-py3-none-any.whl",
+      "sha256": "ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc"
+    },
+    {
+      "name": "click",
+      "version": "8.5.0",
+      "wheel_url": "https://files.pythonhosted.org/packages/58/50/6c0d534c5f134586a8e1ba4e330569e32f057e33372ae556463212fb4cd3/click-8.5.0-py3-none-any.whl",
+      "sha256": "255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360"
+    },
+    {
+      "name": "itsdangerous",
+      "version": "2.2.0",
+      "wheel_url": "https://files.pythonhosted.org/packages/04/96/92447566d16df59b2a776c0fb82dbc4d9e07cd95062562af01e408583fc4/itsdangerous-2.2.0-py3-none-any.whl",
+      "sha256": "c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef"
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6",
+      "wheel_url": "https://files.pythonhosted.org/packages/62/a1/3d680cbfd5f4b8f15abc1d571870c5fc3e594bb582bc3b64ea099db13e56/jinja2-3.1.6-py3-none-any.whl",
+      "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67"
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.4",
+      "wheel_url": "https://files.pythonhosted.org/packages/4f/a7/aeedb5140afa41fc74c225e9184ab96723a6e873b6ee1c9fede7283456d8/markupsafe-3.0.4-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl",
+      "sha256": "8e124f974786f831d6043728e38296969d3579db8896fe004682f5758e613581"
+    },
+    {
+      "name": "Werkzeug",
+      "version": "3.1.9",
+      "wheel_url": "https://files.pythonhosted.org/packages/a1/38/df03f564f43cec2684823f3cccae1a652ee7face1cbaa76fb223096e64d7/werkzeug-3.1.9-py3-none-any.whl",
+      "sha256": "6392e50c78460ba618e5b21f08a71f59c99ce99cdc6cf6e3dd7e6ccca8754fab"
+    }
+  ],
+  "intermediate_setup_failure": {
+    "stage": "pure venv server import",
+    "error": "ModuleNotFoundError: No module named pptx",
+    "resolution": "Venv reconfigured --system-site-packages to reuse supplied runtime python-pptx without reinstalling; Flask remains venv-local"
+  },
+  "launcher": {
+    "command": "<PREVIEW_VENV>/bin/python .claude/skills/ppt-master/scripts/svg_editor/server.py <EXISTING_SYNTHETIC_PROJECT> --daemon --no-browser",
+    "exit_code": 0,
+    "mode": "workflow Step1 post-export reopen; plain mode, live=false",
+    "bind": "127.0.0.1:5050",
+    "public_service": false
+  },
+  "browser": {
+    "index_status": 200,
+    "health": {
+      "status": "ok",
+      "slides": 1,
+      "live": false
+    },
+    "config": {
+      "live": false
+    },
+    "slides": {
+      "slides": [
+        {
+          "annotated": false,
+          "annotation_count": 0,
+          "error": null,
+          "name": "01_합성_KPI_점검.svg",
+          "ok": true
+        }
+      ]
+    },
+    "visible_svg_box": {
+      "x": 224,
+      "y": 223,
+      "width": 1072,
+      "height": 603
+    },
+    "title_visible": true,
+    "kpi_84_90_present": true,
+    "page_errors": [],
+    "http_failures": [],
+    "shutdown_status": 200,
+    "shutdown_body": {
+      "status": "ok"
+    },
+    "browser_version": "151.0.7922.173"
+  },
+  "visual_inspection": "One browser screenshot inspected; synthetic slide visible, no observed clipping or missing Korean glyphs; browser font fidelity not certified",
+  "stop_checks": {
+    "health_connection_refused": true,
+    "project_lock_removed": true,
+    "ui_exit_preview_shutdown": true
+  },
+  "preservation": {
+    "svg_bytes_unchanged": true,
+    "pptx_sha256": "9d6f65c864aaaaecb29549b7448fad876ab8bce88f69245dc91aa962282ef08e",
+    "full_generation_not_repeated": true
+  },
+  "remaining_unexecuted": [
+    "actual user selection/approval UI",
+    "PowerPoint/Edit Data",
+    "two PCs",
+    "company/private inputs",
+    "private delivery",
+    "requests/system Pretendard/OfficeCLI preflight warnings not resolved by this scoped setup"
+  ],
+  "artifacts": {
+    "preview.png": "0f7989493c02d55d5a65011261310bd8bd04df97135d701c0e80fe9d307e6063",
+    "requirements.lock": "47c77eae1a79c1a15f4709c72683f1d96ea921874a388bc3b85866486618d67c",
+    "README.md": "edfb187aed52faa3b67138b5f7444777bd4d8fa09c5afdade18c5cf2493a28b1"
+  }
+}

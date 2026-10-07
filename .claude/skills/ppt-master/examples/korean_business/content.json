@@ -1,0 +1,18 @@
+{
+  "disclosure": "합성자료 · 실제 회사 실적 아님",
+  "baseline_sha": "0578dba7ddf56cf5d7024cf574063c4db7332a3e",
+  "baseline_template": ".claude/skills/ppt-master/templates/decks/consulting_clarity/templates/03_content.svg",
+  "comparison_boundary": "Same synthetic facts on six pages. Baseline uses the existing content prototype; improved pages change evidence layout and introduce native data objects. This is a targeted visual/engineering comparison, not a statistical benchmark.",
+  "pages": [
+    {"file":"01_strategy.svg","title":"재방문 감소가 다음 분기 우선과제","lead":"집중할 두 가지 과제","context":"가상 서비스 조직의 실행 우선순위와 판단 기준","lines":["현재 재방문율 4.8% · 목표 3.6%","방문 전 진단을 표준화한다","핵심 부품을 먼저 확보한다"],"number":"3.6%","annotation":"1.2%p 감소 · 재방문율·최초 해결률"},
+    {"file":"02_kpi.svg","title":"최초 해결률은 목표보다 6%p 낮다","lead":"현재와 목표의 격차","context":"최초 해결률 비교 · 비율 차이는 %p로 표시","lines":["현재 84%","목표 90%","방문 전 진단부터 개선"],"number":"-6%p","annotation":"84% - 90% = -6%p"},
+    {"file":"03_causes.svg","title":"진단·부품 문제가 재방문의 80%다","lead":"두 원인에 먼저 집중","context":"가상 재방문 100건을 분류한 원인 구성비","lines":["진단 누락 48%","부품 미확보 32%","기타 20%"],"number":"80%","annotation":"48% + 32% = 80%"},
+    {"file":"04_roadmap.svg","title":"12주 실행계획과 단계별 판단 기준","lead":"시범 운영 후 확대 여부 결정","context":"진단 기준 정비 후 시범 운영으로 효과를 확인한다","lines":["1–2주: 점검 항목 통일 · 진단 체크리스트","3–6주: 두 팀 시범 운영 · 핵심 부품 사전 확보","7–12주: 주간 재방문 점검 · 목표 3.6% 도달"],"number":"12주","annotation":"판단: 최초 해결률 개선과 재방문율"},
+    {"file":"05_actions.svg","title":"담당·기한·검증 기준을 함께 관리한다","lead":"가상 실행 과제 3개","context":"담당자는 역할명으로 표시","lines":["방문 전 진단 표준화 / 기술팀 / 2주차 / 체크리스트 적용","핵심 부품 사전 확보 / 자재팀 / 6주차 / 부품 준비율 95%","재방문 원인 주간 점검 / 품질팀 / 12주차 / 재방문율 3.6%"],"number":"3개","annotation":"과제·담당·기한·검증 기준"},
+    {"file":"06_risks.svg","title":"고객 접점 AI 도입 전 운영 리스크 점검","lead":"시범 운영 전 리스크 확인","context":"혼합 언어 제목과 표 수용량 검증용 가상 시나리오","lines":["불필요한 고객정보 노출 / 권한 밖 조회 / 접근 권한과 로그 점검","잘못된 진단 제안 / 시범 검증 오류 / 담당자가 최종 판단","현장 교육 시간 부족 / 참여율 목표 미달 / 주간 교육 일정 확보"],"number":"3개","annotation":"리스크·확인 신호·대응 기준"}
+  ],
+  "native_chart_contracts": [
+    {"slide":2,"categories":["현재","목표"],"values":[84,90],"unit":"%","gap_percentage_points":-6},
+    {"slide":3,"categories":["진단 누락","부품 미확보","기타"],"values":[48,32,20],"unit":"%","sum":100}
+  ]
+}

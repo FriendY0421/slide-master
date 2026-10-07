@@ -1,0 +1,421 @@
+{
+  "synthetic_only": true,
+  "actual_user_template_approval": false,
+  "mode_UI_actually_rendered": false,
+  "new_deck_created": false,
+  "new_font_installed": false,
+  "font_binary_publicly_uploaded": false,
+  "background_monitoring": false,
+  "private_drive_connected": false,
+  "checks": [
+    {
+      "name": "invalid native input fails with errors",
+      "passed": true
+    },
+    {
+      "name": "complete current builtin no duplicate settings questions",
+      "passed": true
+    },
+    {
+      "name": "mode menu before other questions; not actually displayed",
+      "passed": true
+    },
+    {
+      "name": "builtin template before bundled settings",
+      "passed": true
+    },
+    {
+      "name": "four missing settings in single question",
+      "passed": true
+    },
+    {
+      "name": "preset and four settings bundled after template",
+      "passed": true
+    },
+    {
+      "name": "invalid requested slide count 0",
+      "passed": true
+    },
+    {
+      "name": "invalid requested slide count -1",
+      "passed": true
+    },
+    {
+      "name": "invalid requested slide count True",
+      "passed": true
+    },
+    {
+      "name": "invalid requested slide count 3.5",
+      "passed": true
+    },
+    {
+      "name": "requested slide count plan/output match",
+      "passed": true
+    },
+    {
+      "name": "plan and output count mismatch both rejected",
+      "passed": true
+    },
+    {
+      "name": "example PPT alone routes native original shell",
+      "passed": true
+    },
+    {
+      "name": "custom reference first before settings",
+      "passed": true
+    },
+    {
+      "name": "raster requires actual pixel/perspective/crop/text/aspect review",
+      "passed": true
+    },
+    {
+      "name": "actual raster byte/pixel/aspect facts",
+      "passed": true
+    },
+    {
+      "name": "byte-bound synthetic visual receipt permits reference plan only",
+      "passed": true
+    },
+    {
+      "name": "unknown photo fonts and pt require estimate confirmation",
+      "passed": true
+    },
+    {
+      "name": "estimate confirmation alone does not select a similar font",
+      "passed": true
+    },
+    {
+      "name": "confirmed estimates still not equivalent",
+      "passed": true
+    },
+    {
+      "name": "ambiguous image font choice rejects user_confirmed",
+      "passed": true
+    },
+    {
+      "name": "ambiguous image font choice rejects similarity_approved",
+      "passed": true
+    },
+    {
+      "name": "ambiguous image font choice rejects confidence",
+      "passed": true
+    },
+    {
+      "name": "image font candidate evidence rejects license_status",
+      "passed": true
+    },
+    {
+      "name": "image font candidate evidence rejects preview_sha256",
+      "passed": true
+    },
+    {
+      "name": "image font candidate evidence rejects rendered_font_sha256",
+      "passed": true
+    },
+    {
+      "name": "stale image review SHA rejected",
+      "passed": true
+    },
+    {
+      "name": "actual family/style/version/hash available",
+      "passed": true
+    },
+    {
+      "name": "exact binary availability local",
+      "passed": true
+    },
+    {
+      "name": "version mismatch local",
+      "passed": true
+    },
+    {
+      "name": "hash mismatch local",
+      "passed": true
+    },
+    {
+      "name": "font file without license review local",
+      "passed": true
+    },
+    {
+      "name": "missing face asks font file local",
+      "passed": true
+    },
+    {
+      "name": "style mismatch no silent substitution local",
+      "passed": true
+    },
+    {
+      "name": "exact binary availability cloud",
+      "passed": true
+    },
+    {
+      "name": "version mismatch cloud",
+      "passed": true
+    },
+    {
+      "name": "hash mismatch cloud",
+      "passed": true
+    },
+    {
+      "name": "font file without license review cloud",
+      "passed": true
+    },
+    {
+      "name": "missing face asks font file cloud",
+      "passed": true
+    },
+    {
+      "name": "style mismatch no silent substitution cloud",
+      "passed": true
+    },
+    {
+      "name": "private store verifies but never activates/installs/embeds",
+      "passed": true
+    },
+    {
+      "name": "private registry resolves verified endpoint cache",
+      "passed": true
+    },
+    {
+      "name": "normalized Korean candidate 견고딕",
+      "passed": true
+    },
+    {
+      "name": "multiple vendor/face candidates require preview 견고딕",
+      "passed": true
+    },
+    {
+      "name": "normalized Korean candidate 궁서",
+      "passed": true
+    },
+    {
+      "name": "multiple vendor/face candidates require preview 궁서",
+      "passed": true
+    },
+    {
+      "name": "normalized Korean candidate 바탕",
+      "passed": true
+    },
+    {
+      "name": "multiple vendor/face candidates require preview 바탕",
+      "passed": true
+    },
+    {
+      "name": "generic Gothic never silently selects",
+      "passed": true
+    },
+    {
+      "name": "only confirmed private personal alias reuses exact face",
+      "passed": true
+    },
+    {
+      "name": "font lookup never mutates user requested alias",
+      "passed": true
+    },
+    {
+      "name": "filename/size candidate never automatically used",
+      "passed": true
+    },
+    {
+      "name": "portable manifest has relative paths",
+      "passed": true
+    },
+    {
+      "name": "root relocation and local endpoint sync exact metadata",
+      "passed": true
+    },
+    {
+      "name": "repeated font reuse no duplicate writes",
+      "passed": true
+    },
+    {
+      "name": "FON renderer support unverified, no automatic use",
+      "passed": true
+    },
+    {
+      "name": "TTC face/support requires confirmation, no automatic use",
+      "passed": true
+    },
+    {
+      "name": "reuse consent required",
+      "passed": true
+    },
+    {
+      "name": "unknown cloud license blocked",
+      "passed": true
+    },
+    {
+      "name": "denied copy license blocked",
+      "passed": true
+    },
+    {
+      "name": "public repository font destination blocked",
+      "passed": true
+    },
+    {
+      "name": "stale license evidence blocked",
+      "passed": true
+    },
+    {
+      "name": "tampered cache binary rejected",
+      "passed": true
+    },
+    {
+      "name": "manifest root escape blocked",
+      "passed": true
+    },
+    {
+      "name": "new_deck_init.py pass 64",
+      "passed": true
+    },
+    {
+      "name": "new_deck_init.py reject 65",
+      "passed": true
+    },
+    {
+      "name": "final QA rejects requested count mismatch",
+      "passed": true
+    },
+    {
+      "name": "template_fill_pptx.py reject 67",
+      "passed": true
+    },
+    {
+      "name": "no PPTX created by current intake regression",
+      "passed": true
+    },
+    {
+      "name": "presentation_brief.py pass 69",
+      "passed": true
+    },
+    {
+      "name": "presentation_brief.py reject 70",
+      "passed": true
+    },
+    {
+      "name": "missing font request joined into one top-level question",
+      "passed": true
+    }
+  ],
+  "font_face": {
+    "verification_level": "hash_verified",
+    "renderer_support": "unverified",
+    "family_aliases": [
+      "Pretendard"
+    ],
+    "style_aliases": [
+      "Regular"
+    ],
+    "family": "Pretendard",
+    "style": "Regular",
+    "version": "Version 1.309;Glyphs 3.2 (3225)",
+    "sha256": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+    "bytes": 1574352,
+    "fsType": 0
+  },
+  "license_review": {
+    "reviewed": true,
+    "license_name": "SIL OFL 1.1",
+    "cloud_use": "allowed",
+    "copy": "allowed",
+    "embedding": "allowed",
+    "evidence_sha256": "b04538c9abec39a3db75108cf0af0fd9c77032fe8aa2cf38345b4d250e98e38e",
+    "conditions": "Retain copyright and license, do not sell font alone, reserved-name rules; no embedding performed"
+  },
+  "image_inspection": {
+    "input_sha256": "de531d03eaff97ba2183fdf0625933399517f032d7a3a0944120e868cdabc7ec",
+    "input_type": ".png",
+    "fully_editable_reproduction_verified": false,
+    "font_pt_equivalence_verified": false,
+    "route": "reference_reconstruction",
+    "source_structure": "pixels; no original master/layout",
+    "pixel_size": [
+      1280,
+      720
+    ],
+    "observed_aspect_ratio": 1.7777777777777777,
+    "suggested_slide_ratio": "16:9",
+    "requires": [
+      "actual pixel visual inspection",
+      "perspective review",
+      "crop confirmation",
+      "OCR/text confirmation",
+      "slide aspect confirmation"
+    ],
+    "font_pt_basis": "estimated until user confirms",
+    "background_raster_is_not_full_editability": true
+  },
+  "reference_receipt": {
+    "de531d03eaff97ba2183fdf0625933399517f032d7a3a0944120e868cdabc7ec": {
+      "pixels_inspected": true,
+      "perspective_confirmed": true,
+      "crop_confirmed": true,
+      "text_confirmed": true,
+      "aspect_confirmed": true,
+      "reviewer": "agent:Codex synthetic fixture",
+      "observations": "Observed flat complete 16:9 render. Read title/labels/footer manually; no OCR engine claimed. Real photo not supplied."
+    }
+  },
+  "cache_manifest_example": {
+    "schema_version": 1,
+    "scope": "user-private",
+    "reuse_confirmed": true,
+    "fonts": [
+      {
+        "verification_level": "hash_verified",
+        "renderer_support": "unverified",
+        "family_aliases": [
+          "Pretendard"
+        ],
+        "style_aliases": [
+          "Regular"
+        ],
+        "family": "Pretendard",
+        "style": "Regular",
+        "version": "Version 1.309;Glyphs 3.2 (3225)",
+        "sha256": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+        "bytes": 1574352,
+        "fsType": 0,
+        "path": "fonts/3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93.otf"
+      },
+      {
+        "verification_level": "hash_verified",
+        "renderer_support": "unverified",
+        "family_aliases": [
+          "Pretendard"
+        ],
+        "style_aliases": [
+          "Bold"
+        ],
+        "family": "Pretendard",
+        "style": "Bold",
+        "version": "Version 1.309;Glyphs 3.2 (3225)",
+        "sha256": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7",
+        "bytes": 1576660,
+        "fsType": 0,
+        "path": "fonts/2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7.otf"
+      }
+    ],
+    "license_review": {
+      "reviewed": true,
+      "license_name": "SIL OFL 1.1",
+      "cloud_use": "allowed",
+      "copy": "allowed",
+      "embedding": "allowed",
+      "evidence_sha256": "b04538c9abec39a3db75108cf0af0fd9c77032fe8aa2cf38345b4d250e98e38e",
+      "conditions": "Retain copyright and license, do not sell font alone, reserved-name rules; no embedding performed",
+      "path": "licenses/b04538c9abec39a3db75108cf0af0fd9c77032fe8aa2cf38345b4d250e98e38e.txt",
+      "sha256": "b04538c9abec39a3db75108cf0af0fd9c77032fe8aa2cf38345b4d250e98e38e"
+    },
+    "root_contract": "Resolve relative files under caller-supplied owner or endpoint root",
+    "system_installation": "not performed",
+    "render_activation": "requires explicit runtime registration and QA",
+    "embedding": "not performed"
+  },
+  "limits": [
+    "Local/cloud endpoint labels tested on this Linux runtime; actual HOME registry/Drive task separate",
+    "No actual photo/PDF/company input or exact visual reproduction claimed",
+    "Font cache stores verified files, not active rendering; runtime registration and full slide QA still required",
+    "No new full generation/render/delivery run; prior artifacts remain separate evidence"
+  ]
+}

@@ -1,0 +1,295 @@
+{
+  "synthetic_only": true,
+  "checks": [
+    {
+      "name": "actual font long Korean paragraph fit, glyphs and all tokens preserved",
+      "passed": true
+    },
+    {
+      "name": "three paragraphs kept separate",
+      "passed": true
+    },
+    {
+      "name": "English/numeric/% tokens unbroken",
+      "passed": true
+    },
+    {
+      "name": "height overflow requests summary/split, no shrink/omission/count change",
+      "passed": true
+    },
+    {
+      "name": "oversized Korean eojeol not split or dropped",
+      "passed": true
+    },
+    {
+      "name": "tracking affects actual measured width",
+      "passed": true
+    },
+    {
+      "name": "explicit negative tracking preserved, never silently reset",
+      "passed": true
+    },
+    {
+      "name": "insets change usable width and wrapping",
+      "passed": true
+    },
+    {
+      "name": "before/after spacing participates in height overflow",
+      "passed": true
+    },
+    {
+      "name": "line overlap fails independently of frame height",
+      "passed": true
+    },
+    {
+      "name": "spaced percent and Latin unit tokens kept together",
+      "passed": true
+    },
+    {
+      "name": "missing glyph never silently falls back",
+      "passed": true
+    },
+    {
+      "name": "unapproved point-size shrink rejected",
+      "passed": true
+    },
+    {
+      "name": "shared finalization keeps candidate bytes",
+      "passed": true
+    },
+    {
+      "name": "native two slides and no raster media",
+      "passed": true
+    },
+    {
+      "name": "native body text contains every measured source line",
+      "passed": true
+    },
+    {
+      "name": "native character spacing and body point size preserved",
+      "passed": true
+    },
+    {
+      "name": "native long table exists",
+      "passed": true
+    },
+    {
+      "name": "four native table paragraphs preserve exact source text",
+      "passed": true
+    },
+    {
+      "name": "mixed native table runs and bold English token preserved",
+      "passed": true
+    },
+    {
+      "name": "table padding native 16px",
+      "passed": true
+    },
+    {
+      "name": "render exact final bytes and two registered fonts",
+      "passed": true
+    },
+    {
+      "name": "nonempty 1280x720 final render 1",
+      "passed": true
+    },
+    {
+      "name": "final rendered body ink stays inside declared inset 1",
+      "passed": true
+    },
+    {
+      "name": "nonempty 1280x720 final render 2",
+      "passed": true
+    },
+    {
+      "name": "final rendered body ink stays inside declared inset 2",
+      "passed": true
+    }
+  ],
+  "measuring_engine": "Pillow FreeType actual glyphs; actual final PPTX additionally rendered by shared Presentations/Skia",
+  "source_body_sha256": "3be9c58758984edb6e2daac210931218e1b6bc9ac5ebbc1c6b4deedb1fd3f57f",
+  "final_pptx": {
+    "bytes": 31822,
+    "sha256": "8e595881aa4dd0b9724cfa31c3230a6b51442af7e0fc66f4150824728a956e6a"
+  },
+  "font_hashes": [
+    "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+    "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7"
+  ],
+  "render_images": [
+    {
+      "path": "review/slide-1.png",
+      "sha256": "ac3cbab34a28e433998cbfbcffa705ef938e79da46583a0a57bbf2f164ce1e2f"
+    },
+    {
+      "path": "review/slide-2.png",
+      "sha256": "9dc7408c31d2eacf8bb3135a237c81134630b84985b5236343340dbd156db0c3"
+    }
+  ],
+  "body_ink_bounds_px": [
+    [
+      96,
+      245,
+      1181,
+      493
+    ],
+    [
+      89,
+      323,
+      1152,
+      548
+    ]
+  ],
+  "visual_review": {
+    "reviewer": "agent:Codex",
+    "individual_images_inspected": 2,
+    "observed_korean_tofu_clipping_overlap": false
+  },
+  "shared_finalization": {
+    "schemaVersion": "presentation-finalization.v1",
+    "finalSha256": "8e595881aa4dd0b9724cfa31c3230a6b51442af7e0fc66f4150824728a956e6a",
+    "byteCount": 31822,
+    "packageIntegrity": {
+      "chart_count": 0,
+      "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
+      "finding_count": 0,
+      "findings": [],
+      "notes_parts_skipped": 0,
+      "relationship_part_count": 16,
+      "slide_count": 2,
+      "status": "pass",
+      "exitCode": 0,
+      "findingCount": 0,
+      "warnings": []
+    },
+    "presentationLayout": {
+      "finding_count": 0,
+      "findings": [],
+      "font_policy": {
+        "checked_text_script_count": 31,
+        "native_font_rendering_verified": false,
+        "observed_font_families": [
+          "Pretendard"
+        ],
+        "observed_font_use_counts": {
+          "Pretendard": 31
+        },
+        "passed": true,
+        "performed": true
+      },
+      "slide_count": 2,
+      "slide_size_in": [
+        13.3333,
+        7.5
+      ],
+      "warning_count": 0,
+      "warnings": [],
+      "exitCode": 0,
+      "findingCount": 0,
+      "fontPolicy": {
+        "checked_text_script_count": 31,
+        "native_font_rendering_verified": false,
+        "observed_font_families": [
+          "Pretendard"
+        ],
+        "observed_font_use_counts": {
+          "Pretendard": 31
+        },
+        "passed": true,
+        "performed": true
+      }
+    },
+    "fontSelection": {
+      "basis": "design",
+      "approvedFamilies": [
+        "Pretendard"
+      ],
+      "scriptFonts": {},
+      "referenceSha256": null,
+      "referenceFontsVerifiedInEncodedText": false,
+      "checked_text_script_count": 31,
+      "native_font_rendering_verified": false,
+      "observed_font_families": [
+        "Pretendard"
+      ],
+      "observed_font_use_counts": {
+        "Pretendard": 31
+      },
+      "passed": true,
+      "performed": true
+    },
+    "firstPartyImport": {
+      "performed": true,
+      "passed": true,
+      "slideCount": 2,
+      "sha256": "8e595881aa4dd0b9724cfa31c3230a6b51442af7e0fc66f4150824728a956e6a",
+      "runtimeNodeModules": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules",
+      "nodeExecutable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node"
+    },
+    "nativeTableArithmetic": {
+      "performed": true,
+      "checked_column_count": 0,
+      "checks": [],
+      "claim_boundary": "Displayed-value arithmetic with rounding tolerance; not source-data verification.",
+      "eligible_table_count": 0,
+      "finding_count": 0,
+      "findings": [],
+      "native_table_count": 1,
+      "passed": true,
+      "schema_version": "presentation-native-table-arithmetic.v1",
+      "skipped_tables": [
+        {
+          "reason": "insufficient_rows",
+          "slide": 2,
+          "table": 1
+        }
+      ],
+      "slide_count": 2,
+      "warning_count": 0,
+      "warnings": []
+    },
+    "nativeChartTitles": {
+      "performed": true,
+      "checks": [],
+      "finding_count": 0,
+      "findings": [],
+      "native_chart_count": 0,
+      "native_powerpoint_verified": false,
+      "passed": true,
+      "presentation_sha256": "8e595881aa4dd0b9724cfa31c3230a6b51442af7e0fc66f4150824728a956e6a",
+      "schema_version": "presentation-native-chart-titles.v1",
+      "slide_count": 2,
+      "source_text_emitted": false,
+      "unresolved_linked_title_count": 0
+    },
+    "sourceDerivedPolicyFlags": [
+      "--expected-slide-size-emu",
+      "12192000,6858000",
+      "--validate-heading-fit",
+      "--require-native-table-slide",
+      "2",
+      "--cover-role",
+      "none",
+      "--expected-slide-count",
+      "2",
+      "--approved-font-family",
+      "Pretendard"
+    ],
+    "nativeChartValidation": {
+      "detectedOwnerSlides": [],
+      "detectedChartCount": 0,
+      "targetApplication": "portable",
+      "sourceChartOwnersExplicitlyDeclared": true,
+      "validatorRan": false,
+      "passed": true
+    }
+  },
+  "limits": [
+    "PowerPoint application/Edit Data/native wrapping not executed",
+    "This synthetic visual-only fixture is not a structured/ACTIVE company template",
+    "Table retains existing native paragraph defaults, not a new spacing-override engine",
+    "Image reference intake uses prior synthetic PNG, not actual photo reconstruction",
+    "Single-font-per-contract precheck; mixed native runs require actual final rendering",
+    "Positive tracking with decomposed jamo requires native shaping review; no normalization/fallback"
+  ]
+}

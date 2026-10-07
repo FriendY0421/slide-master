@@ -25,6 +25,17 @@ SAFE_ID = re.compile(r"^[A-Za-z0-9_.-]+$")
 ACTIVE_STATUS = "ACTIVE"
 
 
+def catalog_source(mode: str) -> tuple[str | None, str]:
+    """Refresh GitHub when requested and pin every catalog read to one commit."""
+    ref, label = legacy._resolve_source(mode)
+    if ref is None:
+        return None, label
+    result = legacy._git(["rev-parse", "--verify", ref + "^{commit}"])
+    if result.returncode != 0:
+        raise RuntimeError("Cannot pin refreshed catalog commit; retry GitHub refresh")
+    return result.stdout.strip(), label
+
+
 def selection_key(kind: str, template_id: str) -> str:
     return f"{kind}:{template_id}"
 

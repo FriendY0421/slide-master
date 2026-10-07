@@ -12,7 +12,7 @@ from xml.etree import ElementTree as ET
 
 from svg_to_pptx.pptx_package.notes import create_notes_slide_xml, markdown_to_plain_text
 
-from .ooxml import NOTES_SLIDE_REL_TYPE, REL_NS, SLIDE_REL_TYPE, _qn, _xml_bytes
+from .ooxml import NOTES_SLIDE_REL_TYPE, NOTES_SLIDE_CONTENT_TYPE, REL_NS, SLIDE_REL_TYPE, _qn, _xml_bytes
 from .package import _empty_relationships_root, _max_numeric_rid
 
 
@@ -112,3 +112,24 @@ def _slide_rels_with_notes(
         note_entries[notes_rels_part] = _create_notes_rels_xml(slide_number, notes_master_target)
 
     return _xml_bytes(root), note_entries
+
+
+def _preserve_cloned_notes(slide_rels_root, entries, new_slide_part, content_root, allocate):
+    """Copy original notes bytes; change only their slide back-reference."""
+    from .ooxml import _normalize_part, _rels_name_for_part
+    from .package import _add_content_type_override, _relative_target
+    for rel in slide_rels_root.findall(_qn(REL_NS, "Relationship")):
+        if rel.get("Type") != NOTES_SLIDE_REL_TYPE:
+            continue
+        source_part = _normalize_part(rel.get("Target"), new_slide_part)
+        new_part = allocate(source_part)
+        entries[new_part] = entries[source_part]
+        _add_content_type_override(content_root, new_part, NOTES_SLIDE_CONTENT_TYPE)
+        source_rels = _rels_name_for_part(source_part)
+        if source_rels in entries:
+            root = ET.fromstring(entries[source_rels])
+            for backref in root.findall(_qn(REL_NS, "Relationship")):
+                if backref.get("Type") == SLIDE_REL_TYPE:
+                    backref.set("Target", _relative_target(new_part, new_slide_part))
+            entries[_rels_name_for_part(new_part)] = _xml_bytes(root)
+        rel.set("Target", _relative_target(new_slide_part, new_part))

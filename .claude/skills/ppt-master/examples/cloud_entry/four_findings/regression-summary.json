@@ -1,0 +1,476 @@
+{
+  "synthetic_only": true,
+  "prior_head": "13f6eabc19ae88a37af4d0bdb836d453dd3310fe",
+  "baseline_reproductions": [
+    {
+      "finding": "P1 strict run readback",
+      "baseline_reproduced": true
+    },
+    {
+      "finding": "P1 stale font requirements",
+      "baseline_reproduced": true
+    },
+    {
+      "finding": "P1 missing font initializer",
+      "baseline_reproduced": true
+    },
+    {
+      "finding": "P2 picker SHA/candidate/selection binding",
+      "baseline_reproduced": true
+    },
+    {
+      "finding": "P2 native self-reported count",
+      "baseline_reproduced": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "P1 original source export is rejected for missing requested runs",
+      "passed": true
+    },
+    {
+      "name": "strict normal six-slide export passes exact target run readback",
+      "passed": true
+    },
+    {
+      "name": "validation receipt binds exact final PPTX SHA256",
+      "passed": true
+    },
+    {
+      "name": "normal six-slide regeneration ZIP parts identical to reviewed artifact",
+      "passed": true
+    },
+    {
+      "name": "strict title target exact each run",
+      "passed": true
+    },
+    {
+      "name": "original requested title mismatch rejected even if text elsewhere",
+      "passed": true
+    },
+    {
+      "name": "one wrong run cannot be satisfied by whole-deck substring",
+      "passed": true
+    },
+    {
+      "name": "native table requested run mismatch blocks readback",
+      "passed": true
+    },
+    {
+      "name": "current effective licensed font succeeds",
+      "passed": true
+    },
+    {
+      "name": "P1 effective policy overrides stale request success",
+      "passed": true
+    },
+    {
+      "name": "current font requirement fingerprint changes with policy",
+      "passed": true
+    },
+    {
+      "name": "current face style mismatch rejects stale success",
+      "passed": true
+    },
+    {
+      "name": "current face version mismatch rejects stale success",
+      "passed": true
+    },
+    {
+      "name": "current face sha256 mismatch rejects stale success",
+      "passed": true
+    },
+    {
+      "name": "P1 initializer rejects stale font result/missing current family",
+      "passed": true
+    },
+    {
+      "name": "freshly verified builtin initialization succeeds",
+      "passed": true
+    },
+    {
+      "name": "initializer binds current brief/hash/style/version/requirements",
+      "passed": true
+    },
+    {
+      "name": "bound synthetic picker final pair validates",
+      "passed": true
+    },
+    {
+      "name": "P2 picker from different SHA rejected before selection write",
+      "passed": true
+    },
+    {
+      "name": "P2 final choice absent from displayed candidates rejected",
+      "passed": true
+    },
+    {
+      "name": "P2 final confirmed template mismatch rejected",
+      "passed": true
+    },
+    {
+      "name": "picker preset final confirmation mismatch rejected",
+      "passed": true
+    },
+    {
+      "name": "modified displayed manifest hash rejected",
+      "passed": true
+    },
+    {
+      "name": "malformed candidate manifest fails closed without crash",
+      "passed": true
+    },
+    {
+      "name": "unbound legacy evidence cannot create a new recommendation",
+      "passed": true
+    },
+    {
+      "name": "same-source same-shown confirmed pair records successfully",
+      "passed": true
+    },
+    {
+      "name": "record consumer gate validates same picker binding",
+      "passed": true
+    },
+    {
+      "name": "tampered selection cannot bypass downstream consumer gate",
+      "passed": true
+    },
+    {
+      "name": "separate six-page custom task binds exact output count",
+      "passed": true
+    },
+    {
+      "name": "P2 plan and own requested count six cannot bypass separate one-page request",
+      "passed": true
+    },
+    {
+      "name": "native output validator rejects current task vs six-page output",
+      "passed": true
+    },
+    {
+      "name": "output count differs from task despite matching plan rejected",
+      "passed": true
+    },
+    {
+      "name": "self-reported plan count requires separate brief",
+      "passed": true
+    },
+    {
+      "name": "explicit missing task brief never silently becomes legacy",
+      "passed": true
+    },
+    {
+      "name": "stale native brief SHA rejected",
+      "passed": true
+    },
+    {
+      "name": "self count differs from current confirmed request rejected",
+      "passed": true
+    },
+    {
+      "name": "bound native six-page apply and final readback pass",
+      "passed": true
+    },
+    {
+      "name": "all original reviewer failures independently reproduced at prior HEAD",
+      "passed": true
+    }
+  ],
+  "checks_passed": 38,
+  "normal_six_slide_zip_parts_identical": true,
+  "actual_user_approval": false,
+  "host_picker_displayed": false,
+  "private_font_activation": false,
+  "unchanged_korean_fit_pptx_sha256": "8e595881aa4dd0b9724cfa31c3230a6b51442af7e0fc66f4150824728a956e6a",
+  "limits": [
+    "Actual company/photo/private font/PowerPoint remain unverified",
+    "No main merge or automation activation",
+    "Separate native task count mandatory for current v2 brief; legacy no-count resume remains compatible"
+  ],
+  "fresh_six_slide_finalization": {
+    "sha256": "a6a1bbe40ed54309e155e077422a8b1295584dae30e7cedf12739668d56d8b17",
+    "bytes": 38549,
+    "individual_images_inspected": 6,
+    "render_images": [
+      {
+        "slide": 1,
+        "sha256": "6218713ac73857c196dc2e1593bc5feab55d2fd7671af6c9b322546de40649b0",
+        "pixels_identical_to_prior_review": true
+      },
+      {
+        "slide": 2,
+        "sha256": "be1df218f358f4c6239a7c95cd44b6a2709d440571f6f22e46f57cf48d15ffd3",
+        "pixels_identical_to_prior_review": true
+      },
+      {
+        "slide": 3,
+        "sha256": "79dd21183f5830796c3586ed3ea39298e51c1a410bea3cceeabd7be7cb2f6654",
+        "pixels_identical_to_prior_review": true
+      },
+      {
+        "slide": 4,
+        "sha256": "f727193d026d96f17a079efcc1dc85222a923098782c7cb0d31ae8465c1eb04c",
+        "pixels_identical_to_prior_review": true
+      },
+      {
+        "slide": 5,
+        "sha256": "c1ff2166be97cfa1fcd6501dba1611f310a54448a7c69ccf36a3d80e17456336",
+        "pixels_identical_to_prior_review": true
+      },
+      {
+        "slide": 6,
+        "sha256": "58e0aff08b1850f6aca0a7bdfbe92f91c814087ab053596dae2b2487539e87a1",
+        "pixels_identical_to_prior_review": true
+      }
+    ],
+    "shared_finalizer": {
+      "schemaVersion": "presentation-finalization.v1",
+      "finalSha256": "a6a1bbe40ed54309e155e077422a8b1295584dae30e7cedf12739668d56d8b17",
+      "byteCount": 38549,
+      "packageIntegrity": {
+        "chart_count": 2,
+        "claim_boundary": "Structural package checks only; no slide text, notes, formulas, chart values, or native PowerPoint execution were inspected.",
+        "finding_count": 0,
+        "findings": [],
+        "notes_parts_skipped": 1,
+        "relationship_part_count": 13,
+        "slide_count": 6,
+        "status": "pass",
+        "exitCode": 0,
+        "findingCount": 0,
+        "warnings": []
+      },
+      "presentationLayout": {
+        "finding_count": 0,
+        "findings": [],
+        "font_policy": {
+          "checked_text_script_count": 110,
+          "native_font_rendering_verified": false,
+          "observed_font_families": [
+            "Pretendard"
+          ],
+          "observed_font_use_counts": {
+            "Pretendard": 110
+          },
+          "passed": true,
+          "performed": true
+        },
+        "slide_count": 6,
+        "slide_size_in": [
+          13.3333,
+          7.5
+        ],
+        "warning_count": 0,
+        "warnings": [],
+        "exitCode": 0,
+        "findingCount": 0,
+        "fontPolicy": {
+          "checked_text_script_count": 110,
+          "native_font_rendering_verified": false,
+          "observed_font_families": [
+            "Pretendard"
+          ],
+          "observed_font_use_counts": {
+            "Pretendard": 110
+          },
+          "passed": true,
+          "performed": true
+        }
+      },
+      "fontSelection": {
+        "basis": "reference",
+        "approvedFamilies": [
+          "Pretendard"
+        ],
+        "scriptFonts": {},
+        "referenceSha256": "d91eec48745dff0a1f249c6630b75fcc8fd6ed434b43177caef71921aac70d65",
+        "referenceFontsVerifiedInEncodedText": true,
+        "checked_text_script_count": 110,
+        "native_font_rendering_verified": false,
+        "observed_font_families": [
+          "Pretendard"
+        ],
+        "observed_font_use_counts": {
+          "Pretendard": 110
+        },
+        "passed": true,
+        "performed": true
+      },
+      "firstPartyImport": {
+        "performed": true,
+        "passed": true,
+        "slideCount": 6,
+        "sha256": "a6a1bbe40ed54309e155e077422a8b1295584dae30e7cedf12739668d56d8b17",
+        "runtimeNodeModules": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules",
+        "nodeExecutable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node"
+      },
+      "nativeTableArithmetic": {
+        "performed": true,
+        "checked_column_count": 0,
+        "checks": [],
+        "claim_boundary": "Displayed-value arithmetic with rounding tolerance; not source-data verification.",
+        "eligible_table_count": 0,
+        "finding_count": 0,
+        "findings": [],
+        "native_table_count": 2,
+        "passed": true,
+        "schema_version": "presentation-native-table-arithmetic.v1",
+        "skipped_tables": [
+          {
+            "reason": "no_numeric_amounts",
+            "slide": 5,
+            "table": 1
+          },
+          {
+            "reason": "no_numeric_amounts",
+            "slide": 6,
+            "table": 1
+          }
+        ],
+        "slide_count": 6,
+        "warning_count": 0,
+        "warnings": []
+      },
+      "nativeChartTitles": {
+        "performed": true,
+        "checks": [
+          {
+            "chart": 1,
+            "slide": 2,
+            "status": "absent"
+          },
+          {
+            "chart": 1,
+            "slide": 3,
+            "status": "absent"
+          }
+        ],
+        "finding_count": 0,
+        "findings": [],
+        "native_chart_count": 2,
+        "native_powerpoint_verified": false,
+        "passed": true,
+        "presentation_sha256": "a6a1bbe40ed54309e155e077422a8b1295584dae30e7cedf12739668d56d8b17",
+        "schema_version": "presentation-native-chart-titles.v1",
+        "slide_count": 6,
+        "source_text_emitted": false,
+        "unresolved_linked_title_count": 0
+      },
+      "sourceDerivedPolicyFlags": [
+        "--expected-slide-size-emu",
+        "12192000,6858000",
+        "--validate-heading-fit",
+        "--require-native-table-slide",
+        "5",
+        "--require-native-table-slide",
+        "6",
+        "--cover-role",
+        "none",
+        "--expected-slide-count",
+        "6",
+        "--approved-font-family",
+        "Pretendard"
+      ],
+      "nativeChartValidation": {
+        "detectedOwnerSlides": [
+          2,
+          3
+        ],
+        "detectedChartCount": 2,
+        "targetApplication": "portable",
+        "sourceChartOwnersExplicitlyDeclared": true,
+        "validatorRan": true,
+        "passed": true
+      },
+      "nativeQuantitativeCharts": {
+        "report": {
+          "claim_boundary": "OOXML/workbook structural validation only; source provenance and native PowerPoint opening remain separate checks.",
+          "expected_quantitative_chart_slides": [
+            2,
+            3
+          ],
+          "failed_slide_count": 0,
+          "failed_slides": [],
+          "formal_human_reviewed": false,
+          "native_application_open_verified": false,
+          "package_sha256": "a6a1bbe40ed54309e155e077422a8b1295584dae30e7cedf12739668d56d8b17",
+          "passed": true,
+          "required_embedded_workbook_slides": [
+            2,
+            3
+          ],
+          "results": [
+            {
+              "approved_source_figure_exception": false,
+              "charts": [
+                {
+                  "cache_reference_ranges_verified": true,
+                  "embedded_workbook_count": 1,
+                  "embedded_workbook_sheet_count": 1,
+                  "native_chart_types": [
+                    "barChart"
+                  ],
+                  "numeric_cache_point_count": 2,
+                  "series_formula_count": 3,
+                  "workbook_numeric_cell_count": 2
+                }
+              ],
+              "failure_codes": [],
+              "native_chart_count": 1,
+              "raster_picture_count": 0,
+              "required_native_chart_count": 1,
+              "slide_number": 2,
+              "status": "passed"
+            },
+            {
+              "approved_source_figure_exception": false,
+              "charts": [
+                {
+                  "cache_reference_ranges_verified": true,
+                  "embedded_workbook_count": 1,
+                  "embedded_workbook_sheet_count": 1,
+                  "native_chart_types": [
+                    "barChart"
+                  ],
+                  "numeric_cache_point_count": 3,
+                  "series_formula_count": 3,
+                  "workbook_numeric_cell_count": 3
+                }
+              ],
+              "failure_codes": [],
+              "native_chart_count": 1,
+              "raster_picture_count": 0,
+              "required_native_chart_count": 1,
+              "slide_number": 3,
+              "status": "passed"
+            }
+          ],
+          "schema_version": "owner-private.quantitative-chart-native-gate.v1",
+          "slide_count": 6,
+          "source_attachments_accessed": false,
+          "target_application": "portable",
+          "validated_slide_count": 2
+        },
+        "exitCode": 0,
+        "validatedSlideCount": 2,
+        "requiredOwnerSlides": [
+          2,
+          3
+        ],
+        "approvedSourceFigureExceptionSlides": [],
+        "requiredEmbeddedWorkbookChartOwnerSlides": [
+          2,
+          3
+        ]
+      }
+    },
+    "font_binding": {
+      "pptx_sha256": "a6a1bbe40ed54309e155e077422a8b1295584dae30e7cedf12739668d56d8b17",
+      "registered_fonts": {
+        "/workspace/slide-master/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Regular.otf": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+        "/workspace/slide-master/.claude/skills/ppt-master/assets/fonts/Pretendard/Pretendard-Bold.otf": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7"
+      }
+    }
+  }
+}

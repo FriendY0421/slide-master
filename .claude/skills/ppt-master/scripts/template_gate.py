@@ -14,7 +14,7 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 from console_encoding import configure_utf8_stdio  # noqa: E402
-from picker_surface_gate import validate_picker_evidence  # noqa: E402
+from picker_surface_gate import validate_picker_evidence, validate_picker_binding  # noqa: E402
 
 configure_utf8_stdio()
 
@@ -110,6 +110,10 @@ def validate_selection_record(data: dict) -> list[str]:
                 errors.extend(f"picker: {err}" for err in picker_errors)
                 if picker.get("surface") != surface:
                     errors.append("selection_surface does not match picker evidence surface")
+                if 'source_commit' in data or picker.get('picker_evidence_version') == 2:
+                    errors.extend(validate_picker_binding(picker, choice,
+                                                          data.get('production_preset', ''),
+                                                          data.get('source_commit')))
     return errors
 
 

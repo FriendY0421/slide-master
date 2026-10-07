@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "User-private font library mapping and endpoint synchronization",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "scope",
+    "entries"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "scope": {
+      "const": "user-private"
+    },
+    "owner_storage": {
+      "type": "object",
+      "properties": {
+        "backend": {
+          "enum": [
+            "private_filesystem",
+            "private_drive"
+          ]
+        },
+        "opaque_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "description": "Actual IDs/mappings stay private. The schema has no user's Drive ID."
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "status",
+          "verification_level"
+        ],
+        "properties": {
+          "family": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "style": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "status": {
+            "enum": [
+              "available",
+              "license_review_required",
+              "missing"
+            ]
+          },
+          "reuse_confirmed": {
+            "type": "boolean"
+          },
+          "cache_entry": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Relative path under mapped private root; checked against traversal by cache tool"
+          },
+          "license_review": {
+            "type": "object",
+            "properties": {
+              "reviewed": {
+                "type": "boolean"
+              },
+              "cloud_use": {
+                "enum": [
+                  "allowed",
+                  "denied",
+                  "unknown"
+                ]
+              },
+              "copy": {
+                "enum": [
+                  "allowed",
+                  "denied",
+                  "unknown"
+                ]
+              },
+              "embedding": {
+                "enum": [
+                  "allowed",
+                  "denied",
+                  "unknown"
+                ]
+              },
+              "evidence_sha256": {
+                "type": "string"
+              }
+            }
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Only aliases read from actual font names or verified private inventory; never guessed"
+          },
+          "verification_level": {
+            "enum": [
+              "filename_size_candidate",
+              "hash_verified",
+              "unavailable"
+            ]
+          },
+          "filename": {
+            "type": "string"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "renderer_support": {
+            "enum": [
+              "verified",
+              "unverified",
+              "unsupported"
+            ]
+          },
+          "search_aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Discovery only; generic names never authorize face selection"
+          },
+          "personal_aliases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "sha256",
+                "user_confirmed"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "sha256": {
+                  "type": "string"
+                },
+                "user_confirmed": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "verification_level": {
+                  "const": "hash_verified"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "family",
+                "style",
+                "version",
+                "sha256"
+              ],
+              "properties": {
+                "family": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "style": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sha256": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "available"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "verification_level": {
+                  "const": "hash_verified"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "endpoint_roots": {
+      "type": "object",
+      "description": "Caller-supplied local/cloud project-private root bindings; never global installation"
+    }
+  },
+  "description": "Mapping contract only, not a connected Drive backend. Cache storage, endpoint materialization, actual renderer registration and embedding are distinct. Reinspect on each request; no background watcher."
+}

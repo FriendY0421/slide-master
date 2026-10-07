@@ -148,6 +148,20 @@ def validate_native_pptx(path: Path, expected_slides: int) -> list[str]:
     return failures
 
 
+def requested_slide_count_errors(project: Path, actual_count: int) -> list[str]:
+    """Enforce an opt-in requested count carried by current intake approval."""
+    approval_path = project / "storyline_approval.json"
+    if not approval_path.is_file():
+        return []
+    from storyline_gate import load_storyline_approval
+    try:
+        approval = load_storyline_approval(approval_path)
+    except ValueError as exc:
+        return [str(exc)]
+    expected = approval.get("requested_slide_count")
+    return [f"output page count {actual_count} != requested {expected}"] if expected is not None and actual_count != expected else []
+
+
 def image_is_placeholder(path: Path) -> bool:
     """Tiny OR near-uniform opaque image ⇒ placeholder suspect.
 
@@ -301,6 +315,7 @@ def run_checks(project: Path) -> tuple[list[str], list[str]]:
         failures.append("no native .pptx in exports/ — run svg_to_pptx.py")
     else:
         newest = max(natives, key=lambda p: p.stat().st_mtime)
+        failures.extend(requested_slide_count_errors(project, len(pages)))
         errs = validate_native_pptx(newest, len(pages))
         if errs:
             failures.append(f"exports/{newest.name}: " + "; ".join(errs))
@@ -378,6 +393,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-render", action="store_true",
                         help="skip only the OfficeCLI contact-sheet render; "
                              "OpenXML validation and all other checks stay on")
+    parser.add_argument("--business-profile", type=Path,
+                        help="opt-in role/capacity/native-evidence contract")
+    parser.add_argument("--business-review", type=Path,
+                        help="hash-bound explicit visual-review receipt")
+    parser.add_argument("--business-render-manifest", type=Path,
+                        help="render manifest for that exact PPTX and font set")
     return parser
 
 
@@ -394,6 +415,20 @@ def main(argv: Optional[list[str]] = None) -> int:
     cli_failures, cli_warnings = officecli_checks(project, render=not args.no_render)
     failures += cli_failures
     warnings += cli_warnings
+
+    if args.business_profile:
+        natives = _native_pptx_files(project)
+        if not natives or not args.business_review or not args.business_render_manifest:
+            failures.append("business profile requires an exported PPTX, review receipt and render manifest")
+        else:
+            pptx = max(natives, key=lambda p: p.stat().st_mtime)
+            if _run_script("business_quality.py", [str(project / "svg_output"),
+                "--profile", str(args.business_profile), "--pptx", str(pptx),
+                "--review-record", str(args.business_review),
+                "--render-manifest", str(args.business_render_manifest)]) != 0:
+                failures.append("business quality evidence is missing, invalid or stale")
+    elif args.business_review or args.business_render_manifest:
+        failures.append("business review arguments require --business-profile")
 
     for w in warnings:
         print(f"  ! WARN {w}", file=sys.stderr)

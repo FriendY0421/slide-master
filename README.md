@@ -214,6 +214,7 @@ sources/회사표준템플릿.pptx 디자인 그대로 쓰고,
 | 🆚 | [Why PPT Master](docs/why-ppt-master.md) | Gamma·Copilot 등 다른 도구와의 비교 |
 | 🏗️ | [Technical Design](docs/technical-design.md) | 아키텍처, 왜 SVG를 거치는가 |
 | 🎨 | [Templates Guide](docs/templates-guide.md) | 브랜드/레이아웃/덱 템플릿 만들고 쓰기 |
+| 📊 | [Korean Business Quality](docs/ppt-project/KOREAN_BUSINESS_QUALITY.md) | 합성 6장 전후 비교, 역할별 수용량·네이티브 표/차트·해시 결합 검수 (선택 적용) |
 | 🔊 | [Audio Narration](docs/audio-narration.md) | 음성 나레이션·자동 넘김 덱 만들기 |
 | 📖 | [SKILL.md](.claude/skills/ppt-master/SKILL.md) | 핵심 워크플로우 규칙 (AI가 따르는 절차 원문) |
 

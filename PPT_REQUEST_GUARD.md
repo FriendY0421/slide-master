@@ -4,6 +4,22 @@ This file is the fail-closed authority for every **new presentation deck** reque
 
 ## Canonical entry routing
 
+### 작업 시작 모드 (task-scoped)
+
+사용자는 매 작업에서 **기본 제공 템플릿** 또는 **사용자 정의 템플릿**을 선택한다.
+기본 제공은 아래 기존 등록 템플릿/프리셋/스토리라인 gate를 그대로 따른다.
+사용자 정의는 원본 또는 예제 PPTX/POTX/PDF/사진·스크린샷을 먼저 받는다.
+실제 PPTX+내용은 routing.md의 native `ppt-template-fill` 경로이며,
+직접 PPTX exemption을 기록하고 그 경로의 입력/계획확인 gate를 따른다.
+등록 템플릿 선택으로 회사 원본을 강제로 대체하지 않는다.
+이번 글꼴/pt 크기/샘플/작성 기준은 작업별 brief에만 기록하고 영구 기본값으로 만들지 않는다.
+POTX는 실제 Master/Layout 추출·확인한 정규화가 필요하다. 이미지/PDF/사진은
+원형 보존과 구분한 참조 재구성이며 픽셀·원근/크롭·텍스트·화면비를 먼저 확인한다.
+현재 작업 brief는 workflow_version 2로 글꼴·크기·장수·작성 기준을 한 번에 확인한다.
+입력완전성 검사와 빠진 필수 항목의 묶음 질문은
+[`TEMPLATE_FIRST_WORKFLOW.md`](docs/ppt-project/TEMPLATE_FIRST_WORKFLOW.md)를 따른다.
+이 모드 선택은 승인 gate를 생략하거나 사용자 승인을 생성하지 않는다.
+
 For every FriendY new PPT/presentation/slides request:
 
 1. Bind first to project `SLIDE_MASTER` and repository `FriendY0421/slide-master`.
@@ -99,7 +115,7 @@ For newly recommended-template flows, selection evidence must carry picker-surfa
 
 Use:
 
-`picker_surface_gate.py record <picker.json> --surface <surface> --purpose "<purpose>" --source-ref "github:main" --candidate-count <n> --detail-preview-max 6 --rendered`
+`picker_surface_gate.py record <picker.json> --surface <surface> --purpose "<purpose>" --source-ref "github:<manifest_SHA>" --manifest <manifest.json> --candidate-keys <shown_keys_csv> --candidate-count <n> --selected-template <confirmed_template> --selected-preset <confirmed_preset> --confirmed --detail-preview-max 6 --rendered`
 
 Valid surfaces:
 
@@ -120,15 +136,15 @@ A preview view, card click, recommendation, `artifact_handoff` call, or tentativ
 
 Recommended-template flow:
 
-`record_template_choice_v2.py <deck:id|layout:id|free> --preset <preset_id> --confirmed --purpose "<purpose>" --picker-evidence <picker.json> --output <result.json>`
+`record_template_choice_v2.py <deck:id|layout:id|free> --source github --preset <preset_id> --confirmed --purpose "<purpose>" --picker-evidence <picker.json> --output <result.json>`
 
 Direct user-specified registered template flow:
 
-`record_template_choice_v2.py <deck:id|layout:id|free> --preset <preset_id> --confirmed --purpose "<purpose>" --direct-template --output <result.json>`
+`record_template_choice_v2.py <deck:id|layout:id|free> --source github --preset <preset_id> --confirmed --purpose "<purpose>" --direct-template --output <result.json>`
 
 Only after template + production-preset evidence exists may research begin. After the post-research storyline/content outline is explicitly approved, initialize only through:
 
-`new_deck_init.py <project_name> --template-selection-result <result.json>`
+`new_deck_init.py <project_name> --template-selection-result <result.json> --storyline-approval-result <approval.json>`
 
 Slide authoring/export remains blocked until that approval.
 
@@ -183,3 +199,5 @@ No valid `template_selection.json` (selected or documented exemption) means the 
 Before any new-deck project initialization or slide authoring, present the **full proposed slide sequence** in chat (or an equivalent visible review surface). Every slide preview must show: slide number, title, core message, 2?5 main content points, and proposed visual/layout treatment. The user may delete, add, merge, split, reorder, retitle, rewrite, change visuals, or request a new total slide count (including 20/30+). Apply those edits to the preview and show the revised affected slides or full sequence as appropriate.
 
 Generation permission requires the user to explicitly approve the **current revision**. Record that exact approved snapshot through `storyline_gate.py`; `new_deck_init.py` requires both `--template-selection-result` and `--storyline-approval-result`. If the storyline changes after approval, the old approval is stale and generation must stop until the revised preview is approved again. `validate_spec.py` checks the generated ?IX slide count/titles/core messages against the approved snapshot, and gate-v3 SVG export is blocked without storyline approval evidence.
+
+New picker evidence v2 binds the actual displayed manifest hash, immutable catalog commit, displayed candidate keys and explicit final template/preset pair. Record it after final confirmation; rendering alone is insufficient. Newly recorded recommendations reject unbound v1 evidence. Existing legacy resume records without a pinned source retain compatibility.

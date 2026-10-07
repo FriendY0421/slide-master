@@ -1,0 +1,153 @@
+{
+  "synthetic_only": true,
+  "purpose": "Builtin visual design improvement example, not final company style",
+  "mapping": {
+    "before_source_pages": [
+      1,
+      2,
+      4
+    ],
+    "improved_pages": [
+      1,
+      2,
+      3
+    ]
+  },
+  "visual_review": {
+    "reviewer": "agent:Codex",
+    "individual_images_inspected": 6,
+    "montage_inspected": true,
+    "observed_clipping_overlap_korean_tofu": false
+  },
+  "shared_runtime_finalization": {
+    "before": {
+      "passed": true,
+      "candidate_bytes_preserved": true
+    },
+    "improved": {
+      "passed": true,
+      "candidate_bytes_preserved": true
+    }
+  },
+  "native_coverage": {
+    "before": {
+      "slides": 3,
+      "charts": 1,
+      "embedded_workbooks": 1,
+      "media_parts": 0,
+      "masters": 1,
+      "layouts": 1,
+      "chart_categories": [
+        "현재",
+        "목표"
+      ],
+      "chart_values": [
+        84.0,
+        90.0
+      ],
+      "axis_minimum": 0,
+      "axis_maximum": 100
+    },
+    "improved": {
+      "slides": 3,
+      "charts": 1,
+      "embedded_workbooks": 1,
+      "media_parts": 0,
+      "masters": 1,
+      "layouts": 1,
+      "chart_categories": [
+        "현재",
+        "목표"
+      ],
+      "chart_values": [
+        84.0,
+        90.0
+      ],
+      "axis_minimum": 0,
+      "axis_maximum": 100
+    }
+  },
+  "font_bytes": {
+    "Pretendard-Regular.otf": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+    "Pretendard-Bold.otf": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7"
+  },
+  "source_data": {
+    "repeat_visit_current_percent": 4.8,
+    "repeat_visit_target_percent": 3.6,
+    "repeat_visit_difference_percentage_points": -1.2,
+    "resolution_current_percent": 84,
+    "resolution_target_percent": 90,
+    "resolution_difference_percentage_points": -6,
+    "hypothetical_phase_weeks": [
+      2,
+      4,
+      6
+    ],
+    "fictional_basis_date": "2026-09-30"
+  },
+  "acceptance_limits": [
+    "PowerPoint application opening and Edit Data not exercised",
+    "Fonts unembedded",
+    "Not a registered template or final company style"
+  ],
+  "files": {
+    "review/before-01.png": {
+      "bytes": 76996,
+      "sha256": "e4da7aff351f310a12caadec70c025239ac57bcf3032fa068005f6a68b4013e6"
+    },
+    "review/before-02.png": {
+      "bytes": 64150,
+      "sha256": "be1df218f358f4c6239a7c95cd44b6a2709d440571f6f22e46f57cf48d15ffd3"
+    },
+    "review/before-03.png": {
+      "bytes": 71931,
+      "sha256": "f727193d026d96f17a079efcc1dc85222a923098782c7cb0d31ae8465c1eb04c"
+    },
+    "review/before-after.png": {
+      "bytes": 346747,
+      "sha256": "9c2ef3b0451c4f27418c7ad0b5929dcfc3f3f4af390b96277c292a20fd85effa"
+    },
+    "review/before.pptx": {
+      "bytes": 24459,
+      "sha256": "34d5d83bc69c9958e9b0f873f9065cd686b27a56090ce53b3764dd8019c24659"
+    },
+    "review/improved-01.png": {
+      "bytes": 87725,
+      "sha256": "77b507abdd5c060261fbc84f492e4c4519c60e76a44acc7dda9e919dddd52ec6"
+    },
+    "review/improved-02.png": {
+      "bytes": 81567,
+      "sha256": "63e50f3c24c14dd187884e0047911dfc958417cd2994de89dbb5ae0d805180b8"
+    },
+    "review/improved-03.png": {
+      "bytes": 88554,
+      "sha256": "de531d03eaff97ba2183fdf0625933399517f032d7a3a0944120e868cdabc7ec"
+    },
+    "review/improved.pptx": {
+      "bytes": 25660,
+      "sha256": "2aa4ecbdbbcf702382215dc5f08421d1555fe9f9edc5e3c873416d2c6e17b3c8"
+    },
+    "improved/templates/01_strategy.svg": {
+      "bytes": 3609,
+      "sha256": "b0066ee8fed9745f999c9f8f727ba1938d8ddaa6d6cb1d96826cfdbfb8d5e0bf"
+    },
+    "improved/templates/02_kpi.svg": {
+      "bytes": 4890,
+      "sha256": "a97d932e14202e569c3e3a5bb4614655825aee3a79958aa2594b825a5d25b598"
+    },
+    "improved/templates/03_roadmap.svg": {
+      "bytes": 5271,
+      "sha256": "3d695821f9b7936cc71d7abac1e7fede91193ab7d8b2185e99b758f01347c5da"
+    },
+    "improved/templates/design_spec.md": {
+      "bytes": 1825,
+      "sha256": "e797e7309e3763e6b5d1652854114916e97530833a8b4a5d6cb2d18bec4af549"
+    }
+  },
+  "roadmap_widths_px": [
+    126.6667,
+    253.3333,
+    380.0
+  ],
+  "original_before_pixels": "All three before images are pixel-identical to original six-page improved source images1/2/4"
+}

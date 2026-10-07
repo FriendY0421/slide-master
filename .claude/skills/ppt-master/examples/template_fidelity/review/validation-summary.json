@@ -1,0 +1,199 @@
+{
+  "synthetic_only": true,
+  "cases": [
+    {
+      "case": "stale-source",
+      "pass": true,
+      "reason": "Template fidelity source SHA256 mismatch; review original again"
+    },
+    {
+      "case": "locked-text",
+      "pass": true,
+      "reason": "Replacement outside explicit editable slot allowlist"
+    },
+    {
+      "case": "ambiguous-selector",
+      "pass": true,
+      "reason": "Replacement outside explicit editable slot allowlist"
+    },
+    {
+      "case": "run-count",
+      "pass": true,
+      "reason": "paragraph_run_texts must match every existing run"
+    },
+    {
+      "case": "run-linebreak",
+      "pass": true,
+      "reason": "Run text must be a string without newlines or tabs"
+    },
+    {
+      "case": "plain-replacement",
+      "pass": true,
+      "reason": "Template fidelity requires paragraph_run_texts for slots"
+    },
+    {
+      "case": "locked-cell",
+      "pass": true,
+      "reason": "Table edit outside explicit editable cell allowlist"
+    },
+    {
+      "case": "new-notes",
+      "pass": true,
+      "reason": "Template fidelity preserves source notes and transitions"
+    },
+    {
+      "case": "chart-style-boundary",
+      "pass": true,
+      "reason": "Template fidelity v1 preserves charts unchanged"
+    },
+    {
+      "case": "source-transition-keep-required",
+      "pass": true
+    },
+    {
+      "case": "six-slide-fidelity-and-source-notes",
+      "pass": true
+    },
+    {
+      "case": "format-mutation-rejected",
+      "pass": true
+    },
+    {
+      "case": "legacy-fill-supported",
+      "pass": true
+    },
+    {
+      "case": "explicit-runtime-font-preparation",
+      "pass": true
+    },
+    {
+      "case": "missing-required-bundled-once",
+      "pass": true
+    },
+    {
+      "case": "builtin-gates-remain-required",
+      "pass": true
+    },
+    {
+      "case": "different-root-identical-native-parts",
+      "pass": true
+    },
+    {
+      "case": "unchanged-slides-pixel-identical",
+      "pass": true
+    }
+  ],
+  "case_count": 18,
+  "font_registration": "Existing Pretendard Regular/Bold exact bytes registered in supported runtime; no visible Korean tofu/overlap in all 12 images",
+  "source_title_run_sizes_pt": [
+    33,
+    24
+  ],
+  "edited_title_run_sizes_pt": [
+    33,
+    24
+  ],
+  "charts": "2 native charts, original cache values/workbooks unchanged; supported finalizer passed",
+  "tables": "2 native tables; one explicitly allowed owner cell replaced",
+  "render_review": "agent:Codex inspected source and filled 6 pages each; no clipping/overlap observed",
+  "environment": {
+    "ok": true,
+    "errors": [],
+    "supplied_runtime": {
+      "CODEX_PRIMARY_RUNTIME_NODE": true,
+      "CODEX_PRIMARY_RUNTIME_NODE_MODULES": true,
+      "CODEX_PRIMARY_RUNTIME": true,
+      "CODEX_PRIMARY_RUNTIME_PYTHON": true
+    },
+    "font_files": [
+      {
+        "path": "../../assets/fonts/Pretendard/Pretendard-Regular.otf",
+        "available": true
+      },
+      {
+        "path": "../../assets/fonts/Pretendard/Pretendard-Bold.otf",
+        "available": true
+      }
+    ],
+    "system_font_families": {
+      "Pretendard": false
+    },
+    "delivery_font_warnings": [
+      "Required receiving-system font is missing or unknown: Pretendard"
+    ],
+    "font_policy": "Preserve requested/source family; never install or substitute automatically",
+    "font_file_readiness_is_not_receiving_powerpoint_readiness": true,
+    "font_render_verified": false,
+    "officecli_available": false,
+    "native_application_verified": false
+  },
+  "cloud": "Linux supplied runtime",
+  "different_os_verified": false,
+  "native_application_verified": false,
+  "relocation": "Project-relative input recipe rerun under a fresh different repo root; all ZIP part bytes match",
+  "initial_relocation_note": "Flattened scripts-only copy failed because an existing repo-root helper requires canonical folder depth; rerun retained repo-relative structure",
+  "files": {
+    "review/filled-01.png": {
+      "bytes": 72327,
+      "sha256": "6218713ac73857c196dc2e1593bc5feab55d2fd7671af6c9b322546de40649b0"
+    },
+    "review/filled-02.png": {
+      "bytes": 64150,
+      "sha256": "be1df218f358f4c6239a7c95cd44b6a2709d440571f6f22e46f57cf48d15ffd3"
+    },
+    "review/filled-03.png": {
+      "bytes": 65764,
+      "sha256": "79dd21183f5830796c3586ed3ea39298e51c1a410bea3cceeabd7be7cb2f6654"
+    },
+    "review/filled-04.png": {
+      "bytes": 71931,
+      "sha256": "f727193d026d96f17a079efcc1dc85222a923098782c7cb0d31ae8465c1eb04c"
+    },
+    "review/filled-05.png": {
+      "bytes": 67354,
+      "sha256": "c1ff2166be97cfa1fcd6501dba1611f310a54448a7c69ccf36a3d80e17456336"
+    },
+    "review/filled-06.png": {
+      "bytes": 70557,
+      "sha256": "58e0aff08b1850f6aca0a7bdfbe92f91c814087ab053596dae2b2487539e87a1"
+    },
+    "review/filled.pptx": {
+      "bytes": 38549,
+      "sha256": "a4090a2f346e07cec732b7586a0dd61ea01ea0e3e20ac5beb0d93fc599492fea"
+    },
+    "review/source-01.png": {
+      "bytes": 75045,
+      "sha256": "289c78b7d0c2256ed2ce319b84373b1da5686d68aa689af0a47f69be3cea6f63"
+    },
+    "review/source-02.png": {
+      "bytes": 64150,
+      "sha256": "be1df218f358f4c6239a7c95cd44b6a2709d440571f6f22e46f57cf48d15ffd3"
+    },
+    "review/source-03.png": {
+      "bytes": 65764,
+      "sha256": "79dd21183f5830796c3586ed3ea39298e51c1a410bea3cceeabd7be7cb2f6654"
+    },
+    "review/source-04.png": {
+      "bytes": 71931,
+      "sha256": "f727193d026d96f17a079efcc1dc85222a923098782c7cb0d31ae8465c1eb04c"
+    },
+    "review/source-05.png": {
+      "bytes": 67174,
+      "sha256": "6e46ff7bbc861410af33067ffc1211037077589781b1b0c60c9fb79ff4020935"
+    },
+    "review/source-06.png": {
+      "bytes": 70557,
+      "sha256": "58e0aff08b1850f6aca0a7bdfbe92f91c814087ab053596dae2b2487539e87a1"
+    },
+    "sources/template-source.pptx": {
+      "bytes": 38591,
+      "sha256": "d91eec48745dff0a1f249c6630b75fcc8fd6ed434b43177caef71921aac70d65"
+    }
+  },
+  "delivery_font_probe_smoke": {
+    "specified_family_respected": true,
+    "simulated_windows_registry_missing_found_unknown": true,
+    "real_windows_execution": false,
+    "font_install_or_substitution": false
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "baseline_sha": "0578dba7ddf56cf5d7024cf574063c4db7332a3e",
+  "comparison": "targeted synthetic engineering fixture; not a statistical quality benchmark",
+  "slides_per_deck": 6,
+  "baseline_native": {
+    "charts": 0,
+    "tables": 0
+  },
+  "improved_native": {
+    "charts": 2,
+    "tables": 2,
+    "embedded_workbooks": 2
+  },
+  "improved_svg_gate": {
+    "pages": 6,
+    "warnings": 0,
+    "errors": 0
+  },
+  "per_slide_visual_review": {
+    "reviewer": "agent:Codex",
+    "before": 6,
+    "after": 6,
+    "all_titles_visible": true,
+    "material_clipping_or_overlap_observed": false
+  },
+  "font_registration": "bundled Pretendard Regular/Bold registered into shared runtime Skia; OFL 1.1",
+  "shared_finalizer": {
+    "baseline": {
+      "package_integrity": "pass",
+      "layout": "pass",
+      "first_party_import": "pass",
+      "bytes_unchanged_from_candidate": true,
+      "native_chart_workbook_validation": "not_applicable"
+    },
+    "improved": {
+      "package_integrity": "pass",
+      "layout": "pass",
+      "first_party_import": "pass",
+      "bytes_unchanged_from_candidate": true,
+      "native_chart_workbook_validation": "pass"
+    }
+  },
+  "smoke_cases": [
+    {
+      "case": "exact reviewed output",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "pass": true
+    },
+    {
+      "case": "shared CSS invalidates all-slide review",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "pass": true
+    },
+    {
+      "case": "small business body rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "pass": true
+    },
+    {
+      "case": "title zone overflow rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "pass": true
+    },
+    {
+      "case": "non-finite geometry rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "pass": true
+    },
+    {
+      "case": "native chart cache mismatch rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "pass": true
+    },
+    {
+      "case": "final PPTX bytes invalidate review",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "pass": true
+    },
+    {
+      "case": "changed PNG rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "pass": true
+    },
+    {
+      "case": "incomplete slide render rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "pass": true
+    },
+    {
+      "case": "missing actual renderer font registration rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "pass": true
+    },
+    {
+      "case": "shape-only output cannot satisfy native contract",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "pass": true
+    }
+  ],
+  "data_edit_smoke": {
+    "chart_value": [
+      84,
+      86
+    ],
+    "chart_cache_and_workbook_updated": true,
+    "table_owner_updated": true,
+    "PowerPoint_Edit_Data_dialog_opened": false
+  },
+  "remaining_acceptance": [
+    "OfficeCLI/PowerPoint application opening and Edit Data interaction; OfficeCLI absent in this cloud",
+    "Source prototype unfilled-title loss not claimed universally repaired"
+  ],
+  "artifacts": {
+    "baseline-01.png": {
+      "sha256": "38c0fb273c80d2887e48964000854fdc5b8cf85ea63946671bc6544c6afc2900",
+      "bytes": 57138
+    },
+    "baseline-02.png": {
+      "sha256": "70e713532b6f67f247486d38744960caaae874ccb838a30e9e31b0890ebad7f0",
+      "bytes": 50365
+    },
+    "baseline-03.png": {
+      "sha256": "5441f258e49fa1457b322d5317be03a89cce5a1beb39409f7080206bd06f4fdb",
+      "bytes": 51069
+    },
+    "baseline-04.png": {
+      "sha256": "66f6943658407077b66a0da3b3bec21f320e6eaeecc9798abfd8ef7731f8be08",
+      "bytes": 59356
+    },
+    "baseline-05.png": {
+      "sha256": "e5759547995ebefcb53171acecfaf0c8b7c748c9ae710647b7ac7282c1ab0b9c",
+      "bytes": 61159
+    },
+    "baseline-06.png": {
+      "sha256": "bc09bbfe2bd25575459a4d5f26ca6624e426ed8cce04e910972687adf6a7c2ce",
+      "bytes": 63751
+    },
+    "baseline.pptx": {
+      "sha256": "a80ab9974b7e01e372d3a9f518d5618e0a1ce42b74233d79aa6167eb3fc9bfe1",
+      "bytes": 25458
+    },
+    "improved-01.png": {
+      "sha256": "e4da7aff351f310a12caadec70c025239ac57bcf3032fa068005f6a68b4013e6",
+      "bytes": 76996
+    },
+    "improved-02.png": {
+      "sha256": "be1df218f358f4c6239a7c95cd44b6a2709d440571f6f22e46f57cf48d15ffd3",
+      "bytes": 64150
+    },
+    "improved-03.png": {
+      "sha256": "79dd21183f5830796c3586ed3ea39298e51c1a410bea3cceeabd7be7cb2f6654",
+      "bytes": 65764
+    },
+    "improved-04.png": {
+      "sha256": "f727193d026d96f17a079efcc1dc85222a923098782c7cb0d31ae8465c1eb04c",
+      "bytes": 71931
+    },
+    "improved-05.png": {
+      "sha256": "6e46ff7bbc861410af33067ffc1211037077589781b1b0c60c9fb79ff4020935",
+      "bytes": 67174
+    },
+    "improved-06.png": {
+      "sha256": "58e0aff08b1850f6aca0a7bdfbe92f91c814087ab053596dae2b2487539e87a1",
+      "bytes": 70557
+    },
+    "improved.pptx": {
+      "sha256": "54ac42304a5ee6339467e56624c6c51e42a9455bcd54a82a28809d3174510a40",
+      "bytes": 37482
+    }
+  },
+  "compatibility_smoke": {
+    "both_native_option_names_parse": true,
+    "missing_template_selection_still_blocks": true
+  }
+}

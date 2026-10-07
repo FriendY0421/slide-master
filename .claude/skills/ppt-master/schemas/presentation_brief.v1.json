@@ -1,0 +1,454 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Task-scoped presentation intake",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "scope",
+    "mode"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "scope": {
+      "const": "task"
+    },
+    "mode": {
+      "enum": [
+        "builtin",
+        "custom"
+      ]
+    },
+    "content_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "content_files": {
+      "$ref": "#/$defs/paths"
+    },
+    "template_files": {
+      "$ref": "#/$defs/paths"
+    },
+    "sample_files": {
+      "$ref": "#/$defs/paths"
+    },
+    "sample_policy": {
+      "const": "not_provided"
+    },
+    "template_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "production_preset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "font_files": {
+      "$ref": "#/$defs/paths"
+    },
+    "font_families": {
+      "$ref": "#/$defs/paths"
+    },
+    "font_policy": {
+      "$ref": "#/$defs/fontPolicy"
+    },
+    "font_size_policy": {
+      "$ref": "#/$defs/sizePolicy"
+    },
+    "writing_rules": {
+      "$ref": "#/$defs/paths"
+    },
+    "writing_rules_policy": {
+      "const": "source"
+    },
+    "inputs_confirmed": {
+      "type": "boolean"
+    },
+    "workflow_version": {
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "slide_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "reference_files": {
+      "$ref": "#/$defs/paths"
+    },
+    "estimated_typography_confirmed": {
+      "type": "boolean"
+    },
+    "reference_review": {
+      "type": "object"
+    },
+    "endpoint": {
+      "enum": [
+        "local",
+        "cloud"
+      ]
+    },
+    "font_cache_root": {
+      "type": "string"
+    },
+    "font_requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "family"
+        ],
+        "properties": {
+          "family": {
+            "type": "string",
+            "minLength": 1
+          },
+          "style": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "font_cache_roots": {
+      "$ref": "#/$defs/paths"
+    },
+    "font_license_review": {
+      "type": "object"
+    },
+    "font_matching": {
+      "type": "object",
+      "properties": {
+        "confidence": {
+          "enum": [
+            "unknown",
+            "low",
+            "medium",
+            "high",
+            "not_inferred"
+          ]
+        },
+        "user_confirmed": {
+          "type": "boolean"
+        },
+        "similarity_approved": {
+          "type": "boolean"
+        },
+        "selected": {
+          "type": "object"
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "estimated_typography": {
+      "type": "object",
+      "properties": {
+        "point_sizes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        }
+      }
+    },
+    "font_library_file": {
+      "type": "string"
+    },
+    "font_library_root": {
+      "type": "string"
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "content_text"
+      ]
+    },
+    {
+      "required": [
+        "content_files"
+      ],
+      "properties": {
+        "content_files": {
+          "minItems": 1
+        }
+      }
+    }
+  ],
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "workflow_version"
+        ],
+        "properties": {
+          "workflow_version": {
+            "const": 2
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "font_policy",
+          "font_size_policy",
+          "slide_count"
+        ],
+        "allOf": [
+          {
+            "anyOf": [
+              {
+                "required": [
+                  "writing_rules"
+                ],
+                "properties": {
+                  "writing_rules": {
+                    "minItems": 1
+                  }
+                }
+              },
+              {
+                "required": [
+                  "writing_rules_policy"
+                ]
+              }
+            ]
+          },
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "builtin"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "template_id",
+                "production_preset_id"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "custom"
+                }
+              }
+            },
+            "then": {
+              "anyOf": [
+                {
+                  "required": [
+                    "template_files"
+                  ],
+                  "properties": {
+                    "template_files": {
+                      "minItems": 1
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "sample_files"
+                  ],
+                  "properties": {
+                    "sample_files": {
+                      "minItems": 1
+                    }
+                  }
+                },
+                {
+                  "required": [
+                    "reference_files"
+                  ],
+                  "properties": {
+                    "reference_files": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "else": {
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "builtin"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "template_id",
+                "production_preset_id"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "mode": {
+                  "const": "custom"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "template_files",
+                "font_policy",
+                "font_size_policy"
+              ],
+              "properties": {
+                "template_files": {
+                  "minItems": 1
+                }
+              },
+              "allOf": [
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "sample_files"
+                      ],
+                      "properties": {
+                        "sample_files": {
+                          "minItems": 1
+                        }
+                      }
+                    },
+                    {
+                      "required": [
+                        "sample_policy"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "writing_rules"
+                      ],
+                      "properties": {
+                        "writing_rules": {
+                          "minItems": 1
+                        }
+                      }
+                    },
+                    {
+                      "required": [
+                        "writing_rules_policy"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "$defs": {
+    "paths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "fontPolicy": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "basis"
+          ],
+          "properties": {
+            "basis": {
+              "const": "source"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "basis",
+            "values"
+          ],
+          "properties": {
+            "basis": {
+              "const": "specified"
+            },
+            "values": {
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "sizePolicy": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "basis"
+          ],
+          "properties": {
+            "basis": {
+              "const": "source"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "basis",
+            "values"
+          ],
+          "properties": {
+            "basis": {
+              "const": "specified"
+            },
+            "values": {
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "description": "Intake only. Path existence and input conflicts are checked by presentation_brief.py. No company defaults, approval or upload authorization is implied. workflow_version 2 adds staged intake, all-mode settings/count and native versus visual references. Version 1 remains compatibility only."
+}
