@@ -7,18 +7,26 @@
 일반 PPT 요청은 **원본 그대로 복제 / 기존 자료 수정·보완 / 템플릿으로 새로 제작**의 세 가지 `purpose_menu_contract`를 반환한다. 호스트가 이 값을 실제 지원 UI로 표시하고 현재 선택 이벤트를 아래 인자로 돌려준다. UI를 표시하지 않은 CLI 결과는 `actually_rendered:false`다.
 
 ```bash
-python3 .claude/skills/ppt-master/scripts/presentation_request.py <task-brief.json> --request-text 'PPT 만들어줘' --output <request-intake.json>
-python3 .claude/skills/ppt-master/scripts/presentation_request.py <task-brief.json> --request-text 'PPT 만들어줘' --purpose-choice copy_original --purpose-confirmation-ref <actual-selection-event> --output <request-intake.json>
+python3 .claude/skills/ppt-master/scripts/presentation_request.py <task-brief.json> --request-text 'PPT 만들어줘' --request-ref <actual-request> --state-file projects/<private-request>/session.json --output <request-intake.json>
+python3 .claude/skills/ppt-master/scripts/presentation_request.py <task-brief.json> --request-text 'PPT 만들어줘' --request-ref <same-request> --state-file projects/<private-request>/session.json --purpose-choice copy_original --purpose-confirmation-ref <actual-current-selection-event> --selection-context-sha256 <returned-menu-context> --output <request-intake.json>
 ```
 
 `복제해줘`, `똑같이`, `원본 그대로` 등 지원되는 직접 명령은 현재 사용자 메시지 근거인 `--request-ref`가 있을 때 그 메시지 자체를 원본 복제 선택으로 사용한다. 이미 명시한 목적을 다시 묻지 않는다. 긴 표현·질문·부정문을 단순 키워드로 승인하지 않는다. 호스트가 명확한 실제 요청을 판단했으면 `--purpose-choice copy_original --purpose-confirmation-ref <actual-message>`로 전달한다. 추천만 있는 요청에는 승인값을 만들지 않는다. 세 선택 중 수정·보완과 원본 복제는 custom 참조로 연결하며 builtin 충돌을 거절한다. 새 제작은 기존 builtin/custom 선택과 해당 owner의 gate를 계속 따른다.
+
+## 선택의 취소와 입력 변경
+
+새 호출은 brief에 남은 이전 `purpose_*` 승인값을 자동 재사용하지 않는다. 호스트의 실제 callback 경로에는 요청별로 하나의 private `--state-file`을 사용한다. 현재 메뉴의 `request_entry.selection_context_sha256`를 callback에 그대로 돌려준다. 메뉴 요청 ID와 실제 선택 이벤트 ID는 구분한다. 이 token은 요청 ID·입력 설정·첨부 파일 bytes·관찰 파일 bytes·revision을 묶으며 호스트 이벤트 인증을 대신하지 않는다.
+
+동일한 현재 입력·요청에만 session 선택을 유지한다. 다른 이미지, 같은 경로의 변경된 이미지 bytes, 관찰값, 장수·폰트·내용 설정, 새 요청 ID는 이전 선택과 callback token을 무효화한다. `--cancel-selection` 또는 지원되는 명확한 취소 명령은 revision을 바꾸고 선택을 폐기한다. 취소 이전 callback은 재사용하지 못한다. 취소된 직접 요청의 같은 메시지 재전송도 다시 선택하지 않으며, 새 실제 메시지나 현재 revision의 명시적 선택만 허용한다.
+
+동일 state 파일의 동시 요청은 잠금으로 차단한다. 같은 revision·model plan의 생성 재시도는 실행 기록으로 막으며 이미 생성된 workspace를 덮어쓰지 않는다. 실패/중복 메시지가 나면 기록된 상태와 기존 결과를 먼저 확인한다. 잠금 파일이 남은 비정상 종료는 호스트가 실행 종료를 확인한 뒤 복구해야 하며 이 CLI가 자동 삭제·재실행하지 않는다. state가 없는 호출은 명시적인 현재 요청의 단발 검사/실행용이며 호스트의 취소·중복 이벤트 처리를 대신하지 않는다.
 
 ## 사진 입력에서 편집형 검토본까지
 
 호스트는 실제 이미지의 픽셀을 보고 [관찰 계약](PHOTO_ORIGINAL_RECONSTRUCTION.md)과 [모델 계획](PHOTO_MODEL_ORCHESTRATION.md)을 작성한다. 사용자에게 SVG나 내부 plan JSON 작성을 요구하지 않는다. `inputs_confirmed`, 참조 검토, 글꼴/pt/장수/작성 기준과 실제 현재 선택 근거가 준비돼야 한다.
 
 ```bash
-python3 .claude/skills/ppt-master/scripts/presentation_request.py <task-brief.json> --request-text '복제해줘' --request-ref <actual-current-message> --build-photo-review <model-plan.json> --workspace-parent projects/<private-request> --presentations-skill-dir <verified-shared-Presentations-skill> --output <entry-result.json>
+python3 .claude/skills/ppt-master/scripts/presentation_request.py <task-brief.json> --request-text '복제해줘' --request-ref <actual-current-message> --state-file projects/<private-request>/session.json --build-photo-review <model-plan.json> --workspace-parent projects/<private-request> --presentations-skill-dir <verified-shared-Presentations-skill> --output <entry-result.json>
 ```
 
 이 opt-in 실행은 현재 intake를 검사하고 제공 runtime·폰트 사용권을 확인한다. 모델 plan에 선택 필드가 없으면 현재 선택값을 인계한다. 이미 있는 선택값/근거가 다르면 덮어쓰지 않고 차단한다. 현재 이미지 SHA 집합·관찰 sidecar·장수·선택 family·허용 pt값이 다르면 생성하지 않는다. 역할별 위치와 문자별 크기의 충실도는 관찰값과 모델 계획의 element 검증·최종 시각 QA가 담당한다.

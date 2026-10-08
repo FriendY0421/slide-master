@@ -25,6 +25,7 @@ import tempfile
 from console_encoding import configure_utf8_stdio
 from presentation_brief import check_environment, validate_brief
 from reference_intake import IMAGE_TYPES
+from presentation_request_state import PURPOSE_FIELDS, apply_session, digest_json, locked_state
 
 configure_utf8_stdio()
 CHOICES = ('copy_original', 'edit_existing', 'new_from_template')
@@ -42,8 +43,12 @@ def prepare_request(brief: dict, text: str, request_ref: str | None,
     if (choice is None) != (choice_ref is None):
         raise ValueError('Purpose choice and its current confirmation reference must be supplied together')
     current = copy.deepcopy(brief)
+    # A new invocation must not inherit approval from a previous task brief.
+    # Only an explicit current event or an unchanged bound session can restore it.
+    for key in PURPOSE_FIELDS:
+        current.pop(key, None)
     current.update(request_text=text, purpose_menu_required=True)
-    origin = 'task_brief' if current.get('purpose_confirmed') is True else None
+    origin = None
     if choice is not None:
         if choice not in CHOICES or not choice_ref.strip():
             raise ValueError('Explicit purpose choice and nonempty confirmation reference required')
@@ -164,6 +169,60 @@ def build_bound_review(brief: dict, report: dict, plan_path: Path, parent: Path,
     return result
 
 
+def process_request(args: argparse.Namespace, state: dict | None) -> int:
+    """Prepare current intake, optionally execute once under the session lock."""
+    brief_bytes = args.brief.read_bytes()
+    raw_brief = json.loads(brief_bytes)
+    brief, origin = prepare_request(raw_brief, args.request_text, args.request_ref,
+                                    args.purpose_choice, args.purpose_confirmation_ref)
+    command = ''.join(args.request_text.split()).strip('.! ?~').casefold()
+    cancel = args.cancel_selection or command in {'선택취소', '취소', 'cancel', 'cancelselection'}
+    if state is not None:
+        apply_session(state, brief, origin, raw_brief, args.brief.resolve().parent,
+                      args.request_ref, args.purpose_choice, args.selection_context_sha256, cancel)
+    elif cancel:
+        if args.purpose_choice:
+            raise ValueError('Cancellation and a new purpose selection cannot be combined')
+        for key in PURPOSE_FIELDS:
+            brief.pop(key, None)
+        origin['purpose_origin'] = 'cancelled'
+    elif args.selection_context_sha256:
+        raise ValueError('Selection context requires a private state file')
+    report = validate_brief(brief, args.brief.resolve().parent)
+    report['request_entry'] = {**origin, 'execution_performed': False,
+                               'brief_input_sha256': hashlib.sha256(brief_bytes).hexdigest(),
+                               'request_text_sha256': hashlib.sha256(args.request_text.encode()).hexdigest()}
+    if args.check_environment or args.build_photo_review:
+        report['environment'] = check_environment(brief, args.brief.resolve().parent)
+        if not report['environment']['ok']:
+            report['ready_for_plan'] = False
+    if args.build_photo_review:
+        if not args.presentations_skill_dir:
+            raise ValueError('Read the shared Presentations skill and provide its verified directory')
+        if state is not None:
+            if not report['ready_for_plan'] or state.get('cancelled'):
+                raise ValueError('Cancelled or incomplete request cannot build')
+            execution_key = digest_json({'context': origin['selection_context_sha256'],
+                                        'plan': hashlib.sha256(args.build_photo_review.read_bytes()).hexdigest()})
+            previous = state.get('execution')
+            if previous and previous['key'] == execution_key:
+                raise ValueError('This request already attempted its build; '
+                                 'inspect its recorded result before retrying')
+            state['execution'] = {'key': execution_key, 'status': 'attempted'}
+        parent = args.workspace_parent or Path(__file__).resolve().parents[4] / 'projects'
+        report['photo_review'] = build_bound_review(brief, report, args.build_photo_review.resolve(),
+                                                   parent, args.presentations_skill_dir, report['request_entry'])
+        report['request_entry']['execution_performed'] = True
+        if state is not None:
+            state['execution'].update(status='completed', result=report['photo_review'])
+    payload = json.dumps(report, ensure_ascii=False, indent=2) + '\n'
+    if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(payload, encoding='utf-8')
+    print(payload, end='')
+    return 0 if report['input_complete'] and report.get('environment', {}).get('ok', True) else 1
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('brief', type=Path)
@@ -172,6 +231,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--purpose-choice', choices=CHOICES)
     parser.add_argument('--purpose-confirmation-ref',
                         help='actual current menu selection or explicit request reference')
+    parser.add_argument('--state-file', type=Path, help='one private session file per host request')
+    parser.add_argument('--selection-context-sha256', help='current menu token returned by the same session')
+    parser.add_argument('--cancel-selection', action='store_true')
     parser.add_argument('--check-environment', action='store_true')
     parser.add_argument('--build-photo-review', type=Path)
     parser.add_argument('--workspace-parent', type=Path)
@@ -179,31 +241,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--output', type=Path)
     args = parser.parse_args(argv)
     try:
-        brief_bytes = args.brief.read_bytes()
-        brief, origin = prepare_request(json.loads(brief_bytes), args.request_text, args.request_ref,
-                                        args.purpose_choice, args.purpose_confirmation_ref)
-        report = validate_brief(brief, args.brief.resolve().parent)
-        report['request_entry'] = {**origin, 'execution_performed': False,
-                                   'brief_input_sha256': hashlib.sha256(brief_bytes).hexdigest(),
-                                   'request_text_sha256': hashlib.sha256(args.request_text.encode()).hexdigest()}
-        if args.check_environment or args.build_photo_review:
-            report['environment'] = check_environment(brief, args.brief.resolve().parent)
-            if not report['environment']['ok']:
-                report['ready_for_plan'] = False
-        if args.build_photo_review:
-            if not args.presentations_skill_dir:
-                raise ValueError('Read the shared Presentations skill and provide its verified directory')
-            parent = args.workspace_parent or Path(__file__).resolve().parents[4] / 'projects'
-            report['photo_review'] = build_bound_review(brief, report, args.build_photo_review.resolve(),
-                                                       parent, args.presentations_skill_dir,
-                                                       report['request_entry'])
-            report['request_entry']['execution_performed'] = True
-        payload = json.dumps(report, ensure_ascii=False, indent=2) + '\n'
-        if args.output:
-            args.output.parent.mkdir(parents=True, exist_ok=True)
-            args.output.write_text(payload, encoding='utf-8')
-        print(payload, end='')
-        return 0 if report['input_complete'] and report.get('environment', {}).get('ok', True) else 1
+        if args.state_file:
+            private_root = Path(__file__).resolve().parents[4] / 'projects'
+            with locked_state(args.state_file, private_root) as state:
+                return process_request(args, state)
+        return process_request(args, None)
     except (OSError, ValueError, KeyError, TypeError) as exc:
         print('Request entry blocked: ' + str(exc))
         return 1
