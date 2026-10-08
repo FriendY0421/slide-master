@@ -10,19 +10,57 @@ Dependencies: existing reference/font inspection helpers
 """
 from __future__ import annotations
 
-import math
 import hashlib
+import json
+import math
+import re
 import zipfile
-from xml.etree import ElementTree as ET
 from pathlib import Path
+from xml.etree import ElementTree as ET
 
-from reference_intake import IMAGE_TYPES, inspect_reference
+from reference_intake import IMAGE_TYPES, inspect_reference, bind_photo_observations
+
+
+def purpose_menu(request_text: str, choice: str | None, confirmed: bool) -> dict:
+    """Recommend a purpose without turning menu state into user approval."""
+    choices = [
+        {'id': 'copy_original', 'label': '원본 그대로 복제'},
+        {'id': 'edit_existing', 'label': '기존 자료 수정·보완'},
+        {'id': 'new_from_template', 'label': '템플릿으로 새로 제작'},
+    ]
+    recommend = 'copy_original' if re.search(
+        r'복제|똑같|동일하게|원본\s*그대로|identical|replica|duplicate',
+        request_text, re.IGNORECASE) else None
+    valid = isinstance(choice, str) and choice in {item['id'] for item in choices}
+    return {'choices': choices, 'recommended': recommend,
+            'tentative_choice': choice if valid else None,
+            'selected': choice if valid and confirmed else None,
+            'confirmed': valid and confirmed, 'actually_rendered': False}
 
 
 def validate_intake(brief: dict, base: Path) -> dict:
     """Bundle missing settings after mode/reference selection, without approval."""
     errors, missing, references = [], [], []
     mode=brief.get('mode');stage='settings'
+    menu = purpose_menu(str(brief.get('request_text') or ''), brief.get('purpose_choice'),
+                        brief.get('purpose_confirmed') is True)
+    for key in ('purpose_confirmed', 'purpose_menu_required'):
+        if key in brief and type(brief[key]) is not bool:
+            errors.append(key + ' must be boolean')
+    if 'output_intent' in brief and brief['output_intent'] not in ('blank_template', 'content_deck'):
+        errors.append('Unknown output_intent')
+    if brief.get('purpose_choice') and menu['tentative_choice'] is None:
+        errors.append('Unknown purpose_choice')
+    confirmation = brief.get('purpose_confirmation_ref')
+    menu['confirmation_ref'] = confirmation if isinstance(confirmation, str) else None
+    if menu['confirmed'] and (not isinstance(confirmation, str) or not confirmation.strip()):
+        errors.append('Record the current user purpose-confirmation reference')
+        menu['confirmed'], menu['selected'] = False, None
+    if menu['selected'] == 'copy_original':
+        if mode is None:
+            mode = 'custom'
+        elif mode != 'custom':
+            errors.append('Original-copy selection requires custom reference mode')
     if brief.get('schema_version')!=1 or brief.get('scope')!='task':
         errors.append('Require schema_version 1 and task scope')
     def files(key):
@@ -53,13 +91,34 @@ def validate_intake(brief: dict, base: Path) -> dict:
             for reference in references:
                 if reference['route']!='reference_reconstruction': continue
                 item=receipt.get(reference['input_sha256'],{}) if isinstance(receipt,dict) else {}
+                if not isinstance(item, dict):
+                    item = {}
                 required=['pixels_inspected','crop_confirmed','text_confirmed','aspect_confirmed']
                 if reference['input_type'] in IMAGE_TYPES: required.append('perspective_confirmed')
                 if any(item.get(k) is not True for k in required):
                     missing.append('참조 픽셀·원근/크롭·텍스트·화면비 확인')
                     break
+                if menu['selected'] == 'copy_original' and reference['input_type'] in IMAGE_TYPES:
+                    observation_path = item.get('observations_file')
+                    if not isinstance(observation_path, str) or not observation_path:
+                        missing.append('사진 원본 화면 영역·요소별 관찰/추정 기록')
+                        continue
+                    try:
+                        path = Path(observation_path)
+                        path = path if path.is_absolute() else base / path
+                        observed = json.loads(path.read_text(encoding='utf-8'))
+                        bound = bind_photo_observations(reference, observed)
+                        if not bound['reconstruction_contract']['reference_pixels_inspected']:
+                            missing.append('사진 원본 픽셀 직접 확인')
+                        reference.update(bound)
+                    except (OSError, ValueError) as exc:
+                        errors.append(str(exc))
     if stage=='settings':
-        if not brief.get('content_text') and not content: missing.append('이번 내용 자료')
+        blank_reference = (menu['selected'] == 'copy_original' and mode == 'custom'
+                           and bool(references) and brief.get('output_intent') == 'blank_template'
+                           and all(r['input_type'] in IMAGE_TYPES for r in references))
+        if not brief.get('content_text') and not content and not blank_reference:
+            missing.append('이번 내용 자료')
         for key,label in [('font_policy','글꼴'),('font_size_policy','글자 크기')]:
             policy=brief.get(key)
             if not isinstance(policy,dict) or policy.get('basis') not in {'source','specified'}:
@@ -105,7 +164,19 @@ def validate_intake(brief: dict, base: Path) -> dict:
     route='main_svg' if mode=='builtin' else 'ppt-template-fill' if native else 'reference/template import then confirmed main SVG' if references else None
     if mode=='custom' and any(r['route']=='native_potx_extract_then_normalize' for r in references):
         route='native POTX master/layout extraction; confirmed normalization before fill'
+    if (brief.get('purpose_menu_required') is True or 'purpose_choice' in brief
+            or 'purpose_confirmed' in brief) and not menu['confirmed']:
+        stage = 'purpose'
+        missing = ['목적 선택 확인: 원본 그대로 복제 / 기존 자료 수정·보완 / 템플릿으로 새로 제작']
+    photo_selection = None
+    if menu['selected'] == 'copy_original' and references:
+        photo_selection = {'kind': 'user_reference_original', 'confirmed': True,
+                           'confirmation_ref': menu['confirmation_ref'],
+                           'input_sha256': [r['input_sha256'] for r in references],
+                           'registered_active_template': False,
+                           'exact_source_font_verified': False}
     return {'schema_version':1,'workflow_version':2,'mode':mode,'scope':'task','stage':stage,
+            'purpose_menu_contract':menu, 'reference_selection':photo_selection,
             'mode_menu_contract':{'choices':[{'id':'builtin','label':'기본 템플릿'},{'id':'custom','label':'사용자 정의'}], 'actually_rendered':False},
             'input_complete':not missing and not errors,'inputs_confirmed':brief.get('inputs_confirmed') is True,
             'ready_for_plan':not missing and not errors and brief.get('inputs_confirmed') is True,

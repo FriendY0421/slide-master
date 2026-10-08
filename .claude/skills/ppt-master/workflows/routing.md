@@ -6,7 +6,20 @@ description: Deterministic route selection rules for PPT Master requests
 
 ## Per-task mode intake
 
-At each task start expose a supported two-option builtin/custom mode selector;
+For new requests, first offer the purpose menu: **copy the original / edit or
+improve existing material / create with a template**. Requests such as
+"복제해줘", "똑같이", "원본 그대로", "duplicate", or "identical" recommend
+copying the original; recommendation and local menu state never confirm it.
+Use `presentation_brief.py --request-text "<actual request>"` to prepare the
+three-option `purpose_menu_contract`; render it through the available host UI.
+Record `purpose_choice` and `purpose_confirmed` only from the user's explicit
+choice. An explicit original-copy request already satisfies that choice:
+skip unrelated registered-template recommendations and inspect the actual
+reference. This selects custom reference mode; do not ask a redundant mode
+question. Preserve the reference review, plan approval and final QA gates.
+
+When the purpose has not already determined the mode, expose the supported
+two-option builtin/custom mode selector;
 never claim an unavailable UI was displayed. Use workflow_version 2 task intake.
 Builtin retains the registered template/preset/storyline sequence. Custom raw
 PPTX + new content routes deterministically to `ppt-template-fill`; collect that
@@ -18,7 +31,21 @@ and confirmed normalization. Image/PDF/photo references use the project-private
 reference/create-template reconstruction workflow, not native PPTX filling.
 Inspect pixels, perspective/crop, text and aspect; mark unverified font/pt as
 estimates and require the current plan approval. Raster backgrounds do not prove
-full editability. This intake contract does not complete that rendering handoff.
+full editability. Intake alone does not complete that rendering handoff. For the
+minimal supported photo scope, after the create-template brief/layout is confirmed,
+the host model supplies the complete bound primitive plan to
+`scripts/photo_reconstruct.py`; it authors SVG through the existing structured
+review exporter and shared finalization/all-page render path. Read
+`docs/ppt-project/PHOTO_MODEL_ORCHESTRATION.md` from repo root. Do not make the
+user author SVG. Unsupported layouts stay with the selected owner; the adapter
+cannot authenticate host confirmation events or replace source comparison QA.
+For an authorized photo-reconstruction **review prototype**, distinguish the
+user's actual reference-purpose selection from model estimates. The adapter's
+explicit `review_only:true` path records `layout_basis:visual_estimate` and model
+review references for coordinates/font/decoration; it does not require invented
+individual user approvals. The result stays review-only, source-font unverified
+and pending comparison. Actual purpose selection, source provenance, font/glyph
+availability, editability and privacy guards still apply.
 See `docs/ppt-project/TEMPLATE_FIRST_WORKFLOW.md` from repo root. Never persist
 private company files or task-specific values as public/global defaults.
 

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "workflow_version": 2,
+  "scope": "task",
+  "mode": "custom",
+  "purpose_choice": "copy_original",
+  "purpose_confirmed": true,
+  "purpose_confirmation_ref": "SYNTHETIC engineering fixture, not real user approval",
+  "output_intent": "blank_template",
+  "reference_files": [
+    "synthetic.png"
+  ],
+  "font_policy": {
+    "basis": "specified",
+    "values": {
+      "body": "Pretendard"
+    }
+  },
+  "font_size_policy": {
+    "basis": "specified",
+    "values": {
+      "title": 20,
+      "body": 14,
+      "detail": 13,
+      "reference": 10
+    }
+  },
+  "slide_count": 2,
+  "writing_rules": [
+    "합성 계약 입력만"
+  ],
+  "inputs_confirmed": true,
+  "reference_review": {
+    "09f45936227d0beeca9c50aac17b22bb999db555355201dfcbc09125e4496742": {
+      "pixels_inspected": true,
+      "crop_confirmed": true,
+      "text_confirmed": true,
+      "aspect_confirmed": true,
+      "perspective_confirmed": true,
+      "observations_file": "observations.json"
+    }
+  }
+}
