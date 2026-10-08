@@ -56,11 +56,11 @@ def validate_intake(brief: dict, base: Path) -> dict:
     if menu['confirmed'] and (not isinstance(confirmation, str) or not confirmation.strip()):
         errors.append('Record the current user purpose-confirmation reference')
         menu['confirmed'], menu['selected'] = False, None
-    if menu['selected'] == 'copy_original':
+    if menu['selected'] in {'copy_original', 'edit_existing'}:
         if mode is None:
             mode = 'custom'
         elif mode != 'custom':
-            errors.append('Original-copy selection requires custom reference mode')
+            errors.append('Original-copy/edit selection requires custom reference mode')
     if brief.get('schema_version')!=1 or brief.get('scope')!='task':
         errors.append('Require schema_version 1 and task scope')
     def files(key):
