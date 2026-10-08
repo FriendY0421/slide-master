@@ -172,6 +172,32 @@
     },
     "font_library_root": {
       "type": "string"
+    },
+    "request_text": {
+      "type": "string"
+    },
+    "purpose_menu_required": {
+      "type": "boolean"
+    },
+    "purpose_choice": {
+      "enum": [
+        "copy_original",
+        "edit_existing",
+        "new_from_template"
+      ]
+    },
+    "purpose_confirmed": {
+      "type": "boolean"
+    },
+    "output_intent": {
+      "enum": [
+        "blank_template",
+        "content_deck"
+      ]
+    },
+    "purpose_confirmation_ref": {
+      "type": "string",
+      "minLength": 1
     }
   },
   "anyOf": [
@@ -186,6 +212,37 @@
       ],
       "properties": {
         "content_files": {
+          "minItems": 1
+        }
+      }
+    },
+    {
+      "required": [
+        "workflow_version",
+        "mode",
+        "purpose_choice",
+        "purpose_confirmed",
+        "output_intent",
+        "reference_files",
+        "purpose_confirmation_ref"
+      ],
+      "properties": {
+        "workflow_version": {
+          "const": 2
+        },
+        "mode": {
+          "const": "custom"
+        },
+        "purpose_choice": {
+          "const": "copy_original"
+        },
+        "purpose_confirmed": {
+          "const": true
+        },
+        "output_intent": {
+          "const": "blank_template"
+        },
+        "reference_files": {
           "minItems": 1
         }
       }

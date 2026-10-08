@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Validate a per-task presentation brief; never writes company defaults.
 
-Usage: python3 scripts/presentation_brief.py BRIEF.json [--output REPORT.json]
+Usage: python3 scripts/presentation_brief.py BRIEF.json [--output REPORT.json] [--request-text REQUEST]
 This is intake only. Existing template/preset/storyline/fill-plan gates remain.
+See docs/ppt-project/PHOTO_ORIGINAL_RECONSTRUCTION.md for the optional purpose menu.
 """
 from __future__ import annotations
 
@@ -102,11 +103,16 @@ def main():
     parser.add_argument("--check-environment", action="store_true")
     parser.add_argument("--planned-slide-count", type=int)
     parser.add_argument("--output-slide-count", type=int)
+    parser.add_argument("--request-text", help="prepare the purpose menu; never confirms its recommendation")
     args = parser.parse_args()
     try:
         brief = json.loads(args.brief.read_text(encoding="utf-8"))
         if not isinstance(brief, dict):
             raise ValueError("Brief must be an object")
+        if args.request_text is not None:
+            if brief.get('workflow_version') != 2:
+                raise ValueError('Purpose menu requires workflow_version 2')
+            brief = {**brief, 'request_text': args.request_text, 'purpose_menu_required': True}
         report = validate_brief(brief, args.brief.resolve().parent)
         if args.planned_slide_count is not None:
             from presentation_intake import validate_slide_count

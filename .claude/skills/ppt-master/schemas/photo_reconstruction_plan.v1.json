@@ -1,0 +1,844 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:slide-master:photo-reconstruction-plan:v1",
+  "title": "Photo reconstruction plan: confirmed input or explicitly estimated review only",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "project_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,79}$"
+    },
+    "purpose_choice": {
+      "const": "copy_original"
+    },
+    "purpose_confirmed": {
+      "const": true
+    },
+    "purpose_confirmation_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "layout_confirmed": {
+      "type": "boolean"
+    },
+    "layout_confirmation_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canvas_px": {
+      "const": [
+        1280,
+        720
+      ]
+    },
+    "slide_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "font_choice": {
+      "$ref": "#/$defs/font_choice"
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/page"
+      },
+      "minItems": 1
+    },
+    "review_only": {
+      "type": "boolean"
+    },
+    "layout_basis": {
+      "const": "visual_estimate"
+    },
+    "layout_review_ref": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "project_name",
+    "purpose_choice",
+    "purpose_confirmed",
+    "purpose_confirmation_ref",
+    "canvas_px",
+    "slide_count",
+    "font_choice",
+    "pages"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "bounds": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "pixel_size": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "input_type": {
+          "enum": [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".webp",
+            ".bmp",
+            ".tif",
+            ".tiff"
+          ]
+        },
+        "review_origin": {
+          "enum": [
+            "local_model_visual_analysis",
+            "parent_model_visual_analysis"
+          ]
+        },
+        "visual_review_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "sha256",
+        "pixel_size",
+        "input_type",
+        "review_origin",
+        "visual_review_ref"
+      ],
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": [
+            "file"
+          ]
+        },
+        {
+          "properties": {
+            "review_origin": {
+              "const": "parent_model_visual_analysis"
+            }
+          }
+        }
+      ]
+    },
+    "observation": {
+      "type": "object",
+      "properties": {
+        "element_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "property": {
+          "enum": [
+            "text",
+            "geometry_px",
+            "font_family",
+            "font_size_pt",
+            "color",
+            "font_weight",
+            "line_spacing_pt",
+            "paragraph_spacing_pt",
+            "row_gap_px",
+            "column_gap_px",
+            "alignment",
+            "image_crop_px",
+            "tracking_pt"
+          ]
+        },
+        "value": {},
+        "basis": {
+          "enum": [
+            "visible_text",
+            "visual_estimate",
+            "user_instruction",
+            "unknown"
+          ]
+        },
+        "certainty": {
+          "enum": [
+            "observed",
+            "estimated",
+            "confirmed",
+            "unverified"
+          ]
+        },
+        "source_bounds_px": {
+          "$ref": "#/$defs/bounds"
+        },
+        "render_as": {
+          "enum": [
+            "native_editable",
+            "preserved_image_crop"
+          ]
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "element_id",
+        "property",
+        "value",
+        "basis",
+        "certainty",
+        "source_bounds_px",
+        "render_as"
+      ],
+      "additionalProperties": false
+    },
+    "observations": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "pixels_inspected": {
+          "const": true
+        },
+        "screen_region_px": {
+          "$ref": "#/$defs/bounds"
+        },
+        "screen_quad_px": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": 0
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "slide_aspect_ratio": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/observation"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "schema_version",
+        "source_sha256",
+        "pixels_inspected",
+        "screen_region_px",
+        "slide_aspect_ratio",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "rect": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,79}$"
+        },
+        "source_bounds_px": {
+          "$ref": "#/$defs/bounds"
+        },
+        "bounds_px": {
+          "$ref": "#/$defs/bounds"
+        },
+        "type": {
+          "const": "rect"
+        },
+        "color": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        }
+      },
+      "required": [
+        "id",
+        "source_bounds_px",
+        "bounds_px",
+        "type",
+        "color"
+      ],
+      "additionalProperties": false
+    },
+    "line": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,79}$"
+        },
+        "source_bounds_px": {
+          "$ref": "#/$defs/bounds"
+        },
+        "bounds_px": {
+          "$ref": "#/$defs/bounds"
+        },
+        "type": {
+          "const": "line"
+        },
+        "color": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "direction": {
+          "enum": [
+            "horizontal",
+            "vertical"
+          ]
+        },
+        "stroke_width_px": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "id",
+        "source_bounds_px",
+        "bounds_px",
+        "type",
+        "color",
+        "direction",
+        "stroke_width_px"
+      ],
+      "additionalProperties": false
+    },
+    "text": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,79}$"
+        },
+        "source_bounds_px": {
+          "$ref": "#/$defs/bounds"
+        },
+        "bounds_px": {
+          "$ref": "#/$defs/bounds"
+        },
+        "type": {
+          "const": "text"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "font_pt": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "font_family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "font_weight": {
+          "type": "integer",
+          "enum": [
+            400,
+            700
+          ]
+        },
+        "color": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "align": {
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ]
+        },
+        "line_height_px": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "text_override": {
+          "$ref": "#/$defs/text_override"
+        }
+      },
+      "required": [
+        "id",
+        "source_bounds_px",
+        "bounds_px",
+        "type",
+        "text",
+        "font_pt",
+        "font_family",
+        "font_weight",
+        "color",
+        "align",
+        "line_height_px"
+      ],
+      "additionalProperties": false
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,79}$"
+        },
+        "source_bounds_px": {
+          "$ref": "#/$defs/bounds"
+        },
+        "bounds_px": {
+          "$ref": "#/$defs/bounds"
+        },
+        "type": {
+          "const": "image"
+        },
+        "asset_file": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asset_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "id",
+        "source_bounds_px",
+        "bounds_px",
+        "type",
+        "asset_file",
+        "asset_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "page": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        },
+        "observations": {
+          "$ref": "#/$defs/observations"
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/rect"
+              },
+              {
+                "$ref": "#/$defs/line"
+              },
+              {
+                "$ref": "#/$defs/text"
+              },
+              {
+                "$ref": "#/$defs/image"
+              }
+            ]
+          },
+          "minItems": 1
+        },
+        "omitted_decorations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/omission"
+          },
+          "minItems": 0
+        },
+        "synthetic_content_disclosure": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "title",
+        "source",
+        "observations",
+        "elements",
+        "omitted_decorations"
+      ],
+      "additionalProperties": false
+    },
+    "text_override": {
+      "type": "object",
+      "properties": {
+        "basis": {
+          "enum": [
+            "user_instruction",
+            "user_authorized_synthetic"
+          ]
+        },
+        "certainty": {
+          "enum": [
+            "confirmed",
+            "model_written"
+          ]
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "original_observed_text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "basis",
+        "certainty",
+        "source_ref",
+        "original_observed_text"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "basis": {
+                "const": "user_authorized_synthetic"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "certainty": {
+                "const": "model_written"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "certainty": {
+                "const": "confirmed"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "omission": {
+      "type": "object",
+      "properties": {
+        "element_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confirmation_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis": {
+          "enum": [
+            "user_instruction",
+            "visual_estimate"
+          ]
+        },
+        "certainty": {
+          "enum": [
+            "confirmed",
+            "estimated"
+          ]
+        },
+        "review_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "element_id",
+        "reason"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "basis"
+            ],
+            "properties": {
+              "basis": {
+                "const": "visual_estimate"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "certainty",
+              "review_ref"
+            ],
+            "properties": {
+              "certainty": {
+                "const": "estimated"
+              }
+            },
+            "not": {
+              "required": [
+                "confirmation_ref"
+              ]
+            }
+          },
+          "else": {
+            "required": [
+              "confirmation_ref"
+            ]
+          }
+        }
+      ]
+    },
+    "font_choice": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis": {
+          "enum": [
+            "design",
+            "visual_estimate"
+          ]
+        },
+        "source_font_identity_verified": {
+          "const": false
+        },
+        "confirmation_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "review_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "font_files": {
+          "type": "object",
+          "properties": {
+            "regular": {
+              "type": "string",
+              "minLength": 1
+            },
+            "bold": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "regular",
+            "bold"
+          ],
+          "additionalProperties": false
+        },
+        "font_license_review": {
+          "type": "object",
+          "properties": {
+            "reviewed": {
+              "const": true
+            },
+            "cloud_use": {
+              "const": "allowed"
+            },
+            "embedding": {
+              "enum": [
+                "allowed",
+                "denied",
+                "unknown"
+              ]
+            },
+            "evidence_file": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence_sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "font_sha256": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "minItems": 2
+            }
+          },
+          "required": [
+            "reviewed",
+            "cloud_use",
+            "embedding",
+            "evidence_file",
+            "evidence_sha256",
+            "font_sha256"
+          ]
+        }
+      },
+      "required": [
+        "family",
+        "basis",
+        "source_font_identity_verified"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "basis": {
+                "const": "visual_estimate"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "review_ref"
+            ],
+            "not": {
+              "required": [
+                "confirmation_ref"
+              ]
+            }
+          },
+          "else": {
+            "required": [
+              "confirmation_ref"
+            ]
+          }
+        },
+        {
+          "if": {
+            "not": {
+              "properties": {
+                "family": {
+                  "const": "Pretendard"
+                }
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "font_files",
+              "font_license_review"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "font_files"
+            ]
+          },
+          "then": {
+            "required": [
+              "font_license_review"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "review_only"
+        ],
+        "properties": {
+          "review_only": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "layout_basis",
+          "layout_review_ref"
+        ],
+        "not": {
+          "required": [
+            "layout_confirmation_ref"
+          ]
+        },
+        "properties": {
+          "font_choice": {
+            "properties": {
+              "basis": {
+                "const": "visual_estimate"
+              }
+            }
+          },
+          "layout_confirmed": {
+            "const": false
+          }
+        }
+      },
+      "else": {
+        "required": [
+          "layout_confirmed",
+          "layout_confirmation_ref"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "layout_basis"
+              ]
+            },
+            {
+              "required": [
+                "layout_review_ref"
+              ]
+            }
+          ]
+        },
+        "properties": {
+          "font_choice": {
+            "properties": {
+              "basis": {
+                "const": "design"
+              }
+            }
+          },
+          "layout_confirmed": {
+            "const": true
+          }
+        }
+      }
+    }
+  ]
+}

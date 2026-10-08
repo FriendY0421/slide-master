@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "source_sha256": "09f45936227d0beeca9c50aac17b22bb999db555355201dfcbc09125e4496742",
+  "authorization": "SYNTHETIC contract fixture only",
+  "pixels_inspected": true,
+  "screen_region_px": [
+    10,
+    10,
+    140,
+    80
+  ],
+  "screen_quad_px": [
+    [
+      10,
+      10
+    ],
+    [
+      150,
+      12
+    ],
+    [
+      145,
+      90
+    ],
+    [
+      12,
+      88
+    ]
+  ],
+  "slide_aspect_ratio": 1.7777777777777777,
+  "items": [
+    {
+      "source_ref": "SYNTHETIC instruction fixture only",
+      "element_id": "synthetic",
+      "property": "text",
+      "value": "SYNTHETIC",
+      "basis": "visible_text",
+      "certainty": "observed",
+      "render_as": "native_editable",
+      "source_bounds_px": [
+        20,
+        20,
+        80,
+        20
+      ]
+    },
+    {
+      "source_ref": "SYNTHETIC instruction fixture only",
+      "element_id": "synthetic",
+      "property": "font_size_pt",
+      "value": 14,
+      "basis": "user_instruction",
+      "certainty": "confirmed",
+      "render_as": "native_editable",
+      "source_bounds_px": [
+        20,
+        20,
+        80,
+        20
+      ]
+    },
+    {
+      "source_ref": "SYNTHETIC instruction fixture only",
+      "element_id": "synthetic",
+      "property": "font_family",
+      "value": null,
+      "basis": "unknown",
+      "certainty": "unverified",
+      "render_as": "native_editable",
+      "source_bounds_px": [
+        20,
+        20,
+        80,
+        20
+      ]
+    },
+    {
+      "source_ref": "SYNTHETIC instruction fixture only",
+      "element_id": "synthetic",
+      "property": "geometry_px",
+      "value": [
+        20,
+        20,
+        80,
+        20
+      ],
+      "basis": "visual_estimate",
+      "certainty": "estimated",
+      "render_as": "native_editable",
+      "source_bounds_px": [
+        20,
+        20,
+        80,
+        20
+      ]
+    }
+  ]
+}

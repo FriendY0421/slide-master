@@ -1,0 +1,1964 @@
+{
+  "schema_version": 1,
+  "project_name": "smoke_photo_bridge_v3",
+  "purpose_choice": "copy_original",
+  "purpose_confirmed": true,
+  "purpose_confirmation_ref": "SYNTHETIC engineering fixture; not user approval",
+  "layout_confirmed": true,
+  "layout_confirmation_ref": "SYNTHETIC confirmed finite layout for connection test",
+  "canvas_px": [
+    1280,
+    720
+  ],
+  "slide_count": 2,
+  "font_choice": {
+    "family": "Pretendard",
+    "basis": "design",
+    "source_font_identity_verified": false,
+    "confirmation_ref": "SYNTHETIC OFL font choice; not identification of original font"
+  },
+  "pages": [
+    {
+      "title": "합성 검증 · 운영 지표",
+      "source": {
+        "file": "source-1.png",
+        "sha256": "5e360815260ba7b8e55be63175c595435fee55c88a824fd8d05897d18c880779",
+        "pixel_size": [
+          1280,
+          800
+        ],
+        "input_type": ".png",
+        "review_origin": "local_model_visual_analysis",
+        "visual_review_ref": "SYNTHETIC source visual inspection in current connection test"
+      },
+      "observations": {
+        "schema_version": 1,
+        "source_sha256": "5e360815260ba7b8e55be63175c595435fee55c88a824fd8d05897d18c880779",
+        "pixels_inspected": true,
+        "screen_region_px": [
+          0,
+          40,
+          1280,
+          720
+        ],
+        "slide_aspect_ratio": 1.7777777777777777,
+        "items": [
+          {
+            "element_id": "page-title",
+            "property": "geometry_px",
+            "value": [
+              60,
+              82,
+              1000,
+              56
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              82,
+              1000,
+              56
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "page-title",
+            "property": "text",
+            "value": "합성 검증 · 운영 지표",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              60,
+              82,
+              1000,
+              56
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "page-title",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              60,
+              82,
+              1000,
+              56
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "page-title",
+            "property": "font_size_pt",
+            "value": 20,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              60,
+              82,
+              1000,
+              56
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "disclosure",
+            "property": "geometry_px",
+            "value": [
+              60,
+              145,
+              1000,
+              40
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              145,
+              1000,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "disclosure",
+            "property": "text",
+            "value": "모든 수치와 문구는 연결 검증용 합성자료입니다",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              60,
+              145,
+              1000,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "disclosure",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              60,
+              145,
+              1000,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "disclosure",
+            "property": "font_size_pt",
+            "value": 10,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              60,
+              145,
+              1000,
+              40
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "section-left",
+            "property": "geometry_px",
+            "value": [
+              60,
+              220,
+              540,
+              48
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              220,
+              540,
+              48
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-right",
+            "property": "geometry_px",
+            "value": [
+              660,
+              220,
+              560,
+              48
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              660,
+              220,
+              560,
+              48
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-left-label",
+            "property": "geometry_px",
+            "value": [
+              82,
+              228,
+              495,
+              36
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              82,
+              228,
+              495,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-left-label",
+            "property": "text",
+            "value": "운영 결과",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              82,
+              228,
+              495,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-left-label",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              82,
+              228,
+              495,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-left-label",
+            "property": "font_size_pt",
+            "value": 14,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              82,
+              228,
+              495,
+              36
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "section-right-label",
+            "property": "geometry_px",
+            "value": [
+              682,
+              228,
+              515,
+              36
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              682,
+              228,
+              515,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-right-label",
+            "property": "text",
+            "value": "다음 과제",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              682,
+              228,
+              515,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-right-label",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              682,
+              228,
+              515,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-right-label",
+            "property": "font_size_pt",
+            "value": 14,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              682,
+              228,
+              515,
+              36
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "metric-left",
+            "property": "geometry_px",
+            "value": [
+              60,
+              304,
+              535,
+              40
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              304,
+              535,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-left",
+            "property": "text",
+            "value": "처리 건수  120건",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              60,
+              304,
+              535,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-left",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              60,
+              304,
+              535,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-left",
+            "property": "font_size_pt",
+            "value": 14,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              60,
+              304,
+              535,
+              40
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "body-left",
+            "property": "geometry_px",
+            "value": [
+              60,
+              364,
+              535,
+              96
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              364,
+              535,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-left",
+            "property": "text",
+            "value": "가상 접수 데이터를 집계했습니다\n실제 회사 실적을 나타내지 않습니다",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              60,
+              364,
+              535,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-left",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              60,
+              364,
+              535,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-left",
+            "property": "font_size_pt",
+            "value": 13,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              60,
+              364,
+              535,
+              96
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "metric-right",
+            "property": "geometry_px",
+            "value": [
+              660,
+              304,
+              555,
+              40
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              660,
+              304,
+              555,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-right",
+            "property": "text",
+            "value": "재방문율  3.2%",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              660,
+              304,
+              555,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-right",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              660,
+              304,
+              555,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-right",
+            "property": "font_size_pt",
+            "value": 14,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              660,
+              304,
+              555,
+              40
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "body-right",
+            "property": "geometry_px",
+            "value": [
+              660,
+              364,
+              555,
+              96
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              660,
+              364,
+              555,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-right",
+            "property": "text",
+            "value": "관찰 원문은 그대로 보존합니다\n교체 문구는 승인 근거와 분리합니다",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              660,
+              364,
+              555,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-right",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              660,
+              364,
+              555,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-right",
+            "property": "font_size_pt",
+            "value": 13,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              660,
+              364,
+              555,
+              96
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "footer-line",
+            "property": "geometry_px",
+            "value": [
+              60,
+              648,
+              1160,
+              2
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              648,
+              1160,
+              2
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "footer",
+            "property": "geometry_px",
+            "value": [
+              60,
+              675,
+              1160,
+              36
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              675,
+              1160,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "footer",
+            "property": "text",
+            "value": "SYNTHETIC  |  editable reconstruction bridge",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              60,
+              675,
+              1160,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "footer",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              60,
+              675,
+              1160,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "footer",
+            "property": "font_size_pt",
+            "value": 10,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              60,
+              675,
+              1160,
+              36
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "crop",
+            "property": "image_crop_px",
+            "value": [
+              1156,
+              92,
+              48,
+              48
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              1156,
+              92,
+              48,
+              48
+            ],
+            "render_as": "preserved_image_crop"
+          },
+          {
+            "element_id": "omitted-dot",
+            "property": "geometry_px",
+            "value": [
+              1120,
+              676,
+              20,
+              20
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              1120,
+              676,
+              20,
+              20
+            ],
+            "render_as": "native_editable"
+          }
+        ]
+      },
+      "elements": [
+        {
+          "id": "page-title",
+          "type": "text",
+          "text": "합성 검증 · 운영 지표",
+          "bounds_px": [
+            60,
+            42,
+            1000,
+            56
+          ],
+          "font_pt": 20,
+          "font_family": "Pretendard",
+          "font_weight": 700,
+          "color": "#172A46",
+          "align": "left",
+          "line_height_px": 38,
+          "source_bounds_px": [
+            60,
+            82,
+            1000,
+            56
+          ]
+        },
+        {
+          "id": "disclosure",
+          "type": "text",
+          "text": "모든 수치와 문구는 연결 검증용 합성자료입니다",
+          "bounds_px": [
+            60,
+            105,
+            1000,
+            40
+          ],
+          "font_pt": 10,
+          "font_family": "Pretendard",
+          "font_weight": 400,
+          "color": "#536278",
+          "align": "left",
+          "line_height_px": 26,
+          "source_bounds_px": [
+            60,
+            145,
+            1000,
+            40
+          ]
+        },
+        {
+          "id": "section-left",
+          "type": "rect",
+          "bounds_px": [
+            60,
+            180,
+            540,
+            48
+          ],
+          "color": "#172A46",
+          "source_bounds_px": [
+            60,
+            220,
+            540,
+            48
+          ]
+        },
+        {
+          "id": "section-right",
+          "type": "rect",
+          "bounds_px": [
+            660,
+            180,
+            560,
+            48
+          ],
+          "color": "#172A46",
+          "source_bounds_px": [
+            660,
+            220,
+            560,
+            48
+          ]
+        },
+        {
+          "id": "section-left-label",
+          "type": "text",
+          "text": "운영 결과",
+          "bounds_px": [
+            82,
+            188,
+            495,
+            36
+          ],
+          "font_pt": 14,
+          "font_family": "Pretendard",
+          "font_weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "line_height_px": 28,
+          "source_bounds_px": [
+            82,
+            228,
+            495,
+            36
+          ]
+        },
+        {
+          "id": "section-right-label",
+          "type": "text",
+          "text": "다음 과제",
+          "bounds_px": [
+            682,
+            188,
+            515,
+            36
+          ],
+          "font_pt": 14,
+          "font_family": "Pretendard",
+          "font_weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "line_height_px": 28,
+          "source_bounds_px": [
+            682,
+            228,
+            515,
+            36
+          ]
+        },
+        {
+          "id": "metric-left",
+          "type": "text",
+          "text": "처리 건수  120건",
+          "bounds_px": [
+            60,
+            264,
+            535,
+            40
+          ],
+          "font_pt": 14,
+          "font_family": "Pretendard",
+          "font_weight": 700,
+          "color": "#172A46",
+          "align": "left",
+          "line_height_px": 30,
+          "source_bounds_px": [
+            60,
+            304,
+            535,
+            40
+          ]
+        },
+        {
+          "id": "body-left",
+          "type": "text",
+          "text": "가상 접수 데이터를 집계했습니다\n실제 회사 실적을 나타내지 않습니다",
+          "bounds_px": [
+            60,
+            324,
+            535,
+            96
+          ],
+          "font_pt": 13,
+          "font_family": "Pretendard",
+          "font_weight": 400,
+          "color": "#172A46",
+          "align": "left",
+          "line_height_px": 34,
+          "source_bounds_px": [
+            60,
+            364,
+            535,
+            96
+          ]
+        },
+        {
+          "id": "metric-right",
+          "type": "text",
+          "text": "재방문율  3.2%",
+          "bounds_px": [
+            660,
+            264,
+            555,
+            40
+          ],
+          "font_pt": 14,
+          "font_family": "Pretendard",
+          "font_weight": 700,
+          "color": "#172A46",
+          "align": "left",
+          "line_height_px": 30,
+          "source_bounds_px": [
+            660,
+            304,
+            555,
+            40
+          ]
+        },
+        {
+          "id": "body-right",
+          "type": "text",
+          "text": "관찰 원문은 그대로 보존합니다\n교체 문구는 승인 근거와 분리합니다",
+          "bounds_px": [
+            660,
+            324,
+            555,
+            96
+          ],
+          "font_pt": 13,
+          "font_family": "Pretendard",
+          "font_weight": 400,
+          "color": "#172A46",
+          "align": "left",
+          "line_height_px": 34,
+          "source_bounds_px": [
+            660,
+            364,
+            555,
+            96
+          ]
+        },
+        {
+          "id": "footer-line",
+          "type": "line",
+          "bounds_px": [
+            60,
+            608,
+            1160,
+            2
+          ],
+          "color": "#B8C0CB",
+          "direction": "horizontal",
+          "stroke_width_px": 2,
+          "source_bounds_px": [
+            60,
+            648,
+            1160,
+            2
+          ]
+        },
+        {
+          "id": "footer",
+          "type": "text",
+          "text": "SYNTHETIC  |  editable reconstruction bridge",
+          "bounds_px": [
+            60,
+            635,
+            1160,
+            36
+          ],
+          "font_pt": 10,
+          "font_family": "Pretendard",
+          "font_weight": 400,
+          "color": "#536278",
+          "align": "left",
+          "line_height_px": 26,
+          "source_bounds_px": [
+            60,
+            675,
+            1160,
+            36
+          ]
+        },
+        {
+          "id": "crop",
+          "type": "image",
+          "bounds_px": [
+            1156,
+            52,
+            48,
+            48
+          ],
+          "asset_file": "crop.png",
+          "source_bounds_px": [
+            1156,
+            92,
+            48,
+            48
+          ],
+          "asset_sha256": "44faf01cb2a397e79c073370f6b9dd3bc50a41aa28780a3773f506892a83e184"
+        }
+      ],
+      "omitted_decorations": [
+        {
+          "element_id": "omitted-dot",
+          "reason": "SYNTHETIC decorative dot omitted to exercise explicit accounting",
+          "confirmation_ref": "SYNTHETIC fixture approval only"
+        }
+      ]
+    },
+    {
+      "title": "합성 검증 · 개선 계획",
+      "source": {
+        "file": "source-2.png",
+        "sha256": "71b0068d7811144fd595140ea1b4f8b7039b70d43fbc33c6a787990f23de012a",
+        "pixel_size": [
+          1280,
+          800
+        ],
+        "input_type": ".png",
+        "review_origin": "local_model_visual_analysis",
+        "visual_review_ref": "SYNTHETIC source visual inspection in current connection test"
+      },
+      "observations": {
+        "schema_version": 1,
+        "source_sha256": "71b0068d7811144fd595140ea1b4f8b7039b70d43fbc33c6a787990f23de012a",
+        "pixels_inspected": true,
+        "screen_region_px": [
+          0,
+          40,
+          1280,
+          720
+        ],
+        "slide_aspect_ratio": 1.7777777777777777,
+        "items": [
+          {
+            "element_id": "page-title",
+            "property": "geometry_px",
+            "value": [
+              60,
+              82,
+              1000,
+              56
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              82,
+              1000,
+              56
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "page-title",
+            "property": "text",
+            "value": "합성 검증 · 개선 계획",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              60,
+              82,
+              1000,
+              56
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "page-title",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              60,
+              82,
+              1000,
+              56
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "page-title",
+            "property": "font_size_pt",
+            "value": 20,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              60,
+              82,
+              1000,
+              56
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "disclosure",
+            "property": "geometry_px",
+            "value": [
+              60,
+              145,
+              1000,
+              40
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              145,
+              1000,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "disclosure",
+            "property": "text",
+            "value": "모든 수치와 문구는 연결 검증용 합성자료입니다",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              60,
+              145,
+              1000,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "disclosure",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              60,
+              145,
+              1000,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "disclosure",
+            "property": "font_size_pt",
+            "value": 10,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              60,
+              145,
+              1000,
+              40
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "section-left",
+            "property": "geometry_px",
+            "value": [
+              60,
+              220,
+              540,
+              48
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              220,
+              540,
+              48
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-right",
+            "property": "geometry_px",
+            "value": [
+              660,
+              220,
+              560,
+              48
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              660,
+              220,
+              560,
+              48
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-left-label",
+            "property": "geometry_px",
+            "value": [
+              82,
+              228,
+              495,
+              36
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              82,
+              228,
+              495,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-left-label",
+            "property": "text",
+            "value": "개선 활동",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              82,
+              228,
+              495,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-left-label",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              82,
+              228,
+              495,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-left-label",
+            "property": "font_size_pt",
+            "value": 14,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              82,
+              228,
+              495,
+              36
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "section-right-label",
+            "property": "geometry_px",
+            "value": [
+              682,
+              228,
+              515,
+              36
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              682,
+              228,
+              515,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-right-label",
+            "property": "text",
+            "value": "확인 기준",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              682,
+              228,
+              515,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-right-label",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              682,
+              228,
+              515,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "section-right-label",
+            "property": "font_size_pt",
+            "value": 14,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              682,
+              228,
+              515,
+              36
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "metric-left",
+            "property": "geometry_px",
+            "value": [
+              60,
+              304,
+              535,
+              40
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              304,
+              535,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-left",
+            "property": "text",
+            "value": "접수 안내 표준화",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              60,
+              304,
+              535,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-left",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              60,
+              304,
+              535,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-left",
+            "property": "font_size_pt",
+            "value": 14,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              60,
+              304,
+              535,
+              40
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "body-left",
+            "property": "geometry_px",
+            "value": [
+              60,
+              364,
+              535,
+              96
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              364,
+              535,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-left",
+            "property": "text",
+            "value": "확인된 안내 문구를 배치합니다\n역할별 수정 항목을 기록합니다",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              60,
+              364,
+              535,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-left",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              60,
+              364,
+              535,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-left",
+            "property": "font_size_pt",
+            "value": 13,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              60,
+              364,
+              535,
+              96
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "metric-right",
+            "property": "geometry_px",
+            "value": [
+              660,
+              304,
+              555,
+              40
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              660,
+              304,
+              555,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-right",
+            "property": "text",
+            "value": "주간 확인  2회",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              660,
+              304,
+              555,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-right",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              660,
+              304,
+              555,
+              40
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "metric-right",
+            "property": "font_size_pt",
+            "value": 14,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              660,
+              304,
+              555,
+              40
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "body-right",
+            "property": "geometry_px",
+            "value": [
+              660,
+              364,
+              555,
+              96
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              660,
+              364,
+              555,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-right",
+            "property": "text",
+            "value": "/ /",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              660,
+              364,
+              555,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-right",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              660,
+              364,
+              555,
+              96
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "body-right",
+            "property": "font_size_pt",
+            "value": 13,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              660,
+              364,
+              555,
+              96
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "footer-line",
+            "property": "geometry_px",
+            "value": [
+              60,
+              648,
+              1160,
+              2
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              648,
+              1160,
+              2
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "footer",
+            "property": "geometry_px",
+            "value": [
+              60,
+              675,
+              1160,
+              36
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              60,
+              675,
+              1160,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "footer",
+            "property": "text",
+            "value": "SYNTHETIC  |  editable reconstruction bridge",
+            "basis": "visible_text",
+            "certainty": "observed",
+            "source_bounds_px": [
+              60,
+              675,
+              1160,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "footer",
+            "property": "font_family",
+            "value": null,
+            "basis": "unknown",
+            "certainty": "unverified",
+            "source_bounds_px": [
+              60,
+              675,
+              1160,
+              36
+            ],
+            "render_as": "native_editable"
+          },
+          {
+            "element_id": "footer",
+            "property": "font_size_pt",
+            "value": 10,
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_bounds_px": [
+              60,
+              675,
+              1160,
+              36
+            ],
+            "render_as": "native_editable",
+            "source_ref": "SYNTHETIC fixture requirement only"
+          },
+          {
+            "element_id": "crop",
+            "property": "image_crop_px",
+            "value": [
+              1156,
+              92,
+              48,
+              48
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              1156,
+              92,
+              48,
+              48
+            ],
+            "render_as": "preserved_image_crop"
+          },
+          {
+            "element_id": "omitted-dot",
+            "property": "geometry_px",
+            "value": [
+              1120,
+              676,
+              20,
+              20
+            ],
+            "basis": "visual_estimate",
+            "certainty": "estimated",
+            "source_bounds_px": [
+              1120,
+              676,
+              20,
+              20
+            ],
+            "render_as": "native_editable"
+          }
+        ]
+      },
+      "elements": [
+        {
+          "id": "page-title",
+          "type": "text",
+          "text": "합성 검증 · 개선 계획",
+          "bounds_px": [
+            60,
+            42,
+            1000,
+            56
+          ],
+          "font_pt": 20,
+          "font_family": "Pretendard",
+          "font_weight": 700,
+          "color": "#172A46",
+          "align": "left",
+          "line_height_px": 38,
+          "source_bounds_px": [
+            60,
+            82,
+            1000,
+            56
+          ]
+        },
+        {
+          "id": "disclosure",
+          "type": "text",
+          "text": "모든 수치와 문구는 연결 검증용 합성자료입니다",
+          "bounds_px": [
+            60,
+            105,
+            1000,
+            40
+          ],
+          "font_pt": 10,
+          "font_family": "Pretendard",
+          "font_weight": 400,
+          "color": "#536278",
+          "align": "left",
+          "line_height_px": 26,
+          "source_bounds_px": [
+            60,
+            145,
+            1000,
+            40
+          ]
+        },
+        {
+          "id": "section-left",
+          "type": "rect",
+          "bounds_px": [
+            60,
+            180,
+            540,
+            48
+          ],
+          "color": "#172A46",
+          "source_bounds_px": [
+            60,
+            220,
+            540,
+            48
+          ]
+        },
+        {
+          "id": "section-right",
+          "type": "rect",
+          "bounds_px": [
+            660,
+            180,
+            560,
+            48
+          ],
+          "color": "#172A46",
+          "source_bounds_px": [
+            660,
+            220,
+            560,
+            48
+          ]
+        },
+        {
+          "id": "section-left-label",
+          "type": "text",
+          "text": "개선 활동",
+          "bounds_px": [
+            82,
+            188,
+            495,
+            36
+          ],
+          "font_pt": 14,
+          "font_family": "Pretendard",
+          "font_weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "line_height_px": 28,
+          "source_bounds_px": [
+            82,
+            228,
+            495,
+            36
+          ]
+        },
+        {
+          "id": "section-right-label",
+          "type": "text",
+          "text": "확인 기준",
+          "bounds_px": [
+            682,
+            188,
+            515,
+            36
+          ],
+          "font_pt": 14,
+          "font_family": "Pretendard",
+          "font_weight": 700,
+          "color": "#FFFFFF",
+          "align": "left",
+          "line_height_px": 28,
+          "source_bounds_px": [
+            682,
+            228,
+            515,
+            36
+          ]
+        },
+        {
+          "id": "metric-left",
+          "type": "text",
+          "text": "접수 안내 표준화",
+          "bounds_px": [
+            60,
+            264,
+            535,
+            40
+          ],
+          "font_pt": 14,
+          "font_family": "Pretendard",
+          "font_weight": 700,
+          "color": "#172A46",
+          "align": "left",
+          "line_height_px": 30,
+          "source_bounds_px": [
+            60,
+            304,
+            535,
+            40
+          ]
+        },
+        {
+          "id": "body-left",
+          "type": "text",
+          "text": "확인된 안내 문구를 배치합니다\n역할별 수정 항목을 기록합니다",
+          "bounds_px": [
+            60,
+            324,
+            535,
+            96
+          ],
+          "font_pt": 13,
+          "font_family": "Pretendard",
+          "font_weight": 400,
+          "color": "#172A46",
+          "align": "left",
+          "line_height_px": 34,
+          "source_bounds_px": [
+            60,
+            364,
+            535,
+            96
+          ]
+        },
+        {
+          "id": "metric-right",
+          "type": "text",
+          "text": "주간 확인  2회",
+          "bounds_px": [
+            660,
+            264,
+            555,
+            40
+          ],
+          "font_pt": 14,
+          "font_family": "Pretendard",
+          "font_weight": 700,
+          "color": "#172A46",
+          "align": "left",
+          "line_height_px": 30,
+          "source_bounds_px": [
+            660,
+            304,
+            555,
+            40
+          ]
+        },
+        {
+          "id": "body-right",
+          "type": "text",
+          "text": "가상 개선 문구로 교체했습니다\n원문의 관찰값도 함께 남깁니다",
+          "bounds_px": [
+            660,
+            324,
+            555,
+            96
+          ],
+          "font_pt": 13,
+          "font_family": "Pretendard",
+          "font_weight": 400,
+          "color": "#172A46",
+          "align": "left",
+          "line_height_px": 34,
+          "text_override": {
+            "basis": "user_instruction",
+            "certainty": "confirmed",
+            "source_ref": "SYNTHETIC replacement approval fixture",
+            "original_observed_text": "/ /"
+          },
+          "source_bounds_px": [
+            660,
+            364,
+            555,
+            96
+          ]
+        },
+        {
+          "id": "footer-line",
+          "type": "line",
+          "bounds_px": [
+            60,
+            608,
+            1160,
+            2
+          ],
+          "color": "#B8C0CB",
+          "direction": "horizontal",
+          "stroke_width_px": 2,
+          "source_bounds_px": [
+            60,
+            648,
+            1160,
+            2
+          ]
+        },
+        {
+          "id": "footer",
+          "type": "text",
+          "text": "SYNTHETIC  |  editable reconstruction bridge",
+          "bounds_px": [
+            60,
+            635,
+            1160,
+            36
+          ],
+          "font_pt": 10,
+          "font_family": "Pretendard",
+          "font_weight": 400,
+          "color": "#536278",
+          "align": "left",
+          "line_height_px": 26,
+          "source_bounds_px": [
+            60,
+            675,
+            1160,
+            36
+          ]
+        },
+        {
+          "id": "crop",
+          "type": "image",
+          "bounds_px": [
+            1156,
+            52,
+            48,
+            48
+          ],
+          "asset_file": "crop.png",
+          "source_bounds_px": [
+            1156,
+            92,
+            48,
+            48
+          ],
+          "asset_sha256": "44faf01cb2a397e79c073370f6b9dd3bc50a41aa28780a3773f506892a83e184"
+        }
+      ],
+      "omitted_decorations": [
+        {
+          "element_id": "omitted-dot",
+          "reason": "SYNTHETIC decorative dot omitted to exercise explicit accounting",
+          "confirmation_ref": "SYNTHETIC fixture approval only"
+        }
+      ]
+    }
+  ]
+}
