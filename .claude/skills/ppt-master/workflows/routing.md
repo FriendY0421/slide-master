@@ -12,6 +12,9 @@ improve existing material / create with a template**. Requests such as
 copying the original; recommendation and local menu state never confirm it.
 Use `presentation_brief.py --request-text "<actual request>"` to prepare the
 three-option `purpose_menu_contract`; render it through the available host UI.
+For a bound request/selection handoff use `scripts/presentation_request.py` and
+`docs/ppt-project/PHOTO_REQUEST_ENTRY.md`; it retains this intake and the selected
+owner rather than treating an intake result as general generation approval.
 Record `purpose_choice` and `purpose_confirmed` only from the user's explicit
 choice. An explicit original-copy request already satisfies that choice:
 skip unrelated registered-template recommendations and inspect the actual

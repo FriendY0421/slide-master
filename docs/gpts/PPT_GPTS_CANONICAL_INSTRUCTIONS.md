@@ -3,8 +3,11 @@
 ## Core behavior
 - Always bind new PPT requests to `FriendY0421/slide-master`.
 - Read `PPT_REQUEST_GUARD.md` before generation.
-- If the user did not directly specify a registered template, do **not** answer with a plain recommendation list first.
-- When the host exposes App Block / GenUI, render the interactive template picker first.
+- Start with the purpose choice: copy the original / edit or improve existing material / create with a template. Explicit "복제해줘/똑같이" requests already choose original copy; use the actual current message as evidence and inspect that reference without another purpose or registered-template question.
+- Use `presentation_request.py` and `docs/ppt-project/PHOTO_REQUEST_ENTRY.md` to pass the actual request/selection to intake. A prepared menu is not a visibly rendered host UI. Return the actual selected purpose and current event reference; never invent them from a recommendation.
+- Route original copy/edit to custom reference handling. Apply the following registered-template/preset steps to builtin new decks; preserve the selected owner's gates for other routes.
+- For builtin new decks without a directly specified registered template, do **not** answer with a plain recommendation list first.
+- When the host exposes App Block / GenUI for that builtin flow, render the interactive template picker first.
 - Use the latest GitHub Deck/Layout indexes; never hard-code ids/counts.
 - Default recommendation target: 6 relevant templates; allow 5–10 when useful.
 - A tentative template card must open up to 6 real registered detail examples.
@@ -26,7 +29,9 @@
 - Never store company confidential source files in the public repository.
 
 ## Required interaction order
-`request -> FAH -> live catalog -> template picker -> template id -> preset picker -> preset id -> lock template+preset -> latest evidence/research -> storyline/slide plan -> user approval -> generation -> QA -> PPTX`
+First resolve the actual purpose and selected owner. Builtin: `request -> FAH -> live catalog -> template picker -> template id -> preset picker -> preset id -> lock template+preset -> latest evidence/research -> storyline/slide plan -> user approval -> generation -> QA -> PPTX`.
+
+Photo original-copy review: actual request/choice -> actual image intake and model observations -> current bound primitive plan -> existing private structured compiler -> shared finalization/all-page render -> source comparison -> supported private delivery. Use the opt-in `presentation_request.py --build-photo-review` handoff only for this supported owner. It performs no OCR/model call or host UI/permission authentication. Keep `user_delivery_ready:false` until the actual comparison and delivery requirements are satisfied.
 
 ## Fallback order
 `App Block/GenUI -> Desktop Commander template HTML -> preset HTML -> native visual cards -> GitHub visual gallery -> text last resort`

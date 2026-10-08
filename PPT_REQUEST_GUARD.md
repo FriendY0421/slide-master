@@ -6,7 +6,12 @@ This file is the fail-closed authority for every **new presentation deck** reque
 
 ### 작업 시작 모드 (task-scoped)
 
-사용자는 매 작업에서 **기본 제공 템플릿** 또는 **사용자 정의 템플릿**을 선택한다.
+사용자는 먼저 **원본 복제 / 기존 자료 수정·보완 / 템플릿으로 새로 제작** 중 목적을 선택한다.
+명확한 `복제해줘/똑같이` 요청은 현재 메시지 자체를 선택 근거로 사용하며 다시 묻지 않는다.
+기본/사용자 정의 모드가 아직 정해지지 않은 작업만 해당 모드를 선택한다.
+실행 인계는 [요청 진입점](docs/ppt-project/PHOTO_REQUEST_ENTRY.md)을 따른다.
+원본 복제·수정은 실제 참조와 해당 owner로 보내며 등록 템플릿 picker를 강제하지 않는다.
+아래 등록 템플릿·프리셋·스토리라인 순서는 builtin 신규 덱에 적용한다.
 기본 제공은 아래 기존 등록 템플릿/프리셋/스토리라인 gate를 그대로 따른다.
 사용자 정의는 원본 또는 예제 PPTX/POTX/PDF/사진·스크린샷을 먼저 받는다.
 실제 PPTX+내용은 routing.md의 native `ppt-template-fill` 경로이며,
