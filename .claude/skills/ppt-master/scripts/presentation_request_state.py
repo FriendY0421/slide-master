@@ -64,12 +64,10 @@ def locked_state(path: Path, private_root: Path) -> Iterator[dict]:
                 or state.get('schema_version') != 1
                 or type(state.get('revision')) is not int or state['revision'] < 0):
             raise ValueError('Invalid request state; preserve it and use a new private request state')
-        try:
-            yield state
-        finally:
-            temporary = path.with_name(path.name + '.tmp')
-            temporary.write_text(json.dumps(state, ensure_ascii=False, indent=2) + '\n')
-            temporary.replace(path)
+        yield state
+        temporary = path.with_name(path.name + '.tmp')
+        temporary.write_text(json.dumps(state, ensure_ascii=False, indent=2) + '\n')
+        temporary.replace(path)
     finally:
         lock.unlink()
 
@@ -80,6 +78,19 @@ def apply_session(state: dict, prepared: dict, origin: dict, raw_brief: dict, ba
     if not isinstance(request_ref, str) or not request_ref.strip():
         raise ValueError('Stateful requests require the actual request reference')
     context = input_context(raw_brief, base, request_ref)
+    if choice is not None or (cancel and state.get('input_context_sha256') is not None):
+        # A callback belongs to the currently stored revision, never to an
+        # older brief that would reset the session before its token is checked.
+        current_token = digest_json({'context': state.get('input_context_sha256'),
+                                     'revision': state['revision']})
+        if (context != state.get('input_context_sha256')
+                or ((choice is not None or token is not None) and token != current_token)):
+            raise ValueError('Stale or missing selection context; '
+                             'preserve the current selection and use the latest session token')
+    # Validate and prepare changes off to the side; rejection must be a no-op
+    # even for API callers that do not use the file transaction.
+    stored = state
+    state = copy.deepcopy(stored)
     if state.get('input_context_sha256') != context:
         revision = state['revision'] + 1
         state.clear()
@@ -92,19 +103,20 @@ def apply_session(state: dict, prepared: dict, origin: dict, raw_brief: dict, ba
         state['cancelled'] = True
         state.pop('selection', None)
         state.pop('execution', None)
-    selection_token = digest_json({'context': context, 'revision': state['revision']})
     if choice is not None:
-        if token != selection_token:
-            raise ValueError('Stale or missing selection context; show the current menu and use its returned token')
         state['cancelled'] = False
+        state['revision'] += 1
     if state.get('cancelled'):
         for key in PURPOSE_FIELDS:
             prepared.pop(key, None)
         origin['purpose_origin'] = 'cancelled'
-    elif prepared.get('purpose_confirmed') is True:
-        state['selection'] = {key: prepared[key] for key in PURPOSE_FIELDS}
-    elif state.get('selection'):
+    elif choice is None and state.get('selection'):
         prepared.update(state['selection'])
         origin['purpose_origin'] = 'bound_session'
+    elif prepared.get('purpose_confirmed') is True:
+        state['selection'] = {key: prepared[key] for key in PURPOSE_FIELDS}
+    selection_token = digest_json({'context': context, 'revision': state['revision']})
     origin.update(input_context_sha256=context, selection_context_sha256=selection_token,
                   state_revision=state['revision'], cancelled=state.get('cancelled', False))
+    stored.clear()
+    stored.update(state)

@@ -19,7 +19,13 @@ python3 .claude/skills/ppt-master/scripts/presentation_request.py <task-brief.js
 
 동일한 현재 입력·요청에만 session 선택을 유지한다. 다른 이미지, 같은 경로의 변경된 이미지 bytes, 관찰값, 장수·폰트·내용 설정, 새 요청 ID는 이전 선택과 callback token을 무효화한다. `--cancel-selection` 또는 지원되는 명확한 취소 명령은 revision을 바꾸고 선택을 폐기한다. 취소 이전 callback은 재사용하지 못한다. 취소된 직접 요청의 같은 메시지 재전송도 다시 선택하지 않으며, 새 실제 메시지나 현재 revision의 명시적 선택만 허용한다.
 
-동일 state 파일의 동시 요청은 잠금으로 차단한다. 같은 revision·model plan의 생성 재시도는 실행 기록으로 막으며 이미 생성된 workspace를 덮어쓰지 않는다. 실패/중복 메시지가 나면 기록된 상태와 기존 결과를 먼저 확인한다. 잠금 파일이 남은 비정상 종료는 호스트가 실행 종료를 확인한 뒤 복구해야 하며 이 CLI가 자동 삭제·재실행하지 않는다. state가 없는 호출은 명시적인 현재 요청의 단발 검사/실행용이며 호스트의 취소·중복 이벤트 처리를 대신하지 않는다.
+현재 token으로 명시적 선택을 수락하면 revision을 올리고 응답에 새 token을 반환한다. 호스트는 다음 이벤트에 이 새 token을 사용한다. 그 뒤 새 선택 없는 resume은 최초 `복제해줘` 문구보다 session의 최신 명시적 선택을 우선한다. 이전 token의 중복·역순 callback과 현재 state에 맞지 않는 오래된 brief snapshot은 현재 선택을 변경하지 않고 거절한다. 실패한 callback 때문에 사용자에게 같은 선택을 다시 요구하지 않는다.
+
+callback의 요청/입력 context와 현재 저장된 token을 검증한 뒤에만 변경 후보를 적용한다. 파일 state는 정상 처리 시에만 임시 파일 교체로 commit하며 예외에서는 원래 파일 bytes를 보존한다. 현재 입력 변경의 정상 intake가 새 revision을 만드는 것과 오래된 snapshot의 실패한 callback을 구분한다.
+
+UI 취소 callback도 현재 token을 전달한다. 취소에 token이 제공되면 이를 검증하며, token 없는 현재 사용자 취소 명령의 인증은 호스트가 담당한다. 목적 선택 callback의 commit과 후속 생성 요청은 나눠 처리한다. 입력이 부족한 정상 intake JSON의 새 token도 반영하되, 예외로 거절된 callback에는 기존 선택/token을 유지한다.
+
+동일 state 파일의 동시 요청은 잠금으로 차단한다. 성공한 같은 revision·model plan의 재호출은 실행 기록으로 막으며 이미 생성된 workspace를 덮어쓰지 않는다. 생성 도중 예외가 나면 session 변경은 rollback하고 기존 owner의 workspace/진단 자료를 먼저 확인한다. 실패한 시도의 state 기록을 자동 commit했다고 주장하지 않는다. 잠금 파일이 남은 비정상 종료는 호스트가 실행 종료를 확인한 뒤 복구해야 하며 이 CLI가 자동 삭제·재실행하지 않는다. state가 없는 호출은 명시적인 현재 요청의 단발 검사/실행용이며 호스트의 취소·중복 이벤트 처리를 대신하지 않는다.
 
 ## 사진 입력에서 편집형 검토본까지
 
@@ -36,6 +42,8 @@ python3 .claude/skills/ppt-master/scripts/presentation_request.py <task-brief.js
 `analysis/request-entry.json`은 실제 선택 근거·입력/인계 plan SHA·effective brief SHA·최종 PPTX SHA를 묶는다. `request-intake.json`은 실행 전 조건, `effective-task-brief.json`은 이번 요청의 실제 적용값이다. 작업 자료와 로그는 private `projects/` 안에만 둔다. CLI 종료값 대신 JSON의 `ready_for_plan`, `environment.ok`, `request_entry.execution_performed`, `photo_review`를 읽는다. `ready_for_generation:false`인 intake를 일반 신규 덱 생성 허가로 해석하지 않는다.
 
 ## 실제 호스트 수용 검증
+
+선택 상태의 세 회귀는 저장소 루트에서 `python3 -m unittest discover -s tests -v`로 실행한다. 합성 입력으로 원래 복제 문구의 resume, 소비된 token 재전송, 오래된 brief 거절 후 실제 state 파일 보존을 검사한다. 관련 PR/push의 CI도 같은 명령을 실행하며 private 검토 자료에 의존하지 않는다. 이 좁은 검사는 아래 실제 호스트 수용 검증을 대신하지 않는다.
 
 이 후보를 운영에 연결하기 전에는 실제 일반 요청에서 세 목적을 표시하고, 선택 이벤트가 현재 요청 근거로 돌아오는지 확인해야 한다. 직접 복제 명령은 불필요한 목적/등록 템플릿 질문 없이 실제 사진 참조로 이어져야 한다. 호스트의 현재 관찰 계획 작성·이 CLI 호출·private 결과 전달을 실제 지원 경로에서 확인해야 한다. builtin/수정 경로의 기존 선택·계획 확인 gate도 유지해야 한다. FAH 판정을 요구하는 호스트는 해당 실제 판정을 별도로 통과해야 한다.
 

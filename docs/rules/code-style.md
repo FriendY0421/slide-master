@@ -262,12 +262,21 @@ def classify_license(
 
 **Hard rule**: this repository does **not** ship automated tests.
 
+**Explicitly authorized exception**: `tests/test_presentation_request_state.py`
+ships three synthetic request-session regression tests. Run them with
+`python3 -m unittest discover -s tests -v`; the dedicated request-state CI workflow
+runs the same command. This narrow exception does not authorize presentation
+generation tests, company fixtures, new dependencies, or unrelated test scaffolding.
+
 **Forbidden**:
 
 - `tests/` directories
 - `test_*.py` files
 - `unittest` / `pytest` imports
 - `if __name__ == "__main__":` blocks that run a self-test suite
+
+The explicitly authorized request-session regression file above is exempt from
+the directory, filename, and standard-library `unittest` restrictions.
 
 **Use instead**:
 
