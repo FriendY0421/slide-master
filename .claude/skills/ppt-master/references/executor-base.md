@@ -16,6 +16,21 @@
 
 ## 1. Template Adherence Rules
 
+### Task-specific small typography
+
+Explicit user/template typography takes precedence over generic body-size
+defaults. When a task supplies small fixed sizes, record them only in that
+project's lock and `dense_layout_contract.json`; do not promote them to other
+templates or increase them to the general 18pt floor. Preserve the supplied
+Master/Layout/theme on native template routes. Resolve narrow tables through
+column widths, row heights, padding and line spacing together; fit the actual
+selected font before export. Reword only within the user's permission and
+preserve factual content. Do not shrink, clip, overlap or omit text to pass QA.
+Bound diagrams to their allocated region; a compact four-step cycle may use
+a low rectangular loop with four editable directional connectors.
+Follow the task-scoped recipe in
+[`DENSE_PPTX_QUALITY.md`](../../../../docs/ppt-project/DENSE_PPTX_QUALITY.md).
+
 ### 1.0 Pre-generation Batch Read
 
 **Hard rule**: Before the first SVG page, batch-read every template SVG this deck will reference. Read once up front, never re-read during generation.

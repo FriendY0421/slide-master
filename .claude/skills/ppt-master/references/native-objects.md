@@ -247,6 +247,15 @@ Cell objects accept `text`, `fill`, `color`,
 `align`, `valign`, `bold`, `font_size`, `padding`, `border_color`, and
 `border_width`, plus optional `lang`; the same `padding`, `border_color`,
 `border_width`, and `lang` keys may also live under `style` as table defaults.
+Optional `line_spacing`, `paragraph_before`, and `paragraph_after` on
+`style` use SVG pixels (`1px = 0.75pt`); a cell may override each default.
+Line spacing must be positive, paragraph spacing nonnegative and finite.
+These opt-in fields emit absolute DrawingML point spacing, and line spacing
+disables autofit. When absent, existing native table XML stays unchanged.
+Size rows using actual font metrics, paragraph count and all four cell margins;
+relative `row_heights` alone do not prove the text fits. See
+[`DENSE_PPTX_QUALITY.md`](../../../../docs/ppt-project/DENSE_PPTX_QUALITY.md).
+
 For multi-paragraph text, replace cell `text` with a non-empty `paragraphs`
 list. Each entry is either a string or an object containing optional
 `align: "l|ctr|r"` and exactly one of `text` or non-empty `runs`; empty

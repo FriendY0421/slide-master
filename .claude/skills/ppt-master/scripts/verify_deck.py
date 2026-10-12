@@ -310,6 +310,11 @@ def run_checks(project: Path) -> tuple[list[str], list[str]]:
 
     # 5. planning artifacts (skip when unchanged since the recorded pass —
     # validate_spec.py writes .spec_pass.json on PASS)
+    dense_contract = project / "dense_layout_contract.json"
+    if dense_contract.exists() and natives:
+        if _run_script("dense_pptx_quality.py", [str(newest), "--contract", str(dense_contract),
+                                               "--output", str(project / "dense_quality_report.json")]) != 0:
+            failures.append("dense_pptx_quality.py reported native text/cell geometry or font-input errors")
     if (project / "design_spec.md").exists() and (project / "spec_lock.md").exists():
         if _stamp_fresh(project / ".spec_pass.json",
                         [project / "design_spec.md",

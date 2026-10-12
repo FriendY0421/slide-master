@@ -11,8 +11,6 @@ import posixpath
 import random
 import re
 import shutil
-import stat
-import subprocess
 import tempfile
 import uuid
 import zipfile
@@ -3198,45 +3196,18 @@ def _create_writable_work_dir(output_path: Path) -> Path:
     )
 
 
-def _relax_output_permissions(output_path: Path) -> list[str]:
-    """Make exported files readable outside the sandbox owner where possible."""
-    warnings: list[str] = []
+def _check_output_readability(output_path: Path) -> list[str]:
+    """Check the current actor's access without broadening file permissions.
 
+    A private host delivery adapter owns recipient access. chmod/world-read and
+    Windows Users ACL grants are not evidence of authenticated file delivery.
+    """
     try:
-        current_mode = output_path.stat().st_mode
-        readable_mode = (
-            current_mode
-            | stat.S_IRUSR
-            | stat.S_IWUSR
-            | stat.S_IRGRP
-            | stat.S_IROTH
-        )
-        os.chmod(output_path, readable_mode)
+        with output_path.open('rb') as stream:
+            stream.read(1)
     except OSError as exc:
-        warnings.append(f"chmod skipped for {output_path}: {exc}")
-
-    if os.name != 'nt':
-        return warnings
-
-    # Windows ACLs can remain sandbox-only even when the file mode looks sane.
-    # Grant the built-in Users SID read access; the SID avoids localization
-    # issues on non-English Windows installations.
-    try:
-        result = subprocess.run(
-            ['icacls', str(output_path), '/grant', '*S-1-5-32-545:R'],
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-    except OSError as exc:
-        warnings.append(f"icacls skipped for {output_path}: {exc}")
-    else:
-        if result.returncode != 0:
-            message = (result.stderr or result.stdout or '').strip()
-            details = f": {message}" if message else ''
-            warnings.append(f"icacls failed for {output_path}{details}")
-
-    return warnings
+        return [f"Exported file is not readable by the current actor: {exc}"]
+    return []
 
 
 _NOTES_MASTER_REL_TYPE = (
@@ -4831,7 +4802,7 @@ def create_pptx_with_native_svg(
                 f'PPTX animation package validation failed: {exc}'
             ) from exc
         shutil.move(str(temp_output_path), str(output_path))
-        permission_warnings = _relax_output_permissions(output_path)
+        permission_warnings = _check_output_readability(output_path)
 
         if conversion_trace_path and conversion_trace is not None:
             conversion_trace_path.parent.mkdir(parents=True, exist_ok=True)
