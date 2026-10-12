@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-12",
+  "timezone": "Asia/Seoul",
+  "repository": "FriendY0421/slide-master",
+  "pull_request": 14,
+  "branch": "codex/dense-quality-20261012",
+  "validated_candidate": "d6ab22e868275781e133936a3ad6b7376bb7fc77",
+  "baseline": "0578dba7ddf56cf5d7024cf574063c4db7332a3e",
+  "scope": "synthetic engineering fixtures; not company source or production flow",
+  "fixtures": [
+    {
+      "name": "before",
+      "deck_sha256": "4e253e1b25b6100e89dd7c95dfd63e73bc687f5524f87363d6b592b653b16c80",
+      "errors": 12,
+      "design_warnings": 8,
+      "targeted_regions": 0,
+      "powerpoint_requested_font_rendering_verified": false
+    },
+    {
+      "name": "code-only",
+      "deck_sha256": "4e8b50a896b648c6b3ec2a80a058fce1078d97a0ba20e8ccd37c08853e32e8c2",
+      "errors": 8,
+      "design_warnings": 116,
+      "targeted_regions": 28,
+      "powerpoint_requested_font_rendering_verified": false
+    },
+    {
+      "name": "after",
+      "deck_sha256": "6b7972b1f0d8fb025aa783b354b2507d7251c5e3e3e9a8605fd52c1df734cdd3",
+      "errors": 0,
+      "design_warnings": 8,
+      "targeted_regions": 28,
+      "powerpoint_requested_font_rendering_verified": false
+    },
+    {
+      "name": "complex",
+      "deck_sha256": "eb7e9dcfdc885cdc7b2e49f174c00a86cb490229bdd96901e2bc2ff9fef2394a",
+      "errors": 0,
+      "design_warnings": 8,
+      "targeted_regions": 38,
+      "powerpoint_requested_font_rendering_verified": false
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "before/exports/dense.pptx",
+      "sha256": "4e253e1b25b6100e89dd7c95dfd63e73bc687f5524f87363d6b592b653b16c80",
+      "storage": "existing private review bundle; binary not published"
+    },
+    {
+      "name": "code-only/exports/dense.pptx",
+      "sha256": "4e8b50a896b648c6b3ec2a80a058fce1078d97a0ba20e8ccd37c08853e32e8c2",
+      "storage": "existing private review bundle; binary not published"
+    },
+    {
+      "name": "after/exports/dense.pptx",
+      "sha256": "6b7972b1f0d8fb025aa783b354b2507d7251c5e3e3e9a8605fd52c1df734cdd3",
+      "storage": "existing private review bundle; binary not published"
+    },
+    {
+      "name": "complex/dense-mixed.pptx",
+      "sha256": "eb7e9dcfdc885cdc7b2e49f174c00a86cb490229bdd96901e2bc2ff9fef2394a",
+      "storage": "existing private review bundle; binary not published"
+    },
+    {
+      "name": "before-code-after.png",
+      "sha256": "3c3b01d8291397385bb031fae42506a300c1e9d7729a209d165e93218c4c7ade",
+      "storage": "existing private review bundle; binary not published"
+    },
+    {
+      "name": "complex/chart-edit-powerpoint-font-unverified.png",
+      "sha256": "44a5b764272b75f6f2ecf36b5cf228071813fc0dd4b872f7c512fc99d5977cf9",
+      "storage": "existing private review bundle; binary not published"
+    },
+    {
+      "name": "chart-edit-reopen.pptx",
+      "sha256": "3ec83ca9053eb1b3e31df860b779975698dea3e160a8ee819aa9f901c9e4a1c0",
+      "storage": "existing private review bundle; binary not published"
+    }
+  ],
+  "powerpoint_chart_edit": {
+    "before": [
+      84.5,
+      90.0
+    ],
+    "after": [
+      85.75,
+      90.0
+    ],
+    "workbookCellB2": 85.75,
+    "externalLink": false,
+    "powerpointVersion": "16.0",
+    "saveReopenPassed": true,
+    "originalUnchanged": true,
+    "requestedFontRenderingVerified": false,
+    "saved_chart_cache": [
+      "85.75",
+      "90"
+    ],
+    "external_relationships": [],
+    "font_parts": []
+  },
+  "renderer": {
+    "node_version": "v24.19.0",
+    "skia_version": "3.0.8",
+    "platform": "win32",
+    "process_passed": false,
+    "probes": [
+      {
+        "mode": "node-only",
+        "status": 0,
+        "windowsStatusHex": "0x0",
+        "signal": null,
+        "error": null
+      },
+      {
+        "mode": "module-only",
+        "status": 0,
+        "windowsStatusHex": "0x0",
+        "signal": null,
+        "error": null
+      },
+      {
+        "mode": "cpu",
+        "status": 3221226505,
+        "windowsStatusHex": "0xc0000409",
+        "signal": null,
+        "error": null
+      },
+      {
+        "mode": "gpu",
+        "status": 3221226505,
+        "windowsStatusHex": "0xc0000409",
+        "signal": null,
+        "error": null
+      }
+    ],
+    "exact_native_cause_verified": false,
+    "forced_success_exit": false
+  },
+  "activation": {
+    "main_merged": false,
+    "plugin_installed": false,
+    "deployed": false,
+    "new_permissions_or_cost": false,
+    "font_registered": false,
+    "font_embedded": false
+  },
+  "acceptance": {
+    "company_source_preservation": false,
+    "cloud_round_trip": false,
+    "recipient_download_and_open": false,
+    "main_plugin_editable_identity_verified": false,
+    "saved_transport_scope_verified": false,
+    "cloud_font_rights_verified": false
+  }
+}

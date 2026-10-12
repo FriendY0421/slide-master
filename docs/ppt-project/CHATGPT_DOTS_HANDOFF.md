@@ -1,0 +1,117 @@
+# Slide Master handoff for ChatGPT and DOTS
+
+Status date: 2026-10-12 (Asia/Seoul). This is the continuation entry point for
+the user's Slide Master quality and full-flow mission. Source access does not
+install a plugin, grant file access or connect a production executor.
+
+## Start here
+
+1. Open [Draft PR #14](https://github.com/FriendY0421/slide-master/pull/14).
+   Work is on `codex/dense-quality-20261012`; approved baseline is
+   `0578dba7ddf56cf5d7024cf574063c4db7332a3e`. Do not assume `main` contains it.
+2. Read `AGENTS.md`, `PPT_REQUEST_GUARD.md` and the routing dispatcher before
+   presentation work. `.claude/skills/` is canonical; `.codex/skills/` contains
+   generated stubs. Select the existing owner rather than rebuilding the engine.
+3. Read [latest quality follow-up](QUALITY_FOLLOWUP_20261012.md),
+   [cloud connection acceptance](CLOUD_CONNECTION_ACCEPTANCE.md),
+   [quality recipe](DENSE_PPTX_QUALITY.md) and
+   [sanitized validation receipt](evidence/validation-summary-20261012.json).
+4. Related history: #6 picker, #10 company/Korean quality, #11 CUSTOM,
+   #12–#13 request state. Preserve existing unfinished work and original backups.
+
+## Current mission and boundaries
+
+Complete basic/custom choice → real previews or attachment analysis → bundled
+purpose/count/font/sizes/style confirmation → current outline approval → editable
+PPTX production → final screen review/revision → private download and recipient
+opening. Reuse picker/CUSTOM/state/finalizer components. Do not claim completion
+from disconnected functions, synthetic actors or simulated model calls.
+
+Company reference files are supplied separately for each request. Preserve their
+Master/Layout/theme, colors, geometry and unselected/right-hand regions. Unknown
+photo values stay unknown. Preserve important content. The user's current company
+profile is SamsungOneKorean, title 14pt, heading/header 12pt, table body 11pt,
+note 9pt and table maximum 12pt. Scope it to that task; do not force other templates.
+Use widths, heights, margins, spacing and layout rather than shrinking or clipping.
+
+No company PPT, photo, font binary, private URL, account/transport identifier or
+local-machine path is stored with these public records. Font permission is still
+unresolved: local production/rendering plus temporary registration approval;
+cloud installation; cloud rendering; output embedding are separate conditions.
+Do not silently substitute fonts or upload/embed/install them.
+
+## Completed evidence, with limits
+
+- Requested Korean font export no longer silently assigns a different East Asian
+  font. Recovered table-spacing/checker work was reused; `text_fit.py` is unchanged.
+- Fixed table spacing remains opt-in; default native output was checked after
+  normalizing the intentional font-slot correction. Final task contracts trigger
+  native geometry/font/merge/arrow QA in `verify_deck.py`.
+- Identical synthetic before/code-only/reflow samples: code-only retains eight
+  mechanical errors; reflow has zero errors and eight spacing warnings across
+  28 targeted regions. The mixed two-slide fixture has 38 targeted regions,
+  zero errors, three editable tables and one native chart/workbook.
+- Actual PowerPoint 16.0 opened fixtures; selected table/text/shape edits survived
+  save/reopen. Chart Excel B2 changed 84.5→85.75; reopened workbook, chart and saved
+  OOXML cache agreed. No external relationships/font parts; original unchanged.
+- Renderer abnormal exit was reproduced without a PPT, text or font. Node/module
+  load/import succeeded, CPU/GPU rectangle render completed then OS status was
+  `0xc0000409`. Exact native cause and remedy remain unresolved; do not force exit 0.
+
+These are synthetic fixture checks. They do not certify company source fidelity,
+Samsung rendering in PowerPoint, a clean renderer process or the whole user flow.
+Private binaries and full local receipts remain in the existing private review
+bundle. The public receipt keeps selected results and hashes for continuity;
+it is not a remotely rerunnable replacement for the private inputs.
+
+## Remaining acceptance and minimum inputs
+
+| Workstream | Missing evidence/input | Next permitted step |
+|---|---|---|
+| Existing user result | Exact previous generated PPTX or private location | Native structure/layout review; do not call it company source |
+| Company fidelity | Original company PPTX and changed/protected region brief | Compare original package and full-page renders |
+| Samsung PowerPoint | Local rights evidence and explicit temporary-session approval | Register only approved files temporarily, render, remove and verify removal |
+| Renderer | Supported native runtime fix or approved renderer alternative | Keep existing failure diagnostics; no blind upgrades |
+| Main plugin | Owner-visible editable plugin/release identity mapped to source | Read supported official management records; do not replace/create a plugin |
+| Saved connection | Exact stored transport and authorized user/workspace scope | Confirm ownership and scope; PRIVATE label is not authentication |
+| Cloud flow | Approved existing executor/model/file delivery binding | Real nonsensitive attachment→approval→production→private download test |
+| Recipient | Correct user downloads and opens the exact editable PPTX | Record receipt/opening separately from export success |
+
+Current Work UI offers the existing Slide Master selection item. This proves UI
+availability only; execution entitlement, retention/download and cost/limits
+remain unverified. PC picker/tunnel and Windows PowerPoint are PC-dependent.
+Do not treat them as automatically migrated to Cloud Work or DOTS.
+
+## Continue safely across hosts
+
+Give the next ChatGPT or DOTS task the repository, PR and this document using its
+already-authorized repository access. If a host cannot read the candidate branch,
+provide these non-sensitive documents explicitly. Do not enable new access merely
+to load this handoff. Private files travel only through approved task attachments
+or file tools; GitHub is not their public distribution channel.
+
+Suggested continuation request:
+
+> Continue FriendY0421/slide-master Draft PR #14. Read
+> docs/ppt-project/CHATGPT_DOTS_HANDOFF.md and its evidence links on
+> codex/dense-quality-20261012. Preserve existing work. Separate code checks,
+> real application checks and complete user-flow acceptance. Do not install,
+> deploy, change permissions/costs, upload fonts or fabricate model/file ownership.
+> Continue independent work; request only the exact remaining input/approval.
+
+Bundle any necessary approval as target/revision, change, affected users/files,
+permissions/cost, test impact, retention and rollback. Do not retry the same blocked
+discovery or count repeated completed checks as progress.
+
+## Applied state, stop and recovery
+
+Changes are committed and pushed for review. PR stays Draft; main and installed
+0.4.2 plugin remain unchanged. A private 0.4.3 instruction candidate is uninstalled.
+No cloud job, deployment, font registration/embedding, new account/scope or paid
+resource was activated. There is no newly deployed service to stop.
+
+Keep original decks/font files/backups private. Stop diagnostic commands normally.
+Use the official existing release mechanism for future rollback; do not overwrite
+managed caches or reset another operating checkout's uncommitted loopback changes.
+A source rollback is a reviewed revert of candidate commits. Removing a task's
+optional dense contract disables that extra check, but does not waive final QA.

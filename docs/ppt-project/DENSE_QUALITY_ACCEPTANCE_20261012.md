@@ -1,5 +1,10 @@
 # Dense quality candidate and end-to-end acceptance
 
+This is the initial acceptance snapshot. Current chart editing and renderer
+diagnosis supersede the pending statements below; continue through
+[ChatGPT/DOTS handoff](CHATGPT_DOTS_HANDOFF.md) and
+[latest follow-up](QUALITY_FOLLOWUP_20261012.md).
+
 Related existing work: #6 (picker), #10 (company/Korean quality), #11 (CUSTOM
 review), #12–#13 (request state). This candidate starts from approved main
 `0578dba7ddf56cf5d7024cf574063c4db7332a3e`; it does not activate pending PRs.
