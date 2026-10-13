@@ -21,6 +21,8 @@ install a plugin, grant file access or connect a production executor.
    with [its limited evidence](evidence/precision-validation-20261013.json).
    The latest renderer continuation reuses the operating CPU fix and connects it
    to the final verifier: [renderer/cloud trial record](RENDERER_CONTINUATION_20261013.md).
+   For the overnight fixes and prepared private files, read
+   [midnight checkpoint](NIGHT_REVIEW_CHECKPOINT_20261014.md).
 4. Related history: #6 picker, #10 company/Korean quality, #11 CUSTOM,
    #12–#13 request state. Preserve existing unfinished work and original backups.
 
