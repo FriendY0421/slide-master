@@ -17,7 +17,9 @@ Artifact Tool import. No bundled dependency, registry, OS font or operating
 checkout is changed. `render_pptx_review.py` launches it and accepts a receipt
 only after OS exit 0, actual presentation page count, source SHA and all PNG hashes
 agree. It preserves existing nonempty review folders and rejects failed/partial
-render receipts. A supplied font profile must bind explicit family/files/SHA;
+render receipts. Each slide must appear exactly once in presentation order, with
+an integer slide number and a distinct image path; duplicate images cannot stand
+in for a missing page. A supplied font profile must bind explicit family/files/SHA;
 the caller must have rights. Registration alone does not certify every rendered
 text run or establish a license.
 
@@ -55,6 +57,13 @@ review stays false until an actual operator inspects the pages.
 - A text-bearing deck is rejected by geometry-only mode. An invalid font profile
   is rejected, no successful render receipt is issued, and previous review evidence
   cannot be overwritten accidentally.
+- Follow-up page-coverage fault injection reproduced four previously accepted
+  invalid receipts (duplicate image path, repeated slide number, reordered pages,
+  boolean slide number). After the correction, all four are rejected without
+  marking the render completed; the valid receipt still passes. A fresh real
+  two-page, font-free render also exits 0. These are wrapper fault-injection tests,
+  not fabricated production or host-attachment evidence. See
+  [page-coverage receipt](evidence/page-coverage-validation-20261013.json).
 - The repository's existing [Pretendard OFL license](https://github.com/orioncactus/pretendard/blob/main/LICENSE)
   was read. An explicitly temporary Pretendard sample has actual-font metrics
   errors 0, native header 12pt/body 11pt/note 9pt, and a successful one-page CPU render.

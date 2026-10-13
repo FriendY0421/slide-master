@@ -82,8 +82,14 @@ def main() -> int:
             raise ValueError('Input source changed')
         if not receipt['images'] or len(receipt['images'])!=slide_count:
             raise ValueError('Rendered page count differs from the actual presentation')
-        for item in receipt['images']:
+        seen_images=set()
+        for index,item in enumerate(receipt['images'],start=1):
+            if type(item['slide']) is not int or item['slide']!=index:
+                raise ValueError('Rendered pages must identify each actual slide once, in presentation order')
             image=(output/item['path']).resolve(strict=True)
+            if image in seen_images:
+                raise ValueError('Each rendered slide requires a distinct page image')
+            seen_images.add(image)
             if image.parent!=output or hashlib.sha256(image.read_bytes()).hexdigest()!=item['sha256']:
                 raise ValueError('Missing/outside/changed page image')
         receipt['process_completed']=True
