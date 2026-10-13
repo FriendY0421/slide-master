@@ -76,6 +76,9 @@ Use a unique native shape name or unique exact-text match. Specify every object
 that must be checked. Optional table `column_widths_pt`, `row_heights_pt`,
 `padding_pt` (left/right/top/bottom), `header_color` and `body_color` bind exact
 geometry and colors. Text objects support `color` and `align`.
+Table `max_font_pt` is a table-wide ceiling, including headers. Header-specific
+`header_max_pt` may tighten it but cannot raise it. These are task contract values;
+templates that explicitly allow a different ceiling retain their own sizes.
 
 ```bash
 python .claude/skills/ppt-master/scripts/dense_pptx_quality.py \

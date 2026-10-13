@@ -370,9 +370,12 @@ class DenseInspector:
                             self.issue("LINE_WEIGHT", target, f"{weight:g}pt line outside requested thin-line range",
                                        preference=True)
                 is_header = r < expected.get("header_rows", 1)
-                cell_expected = {"max_font_pt": expected.get("max_font_pt", expected["header_max_pt"])}
+                table_max = _number(expected.get("max_font_pt", expected["header_max_pt"]),
+                                    "table maximum font size", positive=True)
+                cell_expected = {"max_font_pt": table_max}
                 if is_header:
-                    cell_expected["max_font_pt"] = expected["header_max_pt"]
+                    cell_expected["max_font_pt"] = min(table_max, _number(
+                        expected["header_max_pt"], "header maximum font size", positive=True))
                     if "header_pt" in expected:
                         cell_expected["font_pt"] = expected["header_pt"]
                 else:
