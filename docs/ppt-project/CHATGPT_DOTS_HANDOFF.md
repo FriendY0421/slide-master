@@ -71,7 +71,8 @@ Do not silently substitute fonts or upload/embed/install them.
   font-independent structure pass is explicitly blocked from final acceptance.
 
 These are synthetic fixture checks. They do not certify company source fidelity,
-Samsung rendering in PowerPoint, a clean renderer process or the whole user flow.
+Samsung rendering in PowerPoint or the whole user flow. Checked renderer processes
+now exit 0 only for the explicitly identified local and cloud fixtures.
 Private binaries and full local receipts remain in the existing private review
 bundle. The public receipt keeps selected results and hashes for continuity;
 it is not a remotely rerunnable replacement for the private inputs.
@@ -83,8 +84,8 @@ it is not a remotely rerunnable replacement for the private inputs.
 | Existing user result | Exact previous generated PPTX or private location | Native structure/layout review; do not call it company source |
 | Company fidelity | Original company PPTX and changed/protected region brief | Compare original package and full-page renders |
 | Samsung PowerPoint | Local rights evidence and explicit temporary-session approval | Register only approved files temporarily, render, remove and verify removal |
-| Renderer | Supported native runtime fix or approved renderer alternative | Keep existing failure diagnostics; no blind upgrades |
-| Main plugin | Owner-visible editable plugin/release identity mapped to source | Read supported official management records; do not replace/create a plugin |
+| Renderer | Samsung/company and faithful full-project cloud validation | Local CPU workaround passes; keep failure diagnostics; no blind upgrades |
+| Main plugin | Source/release mapping and execution binding | Cloud official management confirms editable USER/PRIVATE 0.4.2; no replacement |
 | Saved connection | Exact stored transport and authorized user/workspace scope | Confirm ownership and scope; PRIVATE label is not authentication |
 | Cloud flow | Approved existing executor/model/file delivery binding | Real nonsensitive attachment→approval→production→private download test |
 | Recipient | Correct user downloads and opens the exact editable PPTX | Record receipt/opening separately from export success |
@@ -119,8 +120,12 @@ discovery or count repeated completed checks as progress.
 
 Changes are committed and pushed for review. PR stays Draft; main and installed
 0.4.2 plugin remain unchanged. A private 0.4.3 instruction candidate is uninstalled.
-No cloud job, deployment, font registration/embedding, new account/scope or paid
-resource was activated. There is no newly deployed service to stop.
+One explicitly approved Cloud Work trial finished with limited results recorded
+in [cloud trial evidence](CLOUD_TRIAL_RESULT_20261013.md). It did not complete the
+authenticated attachment/approval/private-delivery flow. No deployment, OS font
+registration/embedding, new account/scope or paid resource was activated.
+The local overnight heartbeat ends at 2026-10-14 07:00 KST and requires the PC/app
+online. Stop it through Codex automation controls. No new service was deployed.
 
 Keep original decks/font files/backups private. Stop diagnostic commands normally.
 Use the official existing release mechanism for future rollback; do not overwrite

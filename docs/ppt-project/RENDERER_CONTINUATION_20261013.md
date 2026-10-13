@@ -75,7 +75,9 @@ an approval limited to source review without checking its impact.
 
 Official dependency lookup cannot resolve the GPT-derived instruction package
 through its public-plugin-only interface. This is not an ownership denial. The
-main editable release and saved connection/access scope remain unverified.
+main editable release was not resolved by that local interface. The subsequent
+approved cloud trial resolved editability through official management; saved
+connection/access scope and source-to-execution binding remain unverified.
 The current connected device inventory exposes only HOME-PC, not a cloud device.
 Browser automation initialization failed before opening a new management view;
 no authentication/settings action or access bypass was attempted.
@@ -94,3 +96,6 @@ or fabricate an actor-bound file ID. The actual host attachment/ownership,
 current outline/design approval and private recipient download/opening still
 require direct evidence. Ask only for the exact missing boundary, not a new
 plugin, invented identity or unrelated source file.
+
+The trial has completed with partial evidence, not full-flow acceptance. See
+[cloud trial results and minimum next steps](CLOUD_TRIAL_RESULT_20261013.md).
