@@ -19,6 +19,8 @@ install a plugin, grant file access or connect a production executor.
    The latest no-original-PPT work is
    [precision research and implementation](PPT_PRECISION_RESEARCH_20261013.md)
    with [its limited evidence](evidence/precision-validation-20261013.json).
+   The latest renderer continuation reuses the operating CPU fix and connects it
+   to the final verifier: [renderer/cloud trial record](RENDERER_CONTINUATION_20261013.md).
 4. Related history: #6 picker, #10 company/Korean quality, #11 CUSTOM,
    #12–#13 request state. Preserve existing unfinished work and original backups.
 
@@ -59,7 +61,10 @@ Do not silently substitute fonts or upload/embed/install them.
   OOXML cache agreed. No external relationships/font parts; original unchanged.
 - Renderer abnormal exit was reproduced without a PPT, text or font. Node/module
   load/import succeeded, CPU/GPU rectangle render completed then OS status was
-  `0xc0000409`. Exact native cause and remedy remain unresolved; do not force exit 0.
+  `0xc0000409`. Exact vendor native cause remains unresolved; do not force exit 0.
+  Follow-up recovered an explicit Canvas CPU setter workaround: two font-free
+  pages and a licensed temporary-font page now exit 0 with checked image/source
+  hashes. The vendor's native cause and Samsung rendering remain unverified.
 - Paragraph/table spacing, image aspect/crop/resolution, object gaps and alignment
   are now checked in the existing exporter/verifier path. Eleven faulty probes
   were rejected; PowerPoint opens the native pictures/table. A provisional

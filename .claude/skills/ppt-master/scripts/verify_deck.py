@@ -51,6 +51,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import zipfile
 from pathlib import Path
 from typing import Optional
@@ -389,6 +390,9 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-render", action="store_true",
                         help="skip only the OfficeCLI contact-sheet render; "
                              "OpenXML validation and all other checks stay on")
+    parser.add_argument("--review-node", type=Path, help="explicit supplied Node runtime for process-checked review")
+    parser.add_argument("--review-runtime", type=Path, help="supplied node_modules directory; never installed automatically")
+    parser.add_argument("--review-font-profile", type=Path, help="approved private font family/files/SHA profile")
     return parser
 
 
@@ -396,15 +400,34 @@ def main(argv: Optional[list[str]] = None) -> int:
     configure_utf8_stdio()
     parser = build_parser()
     args = parser.parse_args(argv)
+    review_requested = any((args.review_node, args.review_runtime, args.review_font_profile))
+    if review_requested and (not all((args.review_node, args.review_runtime, args.review_font_profile)) or args.no_render):
+        parser.error("Provide all three --review-* options without --no-render; no automatic font fallback")
     project = Path(args.project).resolve()
     if not project.is_dir():
         print(f"[verify_deck] not a directory: {project}", file=sys.stderr)
         return 2
 
     failures, warnings = run_checks(project)
-    cli_failures, cli_warnings = officecli_checks(project, render=not args.no_render)
+    cli_failures, cli_warnings = officecli_checks(project, render=not args.no_render and not review_requested)
     failures += cli_failures
     warnings += cli_warnings
+    if review_requested and not failures:
+        natives = _native_pptx_files(project)
+        if natives:
+            newest = max(natives, key=lambda p:p.stat().st_mtime)
+            render_root=project/"_pptx_render"
+            render_root.mkdir(exist_ok=True)
+            output=Path(tempfile.mkdtemp(prefix=newest.stem+"-review-", dir=render_root))
+            if _run_script("render_pptx_review.py", [str(newest), str(output), "--node", str(args.review_node),
+                    "--runtime", str(args.review_runtime), "--profile", str(args.review_font_profile)]) != 0:
+                failures.append("process-checked PPTX review render failed; partial images are not accepted")
+            else:
+                receipt={"output_directory":str(output.relative_to(project)),
+                         "manifest":str((output/"render-manifest.json").relative_to(project)),
+                         "manual_visual_review_completed":False}
+                (project/"review_render_receipt.json").write_text(json.dumps(receipt,indent=2)+"\n",encoding="utf-8")
+                print(f"[verify_deck] process-checked review images: {output}")
 
     for w in warnings:
         print(f"  ! WARN {w}", file=sys.stderr)

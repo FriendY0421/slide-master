@@ -129,6 +129,12 @@ avoid a missing font or publish its pass as a final company deck certificate.
 
 ## Final application review
 
+For the supplied runtime's Windows native exit problem, reuse the process-checked
+CPU review helper and opt-in `verify_deck.py --review-*` path documented in
+[renderer continuation](RENDERER_CONTINUATION_20261013.md). It never installs
+dependencies/fonts and cannot substitute an unapproved profile or certify a
+failed child process. Renderer completion and manual visual review are separate.
+
 Reopen the exported PPTX in the supported renderer with the verified font files.
 Inspect all pages at full size, including small cells, Korean wrapping,
 alignment, arrows, protected regions and editability. Compare identical source
