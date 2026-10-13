@@ -23,6 +23,8 @@ install a plugin, grant file access or connect a production executor.
    to the final verifier: [renderer/cloud trial record](RENDERER_CONTINUATION_20261013.md).
    For the overnight fixes and prepared private files, read
    [midnight checkpoint](NIGHT_REVIEW_CHECKPOINT_20261014.md).
+   The consolidated Korean [morning report](MORNING_REPORT_20261014.md) separates
+   completed evidence, private files, operational state and remaining user inputs.
 4. Related history: #6 picker, #10 company/Korean quality, #11 CUSTOM,
    #12–#13 request state. Preserve existing unfinished work and original backups.
 
