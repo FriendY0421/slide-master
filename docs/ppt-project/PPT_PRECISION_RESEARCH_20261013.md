@@ -68,3 +68,16 @@ SamsungOneKorean permissions/actual wrapping, company preservation, plugin edito
 and stored connection identification, cloud execution and private user receipt
 remain open. No replacement plugin, merge, deployment, install, font registration,
 embedding, new authentication or paid resource was activated.
+## Early-line overflow follow-up
+
+The actual-font inspector previously compared only the last line's width when
+`wrap=none`. A long first line followed by a short line could measure 180.625pt
+inside a 100pt box without a `TEXT_WIDTH` error. It now checks the maximum line
+width within each paragraph, including all explicit line breaks. Text, font
+sizes, wrapping settings and exported content are not automatically changed.
+
+Actual bundled OFL Pretendard 11pt probes: first-line and last-line overflow both
+reject; short two-line text and normal wrapping pass. The existing temporary
+native PPTX still has zero errors over nine target regions (one design warning).
+This checks font metrics, not Samsung rendering or actual PowerPoint behaviour.
+See [limited evidence](evidence/early-line-validation-20261013.json).

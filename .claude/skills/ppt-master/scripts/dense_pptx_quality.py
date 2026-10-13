@@ -175,21 +175,22 @@ class DenseInspector:
                     tokens.append((token, font.getlength(token) / SCALE + len(token) * tracking))
             if not tokens:
                 continue
-            lines, current = 1, 0.0
+            lines, current, paragraph_width = 1, 0.0, 0.0
             for token, measured in tokens:
                 if token == "\n":
-                    max_width = max(max_width, current); lines += 1; current = 0.0
+                    paragraph_width = max(paragraph_width, current); lines += 1; current = 0.0
                 elif measured > width + self.tolerance:
                     self.issue("UNBREAKABLE_TEXT_WIDTH", target,
                                f"Token needs {measured:.2f}pt; available {width:.2f}pt")
                     current += measured
                 elif wrap and current + measured > width + self.tolerance:
-                    max_width = max(max_width, current); lines += 1; current = measured if token.strip() else 0.0
+                    paragraph_width = max(paragraph_width, current); lines += 1; current = measured if token.strip() else 0.0
                 else:
                     current += measured
-            max_width = max(max_width, current)
-            if not wrap and current > width + self.tolerance:
-                self.issue("TEXT_WIDTH", target, f"Unwrapped line needs {current:.2f}pt; available {width:.2f}pt")
+            paragraph_width = max(paragraph_width, current)
+            max_width = max(max_width, paragraph_width)
+            if not wrap and paragraph_width > width + self.tolerance:
+                self.issue("TEXT_WIDTH", target, f"Unwrapped line needs {paragraph_width:.2f}pt; available {width:.2f}pt")
             spacing = paragraph.find("a:pPr/a:lnSpc/a:spcPts", NS)
             percent_spacing = paragraph.find("a:pPr/a:lnSpc/a:spcPct", NS)
             line_height = float(spacing.get("val")) / 100 if spacing is not None else natural_height
