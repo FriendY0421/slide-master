@@ -30,6 +30,12 @@ Bound diagrams to their allocated region; a compact four-step cycle may use
 a low rectangular loop with four editable directional connectors.
 Follow the task-scoped recipe in
 [`DENSE_PPTX_QUALITY.md`](../../../../docs/ppt-project/DENSE_PPTX_QUALITY.md).
+For dense/image-heavy work, bind the intended paragraph spacing, table margins,
+object gaps/alignment and important image source region in the task contract.
+Use existing contain/slice image conversion; do not flatten editable pictures.
+Inspect actual exported media resolution and crop, then revise source geometry
+and re-export on a failure. Structure-only checks are provisional and cannot
+replace actual-font wrapping/clipping checks in final verification.
 
 ### 1.0 Pre-generation Batch Read
 

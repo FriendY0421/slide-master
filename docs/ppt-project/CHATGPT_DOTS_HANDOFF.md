@@ -1,6 +1,6 @@
 # Slide Master handoff for ChatGPT and DOTS
 
-Status date: 2026-10-12 (Asia/Seoul). This is the continuation entry point for
+Status date: 2026-10-13 (Asia/Seoul). This is the continuation entry point for
 the user's Slide Master quality and full-flow mission. Source access does not
 install a plugin, grant file access or connect a production executor.
 
@@ -16,6 +16,9 @@ install a plugin, grant file access or connect a production executor.
    [cloud connection acceptance](CLOUD_CONNECTION_ACCEPTANCE.md),
    [quality recipe](DENSE_PPTX_QUALITY.md) and
    [sanitized validation receipt](evidence/validation-summary-20261012.json).
+   The latest no-original-PPT work is
+   [precision research and implementation](PPT_PRECISION_RESEARCH_20261013.md)
+   with [its limited evidence](evidence/precision-validation-20261013.json).
 4. Related history: #6 picker, #10 company/Korean quality, #11 CUSTOM,
    #12–#13 request state. Preserve existing unfinished work and original backups.
 
@@ -57,6 +60,10 @@ Do not silently substitute fonts or upload/embed/install them.
 - Renderer abnormal exit was reproduced without a PPT, text or font. Node/module
   load/import succeeded, CPU/GPU rectangle render completed then OS status was
   `0xc0000409`. Exact native cause and remedy remain unresolved; do not force exit 0.
+- Paragraph/table spacing, image aspect/crop/resolution, object gaps and alignment
+  are now checked in the existing exporter/verifier path. Eleven faulty probes
+  were rejected; PowerPoint opens the native pictures/table. A provisional
+  font-independent structure pass is explicitly blocked from final acceptance.
 
 These are synthetic fixture checks. They do not certify company source fidelity,
 Samsung rendering in PowerPoint, a clean renderer process or the whole user flow.

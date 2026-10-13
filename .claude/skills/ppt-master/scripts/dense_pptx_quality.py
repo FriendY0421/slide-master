@@ -12,8 +12,10 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import math
+import posixpath
 import re
 import sys
 import zipfile
@@ -23,7 +25,8 @@ from xml.etree import ElementTree as ET
 from console_encoding import configure_utf8_stdio
 
 NS = {"a": "http://schemas.openxmlformats.org/drawingml/2006/main",
-      "p": "http://schemas.openxmlformats.org/presentationml/2006/main"}
+      "p": "http://schemas.openxmlformats.org/presentationml/2006/main",
+      "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships"}
 EMU_PT = 12700.0
 SCALE = 8
 
@@ -57,6 +60,9 @@ class DenseInspector:
         self.errors, self.warnings, self.measurements, self.fonts = [], [], [], {}
         self.font_files = {}
         self.tolerance = _number(contract.get("tolerance_pt", 0.2), "tolerance")
+        self.structure_only = contract.get("text_metrics", "actual_font") == "structure_only"
+        if contract.get("text_metrics", "actual_font") not in {"actual_font", "structure_only"}:
+            raise ValueError("text_metrics must be actual_font or structure_only")
 
     def issue(self, kind: str, target: str, detail: str, *, preference: bool = False) -> None:
         (self.warnings if preference else self.errors).append(
@@ -90,8 +96,13 @@ class DenseInspector:
         if xfrm is None or xfrm.get("rot", "0") != "0":
             raise ValueError("Dense check requires explicit unrotated native geometry")
         off, extent = xfrm.find("a:off", NS), xfrm.find("a:ext", NS)
-        return tuple(float(node.get(attr)) / EMU_PT for node, attr in
-                     ((off, "x"), (off, "y"), (extent, "cx"), (extent, "cy")))
+        if off is None or extent is None:
+            raise ValueError("Explicit object offset and extent required")
+        box = tuple(float(node.get(attr)) / EMU_PT for node, attr in
+                    ((off, "x"), (off, "y"), (extent, "cx"), (extent, "cy")))
+        if any(not math.isfinite(value) for value in box):
+            raise ValueError("Object geometry must be finite")
+        return box
 
     def text(self, body: ET.Element, width: float, height: float, target: str,
              expected: dict, fill: str | None) -> None:
@@ -104,6 +115,7 @@ class DenseInspector:
         wrap = props is None or props.get("wrap", "square") != "none"
         required_height, max_width, line_count = 0.0, 0.0, 0
         for paragraph in body.findall("a:p", NS):
+            self.paragraph_style(paragraph, target, expected)
             paragraph_props = paragraph.find("a:pPr", NS)
             align = paragraph_props.get("algn", "l") if paragraph_props is not None else "l"
             if align not in {"l", "ctr", "r"}:
@@ -137,9 +149,11 @@ class DenseInspector:
                     self.issue("FONT_SIZE", target, f"{size:g}pt != required {expected['font_pt']:g}pt")
                 if "max_font_pt" in expected and size > expected["max_font_pt"] + 0.01:
                     self.issue("FONT_SIZE", target, f"{size:g}pt exceeds {expected['max_font_pt']:g}pt")
-                font = self.font(family, run.get("b") == "1", size)
-                ascent, descent = font.getmetrics()
-                natural_height = max(natural_height, (ascent + descent) / SCALE)
+                font = None
+                if not self.structure_only:
+                    font = self.font(family, run.get("b") == "1", size)
+                    ascent, descent = font.getmetrics()
+                    natural_height = max(natural_height, (ascent + descent) / SCALE)
                 color = _color(run)
                 if expected.get("color") and color != expected["color"]:
                     self.issue("COLOR", target, f"{color} differs from required {expected['color']}")
@@ -151,6 +165,8 @@ class DenseInspector:
                 else:
                     self.issue("COLOR_UNVERIFIED", target, "Inherited/theme color requires rendered review",
                                preference=True)
+                if self.structure_only:
+                    continue
                 # Use word boundaries for Latin and per-glyph opportunities for CJK.
                 tracking = float(run.get("spc", "0")) / 100
                 token_pattern = (r"\n|[\u1100-\u11ff\u2e80-\ua4cf\uac00-\ud7af]|"
@@ -191,12 +207,110 @@ class DenseInspector:
             required_height += (natural_height + (lines - 1) * line_height
                                 + sum(float(n.get("val")) / 100 for n in (before, after) if n is not None))
             line_count += lines
+        if self.structure_only:
+            self.measurements.append({"target": target, "available_pt": [width, height],
+                                      "kind": "text_structure", "text_metrics_verified": False})
+            return
         self.measurements.append({"target": target, "available_pt": [width, height],
                                   "measured_width_pt": max_width, "required_height_pt": required_height,
                                   "wrapped_lines": line_count})
         if required_height > height + self.tolerance:
             self.issue("TEXT_HEIGHT", target,
                        f"{line_count} lines need {required_height:.2f}pt; available {height:.2f}pt")
+
+    def paragraph_style(self, paragraph: ET.Element, target: str, expected: dict) -> None:
+        fields = {"line_spacing_pt": "lnSpc/spcPts", "line_spacing_multiple": "lnSpc/spcPct",
+                  "paragraph_before_pt": "spcBef/spcPts", "paragraph_after_pt": "spcAft/spcPts"}
+        if "line_spacing_pt" in expected and "line_spacing_multiple" in expected:
+            raise ValueError("Specify exact or multiple line spacing, not both")
+        for field, path in fields.items():
+            if field not in expected:
+                continue
+            wanted = _number(expected[field], field, positive=field.startswith("line_"))
+            node = paragraph.find("a:pPr/" + "/".join("a:"+part for part in path.split("/")), NS)
+            scale = 100000 if field == "line_spacing_multiple" else 100
+            actual = float(node.get("val"))/scale if node is not None else None
+            if actual is None or not math.isfinite(actual) or abs(actual-wanted) > 0.01:
+                self.issue("PARAGRAPH_SPACING", target, f"{field}: {actual} differs from required {wanted}")
+
+    def image(self, shape: ET.Element, target: str, expected: dict, package, slide_part: str) -> None:
+        from PIL import Image
+
+        if shape.tag != f"{{{NS['p']}}}pic":
+            raise ValueError("Required editable picture object missing")
+        blip = shape.find("p:blipFill/a:blip", NS)
+        if blip is None or blip.get(f"{{{NS['r']}}}link"):
+            raise ValueError("Picture must embed its source, not depend on an external link")
+        rid = blip.get(f"{{{NS['r']}}}embed")
+        rel_part = posixpath.join(posixpath.dirname(slide_part), "_rels", posixpath.basename(slide_part)+".rels")
+        rels = ET.fromstring(package.read(rel_part))
+        rel = next((node for node in rels if node.get("Id") == rid), None)
+        if rel is None or rel.get("TargetMode") == "External":
+            raise ValueError("Embedded image relationship missing or external")
+        media_target = rel.get("Target", "")
+        media_part = posixpath.normpath(media_target.lstrip("/") if media_target.startswith("/")
+                                       else posixpath.join(posixpath.dirname(slide_part), media_target))
+        if not media_part.startswith("ppt/media/"):
+            raise ValueError("Picture relationship must target package media")
+        with Image.open(io.BytesIO(package.read(media_part))) as image:
+            pixels = image.size
+        crop_node = shape.find("p:blipFill/a:srcRect", NS)
+        crop = [float(crop_node.get(side, "0"))/100000 if crop_node is not None else 0
+                for side in ("l", "t", "r", "b")]
+        if any(not math.isfinite(value) or value < 0 or value >= 1 for value in crop):
+            raise ValueError("Negative/outside image crops require separate rendered review")
+        left, top, right, bottom = crop
+        if left+right >= 1 or top+bottom >= 1:
+            raise ValueError("Image crop leaves no visible pixels")
+        _, _, width, height = self.box(shape)
+        if width <= 0 or height <= 0:
+            raise ValueError("Image frame must have positive width and height")
+        visible = [pixels[0]*(1-left-right), pixels[1]*(1-top-bottom)]
+        ratio_error = abs((width/height)/(visible[0]/visible[1])-1)
+        if ratio_error > _number(expected.get("aspect_tolerance", 0.02), "aspect tolerance"):
+            self.issue("IMAGE_DISTORTION", target, "Picture frame stretches the visible source aspect ratio")
+        if expected.get("allow_crop") is False and any(crop):
+            self.issue("IMAGE_CROP", target, "Cropping is forbidden for this source")
+        if "protected_source_rect" in expected:
+            px, py, pw, ph = [_number(value, "protected source rectangle")
+                              for value in expected["protected_source_rect"]]
+            if pw <= 0 or ph <= 0 or px+pw > 1 or py+ph > 1:
+                raise ValueError("protected_source_rect uses normalized source coordinates within [0,1]")
+            if px < left or py < top or px+pw > 1-right or py+ph > 1-bottom:
+                self.issue("IMAGE_PROTECTED_CROP", target, "Cropping removes part of the declared important source region")
+        dpi = [visible[0]*72/width, visible[1]*72/height]
+        if "min_dpi" in expected and min(dpi) < _number(expected["min_dpi"], "minimum image DPI", positive=True):
+            self.issue("IMAGE_RESOLUTION", target, f"Effective {min(dpi):.1f} DPI below the requested minimum")
+        self.measurements.append({"target": target, "kind": "image", "source_pixels": pixels,
+                                  "crop_ltrb": crop, "effective_dpi": dpi,
+                                  "aspect_ratio_error": ratio_error})
+
+    def layout(self, boxes: dict, page: dict, target: str) -> None:
+        anchors = {"left": lambda b:b[0], "right": lambda b:b[0]+b[2],
+                   "top": lambda b:b[1], "bottom": lambda b:b[1]+b[3],
+                   "center_x": lambda b:b[0]+b[2]/2, "center_y": lambda b:b[1]+b[3]/2}
+        for rule in page.get("alignment", []):
+            names, axis = rule["objects"], rule["axis"]
+            if len(names) < 2 or axis not in anchors:
+                raise ValueError("Alignment needs at least two objects and a supported anchor")
+            values = [anchors[axis](boxes[name]) for name in names]
+            tolerance = _number(rule.get("tolerance_pt", self.tolerance), "alignment tolerance")
+            if max(values)-min(values) > tolerance:
+                self.issue("LAYOUT_ALIGNMENT", target, f"{names} do not share requested {axis} alignment")
+        for rule in page.get("spacing", []):
+            first, second = rule["objects"]
+            axis = rule["axis"]
+            if axis not in {"x", "y"}:
+                raise ValueError("Spacing axis must be x or y; objects are ordered left/right or top/bottom")
+            index = 0 if axis == "x" else 1
+            a, b = boxes[first], boxes[second]
+            gap = b[index]-(a[index]+a[index+2])
+            low = _number(rule["min_gap_pt"], "minimum gap")
+            high = _number(rule["max_gap_pt"], "maximum gap") if "max_gap_pt" in rule else math.inf
+            if high < low:
+                raise ValueError("Maximum gap must not be below minimum gap")
+            if gap < low-self.tolerance or gap > high+self.tolerance:
+                self.issue("LAYOUT_SPACING", target, f"{first} to {second}: {gap:.2f}pt outside [{low},{high}]")
 
     def table(self, shape: ET.Element, target: str, expected: dict) -> None:
         table = shape.find("a:graphic/a:graphicData/a:tbl", NS)
@@ -265,6 +379,10 @@ class DenseInspector:
                 color_key = "header_color" if is_header else "body_color"
                 if color_key in expected:
                     cell_expected["color"] = expected[color_key]
+                prefix = "header_" if is_header else "body_"
+                for field in ("line_spacing_pt", "line_spacing_multiple", "paragraph_before_pt", "paragraph_after_pt", "align"):
+                    if prefix+field in expected:
+                        cell_expected[field] = expected[prefix+field]
                 if "padding_pt" in expected and any(
                         abs(a - b) > self.tolerance for a, b in zip(pads, expected["padding_pt"])):
                     self.issue("CELL_PADDING", target, "Padding differs from requested values")
@@ -317,9 +435,17 @@ def inspect_pptx(path: Path, contract: dict, base: Path) -> dict:
                         inspector.issue("REGION_BOUNDS", target,
                                         "Object violates requested page margin/left-half region")
                     boxes.append((target, box))
+                    if "box_pt" in expected and (len(expected["box_pt"]) != 4 or any(
+                            abs(a-b) > inspector.tolerance for a,b in zip(box, expected["box_pt"]))):
+                        inspector.issue("OBJECT_GEOMETRY", target, "Object differs from the requested position/size")
                     if expected["kind"] == "table":
                         inspector.table(shape, target, expected)
-                    else:
+                    elif expected["kind"] == "image":
+                        inspector.image(shape, target, expected, package, f"ppt/slides/slide{number}.xml")
+                    elif expected["kind"] == "shape":
+                        if shape.tag != f"{{{NS['p']}}}sp":
+                            raise ValueError("Required native box/shape missing")
+                    elif expected["kind"] == "text":
                         body = shape.find("p:txBody", NS)
                         if body is None:
                             raise ValueError("Required editable native text/diagram label missing")
@@ -328,8 +454,14 @@ def inspect_pptx(path: Path, contract: dict, base: Path) -> dict:
                                 (("lIns", 91440), ("rIns", 91440), ("tIns", 45720), ("bIns", 45720))]
                         inspector.text(body, w-pads[0]-pads[1], h-pads[2]-pads[3], target, expected,
                                        _color(shape.find("p:spPr", NS), page.get("background", "FFFFFF")))
+                    else:
+                        raise ValueError("Object kind must be text, table, image or shape")
                 except (OSError, ValueError, KeyError, TypeError) as exc:
                     inspector.issue("UNVERIFIED", target, str(exc))
+            try:
+                inspector.layout({name.split(":",1)[1]:box for name,box in boxes}, page, f"P{number}")
+            except (ValueError, KeyError, TypeError) as exc:
+                inspector.issue("UNVERIFIED_LAYOUT", f"P{number}", str(exc))
             for i, (name, (x,y,w,h)) in enumerate(boxes):
                 for other, (xx,yy,ww,hh) in boxes[i+1:]:
                     if (min(x+w,xx+ww)-max(x,xx) > inspector.tolerance
@@ -349,8 +481,10 @@ def inspect_pptx(path: Path, contract: dict, base: Path) -> dict:
             "contract_sha256": hashlib.sha256(json.dumps(contract, sort_keys=True).encode()).hexdigest(),
             "errors": inspector.errors, "design_warnings": inspector.warnings,
             "measurements": inspector.measurements, "font_files_sha256": inspector.font_files,
+            "text_metrics_mode": "structure_only" if inspector.structure_only else "actual_font",
             "rendered_review_completed": False, "powerpoint_review_completed": False,
-            "font_metric_check": "actual supplied font files; rendered review still required"}
+            "font_metric_check": ("not performed; structure-only metadata checks, wrapping/clipping unverified"
+                                  if inspector.structure_only else "actual supplied font files; rendered review still required")}
 
 
 def main(argv: list[str] | None = None) -> int:

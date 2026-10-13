@@ -315,6 +315,12 @@ def run_checks(project: Path) -> tuple[list[str], list[str]]:
         if _run_script("dense_pptx_quality.py", [str(newest), "--contract", str(dense_contract),
                                                "--output", str(project / "dense_quality_report.json")]) != 0:
             failures.append("dense_pptx_quality.py reported native text/cell geometry or font-input errors")
+        else:
+            try:
+                if json.loads(dense_contract.read_text(encoding="utf-8")).get("text_metrics") == "structure_only":
+                    failures.append("structure-only dense QA is provisional; actual-font wrapping/clipping checks are required for final verification")
+            except (OSError, ValueError) as exc:
+                failures.append(f"dense contract cannot be read for final verification: {exc}")
     if (project / "design_spec.md").exists() and (project / "spec_lock.md").exists():
         if _stamp_fresh(project / ".spec_pass.json",
                         [project / "design_spec.md",

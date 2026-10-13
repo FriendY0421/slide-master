@@ -90,7 +90,44 @@ It rejects missing/changed actual font bytes and absent native diagram labels.
 Arrow ends with `type="none"` do not count. Design preferences (contrast, line
 weight, unspecified line spacing) are separate from mechanical failures.
 
-## Render, edit and deliver
+## Precise spacing, image and layout contracts
+
+Paragraphs support task-required `line_spacing_pt` or `line_spacing_multiple`
+(mutually exclusive), `paragraph_before_pt` and `paragraph_after_pt`.
+Tables accept these prefixed with `header_`/`body_`, plus `header_align`/
+`body_align`. They check actual exported values; they do not change user sizes.
+All objects can bind `box_pt: [x,y,width,height]`. `kind: "shape"` checks a native
+box; `kind: "image"` checks an embedded editable picture, visible-source aspect
+ratio, crop and optional effective `min_dpi`. Set `allow_crop: false` for diagrams
+or screenshots whose full content must survive. For other images, a normalized
+`protected_source_rect: [x,y,width,height]` can preserve a declared important
+source area. Do not invent a safe area for unreadable photo text or faces.
+
+Page-level constraints use exact native object names:
+
+```json
+{
+  "alignment": [{"objects": ["image-left", "image-right"], "axis": "top", "tolerance_pt": 0.5}],
+  "spacing": [{"objects": ["image-left", "image-right"], "axis": "x", "min_gap_pt": 12, "max_gap_pt": 16}]
+}
+```
+
+Alignment supports left/right/top/bottom/center_x/center_y. Gap objects are ordered
+left→right for x and top→bottom for y; omitting max_gap_pt leaves the upper bound
+open. Keep background frames out of non-overlap target pairs; these checks do not
+understand intentional layering. Rotated/grouped objects, vector images and masks
+still need separate review. Image checks do not recognize subject matter or OCR.
+An aspect pass is not proof that all important content is visible through a mask.
+
+If font rights are unresolved, `text_metrics: "structure_only"` permits checks
+of literal font/size/spacing, grids, margins, geometry and image layout without
+reading or installing font files. It reports no actual text width/height result
+and explicitly leaves wrapping/clipping unverified. The standalone inspector can
+pass those limited checks; **verify_deck.py rejects this mode for final acceptance**.
+Default actual-font behavior is unchanged. Do not silently turn on this mode to
+avoid a missing font or publish its pass as a final company deck certificate.
+
+## Final application review
 
 Reopen the exported PPTX in the supported renderer with the verified font files.
 Inspect all pages at full size, including small cells, Korean wrapping,
