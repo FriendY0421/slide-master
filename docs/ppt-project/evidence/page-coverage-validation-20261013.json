@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-13",
+  "scope": "renderer wrapper page-coverage fault injection and font-free real render",
+  "baseline": {
+    "duplicate_image_path_incorrectly_accepted": true,
+    "repeated_slide_number_incorrectly_accepted": true,
+    "reordered_pages_incorrectly_accepted": true,
+    "boolean_slide_number_incorrectly_accepted": true
+  },
+  "corrected": {
+    "valid_receipt_exit_code": 0,
+    "duplicate_image_path_exit_code": 1,
+    "repeated_slide_number_exit_code": 1,
+    "reordered_pages_exit_code": 1,
+    "boolean_slide_number_exit_code": 1,
+    "invalid_receipts_marked_completed": false
+  },
+  "actual_render": {
+    "slides": 2,
+    "process_exit_code": 0,
+    "text_font_verified": false,
+    "geometry_only": true,
+    "font_files_registered": 0
+  },
+  "company_source_verified": false,
+  "samsung_render_verified": false,
+  "authenticated_user_flow_verified": false,
+  "installed_plugin_changed": false
+}

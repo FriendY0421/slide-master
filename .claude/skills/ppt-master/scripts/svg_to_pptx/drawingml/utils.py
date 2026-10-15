@@ -69,6 +69,7 @@ SYSTEM_FONTS = {'system-ui', '-apple-system', 'BlinkMacSystemFont'}
 # latin and ea typeface slots so mixed-script runs stay in one family.
 # Pretendard: Korean + Latin (bundled at assets/fonts/Pretendard/, SIL OFL).
 DUAL_SCRIPT_FONTS = {
+    'SamsungOneKorean',
     'Pretendard', 'Pretendard Thin', 'Pretendard ExtraLight', 'Pretendard Light',
     'Pretendard Medium', 'Pretendard SemiBold', 'Pretendard ExtraBold',
     'Pretendard Black', 'Pretendard JP', 'Pretendard GOV',

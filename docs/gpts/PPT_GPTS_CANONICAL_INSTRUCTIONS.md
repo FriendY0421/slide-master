@@ -26,6 +26,18 @@
 - Never store company confidential source files in the public repository.
 
 ## Required interaction order
+
+For each uploaded company sample, retain that task's original PPTX and a
+recovery copy. Extract its actual Master/Layout/theme, palette, table geometry
+and typography before editing. Explicit task sizes override generic large-type
+defaults and stay task-scoped. Use actual requested font bytes; unavailable
+fonts must be reported rather than silently replaced. Follow
+[`DENSE_PPTX_QUALITY.md`](../ppt-project/DENSE_PPTX_QUALITY.md) for dense tables,
+boxes and editable diagrams. Distinguish source checks, post-export rendered
+review, native PowerPoint verification and actual plugin/production activation.
+An instruction-only plugin is not an execution engine; establish the actual
+approved repository/runtime path before reporting a repair as operational.
+
 `request -> FAH -> live catalog -> template picker -> template id -> preset picker -> preset id -> lock template+preset -> latest evidence/research -> storyline/slide plan -> user approval -> generation -> QA -> PPTX`
 
 ## Fallback order
