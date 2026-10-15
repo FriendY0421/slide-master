@@ -25,6 +25,10 @@ install a plugin, grant file access or connect a production executor.
    [midnight checkpoint](NIGHT_REVIEW_CHECKPOINT_20261014.md).
    The consolidated Korean [morning report](MORNING_REPORT_20261014.md) separates
    completed evidence, private files, operational state and remaining user inputs.
+   The subsequent approved synthetic v1 was actually produced, reopened and
+   transferred through private Drive with an exact-byte download check:
+   [2026-10-15 delivery record](CUSTOM_V1_DELIVERY_20261015.md). Recipient opening,
+   company/Samsung acceptance and installed cloud-plugin binding remain separate.
 4. Related history: #6 picker, #10 company/Korean quality, #11 CUSTOM,
    #12–#13 request state. Preserve existing unfinished work and original backups.
 
