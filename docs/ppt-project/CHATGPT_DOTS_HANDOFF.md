@@ -29,6 +29,7 @@ install a plugin, grant file access or connect a production executor.
    transferred through private Drive with an exact-byte download check:
    [2026-10-15 delivery record](CUSTOM_V1_DELIVERY_20261015.md). Recipient opening,
    company/Samsung acceptance and installed cloud-plugin binding remain separate.
+   Latest operational state: [existing plugin 0.4.3 connection update](PLUGIN_CONNECTION_043_20261015.md).
 4. Related history: #6 picker, #10 company/Korean quality, #11 CUSTOM,
    #12–#13 request state. Preserve existing unfinished work and original backups.
 
@@ -93,7 +94,7 @@ it is not a remotely rerunnable replacement for the private inputs.
 | Company fidelity | Original company PPTX and changed/protected region brief | Compare original package and full-page renders |
 | Samsung PowerPoint | Local rights evidence and explicit temporary-session approval | Register only approved files temporarily, render, remove and verify removal |
 | Renderer | Samsung/company and faithful full-project cloud validation | Local CPU workaround passes; keep failure diagnostics; no blind upgrades |
-| Main plugin | Source/release mapping and execution binding | Cloud official management confirms editable USER/PRIVATE 0.4.2; no replacement |
+| Main plugin | Fresh cloud invocation and actual new-user attachment | Existing USER/PRIVATE 0.4.3 saved/read back/installed; current-host approved resume flow tested |
 | Saved connection | Exact stored transport and authorized user/workspace scope | Confirm ownership and scope; PRIVATE label is not authentication |
 | Cloud flow | Approved existing executor/model/file delivery binding | Real nonsensitive attachment→approval→production→private download test |
 | Recipient | Correct user downloads and opens the exact editable PPTX | Record receipt/opening separately from export success |
@@ -126,8 +127,10 @@ discovery or count repeated completed checks as progress.
 
 ## Applied state, stop and recovery
 
-Changes are committed and pushed for review. PR stays Draft; main and installed
-0.4.2 plugin remain unchanged. A private 0.4.3 instruction candidate is uninstalled.
+Source changes are committed and pushed for review. PR stays Draft and main is
+unchanged. On 2026-10-15 the user requested the existing plugin connection update:
+the same USER/PRIVATE main plugin is now actually saved and installed at 0.4.3.
+See the operational report above; earlier uninstalled-candidate records are history.
 One explicitly approved Cloud Work trial finished with limited results recorded
 in [cloud trial evidence](CLOUD_TRIAL_RESULT_20261013.md). It did not complete the
 authenticated attachment/approval/private-delivery flow. No deployment, OS font

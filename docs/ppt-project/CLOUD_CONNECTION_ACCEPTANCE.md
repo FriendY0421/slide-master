@@ -2,6 +2,10 @@
 
 This records the missing connections after #14, reusing #6 and #10–#13.
 Documentation is not a deployed service or an authorization grant.
+Historical discovery below is superseded where stated by the
+[0.4.3 actual connection update](PLUGIN_CONNECTION_043_20261015.md): the existing
+main target was resolved, updated, read back and installed; fresh cloud acceptance
+is still recorded separately.
 
 ## Official interfaces found
 
