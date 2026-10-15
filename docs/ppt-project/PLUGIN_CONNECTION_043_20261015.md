@@ -63,10 +63,35 @@ exact native PowerPoint font appearance remains unverified for both versions.
 ## Cloud and remaining acceptance
 
 The user explicitly approved sending the 0.4.3 validation request to the existing
-Cloud Work trial conversation, and that follow-up was sent. No second trial was
-created. Its new actual result is pending at this checkpoint; do not copy Windows
-evidence into the cloud column. Actual new-user attachment, fresh-host callback
-binding and the user's own download/open remain separate acceptance items.
+Cloud Work trial conversation. The same trial completed real Linux-host authoring,
+finalization, exact-file reimport/render, model visual review, private Drive upload,
+permission readback and actual raw-download hash verification. No second trial was
+created. This is separate cloud evidence, not a copy of the Windows receipt.
+
+Initial cloud QA found eight independent rectangles instead of the two approved
+editable pattern groups. A preserved-copy repair grouped the existing left five
+and right three rectangles without changing any child shape or table XML. Only
+slide1.xml changed; the original file and previous Drive upload remain intact.
+The repaired final file has two native groups, one native 3×2 table and one note.
+Before/after decoded render pixels match exactly. Finalizer integrity/layout
+findings: zero; renderer OS exit: zero; exact final-file reimport: passed.
+
+Final cloud PPTX: 20,662 bytes; SHA256
+`49ecb31bedac25b90084a63e30eedc8588504dc0be8a529e718d12f82ba5855c`.
+The actual Office-file upload reports shared=false and only a user-owner
+permission. Both cloud and current desktop accounts downloaded the raw final
+file and matched that exact size/hash. Private links remain outside GitHub.
+See [cloud test](https://github.com/FriendY0421/slide-master/pull/14#issuecomment-6194142732)
+and [group correction](https://github.com/FriendY0421/slide-master/pull/14#issuecomment-6194264924).
+
+This completes the approved synthetic reference/resume route on the existing
+cloud host using current model capabilities and the declared existing apps.
+Actual new-user attachment, an isolated fresh invocation of only the main plugin,
+and the recipient's own download/open remain separate acceptance items. The final
+cloud bytes were not opened/edited/saved in Microsoft PowerPoint; encoded
+Pretendard font selection and artifact rendering do not establish native
+PowerPoint font rendering. This sample has no merged cells, charts or arrows and
+cannot certify those features or company-template fidelity.
 
 Official dependency introspection is limited to public global listed plugins,
 so it cannot resolve this private main plugin. That is not an installation denial.
@@ -75,8 +100,9 @@ prove private-app callback/auth scope or the Picker's stored transport. The Pick
 was not called again after the earlier 429. Browser verification reached a logged-
 out view and stopped without signing in or using hidden endpoints.
 
-Company-original fidelity, Samsung local/cloud/render/embed rights and a PC-free
-runtime stay outside the completed evidence. A missing runtime is reported rather
+Company-original fidelity, Samsung local/cloud/render/embed rights and a fully
+PC-free Picker flow stay outside the completed evidence. The approved reference
+route did run in Linux cloud without a Windows PowerPoint dependency. A missing runtime is reported rather
 than rerouting through an unauthenticated server or fabricated actor/file receipt.
 
 ## Effect and recovery

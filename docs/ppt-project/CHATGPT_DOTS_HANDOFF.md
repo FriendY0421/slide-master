@@ -30,6 +30,11 @@ install a plugin, grant file access or connect a production executor.
    [2026-10-15 delivery record](CUSTOM_V1_DELIVERY_20261015.md). Recipient opening,
    company/Samsung acceptance and installed cloud-plugin binding remain separate.
    Latest operational state: [existing plugin 0.4.3 connection update](PLUGIN_CONNECTION_043_20261015.md).
+   The existing cloud trial also completed approved reference-v1 production,
+   exact-file reimport/render and owner-only Drive/raw download verification.
+   QA repaired two native pattern groups (5/3 children), preserving child XML and
+   rendered pixels. This is reference/resume evidence; fresh user attachment,
+   isolated main-plugin invocation and recipient-direct opening remain unverified.
 4. Related history: #6 picker, #10 company/Korean quality, #11 CUSTOM,
    #12–#13 request state. Preserve existing unfinished work and original backups.
 
