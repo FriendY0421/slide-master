@@ -30,6 +30,8 @@ install a plugin, grant file access or connect a production executor.
    [2026-10-15 delivery record](CUSTOM_V1_DELIVERY_20261015.md). Recipient opening,
    company/Samsung acceptance and installed cloud-plugin binding remain separate.
    Latest operational state: [existing plugin 0.4.3 connection update](PLUGIN_CONNECTION_043_20261015.md).
+   Next real user-photo test: [attachment acceptance and PC boundaries](REAL_ATTACHMENT_ACCEPTANCE_20261015.md).
+   The existing cloud conversation is open; new user attachment is pending.
    The existing cloud trial also completed approved reference-v1 production,
    exact-file reimport/render and owner-only Drive/raw download verification.
    QA repaired two native pattern groups (5/3 children), preserving child XML and
