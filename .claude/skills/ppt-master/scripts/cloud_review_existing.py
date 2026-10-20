@@ -23,11 +23,14 @@ import argparse
 import hashlib
 import json
 import os
+import posixpath
 import re
 import subprocess
 import xml.etree.ElementTree as ET
-from zipfile import ZipFile
+from zipfile import BadZipFile, ZipFile
 from pathlib import Path
+
+from console_encoding import configure_utf8_stdio
 
 
 RUNTIME_KEYS = (
@@ -290,6 +293,136 @@ def check_inherited_bold_scope(roots: dict, dense: dict) -> None:
                     raise ValueError("Inherited bold is unverified; measured runs require explicit b")
 
 
+
+def inspect_dense_scope(deck: Path, dense: dict, bindings: dict) -> dict:
+    """Preflight explicit single-family text and logical order; never rewrite OOXML.
+
+    The external dense checker still selects ea for a whole run and addresses
+    slideN.xml physically. Reject unsupported inputs rather than certify them.
+    Counts concern top-level native objects, including uncontracted objects.
+    """
+    from fontTools.ttLib import TTFont
+
+    ns = {"p": "http://schemas.openxmlformats.org/presentationml/2006/main",
+          "a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+          "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships"}
+    rel_ns = "{http://schemas.openxmlformats.org/package/2006/relationships}"
+    coverage = {}
+    for role, binding in bindings.items():
+        path = Path(binding["dense_path"])
+        if sha256(path) != binding["sha256"]:
+            raise ValueError("Bound font bytes changed before cmap inspection")
+        with TTFont(path) as font:
+            # getBestCmap maps real Unicode codepoints to glyph names. A mapping
+            # to glyph zero/.notdef is not evidence of a drawable character.
+            coverage[role] = {cp for cp, glyph in (font.getBestCmap() or {}).items()
+                              if font.getGlyphID(glyph) != 0}
+    errors, records, order = [], [], []
+    with ZipFile(deck) as package:
+        pres = ET.fromstring(package.read("ppt/presentation.xml"))
+        rels = ET.fromstring(package.read("ppt/_rels/presentation.xml.rels"))
+        relations = {}
+        for rel in rels.findall(rel_ns + "Relationship"):
+            if rel.get("Id") in relations:
+                raise ValueError("Duplicate presentation relationship ID")
+            relations[rel.get("Id")] = rel
+        for number, entry in enumerate(pres.findall("p:sldIdLst/p:sldId", ns), 1):
+            rel = relations.get(entry.get("{" + ns["r"] + "}id"))
+            if rel is None or rel.get("TargetMode", "Internal") != "Internal" or not (
+                rel.get("Type", "").endswith("/slide")
+            ):
+                raise ValueError("Logical slide relationship is missing or unsupported")
+            target = rel.get("Target", "")
+            part = posixpath.normpath(target.lstrip("/") if target.startswith("/")
+                                      else posixpath.join("ppt", target))
+            if part in order or part not in package.namelist():
+                raise ValueError("Duplicate or missing logical slide part")
+            order.append(part)
+            if part != f"ppt/slides/slide{number}.xml":
+                errors.append(f"P{number}: logical/physical slide order differs; dense mapping unsupported")
+        if not order:
+            raise ValueError("Presentation has no logical slides")
+        targets = {}
+        for page in dense.get("slides", []):
+            number = int(page.get("slide", 1))
+            if number < 1 or number > len(order) or number in targets:
+                raise ValueError("Dense slide target is duplicate or outside logical slide order")
+            targets[number] = page.get("objects", {})
+        for number, part in enumerate(order, 1):
+            root = ET.fromstring(package.read(part))
+            shapes = [shape for shape in root.findall("p:cSld/p:spTree/*", ns)
+                      if shape.tag.rsplit("}", 1)[-1] not in {"nvGrpSpPr", "grpSpPr", "extLst"}]
+            matched = set()
+            for name, expected in targets.get(number, {}).items():
+                matches = [i for i, shape in enumerate(shapes)
+                           if (shape.find(".//p:cNvPr", ns) is not None and
+                               shape.find(".//p:cNvPr", ns).get("name") == name)]
+                if len(matches) != 1 and expected.get("text_equals"):
+                    matches = [i for i, shape in enumerate(shapes) if "".join(
+                        t.text or "" for t in shape.findall(".//a:t", ns)) == expected["text_equals"]]
+                issue = [] if part == f"ppt/slides/slide{number}.xml" else [
+                    "Logical/physical slide mapping unsupported"]
+                if len(matches) != 1 or matches[0] in matched:
+                    records.append({"target": f"P{number}:{name}", "status": "unsupported",
+                                    "issues": ["Missing, duplicate or multiply selected object"]})
+                    continue
+                index = matches[0]
+                matched.add(index)
+                shape = shapes[index]
+                kind = expected.get("kind")
+                tag = shape.tag.rsplit("}", 1)[-1]
+                required_tag = {"text": "sp", "table": "graphicFrame", "shape": "sp", "image": "pic"}
+                if tag != required_tag.get(kind):
+                    issue.append("Object kind/group is unsupported by dense inspection")
+                if kind in {"text", "table"}:
+                    bodies = (shape.findall(".//a:txBody", ns) if kind == "table"
+                              else shape.findall("p:txBody", ns))
+                    if not bodies or (kind == "table" and shape.find(".//a:tbl", ns) is None):
+                        issue.append("Required native text/table body missing")
+                    for body in bodies:
+                        for run in body.findall("a:p/*", ns):
+                            if run.tag.rsplit("}", 1)[-1] not in {"r", "fld"}:
+                                continue
+                            text = run.findtext("a:t", "", ns)
+                            if not text:
+                                continue
+                            props = run.find("a:rPr", ns)
+                            if props is None:
+                                issue.append("Explicit final run properties required")
+                                continue
+                            # Requiring both explicit slots avoids theme/layout
+                            # fallback and the ea-first whole-run measurement bug.
+                            for slot in ("latin", "ea"):
+                                nodes = props.findall("a:" + slot, ns)
+                                if len(nodes) != 1 or nodes[0].get("typeface") != dense["font_family"]:
+                                    issue.append(f"Font slot {slot} must explicitly match the bound family")
+                            cs = props.find("a:cs", ns)
+                            if cs is not None and cs.get("typeface") != dense["font_family"]:
+                                issue.append("Complex-script font slot differs from the bound family")
+                            if "\t" in text:
+                                issue.append("Tab-stop layout is not verified by the dense estimator")
+                            role = "bold" if props.get("b") == "1" else "regular"
+                            if role not in coverage:
+                                issue.append(f"No bound actual {role} face")
+                            else:
+                                missing = sorted({ord(ch) for ch in text if ch not in "\n\r\t"}
+                                                 - coverage[role])
+                                if missing:
+                                    issue.append("Actual cmap lacks " + ", ".join(f"U+{cp:04X}" for cp in missing))
+                records.append({"target": f"P{number}:{name}",
+                                "status": "unsupported" if issue else "supported", "issues": sorted(set(issue))})
+            for index, shape in enumerate(shapes):
+                if index not in matched:
+                    records.append({"target": f"P{number}:object[{index}]", "status": "uninspected", "issues": []})
+    unsupported = sum(r["status"] == "unsupported" for r in records)
+    return {"status": "preflight_passed" if not errors and not unsupported else "unsupported",
+            "logical_slide_parts": order, "logical_order_supported": not errors,
+            "supported_objects": sum(r["status"] == "supported" for r in records),
+            "completed_objects": 0, "unsupported_objects": unsupported,
+            "uninspected_objects": sum(r["status"] == "uninspected" for r in records),
+            "objects": records, "errors": errors, "passed": not errors and unsupported == 0}
+
+
 def review(args: argparse.Namespace) -> dict:
     deck = args.deck.resolve(strict=True)
     if not re.fullmatch(r"[a-f0-9]{64}", args.expected_sha256):
@@ -309,7 +442,10 @@ def review(args: argparse.Namespace) -> dict:
     ]
     dense = None
     font_bindings = {}
+    dense_scope = {"status": "not_requested", "completed_objects": 0,
+                   "unsupported_objects": None, "uninspected_objects": None}
     if args.dense_contract:
+        dense_scope["status"] = "not_executed"
         required.append(scripts / "dense_pptx_quality.py")
         contract_path = args.dense_contract.resolve(strict=True)
         dense = json.loads(contract_path.read_text(encoding="utf-8"))
@@ -352,18 +488,26 @@ def review(args: argparse.Namespace) -> dict:
             str(runtime[RUNTIME_KEYS[0]]), "-e", RENDERER_FONT_PROBE,
             str(runtime[RUNTIME_KEYS[1]]), str(profile_path),
         ]))
+    if dense is not None:
+        commands.insert(1, ("dense-scope", []))
     stages = []
     for name, command in commands:
         try:
-            result = subprocess.run(
-                command, capture_output=True, text=True, encoding="utf-8",
-                errors="replace", timeout=360, check=False,
-            )
+            if name == "dense-scope":
+                dense_scope = inspect_dense_scope(deck, dense, font_bindings)
+                result = subprocess.CompletedProcess(command, 0 if dense_scope["passed"] else 1,
+                                                     json.dumps(dense_scope), "")
+            else:
+                result = subprocess.run(
+                    command, capture_output=True, text=True, encoding="utf-8",
+                    errors="replace", timeout=360, check=False,
+                )
             stage = {
                 "name": name, "exit_code": result.returncode,
                 "stdout": result.stdout, "stderr": result.stderr,
             }
-        except (OSError, subprocess.TimeoutExpired) as exc:
+        except (OSError, ValueError, KeyError, TypeError, ET.ParseError, BadZipFile,
+                subprocess.TimeoutExpired) as exc:
             stage = {"name": name, "exit_code": None, "error": str(exc)}
         stage["accepted"] = stage["exit_code"] == 0
         if stage["accepted"] and font_bindings and name in {"font-map", "dense", "render"}:
@@ -383,7 +527,14 @@ def review(args: argparse.Namespace) -> dict:
         )
         if not stage["accepted"]:
             break
+    if dense_scope.get("passed") and any(
+        s["name"] == "dense" and s["accepted"] for s in stages
+    ):
+        dense_scope["completed_objects"] = dense_scope["supported_objects"]
+        dense_scope["status"] = "completed_targeted_dense_checks"
     unchanged = sha256(deck) == args.expected_sha256
+    if dense_scope and not unchanged:
+        dense_scope["completed_objects"] = 0
     report = {
         "schema_version": 2,
         "operation": "REVIEW_EXISTING_PPTX",
@@ -393,6 +544,12 @@ def review(args: argparse.Namespace) -> dict:
         and all(stage["accepted"] for stage in stages),
         "stages": [{"name": s["name"], "exit_code": s["exit_code"], "accepted": s["accepted"]}
                    for s in stages],
+        "dense_scope": dense_scope,
+        "optional_native_gates": {
+            "status": "unverified", "reason": "Not connected; no verified host interface supplied",
+            "gates": ["native_table_arithmetic_gate.py", "native_quantitative_chart_gate.py",
+                      "native_chart_title_gate.py"],
+        },
         "dense_renderer_font_bindings": font_bindings,
         "renderer_face_map_verified": any(s["name"] == "font-map" and s["accepted"] for s in stages),
         "per_glyph_font_verified": False,
@@ -411,6 +568,7 @@ def review(args: argparse.Namespace) -> dict:
 
 
 def main(argv: list[str] | None = None) -> int:
+    configure_utf8_stdio()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("deck", type=Path)
     parser.add_argument("--expected-sha256", required=True)
@@ -422,7 +580,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         report = review(args)
-    except (OSError, ValueError, KeyError, TypeError) as exc:
+    except (OSError, ValueError, KeyError, TypeError, ET.ParseError, BadZipFile) as exc:
         print(json.dumps({"qa_processes_passed": False, "error": str(exc)}))
         return 2
     print(json.dumps(report, ensure_ascii=False))
