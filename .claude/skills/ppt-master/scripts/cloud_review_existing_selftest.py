@@ -349,6 +349,34 @@ class CloudReviewTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "bold style flags disagree"):
             target.font_metadata(self.font)
 
+    def test_numeric_weight_subfamily_with_regular_style_flags(self) -> None:
+        numeric = self.root / "numeric.otf"
+        self.make_font(numeric, 700)
+        with TTFont(numeric) as font:
+            font["OS/2"].fsSelection = 64
+            font["head"].macStyle = 0
+            for record in font["name"].names:
+                if record.nameID in {2, 17}:
+                    record.string = "700".encode(record.getEncoding())
+            font.save(numeric)
+        self.assertEqual(target.font_metadata(numeric)["role"], "bold")
+        self.assertEqual(target.font_metadata(numeric)["subfamily"], "700")
+
+        for label, selection, mac_style in [
+            ("Bold", 64, 0), ("400", 64, 0), ("700", 32, 0),
+            ("700", 64, 1), ("700", 0, 0),
+        ]:
+            with self.subTest(label=label, selection=selection, mac_style=mac_style):
+                with TTFont(numeric) as font:
+                    font["OS/2"].fsSelection = selection
+                    font["head"].macStyle = mac_style
+                    for record in font["name"].names:
+                        if record.nameID in {2, 17}:
+                            record.string = label.encode(record.getEncoding())
+                    font.save(numeric)
+                with self.assertRaises(ValueError):
+                    target.font_metadata(numeric)
+
     def test_variable_font_rejected(self) -> None:
         font = TTFont(self.font)
         font["fvar"] = newTable("fvar")

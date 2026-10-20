@@ -1,0 +1,157 @@
+{
+  "scope": "Fresh cloud synthetic Samsung QA; not historical artifact replay or production deployment",
+  "baseline_commit": "05fee47cc454317e9b79182f516bb7ea009adfb0",
+  "run_date": "2026-10-20",
+  "environment": "User assigned latest approved 44-host environment; effective policy revision/host list not exposed",
+  "samsung_files": [
+    {
+      "weight": 400,
+      "bytes": 4002384,
+      "sha256": "9fcaefe8dee093d7af3f980ae8f6163dda38f02307e7e4ebc868ebe46045f1cd",
+      "verified": true
+    },
+    {
+      "weight": 700,
+      "bytes": 4063000,
+      "sha256": "7ed7b38e8878dd5c29177ebd0428f3d19b3090cbc848b4d142314c143945d3e0",
+      "verified": true
+    }
+  ],
+  "font_metadata_fix": "Accept exact numeric subfamily matching static OS/2 400/700 with mutually consistent legacy Regular flags; no font modification. Runtime face mapping still required.",
+  "regressions": {
+    "preservation_passed": 20,
+    "focused_adapter_passed": 8,
+    "full_adapter_and_schema_passed": 81,
+    "failed": 0,
+    "skipped": 0,
+    "focused_is_subset_of_full": true,
+    "numeric_weight_case_includes_negative_subcases": 5
+  },
+  "candidate": {
+    "sha256": "35f1276e9c5387577452c0d3f3750daca3e6b75307a72cdaf6d1c50dfb0daf17",
+    "bytes": 15603,
+    "editable_native_table": true,
+    "editable_native_chart": true,
+    "embedded_workbook_count": 1,
+    "table_values": [
+      13,
+      18,
+      31
+    ],
+    "chart_values": [
+      13,
+      18
+    ],
+    "fonts_embedded": false
+  },
+  "qa_stages": [
+    {
+      "name": "chart-workbook-preservation",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "font-map",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "dense-scope",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "package",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "layout",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "dense",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "render",
+      "exit_code": 0,
+      "accepted": true
+    }
+  ],
+  "dense": {
+    "completed_objects": 6,
+    "unsupported_objects": 0,
+    "uninspected_objects": 2,
+    "errors": 0,
+    "design_warnings": 14,
+    "warning_triage": "14 explicit-line-spacing warnings; actual font metrics used. Full-page inspection found no clipping or unwanted wraps. Chart and decoration outside dense scope; chart separately finalized and visually inspected."
+  },
+  "visual_review": {
+    "completed": true,
+    "pages": 1,
+    "korean_english": true,
+    "regular_bold_visibly_distinct": true,
+    "explicit_line_break_preserved": true,
+    "no_clipping_or_overlap": true,
+    "chart_and_table_values_preserved": true,
+    "png_sha256": "af68a3a47a81eba98b4ddf5f2e141c2f45dd71b413f43265e4c0758ff8aece3f"
+  },
+  "native_finalizer": {
+    "package_layout_font_policy_passed": true,
+    "table_arithmetic_passed": true,
+    "chart_title_passed": true,
+    "quantitative_chart_workbook_passed": true,
+    "new_synthetic_literal_workbook_snapshot": true,
+    "existing_source_formula_recovery_claimed": false
+  },
+  "regeneration": {
+    "new_original_builder_data_retained_before_edit": true,
+    "manifest_verified": true,
+    "original_unchanged": true,
+    "without_manifest_blocked": true,
+    "historical_builder_restored": false
+  },
+  "actual_roundtrip": {
+    "workbook_lost": true,
+    "guard_blocked": true,
+    "executed_stages": [
+      "chart-workbook-preservation"
+    ],
+    "later_qa_render_executed": false,
+    "manifest_did_not_override_failure": true,
+    "failed_candidate_retained_locally_not_delivered": true
+  },
+  "initial_failures_retained": [
+    "finalizer missing label_column declaration",
+    "inapplicable original-workbook requirement for new literal chart",
+    "dense table contract missing header/body point requirements; no renderer executed"
+  ],
+  "engine_defect_fixed": false,
+  "powerpoint_verified": false,
+  "officecli_available": false,
+  "per_glyph_renderer_selection_proven": false,
+  "template_picker_callback_retested": false,
+  "real_company_deck_fidelity_verified": false,
+  "main_merged": false,
+  "installed_runtime_changed": false,
+  "si_repositories_touched": false,
+  "new_cost_keys_permissions_network_changes": false,
+  "private_fonts_company_assets_committed": false,
+  "library_save": {
+    "action": "Official Library helper batch save",
+    "targets": [
+      "edited.pptx",
+      "slide-1.png",
+      "samsung-validation-evidence.zip"
+    ],
+    "status": "failed_before_upload_preparation",
+    "reason": "hosted apps tools/list HTTP 403",
+    "file_ids": [],
+    "direct_upload_bypass": false,
+    "retry_attempted": false,
+    "required_action": "Platform restore existing authorized Library helper discovery access"
+  }
+}

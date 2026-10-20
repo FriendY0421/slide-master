@@ -103,9 +103,19 @@ def font_metadata(path: Path) -> dict:
             if os2.fsSelection & ((1 << 0) | (1 << 9)) or head.macStyle & 2 or post.italicAngle != 0:
                 raise ValueError("Italic/oblique faces are not supported by the existing dense checker")
             bold = role == "bold"
-            if bool(os2.fsSelection & 32) != bold or bool(head.macStyle & 1) != bold:
+            # Some numeric subfamilies are separate weight faces rather than
+            # legacy style-linked Bold. Preserve their bytes and require both
+            # legacy flags to agree, an exact numeric name, and OS/2 weight.
+            numeric_weight_face = (
+                names.getBestSubFamilyName() == str(weight)
+                and not os2.fsSelection & 32 and not head.macStyle & 1
+                and bool(os2.fsSelection & 64)
+            )
+            if not numeric_weight_face and (
+                bool(os2.fsSelection & 32) != bold or bool(head.macStyle & 1) != bold
+            ):
                 raise ValueError("Font weight and bold style flags disagree")
-            if bool(os2.fsSelection & 64) == bold:
+            if not numeric_weight_face and bool(os2.fsSelection & 64) == bold:
                 raise ValueError("Font regular style flag disagrees with its weight")
             return {
                 "role": role, "family": names.getBestFamilyName(),
