@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "project_id": "SLIDE_MASTER",
+  "contract_role": "review_candidate_not_runtime_registration",
+  "operationally_enabled": false,
+  "existing_plugin_version": "0.4.3",
+  "actions": {
+    "REVIEW_EXISTING_PPTX": {
+      "implementation": ".claude/skills/ppt-master/scripts/cloud_review_existing.py",
+      "requires_exact_source_sha256": true,
+      "requires_existing_host_runtime": true,
+      "requires_approved_font_usage": true,
+      "requires_matching_dense_renderer_font_hashes": true,
+      "writes_only_new_private_qa_directory": true,
+      "network_access": false,
+      "does_not_authorize": [
+        "PPTX generation or modification",
+        "FAH provider registration or enablement",
+        "template choice or approval fabrication",
+        "new plugin installation or release",
+        "credentials or persistent access",
+        "font installation or embedding",
+        "upload, sharing, deployment or payment"
+      ],
+      "requires_matching_dense_renderer_face_metadata": true,
+      "requires_role_specific_renderer_registration_receipt": true
+    }
+  },
+  "generation_owner": "Keep the existing routed SVG/native owner and its gates.",
+  "photo_analysis_owner": "Current host model reads actual source pixels.",
+  "new_photo_gate": "Actual source provenance and current user approval are required.",
+  "release_gate": "Reviewed code is not deployment approval. Keep existing plugin and main unchanged.",
+  "private_data_policy": "No company original, photo, font, private URL, account ID or secret in public history.",
+  "recovery": "Preserve source bytes and earlier outputs; remove only the isolated candidate after review."
+}

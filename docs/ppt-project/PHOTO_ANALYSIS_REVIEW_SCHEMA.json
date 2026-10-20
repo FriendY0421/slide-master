@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Slide Master photo analysis review, not generation permission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source", "page_count", "items", "uncertainties", "missing_originals", "approval_required", "generation_allowed"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provenance", "sha256", "pixel_size", "actual_pixels_reviewed"],
+      "properties": {
+        "provenance": {"enum": ["user_attachment", "authorized_drive", "public_reference", "isolated_test_fixture"]},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "pixel_size": {"type": "array", "items": {"type": "integer", "minimum": 1}, "minItems": 2, "maxItems": 2},
+        "actual_pixels_reviewed": {"const": true}
+      }
+    },
+    "page_count": {"type": "integer", "minimum": 1},
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "page", "position", "confidence", "basis", "editable_plan"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "kind": {"enum": ["text", "table", "chart", "image", "shape", "group"]},
+          "page": {"type": "integer", "minimum": 1},
+          "position": {
+            "description": "Normalized x, y, width, height. Host also checks right/bottom remain within the page.",
+            "type": "array", "items": {"type": "number", "minimum": 0, "maximum": 1}, "minItems": 4, "maxItems": 4
+          },
+          "confidence": {"enum": ["high", "medium", "low", "unknown"]},
+          "basis": {"type": "string", "minLength": 1},
+          "editable_plan": {"enum": ["native_text", "native_table", "native_chart", "native_shape", "native_group", "separate_image", "unresolved"]},
+          "text": {"type": "string"},
+          "unreadable_text": {"type": "array", "items": {"type": "string"}},
+          "colors": {"type": "array", "items": {"type": "string", "pattern": "^#[0-9A-Fa-f]{6}$"}},
+          "font": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["family_candidates", "size_pt_range", "basis", "exact_identification_verified", "license_status"],
+            "properties": {
+              "family_candidates": {"type": "array", "items": {"type": "string"}},
+              "size_pt_range": {"type": ["array", "null"], "items": {"type": "number", "exclusiveMinimum": 0}, "minItems": 2, "maxItems": 2},
+              "basis": {"enum": ["visual_estimate", "original_pptx_metadata", "original_pdf_metadata", "user_specification", "unknown"]},
+              "exact_identification_verified": {"type": "boolean"},
+              "license_status": {"enum": ["verified_for_task", "pending", "unavailable"]}
+            },
+            "allOf": [{
+              "if": {"properties": {"basis": {"enum": ["visual_estimate", "unknown"]}}, "required": ["basis"]},
+              "then": {"properties": {"exact_identification_verified": {"const": false}}}
+            }]
+          },
+          "image_original": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["available", "rights_status", "crop_policy"],
+            "properties": {
+              "available": {"type": "boolean"},
+              "rights_status": {"enum": ["verified_for_task", "pending", "unavailable"]},
+              "crop_policy": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    },
+    "uncertainties": {"type": "array", "items": {"type": "string"}},
+    "missing_originals": {"type": "array", "items": {"type": "string"}},
+    "approval_required": {"const": true},
+    "generation_allowed": {"const": false}
+  }
+}

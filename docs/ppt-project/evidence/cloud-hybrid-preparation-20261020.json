@@ -1,0 +1,74 @@
+{
+  "status": "local_review_candidate_not_deployed",
+  "date_utc": "2026-10-20",
+  "approved_main": "0578dba7ddf56cf5d7024cf574063c4db7332a3e",
+  "installed_plugin_version_readback": "0.4.3",
+  "installed_plugin_file_count": 22,
+  "reference_final_pptx_sha256": "49ecb31bedac25b90084a63e30eedc8588504dc0be8a529e718d12f82ba5855c",
+  "reference_final_pptx_bytes": 20662,
+  "current_cloud_review": {
+    "package_findings": 0,
+    "layout_findings": 0,
+    "layout_warnings": 0,
+    "dense_measured_regions": 7,
+    "dense_errors": 0,
+    "dense_design_warnings": 0,
+    "render_pages": 1,
+    "render_exit_code": 0,
+    "source_unchanged": true,
+    "full_page_visual_review": true,
+    "final_render_sha256": "a3566b8cac919c5e14d8bd1424bf2bc2bd79f76e93f2a46ed2f49a086307456f",
+    "dense_renderer_font_bindings": {
+      "regular": {
+        "sha256": "3ffbacde6ab8411f1d2db54bb9b1f0b3ee2a738932033722cf0388c06aed1c93",
+        "weight": 400,
+        "style": "normal",
+        "width": "normal"
+      },
+      "bold": {
+        "sha256": "2e91915fab54df71cc9598ebf608b2bdb54c6fe3c066ac61dff0bc44fca71cc7",
+        "weight": 700,
+        "style": "normal",
+        "width": "normal"
+      }
+    },
+    "actual_measurement_and_renderer_font_binding_passed": true,
+    "render_unchanged_after_correction": true,
+    "renderer_face_registration_map_verified": true,
+    "per_glyph_font_verified": false,
+    "actual_reference_swapped_role_negative_test_passed": true
+  },
+  "unit_tests": {
+    "adapter_safety": 45,
+    "gate_and_schema": 10
+  },
+  "private_drive_readback": {
+    "owner_only": true,
+    "shared": false,
+    "actual_download_sha_matches": true
+  },
+  "not_established": [
+    "fresh user attachment flow",
+    "actual current template choice",
+    "new PPTX generation in this preparation",
+    "recipient opening",
+    "Microsoft PowerPoint rendering/edit-save-reopen",
+    "Samsung/company fidelity",
+    "PC-off interactive Picker transport",
+    "FAH runtime provider enablement"
+  ],
+  "production_changes": false,
+  "new_credentials": false,
+  "new_hosting": false,
+  "new_deck_created": false,
+  "public_company_assets": false,
+  "candidate_revision": "role-metadata-and-renderer-registration-binding-correction",
+  "review_correction": {
+    "finding": "P2: SHA-set comparison allowed swapped Regular/Bold measurement roles",
+    "fixed": true,
+    "validation": "45 safety regressions with real synthetic two-face metadata, role-swap and unsupported-style rejection; actual-reference font-role swap rejected; current exact reference five-stage replay passed",
+    "existing_reference_evidence_remains_valid": true,
+    "installed_plugin_scripts_changed": false,
+    "registration_is_not_per_glyph_proof": true
+  }
+}
