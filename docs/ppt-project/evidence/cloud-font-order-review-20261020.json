@@ -1,0 +1,28 @@
+{
+  "status": "draft_source_review_not_deployment",
+  "baseline_commit": "2653d406ea7ba628bc6361f379d5d5700a7fe3e6",
+  "dense_review_commit": "07bd9b68c76eb0cacf0b434f16fccc47f832c526",
+  "font_cache_review_commit": "50fe8f0894c06cabb0aed476b65c368447dcdaee",
+  "checks": {
+    "original_adapter_regressions_passed": 45,
+    "reproducible_gate_schema_checks_passed": 10,
+    "new_boundary_regressions_passed": 21,
+    "total_passed": 76,
+    "failed": 0,
+    "skipped": 0,
+    "compile_passed": true,
+    "diff_check_passed": true
+  },
+  "historical_gate_schema_source_in_baseline": false,
+  "actual_dense_source_wrap_regression": true,
+  "child_process_adapter_cases": "mocked; not actual host renderer execution",
+  "optional_native_gates": "unverified; not discovered in initial workspace scan; subsequently found in supplied host tools",
+  "samsung_local_bytes_verified": false,
+  "drive_candidate_transfer": "metadata/reference returned; local transfer failed URLError; no retry",
+  "powerpoint_verified": false,
+  "visual_review_completed": false,
+  "old_private_deck_replayed": false,
+  "production_changes": false,
+  "new_deck_created": false,
+  "private_font_bytes_committed": false
+}

@@ -1,0 +1,107 @@
+{
+  "scope": "isolated synthetic integration; not user/company deck production",
+  "selected_registered_template": "deck:consulting_clarity",
+  "selected_registered_preset": "balanced_report",
+  "catalog_selection_validation": true,
+  "actual_interactive_picker": "UNAVAILABLE: MCP SSE gateway 429; no retry",
+  "fallback": "Registered template PNG actually rendered and visually inspected; deterministic fixture selection, not a production user callback",
+  "analysis_schema_acceptance": true,
+  "analysis_generation_allowed": false,
+  "template_adaptation": "Existing SVG decoration preserved as one background picture; title/text/table/chart are native; native Master/Layout fidelity not claimed",
+  "fixture_data": {
+    "original": [
+      12,
+      18,
+      30
+    ],
+    "regenerated_edit": [
+      13,
+      18,
+      31
+    ]
+  },
+  "original_final_pptx": {
+    "bytes": 20693,
+    "sha256": "14589fc9437c1eb2805d0c8ab3c0a333963482bcbc09f09c9916ba58ae6da268"
+  },
+  "regenerated_final_pptx": {
+    "bytes": 20694,
+    "sha256": "829e17821a63bed2921199a13bb8e3e85b524c37d58ea316d39748b8f89cac08"
+  },
+  "cloud_review_stages": [
+    {
+      "name": "font-map",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "dense-scope",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "package",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "layout",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "dense",
+      "exit_code": 0,
+      "accepted": true
+    },
+    {
+      "name": "render",
+      "exit_code": 0,
+      "accepted": true
+    }
+  ],
+  "source_unchanged": true,
+  "dense_coverage": {
+    "completed_objects": 1,
+    "unsupported_objects": 0,
+    "uninspected_objects": 9
+  },
+  "real_native_table_arithmetic": true,
+  "real_native_chart_title": true,
+  "real_quantitative_chart_workbook_gate": true,
+  "renderer_process_success": true,
+  "original_and_regenerated_renders_visually_inspected": true,
+  "artifact_tool_edit_roundtrip": {
+    "passed": false,
+    "reason": "Import/edit/export lost embedded chart workbook; finalizer correctly rejected missing source workbook",
+    "failed_draft_preserved": true
+  },
+  "repair": {
+    "method": "Regenerate explicit synthetic edits through preserved existing authoring source",
+    "finalizer_passed": true,
+    "reimport_edit_export_defect_fixed": false
+  },
+  "initial_call_correction": "Required-native-table slide declaration added to existing finalizer layoutArgs; first failed draft retained",
+  "fonts": {
+    "tested": "Existing repository OFL Pretendard static Regular/Bold, temporary process registration only",
+    "samsung_bytes_verified": false,
+    "powerpoint_verified": false,
+    "per_glyph_renderer_selection_verified": false
+  },
+  "environment": {
+    "image_version": "20260927172045-8f4f3df6e62b",
+    "codex_version": "0.159.0-alpha.3",
+    "http_https_proxy": "proxy:8080",
+    "blocked_target_host": "sdmntprcentralus.oaiusercontent.com",
+    "diagnostic": "Unsigned origin HEAD: proxy CONNECT 403",
+    "network_policy_version": "not exposed",
+    "approved_host_list": "not exposed",
+    "client_config": "empty; not evidence of effective sidecar network policy",
+    "stale_environment_vs_missing_allowed_host": "undetermined"
+  },
+  "network_bypass_or_escalation": false,
+  "font_download_retried": false,
+  "full_regressions_rerun": false,
+  "installed_plugin_or_runtime_modified": false,
+  "company_assets_in_public_commit": false
+}

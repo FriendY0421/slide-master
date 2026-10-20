@@ -1,0 +1,79 @@
+{
+  "scope": "source-level edit/regenerate delivery barrier; no external engine patch",
+  "new_preservation_regressions": {
+    "passed": 20,
+    "failed": 0
+  },
+  "focused_adapter_checks": {
+    "passed": 8,
+    "failed": 0,
+    "new_cases": 4,
+    "existing_cases": 4
+  },
+  "previous_full_suite_repeated": false,
+  "compile_passed": true,
+  "diff_check_passed": true,
+  "real_broken_candidate": {
+    "sha256": "95b9b806d65ee03c486b2bc0f1c8d1b4d2c8cd4e0785ec12aa73d06990221f44",
+    "delivery_blocked": true,
+    "executed_stages": [
+      "chart-workbook-preservation"
+    ],
+    "external_qa_or_render_executed": false,
+    "verified_authoring_manifest_did_not_override_failure": true
+  },
+  "real_regenerated_candidate": {
+    "sha256": "829e17821a63bed2921199a13bb8e3e85b524c37d58ea316d39748b8f89cac08",
+    "qa_processes_passed": true,
+    "edit_source_unchanged": true,
+    "stages": [
+      {
+        "name": "chart-workbook-preservation",
+        "exit_code": 0,
+        "accepted": true
+      },
+      {
+        "name": "font-map",
+        "exit_code": 0,
+        "accepted": true
+      },
+      {
+        "name": "dense-scope",
+        "exit_code": 0,
+        "accepted": true
+      },
+      {
+        "name": "package",
+        "exit_code": 0,
+        "accepted": true
+      },
+      {
+        "name": "layout",
+        "exit_code": 0,
+        "accepted": true
+      },
+      {
+        "name": "dense",
+        "exit_code": 0,
+        "accepted": true
+      },
+      {
+        "name": "render",
+        "exit_code": 0,
+        "accepted": true
+      }
+    ],
+    "render_png_sha256": "7a35b2e73664eef8707b681189d7d41c895a16724c6b7fee8d0692a598fff891",
+    "render_matches_previous_visually_inspected_png": true,
+    "without_retained_authoring_manifest": "blocked"
+  },
+  "retained_authoring_verification": "Actual builder/data hashes matched the previously retained handoff manifest",
+  "automatic_regeneration_executed_by_gate": false,
+  "engine_defect_fixed": false,
+  "installed_runtime_changed": false,
+  "powerpoint_verified": false,
+  "samsung_bytes_verified": false,
+  "network_download_retried": false,
+  "environment_handoff": "Parent confirmed storage hostname is in approved latest 42-host policy and executor is old; parent coordinates latest-environment handoff",
+  "private_font_company_data_committed": false
+}
