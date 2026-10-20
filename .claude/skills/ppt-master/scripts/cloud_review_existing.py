@@ -5,6 +5,9 @@ PPT Master - Cloud Existing-File Review
 Run existing host package/layout checks and the reviewed 0.4.3 renderer against
 one exact PPTX. This is a read-only QA adapter, not a generator, authentication
 adapter, approval issuer, font installer, uploader or FAH deployment.
+Post-edit callers must select --operation edit and bind the pre-edit source.
+Regenerate additionally requires retained authoring code/data hashes. See
+docs/ppt-project/CHART_WORKBOOK_PRESERVATION.md for the fail-closed workflow.
 
 Usage:
     python3 cloud_review_existing.py DECK --expected-sha256 SHA --profile PROFILE
@@ -31,6 +34,7 @@ from zipfile import BadZipFile, ZipFile
 from pathlib import Path
 
 from console_encoding import configure_utf8_stdio
+from chart_workbook_preservation import preservation_gate
 
 
 RUNTIME_KEYS = (
@@ -440,6 +444,15 @@ def review(args: argparse.Namespace) -> dict:
         scripts / "render_pptx_review.py",
         scripts / "render_pptx_review.mjs",
     ]
+    operation = getattr(args, "operation", "review")
+    edit_source = getattr(args, "edit_source", None)
+    edit_source_sha = getattr(args, "edit_source_sha256", None)
+    authoring_manifest = getattr(args, "authoring_manifest", None)
+    if operation in {"edit", "regenerate"} and (not edit_source or not edit_source_sha):
+        raise ValueError("Edit/regenerate review requires exact pre-edit source and SHA256")
+    if operation == "review" and (edit_source or edit_source_sha or authoring_manifest):
+        raise ValueError("Explicit edit/regenerate operation required for preservation inputs")
+    preservation = {"status": "not_requested"}
     dense = None
     font_bindings = {}
     dense_scope = {"status": "not_requested", "completed_objects": 0,
@@ -490,10 +503,20 @@ def review(args: argparse.Namespace) -> dict:
         ]))
     if dense is not None:
         commands.insert(1, ("dense-scope", []))
+    if operation in {"edit", "regenerate"}:
+        commands.insert(0, ("chart-workbook-preservation", []))
     stages = []
     for name, command in commands:
         try:
-            if name == "dense-scope":
+            if name == "chart-workbook-preservation":
+                preservation = preservation_gate(
+                    edit_source.resolve(strict=True), deck, edit_source_sha, args.expected_sha256,
+                    mode=operation, authoring_manifest=authoring_manifest,
+                )
+                result = subprocess.CompletedProcess(
+                    command, 0 if preservation["passed"] else 1, json.dumps(preservation), "",
+                )
+            elif name == "dense-scope":
                 dense_scope = inspect_dense_scope(deck, dense, font_bindings)
                 result = subprocess.CompletedProcess(command, 0 if dense_scope["passed"] else 1,
                                                      json.dumps(dense_scope), "")
@@ -535,15 +558,19 @@ def review(args: argparse.Namespace) -> dict:
     unchanged = sha256(deck) == args.expected_sha256
     if dense_scope and not unchanged:
         dense_scope["completed_objects"] = 0
+    edit_source_unchanged = (operation == "review" or sha256(edit_source) == edit_source_sha)
     report = {
         "schema_version": 2,
         "operation": "REVIEW_EXISTING_PPTX",
         "pptx_sha256": args.expected_sha256,
         "source_unchanged": unchanged,
-        "qa_processes_passed": unchanged and len(stages) == len(commands)
+        "qa_processes_passed": unchanged and edit_source_unchanged and len(stages) == len(commands)
         and all(stage["accepted"] for stage in stages),
         "stages": [{"name": s["name"], "exit_code": s["exit_code"], "accepted": s["accepted"]}
                    for s in stages],
+        "review_operation": operation,
+        "edit_source_unchanged": edit_source_unchanged if operation != "review" else None,
+        "chart_workbook_preservation": preservation,
         "dense_scope": dense_scope,
         "optional_native_gates": {
             "status": "unverified", "reason": "Not connected; no verified host interface supplied",
@@ -576,6 +603,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--host-skill-dir", type=Path, required=True)
     parser.add_argument("--review-scripts", type=Path, required=True)
     parser.add_argument("--dense-contract", type=Path)
+    parser.add_argument("--operation", choices=["review", "edit", "regenerate"], default="review")
+    parser.add_argument("--edit-source", type=Path)
+    parser.add_argument("--edit-source-sha256")
+    parser.add_argument("--authoring-manifest", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     try:

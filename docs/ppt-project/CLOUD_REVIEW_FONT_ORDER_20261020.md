@@ -231,3 +231,13 @@ proxy bypass or sandbox escalation was attempted. The platform owner can compare
 these identifiers and the exact hostname with the already approved policy before
 assigning a supported consumer environment. Preserve the handoff artifacts and
 revalidate their hashes before any continuation there.
+
+
+## Post-edit delivery barrier
+
+The workbook-loss finding now has a source-level fail-closed barrier in the QA
+adapter, with separate explicit edit/regenerate modes. See
+[chart/workbook preservation](CHART_WORKBOOK_PRESERVATION.md) for the required
+pre-edit source hashes, retained authoring contract, actual blocked specimen,
+seven-stage regenerated replay and remaining engine limitation. This is an
+unmerged source change, not an installed-runtime patch or delivery approval.

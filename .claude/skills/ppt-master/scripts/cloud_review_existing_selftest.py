@@ -698,6 +698,56 @@ class CloudReviewTests(unittest.TestCase):
         self.assertFalse(result["powerpoint_verified"])
 
 
+    def test_edit_review_requires_bound_pre_edit_source(self) -> None:
+        self.args.operation = "edit"
+        with patch.object(target, "supplied_runtime", return_value=self.runtime), patch.object(
+            target.subprocess, "run"
+        ) as run, self.assertRaisesRegex(ValueError, "pre-edit source"):
+            target.review(self.args)
+        run.assert_not_called()
+
+    def test_preservation_failure_stops_all_external_checks(self) -> None:
+        self.args.operation = "edit"
+        self.args.edit_source = self.deck
+        self.args.edit_source_sha256 = self.args.expected_sha256
+        blocked = {"passed": False, "delivery_blocked": True, "regeneration_eligible": True}
+        with patch.object(target, "supplied_runtime", return_value=self.runtime), patch.object(
+            target, "preservation_gate", return_value=blocked
+        ), patch.object(target.subprocess, "run") as run:
+            report = target.review(self.args)
+        run.assert_not_called()
+        self.assertFalse(report["qa_processes_passed"])
+        self.assertEqual(report["stages"], [{"name": "chart-workbook-preservation",
+                                           "exit_code": 1, "accepted": False}])
+        self.assertTrue(report["chart_workbook_preservation"]["regeneration_eligible"])
+        self.assertFalse(report["production_authorized"])
+
+    def test_review_mode_cannot_ignore_edit_source_fields(self) -> None:
+        self.args.operation = "review"
+        self.args.edit_source = self.deck
+        with patch.object(target, "supplied_runtime", return_value=self.runtime), self.assertRaisesRegex(
+            ValueError, "Explicit edit/regenerate"
+        ):
+            target.review(self.args)
+
+
+    def test_pre_edit_source_change_invalidates_successful_review(self) -> None:
+        original = self.root / "original.pptx"
+        original.write_bytes(self.deck.read_bytes())
+        self.args.operation = "edit"
+        self.args.edit_source = original
+        self.args.edit_source_sha256 = target.sha256(original)
+        def child(*args, **kwargs):
+            original.write_bytes(b"changed pre-edit source")
+            return target.subprocess.CompletedProcess([], 0, "fixture", "")
+        with patch.object(target, "supplied_runtime", return_value=self.runtime), patch.object(
+            target, "preservation_gate", return_value={"passed": True}
+        ), patch.object(target.subprocess, "run", side_effect=child):
+            report = target.review(self.args)
+        self.assertFalse(report["qa_processes_passed"])
+        self.assertFalse(report["edit_source_unchanged"])
+
+
 class GateSchemaTests(unittest.TestCase):
     """Ten reproducible boundary checks; isolated evidence is never approval."""
 
