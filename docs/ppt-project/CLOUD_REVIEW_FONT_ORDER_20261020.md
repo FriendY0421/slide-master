@@ -167,3 +167,67 @@ which host tools exist without replacing the existing generator or renderer.
 The 76 completed regressions were not rerun because this follow-up changes only
 validation records. No installed plugin, network configuration, permissions,
 credentials, fonts or cost-bearing resources changed.
+
+## Synthetic integration execution, without a company deck
+
+Function readiness can be tested without inventing company content or waiting for
+a real user's deck. A private isolated fixture selected registered
+`deck:consulting_clarity` with the real `balanced_report` preset, verified the
+approved catalog entries, rendered and visually inspected the actual registered
+content-page SVG, and validated a synthetic analysis result against the existing
+photo-analysis schema. That result retains `generation_allowed: false`; the
+separate engineering instruction authorizes only this isolated specimen.
+
+The real Picker MCP call failed at its gateway with HTTP 429. No retry or
+transport change was made. A rendered registered-preview fallback and deterministic
+fixture selection were used for the test. This does not prove an interactive
+Picker callback or unattended/laptop-off availability.
+
+The existing supplied Artifact Tool/native finalizer generated one bilingual
+slide containing native text, a 4×2 table and a chart with an embedded workbook
+snapshot. Source values 12 and 18 total 30. Template decoration is a retained
+background picture, while all relevant text and data objects remain native.
+This tests the template's visual layout, not native Master/Layout preservation.
+Repository OFL Pretendard Regular/Bold files were hash-bound and registered only
+inside the process. Samsung bytes and rendering were not tested.
+
+The exact final PPTX passed all six real adapter stages: font-map, dense-scope,
+package, layout, dense and renderer. Source bytes remained unchanged. Dense
+coverage is explicitly one title object completed, zero unsupported and nine
+uninspected objects; this is not a ten-object dense-fit claim. The native
+finalizer separately passed actual package/layout, explicit coordinate-based
+table arithmetic, chart-title and quantitative-chart/workbook checks. The final
+PPTX was reimported, rendered successfully, and its full-page PNG inspected.
+
+The first finalizer call omitted the matching `--require-native-table-slide`
+layout declaration and was rejected. The test invocation was corrected; the
+failed draft/logs remain preserved. No gate was weakened.
+
+A deeper native editing test found a remaining supplied-runtime limitation:
+importing the valid PPTX, editing native table/chart values and exporting loses
+the embedded chart workbook. The finalizer correctly rejects the new draft with
+“An existing referenced chart lacks its source workbook”. That draft was not
+published as final. The installed runtime was not modified. For this known
+synthetic source only, the existing authoring source was reused to regenerate
+explicit values 13 and 18, total 31. The regenerated editable PPTX and workbook
+pass finalization, source-value comparisons, rendering and visual inspection.
+This safe source-authoring path restores the requested specimen without claiming
+that generic import/edit/export or source-formula preservation was fixed.
+
+Both final outputs, retained authoring inputs/scripts, previews, failed drafts,
+process logs and a hash manifest remain in the ignored project workspace. A
+handoff ZIP preserves them if a consumer environment must change. Public evidence
+is limited to sanitized statuses and output hashes in
+`evidence/synthetic-integration-20261020.json`; no company data, private IDs or
+font binaries are committed. The earlier full regression suite was not repeated.
+
+The exact blocked storage host is `sdmntprcentralus.oaiusercontent.com`, through
+the default `proxy:8080`. Exposed execution identifiers are image
+`20260927172045-8f4f3df6e62b` and Codex `0.159.0-alpha.3`. Effective network-policy
+revision and the approved-host list are not exposed. The empty local Codex config
+is not that policy. Therefore stale-environment versus missing-host-rule cannot
+be distinguished from this executor. No alternate host, new security permission,
+proxy bypass or sandbox escalation was attempted. The platform owner can compare
+these identifiers and the exact hostname with the already approved policy before
+assigning a supported consumer environment. Preserve the handoff artifacts and
+revalidate their hashes before any continuation there.
