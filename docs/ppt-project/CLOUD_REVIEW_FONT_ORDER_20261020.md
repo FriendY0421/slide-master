@@ -50,10 +50,13 @@ When dense inspection was not requested or did not execute, unavailable counts
 are null, not fabricated zeros. Each executed scope stage saves stdout in the new
 private QA directory; prior outputs remain protected by `exist_ok=False`.
 
-The optional table arithmetic, quantitative-chart and chart-title host gates were
-not supplied in this environment. They remain explicitly unverified. No alternate
-checker was installed, no host `--receipt` option was used, and no arithmetic or
-currency/unit normalization was added. Future integration must use verified host
+The initial workspace-only scan did not discover the optional table arithmetic,
+quantitative-chart and chart-title host gates. Follow-up inspection found all
+three in the supplied Presentations host tools; each CLI help command exits zero.
+The earlier absence statement was too broad and is corrected here. No actual
+per-deck gate ran because no source deck or applicable task contract is present.
+No alternate checker was installed, no host `--receipt` option was used, and no
+arithmetic or currency/unit normalization was added. Future integration must use verified host
 interfaces, explicit cell coordinates/arithmetic contracts and only charts
 explicitly designated quantitative.
 
@@ -135,3 +138,32 @@ controls. They inform existing-owner improvements without requiring an engine
 replacement. No automatic fit-to-text or shrink operation was added. Marp's
 experimental editable-PPT path is outside this implementation; preserving current
 native editability takes priority over an alternate export experiment.
+
+
+## Current production-flow follow-up
+
+The existing source PR remains Draft. Current main readback is still
+`0578dba7ddf56cf5d7024cf574063c4db7332a3e`. Both approved catalog JSON files
+are readable. No actual template selection, storyline approval, source PPTX or
+photo was found in the current project's workspace. Engineering continuation
+is not a real template choice, source analysis, or current deck-generation
+approval, so no new business deck was invented.
+
+Current default HTTP/HTTPS proxy settings were read without changing them. A
+single HEAD request to the previous storage hostname, without any signed URL or
+file request, fails at proxy CONNECT with HTTP 403. This establishes the current
+network-path blocker. The earlier download log retained only URLError, so its
+exact historical cause remains unproved. No font download was retried, and no
+alternate endpoint, proxy bypass, sandbox escalation or new authentication was
+attempted. A working authorized transfer into the consumer workspace is needed
+before actual Samsung bytes, metadata, cmap and rendering can be checked.
+
+The supplied Node runtime imports Artifact Tool successfully, exposes PPTX
+export, and imports the existing native finalizer. Package/layout inspectors,
+slide renderer and all three optional native gates execute CLI help successfully.
+These are executable-readiness checks, not actual production, editable-content
+validation, image rendering or PowerPoint tests. They resolve uncertainty about
+which host tools exist without replacing the existing generator or renderer.
+The 76 completed regressions were not rerun because this follow-up changes only
+validation records. No installed plugin, network configuration, permissions,
+credentials, fonts or cost-bearing resources changed.

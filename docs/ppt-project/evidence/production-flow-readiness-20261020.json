@@ -1,0 +1,37 @@
+{
+  "operation": "existing_production_flow_readiness_followup",
+  "prior_code_commit": "213c4085bfa1288a1d130e7544487af622b9f84b",
+  "main_readback": "0578dba7ddf56cf5d7024cf574063c4db7332a3e",
+  "network": {
+    "proxy_settings_read_only": true,
+    "diagnostic": "unsigned origin HEAD only",
+    "current_result": "URLError: proxy CONNECT 403; OSError reason",
+    "historical_download_root_cause": "not retained in original log",
+    "font_download_retried": false,
+    "bypass_attempted": false
+  },
+  "runtime": {
+    "artifact_tool_import_passed": true,
+    "pptx_export_api_available": true,
+    "native_finalizer_import_passed": true,
+    "package_inspector_cli_help_passed": true,
+    "layout_inspector_cli_help_passed": true,
+    "slide_renderer_cli_help_passed": true,
+    "table_arithmetic_cli_help_passed": true,
+    "quantitative_chart_cli_help_passed": true,
+    "chart_title_cli_help_passed": true,
+    "native_gate_receipt_option_used": false
+  },
+  "inputs": {
+    "approved_catalogs_readable": true,
+    "source_deck_or_photo_in_project_workspace": false,
+    "actual_template_selection_in_project_workspace": false,
+    "storyline_approval_in_project_workspace": false
+  },
+  "actual_deck_generation": false,
+  "actual_deck_rendering": false,
+  "samsung_bytes_verified": false,
+  "powerpoint_verified": false,
+  "full_regression_suite_repeated": false,
+  "changes": "documentation and sanitized evidence only; no runtime/configuration/security changes"
+}

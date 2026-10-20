@@ -16,7 +16,7 @@
   "historical_gate_schema_source_in_baseline": false,
   "actual_dense_source_wrap_regression": true,
   "child_process_adapter_cases": "mocked; not actual host renderer execution",
-  "optional_native_gates": "unverified; absent; no substitute installed",
+  "optional_native_gates": "unverified; not discovered in initial workspace scan; subsequently found in supplied host tools",
   "samsung_local_bytes_verified": false,
   "drive_candidate_transfer": "metadata/reference returned; local transfer failed URLError; no retry",
   "powerpoint_verified": false,
