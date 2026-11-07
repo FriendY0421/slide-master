@@ -4,6 +4,12 @@ Status date: 2026-11-07 (Asia/Seoul). This is the continuation entry point for
 the user's Slide Master quality and full-flow mission. Source access does not
 install a plugin, grant file access or connect a production executor.
 
+Current acceptance boundary and minimum resumption inputs:
+[remaining real-user/target-environment checks](REMAINING_ACCEPTANCE_20261108.md).
+Independent permitted work is exhausted until actual selection/input or target
+computer evidence arrives. No live process is awaiting completion; preserve the
+full scope and do not mark complete or fabricate another test as user evidence.
+
 Latest saved and locally installed plugin (2026-11-08): [0.4.6 applied/read back](PLUGIN_046_APPLIED_20261108.md)
 adds bundled reset recovery and analysis-first photo/CUSTOM guidance. Same
 private identity, existing connections and all executable scripts preserved;
