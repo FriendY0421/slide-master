@@ -14,6 +14,11 @@ Subsequent implementation on this PR: [quality roadmap and same-fixture evidence
 Reference preservation/repair/coverage checks are connected to the existing
 inspector/final verifier, but are not yet released into installed plugin 0.4.3.
 
+Prepared operational candidate (approval pending):
+[existing plugin 0.4.4 scope, impact, cost and recovery](PLUGIN_044_ROLLOUT_APPROVAL_20261107.md).
+Official current source is still 0.4.3; candidate/recovery archives are private.
+No new PDF has been received or substantively incorporated.
+
 1. Open [Draft PR #14](https://github.com/FriendY0421/slide-master/pull/14).
    Work is on `codex/dense-quality-20261012`; approved baseline is
    `0578dba7ddf56cf5d7024cf574063c4db7332a3e`. Do not assume `main` contains it.
