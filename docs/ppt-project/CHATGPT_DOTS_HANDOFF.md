@@ -4,6 +4,13 @@ Status date: 2026-11-07 (Asia/Seoul). This is the continuation entry point for
 the user's Slide Master quality and full-flow mission. Source access does not
 install a plugin, grant file access or connect a production executor.
 
+2026-11-08 missing-file recovery update: read [reset recovery policy](RESET_RECOVERY_POLICY.md).
+On the identified Aro computer, download/validate missing authorized files and
+resume existing approved work without a separate setup explanation. On another
+computer, give a brief preparation/progress notice before proceeding. New costs,
+permissions, software installation and content approvals remain separate gates.
+This is source guidance; no installed release or actual Aro reset is implied.
+
 Active goal scope: [full previously planned mission](ACTIVE_GOAL_SCOPE_20261107.md).
 Picker/cloud connection is the current priority, not the overall completion
 criterion. The user permits evidence-backed evolution while preserving existing

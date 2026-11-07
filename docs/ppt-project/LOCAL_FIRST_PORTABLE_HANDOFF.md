@@ -14,6 +14,19 @@ local work; it remains unverified rather than silently replaced or labeled done.
 
 ## Resume on another machine
 
+### Reset recovery and environment-specific communication (2026-11-08)
+
+Read [the reset recovery policy](RESET_RECOVERY_POLICY.md) when required files
+are absent. In the user's already identified Aro virtual computer, retrieve the
+verified private capsule and check it without a separate setup explanation or
+repeat approval; continue only the existing genuinely approved work. On another
+computer, first give a concise preparation/progress notice, then perform the
+same checks and continue. That notice does not require another approval for
+already authorized work. An unknown computer is not automatically Aro.
+
+Neither path authorizes installing software, granting access, copying credentials,
+spending money, skipping content approval or fabricating a working Picker.
+
 1. Preserve the source machine's originals and current results. Record the exact
    source/plugin versions, input/result hashes, real approved brief revision and
    unfinished checks. Do not invent selection, owner or user-approval records.
