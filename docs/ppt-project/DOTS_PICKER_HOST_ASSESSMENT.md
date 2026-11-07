@@ -60,6 +60,9 @@ The helper intentionally cannot certify computer identity, account quota,
 outbound access or service persistence by itself.
 
 Current tool access cannot execute commands on the user's named Dot computer.
+During the later local 0.4.6 installed-cache verification, the authorized device
+inventory still exposed only HOME-PC. This is not evidence of Dot free space or
+absence of a Dot computer in the user's account, and no device was added.
 The smallest needed handoff is to run this read-only probe from that Dot's own
 conversation/computer and return its receipt. A result from the already used
 Cloud Work trial must remain labeled Cloud Work unless platform identity proves

@@ -1,8 +1,8 @@
 {
-  "scope": "same USER/PRIVATE plugin saved through official guarded update; local installation/host behavior separately unverified",
+  "scope": "same USER/PRIVATE plugin official save and actual local cache verified; full real user flow remains unverified",
   "saved_version": "0.4.6",
   "previous_version_preserved": "0.4.5",
-  "local_cache_observed_version": "0.4.5",
+  "local_cache_observed_version": "0.4.6",
   "official_readback_files": 29,
   "official_source_matches_candidate": true,
   "preserved": {
@@ -53,12 +53,14 @@
   "new_permissions_cost_install_auth_hosting": false,
   "main_merged": false,
   "not_verified": [
-    "host_installed_0.4.6",
     "actual_Aro_reset",
     "current_photo_analysis_and_user_approval_roundtrip",
     "automatic_picker_pair_return",
     "PC_off_original_picker",
     "company_original_and_Samsung_rights",
     "recipient_open_for_new_company_result"
-  ]
+  ],
+  "previous_cache_observed_version": "0.4.5",
+  "local_cache_files_matched": 29,
+  "installation_receipt": "installed-readback.json"
 }

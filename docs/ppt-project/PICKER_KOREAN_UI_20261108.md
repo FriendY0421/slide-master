@@ -37,6 +37,15 @@ distinguishes `ui/update-model-context` from `ui/message`. Installed MCP Apps SD
 the current acknowledgement path, not independently observed transcript content.
 Root cause of the missing selection pair in this task is **not established**.
 
+Further read-only diagnosis: the [official message extension specification](https://github.com/openai/mcp-extensions/blob/main/docs/spec.md#uimessage-extensions)
+defines omitted options as active-conversation/immediate-send. Therefore missing
+explicit target/send metadata is not an established defect in the current
+standard call, and no speculative duplicate send was added. The already
+authorized cloud trial's backing task and parent ChatGPT conversation were
+read after the user's UI report; their latest state remained the earlier 0.4.5
+verification, with no new selection message. No new run/chat/message was sent.
+This does not establish where another host may have delivered the user's pair.
+
 ## Verification and recovery
 
 [Exact patch](evidence/picker-korean-20261108/picker-korean.patch) applies after

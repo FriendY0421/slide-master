@@ -8,7 +8,7 @@ only that milestone or a source change finishes.
 
 | Acceptance stage | Evidence still required / current boundary |
 | --- | --- |
-| Existing plugin and recovery | Keep same identity, features and backups; current applied 0.4.5 already verified. |
+| Existing plugin and recovery | Keep same identity, features and backups; 0.4.5 originals retained. Subsequent 0.4.6 official save and all 29 actual local installed files verified; see PLUGIN_046_APPLIED_20261108.md. |
 | Template or CUSTOM intake | Real registered previews and explicit template/preset return, or authorized source-based route. Do not invent attachment/user identifiers. |
 | Purpose/count/fonts/format | Confirm together using actual task inputs; preserve company-specific 14/12/11/9pt only where requested. |
 | Analysis and storyline | Preserve source text/numbers/layout, mark unreadable content, obtain real confirmation of the current revision. |

@@ -4,11 +4,12 @@ Status date: 2026-11-07 (Asia/Seoul). This is the continuation entry point for
 the user's Slide Master quality and full-flow mission. Source access does not
 install a plugin, grant file access or connect a production executor.
 
-Latest saved plugin source (2026-11-08): [0.4.6 applied/read back](PLUGIN_046_APPLIED_20261108.md)
+Latest saved and locally installed plugin (2026-11-08): [0.4.6 applied/read back](PLUGIN_046_APPLIED_20261108.md)
 adds bundled reset recovery and analysis-first photo/CUSTOM guidance. Same
 private identity, existing connections and all executable scripts preserved;
-0.4.5 originals retained. Official save/readback is verified, but the last local
-installed cache is still 0.4.5: host refresh/execution of 0.4.6 is not verified.
+0.4.5 originals retained. After the initial stale-cache observation, host refresh
+and all 29 actual local installed files now match official 0.4.6. The new SKILL
+is exposed/read in this task; actual photo/reset flow execution remains open.
 Current package rollback restores 0.4.5 code as 0.4.7, with two exact deletions;
 the older 0.4.6 recovery-of-0.4.4 is historical, not the current rollback.
 The existing user-visible Picker check, automatic pair and PC-off gaps remain.
@@ -52,16 +53,17 @@ The [actual portable capsule and offline-selection results](PORTABLE_HANDOFF_RES
 record source/size/hash, same-PC relocated validation, private Drive delivery,
 and the explicit distinction between a prepared direct handoff and Aro execution.
 
-**Current operational state:** the same existing private plugin is **0.4.5**.
+**Historical 0.4.5 checkpoint, superseded by 0.4.6 above:**
 [Applied release, actual installed desktop/cloud checks, native PowerPoint chart
 edit, private delivery and recovery](PLUGIN_045_APPLIED_20261107.md) supersede the
 0.4.4 and source-only checkpoints below. Both existing required App declarations
 are unchanged. No new permission/install/server/billing change or main merge.
 Real Picker UI/fresh user-photo round trip, PC-off Picker, company original and
 Samsung-use conditions remain explicitly incomplete. Do not reuse old 0.4.5
-recovery-of-0.4.3; current rollback restores 0.4.4 code as 0.4.6.
+recovery-of-0.4.3; that checkpoint's rollback restored 0.4.4 code as 0.4.6.
+Current 0.4.6 rollback instead restores 0.4.5 code as 0.4.7.
 
-Latest actual operational state: existing private plugin **0.4.4 saved and
+Historical 0.4.4 checkpoint: existing private plugin **0.4.4 saved and
 installed on desktop and existing Linux cloud trial**, with approved required
 Drive/Picker declarations. Post-update installed checks, two-page reimport/render
 and private Drive/raw-download verification completed. See

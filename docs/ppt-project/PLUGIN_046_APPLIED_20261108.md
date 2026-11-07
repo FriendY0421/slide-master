@@ -7,6 +7,12 @@ recovery copies remain preserved. This was not a new plugin/App, broader
 audience, permission, authentication, model API, software installation, host,
 billing change, repository merge or cloud task.
 
+Subsequent host refresh is now verified: the host exposes 0.4.6 and all 29
+actual local cache files match official source (legacy JSON semantically).
+[Installed readback receipt](evidence/plugin-046-20261108/installed-readback.json).
+This supersedes the initial stale-cache observation, not the remaining real
+photo/reset/selection-return acceptance conditions.
+
 ## Resulting behavior in the saved release
 
 - Missing files after reset: read existing private Drive metadata, resolve the
@@ -44,7 +50,7 @@ was introduced. The separate Picker App/runtime Korean patch remains the
 | Official source readback | All 29 files fetched and matched candidate. Generated legacy manifest uses equivalent JSON serialization; compared semantically. No missing/size-limited files. |
 | Recovery overlay | Restoring 0.4.5 source as greater version 0.4.7 plus deleting exactly the two added references reproduces the baseline apart from version. Simulated, not live-rolled-back. |
 | Private durable recovery | Owner-only/shared=false Drive ZIP, 246,034 bytes; raw re-download SHA matches. No private link/identifier or signed URL committed. |
-| Local host installation | Last observed desktop cache still **0.4.5**. No manual managed-cache patch or supported refresh API was used. **Installed 0.4.6 and new-instruction execution are unverified.** |
+| Local host installation | Initial cache was 0.4.5; after host skill refresh, actual **0.4.6** cache and all 29 official files match. New SKILL and references are loaded in this local task. Cache was not patched manually. Actual photo/reset flow execution remains unverified. |
 | Runtime rendering | Renderer/inspector scripts are byte-identical to validated 0.4.5; previous render receipts retain their original scope. No repeat render is presented as a new photo/style test. |
 | User flow | User reported original Picker success screen, but exact automatic pair receipt is still unverified. No new company photo or Aro reset was fabricated to test this release. |
 
@@ -55,11 +61,11 @@ Patch application check against the original 0.4.5 source passes.
 
 ## Usage and remaining checks
 
-Once the host actually refreshes the existing plugin, the saved 0.4.6 guidance
-is available through the same plugin entry. If it still reports 0.4.5, preserve
-the current task and reopen the existing plugin/chat through normal host UI;
-do not reinstall a similarly named plugin or claim refresh without evidence.
-This task has no supported refresh tool and does not automate ChatGPT desktop UI.
+The current local host now exposes the existing plugin's 0.4.6 guidance. On
+another environment, verify its actual installed release separately. If it
+still reports 0.4.5, preserve the task and reopen the existing plugin/chat through
+normal host UI; do not reinstall a similarly named plugin or claim refresh
+without evidence. No manual cache edit or ChatGPT desktop UI automation was used.
 
 For a photo job, provide the authorized photo; the next production response must
 be analysis/uncertainty and a reconstruction plan, with real user corrections
