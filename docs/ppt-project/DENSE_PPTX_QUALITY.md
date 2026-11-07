@@ -137,6 +137,26 @@ avoid a missing font or publish its pass as a final company deck certificate.
 
 ## Final application review
 
+### Optional explicit script-slot checks
+
+Add `"required_font_slots": ["latin", "ea"]` to the same private contract to
+check both final typeface assignments independently. Add `"cs"` only when the
+task requires an explicit complex-script assignment. The list accepts only
+unique `latin`, `ea`, `cs` entries. Omission retains the previous checker/report.
+This is implemented in `scripts/dense_pptx_quality.py`, reached by the existing
+`verify_deck.py` contract path; no second inspector or font installation is used.
+
+Missing or theme/inherited required slots produce `FONT_SLOT_UNVERIFIED` errors;
+different explicit families produce `FONT_SLOT` errors. No family is substituted.
+`font_slot_check` records checked nonempty runs/fields within contract-selected
+text objects and table cells. It does not cover unselected/grouped objects or
+native chart text, resolve theme inheritance, inspect cmap, or prove glyph and
+rendering support. A missing CS declaration can be unverified even when the
+current Korean text renders correctly; do not label that file corruption.
+Mixed-family text needs its own supported contract rather than a false pass
+under a single-family task. Full [precision design guidance](../../.claude/skills/ppt-master/references/precision-design.md)
+keeps visual judgment separate from these mechanical checks.
+
 For the supplied runtime's Windows native exit problem, reuse the process-checked
 CPU review helper and opt-in `verify_deck.py --review-*` path documented in
 [renderer continuation](RENDERER_CONTINUATION_20261013.md). It never installs

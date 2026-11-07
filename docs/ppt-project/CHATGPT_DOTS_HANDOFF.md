@@ -11,6 +11,14 @@ and private Drive/raw-download verification completed. See
 [applied release and remaining limits](PLUGIN_044_APPLIED_20261107.md).
 Historical 0.4.3/blocked/pending records below are not the current release state.
 
+Latest source-only supplement: [private design guide incorporation and actual
+slot-check evidence](DESIGN_GUIDANCE_INTEGRATION_20261107.md). The user's PDF/MD
+has now been read and mapped to the existing owner; original files remain
+private. Installed plugin 0.4.4 has not received this later source supplement.
+[Actual Picker access and PC dependence](PICKER_ACCESS_20261107.md) records
+successful desktop/cloud calls after existing runtime startup, cleanup, and the
+still-unverified human UI selection. It does not establish PC-off availability.
+
 ## Start here
 
 Latest research-only supplement (2026-11-07):
@@ -21,10 +29,10 @@ Subsequent implementation on this PR: [quality roadmap and same-fixture evidence
 Reference preservation/repair/coverage checks are connected to the existing
 inspector/final verifier, but are not yet released into installed plugin 0.4.3.
 
-Prepared operational candidate (approval pending):
+Historical prepared operational candidate (then approval pending):
 [existing plugin 0.4.4 scope, impact, cost and recovery](PLUGIN_044_ROLLOUT_APPROVAL_20261107.md).
-Official current source is still 0.4.3; candidate/recovery archives are private.
-No new PDF has been received or substantively incorporated.
+At that checkpoint source was still 0.4.3; candidate/recovery archives are private.
+The later applied-release and design-guidance records above supersede this state.
 
 Rollout was subsequently approved but blocked: [actual API results](PLUGIN_044_ROLLOUT_RESULT_20261107.md).
 Full and changed-file overlay requests both reject optional App declarations;

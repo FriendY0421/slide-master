@@ -63,6 +63,12 @@ class DenseInspector:
         self.structure_only = contract.get("text_metrics", "actual_font") == "structure_only"
         if contract.get("text_metrics", "actual_font") not in {"actual_font", "structure_only"}:
             raise ValueError("text_metrics must be actual_font or structure_only")
+        self.font_slots = contract.get("required_font_slots", [])
+        if (not isinstance(self.font_slots, list)
+                or any(slot not in ("latin", "ea", "cs") for slot in self.font_slots)
+                or len(set(self.font_slots)) != len(self.font_slots)):
+            raise ValueError("required_font_slots must be a unique list of latin, ea, cs")
+        self.font_slot_runs = 0
 
     def issue(self, kind: str, target: str, detail: str, *, preference: bool = False) -> None:
         (self.warnings if preference else self.errors).append(
@@ -137,6 +143,17 @@ class DenseInspector:
                 if run is None or not run.get("sz"):
                     raise ValueError(f"{target}: explicit final run point size required; inherited text is unverified")
                 size = _number(run.get("sz"), "run size", positive=True) / 100
+                if self.font_slots:
+                    self.font_slot_runs += 1
+                    for slot in self.font_slots:
+                        face = run.find(f"a:{slot}", NS)
+                        actual = face.get("typeface") if face is not None else None
+                        if not actual or actual.startswith("+"):
+                            self.issue("FONT_SLOT_UNVERIFIED", target,
+                                       f"{slot}: explicit final typeface required; inheritance is unverified")
+                        elif actual != self.contract["font_family"]:
+                            self.issue("FONT_SLOT", target,
+                                       f"{slot}: {actual} != required {self.contract['font_family']}")
                 typeface = run.find("a:ea", NS)
                 if typeface is None:
                     typeface = run.find("a:latin", NS)
@@ -489,6 +506,15 @@ def inspect_pptx(path: Path, contract: dict, base: Path) -> dict:
             "rendered_review_completed": False, "powerpoint_review_completed": False,
             "font_metric_check": ("not performed; structure-only metadata checks, wrapping/clipping unverified"
                                   if inspector.structure_only else "actual supplied font files; rendered review still required")}
+    if inspector.font_slots:
+        report["font_slot_check"] = {
+            "required_slots": inspector.font_slots,
+            "checked_runs": inspector.font_slot_runs,
+            "scope": "nonempty runs/fields in contract-selected text and table cells",
+            "inherited_typefaces_verified": False,
+            "glyph_coverage_verified": False,
+            "native_chart_text_verified": False,
+        }
     if "reference_comparison" in contract:
         from pptx_reference_quality import compare_pptx, track_repairs
 

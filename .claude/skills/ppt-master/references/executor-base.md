@@ -18,6 +18,10 @@
 
 ### Task-specific small typography
 
+For dense/reference-image tasks, read [precision-design.md](precision-design.md)
+for content-preserving table, image, diagram and bounded-repair review. Explicit
+task locks override the generic size and copy-trimming suggestions below.
+
 When the task requires verbatim content or an unchanged region, pin the actual
 source PPTX SHA256 and declare `reference_comparison` in the existing dense
 contract. Compare native text/table cells (including groups), merge topology,
