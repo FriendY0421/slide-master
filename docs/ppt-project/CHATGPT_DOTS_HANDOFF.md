@@ -6,6 +6,10 @@ install a plugin, grant file access or connect a production executor.
 
 ## Start here
 
+Latest research-only supplement (2026-11-07):
+[GitHub/Hugging Face quality resources](PPT_RESOURCE_REVIEW_20261107.md).
+No external engine/model was installed; FAH integration remains deferred.
+
 1. Open [Draft PR #14](https://github.com/FriendY0421/slide-master/pull/14).
    Work is on `codex/dense-quality-20261012`; approved baseline is
    `0578dba7ddf56cf5d7024cf574063c4db7332a3e`. Do not assume `main` contains it.
