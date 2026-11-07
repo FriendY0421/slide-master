@@ -5,6 +5,9 @@ guarded updates were rejected for the existing optional App declaration.
 Live release remains 0.4.3. Read the [actual rollout result and recovery limitation](PLUGIN_044_ROLLOUT_RESULT_20261107.md)
 before resuming; the original approval does not authorize mandatory dependencies.
 
+The user later separately approved mandatory dependencies and their recovery
+limitation; [the subsequent 0.4.4 application/verification succeeded](PLUGIN_044_APPLIED_20261107.md).
+
 The user requested preparation, one bundled approval and then actual application
 and verification. **No update has been uploaded.** Existing main plugin is still
 0.4.3: confirmed through official current-source access in this preparation turn.

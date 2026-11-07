@@ -1,8 +1,15 @@
 # Slide Master handoff for ChatGPT and DOTS
 
-Status date: 2026-10-13 (Asia/Seoul). This is the continuation entry point for
+Status date: 2026-11-07 (Asia/Seoul). This is the continuation entry point for
 the user's Slide Master quality and full-flow mission. Source access does not
 install a plugin, grant file access or connect a production executor.
+
+Latest actual operational state: existing private plugin **0.4.4 saved and
+installed on desktop and existing Linux cloud trial**, with approved required
+Drive/Picker declarations. Post-update installed checks, two-page reimport/render
+and private Drive/raw-download verification completed. See
+[applied release and remaining limits](PLUGIN_044_APPLIED_20261107.md).
+Historical 0.4.3/blocked/pending records below are not the current release state.
 
 ## Start here
 
@@ -24,6 +31,11 @@ Full and changed-file overlay requests both reject optional App declarations;
 official readback remains 0.4.3. No installed/cloud 0.4.4 verification occurred.
 Do not repeat or silently make dependencies required. Exact backup contents are
 preserved, but their current API reupload is not guaranteed under this rule.
+
+Subsequently the user explicitly approved both required App declarations and
+the limited recovery. [0.4.4 applied release and verification](PLUGIN_044_APPLIED_20261107.md)
+records the saved update, 24-file readback/installed-cache match and actual
+post-update checker/render execution. The old rejection evidence remains historical.
 
 1. Open [Draft PR #14](https://github.com/FriendY0421/slide-master/pull/14).
    Work is on `codex/dense-quality-20261012`; approved baseline is

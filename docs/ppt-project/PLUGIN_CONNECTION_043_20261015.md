@@ -1,5 +1,8 @@
 # Existing Slide Master 0.4.3 — connection update
 
+Historical checkpoint. Latest applied version and post-update desktop/cloud
+evidence: [0.4.4 with approved required dependencies](PLUGIN_044_APPLIED_20261107.md).
+
 The user requested completion of the existing plugin's production, final review
 and private-download connection. The same editable USER/PRIVATE plugin was
 updated from 0.4.2 to 0.4.3 through its official guarded release API. No new plugin,

@@ -1,5 +1,9 @@
 # 0.4.4 rollout result — approved update blocked by package validation
 
+Later status: the user separately approved mandatory declarations and limited
+recovery; the [subsequent 0.4.4 update succeeded](PLUGIN_044_APPLIED_20261107.md).
+The blocked attempts below are retained as historical evidence.
+
 The user explicitly approved the prepared rollout, verification and conditional
 recovery. **No 0.4.4 release was saved. The existing USER/PRIVATE plugin remains
 0.4.3.** This report supersedes the pending-approval state in the

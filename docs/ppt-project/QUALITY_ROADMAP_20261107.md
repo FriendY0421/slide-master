@@ -6,6 +6,11 @@ Continues [PR #14](https://github.com/FriendY0421/slide-master/pull/14),
 FAH integration is deferred. Existing company assets, source/recovery copies,
 template/CUSTOM approval parts and production owners are preserved.
 
+Subsequent operational checkpoint: the user approved required dependencies and
+limited rollback; [0.4.4 was applied and verified on desktop/cloud](PLUGIN_044_APPLIED_20261107.md).
+The source-only statements below describe this earlier engineering checkpoint;
+the linked operational record is current. Main remains unmerged.
+
 ## Overall order, including this change
 
 | Order | Work | Evidence/status and next dependency |
