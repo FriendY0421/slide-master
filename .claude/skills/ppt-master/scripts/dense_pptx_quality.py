@@ -416,6 +416,30 @@ def inspect_pptx(path: Path, contract: dict, base: Path) -> dict:
     if not contract.get("slides") or any(not page.get("objects") for page in contract["slides"]):
         raise ValueError("Dense contract requires nonempty slides and explicit target objects")
     inspector = DenseInspector(contract, base)
+    preservation = None
+    if "chart_workbook_preservation" in contract:
+        from chart_workbook_preservation import preservation_gate
+
+        spec = contract["chart_workbook_preservation"]
+        source = (base / spec["path"]).resolve(strict=True)
+        manifest = ((base / spec["authoring_manifest"]).resolve(strict=True)
+                    if spec.get("authoring_manifest") else None)
+        candidate_sha = hashlib.sha256(path.read_bytes()).hexdigest()
+        preservation = preservation_gate(source, path, spec["sha256"], candidate_sha,
+                                         mode=spec.get("mode", "edit"), authoring_manifest=manifest)
+        if not preservation["passed"]:
+            return {
+                "schema_version": 1, "deck_sha256": candidate_sha,
+                "contract_sha256": hashlib.sha256(json.dumps(contract, sort_keys=True).encode()).hexdigest(),
+                "errors": [{"kind": "CHART_WORKBOOK_PRESERVATION", "target": "deck",
+                            "detail": issue, "category": "mechanical"}
+                           for issue in preservation["issues"]],
+                "design_warnings": [], "measurements": [], "font_files_sha256": {},
+                "text_metrics_mode": "not_performed",
+                "font_metric_check": "not performed; chart/workbook preservation blocked candidate",
+                "rendered_review_completed": False, "powerpoint_review_completed": False,
+                "chart_workbook_preservation": preservation, "stopped_before_dense_checks": True,
+            }
     with zipfile.ZipFile(path) as package:
         pres = ET.fromstring(package.read("ppt/presentation.xml"))
         size = pres.find("p:sldSz", NS)
@@ -515,6 +539,13 @@ def inspect_pptx(path: Path, contract: dict, base: Path) -> dict:
             "glyph_coverage_verified": False,
             "native_chart_text_verified": False,
         }
+    if preservation is not None:
+        if (report["deck_sha256"] != preservation["candidate_sha256"]
+                or hashlib.sha256(source.read_bytes()).hexdigest() != preservation["source_sha256"]):
+            preservation.update(passed=False, delivery_blocked=True, source_unchanged=False)
+            preservation["issues"].append("Source or candidate bytes changed after preservation inspection")
+            inspector.issue("CHART_WORKBOOK_PRESERVATION", "deck", preservation["issues"][-1])
+        report["chart_workbook_preservation"] = preservation
     if "reference_comparison" in contract:
         from pptx_reference_quality import compare_pptx, track_repairs
 
@@ -522,7 +553,8 @@ def inspect_pptx(path: Path, contract: dict, base: Path) -> dict:
         reference = (base / spec["path"]).resolve(strict=True)
         comparison = compare_pptx(path, reference, spec)
         # Same existing inspector/contract/font inputs, not an old cached report.
-        baseline_contract = {k: v for k, v in contract.items() if k != "reference_comparison"}
+        baseline_contract = {k: v for k, v in contract.items()
+                             if k not in {"reference_comparison", "chart_workbook_preservation"}}
         baseline = inspect_pptx(reference, baseline_contract, base)
         report["repair_tracking"] = track_repairs(baseline, report)
         report["reference_comparison"] = comparison
