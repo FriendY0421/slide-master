@@ -19,6 +19,12 @@ Prepared operational candidate (approval pending):
 Official current source is still 0.4.3; candidate/recovery archives are private.
 No new PDF has been received or substantively incorporated.
 
+Rollout was subsequently approved but blocked: [actual API results](PLUGIN_044_ROLLOUT_RESULT_20261107.md).
+Full and changed-file overlay requests both reject optional App declarations;
+official readback remains 0.4.3. No installed/cloud 0.4.4 verification occurred.
+Do not repeat or silently make dependencies required. Exact backup contents are
+preserved, but their current API reupload is not guaranteed under this rule.
+
 1. Open [Draft PR #14](https://github.com/FriendY0421/slide-master/pull/14).
    Work is on `codex/dense-quality-20261012`; approved baseline is
    `0578dba7ddf56cf5d7024cf574063c4db7332a3e`. Do not assume `main` contains it.
