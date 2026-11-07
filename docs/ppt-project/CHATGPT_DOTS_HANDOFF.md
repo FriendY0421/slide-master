@@ -14,6 +14,9 @@ changes](LOCAL_FIRST_PORTABLE_HANDOFF.md). Deliver instructions directly to the
 user; no message to Aro/another project has been sent. The user's Dot-capacity
 report and the unverified same-App cloud-hosting conditions are separated in
 [Dot resource assessment](DOTS_PICKER_HOST_ASSESSMENT.md).
+The [actual portable capsule and offline-selection results](PORTABLE_HANDOFF_RESULT_20261107.md)
+record source/size/hash, same-PC relocated validation, private Drive delivery,
+and the explicit distinction between a prepared direct handoff and Aro execution.
 
 **Current operational state:** the same existing private plugin is **0.4.5**.
 [Applied release, actual installed desktop/cloud checks, native PowerPoint chart
