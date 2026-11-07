@@ -4,6 +4,15 @@ Status date: 2026-11-07 (Asia/Seoul). This is the continuation entry point for
 the user's Slide Master quality and full-flow mission. Source access does not
 install a plugin, grant file access or connect a production executor.
 
+Latest saved plugin source (2026-11-08): [0.4.6 applied/read back](PLUGIN_046_APPLIED_20261108.md)
+adds bundled reset recovery and analysis-first photo/CUSTOM guidance. Same
+private identity, existing connections and all executable scripts preserved;
+0.4.5 originals retained. Official save/readback is verified, but the last local
+installed cache is still 0.4.5: host refresh/execution of 0.4.6 is not verified.
+Current package rollback restores 0.4.5 code as 0.4.7, with two exact deletions;
+the older 0.4.6 recovery-of-0.4.4 is historical, not the current rollback.
+The existing user-visible Picker check, automatic pair and PC-off gaps remain.
+
 2026-11-08 user follow-up: [Korean original Picker menus and real user observation](PICKER_KOREAN_UI_20261108.md)
 record a reported success screen but no captured automatic selection pair.
 Existing foreground server/tunnel were started for that user test; read private

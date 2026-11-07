@@ -1,0 +1,64 @@
+{
+  "scope": "same USER/PRIVATE plugin saved through official guarded update; local installation/host behavior separately unverified",
+  "saved_version": "0.4.6",
+  "previous_version_preserved": "0.4.5",
+  "local_cache_observed_version": "0.4.5",
+  "official_readback_files": 29,
+  "official_source_matches_candidate": true,
+  "preserved": {
+    "app_declarations_exact": true,
+    "default_prompts_and_identity_semantically_exact": true,
+    "all_runtime_scripts_exact": true,
+    "skill_frontmatter_exact": true,
+    "existing_preset_semantics_exact": true,
+    "json_and_internal_references_valid": true,
+    "recovery_overlay_simulation_exact_except_version": true
+  },
+  "unchanged_runtime_script_sha256": {
+    "skills/instructions/scripts/chart_workbook_preservation.py": "699bfcbcc64186f852c0cc5e6010f36cc264c0885abf5a94f86141d105b539d5",
+    "skills/instructions/scripts/console_encoding.py": "71022e21fd89b91f0d96cb3ca128b140dbbe9a5b0dfbf2f46baf26404f20206b",
+    "skills/instructions/scripts/dense_pptx_quality.py": "171d701bc4c1e51308e5087abd1164049478691e3af743938e466b471fe9f166",
+    "skills/instructions/scripts/pptx_reference_quality.py": "f35ddcb55075f0cd493225a59854fb7f7d9a0d0cf8be2b2fc1b61fcff6165a52",
+    "skills/instructions/scripts/render_pptx_review.mjs": "a580cfa2b15b26cb4699fb87294c8e49630252a158e0e48b6df17268a2f5c8dc",
+    "skills/instructions/scripts/render_pptx_review.py": "c62094f483f22b4aa8e3ce88079f0e7231a46050cdca10bc6dbead95cccfa586"
+  },
+  "candidate": {
+    "name": "candidate-0.4.6.zip",
+    "bytes": 90215,
+    "sha256": "d4f7fbd4aef26eb3e417b73d2b7fe39cb48dbef19d268f4cd36a669f0a40884d",
+    "files": 29
+  },
+  "original": {
+    "name": "original-0.4.5.zip",
+    "bytes": 81435,
+    "sha256": "13f08cb6eade328b5bb0cf2edce16a227979cb305956875782e7876b38c3b22f",
+    "files": 27
+  },
+  "recovery": {
+    "name": "restore-0.4.5-as-0.4.7.zip",
+    "bytes": 81446,
+    "sha256": "3a79c5e6d9b261da2a9f3534e22765a5665edd47080fb8ba3e1fbc224511719a",
+    "files": 27
+  },
+  "recovery_delete_paths": [
+    "skills/instructions/references/14_PORTABLE_RECOVERY.md",
+    "skills/instructions/references/15_PHOTO_CUSTOM_RECONSTRUCTION.md"
+  ],
+  "private_backup": {
+    "bytes": 246034,
+    "sha256": "c723a514600e8bfe031f12ab68ff8109b096de978a452e08257685bc0a303139",
+    "owner_only_metadata": true,
+    "raw_download_sha_verified": true
+  },
+  "new_permissions_cost_install_auth_hosting": false,
+  "main_merged": false,
+  "not_verified": [
+    "host_installed_0.4.6",
+    "actual_Aro_reset",
+    "current_photo_analysis_and_user_approval_roundtrip",
+    "automatic_picker_pair_return",
+    "PC_off_original_picker",
+    "company_original_and_Samsung_rights",
+    "recipient_open_for_new_company_result"
+  ]
+}
