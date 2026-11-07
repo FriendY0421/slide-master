@@ -1,5 +1,10 @@
 # Existing Slide Master 0.4.4 — applied with approved required dependencies
 
+Historical applied-release record. Current follow-through is
+[0.4.5](PLUGIN_045_APPLIED_20261107.md), which incorporates the subsequently supplied
+design guide and preserves this 0.4.4 source/recovery baseline. Statements below
+about a not-yet-received PDF or pending later checks refer to that checkpoint.
+
 The user explicitly approved converting the two existing Drive/Picker App
 declarations to required dependencies and the recovery limitation. This supersedes
 the earlier [blocked optional-declaration rollout](PLUGIN_044_ROLLOUT_RESULT_20261107.md).

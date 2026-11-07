@@ -1,5 +1,13 @@
 # Picker access and PC dependency — 2026-11-07
 
+Later main-plugin quality update: [0.4.5](PLUGIN_045_APPLIED_20261107.md). It does
+not change the separate Picker or move its loopback upstream. A subsequent
+browser observation was stopped by Computer Use because the current URL could
+not be verified confidently. No browser inputs, authentication or safety bypass
+followed. Actual gallery selection remains unverified; do not repeat that path
+without an external state/capability change. This is a UI-verification limit,
+not evidence that the Picker's payload or endpoint is defective.
+
 ## Exact target and existing runtime
 
 Main Slide Master remains the already verified private 0.4.4 plugin. The

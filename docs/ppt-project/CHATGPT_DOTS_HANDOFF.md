@@ -4,6 +4,15 @@ Status date: 2026-11-07 (Asia/Seoul). This is the continuation entry point for
 the user's Slide Master quality and full-flow mission. Source access does not
 install a plugin, grant file access or connect a production executor.
 
+**Current operational state:** the same existing private plugin is **0.4.5**.
+[Applied release, actual installed desktop/cloud checks, native PowerPoint chart
+edit, private delivery and recovery](PLUGIN_045_APPLIED_20261107.md) supersede the
+0.4.4 and source-only checkpoints below. Both existing required App declarations
+are unchanged. No new permission/install/server/billing change or main merge.
+Real Picker UI/fresh user-photo round trip, PC-off Picker, company original and
+Samsung-use conditions remain explicitly incomplete. Do not reuse old 0.4.5
+recovery-of-0.4.3; current rollback restores 0.4.4 code as 0.4.6.
+
 Latest actual operational state: existing private plugin **0.4.4 saved and
 installed on desktop and existing Linux cloud trial**, with approved required
 Drive/Picker declarations. Post-update installed checks, two-page reimport/render

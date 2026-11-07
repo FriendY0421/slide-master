@@ -1,0 +1,125 @@
+{
+  "status": "applied and tested; complete fresh-user flow remains partial",
+  "version": "0.4.5",
+  "same_user_private_plugin": true,
+  "official_readback_files": 27,
+  "official_readback_matches_candidate": true,
+  "actual_desktop_installed_files_match": true,
+  "default_prompt_apps_scope_preserved": true,
+  "desktop_installed": {
+    "errors": 0,
+    "regions": 38,
+    "script_runs": 47,
+    "design_warnings": 8,
+    "preservation_passed": true,
+    "reference_status": "partial",
+    "workbook_loss_exit": 1,
+    "workbook_loss_measurements": 0,
+    "stopped_before_metrics": true,
+    "synthetic_formula_loss_blocked_before_metrics": true
+  },
+  "applied_source_render": {
+    "pages": 2,
+    "os_exit": 0,
+    "manual_visual_review": true,
+    "images_identical_to_candidate_and_044": true,
+    "images": [
+      {
+        "slide": 1,
+        "path": "slide-1.png",
+        "sha256": "9cc47df468b1d6f535c153c74f26ca95452c1e7f656d55e6e9fe816e7aa42daf"
+      },
+      {
+        "slide": 2,
+        "path": "slide-2.png",
+        "sha256": "edb7c01109c70379aa41733a21a88ed1a572002870eece51e35b385483c516d4"
+      }
+    ],
+    "text_font_verified": false
+  },
+  "native_powerpoint": {
+    "after": [
+      85.75,
+      90.0
+    ],
+    "externalLink": false,
+    "saveReopenPassed": true,
+    "candidateSha256": "1d4961510af95828ab77fbce23b8a8d752b317661017a7984249ddd8f2064894",
+    "originalUnchanged": true,
+    "workbookCellB2": 85.75,
+    "sourceSha256": "5b3715bf4f9236948ebb3ee9d4f5ae1de833910bfca56c45f715a8de8a3b8510",
+    "requestedFontRenderingVerified": false,
+    "powerpointVersion": "16.0",
+    "passed": true,
+    "seriesFormula": "=SERIES(Sheet1!$B$1,Sheet1!$A$2:$A$3,Sheet1!$B$2:$B$3,1)",
+    "before": [
+      84.5,
+      90.0
+    ],
+    "saved_chart_cache": [
+      "85.75",
+      "90"
+    ],
+    "saved_workbook_B2": "85.75",
+    "external_relationships": [],
+    "embedded_font_parts": [],
+    "chart_preservation_passed": true,
+    "first_attempt_passed": false,
+    "first_attempt_failure": "stale reopened Office COM handle; preserved privately",
+    "recovery": "reacquired application and retained chart/data handles",
+    "preview": "plugin-045-native-chart-edit.png",
+    "mutation_scope": "isolated chart edit test, not revised approved final content",
+    "manual_preview_review_completed": true
+  },
+  "cloud_installed": {
+    "version": "0.4.5",
+    "errors": 0,
+    "regions": 44,
+    "design_warnings": 14,
+    "warning_kind": "LINE_SPACING_UNVERIFIED",
+    "source_sha256": "24ce3abf0d4fea5b18cbe416a7fbb093c5632698e8a46cb3c725a753d3e4608a",
+    "latin_ea_contract": true,
+    "chart_preservation_passed": true,
+    "workbook_loss_blocked_before_metrics": true,
+    "all_two_pages_reopened_rendered_visually_reviewed": true,
+    "render_os_exit": 0,
+    "pc_tools_invoked": false,
+    "actual_new_user_attachment_test": false,
+    "native_powerpoint_test": false,
+    "receipt": "https://github.com/FriendY0421/slide-master/pull/14#issuecomment-6708224552"
+  },
+  "final_pptx": {
+    "bytes": 40449,
+    "sha256": "5b3715bf4f9236948ebb3ee9d4f5ae1de833910bfca56c45f715a8de8a3b8510",
+    "office_mime_preserved": true,
+    "drive_shared": false,
+    "permissions": "user owner only",
+    "cloud_raw_download_sha_match": true,
+    "desktop_private_metadata_confirmed": true,
+    "recipient_open_confirmed": false
+  },
+  "recovery": {
+    "preserved_previous_versions": true,
+    "restores_code_version": "0.4.4",
+    "recovery_release_version": "0.4.6",
+    "required_existing_apps_retained": true,
+    "overlay_simulation_passed": true,
+    "executed_on_live_service": false,
+    "bundle_bytes": 216642,
+    "bundle_sha256": "2ece322e0fc3a91da6bb093393714c445bc829ec63714132f64fdb9fab5633a6",
+    "drive_shared": false,
+    "permissions": "user owner only",
+    "actual_raw_download_sha_match": true
+  },
+  "not_done": [
+    "actual Picker host UI and user selection callback",
+    "physical PC-off Picker availability",
+    "fresh user attachment through approval and recipient opening",
+    "company-original protected-area comparison",
+    "Samsung local/cloud/render/embed rights and actual rendering",
+    "external import/export engine defect repair"
+  ],
+  "computer_use": "browser URL could not be verified confidently; automation stopped; no input/auth/bypass",
+  "new_server_dependency_install_permission_auth_or_billing": false,
+  "main_or_pr15_merged": false
+}

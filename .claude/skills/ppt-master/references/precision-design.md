@@ -73,5 +73,8 @@ claim untested image subjects, inherited fonts, charts, SmartArt, connector
 behavior or company preservation as passed.
 
 **Missing chart preservation coverage**: Stop delivery of that candidate and
-route back to its existing owner. The separate PR #15 workbook guard is not
-automatically included in PR #14 or installed plugin 0.4.4.
+route back to its existing owner. Use the opt-in chart/workbook contract in the
+same dense inspector; see [integration](../../../../docs/ppt-project/CHART_WORKBOOK_DENSE_INTEGRATION.md).
+Only PR #15's standalone preservation logic was reused for 0.4.5; the full PR
+and external engine repair are not included. A preservation pass alone does not
+certify numeric edits or grant delivery.

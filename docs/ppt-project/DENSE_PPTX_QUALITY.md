@@ -10,6 +10,10 @@ For tasks requiring original wording/numbers or protected regions, use the
 opt-in [reference preservation and repair contract](REFERENCE_QUALITY.md).
 It runs through the same inspector/final verifier, without changing defaults.
 See [same-fixture results and overall work order](QUALITY_ROADMAP_20261107.md).
+For post-import native edits, bind the actual pre-edit PPTX and SHA through
+[chart/workbook preservation](CHART_WORKBOOK_DENSE_INTEGRATION.md). Its opt-in
+contract blocks lost workbook candidates before metrics and the later review
+render. This selected module is included in the applied plugin 0.4.5.
 
 Keep each uploaded company original and recovery copy private. Use the existing
 native template owner for PPTX preservation, and the existing CUSTOM review

@@ -1,5 +1,12 @@
 # Design guidance integration — 2026-11-07
 
+Later operational follow-through: [0.4.5 applied and tested](PLUGIN_045_APPLIED_20261107.md).
+The source-only state and pending work below describe this supplement's initial
+checkpoint. The later record documents the actual same-identity release,
+selected chart-guard integration, installed desktop/cloud checks and native
+PowerPoint edit-save-reopen. Original company/font and fresh-photo/UI boundaries
+remain separate.
+
 ## Source and version boundaries
 
 The user supplied private `slide_master.md`, `.txt` and a 22-page PDF. Markdown
