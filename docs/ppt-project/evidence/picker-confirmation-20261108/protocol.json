@@ -1,0 +1,12 @@
+{
+  "scope": "isolated existing local MCP server on temporary loopback port; local catalog; synthetic protocol choices only, not user approval or host iframe",
+  "checks": {
+    "actual_valid_result_contract": true,
+    "actual_invalid_selection_is_error": true,
+    "changed_bundle_served": true,
+    "template_count": 11,
+    "no_host_selection_claim": true
+  },
+  "resource_bytes": 604878,
+  "resource_sha256": "38483a9abde4388fc4267e8ab1c1b6e725f1f2a2167188ae80d7632771ea550d"
+}

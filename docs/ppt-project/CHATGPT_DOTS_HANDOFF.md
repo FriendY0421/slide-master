@@ -11,6 +11,13 @@ computer, give a brief preparation/progress notice before proceeding. New costs,
 permissions, software installation and content approvals remain separate gates.
 This is source guidance; no installed release or actual Aro reset is implied.
 
+2026-11-08 original Picker follow-up: [confirmation rejection fix](PICKER_CONFIRMATION_FIX_20261108.md)
+was applied to the actual existing local runtime and rebuilt without new
+dependencies. Sixteen isolated cases and a temporary MCP resource inspection
+pass; normal server/tunnel remain stopped. Actual host UI/callback and PC-off
+availability remain unverified. Runtime backups, exact patch and owning PR #6
+correspondence are recorded; main plugin remains 0.4.5.
+
 Active goal scope: [full previously planned mission](ACTIVE_GOAL_SCOPE_20261107.md).
 Picker/cloud connection is the current priority, not the overall completion
 criterion. The user permits evidence-backed evolution while preserving existing
