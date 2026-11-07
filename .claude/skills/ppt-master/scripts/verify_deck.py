@@ -320,6 +320,10 @@ def run_checks(project: Path) -> tuple[list[str], list[str]]:
             try:
                 if json.loads(dense_contract.read_text(encoding="utf-8")).get("text_metrics") == "structure_only":
                     failures.append("structure-only dense QA is provisional; actual-font wrapping/clipping checks are required for final verification")
+                dense_report = json.loads((project / "dense_quality_report.json").read_text(encoding="utf-8"))
+                comparison = dense_report.get("reference_comparison", {})
+                if comparison.get("status") == "partial":
+                    warnings.append("reference preservation has unverified objects; inspect its coverage and dedicated chart/diagram/render results")
             except (OSError, ValueError) as exc:
                 failures.append(f"dense contract cannot be read for final verification: {exc}")
     if (project / "design_spec.md").exists() and (project / "spec_lock.md").exists():

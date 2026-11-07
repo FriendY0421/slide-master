@@ -481,7 +481,7 @@ def inspect_pptx(path: Path, contract: dict, base: Path) -> dict:
                               root.findall(".//a:headEnd", NS) + root.findall(".//a:tailEnd", NS))
             if arrow_count < page.get("minimum_arrow_ends", 0):
                 inspector.issue("DIAGRAM_CONNECTORS", f"P{number}", "Required editable arrow connectors are missing")
-    return {"schema_version": 1, "deck_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+    report = {"schema_version": 1, "deck_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
             "contract_sha256": hashlib.sha256(json.dumps(contract, sort_keys=True).encode()).hexdigest(),
             "errors": inspector.errors, "design_warnings": inspector.warnings,
             "measurements": inspector.measurements, "font_files_sha256": inspector.font_files,
@@ -489,6 +489,19 @@ def inspect_pptx(path: Path, contract: dict, base: Path) -> dict:
             "rendered_review_completed": False, "powerpoint_review_completed": False,
             "font_metric_check": ("not performed; structure-only metadata checks, wrapping/clipping unverified"
                                   if inspector.structure_only else "actual supplied font files; rendered review still required")}
+    if "reference_comparison" in contract:
+        from pptx_reference_quality import compare_pptx, track_repairs
+
+        spec = contract["reference_comparison"]
+        reference = (base / spec["path"]).resolve(strict=True)
+        comparison = compare_pptx(path, reference, spec)
+        # Same existing inspector/contract/font inputs, not an old cached report.
+        baseline_contract = {k: v for k, v in contract.items() if k != "reference_comparison"}
+        baseline = inspect_pptx(reference, baseline_contract, base)
+        report["repair_tracking"] = track_repairs(baseline, report)
+        report["reference_comparison"] = comparison
+        report["errors"].extend(comparison["errors"])
+    return report
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -506,8 +519,12 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     if args.output:
         args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
-    print(json.dumps({"errors": len(report["errors"]), "design_warnings": len(report["design_warnings"]),
-                      "measured_regions": len(report["measurements"])}, ensure_ascii=False))
+    summary = {"errors": len(report["errors"]), "design_warnings": len(report["design_warnings"]),
+               "measured_regions": len(report["measurements"])}
+    if "reference_comparison" in report:
+        summary["reference_status"] = report["reference_comparison"]["status"]
+        summary["unverified_objects"] = len(report["reference_comparison"]["coverage"]["unverified"])
+    print(json.dumps(summary, ensure_ascii=False))
     return 1 if report["errors"] else 0
 
 

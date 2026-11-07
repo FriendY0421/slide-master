@@ -6,6 +6,11 @@ storyline gates, or activate a plugin runtime.
 
 ## Authoring
 
+For tasks requiring original wording/numbers or protected regions, use the
+opt-in [reference preservation and repair contract](REFERENCE_QUALITY.md).
+It runs through the same inspector/final verifier, without changing defaults.
+See [same-fixture results and overall work order](QUALITY_ROADMAP_20261107.md).
+
 Keep each uploaded company original and recovery copy private. Use the existing
 native template owner for PPTX preservation, and the existing CUSTOM review
 owner for photographs/sketches. Unreadable values remain marked unknown.

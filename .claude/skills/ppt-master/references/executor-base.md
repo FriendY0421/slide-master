@@ -18,6 +18,16 @@
 
 ### Task-specific small typography
 
+When the task requires verbatim content or an unchanged region, pin the actual
+source PPTX SHA256 and declare `reference_comparison` in the existing dense
+contract. Compare native text/table cells (including groups), merge topology,
+protected objects and their asset/layout/master/theme dependencies. Read
+`reference_comparison.coverage` and `repair_tracking` after the existing final
+verifier: partial/unsupported objects are not passed, and missing objects are
+not repaired. Route actual changes back to the same source owner, re-export and
+review the exact final rendered file. Do not auto-shrink fonts or rewrite wording
+to silence errors. Contract details: `docs/ppt-project/REFERENCE_QUALITY.md`.
+
 Explicit user/template typography takes precedence over generic body-size
 defaults. When a task supplies small fixed sizes, record them only in that
 project's lock and `dense_layout_contract.json`; do not promote them to other

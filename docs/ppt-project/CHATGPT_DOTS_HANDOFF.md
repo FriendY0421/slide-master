@@ -10,6 +10,10 @@ Latest research-only supplement (2026-11-07):
 [GitHub/Hugging Face quality resources](PPT_RESOURCE_REVIEW_20261107.md).
 No external engine/model was installed; FAH integration remains deferred.
 
+Subsequent implementation on this PR: [quality roadmap and same-fixture evidence](QUALITY_ROADMAP_20261107.md).
+Reference preservation/repair/coverage checks are connected to the existing
+inspector/final verifier, but are not yet released into installed plugin 0.4.3.
+
 1. Open [Draft PR #14](https://github.com/FriendY0421/slide-master/pull/14).
    Work is on `codex/dense-quality-20261012`; approved baseline is
    `0578dba7ddf56cf5d7024cf574063c4db7332a3e`. Do not assume `main` contains it.
