@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -18,6 +19,17 @@ if hasattr(sys.stderr, "reconfigure"):
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
 DEFAULT_OUTPUT = REPO_ROOT / "docs" / "template-gallery" / "README.md"
+
+
+def _catalog_source(source: str) -> tuple[str | None, str, dict]:
+    ref, label = legacy._resolve_source(source)
+    if ref:
+        pinned = legacy._git(["rev-parse", "--verify", ref + "^{commit}"])
+        if pinned.returncode or not re.fullmatch(r"[a-f0-9]{40}", pinned.stdout.strip()):
+            raise RuntimeError("Could not pin refreshed GitHub catalog; refresh origin/main before publishing")
+        ref = pinned.stdout.strip()
+        label += " @ " + ref
+    return ref, label, catalog_core.selectable_catalog(catalog_core.load_catalog(ref))
 
 
 def _image_link(output_path: Path, repo_path: str) -> str:
@@ -62,8 +74,8 @@ def _template_block(entry: dict, output_path: Path, ref: str | None) -> list[str
 
 
 def build_markdown(source: str, output_path: Path) -> str:
-    ref, source_label = legacy._resolve_source(source)
-    catalog = catalog_core.load_catalog(ref)
+    ref, source_label, catalog = _catalog_source(source)
+    preset_link = _image_link(output_path, "docs/gpts/PRODUCTION_PRESETS.json")
     decks = sorted(
         (e for e in catalog.values() if e["template_kind"] == "deck"),
         key=lambda e: e["display_name"].lower(),
@@ -83,7 +95,10 @@ def build_markdown(source: str, output_path: Path) -> str:
         "1. 아래 실제 미리보기와 상세 레이아웃을 확인합니다.",
         "2. 원하는 템플릿의 `선택 ID`를 복사합니다.",
         "3. ChatGPT 대화창에 예: `deck:mckinsey 선택`이라고 보냅니다.",
-        "4. 사용자의 명시적 선택 전에는 새 PPT 생성이 시작되지 않습니다.",
+        f"4. 이어서 [제작 프리셋]({preset_link})을 확인하고 `preset:<id>`를 채팅으로 확정합니다.",
+        "5. 템플릿·프리셋 확정 후 장표별 구성안을 확인·수정하고 최신 구성안을 승인한 뒤에만 PPT를 제작합니다.",
+        "",
+        "> 이 화면은 서버 없는 수동 확인 대안이며, 원래 Picker 앱의 자동 선택값 반환을 인증하지 않습니다.",
         "",
         f"- 카탈로그 소스: `{source_label}`",
         f"- 현재 등록 템플릿: **{len(catalog)}개** + Free Design",
@@ -119,13 +134,22 @@ def build_markdown(source: str, output_path: Path) -> str:
 def check_gallery(source: str, output_path: Path) -> list[str]:
     if not output_path.is_file():
         return [f"stable gallery is missing: {output_path}"]
-    ref, _ = legacy._resolve_source(source)
-    catalog = catalog_core.load_catalog(ref)
+    ref, source_label, catalog = _catalog_source(source)
     text = output_path.read_text(encoding="utf-8")
     errors: list[str] = []
+    listed = re.findall(r"^- 선택 ID: `([^`]+)`", text, re.MULTILINE)
+    expected = set(catalog) | {"free"}
+    for key in sorted(expected - set(listed)):
+        errors.append(f"missing selection id: {key}")
+    for key in sorted(set(listed) - expected):
+        errors.append(f"inactive or unknown selection id: {key}")
+    if len(listed) != len(set(listed)):
+        errors.append("duplicate selection ids in stable gallery")
+    if f"**{len(catalog)}개**" not in text:
+        errors.append("registered-template count differs from current ACTIVE catalog")
+    if ref and f"`{source_label}`" not in text:
+        errors.append("gallery source revision differs from refreshed GitHub catalog")
     for entry in catalog.values():
-        if f"`{entry['key']}`" not in text:
-            errors.append(f"missing selection id: {entry['key']}")
         previews = catalog_core.preview_items(entry, ref, limit=6)
         if not previews:
             errors.append(f"missing registered preview: {entry['key']}")
@@ -134,8 +158,6 @@ def check_gallery(source: str, output_path: Path) -> list[str]:
             link = _image_link(output_path, preview_path)
             if link not in text:
                 errors.append(f"missing registered preview link: {entry['key']} -> {link}")
-    if "`free`" not in text:
-        errors.append("missing Free Design selection id")
     return errors
 
 

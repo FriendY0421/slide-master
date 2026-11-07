@@ -4,6 +4,17 @@ Status date: 2026-11-07 (Asia/Seoul). This is the continuation entry point for
 the user's Slide Master quality and full-flow mission. Source access does not
 install a plugin, grant file access or connect a production executor.
 
+Active goal scope: [full previously planned mission](ACTIVE_GOAL_SCOPE_20261107.md).
+Picker/cloud connection is the current priority, not the overall completion
+criterion. The user permits evidence-backed evolution while preserving existing
+features/backups and the no-new-cost/permission approval boundary.
+
+Latest operating choice: [local first, portable Drive handoff on environment
+changes](LOCAL_FIRST_PORTABLE_HANDOFF.md). Deliver instructions directly to the
+user; no message to Aro/another project has been sent. The user's Dot-capacity
+report and the unverified same-App cloud-hosting conditions are separated in
+[Dot resource assessment](DOTS_PICKER_HOST_ASSESSMENT.md).
+
 **Current operational state:** the same existing private plugin is **0.4.5**.
 [Applied release, actual installed desktop/cloud checks, native PowerPoint chart
 edit, private delivery and recovery](PLUGIN_045_APPLIED_20261107.md) supersede the

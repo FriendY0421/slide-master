@@ -1,0 +1,36 @@
+{
+  "catalog_source": "GitHub origin/main @ 0578dba7ddf56cf5d7024cf574063c4db7332a3e",
+  "active_templates": 21,
+  "free_design": true,
+  "registered_preview_links": 139,
+  "all_preview_files_exist_on_pr": true,
+  "stale_gallery_faults": [
+    {
+      "case": "stale-id",
+      "errors": [
+        "inactive or unknown selection id: deck:not_registered"
+      ]
+    },
+    {
+      "case": "missing-free",
+      "errors": [
+        "missing selection id: free"
+      ]
+    },
+    {
+      "case": "duplicate-id",
+      "errors": [
+        "duplicate selection ids in stable gallery"
+      ]
+    },
+    {
+      "case": "wrong-count",
+      "errors": [
+        "registered-template count differs from current ACTIVE catalog"
+      ]
+    }
+  ],
+  "host_picker_replaced": false,
+  "main_plugin_updated": false,
+  "relocated_baseline_verified": true
+}

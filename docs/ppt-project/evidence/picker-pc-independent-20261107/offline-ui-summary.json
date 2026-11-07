@@ -1,0 +1,23 @@
+{
+  "scope": "isolated generated fallback HTML; not original ChatGPT App UI/callback",
+  "offline_context": true,
+  "new_installations": false,
+  "actual_user_selection": false,
+  "catalog_count": 21,
+  "recommended_cards": 0,
+  "pagination_passed": true,
+  "keyboard_card_selection": true,
+  "detail_previews": 6,
+  "detail_images_decoded": true,
+  "template_click_and_manual_token_display": true,
+  "mobile_width": {
+    "viewport": 320,
+    "body": 320
+  },
+  "free_selection": true,
+  "preset_click_and_manual_token_display": true,
+  "preset_return_example": "balanced_report",
+  "http_requests": 0,
+  "page_errors": [],
+  "passed": true
+}
