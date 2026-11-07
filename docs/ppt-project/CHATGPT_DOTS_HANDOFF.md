@@ -12,6 +12,8 @@ labels are applied without a new main-plugin release. The user also prioritizes
 authorized photographed company slides: [analysis-first protocol](PHOTO_CUSTOM_RECONSTRUCTION.md)
 and [primary-source research/adoption decisions](PHOTO_RECONSTRUCTION_RESEARCH_20261108.md)
 are linked into existing canonical/project instructions; no new OCR/model install.
+After the user's test, the two owned server/tunnel sessions were stopped and
+ports 3000/8080 were confirmed closed; the earlier started status is historical.
 
 2026-11-08 missing-file recovery update: read [reset recovery policy](RESET_RECOVERY_POLICY.md).
 On the identified Aro computer, download/validate missing authorized files and

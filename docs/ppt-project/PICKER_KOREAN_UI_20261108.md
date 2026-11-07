@@ -75,3 +75,7 @@ establish PC-off availability, install a persistent service or update the main
 plugin package. Existing foreground server/tunnel were started only for this
 user test; stop only their owned sessions when the test is finished. Handle
 records stay in the private review directory.
+
+Cleanup after the user's reported test: both owned foreground sessions were
+terminated, and ports 3000/8080 have no remaining listeners. No persistent
+process was left behind. Use the existing launcher for a later host check.
