@@ -1,0 +1,17 @@
+{
+  "observed_at": "2026-11-07 15:48:38 UTC",
+  "source_revision": "3cefa3f887311c17d76a0278c18b7cb61e66b220",
+  "scope": "original connected Picker host tool after frontend safety fix; existing local server/tunnel",
+  "picker_health_status": 200,
+  "tunnel_ready_status": 200,
+  "tool_is_error": false,
+  "source": "GitHub origin/main",
+  "selectable_total": 21,
+  "shortlist_count": 6,
+  "preset_count": 5,
+  "host_ui_rendered": null,
+  "host_ui_render_status": "pending_app_signal",
+  "actual_user_selection_returned": false,
+  "pc_off_verified": false,
+  "new_install_permission_cost": false
+}

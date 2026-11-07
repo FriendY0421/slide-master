@@ -4,6 +4,15 @@ Status date: 2026-11-07 (Asia/Seoul). This is the continuation entry point for
 the user's Slide Master quality and full-flow mission. Source access does not
 install a plugin, grant file access or connect a production executor.
 
+2026-11-08 user follow-up: [Korean original Picker menus and real user observation](PICKER_KOREAN_UI_20261108.md)
+record a reported success screen but no captured automatic selection pair.
+Existing foreground server/tunnel were started for that user test; read private
+handle records before cleanup, not a blanket process kill. Korean local runtime
+labels are applied without a new main-plugin release. The user also prioritizes
+authorized photographed company slides: [analysis-first protocol](PHOTO_CUSTOM_RECONSTRUCTION.md)
+and [primary-source research/adoption decisions](PHOTO_RECONSTRUCTION_RESEARCH_20261108.md)
+are linked into existing canonical/project instructions; no new OCR/model install.
+
 2026-11-08 missing-file recovery update: read [reset recovery policy](RESET_RECOVERY_POLICY.md).
 On the identified Aro computer, download/validate missing authorized files and
 resume existing approved work without a separate setup explanation. On another

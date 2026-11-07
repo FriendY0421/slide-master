@@ -8,6 +8,13 @@
 
 ## New-deck flow
 
+For a supplied company photo/screenshot, first apply the existing CUSTOM/source
+route and [photo analysis/reconstruction supplement](PHOTO_CUSTOM_RECONSTRUCTION.md).
+Show observed content/layout/color/typography and explicit uncertainty before
+authoring; let the user supply font/size/other missing facts and approve the
+current plan. Registered-template selection below is not a replacement for the
+user's supplied company source. Record any existing route-defined exemption.
+
 1. Understand the request purpose/audience/constraints.
 2. Refresh/read the live Deck/Layout indexes and render the best available template picker.
 3. Wait for an explicit template id; recommendation is never selection.
