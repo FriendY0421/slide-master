@@ -37,8 +37,8 @@ conflicting old plans. Core source guard commit is
    App dependencies, permissions, defaults, all other files and production owners.
    Same private plugin0.4.7 was now explicitly approved, saved and all29 official
    source files read back; see PLUGIN_047_APPLIED_20261108.md. Do not republish it.
-   Local cache at last check remained0.4.6, so cloud must inspect its own actual
-   installed version before executing. Restore-current0.4.6-as0.4.8 is preserved
+   Local installed0.4.7/all29 files and installed CLI are now verified; cloud must
+   still inspect its own actual installed version before executing. Restore-current0.4.6-as0.4.8 is preserved
    in the verified private capsule; no regression or live rollback occurred.
 4. Test default complete-report compatibility and fault coverage in existing
    supplied runtimes. Public probe uses the existing synthetic mixed deck; no

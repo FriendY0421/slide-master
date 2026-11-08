@@ -1,5 +1,12 @@
 # Slide Master handoff for ChatGPT and DOTS
 
+Latest actual local uptake: installed0.4.7 and all29 files now verified against
+official source (four line-ending equivalents explicit); actual installed CLI
+default/correct pass and18pt fault blocks. Existing default complete report is
+unchanged. No cache patch/CLI refresh used. See PLUGIN_047_APPLIED_20261108.md.
+Cloud installed0.4.7/continuation permission remain separate.
+
+
 Latest authorized save: [same private plugin0.4.7 applied/read back](PLUGIN_047_APPLIED_20261108.md).
 All29 official files verified with explicitly equivalent formatting; saved-source
 positive/negative CLI pass. Local cache still0.4.6 at last observation; actual

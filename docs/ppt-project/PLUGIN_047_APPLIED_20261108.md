@@ -1,4 +1,12 @@
-# Same private Slide Master0.4.7 saved; host uptake separate
+# Same private Slide Master0.4.7 saved and locally installed
+
+Subsequent host refresh is now verified: actual local cache0.4.7, all29 files
+match official source with four explicit CRLF/LF equivalents, and the installed
+checker passed positive/default/negative CLI verification.
+[Installed receipt](evidence/plugin-047-preparation-20261108/installed-readback.json).
+Earlier cache0.4.6 observations below describe the pre-refresh checkpoint; cloud
+installed0.4.7 remains unverified. No managed-cache write or CLI refresh occurred.
+
 
 The user explicitly approved same-plugin0.4.6→0.4.7 application, verification
 and guarded recovery on a problem. Re-read the official release/inventory before
@@ -53,7 +61,9 @@ official release, apply the approved higher0.4.8 recovery with that guard, and
 check source/actual host loading separately. Do not overwrite historical backups
 or use historical restore0.4.5-as0.4.7 against this current release.
 
-Next actual checkpoint is host refresh/installed0.4.7 read-only verification.
+Local installed0.4.7 read-only/CLI verification is now complete.
+Next target-specific checkpoint is cloud installed0.4.7 after an authorized
+continuation, not an unchanged local rerender.
 The [PC-off continuation packet](PC_OFF_CLOUD_CONTINUATION_20261108.md) must use
 the latest saved state, not republish the candidate. Full goal remains active:
 recipient opening/Aro identity and PC-off original Picker/Samsung conditions

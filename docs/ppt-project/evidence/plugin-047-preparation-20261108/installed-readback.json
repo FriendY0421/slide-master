@@ -1,0 +1,165 @@
+{
+  "scope": "actual local managed-cache0.4.7 file read and installed checker execution, not saved-source-only",
+  "installed_version": "0.4.7",
+  "official_file_count": 29,
+  "matched_files": 29,
+  "equivalent_format_normalization": [
+    {
+      "path": "plugin.json",
+      "type": "line_endings"
+    },
+    {
+      "path": "skills/instructions/references/06_GPTS_TEST_SCENARIOS.md",
+      "type": "line_endings"
+    },
+    {
+      "path": "skills/instructions/references/10_HOST_PRODUCTION_DELIVERY.md",
+      "type": "line_endings"
+    },
+    {
+      "path": "skills/instructions/references/12_PRECISION_DESIGN.md",
+      "type": "line_endings"
+    }
+  ],
+  "files": [
+    {
+      "path": ".app.json",
+      "sha256": "bd731ebc2aa3eb38593ed04c142759db3c67b0283dc3d4a1538800c35a14b4e1"
+    },
+    {
+      "path": ".codex-plugin/plugin.json",
+      "sha256": "8e0b8b3e72bced7606779b2f839ded8d2cf189b5e603d24faf7148ea6037a8c5"
+    },
+    {
+      "path": "plugin.json",
+      "sha256": "9a02b9a451a3ba4cbfb8f58ada957596f7ae6eaa466b50572e865c1497c87c53"
+    },
+    {
+      "path": "skills/instructions/SKILL.md",
+      "sha256": "9111109c153d98396be84586bffc05c8424b00ec5de5ffb95dcfcbdccf5e8419"
+    },
+    {
+      "path": "skills/instructions/agents/openai.yaml",
+      "sha256": "43d0ab021fa7e06ccb1b747a79ef197a99d5e040a501e088b06d45699e2fdf7d"
+    },
+    {
+      "path": "skills/instructions/lookup/knowledge-index.json",
+      "sha256": "25d066002bd7e661082b0d16e32d3818c7275b5a3b1d7eed2c6f0e14a134222c"
+    },
+    {
+      "path": "skills/instructions/references/00_README.md",
+      "sha256": "bc09c691659f517c4effd85e692be061587e8ba8b0e22fb5e027dd892077a47c"
+    },
+    {
+      "path": "skills/instructions/references/01_GPTS_INSTRUCTIONS_FINAL_v3.txt",
+      "sha256": "4e7f4aa669643b28542b5294498e12622da77ecdba61cccaaf8598060abb1392"
+    },
+    {
+      "path": "skills/instructions/references/02_PPT_WORKFLOW_KNOWLEDGE.md",
+      "sha256": "dc7f73395d32eef37ce5a7d1f9a03aa7c5ffc19a70cecf543da3a9756a092b9f"
+    },
+    {
+      "path": "skills/instructions/references/03_TEMPLATE_REGISTRATION_POLICY.md",
+      "sha256": "b7f3619171d87c234db696f5440bb07db2749d7c9bebf665aca50a93684b704a"
+    },
+    {
+      "path": "skills/instructions/references/04_PRESENTATION_PRESETS.json",
+      "sha256": "c37ee5d88e78e1ed17554fa752f25edc7b9dca51f845ec550274758e8a7a61a7"
+    },
+    {
+      "path": "skills/instructions/references/05_TEMPLATE_METADATA_SCHEMA.json",
+      "sha256": "2745521f1471f8512e62433e49a4793df22c6aaec35676412180cbe82da77f00"
+    },
+    {
+      "path": "skills/instructions/references/06_GPTS_TEST_SCENARIOS.md",
+      "sha256": "98b3c6764d4a6c8dd61914ba19f0e414e4750f3cfcc46296ee486da4aa434a37"
+    },
+    {
+      "path": "skills/instructions/references/07_TOOL_CONTRACT.md",
+      "sha256": "c012bbd47cce626508d13b3a30a323750bfcecd91da1d0eb300e98535ec3c2ea"
+    },
+    {
+      "path": "skills/instructions/references/08_INTERACTIVE_APP_BLOCK_UI_FINAL.md",
+      "sha256": "6e67a64ac460fb37e150fc3529037689f38d3aaf19e1732031dd17e7a5c2e332"
+    },
+    {
+      "path": "skills/instructions/references/09_CANONICAL_FULL_REFERENCE_v3.md",
+      "sha256": "3bd803d17c2326b525ca74a5aad8ce2b37fd0ec42fa3b5913b4984859165a1ed"
+    },
+    {
+      "path": "skills/instructions/references/10_HOST_PRODUCTION_DELIVERY.md",
+      "sha256": "87d52091fd1efcc086bd8c2ec475219eccb5dea305f6ceb23b66cc8561cb0ddf"
+    },
+    {
+      "path": "skills/instructions/references/11_REFERENCE_QUALITY.md",
+      "sha256": "d9254675ace4c99d3c4c490eeae5066bf72c12e030ade8889aa8c7569861c4d7"
+    },
+    {
+      "path": "skills/instructions/references/12_PRECISION_DESIGN.md",
+      "sha256": "4083249c3f9a92c64423dd46ba62c2918fd83f6591d3dd8f593e048be33f8b9b"
+    },
+    {
+      "path": "skills/instructions/references/13_CHART_WORKBOOK_PRESERVATION.md",
+      "sha256": "fe16fbb01a6d52679f3bbff0d48cb5388623d8a95ef1cad78c1402e7210f91de"
+    },
+    {
+      "path": "skills/instructions/references/14_PORTABLE_RECOVERY.md",
+      "sha256": "a8fa983bd08915ac5e328179efd7a0f18d7d9b03921a6dbe59b6a25e38f8c2e2"
+    },
+    {
+      "path": "skills/instructions/references/15_PHOTO_CUSTOM_RECONSTRUCTION.md",
+      "sha256": "df439e75286b740edaf382fbd925e8e0583a79f89144f9be3cc5580b9128e32d"
+    },
+    {
+      "path": "skills/instructions/references/template_gallery_reference.html",
+      "sha256": "c7a19acde9f146ff867aa8fcd91c8479b26e778ff737f4d0e6b6d2570a0e97f3"
+    },
+    {
+      "path": "skills/instructions/scripts/chart_workbook_preservation.py",
+      "sha256": "699bfcbcc64186f852c0cc5e6010f36cc264c0885abf5a94f86141d105b539d5"
+    },
+    {
+      "path": "skills/instructions/scripts/console_encoding.py",
+      "sha256": "71022e21fd89b91f0d96cb3ca128b140dbbe9a5b0dfbf2f46baf26404f20206b"
+    },
+    {
+      "path": "skills/instructions/scripts/dense_pptx_quality.py",
+      "sha256": "765351851bb998a0df49cfd10de4b077cbde09d0d2f03d0f9cac15e4995573e2"
+    },
+    {
+      "path": "skills/instructions/scripts/pptx_reference_quality.py",
+      "sha256": "f35ddcb55075f0cd493225a59854fb7f7d9a0d0cf8be2b2fc1b61fcff6165a52"
+    },
+    {
+      "path": "skills/instructions/scripts/render_pptx_review.mjs",
+      "sha256": "a580cfa2b15b26cb4699fb87294c8e49630252a158e0e48b6df17268a2f5c8dc"
+    },
+    {
+      "path": "skills/instructions/scripts/render_pptx_review.py",
+      "sha256": "c62094f483f22b4aa8e3ce88079f0e7231a46050cdca10bc6dbead95cccfa586"
+    }
+  ],
+  "installed_cli": [
+    {
+      "case": "default",
+      "exit_code": 0,
+      "errors": 0
+    },
+    {
+      "case": "correct",
+      "exit_code": 0,
+      "errors": 0
+    },
+    {
+      "case": "fault",
+      "exit_code": 1,
+      "errors": 1
+    }
+  ],
+  "default_complete_report_matches_official046": true,
+  "managed_cache_modified": false,
+  "new_install_permissions_cost": false,
+  "native_render_repeated": false,
+  "cloud047_verified": false,
+  "live_rollback_executed": false
+}
