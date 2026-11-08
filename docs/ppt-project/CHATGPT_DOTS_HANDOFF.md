@@ -1,5 +1,12 @@
 # Slide Master handoff for ChatGPT and DOTS
 
+Latest continuation: [Picker return repair / actual Cloud Work0.4.6 check](PICKER_RETURN_CLOUD_CONTINUATION_20261108.md).
+Existing Cloud Work now has actual installed0.4.6 write/render/private-download
+proof; it is not proven to be Aro/Dot. Original Picker source/bundle has a bounded
+context-failure/duplicate-send repair and was reopened for actual user return.
+Automatic pair receipt is still pending. User directs FAH integration **after**
+Slide Master acceptance; no FAH deployment or merge has occurred.
+
 Status date: 2026-11-08 (Asia/Seoul). This is the continuation entry point for
 the user's Slide Master quality and full-flow mission. Source access does not
 install a plugin, grant file access or connect a production executor.
@@ -100,7 +107,9 @@ still-unverified human UI selection. It does not establish PC-off availability.
 
 Latest research-only supplement (2026-11-07):
 [GitHub/Hugging Face quality resources](PPT_RESOURCE_REVIEW_20261107.md).
-No external engine/model was installed; FAH integration remains deferred.
+No external engine/model was installed. Historical FAH deferral is superseded
+by the 2026-11-08 ordered follow-on in ACTIVE_GOAL_SCOPE_20261107.md; integration
+starts after Slide Master acceptance, with any rollout approval kept separate.
 
 Subsequent implementation on this PR: [quality roadmap and same-fixture evidence](QUALITY_ROADMAP_20261107.md).
 Reference preservation/repair/coverage checks are connected to the existing

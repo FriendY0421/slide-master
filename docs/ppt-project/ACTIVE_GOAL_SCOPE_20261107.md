@@ -1,9 +1,10 @@
-# Active goal — full Slide Master delivery mission
+# Standing scope — full Slide Master delivery mission
 
-The user clarified that the registered active goal covers the **whole previously
-planned mission**, not just the currently prioritized Picker/cloud milestone.
-Treat this file as the expanded acceptance scope alongside the active goal's
-initial milestone description. Do not declare the overall goal complete when
+The user clarified that the project covers the **whole previously planned
+mission**, not just the currently prioritized Picker/cloud milestone. On
+2026-11-08 the user cleared the runtime Goal and restated the full project
+mission; this repository record remains the standing acceptance scope and does
+not assert that a runtime Goal is active. Do not declare the overall goal complete when
 only that milestone or a source change finishes.
 
 | Acceptance stage | Evidence still required / current boundary |
@@ -24,4 +25,22 @@ repeat unchanged failures or count repeat passes as new progress. No new cost,
 permission, authentication, deployment environment or App replacement is implied
 by permission to evolve the design. Prepare the concrete scope/impact/recovery
 before asking for any necessary approval. Company files/fonts/private links stay
-out of public evidence. FAH integration remains deferred; weather is out of scope.
+out of public evidence. Weather is out of scope.
+
+## Ordered FAH follow-on — user direction 2026-11-08
+
+1. Finish the existing Slide Master acceptance stages above; preserve its same
+   plugin, recovery copies and task-specific source/style rules.
+2. Then inspect the actual FAH owner/version/entry and existing identity/file/
+   production/private-delivery interfaces without altering production.
+3. Reuse Slide Master through a reversible integration, including actual input,
+   current analysis/storyline approval, editable PPTX, exact-file QA and private
+   delivery. Do not invent actor/file rights or bypass confirmations.
+4. Validate the same dense synthetic sample and a real authorized intake in FAH
+   before declaring end-to-end PPT delivery. Retain standalone Slide Master.
+5. Group any new operational change, permission, install, auth, fee or hosting
+   with its target, impact and recovery for approval before applying it.
+
+This supersedes earlier indefinite FAH deferral as the next planned phase, not
+as immediate production deployment or PR merge authorization. See
+[PICKER_RETURN_CLOUD_CONTINUATION_20261108.md](PICKER_RETURN_CLOUD_CONTINUATION_20261108.md).

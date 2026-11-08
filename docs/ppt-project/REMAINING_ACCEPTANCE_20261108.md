@@ -3,10 +3,18 @@
 Subsequent input has arrived: [actual App render signal/manual selection/private
 photo analysis](USER_ACCEPTANCE_INPUTS_20261108.md) and [Aro cloud inventory/write
 limitation report](ARO_CLOUD_REPORT_20261108.md). The previous missing-input stop
-is superseded. Current production waits for approval of photo proposal v1 (or
-revisions/evening samples); cloud writes/render remain unverified.
+is superseded. Photo proposal v1 is now explicitly approved and produced, with
+local actual PowerPoint edit/save/reopen and private-download hash evidence.
+Cloud Work0.4.6 separately passed writes/render/private download; the Aro/Dot
+identity and its reported read-only paths remain unverified.
 
-The full mission is **not complete**. Same existing plugin 0.4.6 is officially
+The full mission is **not complete**. Latest
+[Picker-return and Cloud Work evidence](PICKER_RETURN_CLOUD_CONTINUATION_20261108.md)
+adds actual Cloud Work0.4.6 write/render/delivery; Aro identity and automatic
+Picker pair receipt stay separate. The user plans FAH integration after this
+mission, not as an immediate replacement or rollout.
+
+The same existing plugin 0.4.6 is officially
 saved and actually loaded locally, with all 29 installed files matching official
 source. The original 0.4.5, earlier recovery copies and current 0.4.7 recovery
 package remain preserved. Source is on existing Draft PR #14; main is not merged.
@@ -26,8 +34,9 @@ package remain preserved. Source is on existing Draft PR #14; main is not merged
   editing and private Drive hashes retain their documented scopes. Same-PC
   relocated extraction and Aro's HOME-PC result do not establish Dot execution.
 - Local-first policy, private downloadable capsule and direct Aro guide are
-  prepared/verified. Original server/tunnel remain stopped after the user test;
-  there is no live job whose completion could resolve the remaining conditions.
+  prepared/verified. Earlier test-owned server/tunnel were stopped;
+  the latest original Picker has been reopened with test-owned foreground sessions
+  temporarily retained for the pending real user click; no always-on service is claimed.
 
 ## Why independent execution cannot close the remaining checks
 

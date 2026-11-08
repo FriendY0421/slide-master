@@ -1,0 +1,54 @@
+{
+  "scope": "actual confirmation-function isolated execution; mocked MCP host, not actual user or transcript acceptance",
+  "results": [
+    {
+      "name": "normal",
+      "messageCount": 1,
+      "expectedMessages": 1,
+      "pass": true
+    },
+    {
+      "name": "context_rejection",
+      "messageCount": 1,
+      "expectedMessages": 1,
+      "pass": true
+    },
+    {
+      "name": "context_timeout",
+      "messageCount": 1,
+      "expectedMessages": 1,
+      "pass": true
+    },
+    {
+      "name": "context_stale",
+      "messageCount": 0,
+      "expectedMessages": 0,
+      "pass": true
+    },
+    {
+      "name": "double_click",
+      "messageCount": 1,
+      "expectedMessages": 1,
+      "pass": true
+    },
+    {
+      "name": "message_rejection",
+      "messageCount": 1,
+      "expectedMessages": 1,
+      "pass": true
+    },
+    {
+      "name": "message_timeout",
+      "messageCount": 1,
+      "expectedMessages": 1,
+      "pass": true
+    },
+    {
+      "name": "invalid_validation",
+      "messageCount": 0,
+      "expectedMessages": 0,
+      "pass": true
+    }
+  ],
+  "failures": 0
+}
