@@ -4,7 +4,10 @@ Latest continuation: [Picker return repair / actual Cloud Work0.4.6 check](PICKE
 Existing Cloud Work now has actual installed0.4.6 write/render/private-download
 proof; it is not proven to be Aro/Dot. Original Picker source/bundle has a bounded
 context-failure/duplicate-send repair and was reopened for actual user return.
-Automatic pair receipt is still pending. User directs FAH integration **after**
+User reports pressing confirm, but no automatic pair appears in this chat or
+the inspected trial-parent recent turns. Final-screen diagnostic is pending;
+owned test sessions have been stopped and ports3000/8080 are clear.
+User directs FAH integration **after**
 Slide Master acceptance; no FAH deployment or merge has occurred.
 
 Status date: 2026-11-08 (Asia/Seoul). This is the continuation entry point for

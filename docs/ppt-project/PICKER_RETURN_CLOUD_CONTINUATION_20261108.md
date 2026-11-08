@@ -49,9 +49,13 @@ Korean/copy behavior. Initial literal timeout inspection failed on esbuild
 whitespace; corrected whitespace-aware inspection passes without code mutation.
 Actual original connected tool returns the live GitHub/main 21-entry catalog.
 The original Picker was reopened for a real user click, **without manufacturing
-a choice or generating a PPTX**. Real automatic pair receipt remains pending.
-Test-owned foreground server/tunnel remain only while that user test is pending;
-stop their exact owned sessions afterward, not unrelated processes.
+a choice or generating a PPTX**. The user then explicitly reported pressing
+confirmation. The current chat and existing trial-parent recent-turn readback
+contain no automatic selected pair. Thus click observation is real, automatic
+return is **not passed**. The final UI acknowledgement/context status was requested
+once to distinguish rejection from acknowledged-but-undelivered messaging; no
+repeat selection is requested. Exact owned foreground sessions were stopped
+after the click test; ports3000/8080 have no remaining listeners.
 
 Recovery: stop this test's owned processes; restore only `app.before.js` and
 `bundle.before.js` from the private picker-return job to the original runtime

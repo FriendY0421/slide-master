@@ -13,5 +13,11 @@
     "source": "d63516912c0b06eec646e867e391b28908ebc36ec0826999054be761533210b1",
     "bundle": "77bad9ece4c0c7f439dd921db8c183eb1cedea45e9ae9b3fd2bf24af5a9ee63a",
     "server": "5bcf46fae77334c91ec34624f4444586999d9ea678466da5837bb098276b339f"
-  }
+  },
+  "user_reported_real_confirm_click": true,
+  "automatic_pair_present_in_local_chat": false,
+  "automatic_pair_present_in_existing_trial_parent_recent_turns": false,
+  "last_screen_diagnostic_requested": true,
+  "owned_test_sessions_stopped": true,
+  "ports_3000_8080_listeners_after_cleanup": 0
 }

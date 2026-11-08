@@ -35,8 +35,9 @@ package remain preserved. Source is on existing Draft PR #14; main is not merged
   relocated extraction and Aro's HOME-PC result do not establish Dot execution.
 - Local-first policy, private downloadable capsule and direct Aro guide are
   prepared/verified. Earlier test-owned server/tunnel were stopped;
-  the latest original Picker has been reopened with test-owned foreground sessions
-  temporarily retained for the pending real user click; no always-on service is claimed.
+  the latest original Picker click test also ended and its exact owned sessions
+  were stopped. User reports confirmation but automatic pair receipt is not passed;
+  no always-on service is claimed.
 
 ## Why independent execution cannot close the remaining checks
 
