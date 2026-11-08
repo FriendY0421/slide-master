@@ -30,7 +30,7 @@ or source change finishes.
 
 | Acceptance stage | Evidence still required / current boundary |
 | --- | --- |
-| Existing plugin and recovery | Keep same identity, features and backups; 0.4.5 originals retained. Subsequent 0.4.6 official save and all 29 actual local installed files verified; see PLUGIN_046_APPLIED_20261108.md. |
+| Existing plugin and recovery | Keep same identity/features/backups. Approved0.4.7 officially saved/all29 source read back; original0.4.6 and approved restore-as0.4.8 privately raw-hash verified. Actual local cache remains0.4.6; installed0.4.7 pending. See PLUGIN_047_APPLIED_20261108.md. |
 | Template or CUSTOM intake | Real previews/manual pair and approved photo route evidenced; subsequent actual App model-context plus message confirms bounded delayed automatic return. No invented attachment/user identifiers. |
 | Purpose/count/fonts/format | Confirm together using actual task inputs; preserve company-specific 14/12/11/9pt only where requested. |
 | Analysis and storyline | Preserve source text/numbers/layout, mark unreadable content, obtain real confirmation of the current revision. |

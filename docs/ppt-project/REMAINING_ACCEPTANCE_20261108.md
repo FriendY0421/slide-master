@@ -1,94 +1,51 @@
-# Remaining real-user acceptance and resumption
+# Current remaining acceptance — 2026-11-08 KST
 
-Latest: [actual original Picker automatic callback received](PICKER_AUTOMATIC_RETURN_ACCEPTANCE_20261108.md).
-This supersedes intermediate missing-return statements below: real model-context
-and message arrived after the prior assistant final. Bounded host return is now
-passed; PC-off hosting and Aro identity/write acceptance remain open.
+This is the current checklist, replacing contradictory intermediate status prose.
+Historical observations remain in the linked dated reports and Git history.
+Latest human requests take precedence under [the standing goal](ACTIVE_GOAL_SCOPE_20261107.md).
+The runtime Goal remains active; the full mission is **not complete**.
 
-
-Subsequent input has arrived: [actual App render signal/manual selection/private
-photo analysis](USER_ACCEPTANCE_INPUTS_20261108.md) and [Aro cloud inventory/write
-limitation report](ARO_CLOUD_REPORT_20261108.md). The previous missing-input stop
-is superseded. Photo proposal v1 is now explicitly approved and produced, with
-local actual PowerPoint edit/save/reopen and private-download hash evidence.
-Cloud Work0.4.6 separately passed writes/render/private download; the Aro/Dot
-identity and its reported read-only paths remain unverified.
-
-The full mission is **not complete**. Latest
-[Picker-return and Cloud Work evidence](PICKER_RETURN_CLOUD_CONTINUATION_20261108.md)
-adds actual Cloud Work0.4.6 write/render/delivery; Aro identity and automatic
-Picker pair receipt stay separate. The user plans FAH integration after this
-mission, not as an immediate replacement or rollout.
-
-The same existing plugin 0.4.6 is officially
-saved and actually loaded locally, with all 29 installed files matching official
-source. The original 0.4.5, earlier recovery copies and current 0.4.7 recovery
-package remain preserved. Source is on existing Draft PR #14; main is not merged.
-
-## Completed evidence and actual limits
-
-- [0.4.6 save and installed readback](PLUGIN_046_APPLIED_20261108.md): reset
-  recovery/photo-analysis guidance bundled; no new App, permission, install,
-  credentials, model/API, host or fee. This is not an actual Aro reset trial.
-- [Original Picker safety fix](PICKER_CONFIRMATION_FIX_20261108.md) and
-  [Korean UI](PICKER_KOREAN_UI_20261108.md): original local runtime changed with
-  exact patches/backups; isolated cases and actual served resource checked.
-  User reports seeing the success screen; a later original App render callback
-  and the user's real copied template/preset pair have now arrived. Automatic
-  pair delivery remains unverified; mock choices are never user confirmation.
-- Existing dense synthetic fixture, exact-byte reimport/render, native chart
-  editing and private Drive hashes retain their documented scopes. Same-PC
-  relocated extraction and Aro's HOME-PC result do not establish Dot execution.
-- Local-first policy, private downloadable capsule and direct Aro guide are
-  prepared/verified. Earlier test-owned server/tunnel were stopped;
-  the latest original Picker click test also ended and its exact owned sessions
-  were stopped. User reports confirmation but automatic pair receipt is not passed;
-  no always-on service is claimed.
-
-## Why independent execution cannot close the remaining checks
-
-| Condition | Already attempted / evidence | Minimum real next input or action |
+| Requirement | Actual status / evidence | Remaining real condition |
 | --- | --- | --- |
-| Actual selection receipt | Actual original App render signal and user-copied pair now received; existing server and recorder validate training_playbook/balanced_report with generation=false. A subsequent real user click produced matching actual App model-context and message after the prior assistant final. | Manual and bounded actual automatic return are complete. Do not re-ask selection or claim PC-off/multi-host reliability from this one delayed receipt. |
-| Fresh actual-input flow | Current private photo proposal v1 explicitly approved; editable one-slide production, exact-file reimport/render, native PowerPoint copy-edit/save/reopen and private raw-download hash verification completed. Recipient opening is pending. | Ask only whether the user can download/open the delivered PPTX and which illegible text to resolve. A company original PPTX is not required for the completed photo route; exact original-master comparison remains unavailable. |
-| Actual Aro/Dot execution | User supplied Aro's non-HOME-PC cloud inventory and memory-download hash report. Cache 0.4.3/guidance 0.4.6 remain distinct; save/extract/render blocked by reported read-only filesystem. This local task still cannot directly target it. | Aro should identify the exact write error and existing authorized task/temp paths. Use the bounded diagnosis in ARO_CLOUD_REPORT_20261108.md; do not install an agent, alter mounts/permissions or copy credentials. |
-| PC-off original Picker | Existing saved tunnel points to the PC's loopback server. Cloud direct review and no-server preview alternatives do not relocate it. | Prefer existing no-server real-preview/manual-confirmation fallback for a bounded trial on the actual target. If persistent same-App hosting is still required, establish a concrete approved host and official mapping before any credential/service change. |
+| Same plugin, existing features and recovery | Approved same USER/PRIVATE plugin0.4.7 officially saved. All29 official files read back with equivalent JSON/line-ending normalization explicit. [Actual save](PLUGIN_047_APPLIED_20261108.md). | Actual installed0.4.7 uptake is not established. Latest local cache read still shows0.4.6; no managed-cache patch or repeat publication. |
+| Real original Picker | User personally selected/confirmed; matching actual App model-context and message arrived after prior assistant final. [Automatic return](PICKER_AUTOMATIC_RETURN_ACCEPTANCE_20261108.md). | Bounded actual automatic return passed; no new selection or unchanged replay needed. Do not claim instant delivery, every host or PC-off hosting. |
+| Actual input and storyline approval | Real private photo read and analysis/proposal v1 explicitly approved. Original manual registered pair remains a separate record; approved photo route preserves photo composition. [Input](USER_ACCEPTANCE_INPUTS_20261108.md). | No further production approval needed for the already delivered photo v1. Better source can resolve marked illegible text; a company original PPTX is unnecessary for this route. |
+| Detailed editable photo production | One slide, fixed temporary Pretendard14/12/11/9pt, table max12pt,68 text shapes/3 native tables/1 native chart and editable arrows. [Production](PHOTO_PRODUCTION_ACCEPTANCE_20261108.md). | Exact original master/XML and hidden source workbook were not supplied/recovered. Do not infer those from the photo. |
+| Actual final QA and editability | Final reimport/render;166 inspected regions/zero mechanical errors with warnings retained. Actual PowerPoint16.0 copy text/table/chart edit→save→reopen; final bytes preserved. | Native exact Pretendard rendering unverified because that Windows family is absent. Do not call temporary-font results Samsung certification. |
+| Empty table row-expansion recurrence | Per-job paragraph-end correction actually rerendered in PowerPoint; source guard catches25 bad versus0 corrected marks. Guard now saved in0.4.7. [Guard](EMPTY_TABLE_PARAGRAPH_GUARD_20261108.md). | Installed0.4.7 execution pending. The guard reports a defect; it is not a global auto-repair/row-height certification engine. |
+| Private delivery / recipient | Actual photo output owner-only/shared=false; raw download SHA equals final. Private report and local/Drive links were delivered. | User must actually download/open the file and confirm any display/edit problem. Assistant-side roundtrip does not prove recipient opening. |
+| Cloud Work execution | Actual installed/loaded0.4.6 Linux task/tmp write probes, dense positive/negative,2-page exact-file render and private Office raw download passed. [Cloud](PICKER_RETURN_CLOUD_CONTINUATION_20261108.md). | This is existing synthetic verification, not fresh-photo production or Aro identity. Cloud0.4.7 installed uptake and further continuation are unverified. |
+| Aro/Dot target | User-relayed non-HOME-PC inventory and full in-memory capsule hash received. Reported actual cache0.4.3, guidance0.4.6, write/extract/render blocked. [Bounded diagnosis](ARO_CLOUD_REPORT_20261108.md). | Need actual failing tool/path/errno or an existing authorized writable task/temp path on that computer. Current connector exposes HOME-PC only; no agent/credentials/permission migration authorized. |
+| PC-off use | Existing Cloud Work stages need no PC tools. Original Picker server/tunnel and Windows PowerPoint remain PC-bound; exact test-owned sessions are stopped. [PC-off packet](PC_OFF_CLOUD_CONTINUATION_20261108.md). | Existing real-preview/manual-confirmation fallback is available as a distinct route; actual intended-cloud trial needs the pending authorized continuation. Same-App always-on hosting needs a concrete target/permission/recovery decision, not a renamed fallback. |
+| Durable recovery | Original0.4.6, candidate0.4.7, restore0.4.6-as0.4.8 in private262,914-byte capsule, owner-only/raw SHA verified. Earlier backups retained. | No live rollback needed; if regression, use then-current release guard and approved higher0.4.8 restore. Historical restore0.4.5-as0.4.7 is not current recovery. |
+| FAH follow-on | Latest user direction supersedes indefinite old deferral: finish applicable Slide Master acceptance, then inspect/reuse actual FAH contracts and validate private PPT delivery. | No FAH source/service changed or deployed. Do not skip actual actor/file/current-approval/private-delivery contracts, or infer approval for a new fee/permission/deploy/merge. |
 
-Do not wait on a nonexistent process or replay unchanged failed endpoint/UI
-paths. Do not keep changing unrelated features or rerunning successful checks
-to simulate advancement. Selection and version questions are resolved; the
-current photo proposal v1 has been approved and produced. See PHOTO_PRODUCTION_ACCEPTANCE_20261108.md; recipient opening and target-cloud execution remain unverified.
+## Current approvals and minimum next actions
 
-## No-new-cost alternatives and approval boundary
+- **Granted and executed:** same-plugin0.4.7 publication/source verification;
+  recovery to0.4.6-as0.4.8 authorized if a real regression occurs. No new fees,
+  permissions, auth or install were added. Main PR14 remains unmerged.
+- **Pending human answer:** the one request to send the full continuation packet
+  to the already existing Cloud Work trial. Earlier narrow revalidation ran and
+  finished; it is not a currently running background job. Do not send, create a
+  duplicate chat or claim cloud work started while this question is unanswered.
+- **Pending recipient:** actual opening of the delivered private photo PPTX.
+- **Host-owned condition:** installed0.4.7 loading. No official refresh action is
+  exposed in this task's tools; metadata/save is not installed execution. Retry
+  verification only after a meaningful host refresh/new installed-version signal.
+- **Conditional company acceptance:** Samsung local/cloud/render/embedding rights
+  and a genuine original PPTX are required only for those exact font/master tests.
+  They do not block temporary-font, photo-based or other independent authorized
+  work. Never upload/register/embed Samsung while rights remain unresolved.
 
-Keep the PC/local runtime for normal work. On an environment change, use the
-existing Drive capsule and host-provided runtimes. If the original Picker is
-unavailable, use its documented actual-preview fallback and return real IDs;
-call this a fallback, not original automatic callback or always-on hosting.
+## Work and recovery discipline
 
-No new approval is needed merely to copy an existing selection value, provide an
-authorized test input or execute the existing read-only probe in Aro's own
-authorized computer. A missing dependency/access is an exception, not automatic
-permission to install or authenticate. Any later new installation, permission,
-auth/credential movement, persistent hosting, cost or App replacement needs one
-concrete target/change/impact/cost/recovery bundle before action. No blanket
-unknown-host approval is requested here. See [host assessment](DOTS_PICKER_HOST_ASSESSMENT.md).
-
-Samsung installation/server-render/embedding rights remain separate. Continue
-allowed tests with clearly temporary approved Pretendard; do not call those
-Samsung certification. A real company source is needed only when its own exact
-preservation/branding acceptance is requested, and must stay private.
-
-## Safe resumption and recovery
-
-Resume from [the handoff](CHATGPT_DOTS_HANDOFF.md) when actual input/environment
-evidence arrives. Preserve the same full scope and last real approved revision;
-do not create a new chat, install a replacement plugin or repeat onboarding.
-The identified Aro computer may retrieve/validate missing files without a setup
-tutorial; other computers receive a short progress/preparation notice first.
-
-Use the existing [0.4.7 recovery of 0.4.5](PLUGIN_046_APPLIED_20261108.md#recovery)
-only if needed, with current official release guard and the two exact deletions.
-Do not use historical 0.4.6 recovery-of-0.4.4 against the current 0.4.6 release.
-Picker source/bundle backups remain separate; no global process kill, checkout
-reset, public company/font upload, merge or destructive cleanup is needed.
+Reuse verified evidence; do not repeat successful fixtures or unchanged failed
+endpoint/UI paths as progress. No live process is awaiting completion now.
+Source-only, official saved source, installed local, installed cloud and actual
+recipient use are separate layers. Existing originals, private assets and all
+recovery versions remain preserved. Do not create a replacement plugin, enable a
+persistent service, copy credentials, merge, or alter other projects to bypass
+an external condition. Group any genuinely necessary approval with the exact
+target/change/impact/cost/recovery. Keep company files/fonts/private URLs out of
+public GitHub; only sanitized task evidence belongs on existing PR14.

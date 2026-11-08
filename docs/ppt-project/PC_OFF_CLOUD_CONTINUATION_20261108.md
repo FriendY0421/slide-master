@@ -27,12 +27,11 @@ conflicting old plans. Core source guard commit is
 1. Preserve the full standing objective and already verified work. Do not replay
    existing renders/checks as progress. No company photo or Samsung font may be
    retrieved/uploaded for this nonsensitive cloud continuation.
-2. Continue the concrete empty-table guard rollout preparation. Current official
-   source inventory is same private USER plugin0.4.6, 29 files, read-only checked
-   in the local preparation; all match the retained official baseline. Cloud
-   must revalidate the exact current official source/release using its own tools
-   before packaging. If only the installed cache is available, label that source
-   honestly; do not patch a managed cache or claim official-source verification.
+2. Continue installed-uptake verification of the now saved same private USER
+   plugin0.4.7; official29-file source already read back locally. Do not republish
+   it. Inspect the actual cloud cache/version with existing tools. If it remains
+   older, distinguish installed versus saved-source execution rather than patching
+   managed cache or claiming source access not actually available.
 3. Candidate design: existing checker plus existing precision/production guidance
    teach task-scoped `require_empty_cell_paragraph_style`. Preserve identity,
    App dependencies, permissions, defaults, all other files and production owners.
@@ -62,6 +61,6 @@ conflicting old plans. Core source guard commit is
 No always-on server, new cloud account, agent, credential migration, permission,
 fee, plugin replacement or new chat is needed for this packet. A cloud run can
 still stop on a missing capability/user input; it is not a guarantee of unlimited
-background execution. Source and existing plugin0.4.6 stay usable if preparation
-stops. Revert a future source commit normally if needed, never reset/delete the
+background execution. Source and the existing saved plugin0.4.7 remain preserved if continuation
+stops; an older loaded0.4.6 cache must still be labeled accurately. Revert a future source commit normally if needed, never reset/delete the
 originals. No rollout occurs merely because this packet is saved.
