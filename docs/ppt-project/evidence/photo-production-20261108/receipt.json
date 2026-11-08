@@ -19,6 +19,11 @@
   "native_requested_font_rendering_verified": false,
   "source_original_pptx_provided": false,
   "private_delivery_verified": true,
-  "recipient_opened": false,
-  "new_install_permission_cost": false
+  "recipient_opened": true,
+  "new_install_permission_cost": false,
+  "recipient_downloaded": true,
+  "recipient_confirmation_source": "actual human reply to the delivered-file question",
+  "recipient_confirmation_date_kst": "2026-11-08",
+  "recipient_visual_font_edit_approval_verified": false,
+  "full_mission_complete": false
 }

@@ -36,7 +36,7 @@ or source change finishes.
 | Analysis and storyline | Preserve source text/numbers/layout, mark unreadable content, obtain real confirmation of the current revision. |
 | Production | Existing owner creates native editable text/table/diagram/chart within the approved scope. |
 | Quality | Same dense sample, actual font/spacing/crop/layout checks, exact-byte reopen/render and documented native-app editability. Samsung and company-original conditions remain separate. |
-| Private delivery | Verified file ownership/access, raw download/hash and actual recipient-open confirmation. Synthetic assistant-side delivery is not fresh-user completion. |
+| Private delivery | Private owner-only/raw SHA verified; actual user now confirms downloading/opening the real photo output. No exact-font/visual/edit approval is inferred. Synthetic delivery remains separately scoped. |
 | Cloud use | Cloud Work installed0.4.6 write/render/private delivery evidenced; distinguish from PC loopback Picker/Windows PowerPoint. Original Picker automatic return passed in this local test, not PC-off/Aro hosting. |
 | Operations and handoff | Record exact source/release, applied/unapplied changes, failures, recovery, costs/permissions and remaining conditions on existing PR #14. |
 

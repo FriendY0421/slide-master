@@ -2,8 +2,9 @@
 
 The user approved the presented one-slide photo reconstruction proposal v1 in
 this conversation. This advances the real-input flow beyond synthetic tests.
-It does **not** close automatic Picker delivery, recipient opening, Aro writable
-execution or PC-off hosting. The earlier actual Picker pair is preserved; the
+Later actual automatic Picker receipt is separately verified. The user now
+explicitly confirms downloading/opening the private output on2026-11-08 KST.
+This does **not** close Aro writable execution or PC-off hosting. The earlier actual Picker pair is preserved; the
 approved photo CUSTOM composition was used without silently imposing its deck.
 
 ## Actual production and verification
@@ -35,8 +36,9 @@ approved photo CUSTOM composition was used without silently imposing its deck.
   that the generic plugin exporter or upstream runtime was globally patched.
 - Existing Google Drive Office-file upload, metadata readback: shared=false,
   owner-only permissions. Actual raw download matched exact local bytes/SHA256.
-  No native Google Slides conversion or public sharing. **Recipient-open remains
-  unverified**, so delivery infrastructure success is not user acceptance.
+  No native Google Slides conversion or public sharing. **Recipient download/opening is now user-confirmed** in the actual delivered-file
+  question. This later human evidence closes opening, not exact-font/visual/edit
+  approval; assistant-side delivery checks alone had not closed it.
 
 ## Preserved limitations
 
@@ -67,8 +69,9 @@ and preserved; no original replacement occurred. Stop using the new output to
 revert this job; no plugin rollback is needed. Picker test-owned server/tunnel
 were cleaned up before this production run.
 
-The user only needs to download/open the delivered file and report any opening
-or display issue. Better source text can resolve the marked illegible regions.
+The user has now directly confirmed download and normal opening of the delivered
+file. Do not ask for the same confirmation again. Better source text can resolve
+marked illegible regions; no new problem or exact-font/visual approval was supplied.
 Existing [cloud write diagnosis](ARO_CLOUD_REPORT_20261108.md) is still needed on
 the actual Aro computer; this successful local run does not establish PC-off
 original-App hosting or target-cloud render capability.

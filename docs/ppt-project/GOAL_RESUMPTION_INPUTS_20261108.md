@@ -1,5 +1,11 @@
 # Full goal: required resumption inputs after three blocked audits
 
+Subsequent real input: recipient download/opening is now explicitly confirmed
+by the human on2026-11-08 KST. That blocker is resolved; do not repeat the
+question. Existing cloud-continuation message authorization remains pending.
+The historical three-audit observations below describe the earlier state.
+
+
 The full objective is retained; it is **not complete** or narrowed to the code
 already shipped. The previous meaningful checkpoint verified actual local
 installed0.4.7/all29 files and installed checker execution. Since then, three
