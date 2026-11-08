@@ -1,4 +1,11 @@
-# Full goal: required resumption inputs after three blocked audits
+# Full goal: previous blocked audit and actual authorized continuation
+
+Both minimum human inputs have now arrived: actual private-PPTX download/opening
+and explicit “클라우드 인계 승인”. The full follow-up was actually dispatched to
+the same existing durable Cloud Work trial; compact status confirms a new
+active/inProgress turn. This supersedes missing-input statements below. Preserve
+remaining scope and monitor that actual run rather than starting a duplicate.
+
 
 Subsequent real input: recipient download/opening is now explicitly confirmed
 by the human on2026-11-08 KST. That blocker is resolved; do not repeat the

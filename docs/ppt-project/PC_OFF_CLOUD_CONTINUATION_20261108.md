@@ -1,4 +1,17 @@
-# PC shutdown: continue through the existing Cloud Work trial
+# PC shutdown: existing Cloud Work continuation actually dispatched
+
+2026-11-08 KST: the user explicitly answered “클라우드 인계 승인”. The follow-up
+was sent to the same existing durable Cloud Work trial, with the full unchanged
+objective, latest source, actual recipient-open confirmation and no company
+photo/font/credential transfer. Compact official task observation confirms
+active/inProgress at approximately11:03 KST. This is actual dispatch/start,
+not an unanswered prompt or automatic migration of the local chat/Goal.
+
+Use cloud progress and its PR14 evidence for later status; an active task is not
+a guarantee of indefinite background execution or completion. Local code work
+will not race the delegated cloud source work; only this dispatch record is
+being finalized here. No new environment/chat/server/permission/fee was created.
+
 
 The user plans to turn off the PC at approximately 11:20 KST on 2026-11-08.
 The current local chat/Goal is not automatically migrated: the available

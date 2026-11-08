@@ -4,8 +4,10 @@ This is the current checklist, replacing contradictory intermediate status prose
 Historical observations remain in the linked dated reports and Git history.
 Latest human requests take precedence under [the standing goal](ACTIVE_GOAL_SCOPE_20261107.md).
 The runtime Goal was marked blocked after three unanswered-input audits; the
-recipient has now supplied the download/opening answer, while cloud-continuation
-message authorization remains pending. The full mission is **not complete**.
+recipient has now supplied the download/opening answer and explicitly approved
+cloud continuation. The actual follow-up was sent to the existing durable trial;
+official compact status confirms a new active/inProgress turn. The full mission
+is **not complete**; source-local Goal status is not a cloud migration receipt.
 
 | Requirement | Actual status / evidence | Remaining real condition |
 | --- | --- | --- |
@@ -27,10 +29,11 @@ message authorization remains pending. The full mission is **not complete**.
 - **Granted and executed:** same-plugin0.4.7 publication/source verification;
   recovery to0.4.6-as0.4.8 authorized if a real regression occurs. No new fees,
   permissions, auth or install were added. Main PR14 remains unmerged.
-- **Pending human answer:** the one request to send the full continuation packet
-  to the already existing Cloud Work trial. Earlier narrow revalidation ran and
-  finished; it is not a currently running background job. Do not send, create a
-  duplicate chat or claim cloud work started while this question is unanswered.
+- **Granted and dispatched:** the actual human “클라우드 인계 승인” reply authorized
+  the full follow-up in the same existing durable Cloud Work trial. It was sent
+  once; official task state is active/inProgress around11:03 KST. Monitor that
+  exact run, do not create a duplicate or treat a transient observation timeout
+  as a stopped task. The full objective and prior acceptance evidence were sent.
 - **Received recipient evidence:** actual user reply confirms download and normal
   opening of the private photo PPTX. No repeated opening question needed; exact
   font/visual/edit approval was not inferred.
@@ -46,7 +49,9 @@ message authorization remains pending. The full mission is **not complete**.
 ## Work and recovery discipline
 
 Reuse verified evidence; do not repeat successful fixtures or unchanged failed
-endpoint/UI paths as progress. No live process is awaiting completion now.
+endpoint/UI paths as progress. The existing durable cloud continuation is now
+actually running; inspect its authoritative handle rather than inferring status
+from this historical checklist.
 Source-only, official saved source, installed local, installed cloud and actual
 recipient use are separate layers. Existing originals, private assets and all
 recovery versions remain preserved. Do not create a replacement plugin, enable a
