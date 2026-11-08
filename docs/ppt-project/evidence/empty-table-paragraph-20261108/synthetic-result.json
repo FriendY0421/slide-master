@@ -1,0 +1,44 @@
+{
+  "scope": "synthetic structural fault probe; not native rendering",
+  "results": [
+    {
+      "case": "correct",
+      "guard_errors": 0,
+      "kinds": [],
+      "pass": true
+    },
+    {
+      "case": "missing_mark",
+      "guard_errors": 1,
+      "kinds": [
+        "EMPTY_CELL_STYLE_UNVERIFIED"
+      ],
+      "pass": true
+    },
+    {
+      "case": "oversized_18pt",
+      "guard_errors": 1,
+      "kinds": [
+        "EMPTY_CELL_FONT_SIZE"
+      ],
+      "pass": true
+    },
+    {
+      "case": "wrong_ea_family",
+      "guard_errors": 1,
+      "kinds": [
+        "EMPTY_CELL_FONT_SLOT"
+      ],
+      "pass": true
+    },
+    {
+      "case": "missing_ea",
+      "guard_errors": 1,
+      "kinds": [
+        "EMPTY_CELL_STYLE_UNVERIFIED"
+      ],
+      "pass": true
+    }
+  ],
+  "passed": true
+}

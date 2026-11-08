@@ -69,6 +69,8 @@ class DenseInspector:
                 or len(set(self.font_slots)) != len(self.font_slots)):
             raise ValueError("required_font_slots must be a unique list of latin, ea, cs")
         self.font_slot_runs = 0
+        self.empty_table_paragraphs = 0
+        self.empty_table_style_requested = False
 
     def issue(self, kind: str, target: str, detail: str, *, preference: bool = False) -> None:
         (self.warnings if preference else self.errors).append(
@@ -330,7 +332,54 @@ class DenseInspector:
             if gap < low-self.tolerance or gap > high+self.tolerance:
                 self.issue("LAYOUT_SPACING", target, f"{first} to {second}: {gap:.2f}pt outside [{low},{high}]")
 
+    def empty_table_paragraph_style(self, body: ET.Element, target: str,
+                                    expected: dict, is_header: bool) -> None:
+        """Check paragraph marks that can enlarge otherwise blank native cells.
+
+        Explicitly opt-in: this does not resolve master inheritance or modify a
+        package, and an explicit font in an empty run is not a paragraph mark.
+        """
+        limit = _number(expected.get("max_font_pt", expected["header_max_pt"]),
+                        "empty cell maximum font size", positive=True)
+        if is_header:
+            limit = min(limit, _number(expected["header_max_pt"],
+                                       "empty header maximum font size", positive=True))
+        wanted = expected.get("header_pt" if is_header else "body_pt")
+        if wanted is not None:
+            wanted = _number(wanted, "empty cell font size", positive=True)
+        slots = self.font_slots or ["latin", "ea"]
+        paragraphs = body.findall("a:p", NS)
+        if not paragraphs:
+            self.issue("EMPTY_CELL_STYLE_UNVERIFIED", target, "Missing native paragraph")
+        for number, paragraph in enumerate(paragraphs, 1):
+            if "".join(t.text or "" for t in paragraph.findall(".//a:t", NS)).strip():
+                continue
+            self.empty_table_paragraphs += 1
+            mark = paragraph.find("a:endParaRPr", NS)
+            label = f"{target}:P{number}"
+            if mark is None or not mark.get("sz"):
+                self.issue("EMPTY_CELL_STYLE_UNVERIFIED", label,
+                           "Explicit paragraph-end size required; empty runs do not prove final row height")
+                continue
+            size = _number(mark.get("sz"), "empty paragraph size", positive=True) / 100
+            if size > limit + 0.01 or (wanted is not None and abs(size - wanted) > 0.01):
+                self.issue("EMPTY_CELL_FONT_SIZE", label,
+                           "Paragraph-end size differs from requested table role")
+            for slot in slots:
+                face = mark.find(f"a:{slot}", NS)
+                family = face.get("typeface") if face is not None else None
+                if not family or family.startswith("+"):
+                    self.issue("EMPTY_CELL_STYLE_UNVERIFIED", label,
+                               f"Explicit paragraph-end {slot} typeface required")
+                elif family != self.contract["font_family"]:
+                    self.issue("EMPTY_CELL_FONT_SLOT", label,
+                               f"Paragraph-end {slot} differs from requested family")
+
     def table(self, shape: ET.Element, target: str, expected: dict) -> None:
+        check_empty = expected.get("require_empty_cell_paragraph_style", False)
+        if not isinstance(check_empty, bool):
+            raise ValueError("require_empty_cell_paragraph_style must be boolean")
+        self.empty_table_style_requested |= check_empty
         table = shape.find("a:graphic/a:graphicData/a:tbl", NS)
         if table is None:
             raise ValueError(f"{target}: required editable native table is missing")
@@ -354,6 +403,12 @@ class DenseInspector:
                 identity = (r, col)
                 continuation = cell.get("hMerge") == "1" or cell.get("vMerge") == "1"
                 body = cell.find("a:txBody", NS)
+                if check_empty:
+                    if body is None:
+                        raise ValueError("Native table cell text body missing")
+                    self.empty_table_paragraph_style(
+                        body, f"{target}:R{r+1}C{col+1}", expected,
+                        r < expected.get("header_rows", 1))
                 if identity in covered:
                     if not continuation or "".join(body.itertext()).strip():
                         self.issue("MERGE_CONTINUATION", target,
@@ -538,6 +593,13 @@ def inspect_pptx(path: Path, contract: dict, base: Path) -> dict:
             "inherited_typefaces_verified": False,
             "glyph_coverage_verified": False,
             "native_chart_text_verified": False,
+        }
+    if inspector.empty_table_style_requested:
+        report["empty_table_paragraph_check"] = {
+            "checked_empty_paragraphs": inspector.empty_table_paragraphs,
+            "scope": "contract-selected native tables, including merge continuations",
+            "inherited_styles_resolved": False,
+            "native_row_height_verified": False,
         }
     if preservation is not None:
         if (report["deck_sha256"] != preservation["candidate_sha256"]

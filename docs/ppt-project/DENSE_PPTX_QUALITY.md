@@ -161,6 +161,29 @@ Mixed-family text needs its own supported contract rather than a false pass
 under a single-family task. Full [precision design guidance](../../.claude/skills/ppt-master/references/precision-design.md)
 keeps visual judgment separate from these mechanical checks.
 
+### Opt-in empty native table paragraph marks
+
+For a task that requires fixed header/body typography, add
+`"require_empty_cell_paragraph_style": true` to each selected table object's
+contract. The existing inspector then checks every blank paragraph, including
+merge continuations, for explicit `a:endParaRPr` size and requested typefaces.
+It uses `header_pt`/`body_pt`, the existing maxima, and `required_font_slots`
+(Latin/EA if omitted). No company font or size is globally forced. Nonboolean
+flags fail verification. Without the flag, behavior and report remain unchanged.
+
+This covers otherwise invisible paragraph marks that can cause native row
+expansion even when all visible runs are correct. Missing/inherited end style
+reports `EMPTY_CELL_STYLE_UNVERIFIED`; wrong size/family reports
+`EMPTY_CELL_FONT_SIZE`/`EMPTY_CELL_FONT_SLOT`. A styled empty `a:r` is not the
+paragraph-end marker. Preserve the source text, values and blank cells; do not
+insert zeros, shrink text or discard a paragraph to silence the finding.
+
+`empty_table_paragraph_check` reports coverage separately. This is structural
+verification, not a row-height prediction or native font/render certification.
+It changes no file. Reuse the existing native owner to correct explicit style,
+then inspect exact final bytes in the renderer and PowerPoint where available.
+See [source-only validation evidence](EMPTY_TABLE_PARAGRAPH_GUARD_20261108.md).
+
 For the supplied runtime's Windows native exit problem, reuse the process-checked
 CPU review helper and opt-in `verify_deck.py --review-*` path documented in
 [renderer continuation](RENDERER_CONTINUATION_20261013.md). It never installs

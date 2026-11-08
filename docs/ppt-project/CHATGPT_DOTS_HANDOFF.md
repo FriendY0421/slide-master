@@ -1,5 +1,13 @@
 # Slide Master handoff for ChatGPT and DOTS
 
+Source follow-up after the actual photo job:
+[empty table paragraph guard](EMPTY_TABLE_PARAGRAPH_GUARD_20261108.md) adds an
+opt-in check to the existing dense inspector. Existing pre-correction private
+bytes fail25 marks, corrected delivery bytes pass the same25, and default full
+report compatibility is verified. Source/PR only: installed0.4.6 is unchanged.
+Next rollout preparation must inspect current official source, preserve recovery
+and package checker/instruction together; do not imply managed-cache uptake.
+
 Latest human clarification (2026-11-08): newer requests override conflicting
 older worklist items; compatible requirements/evidence remain. Full-scope
 runtime Goal was actually recreated after the user's explicit reaffirmation.

@@ -1,0 +1,20 @@
+{
+  "default_complete_report_unchanged": true,
+  "real_private_existing_previously_native_rendered_decks": [
+    {
+      "revision": "v4",
+      "new_guard_errors": 25,
+      "checked_empty_paragraphs": 25,
+      "original_unchanged": true
+    },
+    {
+      "revision": "v5",
+      "new_guard_errors": 0,
+      "checked_empty_paragraphs": 25,
+      "original_unchanged": true
+    }
+  ],
+  "native_render_repeated": false,
+  "company_content_published": false,
+  "plugin_applied": false
+}
