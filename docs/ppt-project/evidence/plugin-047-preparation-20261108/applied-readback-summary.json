@@ -1,0 +1,45 @@
+{
+  "saved_version": "0.4.7",
+  "official_readback_matches_candidate_files": 29,
+  "equivalent_format_normalization": [
+    {
+      "path": ".codex-plugin/plugin.json",
+      "type": "json_serialization"
+    },
+    {
+      "path": "plugin.json",
+      "type": "line_endings"
+    },
+    {
+      "path": "skills/instructions/references/06_GPTS_TEST_SCENARIOS.md",
+      "type": "line_endings"
+    },
+    {
+      "path": "skills/instructions/references/10_HOST_PRODUCTION_DELIVERY.md",
+      "type": "line_endings"
+    },
+    {
+      "path": "skills/instructions/references/12_PRECISION_DESIGN.md",
+      "type": "line_endings"
+    }
+  ],
+  "same_identity_and_app_declaration": true,
+  "saved_source_cli_runs": [
+    {
+      "fixture": "correct",
+      "exit_code": 0,
+      "errors": 0
+    },
+    {
+      "fixture": "oversized_18pt",
+      "exit_code": 1,
+      "errors": 1
+    }
+  ],
+  "observed_local_cache_versions": [
+    "0.4.6"
+  ],
+  "installed047_verified": false,
+  "live_rollback_executed": false,
+  "new_install_permission_cost": false
+}

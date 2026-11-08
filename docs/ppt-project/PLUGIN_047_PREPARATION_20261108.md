@@ -1,4 +1,10 @@
-# Empty-table guard: same-plugin 0.4.7 candidate, not published
+# Empty-table guard: same-plugin0.4.7 preparation history
+
+Subsequent user approval and official save/readback:
+[PLUGIN_047_APPLIED_20261108.md](PLUGIN_047_APPLIED_20261108.md).
+The source/authorization statements below describe the preceding preparation
+checkpoint. Installed uptake remains separately pending.
+
 
 Read the current official inventory and all29 text files through Plugin Creator;
 same USER/PRIVATE0.4.6 and current release remain unchanged. All29 files match

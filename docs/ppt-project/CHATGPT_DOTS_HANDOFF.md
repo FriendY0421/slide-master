@@ -1,5 +1,11 @@
 # Slide Master handoff for ChatGPT and DOTS
 
+Latest authorized save: [same private plugin0.4.7 applied/read back](PLUGIN_047_APPLIED_20261108.md).
+All29 official files verified with explicitly equivalent formatting; saved-source
+positive/negative CLI pass. Local cache still0.4.6 at last observation; actual
+installed0.4.7 and cloud uptake are pending. Do not republish or patch cache.
+
+
 Source follow-up after the actual photo job:
 [empty table paragraph guard](EMPTY_TABLE_PARAGRAPH_GUARD_20261108.md) adds an
 opt-in check to the existing dense inspector. Existing pre-correction private

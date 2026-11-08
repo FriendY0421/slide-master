@@ -36,11 +36,11 @@ conflicting old plans. Core source guard commit is
 3. Candidate design: existing checker plus existing precision/production guidance
    teach task-scoped `require_empty_cell_paragraph_style`. Preserve identity,
    App dependencies, permissions, defaults, all other files and production owners.
-   Candidate version0.4.7 and restore-current0.4.6-as0.4.8 are now built and tested
-   locally and privately backed up with raw-download SHA verification. Publication
-   remains pending user approval. Cloud must retrieve the authorized capsule or
-   rebuild from its own actual official baseline, without overwriting historical
-   recovery archives.
+   Same private plugin0.4.7 was now explicitly approved, saved and all29 official
+   source files read back; see PLUGIN_047_APPLIED_20261108.md. Do not republish it.
+   Local cache at last check remained0.4.6, so cloud must inspect its own actual
+   installed version before executing. Restore-current0.4.6-as0.4.8 is preserved
+   in the verified private capsule; no regression or live rollback occurred.
 4. Test default complete-report compatibility and fault coverage in existing
    supplied runtimes. Public probe uses the existing synthetic mixed deck; no
    install, external model, new inference key or paid resource. The exact
