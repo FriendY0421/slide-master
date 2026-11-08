@@ -1,5 +1,11 @@
 # Slide Master handoff for ChatGPT and DOTS
 
+Latest human clarification (2026-11-08): newer requests override conflicting
+older worklist items; compatible requirements/evidence remain. Full-scope
+runtime Goal was actually recreated after the user's explicit reaffirmation.
+Use [the scope and precedence rules](ACTIVE_GOAL_SCOPE_20261107.md), including
+ordered FAH follow-on and unchanged concrete approval/privacy boundaries.
+
 Latest actual callback supersedes the intermediate missing-receipt status below:
 [original Picker automatic return accepted](PICKER_AUTOMATIC_RETURN_ACCEPTANCE_20261108.md).
 Both real App model-context and message arrived in this intended chat after the

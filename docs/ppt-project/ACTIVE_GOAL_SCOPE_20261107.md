@@ -1,11 +1,32 @@
 # Standing scope — full Slide Master delivery mission
 
 The user clarified that the project covers the **whole previously planned
-mission**, not just the currently prioritized Picker/cloud milestone. On
-2026-11-08 the user cleared the runtime Goal and restated the full project
-mission; this repository record remains the standing acceptance scope and does
-not assert that a runtime Goal is active. Do not declare the overall goal complete when
-only that milestone or a source change finishes.
+mission**, not just the currently prioritized Picker/cloud milestone. After
+clearing the earlier runtime Goal, the user explicitly reaffirmed Goal-mode
+execution of the GitHub worklist through completion on 2026-11-08. A new full-
+scope runtime Goal has now actually been created. This file is its repository
+acceptance scope. Do not declare the overall goal complete when only a milestone
+or source change finishes.
+
+## Latest-user-request precedence — explicit clarification 2026-11-08
+
+- If an older plan/worklist and a newer human request conflict, execute the newer
+  request. Retain compatible older requirements and completed evidence.
+- Record superseded, deferred or replaced work and its reason; do not silently
+  delete history, repeat already successful checks, or revive an older blocker
+  after newer real evidence resolves it.
+- In particular, indefinite FAH deferral is superseded by the user's ordered
+  follow-on below; it is not permission to skip Slide Master acceptance or
+  deploy/merge before a required concrete approval.
+- Current local-first operation, temporary approved Pretendard tests, photo-
+  based production without an original PPTX, and actual delayed Picker receipt
+  supersede conflicting earlier prerequisites/statuses within their scopes.
+  Samsung-specific rights/rendering and exact original-master preservation
+  remain separate unmet conditions, not fabricated passes or blanket blockers
+  on font-independent work.
+- Latest requests do not implicitly expand new spending, permission, auth,
+  installation, hosting or publication scope. Continue independent authorized
+  work and group any genuinely necessary approval with target/impact/recovery.
 
 | Acceptance stage | Evidence still required / current boundary |
 | --- | --- |
