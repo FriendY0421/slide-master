@@ -5,8 +5,10 @@ Source follow-up after the actual photo job:
 opt-in check to the existing dense inspector. Existing pre-correction private
 bytes fail25 marks, corrected delivery bytes pass the same25, and default full
 report compatibility is verified. Source/PR only: installed0.4.6 is unchanged.
-Next rollout preparation must inspect current official source, preserve recovery
-and package checker/instruction together; do not imply managed-cache uptake.
+Current official29-file source was re-read; same-plugin0.4.7 checker/instruction
+candidate and0.4.8 recovery are built/tested/private-Drive-verified. Publication
+and existing cloud follow-up authorization were concretely requested and remain
+pending. See PLUGIN_047_PREPARATION_20261108.md; no managed-cache uptake yet.
 
 Latest human clarification (2026-11-08): newer requests override conflicting
 older worklist items; compatible requirements/evidence remain. Full-scope

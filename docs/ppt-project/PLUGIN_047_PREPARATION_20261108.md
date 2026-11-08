@@ -56,3 +56,20 @@ patch managed caches. No live rollback was executed here.
 The [PC-off continuation packet](PC_OFF_CLOUD_CONTINUATION_20261108.md) lets the
 existing Cloud Work trial rebuild/verify from its own actual tools after an
 authorized handoff. A Windows path alone is not a cloud file or durable transfer.
+
+
+## Durable recovery and concrete pending approvals
+
+Baseline/candidate/recovery ZIPs plus manifest/preparation evidence are now
+bundled in a262,914-byte private Drive recovery capsule. Metadata confirms
+shared=false/owner-only; actual raw re-download SHA matches the local capsule.
+The [sanitized receipt](evidence/plugin-047-preparation-20261108/recovery-verified.json)
+contains no private URL or account identifier. No fonts/company data/keys or
+runtime binary are included. Existing historical archives remain unchanged.
+
+The user has been asked once to approve same-plugin0.4.6→0.4.7 publication,
+source/actual-install verification and guarded restore0.4.6-as0.4.8 on regression.
+That question excludes new installs/permissions/fees, FAH deployment and PR
+merge. It is pending, not authorized by an unanswered prompt. A separate existing
+Cloud Work follow-up message authorization is also pending; no handoff/start
+is claimed. Prepare/read-only work may continue within existing scope.
