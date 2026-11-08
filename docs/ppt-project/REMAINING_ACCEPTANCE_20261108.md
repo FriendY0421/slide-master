@@ -15,8 +15,10 @@ recipient has now supplied the download/opening answer and explicitly approved
 cloud continuation. The actual follow-up was sent to the existing durable trial;
 official compact status initially confirmed active/inProgress, but that turn
 then completed with an unavailable executor and is now idle/completed. Read-only
-checks succeeded; code/render continuation is blocked. See
-[CLOUD_CONTINUATION_BLOCKER_20261108.md](CLOUD_CONTINUATION_BLOCKER_20261108.md).
+checks succeeded in that older trial. The separately approved single Codex Cloud
+task subsequently executed successfully; its source/render evidence is recorded
+in [the current cloud report](CODEX_CLOUD_FAH_PREPARATION_20261108.md).
+The older [executor blocker](CLOUD_CONTINUATION_BLOCKER_20261108.md) remains historical.
 The full mission is **not complete**.
 
 | Requirement | Actual status / evidence | Remaining real condition |
@@ -28,9 +30,9 @@ The full mission is **not complete**.
 | Actual final QA and editability | Final reimport/render;166 inspected regions/zero mechanical errors with warnings retained. Actual PowerPoint16.0 copy text/table/chart edit→save→reopen; final bytes preserved. | Native exact Pretendard rendering unverified because that Windows family is absent. Do not call temporary-font results Samsung certification. |
 | Empty table row-expansion recurrence | Per-job paragraph-end correction actually rerendered in PowerPoint; source guard catches25 bad versus0 corrected marks. Guard now saved in0.4.7. [Guard](EMPTY_TABLE_PARAGRAPH_GUARD_20261108.md). | Actual local installed0.4.7 execution is verified. The guard reports a defect; it is not a global auto-repair/row-height certification engine. |
 | Private delivery / recipient | Actual photo output owner-only/shared=false; raw download SHA equals final. User now explicitly confirms download and normal opening of the delivered file. | Recipient opening passed by actual human reply. This is not exact-font/visual approval or recipient data-edit verification; do not ask opening again. |
-| Cloud Work execution | Actual installed/loaded0.4.6 Linux task/tmp write probes, dense positive/negative,2-page exact-file render and private Office raw download passed. [Cloud](PICKER_RETURN_CLOUD_CONTINUATION_20261108.md). | This is existing synthetic verification, not fresh-photo production or Aro identity. Cloud0.4.7 installed uptake and further continuation are unverified. |
+| Cloud Work execution | Actual installed/loaded0.4.6 Linux task/tmp write probes, dense positive/negative,2-page exact-file render and private Office raw download passed. [Cloud](PICKER_RETURN_CLOUD_CONTINUATION_20261108.md). | This is existing synthetic verification, not fresh-photo production or Aro identity. The separately approved Codex Cloud task passed source probes and two-page conversion; installed cloud0.4.7 uptake remains unverified. |
 | Aro/Dot target | User-relayed non-HOME-PC inventory and full in-memory capsule hash received. Reported actual cache0.4.3, guidance0.4.6, write/extract/render blocked. [Bounded diagnosis](ARO_CLOUD_REPORT_20261108.md). | Need actual failing tool/path/errno or an existing authorized writable task/temp path on that computer. Current connector exposes HOME-PC only; no agent/credentials/permission migration authorized. |
-| PC-off use | Existing Cloud Work stages need no PC tools. Original Picker server/tunnel and Windows PowerPoint remain PC-bound; exact test-owned sessions are stopped. [PC-off packet](PC_OFF_CLOUD_CONTINUATION_20261108.md). | Existing real-preview/manual-confirmation fallback is available as a distinct route; actual intended-cloud trial needs the pending authorized continuation. Same-App always-on hosting needs a concrete target/permission/recovery decision, not a renamed fallback. |
+| PC-off use | Existing Cloud Work stages need no PC tools. Original Picker server/tunnel and Windows PowerPoint remain PC-bound; exact test-owned sessions are stopped. [PC-off packet](PC_OFF_CLOUD_CONTINUATION_20261108.md). | Existing real-preview/manual-confirmation fallback is available as a distinct route; the new Codex Cloud source/render trial passed. This does not establish Aro identity or always-on original Picker hosting. Same-App always-on hosting needs a concrete target/permission/recovery decision, not a renamed fallback. |
 | Durable recovery | Original0.4.6, candidate0.4.7, restore0.4.6-as0.4.8 in private262,914-byte capsule, owner-only/raw SHA verified. Earlier backups retained. | No live rollback needed; if regression, use then-current release guard and approved higher0.4.8 restore. Historical restore0.4.5-as0.4.7 is not current recovery. |
 | FAH follow-on | Latest user direction supersedes indefinite old deferral: finish applicable Slide Master acceptance, then inspect/reuse actual FAH contracts and validate private PPT delivery. | No FAH source/service changed or deployed. Do not skip actual actor/file/current-approval/private-delivery contracts, or infer approval for a new fee/permission/deploy/merge. |
 
@@ -43,8 +45,10 @@ The full mission is **not complete**.
   the full follow-up in the same existing durable Cloud Work trial. It was sent
   once, initially active around11:03 KST, then authoritatively completed/idle with
   unavailable execution environment. No repeated failed command or new task.
-  A saved ready/runnable Codex Cloud configuration needs separate new-task
-  authorization; existing-trial-only consent is not that authorization.
+  The user then separately authorized exactly one task using the existing saved
+  configuration. That task completed real source probes/render conversion and
+  read-only FAH preparation, pushed commit f066c6c, and is now idle/completed.
+  There is no claimed running background production process.
 - **Received recipient evidence:** actual user reply confirms download and normal
   opening of the private photo PPTX. No repeated opening question needed; exact
   font/visual/edit approval was not inferred.
@@ -60,10 +64,10 @@ The full mission is **not complete**.
 ## Work and recovery discipline
 
 Reuse verified evidence; do not repeat successful fixtures or unchanged failed
-endpoint/UI paths as progress. The existing durable cloud continuation is now
-authoritatively idle/completed after an unavailable-executor result. There is
-no live code/render process to wait on; use a changed availability condition or
-explicit new-task approval before retrying.
+endpoint/UI paths as progress. The old durable trial and the separately approved completed Codex Cloud task
+are distinct executor records. Both are now idle/completed; there is no live
+code/render process to wait on. The user has reconnected the PC, so local-first
+work resumes from the cloud commit without another cloud task or repeated probes.
 Source-only, official saved source, installed local, installed cloud and actual
 recipient use are separate layers. Existing originals, private assets and all
 recovery versions remain preserved. Do not create a replacement plugin, enable a
@@ -71,3 +75,17 @@ persistent service, copy credentials, merge, or alter other projects to bypass
 an external condition. Group any genuinely necessary approval with the exact
 target/change/impact/cost/recovery. Keep company files/fonts/private URLs out of
 public GitHub; only sanitized task evidence belongs on existing PR14.
+
+
+## Local-first resume after PC reconnection
+
+The user confirmed the PC is connected again. The existing local checkout was
+clean and fast-forwarded from 60fdb78 to f066c6c; prior files/history were retained.
+No plugin/runtime was republished and no FAH source or operational state changed.
+A read-only connected-plugin search did not return an FAH-specific plugin.
+A separate capability-discovery connector required reauthentication and was
+stopped without retry, login, permission change or credential extraction.
+The existing desktop window inventory contained no FAH web page; logged-in
+FAH attachment/private-delivery UI is therefore unverified, not absent by proof.
+Next work still needs the real authenticated attachment/production/private-output
+contract described in the cloud preparation; no caller-supplied identity is used.
