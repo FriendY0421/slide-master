@@ -1,4 +1,12 @@
-# PC shutdown: existing Cloud Work continuation actually dispatched
+# PC shutdown: existing Cloud Work continuation dispatched, then blocked
+
+**Current result:** that turn completed; subsequent official task readback is
+idle/completed. Cloud reports “No usable execution environment” before process
+startup. Read-only connected checks succeeded, executable work did not. See
+[CLOUD_CONTINUATION_BLOCKER_20261108.md](CLOUD_CONTINUATION_BLOCKER_20261108.md)
+for the concrete separately approved alternative. The initial active state below
+is historical, not a current background-work claim.
+
 
 2026-11-08 KST: the user explicitly answered “클라우드 인계 승인”. The follow-up
 was sent to the same existing durable Cloud Work trial, with the full unchanged

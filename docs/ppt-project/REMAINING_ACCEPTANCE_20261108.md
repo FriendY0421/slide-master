@@ -6,8 +6,11 @@ Latest human requests take precedence under [the standing goal](ACTIVE_GOAL_SCOP
 The runtime Goal was marked blocked after three unanswered-input audits; the
 recipient has now supplied the download/opening answer and explicitly approved
 cloud continuation. The actual follow-up was sent to the existing durable trial;
-official compact status confirms a new active/inProgress turn. The full mission
-is **not complete**; source-local Goal status is not a cloud migration receipt.
+official compact status initially confirmed active/inProgress, but that turn
+then completed with an unavailable executor and is now idle/completed. Read-only
+checks succeeded; code/render continuation is blocked. See
+[CLOUD_CONTINUATION_BLOCKER_20261108.md](CLOUD_CONTINUATION_BLOCKER_20261108.md).
+The full mission is **not complete**.
 
 | Requirement | Actual status / evidence | Remaining real condition |
 | --- | --- | --- |
@@ -31,9 +34,10 @@ is **not complete**; source-local Goal status is not a cloud migration receipt.
   permissions, auth or install were added. Main PR14 remains unmerged.
 - **Granted and dispatched:** the actual human “클라우드 인계 승인” reply authorized
   the full follow-up in the same existing durable Cloud Work trial. It was sent
-  once; official task state is active/inProgress around11:03 KST. Monitor that
-  exact run, do not create a duplicate or treat a transient observation timeout
-  as a stopped task. The full objective and prior acceptance evidence were sent.
+  once, initially active around11:03 KST, then authoritatively completed/idle with
+  unavailable execution environment. No repeated failed command or new task.
+  A saved ready/runnable Codex Cloud configuration needs separate new-task
+  authorization; existing-trial-only consent is not that authorization.
 - **Received recipient evidence:** actual user reply confirms download and normal
   opening of the private photo PPTX. No repeated opening question needed; exact
   font/visual/edit approval was not inferred.
@@ -50,8 +54,9 @@ is **not complete**; source-local Goal status is not a cloud migration receipt.
 
 Reuse verified evidence; do not repeat successful fixtures or unchanged failed
 endpoint/UI paths as progress. The existing durable cloud continuation is now
-actually running; inspect its authoritative handle rather than inferring status
-from this historical checklist.
+authoritatively idle/completed after an unavailable-executor result. There is
+no live code/render process to wait on; use a changed availability condition or
+explicit new-task approval before retrying.
 Source-only, official saved source, installed local, installed cloud and actual
 recipient use are separate layers. Existing originals, private assets and all
 recovery versions remain preserved. Do not create a replacement plugin, enable a
