@@ -10,13 +10,13 @@ only that milestone or a source change finishes.
 | Acceptance stage | Evidence still required / current boundary |
 | --- | --- |
 | Existing plugin and recovery | Keep same identity, features and backups; 0.4.5 originals retained. Subsequent 0.4.6 official save and all 29 actual local installed files verified; see PLUGIN_046_APPLIED_20261108.md. |
-| Template or CUSTOM intake | Real registered previews and explicit template/preset return, or authorized source-based route. Do not invent attachment/user identifiers. |
+| Template or CUSTOM intake | Real previews/manual pair and approved photo route evidenced; subsequent actual App model-context plus message confirms bounded delayed automatic return. No invented attachment/user identifiers. |
 | Purpose/count/fonts/format | Confirm together using actual task inputs; preserve company-specific 14/12/11/9pt only where requested. |
 | Analysis and storyline | Preserve source text/numbers/layout, mark unreadable content, obtain real confirmation of the current revision. |
 | Production | Existing owner creates native editable text/table/diagram/chart within the approved scope. |
 | Quality | Same dense sample, actual font/spacing/crop/layout checks, exact-byte reopen/render and documented native-app editability. Samsung and company-original conditions remain separate. |
 | Private delivery | Verified file ownership/access, raw download/hash and actual recipient-open confirmation. Synthetic assistant-side delivery is not fresh-user completion. |
-| Cloud use | Distinguish independent cloud stages from PC loopback Picker/Windows PowerPoint. Verify an approved PC-independent selection route; no unsupported always-on hosting claim. |
+| Cloud use | Cloud Work installed0.4.6 write/render/private delivery evidenced; distinguish from PC loopback Picker/Windows PowerPoint. Original Picker automatic return passed in this local test, not PC-off/Aro hosting. |
 | Operations and handoff | Record exact source/release, applied/unapplied changes, failures, recovery, costs/permissions and remaining conditions on existing PR #14. |
 
 Improve the approach when evidence supports a better recommendation. Reuse

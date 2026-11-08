@@ -1,5 +1,13 @@
 # Slide Master handoff for ChatGPT and DOTS
 
+Latest actual callback supersedes the intermediate missing-receipt status below:
+[original Picker automatic return accepted](PICKER_AUTOMATIC_RETURN_ACCEPTANCE_20261108.md).
+Both real App model-context and message arrived in this intended chat after the
+previous assistant final, with the same real user-selected pair and generation
+blocked. Earlier in-progress readback was a premature final-delivery boundary,
+not proof of permanent loss. PC-off original Picker/Aro remain separate.
+
+
 Latest continuation: [Picker return repair / actual Cloud Work0.4.6 check](PICKER_RETURN_CLOUD_CONTINUATION_20261108.md).
 Existing Cloud Work now has actual installed0.4.6 write/render/private-download
 proof; it is not proven to be Aro/Dot. Original Picker source/bundle has a bounded

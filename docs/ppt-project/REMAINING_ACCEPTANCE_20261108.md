@@ -1,5 +1,11 @@
 # Remaining real-user acceptance and resumption
 
+Latest: [actual original Picker automatic callback received](PICKER_AUTOMATIC_RETURN_ACCEPTANCE_20261108.md).
+This supersedes intermediate missing-return statements below: real model-context
+and message arrived after the prior assistant final. Bounded host return is now
+passed; PC-off hosting and Aro identity/write acceptance remain open.
+
+
 Subsequent input has arrived: [actual App render signal/manual selection/private
 photo analysis](USER_ACCEPTANCE_INPUTS_20261108.md) and [Aro cloud inventory/write
 limitation report](ARO_CLOUD_REPORT_20261108.md). The previous missing-input stop
@@ -43,7 +49,7 @@ package remain preserved. Source is on existing Draft PR #14; main is not merged
 
 | Condition | Already attempted / evidence | Minimum real next input or action |
 | --- | --- | --- |
-| Actual selection receipt | Actual original App render signal and user-copied pair now received; existing server and recorder validate training_playbook/balanced_report with generation=false. Automatic delivery root cause remains unestablished. | Manual confirmation is complete; do not re-ask it. Keep automatic delivery as a separate unverified behavior. |
+| Actual selection receipt | Actual original App render signal and user-copied pair now received; existing server and recorder validate training_playbook/balanced_report with generation=false. A subsequent real user click produced matching actual App model-context and message after the prior assistant final. | Manual and bounded actual automatic return are complete. Do not re-ask selection or claim PC-off/multi-host reliability from this one delayed receipt. |
 | Fresh actual-input flow | Current private photo proposal v1 explicitly approved; editable one-slide production, exact-file reimport/render, native PowerPoint copy-edit/save/reopen and private raw-download hash verification completed. Recipient opening is pending. | Ask only whether the user can download/open the delivered PPTX and which illegible text to resolve. A company original PPTX is not required for the completed photo route; exact original-master comparison remains unavailable. |
 | Actual Aro/Dot execution | User supplied Aro's non-HOME-PC cloud inventory and memory-download hash report. Cache 0.4.3/guidance 0.4.6 remain distinct; save/extract/render blocked by reported read-only filesystem. This local task still cannot directly target it. | Aro should identify the exact write error and existing authorized task/temp paths. Use the bounded diagnosis in ARO_CLOUD_REPORT_20261108.md; do not install an agent, alter mounts/permissions or copy credentials. |
 | PC-off original Picker | Existing saved tunnel points to the PC's loopback server. Cloud direct review and no-server preview alternatives do not relocate it. | Prefer existing no-server real-preview/manual-confirmation fallback for a bounded trial on the actual target. If persistent same-App hosting is still required, establish a concrete approved host and official mapping before any credential/service change. |

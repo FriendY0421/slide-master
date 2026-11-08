@@ -1,12 +1,12 @@
 {
-  "scope": "existing original Picker runtime source/bundle and served-resource verification; isolated bridge tests are not host acceptance",
+  "scope": "existing original Picker runtime, isolated regression tests, and actual delayed host model-context/message receipt",
   "bridge_cases": 8,
   "bridge_failures": 0,
   "safety_cases": 16,
   "safety_failures": 0,
   "actual_host_tool_success": true,
   "catalog_entries": 21,
-  "actual_automatic_pair_received": false,
+  "actual_automatic_pair_received": true,
   "server_source_unchanged": true,
   "new_install_permission_cost": false,
   "hashes": {
@@ -15,7 +15,7 @@
     "server": "5bcf46fae77334c91ec34624f4444586999d9ea678466da5837bb098276b339f"
   },
   "user_reported_real_confirm_click": true,
-  "automatic_pair_present_in_local_chat": false,
+  "automatic_pair_present_in_local_chat": true,
   "automatic_pair_present_in_existing_trial_parent_recent_turns": false,
   "last_screen_diagnostic_requested": false,
   "owned_test_sessions_stopped": true,
@@ -28,5 +28,22 @@
   },
   "diagnostic_pair_is_automatic_receipt": false,
   "diagnostic_pair_is_production_approval": false,
-  "automatic_return_passed": false
+  "automatic_return_passed": true,
+  "actual_app_model_context_received": true,
+  "actual_app_message_received": true,
+  "matching_pair_in_both_app_events": true,
+  "actual_pair": {
+    "template": "deck:modern_corporate_blue",
+    "preset": "data_insight"
+  },
+  "actual_event_workflow": {
+    "next_state": "WAIT_STORYLINE_PREVIEW",
+    "generation_allowed": false
+  },
+  "receipt_arrived_after_previous_assistant_final": true,
+  "prior_in_progress_local_readback_had_pair": false,
+  "exact_delay_seconds_measured": false,
+  "host_queue_cause_confirmed": false,
+  "pc_off_original_picker_verified": false,
+  "new_pptx_generated_from_test_selection": false
 }

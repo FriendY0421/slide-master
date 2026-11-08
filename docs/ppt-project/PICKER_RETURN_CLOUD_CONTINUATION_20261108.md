@@ -1,5 +1,11 @@
 # Picker return repair and actual Cloud Work 0.4.6 verification
 
+**Later actual result:** matching original-App model-context and selection
+message arrived in the intended chat after the prior assistant final. See
+[PICKER_AUTOMATIC_RETURN_ACCEPTANCE_20261108.md](PICKER_AUTOMATIC_RETURN_ACCEPTANCE_20261108.md).
+The intermediate missing-receipt observation below is historical and superseded.
+
+
 This continues existing PR #14 with the same original Picker and main plugin.
 No company input, font, private download URL or credential is included here.
 The user explicitly approved messaging the existing cloud trial for this check.
@@ -97,8 +103,8 @@ deferral **as a future sequence**, not as an immediate deployment/merge approval
 Use the [standing full scope](ACTIVE_GOAL_SCOPE_20261107.md). The user's runtime
 Goal was cleared; repository scope remains valid without claiming a Goal active.
 
-Next evidence: real Picker-selected pair automatically arriving in the intended
-chat; recipient opening of the delivered actual photo PPTX; actual Aro writable
+The bounded real Picker automatic receipt is now evidenced. Remaining evidence:
+recipient opening of the delivered actual photo PPTX; actual Aro writable
 path/errno where that environment is used; Samsung rights only for subsequent
 Samsung-specific acceptance. Existing local photo production is not undone.
 

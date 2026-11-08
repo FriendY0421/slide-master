@@ -1,4 +1,11 @@
-# Original Picker: acknowledged UI requests without intended-chat receipt
+# Original Picker: intermediate missing receipt, later delayed delivery
+
+**Superseded conclusion:** after the previous assistant final, the actual App
+model-context and message arrived in the intended chat with matching pair.
+[Final acceptance record](PICKER_AUTOMATIC_RETURN_ACCEPTANCE_20261108.md).
+The observations below were captured before that arrival; they must not be
+quoted as a currently unresolved permanent delivery failure.
+
 
 ## Observed actual user test
 
@@ -75,7 +82,7 @@ The test's exact owned foreground server/tunnel sessions were stopped after the
 user click, with no remaining listeners on ports3000/8080. Existing plugin,
 runtime backups, server source, keys, auth and permissions remain intact.
 
-For an automatic-return closure, the intended host must supply a working
+At the intermediate missing-receipt point, the proposed investigation needed a working
 `ui/message` delivery path or a verifiable host diagnostic showing the actual
 destination/rejection. This report is prepared on the user's existing PR; no
 external support message/issue, new App, account permission, hosting or payment
