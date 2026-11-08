@@ -1,5 +1,11 @@
 # Slide Master handoff for ChatGPT and DOTS
 
+Current full-goal continuation requires
+[the two pending real inputs](GOAL_RESUMPTION_INPUTS_20261108.md). Three successive
+audits found no new human answer; existing cloud trial is idle/completed, not a
+live wait. Preserve the full objective and resume only relevant authorized work
+when actual input/state changes, rather than repeating passed checks.
+
 Latest actual local uptake: installed0.4.7 and all29 files now verified against
 official source (four line-ending equivalents explicit); actual installed CLI
 default/correct pass and18pt fault blocks. Existing default complete report is
