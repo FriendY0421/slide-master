@@ -52,8 +52,10 @@ The original Picker was reopened for a real user click, **without manufacturing
 a choice or generating a PPTX**. The user then explicitly reported pressing
 confirmation. The current chat and existing trial-parent recent-turn readback
 contain no automatic selected pair. Thus click observation is real, automatic
-return is **not passed**. The final UI acknowledgement/context status was requested
-once to distinguish rejection from acknowledged-but-undelivered messaging; no
+return is **not passed**. The user then supplied the final screen: both context and message show request
+acceptance, yet no automatic pair arrived. See the
+[minimal host-delivery reproduction](PICKER_HOST_DELIVERY_REPRO_20261108.md). The
+quoted diagnostic pair is manual, test-only and not production approval. No
 repeat selection is requested. Exact owned foreground sessions were stopped
 after the click test; ports3000/8080 have no remaining listeners.
 

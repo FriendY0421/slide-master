@@ -5,8 +5,9 @@ Existing Cloud Work now has actual installed0.4.6 write/render/private-download
 proof; it is not proven to be Aro/Dot. Original Picker source/bundle has a bounded
 context-failure/duplicate-send repair and was reopened for actual user return.
 User reports pressing confirm, but no automatic pair appears in this chat or
-the inspected trial-parent recent turns. Final-screen diagnostic is pending;
-owned test sessions have been stopped and ports3000/8080 are clear.
+the inspected trial-parent recent turns. User-provided final-screen diagnostic shows context/message request acceptance,
+but not automatic arrival; see PICKER_HOST_DELIVERY_REPRO_20261108.md. Owned
+test sessions have been stopped and ports3000/8080 are clear.
 User directs FAH integration **after**
 Slide Master acceptance; no FAH deployment or merge has occurred.
 

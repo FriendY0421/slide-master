@@ -17,7 +17,16 @@
   "user_reported_real_confirm_click": true,
   "automatic_pair_present_in_local_chat": false,
   "automatic_pair_present_in_existing_trial_parent_recent_turns": false,
-  "last_screen_diagnostic_requested": true,
+  "last_screen_diagnostic_requested": false,
   "owned_test_sessions_stopped": true,
-  "ports_3000_8080_listeners_after_cleanup": 0
+  "ports_3000_8080_listeners_after_cleanup": 0,
+  "user_reported_message_acknowledgement": true,
+  "user_reported_context_acknowledgement": true,
+  "manual_diagnostic_pair": {
+    "template": "deck:modern_corporate_blue",
+    "preset": "data_insight"
+  },
+  "diagnostic_pair_is_automatic_receipt": false,
+  "diagnostic_pair_is_production_approval": false,
+  "automatic_return_passed": false
 }
