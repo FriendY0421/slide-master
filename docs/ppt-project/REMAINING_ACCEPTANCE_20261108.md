@@ -1,5 +1,11 @@
 # Remaining real-user acceptance and resumption
 
+Subsequent input has arrived: [actual App render signal/manual selection/private
+photo analysis](USER_ACCEPTANCE_INPUTS_20261108.md) and [Aro cloud inventory/write
+limitation report](ARO_CLOUD_REPORT_20261108.md). The previous missing-input stop
+is superseded. Current production waits for approval of photo proposal v1 (or
+revisions/evening samples); cloud writes/render remain unverified.
+
 The full mission is **not complete**. Same existing plugin 0.4.6 is officially
 saved and actually loaded locally, with all 29 installed files matching official
 source. The original 0.4.5, earlier recovery copies and current 0.4.7 recovery
@@ -13,8 +19,9 @@ package remain preserved. Source is on existing Draft PR #14; main is not merged
 - [Original Picker safety fix](PICKER_CONFIRMATION_FIX_20261108.md) and
   [Korean UI](PICKER_KOREAN_UI_20261108.md): original local runtime changed with
   exact patches/backups; isolated cases and actual served resource checked.
-  User reports seeing the success screen. The exact user's template/preset
-  pair did not arrive in this task; mock choices are not user confirmation.
+  User reports seeing the success screen; a later original App render callback
+  and the user's real copied template/preset pair have now arrived. Automatic
+  pair delivery remains unverified; mock choices are never user confirmation.
 - Existing dense synthetic fixture, exact-byte reimport/render, native chart
   editing and private Drive hashes retain their documented scopes. Same-PC
   relocated extraction and Aro's HOME-PC result do not establish Dot execution.
@@ -26,15 +33,15 @@ package remain preserved. Source is on existing Draft PR #14; main is not merged
 
 | Condition | Already attempted / evidence | Minimum real next input or action |
 | --- | --- | --- |
-| Actual selection receipt | Validated current connected payload; fixed explicit rejection handling; user reports success screen; checked existing authorized trial/backing chat and official message defaults. No new pair found; root cause remains unestablished. | Copy the pair shown in the already selected Picker screen into this chat. Record manual confirmation separately from automatic bridge success. No need to choose again. |
-| Fresh actual-input flow | Existing authorized synthetic artifacts and prior approved output are preserved, but no current attached non-sensitive test photo/current reconstruction approval/recipient-open evidence completes this stage. | Attach one rights-cleared non-sensitive test photo in this chat. Show actual analysis first, receive corrections and current approval, then produce/reopen/render/deliver privately and obtain real recipient-open confirmation. A company original PPTX is not required for the photo route. |
-| Actual Aro/Dot execution | Current authorized device inventory exposes HOME-PC only. No targetable identified Dot computer or its resource/runtime receipt is available. Cloud Work configuration and a filesystem view are not that identity. | From Aro's actual selected virtual computer, use the existing private guide/capsule and return its read-only environment probe. Do not install a new remote agent or copy credentials to make this appear connected. |
+| Actual selection receipt | Actual original App render signal and user-copied pair now received; existing server and recorder validate training_playbook/balanced_report with generation=false. Automatic delivery root cause remains unestablished. | Manual confirmation is complete; do not re-ask it. Keep automatic delivery as a separate unverified behavior. |
+| Fresh actual-input flow | Current private photo proposal v1 explicitly approved; editable one-slide production, exact-file reimport/render, native PowerPoint copy-edit/save/reopen and private raw-download hash verification completed. Recipient opening is pending. | Ask only whether the user can download/open the delivered PPTX and which illegible text to resolve. A company original PPTX is not required for the completed photo route; exact original-master comparison remains unavailable. |
+| Actual Aro/Dot execution | User supplied Aro's non-HOME-PC cloud inventory and memory-download hash report. Cache 0.4.3/guidance 0.4.6 remain distinct; save/extract/render blocked by reported read-only filesystem. This local task still cannot directly target it. | Aro should identify the exact write error and existing authorized task/temp paths. Use the bounded diagnosis in ARO_CLOUD_REPORT_20261108.md; do not install an agent, alter mounts/permissions or copy credentials. |
 | PC-off original Picker | Existing saved tunnel points to the PC's loopback server. Cloud direct review and no-server preview alternatives do not relocate it. | Prefer existing no-server real-preview/manual-confirmation fallback for a bounded trial on the actual target. If persistent same-App hosting is still required, establish a concrete approved host and official mapping before any credential/service change. |
 
 Do not wait on a nonexistent process or replay unchanged failed endpoint/UI
 paths. Do not keep changing unrelated features or rerunning successful checks
-to simulate advancement. The pending selection question stays pending; the old
-version question is obsolete because actual local 0.4.6 was independently checked.
+to simulate advancement. Selection and version questions are resolved; the
+current photo proposal v1 has been approved and produced. See PHOTO_PRODUCTION_ACCEPTANCE_20261108.md; recipient opening and target-cloud execution remain unverified.
 
 ## No-new-cost alternatives and approval boundary
 

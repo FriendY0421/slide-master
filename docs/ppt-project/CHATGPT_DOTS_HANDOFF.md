@@ -1,21 +1,33 @@
 # Slide Master handoff for ChatGPT and DOTS
 
-Status date: 2026-11-07 (Asia/Seoul). This is the continuation entry point for
+Status date: 2026-11-08 (Asia/Seoul). This is the continuation entry point for
 the user's Slide Master quality and full-flow mission. Source access does not
 install a plugin, grant file access or connect a production executor.
 
+Latest real-user input (2026-11-08): [App render signal, actual user-copied pair
+and private photo intake](USER_ACCEPTANCE_INPUTS_20261108.md) supersede the earlier
+missing-input stop. `deck:training_playbook | preset:balanced_report` was genuinely
+received/validated; automatic pair delivery is still unverified. A private
+photo proposal v1 was actually approved, produced as an editable one-slide PPTX,
+reimported/rendered, copy-edited/save-reopened in PowerPoint and privately
+delivered with matching raw-download SHA. See
+[scoped production evidence](PHOTO_PRODUCTION_ACCEPTANCE_20261108.md). Recipient
+opening is still pending. [New Aro report](ARO_CLOUD_REPORT_20261108.md) supplies cloud inventory
+and memory-download hash but reports blocked writes/extraction/render and a
+0.4.3 cache despite 0.4.6 guidance. Local and cloud evidence remain distinct.
+
 Current acceptance boundary and minimum resumption inputs:
 [remaining real-user/target-environment checks](REMAINING_ACCEPTANCE_20261108.md).
-Independent permitted work is exhausted until actual selection/input or target
-computer evidence arrives. No live process is awaiting completion; preserve the
-full scope and do not mark complete or fabricate another test as user evidence.
+Local production progressed after real selection/input and explicit proposal
+approval arrived. Remaining target-cloud and recipient-open acceptance needs
+real evidence; preserve the full scope and do not mark the full mission complete.
 
 Latest saved and locally installed plugin (2026-11-08): [0.4.6 applied/read back](PLUGIN_046_APPLIED_20261108.md)
 adds bundled reset recovery and analysis-first photo/CUSTOM guidance. Same
 private identity, existing connections and all executable scripts preserved;
 0.4.5 originals retained. After the initial stale-cache observation, host refresh
 and all 29 actual local installed files now match official 0.4.6. The new SKILL
-is exposed/read in this task; actual photo/reset flow execution remains open.
+is exposed/read in this task; actual local photo production is now evidenced; target reset/cloud execution remains open.
 Current package rollback restores 0.4.5 code as 0.4.7, with two exact deletions;
 the older 0.4.6 recovery-of-0.4.4 is historical, not the current rollback.
 The existing user-visible Picker check, automatic pair and PC-off gaps remain.
