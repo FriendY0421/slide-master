@@ -1,3 +1,10 @@
+Latest actual continuation (2026-11-08 KST): the explicitly authorized single
+Codex Cloud task executed successfully and prepared read-only FAH contracts on
+PR14. See [current executor evidence and reversible candidate](CODEX_CLOUD_FAH_PREPARATION_20261108.md).
+Older pending-new-task/continuation wording below is historical. Installed cloud
+0.4.7, Aro identity, PC-off original Picker and actual FAH PPT delivery remain
+separate unverified conditions; full mission is not complete.
+
 # Slide Master handoff for ChatGPT and DOTS
 
 Latest cloud result supersedes the initial active-start observation:
