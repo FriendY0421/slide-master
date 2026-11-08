@@ -3,16 +3,16 @@
   "project_id": "SLIDE_MASTER",
   "project_name": "Slide Master",
   "repository": "FriendY0421/slide-master",
-  "updated_at_kst": "2026-08-30T22:30:00+09:00",
+  "updated_at_kst": "2026-11-08T14:16:00+09:00",
   "state_sync_status": "CURRENT",
   "latest_work": {
-    "work_id": "SLIDE-MASTER-DESIGN-SYSTEM-V3-20260830",
-    "status": "CURRENT_ON_MAIN",
-    "mode": "RECOGNIZED_SOURCE_DESIGN_AUTHORITY_AND_MACHINE_QUALITY_GATE",
-    "actor": "ChatGPT",
-    "summary": "Added Slide Design System V3 based on mature recognized presentation sources; added one-slide/one-assertion composition rules and a machine design-quality gate for cramped spacing, card walls, weak imagery, dead-space imbalance and repeated layouts; host workflow explicitly blocks generation when Picker says WAIT_STORYLINE_PREVIEW.",
-    "history_file": "docs/ai-history/2026-08-30-slide-design-system-v3.md",
-    "implementation_commit": "c23328ebe065edc2854148c72f2b2e5d09759cb1"
+    "work_id": "SLIDE-MASTER-PR14-STANDALONE-CLOSEOUT-FAH-HANDOFF-20261108",
+    "status": "UNMERGED_PR14_HANDOFF_STANDALONE_SCOPED_ACCEPTANCE",
+    "mode": "DOCUMENTED_HANDOFF_NO_RUNTIME_CHANGE",
+    "summary": "Latest user defers FAH implementation to another Codex chat. Preserve installed local0.4.7, accepted real-photo/native-app/private-recipient evidence and recovery; retain exact-font/Aro/PC-off original-Picker limits.",
+    "history_file": "docs/ai-history/2026-11-08-standalone-closeout-fah-handoff.md",
+    "handoff_file": "docs/ppt-project/ko/SLIDE_MASTER_FAH_HANDOFF_20261108.md",
+    "source_checkpoint_before_handoff": "395c641795752d100b0aedc987e7b1d7de4ec478"
   },
   "production": {},
   "source_authority": {
@@ -397,5 +397,26 @@
     "monitor_accepted_at_kst": "2026-08-24 23:33:32",
     "local_guard": "template_selection.json + svg_to_pptx.py",
     "fail_closed": true
+  },
+  "accepted_main_latest_work": {
+    "work_id": "SLIDE-MASTER-DESIGN-SYSTEM-V3-20260830",
+    "status": "CURRENT_ON_MAIN",
+    "mode": "RECOGNIZED_SOURCE_DESIGN_AUTHORITY_AND_MACHINE_QUALITY_GATE",
+    "actor": "ChatGPT",
+    "summary": "Added Slide Design System V3 based on mature recognized presentation sources; added one-slide/one-assertion composition rules and a machine design-quality gate for cramped spacing, card walls, weak imagery, dead-space imbalance and repeated layouts; host workflow explicitly blocks generation when Picker says WAIT_STORYLINE_PREVIEW.",
+    "history_file": "docs/ai-history/2026-08-30-slide-design-system-v3.md",
+    "implementation_commit": "c23328ebe065edc2854148c72f2b2e5d09759cb1"
+  },
+  "active_pr_workstream": {
+    "pr": 14,
+    "branch": "codex/dense-quality-20261012",
+    "merged": false,
+    "main_authority_rebaselined": false,
+    "fah_runtime_mutated": false,
+    "installed_local_plugin_version": "0.4.7",
+    "installed_cloud_plugin_version_verified": false,
+    "fah_integration": "DEFERRED_TO_SEPARATE_CODEX_CHAT_BY_LATEST_USER",
+    "overall_original_mission_complete": false,
+    "current_acceptance": "docs/ppt-project/REMAINING_ACCEPTANCE_20261108.md"
   }
 }

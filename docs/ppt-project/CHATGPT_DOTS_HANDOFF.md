@@ -1,3 +1,11 @@
+Latest human direction (2026-11-08 KST): FAH integration is deferred to another
+Codex chat. Do not continue FAH implementation/deployment from this workstream.
+Read [bounded standalone closeout](STANDALONE_CLOSEOUT_20261108.md) and
+[the Korean FAH handoff](ko/SLIDE_MASTER_FAH_HANDOFF_20261108.md) first.
+Earlier immediate-FAH follow-on wording below is historical and superseded.
+Accepted standalone evidence is retained; exact-font/Aro/PC-off-original-Picker
+conditions are not promoted to complete.
+
 Latest actual continuation (2026-11-08 KST): the explicitly authorized single
 Codex Cloud task executed successfully and prepared read-only FAH contracts on
 PR14. See [current executor evidence and reversible candidate](CODEX_CLOUD_FAH_PREPARATION_20261108.md).

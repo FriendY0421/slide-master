@@ -1,3 +1,11 @@
+Latest human direction (2026-11-08 KST): FAH integration is deferred to another
+Codex chat. Do not continue FAH implementation/deployment from this workstream.
+Read [bounded standalone closeout](STANDALONE_CLOSEOUT_20261108.md) and
+[the Korean FAH handoff](ko/SLIDE_MASTER_FAH_HANDOFF_20261108.md) first.
+Earlier immediate-FAH follow-on wording below is historical and superseded.
+Accepted standalone evidence is retained; exact-font/Aro/PC-off-original-Picker
+conditions are not promoted to complete.
+
 Latest actual continuation (2026-11-08 KST): the explicitly authorized single
 Codex Cloud task executed successfully and prepared read-only FAH contracts on
 PR14. See [current executor evidence and reversible candidate](CODEX_CLOUD_FAH_PREPARATION_20261108.md).
@@ -34,7 +42,7 @@ The full mission is **not complete**.
 | Aro/Dot target | User-relayed non-HOME-PC inventory and full in-memory capsule hash received. Reported actual cache0.4.3, guidance0.4.6, write/extract/render blocked. [Bounded diagnosis](ARO_CLOUD_REPORT_20261108.md). | Need actual failing tool/path/errno or an existing authorized writable task/temp path on that computer. Current connector exposes HOME-PC only; no agent/credentials/permission migration authorized. |
 | PC-off use | Existing Cloud Work stages need no PC tools. Original Picker server/tunnel and Windows PowerPoint remain PC-bound; exact test-owned sessions are stopped. [PC-off packet](PC_OFF_CLOUD_CONTINUATION_20261108.md). | Existing real-preview/manual-confirmation fallback is available as a distinct route; the new Codex Cloud source/render trial passed. This does not establish Aro identity or always-on original Picker hosting. Same-App always-on hosting needs a concrete target/permission/recovery decision, not a renamed fallback. |
 | Durable recovery | Original0.4.6, candidate0.4.7, restore0.4.6-as0.4.8 in private262,914-byte capsule, owner-only/raw SHA verified. Earlier backups retained. | No live rollback needed; if regression, use then-current release guard and approved higher0.4.8 restore. Historical restore0.4.5-as0.4.7 is not current recovery. |
-| FAH follow-on | Latest user direction supersedes indefinite old deferral: finish applicable Slide Master acceptance, then inspect/reuse actual FAH contracts and validate private PPT delivery. | No FAH source/service changed or deployed. Do not skip actual actor/file/current-approval/private-delivery contracts, or infer approval for a new fee/permission/deploy/merge. |
+| FAH follow-on | Latest human direction defers implementation to the separate FAH Codex chat; [concept/workflow/history handoff](ko/SLIDE_MASTER_FAH_HANDOFF_20261108.md) prepared. | No FAH source/runtime changed here. Preserve actual owner/attachment/production/private-output prerequisites; earlier immediate-follow-on scope is superseded. |
 
 ## Current approvals and minimum next actions
 
@@ -87,5 +95,6 @@ A separate capability-discovery connector required reauthentication and was
 stopped without retry, login, permission change or credential extraction.
 The existing desktop window inventory contained no FAH web page; logged-in
 FAH attachment/private-delivery UI is therefore unverified, not absent by proof.
-Next work still needs the real authenticated attachment/production/private-output
-contract described in the cloud preparation; no caller-supplied identity is used.
+The separate FAH chat will own the real authenticated attachment/production/private-output
+contract described in the cloud preparation. This workstream has stopped that
+implementation; no caller-supplied identity or fake binding was used.
