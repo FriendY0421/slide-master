@@ -57,6 +57,7 @@ ChatGPT plugin conversation. The current conversation has no connected
 mobile ChatGPT execution session for this approval. No local export, new cloud
 task, private upload or replacement link was created for this test.
 
-Resume in the mobile ChatGPT conversation with the approved selection and
-two-slide plan. Capture the actual cloud execution, exact-file reopen and
-render, private transfer and recipient phone open separately.
+The user is running the separate mobile ChatGPT trial and asked this
+workstream to stop mobile testing. If that trial's results are supplied later,
+record cloud execution, exact-file reopen and render, private transfer and
+recipient phone open separately.

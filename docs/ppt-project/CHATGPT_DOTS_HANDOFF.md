@@ -1,4 +1,22 @@
-Latest human direction (2026-11-08 KST): FAH integration is deferred to another
+# Slide Master handoff for ChatGPT and DOTS
+
+## Current handoff — 2026-11-11 KST
+
+Use the [private 0.4.12 release record](PUBLIC_PRESENTATION_RELEASE_0.4.12.md)
+and the [dense-sample acceptance record](DENSE_SAMPLE_ACCEPTANCE_0.4.12.md)
+as the current state. The local managed 0.4.12 package matches the saved
+source. The user confirmed phone download and opening of both slides from the
+delivered sample. The user is handling the separate new mobile production
+trial and asked this workstream to stop mobile testing.
+
+For a 0.4.12 regression, the guarded 0.4.13 overlay restores 0.4.10 content.
+For missing job files, follow the [portable recovery policy](RESET_RECOVERY_POLICY.md).
+Exact Samsung rendering, an original company master comparison, and
+PC-independent hosting of the original Picker retain their own conditions.
+
+## Historical checkpoints — 2026-11-08 KST
+
+User direction (2026-11-08 KST): FAH integration is deferred to another
 Codex chat. Do not continue FAH implementation/deployment from this workstream.
 Read [bounded standalone closeout](STANDALONE_CLOSEOUT_20261108.md) and
 [the Korean FAH handoff](ko/SLIDE_MASTER_FAH_HANDOFF_20261108.md) first.
@@ -12,8 +30,6 @@ PR14. See [current executor evidence and reversible candidate](CODEX_CLOUD_FAH_P
 Older pending-new-task/continuation wording below is historical. Installed cloud
 0.4.7, Aro identity, PC-off original Picker and actual FAH PPT delivery remain
 separate unverified conditions; full mission is not complete.
-
-# Slide Master handoff for ChatGPT and DOTS
 
 Latest cloud result supersedes the initial active-start observation:
 [CLOUD_CONTINUATION_BLOCKER_20261108.md](CLOUD_CONTINUATION_BLOCKER_20261108.md).

@@ -67,21 +67,17 @@ PowerPoint availability and Samsung rendering remain separate acceptance items.
 
 ## Application and recovery status
 
-This is a repository execution policy linked by canonical GPTS instructions and
-the ChatGPT/DOTS handoff. Later official save and actual local installed0.4.7
-are verified in [the release record](PLUGIN_047_APPLIED_20261108.md). Neither
-this policy nor that local installation proves a reset on Aro was executed.
-The pinned0.4.5-name portable ZIP above remains an older immutable baseline;
-never overwrite the current managed plugin cache with it. Current guarded
-plugin recovery is the separately verified0.4.6-content-as0.4.8 capsule.
-Resolve current installed/source versions explicitly after recovery and reuse
-existing official loading; missing current runtime capability is a limitation,
-not permission to install, patch cache or claim the old capsule is0.4.7.
-The old immutable capsule and prior recovery files remain unchanged. To undo
-this policy, revert only these documentation changes; no install, connection,
-permission or billing rollback is needed.
+The [0.4.12 release record](PUBLIC_PRESENTATION_RELEASE_0.4.12.md) covers the
+current saved and locally installed plugin. Its guarded 0.4.13 restore brings
+back 0.4.10 content on the same plugin. The 0.4.6-content-as-0.4.8 capsule is a
+historical release recovery. A reset on Aro has its own verification.
 
-Actual checks for this change: documentation diff whitespace check passed;
+The pinned portable ZIP above remains an immutable job/source baseline. Reuse
+existing official loading, resolve the current installed and source versions
+after recovery, and keep the managed cache separate from extracted job files.
+The pinned capsule and prior recovery files remain preserved.
+
+At the original 2026-11-08 checkpoint, the documentation diff check passed;
 existing capsule SHA256 still matches the pinned baseline; the separate private
 Drive continuation guide was updated in place and fetched back with the new
 environment-specific instructions. Metadata still shows owner-only/shared=false,

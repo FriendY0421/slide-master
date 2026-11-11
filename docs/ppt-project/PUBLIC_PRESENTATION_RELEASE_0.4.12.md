@@ -18,6 +18,7 @@ cloud font and mobile viewer guidance. See the
 | Current release and plugin identity | The update and source readback agree on version `0.4.12`. The plugin identity and personal private scope match the baseline. |
 | Expected changes | Both manifests and both changed instruction files match the candidate. The compatibility manifest matches as parsed JSON and the delivery reference matches after text normalization. |
 | Preserved source | All 29 paths were read. The other 25 files match the baseline, including the App declaration, skill entry point, Picker contract and validation scripts. The existing Drive font registry guidance remains present. |
+| Local managed installation | All 29 installed paths match the saved release. Of those, 27 match exactly and two Markdown files match after text normalization. The installed dense inspector measured 38 regions on the existing reviewed sample, with 0 errors, the same 8 line-spacing warnings and partial native-chart coverage. |
 | Runtime verification | The [dense-sample acceptance run](DENSE_SAMPLE_ACCEPTANCE_0.4.12.md) covers local production with the saved guidance, native PowerPoint, verified private Drive delivery and the recipient's confirmed phone download and open. New cloud production initiated from the phone remains a separate acceptance run. |
 
 No new connection, permission, installation or paid service was used in
