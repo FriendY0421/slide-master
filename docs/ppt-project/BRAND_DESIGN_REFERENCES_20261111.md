@@ -68,8 +68,7 @@ documentation.
 
 - The existing [composition planning reference](../../.claude/skills/ppt-master/references/composition-planning.md)
   now maps page purpose to composition. Strategist and Executor already load it.
-- The private 0.4.12 candidate carries the same patterns in the precision design
-  reference and preserves the existing mobile and font delivery guidance. The
-  previous candidate and the 0.4.13 recovery package are retained.
-- No dependency, renderer or app connection changed. The private plugin release
-  and actual PPTX/mobile output review remain pending.
+- The private 0.4.12 release carries the same patterns in the precision design
+  reference. The existing mobile delivery and Drive font guidance were retained.
+  See the [release record](PUBLIC_PRESENTATION_RELEASE_0.4.12.md) for readback
+  and recovery. Actual PPTX and mobile tests are deferred at the user's request.
