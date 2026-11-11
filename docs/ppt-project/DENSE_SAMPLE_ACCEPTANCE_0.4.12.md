@@ -41,3 +41,22 @@ production initiated from the phone remains a separate acceptance run.
 - Delivery SHA-256 `ab7dfa61dfbce37d7486b0587e89490628eba7244b2cca37d59abc743c096afa`.
 - The comparison PNG and inspection logs were retained with the local review
   files. The private Drive link and editability test copy are excluded from Git.
+
+## New production from mobile Chat
+
+The user approved a two-slide test with `deck:service_improvement` and
+`preset:balanced_report`. The active main catalog contains both IDs and the
+registered KPI and content layouts. The approved content is the 84.5% actual
+versus 90.0% target comparison (5.5 percentage points), followed by intake,
+repair and follow-up. The approval was received in the Codex conversation.
+
+The existing Cloud Work trial was idle and its last recorded execution check
+had no usable runtime. The separate saved Codex Cloud configuration is
+listed as runnable. It does not supply an execution session for the mobile
+ChatGPT plugin conversation. The current conversation has no connected
+mobile ChatGPT execution session for this approval. No local export, new cloud
+task, private upload or replacement link was created for this test.
+
+Resume in the mobile ChatGPT conversation with the approved selection and
+two-slide plan. Capture the actual cloud execution, exact-file reopen and
+render, private transfer and recipient phone open separately.
