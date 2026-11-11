@@ -60,6 +60,23 @@ Image intent (when used): product photo in the right zone; preserve the whole
 product and label; contain if a subject-safe crop cannot be achieved.
 ```
 
+**Across the deck**: Pick a focal element that helps the reader understand each
+page's message. Keep supporting elements quieter through spacing, alignment or
+approved color roles. Group related items before adding borders or labels. Keep
+locked wording and type sizes, and use the template's existing geometry and
+visual styles. Compare adjacent rendered pages at overview scale to check the
+sequence of focal elements, then at reading scale to check Korean wrapping,
+labels and numbers. Repeated geometry can help readers compare pages with the
+same structure.
+
+**Public design references**: Match the reference to the page's job. In
+Microsoft's Financial pitch deck, slide 10 gives comparable values aligned
+positions and slide 12 makes chronology visible across stages. In its Retail
+pitch deck, slide 7 marks a section change with a spare composition and slide 9
+gives photographs their own column alongside the numbers. Adapt the arrangement
+within the approved template. Use the selected palette, native editable objects
+and authorized images for the deliverable. [Microsoft PowerPoint examples](https://powerpoint.cloud.microsoft/create/en/pitch-deck-templates/)
+
 ---
 
 ## 3. Subject-aware image placement
