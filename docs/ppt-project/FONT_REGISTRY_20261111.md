@@ -26,3 +26,12 @@ readbacks. The test copy remains private for verification.
 The 0.4.8 changed-file baseline and a 0.4.10 overlay restoring that behavior
 were preserved and ZIP-read verified. No new scopes, installations or fees
 were added. Keep the actual registry link and account identifiers private.
+
+## First addition to the live list
+
+The user requested Noto Sans KR 400. A fresh read confirmed revision 1 and
+no duplicate. The same owner-only Drive file was updated and read back as
+revision 2 with three entries. The original entries and unset default were
+preserved. Noto Sans KR was registered by name with usage checks pending.
+The user received a prompt to compare revision 2 and the new entry on the
+PC and phone. The two device readbacks are pending.
