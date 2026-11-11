@@ -35,6 +35,21 @@ PowerPoint production route continue to own export. If a later task calls for
 reusing a Community asset, check its individual terms and attribution first.
 [Figma Community publishing guide](https://help.figma.com/hc/en-us/articles/25923960876567-Publish-slide-deck-templates-to-the-Figma-Community)
 
+## Samsung Electronics, public pitches and presentation videos
+
+| Source | Observed material | Production guidance |
+|---|---|---|
+| [Samsung Electronics 4Q25 earnings presentation in Korean](https://images.samsung.com/kdp/ir/events/2025/2025_4Q_conference_kor.pdf) | PDF pages 5–7 show distinct quarter and full-year summaries, financial detail and business-segment comparisons with period labels and notes. | Give the summary a clear entry point. Group dense columns by period, retain units and notes, and align comparable figures. Carry a consistent grid across divisions. |
+| [Samsung Galaxy Unpacked 2025](https://news.samsung.com/global/galaxy-unpacked-2025-highlights-from-galaxy-unpacked-a-new-era-of-ai-integration), [official replay chapters](https://www.youtube.com/watch?v=h0VcXeKd-pw) | Newsroom stage stills, recap and replay chapters organize features around doing, playing and creating. | Lead a demo with an outcome and use the product or task as the focal visual. Put supporting specifications in a secondary zone. |
+| [Hans Rosling's TED talk on YouTube](https://www.youtube.com/watch?v=hVimVzgtD6w), [Gapminder's presentation notes](https://www.gapminder.org/videos/hans-rosling-ted-2006-debunking-myths-about-the-third-world/) | The TED upload showed about 4.39 million views when consulted. TED and Gapminder describe the use of animated data to show changes over time. | For static PPTX, use direct labels on a trend or show comparable periods as aligned small multiples. Keep the editable chart and axis meaning. |
+| [LinkedIn's Series B pitch, published by Reid Hoffman](https://www.reidhoffman.org/linkedin-pitch-to-greylock/) | The original slides and annotations include planned versus actual results on slides 10–11 and an explicit treatment of risks. | Give the proposal's strongest evidence a clear visual role and keep material assumptions and risks visible. |
+
+Video findings are based on official descriptions, chapters and available stills.
+The guidance uses four existing gallery entries as examples. The registered
+template IDs and previews remain the source for user selection. Public Samsung
+material was used for structure and comparison patterns. The release candidate
+adds guidance only and contains no external brand assets or slide copies.
+
 ## GitHub features reviewed
 
 Star counts from the GitHub API on 2026-11-11. Capabilities are based on project

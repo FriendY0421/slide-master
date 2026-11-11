@@ -82,6 +82,10 @@ palette, type, content and authorized assets.
 | Improvement plan or process | Show dated milestones in reading order. Use a compact loop with a clear return arrow when the source describes a feedback loop. | Microsoft Financial, NVIDIA Investor Presentation |
 | Project or design review | Pair the result or screen with a compact zone for findings and decisions. Align before/after screens and place editable callouts beside the relevant detail. | Figma Project Review, Figma Redesigning Finance |
 | Roadmap | Share a time axis across workstreams. Make dependencies visible when the source specifies them and distinguish confirmed milestones from proposals. | Figma Product Roadmap |
+| Periodic business results | Put the period summary and trend in distinct zones. Group columns by period and keep the unit, comparison basis and footnotes visible. Use a consistent grid across business units. | Samsung Electronics earnings presentation |
+| Data story | Lead the eye from a clear starting point to the meaningful change. Use a single annotated trend or aligned small multiples with the same scales when comparisons require them. | TED / Gapminder |
+| Product launch or service demo | Open with the outcome, show the task or product in use, and put the supporting specification in an approved secondary zone. | Samsung Galaxy Unpacked |
+| Proposal or pitch | Make the decision request clear. Give the strongest available evidence its own space and keep the risk or assumption visible. | LinkedIn Series B |
 
 **Default — adapt rather than trace**: Combine arrangements by purpose within
 one deck, using a shared alignment grid. For undecided direction, distinguish
@@ -94,6 +98,15 @@ See [`BRAND_DESIGN_REFERENCES_20261111.md`](../../../../docs/ppt-project/BRAND_D
 **Reference — Figma Community**: For open design work, use public templates as
 page-level references for structure and spacing. Keep one approved visual system
 across the deck. Use the existing selection flow for actual production templates.
+
+**Default — show variety through existing layouts**: When recommending a
+template, match the audience and density using the current registered previews.
+Consider `deck:modern_corporate_blue` for business results with dense detail,
+`deck:data_insight_pro` for a chart-led data story, `deck:apple` for a
+visual-first launch, or `deck:startup_pitch_bold` for a short proposal. Inside
+the confirmed template, vary the focal object and layout by page purpose.
+Translate stage reveals into labeled, editable chart states or annotations that
+make sense on a static page. Use the approved page count and preservation scope.
 
 ---
 
