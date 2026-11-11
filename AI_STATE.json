@@ -418,5 +418,14 @@
     "fah_integration": "DEFERRED_TO_SEPARATE_CODEX_CHAT_BY_LATEST_USER",
     "overall_original_mission_complete": false,
     "current_acceptance": "docs/ppt-project/REMAINING_ACCEPTANCE_20261108.md"
+  },
+  "composition_design_enhancement": {
+    "status": "SOURCE_INSTRUCTIONS_CONNECTED_NOT_RELEASED",
+    "history_file": "docs/ai-history/2026-11-11-composition-image-placement.md",
+    "reference": ".claude/skills/ppt-master/references/composition-planning.md",
+    "base_commit": "a3cbef1f95b23da0009028a34f691ebbc7180384",
+    "validation": "REFERENCE_LINKS_LOAD_PATHS_CROP_ARITHMETIC_DIFF_CHECK_PASS",
+    "actual_ppt_visual_acceptance": false,
+    "plugin_published": false
   }
 }

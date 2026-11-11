@@ -1,3 +1,19 @@
+Updated checkpoint: 2026-11-11 KST
+
+## Composition and image placement — source instructions connected
+
+User-authorized design refinement preserves current source/typography/template
+and approval standards. Planner and both SVG authoring paths now load
+`composition-planning.md` for content-led layout, existing-confirmation alternatives,
+subject-safe placement and final-scan review. Native routes retain their owners.
+Link/load-path, crop arithmetic and diff checks passed; actual PPT visual results
+and installed plugin uptake are not established. No release/install/merge/FAH
+change. Mobile and shared font registry work below remains preserved.
+
+History: [composition and image placement](../ai-history/2026-11-11-composition-image-placement.md).
+
+---
+
 # Latest PR14 workstream — standalone closeout / FAH deferred
 
 2026-11-08 KST. This branch remains the unmerged PR14 workstream, not accepted

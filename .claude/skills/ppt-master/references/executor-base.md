@@ -243,6 +243,8 @@ Colors, fonts, and icons still come exclusively from `spec_lock.md` in both bran
 
 ## 3. Execution Guidelines
 
+**Mandatory**: Read [`composition-planning.md`](./composition-planning.md) once before authoring. Implement the approved §IX composition; use its subject-aware placement and final-scan review within existing route gates.
+
 - **Proximity**: group related elements with tight spacing; separate unrelated groups
 - **Element grouping (Mandatory)**: wrap every logical Slide-local content unit — title, core-message line, each content block, card, list item, and diagram — in a top-level `<g id="...">` with a descriptive id. Flat free-design/brand-only pages use ordinary semantic groups for every logical unit. On structured template pages, slot `<g>` elements are already semantic groups and direct Master/Layout atoms are the required exception to grouping. Authored native preset fragments (`preset_shape_svg.py`) already are one atomic `<g id>` each and count as one ordinary content group; keep their labels in a sibling parent `<g>`.
 - **Spec adherence**: follow color, layout, canvas format, and typography in the spec
