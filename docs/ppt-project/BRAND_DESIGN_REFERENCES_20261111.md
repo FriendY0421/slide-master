@@ -71,4 +71,5 @@ documentation.
 - The private 0.4.12 release carries the same patterns in the precision design
   reference. The existing mobile delivery and Drive font guidance were retained.
   See the [release record](PUBLIC_PRESENTATION_RELEASE_0.4.12.md) for readback
-  and recovery. Actual PPTX and mobile tests are deferred at the user's request.
+  and recovery. See the [dense-sample acceptance run](DENSE_SAMPLE_ACCEPTANCE_0.4.12.md)
+  for the subsequent PowerPoint comparison and delivery status.
