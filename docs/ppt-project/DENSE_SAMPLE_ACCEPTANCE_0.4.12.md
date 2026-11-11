@@ -32,10 +32,10 @@ SamsungOneKorean was outside this synthetic check.
 
 The 40,338-byte delivery file is a native PPTX in private My Drive. The connector
 reported owner-only permissions. An authenticated download matched the local
-file byte for byte. The file can be served by Drive independently of the
-production PC. Physical phone download and opening with the PC off require
-the recipient's confirmation. This download test does not exercise cloud
-production of a new PPTX.
+file byte for byte. The recipient confirmed downloading the file on their
+phone without using the PC and opening both slides successfully in PowerPoint.
+This confirms phone receipt and opening of the delivered PPTX. New PPTX
+production initiated from the phone remains a separate acceptance run.
 
 - Baseline SHA-256 `63d15081a4ab6a7351b548384ddb4826d1d6a0c9e1eb9396178ab2da25e3607d`.
 - Delivery SHA-256 `ab7dfa61dfbce37d7486b0587e89490628eba7244b2cca37d59abc743c096afa`.
