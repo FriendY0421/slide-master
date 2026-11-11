@@ -69,13 +69,25 @@ sequence of focal elements, then at reading scale to check Korean wrapping,
 labels and numbers. Repeated geometry can help readers compare pages with the
 same structure.
 
-**Public design references**: Match the reference to the page's job. In
-Microsoft's Financial pitch deck, slide 10 gives comparable values aligned
-positions and slide 12 makes chronology visible across stages. In its Retail
-pitch deck, slide 7 marks a section change with a spare composition and slide 9
-gives photographs their own column alongside the numbers. Adapt the arrangement
-within the approved template. Use the selected palette, native editable objects
-and authorized images for the deliverable. [Microsoft PowerPoint examples](https://powerpoint.cloud.microsoft/create/en/pitch-deck-templates/)
+**Reference — public deck patterns**: Match each page to its purpose. Use the
+patterns below within the approved template and story. Keep the approved
+palette, type, content and authorized assets.
+
+| Page purpose | Composition to try | Public example |
+|---|---|---|
+| Executive decision | Give the decision or result a clear focal point, with its evidence close by. Keep the supporting detail in the approved slots. | Microsoft Financial |
+| KPI or before/after | Align comparable values and chart baselines. Keep units and periods explicit. Use one approved emphasis role for the key difference. | Microsoft Financial, NVIDIA Investor Presentation |
+| Product or interface demo | Give the product or screen its own space. Place the explanation beside it and keep important UI labels visible. | Apple WWDC, Microsoft Retail |
+| Training or onboarding | Introduce the principle, show a concrete example, then give the audience an action. Use a short section overview for orientation in long decks. | Netflix Culture |
+| Improvement plan or process | Show dated milestones in reading order. Use a compact loop with a clear return arrow when the source describes a feedback loop. | Microsoft Financial, NVIDIA Investor Presentation |
+
+**Default — adapt rather than trace**: Combine arrangements by purpose within
+one deck, using a shared alignment grid. For undecided direction, distinguish
+the existing proposals by focal object, reading order, or how the evidence is
+grouped. For example, show a metric-led proposal and a photo-led proposal only
+when both fit the same brief and available assets. Keep repeated layouts for
+comparable data. Use the approved geometry and type for dense reports.
+See [`BRAND_DESIGN_REFERENCES_20261111.md`](../../../../docs/ppt-project/BRAND_DESIGN_REFERENCES_20261111.md).
 
 ---
 
