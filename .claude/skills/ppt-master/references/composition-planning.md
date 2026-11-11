@@ -80,6 +80,8 @@ palette, type, content and authorized assets.
 | Product or interface demo | Give the product or screen its own space. Place the explanation beside it and keep important UI labels visible. | Apple WWDC, Microsoft Retail |
 | Training or onboarding | Introduce the principle, show a concrete example, then give the audience an action. Use a short section overview for orientation in long decks. | Netflix Culture |
 | Improvement plan or process | Show dated milestones in reading order. Use a compact loop with a clear return arrow when the source describes a feedback loop. | Microsoft Financial, NVIDIA Investor Presentation |
+| Project or design review | Pair the result or screen with a compact zone for findings and decisions. Align before/after screens and place editable callouts beside the relevant detail. | Figma Project Review, Figma Redesigning Finance |
+| Roadmap | Share a time axis across workstreams. Make dependencies visible when the source specifies them and distinguish confirmed milestones from proposals. | Figma Product Roadmap |
 
 **Default — adapt rather than trace**: Combine arrangements by purpose within
 one deck, using a shared alignment grid. For undecided direction, distinguish
@@ -88,6 +90,10 @@ grouped. For example, show a metric-led proposal and a photo-led proposal only
 when both fit the same brief and available assets. Keep repeated layouts for
 comparable data. Use the approved geometry and type for dense reports.
 See [`BRAND_DESIGN_REFERENCES_20261111.md`](../../../../docs/ppt-project/BRAND_DESIGN_REFERENCES_20261111.md).
+
+**Reference — Figma Community**: For open design work, use public templates as
+page-level references for structure and spacing. Keep one approved visual system
+across the deck. Use the existing selection flow for actual production templates.
 
 ---
 

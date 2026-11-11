@@ -17,6 +17,24 @@ Apply structure and reading order. Use the approved template, palette, type and
 authorized project assets. Brand artwork, screenshots and template files are
 excluded from the changes.
 
+## Figma Community follow-up
+
+The [user-supplied Community presentations gallery](https://www.figma.com/ko-kr/community/presentations?resource_type=files)
+could not be loaded by the research browser. Figma's own public examples and
+documentation support the following additions. Individual Community previews,
+rankings, and usage counts remain unverified.
+
+| Source | Evidence and application |
+|---|---|
+| [Figma's template examples](https://www.figma.com/resource-library/what-is-a-slide-deck/) | Project Review separates objectives, results and takeaways. Product Roadmap presents strategy, timeline and metrics. Use a dedicated decision zone in reviews and a shared time axis in roadmaps. |
+| [Figma's Redesigning Finance](https://static.figma.com/uploads/6ed58f992ed1fa443b27259144770d48803bbf82.pdf) | The “Apps Then → Apps Now” example uses real interface comparisons to support a chronology. Align comparable screens and place editable callouts outside the image. |
+| [Figma's slide template guide](https://help.figma.com/hc/en-us/articles/26621828788631-Find-and-use-slide-deck-templates) | Choose layouts by page purpose while reusing type and color styles. Apply the layout principle inside Slide Master's approved visual system. |
+
+The catalog is a reference source. Existing template IDs and the editable
+PowerPoint production route continue to own export. If a later task calls for
+reusing a Community asset, check its individual terms and attribution first.
+[Figma Community publishing guide](https://help.figma.com/hc/en-us/articles/25923960876567-Publish-slide-deck-templates-to-the-Figma-Community)
+
 ## GitHub features reviewed
 
 Star counts from the GitHub API on 2026-11-11. Capabilities are based on project
