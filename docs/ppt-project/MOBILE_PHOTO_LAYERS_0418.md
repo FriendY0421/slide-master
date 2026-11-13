@@ -40,3 +40,20 @@ access to the existing private mobile ChatGPT plugin or phone download.
 The local 0.4.18 installation and guidebook test remain verified separately.
 The PC-off mobile invocation, actual cloud export/render, private mobile
 download and phone open are pending a physical-phone trial.
+
+## Regular ChatGPT Chat trial readback
+
+The trial conversation recorded one image attachment, the one-slide proposal,
+and the user's approval of that proposal. The Chat reply reported HTTP 429
+during the Picker preview. After approval, the reply reported no available
+execution route for verifying the loaded 0.4.18 version and producing and
+attaching the PPTX. Chat history confirms the reported failure and approval.
+It does not expose the raw Picker response or establish the reason for the
+429. There was no PPTX attachment in the trial history. Cloud production,
+rendering, private download and phone opening therefore remain unverified.
+The PC power state is not independently established by the chat readback.
+
+Reuse the approved one-slide specification when an execution route becomes
+available in the same Chat. Confirm the loaded plugin version separately
+from Picker availability. Then require a rendered PPTX attached to the Chat
+and a recipient download and open result before closing the mobile trial.
