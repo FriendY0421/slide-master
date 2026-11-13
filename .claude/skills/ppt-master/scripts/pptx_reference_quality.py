@@ -148,6 +148,31 @@ def _slide_context(package, part):
     return context, _dependencies(package, part, dummy)
 
 
+def _photo_region_text(tree, name):
+    # Resolve only the named region. Unrelated pictures may share export names.
+    if tree is None:
+        return None
+    segments = name.split("/")
+    node = tree
+    for segment in segments:
+        matches = [child for child in node if any(
+            identity.get("name") == segment
+            for identity in child.findall("./*/p:cNvPr", NS))]
+        if not matches and node.tag == f"{{{NS['p']}}}graphicFrame":
+            coordinates = re.fullmatch(r"R(\d+)C(\d+)", segment)
+            if coordinates:
+                row, col = map(int, coordinates.groups())
+                matches = node.findall(f".//a:tbl/a:tr[{row + 1}]/a:tc[{col + 1}]", NS)
+        if len(matches) != 1:
+            return None
+        node = matches[0]
+    if node.tag == f"{{{NS['p']}}}sp":
+        node = node.find("p:txBody", NS)
+    if node is None or node.tag not in {f"{{{NS['p']}}}txBody", f"{{{NS['a']}}}tc"}:
+        return None
+    return _paragraphs(node)
+
+
 def check_photo_text(candidate: Path, spec: dict, base: Path) -> dict:
     """Check approved photo transcription against named editable PPTX text."""
     source_hash = spec["sha256"]
@@ -157,7 +182,6 @@ def check_photo_text(candidate: Path, spec: dict, base: Path) -> dict:
     if not isinstance(regions, list) or not regions:
         raise ValueError("Photo text contract requires reviewed regions")
     with zipfile.ZipFile(candidate) as package:
-        _, native_text, _, _, _, _ = _inventory(package)
         presentation = "ppt/presentation.xml"
         relationships = _relationships(package, presentation)
         root = ET.fromstring(package.read(presentation))
@@ -169,22 +193,26 @@ def check_photo_text(candidate: Path, spec: dict, base: Path) -> dict:
                 raise ValueError("Photo text contract requires internal slide relationships")
             slide_parts.append(posixpath.normpath(target.lstrip("/") if target.startswith("/")
                                                   else posixpath.join("ppt", target)))
+        trees = {
+            page: ET.fromstring(package.read(part)).find("p:cSld/p:spTree", NS)
+            for page, part in enumerate(slide_parts, start=1)
+        }
     checks, errors, seen = [], [], set()
     for region in regions:
         page, name, status = region["slide"], region["object"], region["status"]
         if type(page) is not int or not 1 <= page <= len(slide_parts):
             raise ValueError("Photo text contract slide is outside the presentation")
-        if not isinstance(name, str) or not name.strip() or (page, name) in seen:
+        if (not isinstance(name, str) or any(not segment.strip() for segment in name.split("/"))
+                or (page, name) in seen):
             raise ValueError("Photo text contract requires unique named regions per slide")
         seen.add((page, name))
         target = f"P{page}:{name}"
-        key = f"{slide_parts[page - 1]}/{name}"
+        actual = _photo_region_text(trees[page], name)
         expected = region.get("text")
         if status == "confirmed" and isinstance(expected, str) and expected.strip():
-            actual = native_text.get(key)
             passed = actual is not None and "\n".join(actual) == expected
         elif status == "unreadable" and "text" not in region:
-            passed = native_text.get(key) == ["[판독 불가]"]
+            passed = actual == ["[판독 불가]"]
         else:
             raise ValueError("Photo text regions need confirmed text or unreadable status")
         checks.append({"target": target, "source_status": status, "passed": passed})
