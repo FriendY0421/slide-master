@@ -36,9 +36,37 @@ preservation inventory retains its stricter naming rule.
 
 | Priority | Improvement | Evidence and application |
 | --- | --- | --- |
-| Photo fidelity | Align a photographed page using confirmed corners, then compare the exact final render with the aligned page. Review title boxes, figure crops, margins and color by region. | Manual three-way render comparison completed for this job. A reusable alignment/overlay tool remains a candidate. [OpenCV homography](https://github.com/opencv/opencv/blob/4.x/doc/tutorials/features2d/homography/homography.markdown) |
+| Photo fidelity | Align a photographed page using reviewed corners, then compare the exact final render with the aligned page. Review title boxes, figure crops, margins and color by region. | The reusable overlay tool ran on both pages of both PowerPoint exports. [OpenCV homography](https://github.com/opencv/opencv/blob/4.x/doc/tutorials/features2d/homography/homography.markdown) |
 | Consistent visual review | Tie the review to the exact export and repeat the affected page checks after an edit. Review both full-slide hierarchy and small text at reading scale. | Reuse the existing hash-checked rendering and compare photos and exact output before delivery. [PPTAgent evidence model](https://github.com/icip-cas/PPTAgent/blob/main/skills/pptagent/references/task-contract.md) |
 | Layout for report decks | Plan chart and label space with the text grid. Check slide-to-slide title and caption consistency and verify logical reading order where required. | The geometry check and human review remain separate. Reading order and alt text are suitable follow-up checks, particularly for decks distributed broadly. [OpenAI slide automation](https://github.com/openai/plugins/blob/main/plugins/build-web-data-visualization/skills/reports-pdfs-and-slide-automation/references/powerpoint-and-google-slides.md), [Microsoft reading order](https://support.microsoft.com/en-us/powerpoint/make-slides-easier-to-read-by-using-the-reading-order-pane) |
 
-The verifier correction is a repository change. The installed private plugin
-remains 0.4.14. No new dependencies, permissions or costs were introduced.
+## Aligned review and release preparation
+
+The same manually estimated corner coordinates were applied to both arms for
+each page. The left and right outer corners were partly cropped. Each run
+produced an aligned photo, a 50/50 blend and a two-color boundary map. The
+Slide Master render followed the cover's cloud contour and the section title
+bands more closely in this comparison. Illustration crop seams and differences
+in caption position and shape remained visible. Lighting, texture and the
+estimated corners limit interpretation of isolated edge differences.
+
+The tool passed identity and angled geometry checks, rejected crossed and
+out-of-bounds corners, and distinguished source, render and shared edges.
+The packaged tool reproduced the reviewed page 2 hashes. The packaged
+transcription checker passed all 24 declared regions in both actual decks.
+The input decks and photographs stayed in the private job directory.
+
+The 0.4.16 candidate combines the overlay script, the named-region verifier
+fix, the photo workflow guide and both version manifests. It uses existing
+Pillow. No new dependencies, connections, permissions or costs are required.
+The installed private plugin remains 0.4.14 pending operational approval.
+
+| Private overlay | SHA-256 |
+| --- | --- |
+| `slide-master-0.4.16-photo-overlay.zip` | `eb81d246fef81be4eb52c3d6f6f3f7ac6832d5e92128c31953cba03616d06cdd` |
+| `slide-master-0.4.17-restore-0.4.14.zip` | `7409e77032bd179000414ce67ac54f8eb9d6b3f5862dd8caf17606c3f4dd348b` |
+
+Use the current official release guard on the same private plugin. The 0.4.17
+restore overlays the prior guide and verifier and requires one explicit
+deletion, `skills/instructions/scripts/review_photo_overlay.py`. Verify the
+restored inventory and local loading separately.

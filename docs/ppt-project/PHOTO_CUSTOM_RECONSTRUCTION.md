@@ -92,6 +92,25 @@ source, approved analysis, final bytes, QA and recovery in the authorized stores
 
 ### Delivery and comparison evidence
 
+For an angled photo, mark the four corners of each page after EXIF rotation.
+Use clockwise order starting at top-left and use the same coordinates for
+both renders in a comparison. Run the existing finalizer and render the exact
+PPTX before running the overlay tool. Keep the original photo, rendered PNG,
+and the tool output in the private job directory.
+
+```sh
+python scripts/review_photo_overlay.py PHOTO FINAL_SLIDE.png NEW_OUTPUT \
+  --corners 25,20 770,15 765,1090 35,1100
+```
+
+Use the aligned photo and blend to compare margin and position. Use the boundary
+map to locate differences in baselines, image frames and captions. Red is the
+photo, cyan is the slide render, and dark edges appear in both. Review at
+reading size and distinguish layout differences from shadows, texture,
+compression, and font changes. The tool records source, render and output hashes.
+When a page corner is cropped or obscured, record the estimate and explain
+its effect. The map is a review aid and carries no pass score.
+
 For an approved photo text plan with one source image, add `photo_text` to the
 job's existing dense layout contract and run the existing dense verifier.
 Use the actual approved source path and SHA-256. List the exact native object
@@ -133,9 +152,8 @@ review or correction evidence. Keep the files and comparison private.
 
 ### Candidate improvements and validation
 
-- For an angled photograph, use four confirmed corners to align a derivative
-  with the slide. Preserve the untouched photo and compare against the aligned
-  view. [OpenCV homography and perspective correction](https://github.com/opencv/opencv/blob/4.x/doc/tutorials/features2d/homography/homography.markdown)
+- The overlay tool applies the four-point perspective method using the
+  existing Pillow dependency. [OpenCV homography and perspective correction](https://github.com/opencv/opencv/blob/4.x/doc/tutorials/features2d/homography/homography.markdown)
 - After alignment, show a source/render overlay and focus on the regions the
   user needs to correct. Image similarity can flag differences for inspection.
   Text, exact values and editability use separate evidence.
@@ -144,9 +162,8 @@ review or correction evidence. Keep the files and comparison private.
   verifier. A synthetic two-slide fixture accepted the editable unreadable
   marker and rejected text substituted for it and an incorrect source hash.
   The legacy fixture without the photo contract still measured 38 regions with
-  zero errors. Alignment and overlay are follow-up candidates. This check has
-  not been released to the private plugin or compared on the original company
-  photo.
+  zero errors. The [guidebook comparison](PHOTO_COMPARISON_20261113.md) records
+  the actual photo, overlay and verifier results at the review level.
 
 ## Application boundary
 
