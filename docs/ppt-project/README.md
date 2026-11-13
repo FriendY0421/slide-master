@@ -4,6 +4,10 @@ This directory documents the host-independent PPT production path.
 
 ## Current standalone status
 
+- [Private 0.4.14 photo reconstruction update](PHOTO_PLUGIN_UPDATE_0.4.14.md)
+  covers official publication, synthetic validation and 0.4.15 recovery.
+  Local loading is tracked separately in the update record.
+
 - [Private 0.4.12 release and recovery](PUBLIC_PRESENTATION_RELEASE_0.4.12.md)
   covers the saved release, verified local package and guarded 0.4.13 restore.
 - [Dense sample acceptance](DENSE_SAMPLE_ACCEPTANCE_0.4.12.md) covers

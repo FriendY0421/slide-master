@@ -1,6 +1,6 @@
-# Photo reconstruction update candidate 0.4.14
+# Photo reconstruction update 0.4.14
 
-The current private plugin was read back as 0.4.12 with 29 files. The candidate
+The private plugin baseline was 0.4.12 with 29 files. The update
 updates the photo reconstruction guide, the two existing dense/reference
 checker files and the versions in both manifests. The photo guide directs
 authors to show observed typography and layout, identify unreadable regions,
@@ -12,6 +12,8 @@ The scripts in the candidate match the repository implementation. Running the
 packaged code on a synthetic fixture accepted an editable unreadable marker,
 rejected a guessed replacement and a mismatched source hash, and preserved
 the legacy result of 38 measured regions with zero errors.
+The packaged checker also followed actual presentation order in a reordered
+deck and rejected text declared on the wrong slide and a missing native object.
 
 | Private overlay | SHA-256 |
 | --- | --- |
@@ -23,7 +25,13 @@ the three overwritten files from 0.4.12 and bumps the two manifests. Apply
 with a fresh current release guard to the same private plugin and verify all
 retained paths. Verify the installed package separately after official loading.
 
-Release pending operational approval. The candidate requires no new
-installation, dependencies, connections, permissions or paid service.
+The user approved the update and Plugin Creator saved 0.4.14 on the same
+personal private plugin using the 0.4.12 release guard. Official readback
+matched all 29 expected files exactly, including five updated paths and 24
+retained paths. The Picker and Drive declarations were preserved. At the
+first local check after publication the managed cache still exposed 0.4.12.
+Local loading of 0.4.14 needs separate confirmation after the official client
+refresh. No new installation, dependencies, connections, permissions or paid
+service were required for the release.
 Company photo comparison and exact font or visual fidelity are outside the
 synthetic fixture. Mobile testing remains paused in this workstream.
