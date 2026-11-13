@@ -108,3 +108,30 @@ two caption text objects, one checklist item, the diagonal caption shape
 width and a masked illustration's position. The delivered file hash was
 unchanged by the edit test. The source photo, editable PPTX and comparison
 images remain in the private job directory.
+
+## Final visual pass
+
+The same source and perspective coordinates were used for the final
+comparison against the prior PowerPoint render. The cover now has an
+editable continuous cloud outline, subtle blue gradient and separate
+decorative shapes placed from the photo. The inside page follows the
+reference's rounded banners and angled checklist header. Both office
+pictures reach the bottom edge; the previous artificial backing strip is
+gone. The left picture is masked along the diagonal so the original photo
+caption does not show through the editable overlay. The caption, its
+detail, and the small Tip label are separate native text objects.
+
+PowerPoint 16 reopened and rendered both slides. The two final renders
+were visually compared with the same aligned photo and the prior renders.
+All 24 approved transcription checks passed, including both unreadable
+markers. The deck contains 32 native text objects, seven independent picture
+objects (five with transparency), and 13 native freeforms. On a copy, nine
+changes to text, shape geometry and picture positions survived a save and
+reopen. The final deck and previous revision hashes remained unchanged
+during the edit test. The source, earlier revision, final deck, render and
+overlay images are preserved privately.
+
+Pretendard remains the temporary typeface. The exact original font, print
+texture and small original illustration details cannot be verified against
+the photo alone. This was a document revision; it did not alter the
+installed 0.4.16 plugin, deployment or permissions.
