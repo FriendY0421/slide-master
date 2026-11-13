@@ -148,6 +148,54 @@ def _slide_context(package, part):
     return context, _dependencies(package, part, dummy)
 
 
+def check_photo_text(candidate: Path, spec: dict, base: Path) -> dict:
+    """Check approved photo transcription against named editable PPTX text."""
+    source_hash = spec["sha256"]
+    if _digest((base / spec["path"]).read_bytes()) != source_hash:
+        raise ValueError("Photo source bytes differ from the approved source")
+    regions = spec["regions"]
+    if not isinstance(regions, list) or not regions:
+        raise ValueError("Photo text contract requires reviewed regions")
+    with zipfile.ZipFile(candidate) as package:
+        _, native_text, _, _, _, _ = _inventory(package)
+        presentation = "ppt/presentation.xml"
+        relationships = _relationships(package, presentation)
+        root = ET.fromstring(package.read(presentation))
+        slide_parts = []
+        for node in root.findall("p:sldIdLst/p:sldId", NS):
+            rel = relationships[node.attrib[f"{{{NS['r']}}}id"]]
+            target = rel.attrib["Target"]
+            if rel.get("TargetMode") == "External" or not rel.get("Type", "").endswith("/slide"):
+                raise ValueError("Photo text contract requires internal slide relationships")
+            slide_parts.append(posixpath.normpath(target.lstrip("/") if target.startswith("/")
+                                                  else posixpath.join("ppt", target)))
+    checks, errors, seen = [], [], set()
+    for region in regions:
+        page, name, status = region["slide"], region["object"], region["status"]
+        if type(page) is not int or not 1 <= page <= len(slide_parts):
+            raise ValueError("Photo text contract slide is outside the presentation")
+        if not isinstance(name, str) or not name.strip() or (page, name) in seen:
+            raise ValueError("Photo text contract requires unique named regions per slide")
+        seen.add((page, name))
+        target = f"P{page}:{name}"
+        key = f"{slide_parts[page - 1]}/{name}"
+        expected = region.get("text")
+        if status == "confirmed" and isinstance(expected, str) and expected.strip():
+            actual = native_text.get(key)
+            passed = actual is not None and "\n".join(actual) == expected
+        elif status == "unreadable" and "text" not in region:
+            passed = native_text.get(key) == ["[판독 불가]"]
+        else:
+            raise ValueError("Photo text regions need confirmed text or unreadable status")
+        checks.append({"target": target, "source_status": status, "passed": passed})
+        if not passed:
+            errors.append({"kind": "PHOTO_TRANSCRIPTION", "target": target,
+                           "detail": "Named editable region differs from the approved text or unreadable marker",
+                           "category": "mechanical"})
+    return {"source_sha256": source_hash, "checks": checks, "errors": errors,
+            "scope": "declared native text only; photo interpretation and visual fidelity require review"}
+
+
 def compare_pptx(candidate: Path, reference: Path, spec: dict) -> dict:
     """Compare declared preservation scope; emit identifiers, never source text."""
     expected = spec.get("sha256")

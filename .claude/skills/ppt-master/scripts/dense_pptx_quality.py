@@ -616,11 +616,17 @@ def inspect_pptx(path: Path, contract: dict, base: Path) -> dict:
         comparison = compare_pptx(path, reference, spec)
         # Same existing inspector/contract/font inputs, not an old cached report.
         baseline_contract = {k: v for k, v in contract.items()
-                             if k not in {"reference_comparison", "chart_workbook_preservation"}}
+                             if k not in {"reference_comparison", "chart_workbook_preservation", "photo_text"}}
         baseline = inspect_pptx(reference, baseline_contract, base)
         report["repair_tracking"] = track_repairs(baseline, report)
         report["reference_comparison"] = comparison
         report["errors"].extend(comparison["errors"])
+    if "photo_text" in contract:
+        from pptx_reference_quality import check_photo_text
+
+        photo_check = check_photo_text(path, contract["photo_text"], base)
+        report["photo_text"] = photo_check
+        report["errors"].extend(photo_check["errors"])
     return report
 
 

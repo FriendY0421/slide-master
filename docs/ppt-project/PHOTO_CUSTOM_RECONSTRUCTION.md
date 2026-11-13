@@ -31,6 +31,16 @@ values presented as image-derived facts):
 > 사진 분석 v1: 원문·수치 / 배치·색상 / 글꼴·크기(확정·추정·미확인) /
 > 표·도식·이미지 / 읽기 어려운 부분 / 편집형 재구성안 / 추가 확인 사항.
 
+For each page, keep the user-facing summary short enough to scan on a phone.
+Pair the observed layout with an implementation proposal. State the relative
+width and alignment of the main text and image areas, which crop or margins
+must be retained, and which parts will be rebuilt as editable objects.
+Describe the title, body, table and note hierarchy where present. Give font
+candidates or a point-size range only when the visible evidence and assumed
+slide dimensions support it. State what the user can confirm or supply before
+approving the plan. Use the original composition as the starting proposal for
+an exact-reproduction request.
+
 Do not re-ask supplied information. User corrections become analysis/brief v2;
 retain the source and approved snapshot. If layout/content changes after approval,
 the existing current-revision approval rule applies again. A recovered synthetic
@@ -82,6 +92,29 @@ source, approved analysis, final bytes, QA and recovery in the authorized stores
 
 ### Delivery and comparison evidence
 
+For an approved photo text plan with one source image, add `photo_text` to the
+job's existing dense layout contract and run the existing dense verifier.
+Use the actual approved source path and SHA-256. List the exact native object
+name (or group path and table cell suffix), slide number in presentation order,
+and approved status for each checked region. For `confirmed` supply exact
+`text`, including newline boundaries. For `unreadable`, omit `text` and use the
+native `[판독 불가]` marker in that object. This check covers only declared regions.
+For multiple source images or an approved omission, continue the existing
+manual source comparison.
+
+```json
+{
+  "photo_text": {
+    "path": "approved-photo.png",
+    "sha256": "<SHA-256 of the approved image>",
+    "regions": [
+      {"slide": 1, "object": "kpi", "status": "confirmed", "text": "84.5%"},
+      {"slide": 1, "object": "note", "status": "unreadable"}
+    ]
+  }
+}
+```
+
 Summarize the checks actually run in the existing delivery response. Include
 the authoring route and tool or renderer used, source-to-render comparison
 results for each affected slide, unresolved text or font differences, and
@@ -97,6 +130,23 @@ readable wording and numbers, unresolved regions, layout, editability and
 corrections required. Identical package contents establish equivalent delivered
 output for that pair. Any claimed workflow difference needs its own approval,
 review or correction evidence. Keep the files and comparison private.
+
+### Candidate improvements and validation
+
+- For an angled photograph, use four confirmed corners to align a derivative
+  with the slide. Preserve the untouched photo and compare against the aligned
+  view. [OpenCV homography and perspective correction](https://github.com/opencv/opencv/blob/4.x/doc/tutorials/features2d/homography/homography.markdown)
+- After alignment, show a source/render overlay and focus on the regions the
+  user needs to correct. Image similarity can flag differences for inspection.
+  Text, exact values and editability use separate evidence.
+  [scikit-image structural similarity example](https://scikit-image.org/docs/stable/auto_examples/transform/plot_ssim.html)
+- The approved-transcription check is implemented in the existing dense
+  verifier. A synthetic two-slide fixture accepted the editable unreadable
+  marker and rejected text substituted for it and an incorrect source hash.
+  The legacy fixture without the photo contract still measured 38 regions with
+  zero errors. Alignment and overlay are follow-up candidates. This check has
+  not been released to the private plugin or compared on the original company
+  photo.
 
 ## Application boundary
 
