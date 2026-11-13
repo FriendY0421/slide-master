@@ -135,3 +135,75 @@ Pretendard remains the temporary typeface. The exact original font, print
 texture and small original illustration details cannot be verified against
 the photo alone. This was a document revision; it did not alter the
 installed 0.4.16 plugin, deployment or permissions.
+
+## Reusable illustration and caption workflow
+
+Candidate 0.4.18 extends the existing photo/CUSTOM guide after the plan approval
+and perspective review. `prepare_photo_layers.py` uses a reviewed polygon to
+remove the rectangular background from an illustration. It previews the edge
+on light and dark backgrounds. For a descending caption, it masks the printed
+caption from the picture and emits the matching native freeform coordinates.
+The current authoring tool builds that shape and keeps title, detail and badge
+text editable. A new photo needs its own crop and reviewed outline. The
+triangular caption helper covers the slope used in this guidebook. Other
+caption shapes stay in the manual native authoring path.
+
+### Guidebook verification
+
+The isolated candidate archive produced four illustration PNGs and one
+caption-masked photo from the same guidebook. Its outputs matched the
+repository tool byte for byte. The tool rejected an out-of-page diagonal and
+an attempt to overwrite an existing review directory. All five images were
+embedded in the candidate PPTX. The deck contains seven picture objects and
+32 native text objects. Its caption is a native freeform. The existing
+verifier passed 24 of 24 approved transcription checks.
+
+PowerPoint 16 reopened and rendered both pages. Compared with the previous
+final render, page 2 was pixel-identical. Page 1 differences stayed within
+the illustration area. Inspection against the aligned source and light/dark
+previews found no rectangular crop frames. Narrow handles and similar-color
+edges still depend on the precision of the reviewed outline. In a copy,
+picture movement, caption resize, caption detail and Tip text survived saving
+and reopening. The candidate PPTX was unchanged during this edit test.
+All guidebook inputs, derived images and decks are private. The current
+operating plugin is 0.4.16. The candidate workflow was exercised locally
+with the packaged code and existing runtime. Mobile and cloud execution of
+this candidate have not been verified.
+
+### Apply and restore
+
+The personal private 0.4.16 source inventory reported 30 files. Both manifests
+and the existing photo guide matched the archived base byte for byte.
+Candidate and restore archives are partial updates for the same plugin.
+
+| Private archive | SHA-256 |
+| --- | --- |
+| `slide-master-0.4.18-photo-layers.zip` | `67cbe5cfa482932044c2f8febd6834f5cc578c2217fb5bad87d6efc70f4cf9e2` |
+| `slide-master-0.4.19-restore-0.4.16.zip` | `057f9f5f47fddbe6af6715edc506788ac22de5fb3ef16e6ed8a42a909a98ec4a` |
+
+1. When applying, read back the exact existing private plugin and its current
+   release ID. Use that ID as the update guard. If the base has changed,
+   reconcile its source with the archive before sending an update.
+2. Apply the 0.4.18 archive. It replaces two version manifests and the photo
+   guide and adds one helper. The expected inventory is 31 files. Read back
+   the version and affected bytes, confirm Google Drive and Template Picker
+   declarations, refresh the host, and run the packaged workflow on the same
+   guidebook. This package uses the existing Pillow dependency. It requires
+   no new connection, permission or paid service.
+3. To restore after a 0.4.18 deployment, read the current release ID and
+   apply the 0.4.19 archive with explicit deletion of
+   `skills/instructions/scripts/prepare_photo_layers.py`. If the host cannot
+   request the deletion, stop the update until it can. Verify the restored
+   30-file inventory, the original photo guide and both connections. The
+   archive simulation restored the changed content byte for byte apart from
+   the recovery version. The earlier 0.4.17 recovery archive remains preserved
+   for its original 0.4.14 target.
+
+### Additional quality improvements
+
+| Order | Improvement | Decision |
+| --- | --- | --- |
+| 1 | Inspect masked images on dark and light backgrounds and compare the exact exported slide. Keep the approved outline separate from the photo. [Pillow polygon rendering](https://pillow.readthedocs.io/en/stable/reference/ImageDraw.html#PIL.ImageDraw.ImageDraw.polygon) | Included in the candidate. Useful for spotting crop edges and pale halos before delivery. |
+| 2 | Keep freeform caption geometry independent of text and photos. Use the existing PowerPoint authoring tool to preserve native objects. [PptxGenJS custom geometry example](https://github.com/gitbrent/PptxGenJS/blob/master/demos/modules/demo_shape.mjs) | Included as a geometry handoff. No new authoring library. |
+| 3 | Review the whole slide for hierarchy, then revisit changed areas at reading size. For shared decks, verify the reading order and meaningful image descriptions in PowerPoint. [PPTAgent](https://github.com/icip-cas/PPTAgent), [Microsoft reading order](https://support.microsoft.com/en-us/powerpoint/make-slides-easier-to-read-by-using-the-reading-order-pane) | Documented for production review. Add a reading-order check only after a representative shared deck is available. |
+| 4 | Trial local foreground segmentation on difficult photos, with manual boundary correction. [OpenCV GrabCut](https://docs.opencv.org/4.x/d8/d83/tutorial_py_grabcut.html) | Deferred. The existing host does not have OpenCV, and segmentation may remove narrow details. Compare results on authorized samples before adding a dependency. |

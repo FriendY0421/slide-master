@@ -111,6 +111,42 @@ compression, and font changes. The tool records source, render and output hashes
 When a page corner is cropped or obscured, record the estimate and explain
 its effect. The map is a review aid and carries no pass score.
 
+### Illustration borders and diagonal captions
+
+When the approved plan includes a cut-out illustration or a diagonal caption,
+use the aligned page PNG and review the relevant crop at full size. Keep the
+original photo and work in the private job directory. Use one plan per layer.
+
+```sh
+python scripts/prepare_photo_layers.py ALIGNED.png PLAN.json NEW_OUTPUT
+```
+
+- Illustration plan example:
+  `{"kind":"illustration","crop":[20,90,140,220],"keep":[[8,75],[30,12],[83,15],[105,70],[91,120],[20,111]]}`.
+  The crop uses page coordinates in left/top/right/bottom order with an
+  exclusive right and bottom. The keep polygon uses crop-relative integer
+  coordinates. Trace the actual outline and preserve narrow edges. Verify the
+  light and dark previews for leftover rectangles, halos and missing pixels.
+  Keep an intentional frame. Reuse coordinates only with the same aligned
+  source. Disconnected pieces or holes may require separate masks or manual
+  retouching.
+- Caption plan example:
+  `{"kind":"caption","crop":[0,820,400,1120],"diagonal":[950,570]}`.
+  The diagonal runs from the crop's left edge at page y=950 to the crop's
+  bottom edge at page x=570. It may continue beyond this picture into a
+  neighboring one. Insert `picture.png` at the crop coordinates without
+  changing its aspect ratio. Use `native_caption` in `layers.json` to place
+  the editable shape above the picture. Build the title, detail, and any
+  visible badge as independent native objects. Extend adjacent photos to the
+  shared edge. Confirm the original printed words are completely covered and
+  inspect the seam at full size. Other slopes or shapes use the current
+  authoring tool's editable freeform and manual review.
+- Use `preview-light.png` and `preview-dark.png` to inspect the picture only.
+  Compare the final PowerPoint render against the aligned reference for edge
+  quality and caption placement. Check important text and images in reading
+  order for widely shared decks. Verify edits to at least one affected native
+  shape or caption text on a copy when PowerPoint is available.
+
 For an approved photo text plan with one source image, add `photo_text` to the
 job's existing dense layout contract and run the existing dense verifier.
 Use the actual approved source path and SHA-256. List the exact native object
