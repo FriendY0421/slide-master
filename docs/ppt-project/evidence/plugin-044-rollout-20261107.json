@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-07",
+  "user_rollout_and_conditional_recovery_approved": true,
+  "target_scope": "existing USER/PRIVATE Slide Master",
+  "before_version": "0.4.3",
+  "intended_version": "0.4.4",
+  "approved_archive_sha256_verified": "363c19284684710b2b079859b10c6a1f7c93a418d80d7d45e8618d785073dd0f",
+  "attempts": [
+    {
+      "kind": "full approved archive, current-release guarded",
+      "files_uploaded": 24,
+      "result": "INVALID_ARGUMENT / HTTP 400",
+      "reason": "apps.google-drive must not set required to false or optional to true"
+    },
+    {
+      "kind": "approved changed-file overlay, existing app declaration omitted/preserved",
+      "files_uploaded": 11,
+      "sha256": "34d0057fda8d5f1deed248b5a220c86d51215da7e2e6da3a7db75b847704c140",
+      "uploaded_content_identical_to_approved_archive": true,
+      "result": "INVALID_ARGUMENT / HTTP 400",
+      "reason": "same effective optional App declaration rejected"
+    }
+  ],
+  "after_official_readback_version": "0.4.3",
+  "after_inventory_files": 22,
+  "same_current_release_id": true,
+  "original_app_declarations_and_manifests_read_back": true,
+  "release_saved": false,
+  "rollback_executed": false,
+  "originals_and_recovery_content_preserved": true,
+  "exact_backup_reupload_currently_guaranteed": false,
+  "installed_044_verification_performed": false,
+  "cloud_044_verification_performed": false,
+  "new_install_auth_permission_paid_service_or_main_merge": false,
+  "dependency_required_conversion_prepared_but_not_submitted": true,
+  "dependency_conversion_needs_new_explicit_approval": true,
+  "dependency_conversion_rollback_would_retain_required_declarations": true,
+  "pdf_received_or_applied": false,
+  "status": "approved deployment blocked; existing 0.4.3 preserved"
+}

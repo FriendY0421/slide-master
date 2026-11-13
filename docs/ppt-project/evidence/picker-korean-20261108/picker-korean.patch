@@ -1,0 +1,101 @@
+--- a/apps/slide-master-picker/web/src/app.js
++++ b/apps/slide-master-picker/web/src/app.js
+@@ -16,6 +16,17 @@
+ let query = "";
+ let page = 1;
+ const PAGE_SIZE = 6;
++const PRESET_LABELS_KO = {
++  "balanced_report": "균형형 보고서",
++  "executive_brief": "핵심 요약 보고",
++  "storytelling_proposal": "설득형 제안서",
++  "data_insight": "데이터 분석 보고",
++  "training_guide": "교육·사용 안내",
++  "product_showcase": "제품·서비스 소개"
++};
++const presetLabel = (p) => p?.display_name_ko || PRESET_LABELS_KO[p?.id] || p?.display_name || p?.id || "";
++const previewLabel = (label) => ({Cover:"표지",Content:"본문",Data:"데이터",Comparison:"비교",Ending:"마무리",Section:"섹션",TOC:"목차","TOC / Section":"목차·섹션"}[label] || label);
++
+
+ const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({
+   "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+@@ -46,7 +57,7 @@
+ function templateCard(t) {
+   const preview = t.previews?.[0]?.src || "";
+   return `<button type="button" class="template-card${selectedTemplate?.id === t.id ? " selected" : ""}" data-open="${esc(t.id)}">
+-    <div class="preview">${preview ? `<img src="${preview}" alt="${esc(t.name)} 대표 미리보기">` : "<span>Preview unavailable</span>"}</div>
++    <div class="preview">${preview ? `<img src="${preview}" alt="${esc(t.name)} 대표 미리보기">` : "<span>미리보기를 불러올 수 없습니다</span>"}</div>
+     <div class="card-body">
+       <div class="card-title">${t.rec ? '<span class="badge">추천</span>' : ""}${esc(t.name)}</div>
+       <div class="card-id">${esc(t.id)}</div>
+@@ -58,7 +69,7 @@
+ function presetCard(p) {
+   const rank = p.recommended_rank ? `<span class="rank">추천 ${p.recommended_rank}</span>` : "";
+   return `<button type="button" class="preset-card${selectedPreset?.id === p.id ? " selected" : ""}" data-preset="${esc(p.id)}">
+-    <strong>${rank}${esc(p.display_name)}</strong><span>${esc(p.summary)}</span>
++    <strong>${rank}${esc(presetLabel(p))}</strong><span>${esc(p.summary)}</span>
+     <small>${esc(p.slide_range)}장 · 텍스트 ${esc(p.visual_ratio?.text)}% / 시각 ${esc(p.visual_ratio?.visual)}%</small>
+   </button>`;
+ }
+@@ -70,28 +81,29 @@
+   const start = (page - 1) * PAGE_SIZE;
+   const list = filtered.slice(start, start + PAGE_SIZE);
+   root.innerHTML = `<section class="picker-shell">
+-    <header><div><strong>Slide Master 템플릿 선택</strong><p>${esc(payload.purpose)}</p></div>
++    <header><div><strong>기본 템플릿 선택</strong><p>${esc(payload.purpose)}</p></div>
+       <div class="tabs"><button data-mode="recommended" class="${mode === "recommended" ? "active" : ""}">추천</button><button data-mode="all" class="${mode === "all" ? "active" : ""}">전체</button></div></header>
++    <p class="summary">내 회사 양식을 사용하려면 대화창에 PPTX·POTX·PDF·사진을 첨부하고 “내 양식 사용”이라고 알려주세요. 원본 내용을 확인한 뒤 진행합니다.</p>
+     <div class="toolbar"><input data-search type="search" value="${esc(query)}" placeholder="템플릿 이름·ID·특징 검색" aria-label="템플릿 검색">
+-      <div class="filters"><button data-kind="all" class="${kind === "all" ? "active" : ""}">전체</button><button data-kind="deck" class="${kind === "deck" ? "active" : ""}">Deck</button><button data-kind="layout" class="${kind === "layout" ? "active" : ""}">Layout</button></div></div>
++      <div class="filters"><button data-kind="all" class="${kind === "all" ? "active" : ""}">전체</button><button data-kind="deck" class="${kind === "deck" ? "active" : ""}">전체 슬라이드형</button><button data-kind="layout" class="${kind === "layout" ? "active" : ""}">개별 레이아웃</button></div></div>
+     <div class="summary">${filtered.length}개 표시 · 페이지 ${page}/${pages}</div>
+     ${list.length ? `<div class="grid">${list.map(templateCard).join("")}</div>` : '<div class="empty">조건에 맞는 템플릿이 없습니다.</div>'}
+     <div class="pager"><button type="button" data-prev ${page <= 1 ? "disabled" : ""}>← 이전</button><span>${page} / ${pages}</span><button type="button" data-next ${page >= pages ? "disabled" : ""}>다음 →</button></div>
+-    <div class="free"><button type="button" data-free>Free Design 선택</button></div>
++    <div class="free"><button type="button" data-free>자유 디자인 선택</button>/button></div>
+   </section>`;
+   bind("[data-mode]", (el) => { mode = el.dataset.mode; page = 1; persistState(); renderGallery(); });
+   bind("[data-kind]", (el) => { kind = el.dataset.kind; page = 1; persistState(); renderGallery(); });
+   bind("[data-prev]", () => { page -= 1; persistState(); renderGallery(); });
+   bind("[data-next]", () => { page += 1; persistState(); renderGallery(); });
+   bind("[data-open]", (el) => { detailTemplate = payload.all_templates.find((x) => x.id === el.dataset.open); renderDetail(); });
+-  bind("[data-free]", () => { selectedTemplate = { id: "free", name: "Free Design", previews: [] }; persistState(); renderPresets(); });
++  bind("[data-free]", () => { selectedTemplate = { id: "free", name: "자유 디자인", previews: [] }; persistState(); renderPresets(); });
+   const search = root.querySelector("[data-search]");
+   search?.addEventListener("input", (event) => { query = event.target.value; page = 1; persistState(); renderGallery(); });
+ }
+
+ function renderDetail() {
+   const t = detailTemplate;
+-  const shots = (t.previews || []).map((p) => `<figure><img src="${p.src}" alt="${esc(p.label)}"><figcaption>${esc(p.label)}</figcaption></figure>`).join("");
++  const shots = (t.previews || []).map((p) => `<figure><img src="${p.src}" alt="${esc(previewLabel(p.label))}"><figcaption>${esc(previewLabel(p.label))}</figcaption></figure>`).join("");
+   root.innerHTML = `<section class="picker-shell">
+     <header><button type="button" data-back>← 다른 템플릿 보기</button><div><strong>${esc(t.name)}</strong><p>${esc(t.id)} · ${esc(t.summary)}</p></div></header>
+     <div class="detail-grid">${shots}</div>
+@@ -171,7 +183,17 @@
+     await app.updateModelContext({ content: [{ type: "text", text: contextText }] });
+     const result = await app.sendMessage({ role: "user", content: [{ type: "text", text: message }] });
+     if (result?.isError) throw new Error("host rejected selection message");
+-    root.innerHTML = `<section class="picker-shell final success"><h2>선택이 확정되었습니다</h2><code>${esc(token)}</code><p>다음 단계는 PPT 생성이 아니라 ${esc(previewScope)}의 장표안 미리보기입니다. 대화창에서 장표별 내용을 확인·수정한 뒤 승인해 주세요.</p><small>validation: ${esc(validationMode)}</small></section>`;
++    root.innerHTML = `<section class="picker-shell final success"><h2>선택값 전달 요청 완료</h2><code>${esc(token)}</code><p>다음 단계는 PPT 생성이 아니라 ${esc(previewScope)}의 장표안 미리보기입니다. 대화창에서 장표별 내용을 확인·수정한 뒤 승인해 주세요.</p><p>대화창에 선택 ID가 보이지 않으면 아래 선택값을 복사해 보내주세요.</p><button type="button" data-copy-selection>선택값 복사</button><span data-copy-status role="status"></span></section>`;
++    bind("[data-copy-selection]", async () => {
++      const status = root.querySelector("[data-copy-status]");
++      try {
++        if (!navigator.clipboard?.writeText) throw new Error("clipboard unavailable");
++        await navigator.clipboard.writeText(`PPT 템플릿 최종 선택: ${token}. 아직 PPT를 생성하지 말고 장표별 구성안을 먼저 보여주세요.`);
++        if (status) status.textContent = "복사했습니다. 대화창에 붙여넣어 주세요.";
++      } catch (_) {
++        if (status) status.textContent = "복사를 사용할 수 없습니다. 위 선택 ID를 직접 복사해 주세요.";
++      }
++    });
+   } catch (error) {
+     try { await navigator.clipboard?.writeText?.(message); } catch (_) {}
+     root.innerHTML = `<section class="picker-shell final warning"><h2>선택값의 자동 채팅 전달이 제한되었습니다</h2><p>선택 자체는 유지됩니다. 아래 내용을 복사해 채팅에 보내면 동일한 공식 선택 확정으로 처리됩니다.</p><code>${esc(message)}</code><small>${esc(error?.message || "host message bridge unavailable")}</small></section>`;
+@@ -182,7 +204,7 @@
+   const token = localToken();
+   root.innerHTML = `<section class="picker-shell final">
+     <button type="button" data-back>← 제작 방식 다시 선택</button><h2>선택 내용 확인</h2>
+-    <dl><dt>템플릿</dt><dd>${esc(selectedTemplate.name || selectedTemplate.id)}</dd><dt>제작 방식</dt><dd>${esc(selectedPreset.display_name)}</dd><dt>선택 ID</dt><dd><code>${esc(token)}</code></dd></dl>
++    <dl><dt>템플릿</dt><dd>${esc(selectedTemplate.name || selectedTemplate.id)}</dd><dt>제작 방식</dt><dd>${esc(presetLabel(selectedPreset))}</dd><dt>선택 ID</dt><dd><code>${esc(token)}</code></dd></dl>
+     <button type="button" class="primary confirm" data-confirm>선택 확정 → 장표안 미리보기</button>
+   </section>`;
+   bind("[data-back]", () => renderPresets());

@@ -62,6 +62,7 @@
 `mask`, `<style>`, `class`, external CSS, `<foreignObject>`, `textPath`, `@font-face`, `<animate*>`/`<set>`, `<script>`/event attrs, `<iframe>`. No `clip-path` except on `<image>` (single supported shape). No filter on `<image>` or on a multi-element `<g>`. Shadows/glow: one `feDropShadow`/`feGaussianBlur` on `<rect>/<circle>/<path>/<text>`, single light direction per page — reach for it only on genuinely floating elements (editorial: mostly flat).
 
 ## 7. Rhythm (breaks the "AI card-grid" look)
+- Read [`composition-planning.md`](./composition-planning.md) once for content-led composition and review; this speed path still excludes images and preserves the approved §IX layout.
 - Read each page's `page_rhythm` tag. `anchor` = structural (cover/section/TOC/ending). `dense` = grids/columns/lists OK. `breathing` = **no multi-card grid** — naked text, dividers, whitespace, or full-bleed; single rounded elements are fine.
 
 ## 8. Per-page + milestone gate

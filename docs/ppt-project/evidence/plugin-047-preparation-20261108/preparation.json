@@ -1,0 +1,30 @@
+{
+  "current_official_version": "0.4.6",
+  "candidate_version": "0.4.7",
+  "recovery_version": "0.4.8",
+  "file_count": 29,
+  "changed_paths": [
+    ".codex-plugin/plugin.json",
+    "plugin.json",
+    "skills/instructions/references/06_GPTS_TEST_SCENARIOS.md",
+    "skills/instructions/references/10_HOST_PRODUCTION_DELIVERY.md",
+    "skills/instructions/references/12_PRECISION_DESIGN.md",
+    "skills/instructions/scripts/dense_pptx_quality.py"
+  ],
+  "app_declarations_unchanged": true,
+  "identity_defaults_permissions_unchanged": true,
+  "recovery_equal_baseline_except_version": true,
+  "delete_paths": [],
+  "new_install_auth_cost": false,
+  "published": false,
+  "archives": {
+    "candidate-0.4.7.zip": {
+      "bytes": 90775,
+      "sha256": "54630b421c34f4ea68abba69ad70a3b08a40bf6ba8877fb8e31b916eba10d758"
+    },
+    "restore-0.4.6-as-0.4.8.zip": {
+      "bytes": 89079,
+      "sha256": "b68505c25a5042db953490cd2b7282711a74e4fd479a0a26e0149f9d017b5352"
+    }
+  }
+}

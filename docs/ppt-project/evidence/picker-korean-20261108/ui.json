@@ -1,0 +1,14 @@
+{
+  "scope": "isolated real frontend source with actual catalog payload and explicitly mocked host bridge; not original host callback",
+  "catalog_count": 21,
+  "preset_labels_korean": true,
+  "choice_ids_preserved": true,
+  "generation_remains_disallowed": true,
+  "message_count_in_mock": 1,
+  "copy_button": true,
+  "mobile_widths": {
+    "viewport": 320,
+    "body": 320
+  },
+  "page_errors": []
+}

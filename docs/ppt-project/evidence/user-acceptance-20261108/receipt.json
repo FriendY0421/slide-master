@@ -1,0 +1,29 @@
+{
+  "scope": "real App render and user manual choice; actual approved private photo production and private delivery",
+  "actual_app_render_signal_received": true,
+  "catalog_entries_in_signal": 21,
+  "simultaneously_visible_card_count_verified": false,
+  "manual_user_pair": {
+    "template": "deck:training_playbook",
+    "preset": "balanced_report"
+  },
+  "original_server_validated": true,
+  "next_state": "WAIT_RECIPIENT_OPEN_AND_TARGET_CLOUD_EVIDENCE",
+  "generation_allowed": false,
+  "automatic_pair_receipt_verified": false,
+  "gate_version": 3,
+  "selection_method": "picker_then_explicit_user_confirmation",
+  "recorder_catalog_provenance": "registered-local-catalog-v2",
+  "fresh_private_photo_received": true,
+  "actual_pixels_inspected": true,
+  "private_source_preserved": true,
+  "photo_content_or_assets_committed": false,
+  "private_analysis_revision": "v1",
+  "current_production_approval_received": true,
+  "pptx_created": true,
+  "aro_cloud_report_received": true,
+  "aro_write_extract_render_verified": false,
+  "owned_picker_sessions_cleaned": true,
+  "new_install_permissions_auth_cost": false,
+  "generation_allowed_scope": "original Picker tool validation returned false before storyline approval; not the later photo production authorization"
+}

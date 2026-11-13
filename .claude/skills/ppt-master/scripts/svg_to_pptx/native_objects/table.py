@@ -483,6 +483,7 @@ def _validate_table_lengths(payload: dict[str, Any], table_rows: list[list[Any]]
 
 def _validate_table_cell_formatting(payload: dict[str, Any], table_rows: list[list[Any]]) -> None:
     style = payload.get("style") if isinstance(payload.get("style"), dict) else {}
+    _table_paragraph_properties("l", style)
     _table_bool(style.get("band_row"), "style.band_row", default=True)
     if "borders" in style:
         raise RuntimeError(
@@ -491,6 +492,7 @@ def _validate_table_cell_formatting(payload: dict[str, Any], table_rows: list[li
     for row in table_rows:
         for cell in row:
             cell_data = _cell_payload(cell)
+            _table_paragraph_properties("l", {**style, **cell_data})
             _table_cell_paragraphs(cell_data)
             if "bold" in cell_data:
                 _table_bool(cell_data["bold"], "cell bold", default=False)
@@ -835,6 +837,22 @@ def _table_merge_attrs(
     return (" " + " ".join(attrs)) if attrs else ""
 
 
+def _table_paragraph_properties(align: str, style: dict[str, Any]) -> str:
+    """Emit opt-in absolute spacing in SVG pixels; keep old defaults when absent."""
+    parts = []
+    for key, tag in (("line_spacing", "lnSpc"), ("paragraph_before", "spcBef"),
+                     ("paragraph_after", "spcAft")):
+        if key in style:
+            value = _number(style[key], f"table {key}")
+            if value < 0 or (key == "line_spacing" and value == 0):
+                requirement = "positive" if key == "line_spacing" else "nonnegative"
+                raise RuntimeError(f"Native PPTX table {key} requires {requirement} pixels")
+            # Spacing has hundredth-point precision; font rounding loses small gaps.
+            parts.append(f'<a:{tag}><a:spcPts val="{round(value * 75)}"/></a:{tag}>')
+    attribute = f' algn="{align}"' if align != "l" else ""
+    return f'<a:pPr{attribute}>{"".join(parts)}</a:pPr>' if parts else f'<a:pPr{attribute}/>'
+
+
 def _build_native_table(elem: ET.Element, ctx: ConvertContext, payload: dict[str, Any]) -> ShapeResult:
     table_rows, col_count, merge_layout = _validate_table_payload(payload)
     header_rows = _table_header_rows(payload, len(table_rows))
@@ -895,6 +913,7 @@ def _build_native_table(elem: ET.Element, ctx: ConvertContext, payload: dict[str
                 continue
 
             cell_data = _cell_payload(cell)
+            paragraph_style = {**style, **cell_data}
             if preserve_source_style:
                 fill = (
                     _clean_hex(cell_data.get("fill"), "#FFFFFF")
@@ -949,9 +968,7 @@ def _build_native_table(elem: ET.Element, ctx: ConvertContext, payload: dict[str
                     "" if cell_data.get("text") is None
                     else str(cell_data.get("text"))
                 )
-                paragraph_props = (
-                    f'<a:pPr algn="{align}"/>' if align != "l" else "<a:pPr/>"
-                )
+                paragraph_props = _table_paragraph_properties(align, paragraph_style)
                 text_run_xml = _table_text_run(
                     text,
                     color=color,
@@ -968,11 +985,7 @@ def _build_native_table(elem: ET.Element, ctx: ConvertContext, payload: dict[str
                 paragraph_parts: list[str] = []
                 for paragraph in paragraphs:
                     paragraph_align = paragraph.align or align
-                    paragraph_props = (
-                        f'<a:pPr algn="{paragraph_align}"/>'
-                        if paragraph.align is not None or paragraph_align != "l"
-                        else "<a:pPr/>"
-                    )
+                    paragraph_props = _table_paragraph_properties(paragraph_align, paragraph_style)
                     if paragraph.runs is None:
                         text_run_xml = _table_text_run(
                             paragraph.text,
@@ -1027,7 +1040,10 @@ def _build_native_table(elem: ET.Element, ctx: ConvertContext, payload: dict[str
             )
             cells_xml.append(
                 f"<a:tc{merge_attrs}>"
-                "<a:txBody><a:bodyPr/><a:lstStyle/>"
+                "<a:txBody>"
+                + ('<a:bodyPr><a:noAutofit/></a:bodyPr>'
+                   if "line_spacing" in paragraph_style else '<a:bodyPr/>')
+                + "<a:lstStyle/>"
                 f"{paragraphs_xml}"
                 "</a:txBody>"
                 f'<a:tcPr{tc_pr_attrs}>{border_xml}{fill_xml}</a:tcPr>'

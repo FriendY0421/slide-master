@@ -16,6 +16,41 @@
 
 ## 1. Template Adherence Rules
 
+### Task-specific small typography
+
+For dense/reference-image tasks, read [precision-design.md](precision-design.md)
+for content-preserving table, image, diagram and bounded-repair review. Explicit
+task locks override the generic size and copy-trimming suggestions below.
+
+When the task requires verbatim content or an unchanged region, pin the actual
+source PPTX SHA256 and declare `reference_comparison` in the existing dense
+contract. Compare native text/table cells (including groups), merge topology,
+protected objects and their asset/layout/master/theme dependencies. Read
+`reference_comparison.coverage` and `repair_tracking` after the existing final
+verifier: partial/unsupported objects are not passed, and missing objects are
+not repaired. Route actual changes back to the same source owner, re-export and
+review the exact final rendered file. Do not auto-shrink fonts or rewrite wording
+to silence errors. Contract details: `docs/ppt-project/REFERENCE_QUALITY.md`.
+
+Explicit user/template typography takes precedence over generic body-size
+defaults. When a task supplies small fixed sizes, record them only in that
+project's lock and `dense_layout_contract.json`; do not promote them to other
+templates or increase them to the general 18pt floor. Preserve the supplied
+Master/Layout/theme on native template routes. Resolve narrow tables through
+column widths, row heights, padding and line spacing together; fit the actual
+selected font before export. Reword only within the user's permission and
+preserve factual content. Do not shrink, clip, overlap or omit text to pass QA.
+Bound diagrams to their allocated region; a compact four-step cycle may use
+a low rectangular loop with four editable directional connectors.
+Follow the task-scoped recipe in
+[`DENSE_PPTX_QUALITY.md`](../../../../docs/ppt-project/DENSE_PPTX_QUALITY.md).
+For dense/image-heavy work, bind the intended paragraph spacing, table margins,
+object gaps/alignment and important image source region in the task contract.
+Use existing contain/slice image conversion; do not flatten editable pictures.
+Inspect actual exported media resolution and crop, then revise source geometry
+and re-export on a failure. Structure-only checks are provisional and cannot
+replace actual-font wrapping/clipping checks in final verification.
+
 ### 1.0 Pre-generation Batch Read
 
 **Hard rule**: Before the first SVG page, batch-read every template SVG this deck will reference. Read once up front, never re-read during generation.
@@ -207,6 +242,8 @@ Colors, fonts, and icons still come exclusively from `spec_lock.md` in both bran
 ---
 
 ## 3. Execution Guidelines
+
+**Mandatory**: Read [`composition-planning.md`](./composition-planning.md) once before authoring. Implement the approved §IX composition; use its subject-aware placement and final-scan review within existing route gates.
 
 - **Proximity**: group related elements with tight spacing; separate unrelated groups
 - **Element grouping (Mandatory)**: wrap every logical Slide-local content unit — title, core-message line, each content block, card, list item, and diagram — in a top-level `<g id="...">` with a descriptive id. Flat free-design/brand-only pages use ordinary semantic groups for every logical unit. On structured template pages, slot `<g>` elements are already semantic groups and direct Master/Layout atoms are the required exception to grouping. Authored native preset fragments (`preset_shape_svg.py`) already are one atomic `<g id>` each and count as one ordinary content group; keep their labels in a sibling parent `<g>`.

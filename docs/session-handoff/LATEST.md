@@ -1,3 +1,33 @@
+Updated checkpoint: 2026-11-11 KST
+
+## Composition and image placement — source instructions connected
+
+User-authorized design refinement preserves current source/typography/template
+and approval standards. Planner and both SVG authoring paths now load
+`composition-planning.md` for content-led layout, existing-confirmation alternatives,
+subject-safe placement and final-scan review. Native routes retain their owners.
+Link/load-path, crop arithmetic and diff checks passed; actual PPT visual results
+and installed plugin uptake are not established. No release/install/merge/FAH
+change. Mobile and shared font registry work below remains preserved.
+
+History: [composition and image placement](../ai-history/2026-11-11-composition-image-placement.md).
+
+---
+
+# Latest PR14 workstream — standalone closeout / FAH deferred
+
+2026-11-08 KST. This branch remains the unmerged PR14 workstream, not accepted
+main/runtime authority. Same private plugin0.4.7 is officially saved and actually
+installed locally; detailed proofs retain their target/version boundaries.
+Latest human direction moves FAH integration to another Codex chat.
+Read [concept/workflow/history handoff](../ppt-project/ko/SLIDE_MASTER_FAH_HANDOFF_20261108.md),
+[bounded standalone closeout](../ppt-project/STANDALONE_CLOSEOUT_20261108.md), and
+[current acceptance](../ppt-project/REMAINING_ACCEPTANCE_20261108.md) first.
+Company/private artifacts stay outside GitHub. Earlier entries below are history;
+older font defaults do not override the user's task-specific company sizes.
+
+---
+
 # Latest project handoff
 
 Updated checkpoint: 2026-08-30 22:30 KST

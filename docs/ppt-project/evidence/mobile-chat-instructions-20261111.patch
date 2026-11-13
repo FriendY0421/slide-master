@@ -1,0 +1,26 @@
+--- a/skills/instructions/SKILL.md
++++ b/skills/instructions/SKILL.md
+@@ -39,0 +40,4 @@
++
++1-A-1) 휴대폰에서 PC 없이 작업
++- Picker가 429/연결 불가이면 현재 승인 카탈로그의 실제 미리보기와 채팅으로 복사할 템플릿·제작 프리셋 선택값을 같은 응답에 표시한다. 작업 메뉴 번호는 제작 경로 선택이다. 이미 받은 선택은 다시 묻지 않는다.
++- PC 없이 작업할 때는 [호스트 제작·전달](references/10_HOST_PRODUCTION_DELIVERY.md)에 따라 현재 모바일 Chat의 클라우드 도구를 먼저 확인한다. 실제 장표안 승인과 기존 제작·검수 순서를 적용한다.
+--- a/skills/instructions/references/10_HOST_PRODUCTION_DELIVERY.md
++++ b/skills/instructions/references/10_HOST_PRODUCTION_DELIVERY.md
+@@ -6,0 +7,7 @@
++
++## PC 없이 사용하는 모바일 Chat과 Work
++
++- 요청한 호스트에서 기존 제작 경로의 실행, 입력 파일 접근, 완성된 PPTX 다운로드가 실제 가능한지 확인한다. 로컬 PC가 꺼져 있으면 현재 호스트의 클라우드 실행 환경을 사용한다.
++- Picker가 429/연결 불가이면 현재 승인 카탈로그의 실제 등록 미리보기와 복사 가능한 선택값을 제공한다. 이미 받은 선택·자료를 유지하고 사용자가 현재 장표안을 승인한 뒤 기존 제작기로 진행한다.
++- 실행 도구나 파일 전달 기능이 없으면 마지막으로 마친 단계와 필요한 기능을 알려준다. 모바일 Chat에서 클라우드 도구가 확인되면 그 대화에서 계속한다. 현재 대화에서 필요한 기능이 없고 모바일 Work에서 실제 제공되는 경우 같은 플러그인과 접근 가능한 원본으로 이어가는 방법을 안내한다.
++- 최종 PPTX를 재열어 검수하고 현재 호스트의 비공개 다운로드를 우선 사용한다. 기존 승인된 Drive를 사용할 경우 아래 §5를 적용한다. 집 PC를 끈 상태에서 요청한 실제 사용자가 다운로드하여 휴대폰에서 열어본 결과를 확인한다.
+--- a/skills/instructions/references/06_GPTS_TEST_SCENARIOS.md
++++ b/skills/instructions/references/06_GPTS_TEST_SCENARIOS.md
+@@ -99,0 +100,6 @@
++
++
++## 모바일 PPTX 수령
++- PC 종료와 Picker 429 조건에서 실제 미리보기와 수동 선택값을 제공한다.
++- 최신 장표안 승인 뒤 기존 제작기로 PPTX를 생성하고 재열기 검수를 진행한다.
++- 실행이나 다운로드 도구가 없는 경우 실제 미완료 단계를 보고한다. 실기기 다운로드 및 정상 열림을 사용자에게 확인한다.

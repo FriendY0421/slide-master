@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-13",
+  "scope": "synthetic structural engine probe, not final company-font QA",
+  "checks": {
+    "positive_errors": 0,
+    "negative_probes_rejected": {
+      "distortion": [
+        "IMAGE_DISTORTION",
+        "LAYOUT_SPACING"
+      ],
+      "low-resolution": [
+        "IMAGE_RESOLUTION"
+      ],
+      "protected-crop": [
+        "IMAGE_DISTORTION",
+        "IMAGE_PROTECTED_CROP",
+        "IMAGE_RESOLUTION"
+      ],
+      "alignment": [
+        "LAYOUT_ALIGNMENT"
+      ],
+      "gap": [
+        "LAYOUT_SPACING"
+      ],
+      "line-spacing": [
+        "PARAGRAPH_SPACING"
+      ],
+      "small-font": [
+        "FONT_SIZE"
+      ],
+      "padding": [
+        "CELL_PADDING"
+      ],
+      "missing-spacing-object": [
+        "UNVERIFIED_LAYOUT"
+      ],
+      "wrong-kind": [
+        "UNVERIFIED"
+      ],
+      "nan-geometry": [
+        "UNVERIFIED",
+        "UNVERIFIED_LAYOUT"
+      ]
+    },
+    "previous_structure_regression_passed": true,
+    "font_files_read": 0,
+    "actual_font_rendering_verified": false,
+    "korean_wrapping_verified": false,
+    "production_owner": "existing create_pptx_with_native_svg; engineering fixture, not company deck"
+  },
+  "checked_targets": 9,
+  "text_metrics_mode": "structure_only",
+  "qa_font_files_read": 0,
+  "final_gate_refused_structure_only": true,
+  "powerpoint": {
+    "originalUnchanged": true,
+    "powerpointVersion": "16.0",
+    "requestedFontRenderingVerified": false,
+    "opened": true,
+    "nativePictures": [
+      {
+        "y": 48.0,
+        "height": 120.0,
+        "cropBottom": 0.0,
+        "cropTop": 0.0,
+        "name": "Image 2",
+        "cropRight": 0.0,
+        "x": 36.0,
+        "width": 240.0,
+        "cropLeft": 0.0
+      },
+      {
+        "y": 48.0,
+        "height": 120.0,
+        "cropBottom": 337.5,
+        "cropTop": 337.5,
+        "name": "Image 3",
+        "cropRight": 0.0,
+        "x": 324.0,
+        "width": 240.0,
+        "cropLeft": 0.0
+      }
+    ],
+    "nativeTables": 1
+  },
+  "artifacts": [
+    {
+      "name": "precision.pptx",
+      "sha256": "e04ee773a88484d0a744da7d13624c0cdd260768494acfc0636fd38be8714761",
+      "storage": "private precision review archive"
+    },
+    {
+      "name": "powerpoint-font-unverified.png",
+      "sha256": "8bb098d51be1a272a4dd3761a46d15be5f189a8aac079d7296ca3f24a93c37bc",
+      "storage": "private precision review archive"
+    }
+  ],
+  "live_plugin_activated": false,
+  "company_source_compared": false,
+  "cloud_round_trip": false
+}

@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-13",
+  "scope": "actual-font metric inspector, explicitly temporary OFL Pretendard 11pt",
+  "available_width_pt": 100,
+  "wide_line_width_pt": 180.625,
+  "before": {"first_line_overflow_detected": false, "last_line_overflow_detected": true},
+  "after": {
+    "first_line_overflow_detected": true,
+    "last_line_overflow_detected": true,
+    "short_two_lines_pass": true,
+    "normal_wrapping_pass": true
+  },
+  "existing_native_fixture": {"errors": 0, "design_warnings": 1, "measured_regions": 9},
+  "text_or_font_size_automatically_changed": false,
+  "samsung_verified": false,
+  "powerpoint_verified_for_this_probe": false,
+  "company_source_verified": false,
+  "installed_plugin_changed": false
+}

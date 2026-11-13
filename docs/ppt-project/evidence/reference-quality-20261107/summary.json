@@ -1,0 +1,293 @@
+{
+  "date": "2026-11-07",
+  "scope": "owned synthetic two-slide engineering comparison; temporary OFL Pretendard",
+  "code_not_installed_in_plugin": true,
+  "new_dependencies_or_paid_services": false,
+  "default_report_equal_to_prechange_code": true,
+  "comparison": {
+    "before": {
+      "bytes": 40303,
+      "sha256": "24ce3abf0d4fea5b18cbe416a7fbb093c5632698e8a46cb3c725a753d3e4608a",
+      "mechanical_errors": 8,
+      "design_warnings": 116,
+      "measured_regions": 38,
+      "reference_checks": 94,
+      "reference_errors": 0,
+      "reference_status": "partial",
+      "coverage": {
+        "reference": {
+          "shape": 24,
+          "graphic_frame": 4,
+          "native_table": 3,
+          "table_cell": 32,
+          "picture": 1,
+          "group": 1
+        },
+        "candidate": {
+          "shape": 24,
+          "graphic_frame": 4,
+          "native_table": 3,
+          "table_cell": 32,
+          "picture": 1,
+          "group": 1
+        },
+        "unverified": [
+          {
+            "target": "ppt/slides/slide2.xml/native-chart",
+            "kind": "chart/diagram/other graphic frame",
+            "reason": "native text/data/rendering needs dedicated checks"
+          }
+        ]
+      },
+      "render_process_exit_code": 0,
+      "rendered_pages": [
+        {
+          "slide": 1,
+          "sha256": "04a57771d071c462faa72d3067d20f62254a94f7ef072d6b56bd76bd0e44d719"
+        },
+        {
+          "slide": 2,
+          "sha256": "edb7c01109c70379aa41733a21a88ed1a572002870eece51e35b385483c516d4"
+        }
+      ],
+      "font_metric_mode": "actual_font",
+      "native_powerpoint_font_rendering_verified": false,
+      "embedded_fonts": false,
+      "external_relationships": false
+    },
+    "after": {
+      "bytes": 40449,
+      "sha256": "5b3715bf4f9236948ebb3ee9d4f5ae1de833910bfca56c45f715a8de8a3b8510",
+      "mechanical_errors": 0,
+      "design_warnings": 8,
+      "measured_regions": 38,
+      "reference_checks": 94,
+      "reference_errors": 0,
+      "reference_status": "partial",
+      "coverage": {
+        "reference": {
+          "shape": 24,
+          "graphic_frame": 4,
+          "native_table": 3,
+          "table_cell": 32,
+          "picture": 1,
+          "group": 1
+        },
+        "candidate": {
+          "shape": 24,
+          "graphic_frame": 4,
+          "native_table": 3,
+          "table_cell": 32,
+          "picture": 1,
+          "group": 1
+        },
+        "unverified": [
+          {
+            "target": "ppt/slides/slide2.xml/native-chart",
+            "kind": "chart/diagram/other graphic frame",
+            "reason": "native text/data/rendering needs dedicated checks"
+          }
+        ]
+      },
+      "render_process_exit_code": 0,
+      "rendered_pages": [
+        {
+          "slide": 1,
+          "sha256": "9cc47df468b1d6f535c153c74f26ca95452c1e7f656d55e6e9fe816e7aa42daf"
+        },
+        {
+          "slide": 2,
+          "sha256": "edb7c01109c70379aa41733a21a88ed1a572002870eece51e35b385483c516d4"
+        }
+      ],
+      "font_metric_mode": "actual_font",
+      "native_powerpoint_font_rendering_verified": false,
+      "embedded_fonts": false,
+      "external_relationships": false
+    }
+  },
+  "fault_injection": {
+    "default_contract_report_identical_to_previous_code": true,
+    "faults": [
+      {
+        "fault": "table-number",
+        "previous_geometry_errors": 0,
+        "new_combined_errors": 1,
+        "reference_kinds": [
+          "REFERENCE_TEXT"
+        ]
+      },
+      {
+        "fault": "group-text",
+        "previous_geometry_errors": 0,
+        "new_combined_errors": 2,
+        "reference_kinds": [
+          "REFERENCE_PROTECTED_OBJECT",
+          "REFERENCE_TEXT"
+        ]
+      },
+      {
+        "fault": "group-position",
+        "previous_geometry_errors": 0,
+        "new_combined_errors": 1,
+        "reference_kinds": [
+          "REFERENCE_PROTECTED_OBJECT"
+        ]
+      },
+      {
+        "fault": "image-bytes",
+        "previous_geometry_errors": 0,
+        "new_combined_errors": 2,
+        "reference_kinds": [
+          "REFERENCE_PROTECTED_OBJECT",
+          "REFERENCE_PROTECTED_PART"
+        ]
+      },
+      {
+        "fault": "chart-data",
+        "previous_geometry_errors": 0,
+        "new_combined_errors": 2,
+        "reference_kinds": [
+          "REFERENCE_PROTECTED_OBJECT",
+          "REFERENCE_PROTECTED_PART"
+        ]
+      },
+      {
+        "fault": "master",
+        "previous_geometry_errors": 0,
+        "new_combined_errors": 15,
+        "reference_kinds": [
+          "REFERENCE_PROTECTED_OBJECT",
+          "REFERENCE_PROTECTED_PART"
+        ]
+      },
+      {
+        "fault": "slide-background",
+        "previous_geometry_errors": 0,
+        "new_combined_errors": 2,
+        "reference_kinds": [
+          "REFERENCE_PROTECTED_OBJECT"
+        ]
+      },
+      {
+        "fault": "layout-target",
+        "previous_geometry_errors": 0,
+        "new_combined_errors": 2,
+        "reference_kinds": [
+          "REFERENCE_PROTECTED_OBJECT"
+        ]
+      },
+      {
+        "fault": "merge-topology",
+        "previous_geometry_errors": 3,
+        "new_combined_errors": 4,
+        "reference_kinds": [
+          "REFERENCE_TABLE_STRUCTURE"
+        ]
+      },
+      {
+        "fault": "missing-table",
+        "previous_geometry_errors": 1,
+        "new_combined_errors": 20,
+        "reference_kinds": [
+          "REFERENCE_PROTECTED_OBJECT",
+          "REFERENCE_TABLE_STRUCTURE",
+          "REFERENCE_TEXT"
+        ]
+      }
+    ],
+    "strict_unknown_coverage_rejected": true,
+    "wrong_baseline_hash_rejected": true,
+    "missing_target_not_falsely_resolved": true,
+    "render_comparisons": [
+      {
+        "slide": 1,
+        "protected_right_half_pixels_identical": true,
+        "entire_slide_pixels_identical": false
+      },
+      {
+        "slide": 2,
+        "protected_right_half_pixels_identical": true,
+        "entire_slide_pixels_identical": true
+      }
+    ]
+  },
+  "strict_production_acceptance": false,
+  "new_powerpoint_application_check": false,
+  "company_or_samsung_verified": false,
+  "original_sources_reused_not_a_new_layout_claim": true,
+  "final_verifier": {
+    "exit_code": 0,
+    "process_checked_render_executed": true,
+    "warnings": [
+      "engineering project metadata absent",
+      "engineering design plan absent",
+      "partial native chart text/data coverage"
+    ],
+    "initial_fixture_scaffold_missing_flat_lock_failed": true,
+    "existing_truthful_flat_lock_restored_before_pass": true
+  },
+  "source_code_sha256": {
+    "dense_pptx_quality.py": "17caa3216b1a003b837815c5c3aa63ce83312909848a5473e927d66956c692f1",
+    "pptx_reference_quality.py": "f35ddcb55075f0cd493225a59854fb7f7d9a0d0cf8be2b2fc1b61fcff6165a52",
+    "verify_deck.py": "b81a33e3bb13e81edbe5d32066b12c624db50a8ca4dcbf72934b7d9d5964ef89"
+  },
+  "repair_tracking": {
+    "baseline_sha256": "24ce3abf0d4fea5b18cbe416a7fbb093c5632698e8a46cb3c725a753d3e4608a",
+    "final_sha256": "5b3715bf4f9236948ebb3ee9d4f5ae1de833910bfca56c45f715a8de8a3b8510",
+    "same_contract": true,
+    "records": [
+      {
+        "target": "P1:note",
+        "kind": "OBJECT_OVERLAP",
+        "before": 2,
+        "after": 0,
+        "status": "resolved"
+      },
+      {
+        "target": "P1:process-table:R2C2",
+        "kind": "TEXT_HEIGHT",
+        "before": 1,
+        "after": 0,
+        "status": "resolved"
+      },
+      {
+        "target": "P1:process-table:R2C3",
+        "kind": "TEXT_HEIGHT",
+        "before": 1,
+        "after": 0,
+        "status": "resolved"
+      },
+      {
+        "target": "P1:process-table:R3C2",
+        "kind": "TEXT_HEIGHT",
+        "before": 1,
+        "after": 0,
+        "status": "resolved"
+      },
+      {
+        "target": "P1:process-table:R3C3",
+        "kind": "TEXT_HEIGHT",
+        "before": 1,
+        "after": 0,
+        "status": "resolved"
+      },
+      {
+        "target": "P1:process-table:R4C2",
+        "kind": "TEXT_HEIGHT",
+        "before": 1,
+        "after": 0,
+        "status": "resolved"
+      },
+      {
+        "target": "P1:process-table:R4C3",
+        "kind": "TEXT_HEIGHT",
+        "before": 1,
+        "after": 0,
+        "status": "resolved"
+      }
+    ],
+    "boundary": "Mechanical findings only; no claim of visual/application repair",
+    "resolved_occurrences": 8
+  }
+}

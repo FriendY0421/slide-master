@@ -1,0 +1,11 @@
+{
+  "scope": "actual existing server resource readback, not host iframe screenshot/selection receipt",
+  "checks": {
+    "korean_menu": true,
+    "korean_preset": true,
+    "copy_button": true,
+    "delivery_ack_wording": true
+  },
+  "bytes": 607381,
+  "sha256": "e320d1edc8d8964774ad0b51f0421bc940a9a6e3e33f0255d01aea9fea99eb82"
+}

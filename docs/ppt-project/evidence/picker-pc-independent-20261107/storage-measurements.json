@@ -1,0 +1,59 @@
+{
+  "measurement_scope": "current local files; not Dot VM free space or account quota",
+  "tracked_source": {
+    "bytes": 30884178,
+    "files": 12515
+  },
+  "main_skill": {
+    "bytes": 32766174,
+    "files": 12462,
+    "MiB": 31.25
+  },
+  "all_pretendard_fonts": {
+    "bytes": 9491777,
+    "files": 7,
+    "MiB": 9.05
+  },
+  "regular_bold_fonts": {
+    "Pretendard-Regular.otf": {
+      "bytes": 1574352,
+      "files": 1
+    },
+    "Pretendard-Bold.otf": {
+      "bytes": 1576660,
+      "files": 1
+    }
+  },
+  "installed_plugin_045": {
+    "bytes": 293607,
+    "files": 30,
+    "MiB": 0.28
+  },
+  "supplied_node_modules_upper_bound": {
+    "bytes": 384868390,
+    "files": 8531,
+    "MiB": 367.04
+  },
+  "artifact_tool_package_only": {
+    "bytes": 128040660,
+    "files": 215,
+    "MiB": 122.11
+  },
+  "two_slide_pptx": {
+    "bytes": 40449,
+    "files": 1
+  },
+  "two_render_pngs": {
+    "bytes": 119015,
+    "files": 4,
+    "MiB": 0.11
+  },
+  "offline_gallery": {
+    "bytes": 810603,
+    "files": 1
+  },
+  "recovery_bundle": {
+    "bytes": 216642,
+    "files": 1
+  }
+}

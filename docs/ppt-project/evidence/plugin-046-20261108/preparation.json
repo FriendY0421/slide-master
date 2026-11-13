@@ -1,0 +1,65 @@
+{
+  "scope": "prepared existing-plugin instruction update; not applied/installed/host-validated",
+  "base_version": "0.4.5",
+  "candidate_version": "0.4.6",
+  "recovery_version": "0.4.7",
+  "changed": [
+    ".codex-plugin/plugin.json",
+    "plugin.json",
+    "skills/instructions/SKILL.md",
+    "skills/instructions/lookup/knowledge-index.json",
+    "skills/instructions/references/00_README.md",
+    "skills/instructions/references/01_GPTS_INSTRUCTIONS_FINAL_v3.txt",
+    "skills/instructions/references/02_PPT_WORKFLOW_KNOWLEDGE.md",
+    "skills/instructions/references/04_PRESENTATION_PRESETS.json",
+    "skills/instructions/references/06_GPTS_TEST_SCENARIOS.md",
+    "skills/instructions/references/09_CANONICAL_FULL_REFERENCE_v3.md",
+    "skills/instructions/references/10_HOST_PRODUCTION_DELIVERY.md"
+  ],
+  "unchanged_count": 16,
+  "added": [
+    "skills/instructions/references/14_PORTABLE_RECOVERY.md",
+    "skills/instructions/references/15_PHOTO_CUSTOM_RECONSTRUCTION.md"
+  ],
+  "preserved": {
+    "app_declarations_exact": true,
+    "default_prompts_and_identity_semantically_exact": true,
+    "all_runtime_scripts_exact": true,
+    "skill_frontmatter_exact": true,
+    "existing_preset_semantics_exact": true,
+    "json_and_internal_references_valid": true,
+    "recovery_overlay_simulation_exact_except_version": true
+  },
+  "original": {
+    "name": "original-0.4.5.zip",
+    "bytes": 81435,
+    "sha256": "13f08cb6eade328b5bb0cf2edce16a227979cb305956875782e7876b38c3b22f",
+    "files": 27
+  },
+  "candidate": {
+    "name": "candidate-0.4.6.zip",
+    "bytes": 90215,
+    "sha256": "d4f7fbd4aef26eb3e417b73d2b7fe39cb48dbef19d268f4cd36a669f0a40884d",
+    "files": 29
+  },
+  "recovery": {
+    "name": "restore-0.4.5-as-0.4.7.zip",
+    "bytes": 81446,
+    "sha256": "3a79c5e6d9b261da2a9f3534e22765a5665edd47080fb8ba3e1fbc224511719a",
+    "files": 27
+  },
+  "recovery_delete_paths": [
+    "skills/instructions/references/14_PORTABLE_RECOVERY.md",
+    "skills/instructions/references/15_PHOTO_CUSTOM_RECONSTRUCTION.md"
+  ],
+  "unverified": [
+    "official_save",
+    "installed_cache",
+    "Aro_reset_recovery",
+    "photo_analysis_to_user_approval",
+    "automatic_picker_pair_return",
+    "PC_off_original_picker",
+    "new_company_photo_render",
+    "Samsung_rights"
+  ]
+}

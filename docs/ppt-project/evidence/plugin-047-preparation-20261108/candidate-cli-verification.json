@@ -1,0 +1,26 @@
+{
+  "runs": [
+    {
+      "name": "old-default",
+      "exit_code": 0,
+      "errors": 0
+    },
+    {
+      "name": "candidate-default",
+      "exit_code": 0,
+      "errors": 0
+    },
+    {
+      "name": "candidate-correct",
+      "exit_code": 0,
+      "errors": 0
+    },
+    {
+      "name": "candidate-fault",
+      "exit_code": 1,
+      "errors": 1
+    }
+  ],
+  "default_full_report_equal": true,
+  "published": false
+}

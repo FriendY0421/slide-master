@@ -4,6 +4,7 @@
     {
       "id": "balanced_report",
       "display_name": "Balanced Report",
+      "display_name_ko": "균형형 보고서",
       "summary": "보고·공유에 가장 범용적인 균형형",
       "slide_range": "10-15",
       "content_density": "balanced",
@@ -16,6 +17,7 @@
     {
       "id": "executive_brief",
       "display_name": "Executive Brief",
+      "display_name_ko": "핵심 요약 보고",
       "summary": "핵심 결론과 의사결정 포인트를 빠르게 전달",
       "slide_range": "6-10",
       "content_density": "low",
@@ -28,6 +30,7 @@
     {
       "id": "storytelling_proposal",
       "display_name": "Storytelling Proposal",
+      "display_name_ko": "설득형 제안서",
       "summary": "문제→원인→해결→효과로 설득하는 제안형",
       "slide_range": "12-18",
       "content_density": "balanced",
@@ -40,6 +43,7 @@
     {
       "id": "data_insight",
       "display_name": "Data Insight",
+      "display_name_ko": "데이터 분석 보고",
       "summary": "수치·KPI·트렌드·비교를 중심으로 분석",
       "slide_range": "10-15",
       "content_density": "high",
@@ -52,6 +56,7 @@
     {
       "id": "training_guide",
       "display_name": "Training & Guide",
+      "display_name_ko": "교육·사용 안내",
       "summary": "단계별 설명과 예시 중심의 교육형",
       "slide_range": "15-25",
       "content_density": "medium_high",
@@ -64,6 +69,7 @@
     {
       "id": "product_showcase",
       "display_name": "Product / Service Showcase",
+      "display_name_ko": "제품·서비스 소개",
       "summary": "제품·서비스·브랜드 스토리를 시각적으로 전달",
       "slide_range": "8-14",
       "content_density": "low_medium",

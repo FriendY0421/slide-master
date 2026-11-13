@@ -1,0 +1,9 @@
+{
+  "scope": "closeout integrity only; no repeated rendering or new editability claim",
+  "delivered_private_pptx_present": true,
+  "delivered_private_pptx_unchanged": true,
+  "current_recovery_capsule_present": true,
+  "current_recovery_capsule_unchanged": true,
+  "deferred_unverified_fah_draft_outside_source": true,
+  "fah_draft_installed": false
+}

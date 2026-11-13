@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-13",
+  "scope": "editable native table OOXML and actual temporary OFL Pretendard metrics",
+  "before": {"header_14_under_table_cap_12_incorrectly_accepted": true},
+  "after": {
+    "header_12_under_table_cap_12_errors": 0,
+    "header_14_under_table_cap_12_font_size_errors": 2,
+    "other_template_header_14_under_table_cap_14_errors": 0,
+    "target_regions_per_case": 9
+  },
+  "all_templates_forced_to_12pt": false,
+  "exported_font_size_automatically_changed": false,
+  "samsung_verified": false,
+  "powerpoint_verified_for_this_probe": false,
+  "company_source_verified": false,
+  "installed_plugin_changed": false
+}

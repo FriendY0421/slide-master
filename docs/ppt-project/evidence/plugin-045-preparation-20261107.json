@@ -1,0 +1,185 @@
+{
+  "stage": "prepared and tested; not yet saved",
+  "package": {
+    "expected_current_version": "0.4.4",
+    "candidate_version": "0.4.5",
+    "rollback_version": "0.4.6",
+    "files": 27,
+    "changed_existing": [
+      ".codex-plugin/plugin.json",
+      "plugin.json",
+      "skills/instructions/SKILL.md",
+      "skills/instructions/lookup/knowledge-index.json",
+      "skills/instructions/references/00_README.md",
+      "skills/instructions/references/01_GPTS_INSTRUCTIONS_FINAL_v3.txt",
+      "skills/instructions/references/09_CANONICAL_FULL_REFERENCE_v3.md",
+      "skills/instructions/references/10_HOST_PRODUCTION_DELIVERY.md",
+      "skills/instructions/references/11_REFERENCE_QUALITY.md",
+      "skills/instructions/scripts/dense_pptx_quality.py"
+    ],
+    "retained_existing": [
+      ".app.json",
+      "skills/instructions/agents/openai.yaml",
+      "skills/instructions/references/02_PPT_WORKFLOW_KNOWLEDGE.md",
+      "skills/instructions/references/03_TEMPLATE_REGISTRATION_POLICY.md",
+      "skills/instructions/references/04_PRESENTATION_PRESETS.json",
+      "skills/instructions/references/05_TEMPLATE_METADATA_SCHEMA.json",
+      "skills/instructions/references/06_GPTS_TEST_SCENARIOS.md",
+      "skills/instructions/references/07_TOOL_CONTRACT.md",
+      "skills/instructions/references/08_INTERACTIVE_APP_BLOCK_UI_FINAL.md",
+      "skills/instructions/references/template_gallery_reference.html",
+      "skills/instructions/scripts/console_encoding.py",
+      "skills/instructions/scripts/pptx_reference_quality.py",
+      "skills/instructions/scripts/render_pptx_review.mjs",
+      "skills/instructions/scripts/render_pptx_review.py"
+    ],
+    "new_files": [
+      "skills/instructions/references/12_PRECISION_DESIGN.md",
+      "skills/instructions/references/13_CHART_WORKBOOK_PRESERVATION.md",
+      "skills/instructions/scripts/chart_workbook_preservation.py"
+    ],
+    "rollback_delete_paths": [
+      "skills/instructions/references/12_PRECISION_DESIGN.md",
+      "skills/instructions/references/13_CHART_WORKBOOK_PRESERVATION.md",
+      "skills/instructions/scripts/chart_workbook_preservation.py"
+    ],
+    "identity_default_prompts_apps_preserved": true,
+    "rollback_overlay_simulation_passed": true,
+    "syntax_links_inventory_passed": true,
+    "artifacts": [
+      {
+        "name": "original-0.4.4.zip",
+        "sha256": "3c1fd8e74d8208e3b51d1c3dd8a156aa09ba09299bb2a709c7d384d53cccd2eb",
+        "bytes": 70395
+      },
+      {
+        "name": "candidate-0.4.5.zip",
+        "sha256": "233b1fbfca8c291d9de199f0eea0e09652f24958885fa4fed20793d737c7eeb5",
+        "bytes": 81446
+      },
+      {
+        "name": "restore-0.4.4-as-0.4.6.zip",
+        "sha256": "7978bfad16f90c8b48e50ca1a15509563363caafdde30d455fec17fa277f715e",
+        "bytes": 70405
+      }
+    ],
+    "extra_permission_installation_cost": false,
+    "saved_release_changed": false
+  },
+  "chart_guard": {
+    "source_pr15_head": "d9548db070ee65d405b15657987043828e89dc56",
+    "imported_module_sha256": "699bfcbcc64186f852c0cc5e6010f36cc264c0885abf5a94f86141d105b539d5",
+    "source_sha256": "5b3715bf4f9236948ebb3ee9d4f5ae1de833910bfca56c45f715a8de8a3b8510",
+    "default_report_unchanged": true,
+    "measured_regions": 38,
+    "errors": 0,
+    "font_runs": 47,
+    "faults": [
+      {
+        "case": "missing-workbook",
+        "blocked_before_metrics": true,
+        "issues": [
+          "Candidate native chart/workbook package is broken or missing"
+        ]
+      },
+      {
+        "case": "missing-external-data",
+        "blocked_before_metrics": true,
+        "issues": [
+          "P2:chart1: native chart type/series/range/workbook linkage changed"
+        ]
+      },
+      {
+        "case": "external-workbook",
+        "blocked_before_metrics": true,
+        "issues": [
+          "Candidate native chart/workbook package is broken or missing"
+        ]
+      },
+      {
+        "case": "changed-series-range",
+        "blocked_before_metrics": true,
+        "issues": [
+          "P2:chart1: native chart type/series/range/workbook linkage changed"
+        ]
+      }
+    ],
+    "repacked_same_chart_passed": true,
+    "missing_manifest_regenerate_blocked": true,
+    "external_fetches": 0,
+    "new_permissions": false,
+    "new_installations": false,
+    "native_chart_edit_verified_in_this_probe": false,
+    "candidate_deliverable_by_guard_alone": false,
+    "upstream_module_sha256": "b75d394bf0378191e7806dfc554849204a549e5fce59fa078f50a23e5714e2a5",
+    "documentation_link_adjusted_only": true
+  },
+  "native_powerpoint": {
+    "after": [
+      85.75,
+      90.0
+    ],
+    "externalLink": false,
+    "saveReopenPassed": true,
+    "candidateSha256": "1d4961510af95828ab77fbce23b8a8d752b317661017a7984249ddd8f2064894",
+    "originalUnchanged": true,
+    "workbookCellB2": 85.75,
+    "sourceSha256": "5b3715bf4f9236948ebb3ee9d4f5ae1de833910bfca56c45f715a8de8a3b8510",
+    "requestedFontRenderingVerified": false,
+    "powerpointVersion": "16.0",
+    "passed": true,
+    "seriesFormula": "=SERIES(Sheet1!$B$1,Sheet1!$A$2:$A$3,Sheet1!$B$2:$B$3,1)",
+    "before": [
+      84.5,
+      90.0
+    ],
+    "saved_chart_cache": [
+      "85.75",
+      "90"
+    ],
+    "saved_workbook_B2": "85.75",
+    "external_relationships": [],
+    "embedded_font_parts": [],
+    "chart_preservation_passed": true,
+    "first_attempt_passed": false,
+    "first_attempt_failure": "stale reopened Office COM handle; preserved privately",
+    "recovery": "reacquired application and retained chart/data handles",
+    "preview": "plugin-045-native-chart-edit.png",
+    "mutation_scope": "isolated chart edit test, not revised approved final content",
+    "manual_preview_review_completed": true
+  },
+  "render": {
+    "renderer": "artifact-tool importPptx/export PNG; existing Windows CPU property-setter workaround",
+    "pptx_sha256": "5b3715bf4f9236948ebb3ee9d4f5ae1de833910bfca56c45f715a8de8a3b8510",
+    "images": [
+      {
+        "slide": 1,
+        "path": "slide-1.png",
+        "sha256": "9cc47df468b1d6f535c153c74f26ca95452c1e7f656d55e6e9fe816e7aa42daf"
+      },
+      {
+        "slide": 2,
+        "path": "slide-2.png",
+        "sha256": "edb7c01109c70379aa41733a21a88ed1a572002870eece51e35b385483c516d4"
+      }
+    ],
+    "process_completed": true,
+    "process_exit_code": 0,
+    "text_font_verified": false,
+    "powerpoint": false
+  },
+  "visual_review": {
+    "both_pages_reviewed": true,
+    "images_identical_to_044": true,
+    "samsung_verified": false,
+    "company_original_verified": false
+  },
+  "final_verifier": {
+    "exit": 0,
+    "rendered": true,
+    "limitations": [
+      "synthetic fixture lacks complete plan/canvas metadata",
+      "reference generic chart coverage partial; separate preservation/native edit checks applied"
+    ]
+  }
+}

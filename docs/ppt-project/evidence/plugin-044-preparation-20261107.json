@@ -1,0 +1,39 @@
+{
+  "status": "prepared, approval pending",
+  "current_version": "0.4.3",
+  "candidate_version": "0.4.4",
+  "package_files": 24,
+  "modified_existing_files": 9,
+  "new_files": 2,
+  "unchanged_existing_files": 13,
+  "json_yaml_python_syntax": "pass",
+  "identity_presentation_default_prompt_apps_unchanged": true,
+  "references_and_index_present": true,
+  "rollback_overlay_content_matches_original_except_version": true,
+  "packaged_checker": {
+    "positive_measured_regions": 38,
+    "positive_errors": 0,
+    "positive_reference_status": "partial",
+    "unverified_graphic_frames": 1,
+    "changed_numeric_copy_rejected": true
+  },
+  "upload_executed": false,
+  "pdf_received": false,
+  "artifacts": {
+    "original-0.4.3": {
+      "sha256": "64d62fe16353906c5fded5d4db17cf3121821a34241ec4f77aa1862fbc7b0481",
+      "bytes": 61776,
+      "files": 22
+    },
+    "candidate-0.4.4": {
+      "sha256": "363c19284684710b2b079859b10c6a1f7c93a418d80d7d45e8618d785073dd0f",
+      "bytes": 70406,
+      "files": 24
+    },
+    "restore-0.4.3-as-0.4.5": {
+      "sha256": "0ad5615b9ddb36040ed70472b0a6fae156983bf63edbfa5085a72c85c98571df",
+      "bytes": 61786,
+      "files": 22
+    }
+  }
+}

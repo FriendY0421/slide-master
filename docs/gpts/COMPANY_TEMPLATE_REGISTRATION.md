@@ -3,6 +3,13 @@
 ## Goal
 When a user supplies a company PPT/POTX/PDF/image/photo and asks to reuse it, convert it into a governed Slide Master template candidate rather than treating it as a one-off visual reference.
 
+This registration lifecycle applies when reusable registration is requested.
+A one-job company CUSTOM reconstruction is allowed without registering or
+publishing it. For authorized photographs, follow
+`docs/ppt-project/PHOTO_CUSTOM_RECONSTRUCTION.md`: show the analysis summary and
+uncertain fonts/sizes first, receive corrections, then obtain current approval.
+Do not demand an unavailable DRM-protected PPTX as a prerequisite for that path.
+
 ## Supported sources
 - PPTX / POTX: extract real theme, master, layout, placeholder, color, font, footer and page geometry where possible.
 - PDF: analyze visual rules and reconstruct a reusable template; do not claim an editable master was extracted.

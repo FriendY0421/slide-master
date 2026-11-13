@@ -1,0 +1,351 @@
+--- a/.codex-plugin/plugin.json
++++ b/.codex-plugin/plugin.json
+@@ -7,17 +7,17 @@
+     "defaultPrompt": [
+       "PPT"
+     ],
+-    "developerName": "\uae40\uc885\uc5f4",
+-    "displayName": "\uc2ac\ub77c\uc774\ub4dc \ub9c8\uc2a4\ud130",
+-    "longDescription": "PPT \uc81c\uc791",
+-    "shortDescription": "PPT \uc81c\uc791"
++    "developerName": "김종열",
++    "displayName": "슬라이드 마스터",
++    "longDescription": "PPT 제작",
++    "shortDescription": "PPT 제작"
+   },
+   "apps": "./.app.json",
+   "name": "gpt-141e7e0e840a7bb75514829d32e70751",
+-  "version": "0.4.5",
+-  "description": "PPT \uc81c\uc791",
++  "version": "0.4.6",
++  "description": "PPT 제작",
+   "author": {
+-    "name": "\uae40\uc885\uc5f4"
++    "name": "김종열"
+   },
+   "keywords": [],
+   "skills": "./skills"
+--- a/plugin.json
++++ b/plugin.json
+@@ -1,7 +1,7 @@
+ {
+   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+   "name": "gpt-141e7e0e840a7bb75514829d32e70751",
+-  "version": "0.4.5",
++  "version": "0.4.6",
+   "description": "PPT 제작",
+   "author": {
+     "name": "김종열"
+--- a/skills/instructions/SKILL.md
++++ b/skills/instructions/SKILL.md
+@@ -179,3 +179,12 @@
+ - 고정 크기·문구·수치를 유지하고 열/행/여백/행간/이미지 비율과 영역을 함께 조정한다. 실제 한글·영문 슬롯은 기존 계약의 required_font_slots로 따로 검사하며 실제 폰트/렌더 검수를 대체하지 않는다.
+ - PPTX import 후 수정은 [차트·워크북 보존](references/13_CHART_WORKBOOK_PRESERVATION.md)에 따라 실제 수정 전 파일·SHA를 기존 dense 계약에 연결한다. 보존 오류면 후속 렌더/전달 전에 중지한다. 허위 원본·원데이터·확인 기록으로 우회하지 않는다.
+ - 사진/새 제작은 실제 첨부·현재 구성안 확인을 유지한다. 변환 엔진·호스트 UI·클라우드 서버가 새로 생겼다고 하지 않는다. 삼성 글꼴 사용권, 회사 원본 대조, 수령자 직접 열기는 별도 증거가 필요하다.
++
++
++### 0.4.6 파일 복구와 사진 기반 회사 양식
++- 환경 초기화나 파일 누락 시 [기존 Drive 복구](references/14_PORTABLE_RECOVERY.md)를 먼저 읽는다. 이미 확인된 아로 환경에서는 필요한 승인 자료를 내려받아 해시·공간·도구를 점검하고 기존 승인 작업을 별도 준비 안내/반복 승인 없이 계속한다. 다른 컴퓨터에서는 준비 상태와 다음 작업을 간단히 안내한 뒤 진행한다. 알 수 없는 환경을 아로로 단정하지 않는다.
++- 다운로드는 새 설치·권한·비용·인증정보 이전·자동 제작 승인이 아니다. 기존 파일과 승인 상태를 보존하고, 예외만 원인·시도·대안·최소 행동으로 묶어 알린다. 원래 Picker의 PC 서버·터널 의존과 대체 미리보기의 수동 선택을 구분한다.
++- 사진으로 제공된 회사 PPT는 [사진 분석·복원](references/15_PHOTO_CUSTOM_RECONSTRUCTION.md)에 따라 실제 픽셀을 읽고, 제작 전에 원문·수치/배치·색상/글꼴 후보·크기(확정·추정·미확인)/표·도식/판독 불가 영역/편집형 재구성안을 한국어로 요약한다. 사용자가 글꼴 등 정보를 보완한 현재 구성안을 승인한 뒤 기존 CUSTOM 제작 소유자로 진행한다.
++- 원본 PPTX가 없다는 이유만으로 사진 경로를 막거나, 사진에서 숨은 데이터·정확한 글꼴·pt·원본 마스터를 추출했다고 하지 않는다. 글자·표·도형은 native editable 객체로, 복잡한 사진 자산은 별도 이미지로 구분한다. 사진과 PPTX 원본 비교를 혼동하지 않는다.
++- 회사 자료는 이번 작업의 비공개 자료다. 공용 등록은 별도 요청/승인 경로다. 회사별 고정 크기는 해당 작업에만 적용하고, Samsung 권리 미확인·조용한 폰트 대체 금지를 유지한다. 실제 재열기·렌더·원본 비교·비공개 다운로드/수령 확인을 생략하지 않는다.
++- 사용자 메뉴와 제작 방식 이름은 한국어를 우선하되 실제 template/preset ID, 원문과 등록 이름을 임의 변경하지 않는다. Picker의 전달 요청 화면은 실제 채팅 선택값 수신과 구분하며, 수신하지 않은 pair를 생성 허가로 만들지 않는다.
+--- a/skills/instructions/lookup/knowledge-index.json
++++ b/skills/instructions/lookup/knowledge-index.json
+@@ -59,6 +59,14 @@
+     {
+       "name": "13_CHART_WORKBOOK_PRESERVATION.md",
+       "path": "references/13_CHART_WORKBOOK_PRESERVATION.md"
++    },
++    {
++      "name": "14_PORTABLE_RECOVERY.md",
++      "path": "references/14_PORTABLE_RECOVERY.md"
++    },
++    {
++      "name": "15_PHOTO_CUSTOM_RECONSTRUCTION.md",
++      "path": "references/15_PHOTO_CUSTOM_RECONSTRUCTION.md"
+     }
+   ]
+ }
+--- a/skills/instructions/references/00_README.md
++++ b/skills/instructions/references/00_README.md
+@@ -48,3 +48,6 @@
+
+ - 0.4.5 세밀한 제작/실제 슬롯 검수: `12_PRECISION_DESIGN.md`
+ - 0.4.5 차트·워크북 보존: `13_CHART_WORKBOOK_PRESERVATION.md`
++
++- 0.4.6 초기화 후 기존 Drive 파일 복구: `14_PORTABLE_RECOVERY.md`
++- 0.4.6 사진 분석 요약·사용자 보완 후 편집형 제작: `15_PHOTO_CUSTOM_RECONSTRUCTION.md`
+--- a/skills/instructions/references/01_GPTS_INSTRUCTIONS_FINAL_v3.txt
++++ b/skills/instructions/references/01_GPTS_INSTRUCTIONS_FINAL_v3.txt
+@@ -173,3 +173,12 @@
+ - 고정 크기·문구·수치를 유지하고 열/행/여백/행간/이미지 비율과 영역을 함께 조정한다. 실제 한글·영문 슬롯은 기존 계약의 required_font_slots로 따로 검사하며 실제 폰트/렌더 검수를 대체하지 않는다.
+ - PPTX import 후 수정은 [차트·워크북 보존](13_CHART_WORKBOOK_PRESERVATION.md)에 따라 실제 수정 전 파일·SHA를 기존 dense 계약에 연결한다. 보존 오류면 후속 렌더/전달 전에 중지한다. 허위 원본·원데이터·확인 기록으로 우회하지 않는다.
+ - 사진/새 제작은 실제 첨부·현재 구성안 확인을 유지한다. 변환 엔진·호스트 UI·클라우드 서버가 새로 생겼다고 하지 않는다. 삼성 글꼴 사용권, 회사 원본 대조, 수령자 직접 열기는 별도 증거가 필요하다.
++
++
++### 0.4.6 파일 복구와 사진 기반 회사 양식
++- 환경 초기화나 파일 누락 시 [기존 Drive 복구](14_PORTABLE_RECOVERY.md)를 먼저 읽는다. 이미 확인된 아로 환경에서는 필요한 승인 자료를 내려받아 해시·공간·도구를 점검하고 기존 승인 작업을 별도 준비 안내/반복 승인 없이 계속한다. 다른 컴퓨터에서는 준비 상태와 다음 작업을 간단히 안내한 뒤 진행한다. 알 수 없는 환경을 아로로 단정하지 않는다.
++- 다운로드는 새 설치·권한·비용·인증정보 이전·자동 제작 승인이 아니다. 기존 파일과 승인 상태를 보존하고, 예외만 원인·시도·대안·최소 행동으로 묶어 알린다. 원래 Picker의 PC 서버·터널 의존과 대체 미리보기의 수동 선택을 구분한다.
++- 사진으로 제공된 회사 PPT는 [사진 분석·복원](15_PHOTO_CUSTOM_RECONSTRUCTION.md)에 따라 실제 픽셀을 읽고, 제작 전에 원문·수치/배치·색상/글꼴 후보·크기(확정·추정·미확인)/표·도식/판독 불가 영역/편집형 재구성안을 한국어로 요약한다. 사용자가 글꼴 등 정보를 보완한 현재 구성안을 승인한 뒤 기존 CUSTOM 제작 소유자로 진행한다.
++- 원본 PPTX가 없다는 이유만으로 사진 경로를 막거나, 사진에서 숨은 데이터·정확한 글꼴·pt·원본 마스터를 추출했다고 하지 않는다. 글자·표·도형은 native editable 객체로, 복잡한 사진 자산은 별도 이미지로 구분한다. 사진과 PPTX 원본 비교를 혼동하지 않는다.
++- 회사 자료는 이번 작업의 비공개 자료다. 공용 등록은 별도 요청/승인 경로다. 회사별 고정 크기는 해당 작업에만 적용하고, Samsung 권리 미확인·조용한 폰트 대체 금지를 유지한다. 실제 재열기·렌더·원본 비교·비공개 다운로드/수령 확인을 생략하지 않는다.
++- 사용자 메뉴와 제작 방식 이름은 한국어를 우선하되 실제 template/preset ID, 원문과 등록 이름을 임의 변경하지 않는다. Picker의 전달 요청 화면은 실제 채팅 선택값 수신과 구분하며, 수신하지 않은 pair를 생성 허가로 만들지 않는다.
+--- a/skills/instructions/references/02_PPT_WORKFLOW_KNOWLEDGE.md
++++ b/skills/instructions/references/02_PPT_WORKFLOW_KNOWLEDGE.md
+@@ -96,3 +96,7 @@
+ ## 승인 후 호스트 제작·검수·비공개 전달
+
+ [실제 전체 흐름](10_HOST_PRODUCTION_DELIVERY.md)을 적용한다. 기존 Picker는 선택 전용이며, 현재 호스트의 Presentations 실행과 이미 연결된 Google Drive 전달을 재사용한다. 앱 선언만으로 인증된 전체 흐름이 완료된 것은 아니다.
++
++
++## 파일 복구·사진 입력 추가 기준
++파일 복구는 `14_PORTABLE_RECOVERY.md`, 사진 분석 요약·사용자 보완·현행 구성안 승인은 `15_PHOTO_CUSTOM_RECONSTRUCTION.md`를 기존 제작 소유자에 연결해 적용한다. 새 서버/OCR/API/권한/설치를 추가하거나 사용자 파일·승인 증거를 만들지 않는다.
+--- a/skills/instructions/references/04_PRESENTATION_PRESETS.json
++++ b/skills/instructions/references/04_PRESENTATION_PRESETS.json
+@@ -21,7 +21,8 @@
+         "현황공유",
+         "개선활동",
+         "프로젝트 결과"
+-      ]
++      ],
++      "display_name_ko": "균형형 보고서"
+     },
+     {
+       "id": "executive_brief",
+@@ -42,7 +43,8 @@
+         "의사결정",
+         "핵심 KPI",
+         "요약보고"
+-      ]
++      ],
++      "display_name_ko": "핵심 요약 보고"
+     },
+     {
+       "id": "storytelling_proposal",
+@@ -64,7 +66,8 @@
+         "제안서",
+         "신규 프로젝트",
+         "변화관리"
+-      ]
++      ],
++      "display_name_ko": "설득형 제안서"
+     },
+     {
+       "id": "data_insight",
+@@ -87,7 +90,8 @@
+         "VOC",
+         "트렌드",
+         "성과분석"
+-      ]
++      ],
++      "display_name_ko": "데이터 분석 보고"
+     },
+     {
+       "id": "training_guide",
+@@ -108,7 +112,8 @@
+         "매뉴얼",
+         "사용법",
+         "사내 가이드"
+-      ]
++      ],
++      "display_name_ko": "교육·사용 안내"
+     },
+     {
+       "id": "product_showcase",
+@@ -130,7 +135,8 @@
+         "서비스소개",
+         "브랜드",
+         "행사 발표"
+-      ]
++      ],
++      "display_name_ko": "제품·서비스 소개"
+     }
+   ]
+ }
+--- a/skills/instructions/references/06_GPTS_TEST_SCENARIOS.md
++++ b/skills/instructions/references/06_GPTS_TEST_SCENARIOS.md
+@@ -84,3 +84,10 @@
+ - T16 구현 없는 환경: 자동 사진→PPT 엔진이 설치되었다고 하지 않는다. 미승인 PR HEAD 자동 실행 금지.
+ - T17 복제 QA: 원본 대비 폰트·크기·이미지·행열 크기·간격·배치와 실제 객체 편집 가능 여부 확인, 남은 차이 공개.
+
++
++
++## 0.4.6 추가 수용 시나리오 — 실제 실행 증거와 구분
++- 확인된 아로/다른 컴퓨터/미확인 환경의 파일 누락: 동일한 해시 검증·보존을 수행하며 준비 안내만 구분한다. 도구/권한/공간이 없으면 정확한 예외를 알리고 설치하지 않는다.
++- 사진 기반 회사 양식: 실제 분석 요약을 먼저 제시하고 모호한 글꼴·크기·수치를 표시한다. 사용자 보완/현재 구성안 승인 전 제작하지 않는다.
++- 원본 PPTX 없이 사진 사용, 비공개 유지, 등록 요청 없는 공용 등록 금지, 폰트/차트 숨은 데이터 추정 금지를 확인한다.
++- 한국어 제작 방식 표시와 실제 ID 유지, Picker 화면의 전달 요청과 실제 pair 수신을 구분한다. 격리 테스트를 실제 사용자 승인/호스트 수신으로 표시하지 않는다.
+--- a/skills/instructions/references/09_CANONICAL_FULL_REFERENCE_v3.md
++++ b/skills/instructions/references/09_CANONICAL_FULL_REFERENCE_v3.md
+@@ -270,3 +270,12 @@
+ - 고정 크기·문구·수치를 유지하고 열/행/여백/행간/이미지 비율과 영역을 함께 조정한다. 실제 한글·영문 슬롯은 기존 계약의 required_font_slots로 따로 검사하며 실제 폰트/렌더 검수를 대체하지 않는다.
+ - PPTX import 후 수정은 [차트·워크북 보존](13_CHART_WORKBOOK_PRESERVATION.md)에 따라 실제 수정 전 파일·SHA를 기존 dense 계약에 연결한다. 보존 오류면 후속 렌더/전달 전에 중지한다. 허위 원본·원데이터·확인 기록으로 우회하지 않는다.
+ - 사진/새 제작은 실제 첨부·현재 구성안 확인을 유지한다. 변환 엔진·호스트 UI·클라우드 서버가 새로 생겼다고 하지 않는다. 삼성 글꼴 사용권, 회사 원본 대조, 수령자 직접 열기는 별도 증거가 필요하다.
++
++
++### 0.4.6 파일 복구와 사진 기반 회사 양식
++- 환경 초기화나 파일 누락 시 [기존 Drive 복구](14_PORTABLE_RECOVERY.md)를 먼저 읽는다. 이미 확인된 아로 환경에서는 필요한 승인 자료를 내려받아 해시·공간·도구를 점검하고 기존 승인 작업을 별도 준비 안내/반복 승인 없이 계속한다. 다른 컴퓨터에서는 준비 상태와 다음 작업을 간단히 안내한 뒤 진행한다. 알 수 없는 환경을 아로로 단정하지 않는다.
++- 다운로드는 새 설치·권한·비용·인증정보 이전·자동 제작 승인이 아니다. 기존 파일과 승인 상태를 보존하고, 예외만 원인·시도·대안·최소 행동으로 묶어 알린다. 원래 Picker의 PC 서버·터널 의존과 대체 미리보기의 수동 선택을 구분한다.
++- 사진으로 제공된 회사 PPT는 [사진 분석·복원](15_PHOTO_CUSTOM_RECONSTRUCTION.md)에 따라 실제 픽셀을 읽고, 제작 전에 원문·수치/배치·색상/글꼴 후보·크기(확정·추정·미확인)/표·도식/판독 불가 영역/편집형 재구성안을 한국어로 요약한다. 사용자가 글꼴 등 정보를 보완한 현재 구성안을 승인한 뒤 기존 CUSTOM 제작 소유자로 진행한다.
++- 원본 PPTX가 없다는 이유만으로 사진 경로를 막거나, 사진에서 숨은 데이터·정확한 글꼴·pt·원본 마스터를 추출했다고 하지 않는다. 글자·표·도형은 native editable 객체로, 복잡한 사진 자산은 별도 이미지로 구분한다. 사진과 PPTX 원본 비교를 혼동하지 않는다.
++- 회사 자료는 이번 작업의 비공개 자료다. 공용 등록은 별도 요청/승인 경로다. 회사별 고정 크기는 해당 작업에만 적용하고, Samsung 권리 미확인·조용한 폰트 대체 금지를 유지한다. 실제 재열기·렌더·원본 비교·비공개 다운로드/수령 확인을 생략하지 않는다.
++- 사용자 메뉴와 제작 방식 이름은 한국어를 우선하되 실제 template/preset ID, 원문과 등록 이름을 임의 변경하지 않는다. Picker의 전달 요청 화면은 실제 채팅 선택값 수신과 구분하며, 수신하지 않은 pair를 생성 허가로 만들지 않는다.
+--- a/skills/instructions/references/10_HOST_PRODUCTION_DELIVERY.md
++++ b/skills/instructions/references/10_HOST_PRODUCTION_DELIVERY.md
+@@ -115,3 +115,7 @@
+ ## 0.4.5 후속 지침
+
+ 이번에 제공된 디자인 지침의 적용 기준은 `12_PRECISION_DESIGN.md`, native 수정 후 차트/워크북 보존은 `13_CHART_WORKBOOK_PRESERVATION.md`를 따른다. 기존 입력/승인/원본 보존/비공개 전달 경로는 유지한다.
++
++
++## 파일 복구·사진 입력 추가 기준
++파일 복구는 `14_PORTABLE_RECOVERY.md`, 사진 분석 요약·사용자 보완·현행 구성안 승인은 `15_PHOTO_CUSTOM_RECONSTRUCTION.md`를 기존 제작 소유자에 연결해 적용한다. 새 서버/OCR/API/권한/설치를 추가하거나 사용자 파일·승인 증거를 만들지 않는다.
+--- /dev/null
++++ b/skills/instructions/references/14_PORTABLE_RECOVERY.md
+@@ -0,0 +1,67 @@
++# Missing-file recovery on Aro and other computers
++
++User direction recorded 2026-11-08 (Asia/Seoul). Keep the current PC as the
++preferred working environment while it is available. This policy concerns
++recovering missing job/source files after reset or environment changes; it does
++not provision a computer, install the plugin or relocate its MCP server.
++
++## Communication and execution
++
++| Destination | Required behavior |
++| --- | --- |
++| User's already identified Aro virtual computer | If required files are missing, use the existing authorized Drive connection to retrieve the verified private capsule, validate it, and resume the actual approved revision without a separate setup tutorial or repeat permission question. Include recovery in the eventual result record. |
++| Another computer | Before downloading/working, explain briefly the destination, files/size, checks and next work. Then proceed within existing authorization; the informational notice is not a new approval gate. |
++| Unidentified environment | Give the other-computer notice. Do not infer Aro identity from a display name, an unrelated task or a shared filesystem. Ask only if identity is needed for access or another consequential decision. |
++
++Existing analysis/design/template/preset/current-storyline approval requirements
++remain in force. Automatic recovery is not automatic approval of new production.
++If no genuine approved revision is available, recover files, inspect them, and
++present the required analysis/plan before authoring.
++
++## Recovery sequence
++
++1. Read the latest repository handoff and this policy. Find the existing private
++   Drive recovery entry from the user's supplied link or authenticated metadata;
++   if absent, search for the exact authorized capsule name below. Resolve any
++   duplicate using version and hash, not filename alone. Never request public
++   sharing or put Drive IDs/links in the public repository.
++2. Check actual destination storage and existing runtimes. Download only the
++   needed capsule into a new dedicated directory; preserve existing originals
++   and incomplete work. If required files already exist with matching hashes,
++   reuse them instead of downloading again.
++3. For the current baseline, verify `SlideMaster_Portable_045_0d66249.zip`:
++   **19,444,972 bytes**, SHA256
++   `ac3a8266191604223cdb1a51a929f686e83de185849cabd7010b536dbbc2e383`.
++   This is the pinned baseline, not a claim that it contains later changes.
++   Prefer a later verified job manifest only when actual evidence establishes it.
++4. Extract without overwriting existing work. Read `CONTINUE_WITH_ARO.md`, job
++   manifest and file hashes; use the current repository policy if the archive's
++   older communication instructions differ. Reject mismatched or unsafe archive
++   paths, missing/corrupt files and unverified replacement inputs.
++5. Reuse supplied Python/Node/render tools. Resolve relative asset/font paths,
++   run the route owner's existing validation, then reopen/render the exact output
++   before private delivery. Report unsupported checks separately. A successful
++   download/extraction is not proof that production dependencies are available.
++6. Preserve the genuine approval/source state, final PPTX and QA receipts privately
++   in Drive, and public-safe progress in PR #14. Verify durable bytes/access before
++   treating local copies as disposable. Do not delete other projects or caches.
++
++The capsule contains public source, temporary OFL Pretendard and synthetic QA
++fixtures, not the user's company original or a new business brief. Never use
++synthetic fixtures as a substitute for a missing user attachment. Do not fetch,
++install or embed Samsung fonts without their separately established use rights.
++
++## Exceptions and limits
++
++Missing Drive authentication/access, an ambiguous capsule, insufficient space,
++missing software or a disconnected Picker is a real exception. Report its exact
++cause, checks already performed, available no-cost alternative and minimum user
++action together. Continue independent permitted inspection. Do not install,
++grant access, transfer secrets, spend money or start a replacement service under
++the automatic-download instruction.
++
++Original Picker requires its existing reachable server/tunnel. A source ZIP
++cannot make it PC-independent. Use the documented real-preview fallback only
++with its actual reason and genuine template/preset confirmation. Native Windows
++PowerPoint availability and Samsung rendering remain separate acceptance items.
++
+--- /dev/null
++++ b/skills/instructions/references/15_PHOTO_CUSTOM_RECONSTRUCTION.md
+@@ -0,0 +1,74 @@
++# Photo-based company slides: analyze before authoring
++
++This refines the existing CUSTOM/source-reconstruction path, not a new OCR
++service or converter. User direction: company PPTs are often provided as
++authorized photographs because the editable source is DRM-protected. Accept
++the supplied image without requiring the unavailable original PPTX. Reconstruct
++what is visible; do not claim to have extracted its original master or hidden
++objects. Preserve each company's own appearance, with no automatic public
++registration. Optional reusable registration keeps its existing separate gate.
++
++## First visible response: analysis summary v1
++
++Before slide authoring, inspect actual image pixels, then show a concise Korean
++summary. Use one row per slide and one row per ambiguous region as needed:
++
++| Item | Required observation / user-review field |
++| --- | --- |
++| Source and scope | Actual attached/private file, page/image number, readable area, requested slide count, preserved regions and requested changes. Record real source SHA privately when bytes are available. |
++| Canvas | Observed slide boundary, aspect ratio, crop/rotation/perspective, blur, glare and missing edges. Distinguish a camera photograph from a clean screenshot. Preserve the source image; rectified views are separate derivatives. |
++| Content | Title, headings, exact text, numbers, decimal points, units, dates and notes by region. Mark illegible text/numbers `[판독 불가: 위치]`; list ambiguous alternatives without selecting one as fact. |
++| Layout | Relative region bounds, alignments, margins, spacing, box proportions, image crops and protected/right-hand areas. Separate the slide's geometry from the camera frame. |
++| Color | Dominant background/text/accent/border colors and their evidence. Camera tint/glare makes exact brand RGB uncertain; prefer a supplied company palette when confirmed. |
++| Typography | Family candidates, weight, alignment, line breaks, line/paragraph spacing and size hierarchy. Label each family/size as user-confirmed, observed estimate or unknown. OCR text recognition does not identify a font. |
++| Tables and diagrams | Row/column boundaries, merges, headers/body/notes, cell padding, lines, arrow direction, box order and layers. Distinguish visible chart labels from unavailable underlying series/workbook data. |
++| Editable plan | Native text, tables, simple shapes and connectors; separate photo/logo/complex-art assets. Declare object-level raster editability separately from editable internal geometry. Do not use one full-slide screenshot as the final editable slide. |
++| Questions and production plan | Collect only missing consequential information together: font name/size, palette, unclear values, allowed crop, slide ratio or an editable chart's actual data. Show proposed reconstruction and wait for real approval of its current version. |
++
++Example Korean response structure (fill with actual observations, never example
++values presented as image-derived facts):
++
++> 사진 분석 v1: 원문·수치 / 배치·색상 / 글꼴·크기(확정·추정·미확인) /
++> 표·도식·이미지 / 읽기 어려운 부분 / 편집형 재구성안 / 추가 확인 사항.
++
++Do not re-ask supplied information. User corrections become analysis/brief v2;
++retain the source and approved snapshot. If layout/content changes after approval,
++the existing current-revision approval rule applies again. A recovered synthetic
++fixture is not a substitute for the user's absent photo or approval.
++
++## Scale, fonts and preservation
++
++Pixel glyph height is not a directly observed PowerPoint point size. Record the
++assumed target slide dimensions and relative positions before estimating sizes;
++do not apply an arbitrary 96-DPI conversion as an exact source-font finding.
++Retain uncertainty if the slide boundaries or physical dimensions are unknown.
++
++For this user's explicitly requested company jobs, record SamsungOneKorean and
++14/12/11/9pt roles plus the table maximum 12pt. If those constraints conflict with
++the photographed hierarchy, explain the conflict in the analysis and obtain the
++current task decision. They are not global template defaults. No silent font
++substitution; Samsung installation/rendering/embedding still requires its
++separately established rights. Temporary approved Pretendard remains temporary.
++
++Photo matching is a visual comparison, not source-PPTX XML/master preservation.
++For protected areas, compare aligned source-image and exact exported-slide
++regions; retain unknowns caused by image quality. Preserve all visible content
++unless a real user edit allows a change. Do not invent hidden chart data or an
++embedded workbook from photographed labels. Obtain data if native-data editing
++is required, otherwise state the actual editable representation.
++
++## Existing production and final QA
++
++After current analysis/design approval, use the existing CUSTOM host-production
++owner / route-selected presentation finalizer, not an unrelated installed skill.
++Record genuine file/actor/approval evidence and any route exemption; this policy
++does not bypass the request guard. Reuse the dense inspector and reference
++contracts for supported elements; report unsupported photo semantics separately.
++
++Reopen the exported exact PPTX, render all slides and compare against the source
++and approved analysis. Check wording/numbers, Korean line breaks, actual fonts,
++row/column sizes, padding, line spacing, merges, image crops, borders and arrows.
++Inspect native editability independently of visual similarity. Keep actual
++PowerPoint checks distinct from other renderers. Deliver privately and preserve
++source, approved analysis, final bytes, QA and recovery in the authorized stores.
++

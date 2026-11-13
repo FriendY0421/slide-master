@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-13",
+  "scope": "local process-checked review, not full company/cloud acceptance",
+  "geometry": {
+    "renderer": "artifact-tool importPptx/export PNG; existing Windows CPU property-setter workaround",
+    "node_version": "v24.19.0",
+    "cpu_canvas_count": 2,
+    "pptx_sha256": "8f25dd56570e5ee0d6d1e755838d8af8028b0ca0bea3adeaf5fd3d410eb140b7",
+    "images": [
+      {
+        "slide": 1,
+        "path": "slide-1.png",
+        "sha256": "10697f7cc172a99584b9620ea100e019950789c82a6ca4aa95569a8256d46a27"
+      },
+      {
+        "slide": 2,
+        "path": "slide-2.png",
+        "sha256": "18f40e0f0a9587ee0658a87e618cccd95f27a2558be21dbb951a0496fd1ededa"
+      }
+    ],
+    "registered_fonts": {},
+    "font_profile_registered": false,
+    "text_font_verified": false,
+    "geometry_only": true,
+    "powerpoint": false,
+    "process_completed": true,
+    "license_verified": false,
+    "process_exit_code": 0
+  },
+  "negative_guards": {
+    "geometry_render_process_exit": 0,
+    "rendered_pages": 2,
+    "font_files_registered": 0,
+    "invalid_font_profile_rejected": true,
+    "failed_child_not_certified": true,
+    "existing_review_preserved": true,
+    "text_free_guard_rejected_text_deck": true,
+    "scope": "font-independent local CPU workaround, not Samsung or cloud certification"
+  },
+  "temporary_font_verify": {
+    "verify_deck_exit": 0,
+    "renderer_process_exit": 0,
+    "rendered_pages": 1,
+    "manual_visual_review_completed": false,
+    "temporary_font": "Pretendard",
+    "samsung_certified": false,
+    "production_storyline_approved": false,
+    "planning_checks_skipped": true,
+    "installed_plugin_changed": false
+  },
+  "temporary_font_metrics": {
+    "errors": 0,
+    "font_family": "Pretendard",
+    "license": "existing bundled SIL OFL 1.1"
+  },
+  "samsung_font_used": false,
+  "operational_activation": false,
+  "cloud_trial_approved": true,
+  "full_attachment_download_flow_verified": false,
+  "synthetic_cloud_input_sha256": "fc84ecfec638c88d5cd7cd0772db105b64a30c85b510f822f08d0a776be3e132"
+}

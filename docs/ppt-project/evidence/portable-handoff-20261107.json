@@ -1,0 +1,35 @@
+{
+  "source_commit": "0d66249e51890af4c4f89842e005b299b978f92f",
+  "archive_name": "SlideMaster_Portable_045_0d66249.zip",
+  "archive_sha256": "ac3a8266191604223cdb1a51a929f686e83de185849cabd7010b536dbbc2e383",
+  "archive_bytes": 19444972,
+  "uncompressed_file_bytes": 32019941,
+  "files": 12537,
+  "credentials_or_samsung_included": false,
+  "full_source_snapshot_included": true,
+  "runtime_binaries_or_node_modules_included": false,
+  "relative_job_contracts": true,
+  "company_original_or_new_production_approval_included": false,
+  "target_dot_space_measured": false,
+  "actual_new_directory_check": {
+    "environment": "same Windows PC, different extraction root",
+    "errors": 0,
+    "measured_regions": 38,
+    "font_runs": 47,
+    "warnings": 8,
+    "render_pages": 2,
+    "render_os_exit": 0,
+    "image_hashes_equal_inspected_045": true,
+    "actual_different_machine_test": false
+  },
+  "private_drive": {
+    "shared": false,
+    "permissions": "user owner only",
+    "actual_raw_download_bytes": 19444972,
+    "actual_raw_download_sha_match": true
+  },
+  "user_operating_policy": "local first while current PC available; cloud/virtual only on environment change",
+  "user_requested_direct_handoff": true,
+  "aro_message_sent": false,
+  "full_goal_complete": false
+}

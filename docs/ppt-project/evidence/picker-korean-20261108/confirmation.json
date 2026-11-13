@@ -1,0 +1,118 @@
+{
+  "scope": "isolated original confirmation-function execution; mocked bridge, not host/user acceptance",
+  "results": [
+    {
+      "name": "valid",
+      "shouldSend": true,
+      "sent": true,
+      "contextUpdated": true,
+      "pass": true
+    },
+    {
+      "name": "server_is_error",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "server_invalid",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "wrong_template",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "wrong_preset",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "wrong_token",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "generation_allowed",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "missing_contract",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "missing_result",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "transport_502",
+      "shouldSend": true,
+      "sent": true,
+      "contextUpdated": true,
+      "pass": true
+    },
+    {
+      "name": "thrown_rejection",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "transport_503",
+      "shouldSend": true,
+      "sent": true,
+      "contextUpdated": true,
+      "pass": true
+    },
+    {
+      "name": "unknown_exception",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "stale_payload",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "removed_template",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    },
+    {
+      "name": "removed_preset",
+      "shouldSend": false,
+      "sent": false,
+      "contextUpdated": false,
+      "pass": true
+    }
+  ],
+  "failures": 0
+}

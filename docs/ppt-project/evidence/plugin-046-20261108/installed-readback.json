@@ -1,0 +1,137 @@
+{
+  "scope": "actual existing local Codex plugin cache after host skill refresh; read-only file verification",
+  "installed_version": "0.4.6",
+  "official_file_count": 29,
+  "matched_files": 29,
+  "managed_cache_modified_by_this_check": false,
+  "new_installation_permissions_cost": false,
+  "skill_exposed_in_current_host": true,
+  "full_photo_or_reset_execution_verified": false,
+  "same_main_plugin_identity": true,
+  "files": [
+    {
+      "path": ".app.json",
+      "sha256": "bd731ebc2aa3eb38593ed04c142759db3c67b0283dc3d4a1538800c35a14b4e1"
+    },
+    {
+      "path": ".codex-plugin/plugin.json",
+      "sha256": "258ee2d2f58f025851f78eb6cc25cda3cd99a06b0e40aabb3c9f0a77e7de59e9"
+    },
+    {
+      "path": "plugin.json",
+      "sha256": "499771047cef82321246b2ef02c85a10cba571c7943fad6bc7123407b028c8ef"
+    },
+    {
+      "path": "skills/instructions/SKILL.md",
+      "sha256": "9111109c153d98396be84586bffc05c8424b00ec5de5ffb95dcfcbdccf5e8419"
+    },
+    {
+      "path": "skills/instructions/agents/openai.yaml",
+      "sha256": "43d0ab021fa7e06ccb1b747a79ef197a99d5e040a501e088b06d45699e2fdf7d"
+    },
+    {
+      "path": "skills/instructions/lookup/knowledge-index.json",
+      "sha256": "25d066002bd7e661082b0d16e32d3818c7275b5a3b1d7eed2c6f0e14a134222c"
+    },
+    {
+      "path": "skills/instructions/references/00_README.md",
+      "sha256": "bc09c691659f517c4effd85e692be061587e8ba8b0e22fb5e027dd892077a47c"
+    },
+    {
+      "path": "skills/instructions/references/01_GPTS_INSTRUCTIONS_FINAL_v3.txt",
+      "sha256": "4e7f4aa669643b28542b5294498e12622da77ecdba61cccaaf8598060abb1392"
+    },
+    {
+      "path": "skills/instructions/references/02_PPT_WORKFLOW_KNOWLEDGE.md",
+      "sha256": "dc7f73395d32eef37ce5a7d1f9a03aa7c5ffc19a70cecf543da3a9756a092b9f"
+    },
+    {
+      "path": "skills/instructions/references/03_TEMPLATE_REGISTRATION_POLICY.md",
+      "sha256": "b7f3619171d87c234db696f5440bb07db2749d7c9bebf665aca50a93684b704a"
+    },
+    {
+      "path": "skills/instructions/references/04_PRESENTATION_PRESETS.json",
+      "sha256": "c37ee5d88e78e1ed17554fa752f25edc7b9dca51f845ec550274758e8a7a61a7"
+    },
+    {
+      "path": "skills/instructions/references/05_TEMPLATE_METADATA_SCHEMA.json",
+      "sha256": "2745521f1471f8512e62433e49a4793df22c6aaec35676412180cbe82da77f00"
+    },
+    {
+      "path": "skills/instructions/references/06_GPTS_TEST_SCENARIOS.md",
+      "sha256": "e4188675304e31212d76a3f1f3237d7dfe70f9a3429e8adde368b10cadad4128"
+    },
+    {
+      "path": "skills/instructions/references/07_TOOL_CONTRACT.md",
+      "sha256": "c012bbd47cce626508d13b3a30a323750bfcecd91da1d0eb300e98535ec3c2ea"
+    },
+    {
+      "path": "skills/instructions/references/08_INTERACTIVE_APP_BLOCK_UI_FINAL.md",
+      "sha256": "6e67a64ac460fb37e150fc3529037689f38d3aaf19e1732031dd17e7a5c2e332"
+    },
+    {
+      "path": "skills/instructions/references/09_CANONICAL_FULL_REFERENCE_v3.md",
+      "sha256": "3bd803d17c2326b525ca74a5aad8ce2b37fd0ec42fa3b5913b4984859165a1ed"
+    },
+    {
+      "path": "skills/instructions/references/10_HOST_PRODUCTION_DELIVERY.md",
+      "sha256": "1f0df8641cf37ff39b5a55b6f9af80ad0da5442ef27246b487afcb251b846500"
+    },
+    {
+      "path": "skills/instructions/references/11_REFERENCE_QUALITY.md",
+      "sha256": "d9254675ace4c99d3c4c490eeae5066bf72c12e030ade8889aa8c7569861c4d7"
+    },
+    {
+      "path": "skills/instructions/references/12_PRECISION_DESIGN.md",
+      "sha256": "10b67b023c22120c0f3c3df28dd75ce24fe7d7fe0f41ae9b4dc83838fc17d313"
+    },
+    {
+      "path": "skills/instructions/references/13_CHART_WORKBOOK_PRESERVATION.md",
+      "sha256": "fe16fbb01a6d52679f3bbff0d48cb5388623d8a95ef1cad78c1402e7210f91de"
+    },
+    {
+      "path": "skills/instructions/references/14_PORTABLE_RECOVERY.md",
+      "sha256": "a8fa983bd08915ac5e328179efd7a0f18d7d9b03921a6dbe59b6a25e38f8c2e2"
+    },
+    {
+      "path": "skills/instructions/references/15_PHOTO_CUSTOM_RECONSTRUCTION.md",
+      "sha256": "df439e75286b740edaf382fbd925e8e0583a79f89144f9be3cc5580b9128e32d"
+    },
+    {
+      "path": "skills/instructions/references/template_gallery_reference.html",
+      "sha256": "c7a19acde9f146ff867aa8fcd91c8479b26e778ff737f4d0e6b6d2570a0e97f3"
+    },
+    {
+      "path": "skills/instructions/scripts/chart_workbook_preservation.py",
+      "sha256": "699bfcbcc64186f852c0cc5e6010f36cc264c0885abf5a94f86141d105b539d5"
+    },
+    {
+      "path": "skills/instructions/scripts/console_encoding.py",
+      "sha256": "71022e21fd89b91f0d96cb3ca128b140dbbe9a5b0dfbf2f46baf26404f20206b"
+    },
+    {
+      "path": "skills/instructions/scripts/dense_pptx_quality.py",
+      "sha256": "171d701bc4c1e51308e5087abd1164049478691e3af743938e466b471fe9f166"
+    },
+    {
+      "path": "skills/instructions/scripts/pptx_reference_quality.py",
+      "sha256": "f35ddcb55075f0cd493225a59854fb7f7d9a0d0cf8be2b2fc1b61fcff6165a52"
+    },
+    {
+      "path": "skills/instructions/scripts/render_pptx_review.mjs",
+      "sha256": "a580cfa2b15b26cb4699fb87294c8e49630252a158e0e48b6df17268a2f5c8dc"
+    },
+    {
+      "path": "skills/instructions/scripts/render_pptx_review.py",
+      "sha256": "c62094f483f22b4aa8e3ce88079f0e7231a46050cdca10bc6dbead95cccfa586"
+    }
+  ],
+  "remaining": [
+    "actual_Aro_reset_and_environment_identity",
+    "automatic_selection_pair_receipt",
+    "PC_off_original_picker",
+    "fresh_authorized_photo_analysis_corrections_approval_production_delivery",
+    "Samsung_rights",
+    "recipient_open_for_new_company_result"
+  ]
+}
