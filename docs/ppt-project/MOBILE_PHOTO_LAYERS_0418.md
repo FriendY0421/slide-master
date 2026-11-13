@@ -76,3 +76,23 @@ already approved proposal in that conversation. Capture actual generation
 and render results before asking for the recipient's phone download and
 open result. A ready saved Codex Cloud configuration does not establish
 execution or delivery in this mobile Work conversation.
+
+## Same Work conversation execution preflight
+
+One follow-up in the same Work conversation used the existing approval and
+attachment. It requested a read-only cloud startup probe before the PC-off
+production trial. The Work reply reported that the previous two attempts
+returned `No usable execution environment is available` before command
+startup. The new probe returned an execution session and `pwd` completed
+in the cloud workspace with exit code 0. The Work reply also reported that
+a private file delivery tool was available. The conversation readback
+exposes these results as reported by Work, without the underlying tool
+trace. The error does not establish why the earlier executor was
+unavailable. The public OpenAI status check listed ChatGPT Work as
+operational at the time of the follow-up.
+
+The next production turn should start from the phone after the user turns
+off the PC. Reuse the existing image and approved one-slide plan. The probe
+did not create a PPTX or test the attachment tool. Production, rendered
+review, delivery, and opening the downloaded file on the phone are still
+pending. No new environment, permission or paid resource was used.
