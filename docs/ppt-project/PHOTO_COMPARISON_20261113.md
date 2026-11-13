@@ -59,14 +59,27 @@ The input decks and photographs stayed in the private job directory.
 The 0.4.16 candidate combines the overlay script, the named-region verifier
 fix, the photo workflow guide and both version manifests. It uses existing
 Pillow. No new dependencies, connections, permissions or costs are required.
-The installed private plugin remains 0.4.14 pending operational approval.
+The user approved deployment and the existing personal private plugin was
+updated to 0.4.16 using the current 0.4.14 release guard. All 30 server files
+matched the expected package exactly, including 25 retained files. Codex
+showed 0.4.16 with Google Drive and the Template Picker connected. The
+local package appeared after refreshing the Codex plugin catalog. Of its
+30 files, 28 matched the server exactly and two retained Markdown files
+matched after text normalization.
+
+The installed 0.4.16 scripts processed the same guidebook photo and the
+four existing PowerPoint slide renders. All twelve generated PNGs matched
+the previously reviewed image hashes. Each PPTX passed all 24 declared
+transcription regions. An ambiguous requested object name was rejected.
+No rollback was triggered.
 
 | Private overlay | SHA-256 |
 | --- | --- |
 | `slide-master-0.4.16-photo-overlay.zip` | `eb81d246fef81be4eb52c3d6f6f3f7ac6832d5e92128c31953cba03616d06cdd` |
 | `slide-master-0.4.17-restore-0.4.14.zip` | `7409e77032bd179000414ce67ac54f8eb9d6b3f5862dd8caf17606c3f4dd348b` |
 
-Use the current official release guard on the same private plugin. The 0.4.17
+For recovery use the current official release guard on the same private plugin.
+The 0.4.17
 restore overlays the prior guide and verifier and requires one explicit
 deletion, `skills/instructions/scripts/review_photo_overlay.py`. Verify the
 restored inventory and local loading separately.

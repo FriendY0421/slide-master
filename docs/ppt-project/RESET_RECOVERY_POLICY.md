@@ -67,10 +67,10 @@ PowerPoint availability and Samsung rendering remain separate acceptance items.
 
 ## Application and recovery status
 
-The [0.4.14 release record](PHOTO_PLUGIN_UPDATE_0.4.14.md) covers the current
-saved and locally installed plugin. Its guarded 0.4.15 restore brings back
-0.4.12 content on the same plugin. The earlier 0.4.13 and 0.4.8 overlays are
-historical release recovery. A reset on Aro has its own verification.
+The [0.4.16 release record](PHOTO_COMPARISON_20261113.md) covers the current
+saved and locally installed plugin. Its guarded 0.4.17 restore brings back
+0.4.14 content on the same plugin. The earlier 0.4.15, 0.4.13 and 0.4.8 overlays
+are historical release recovery. A reset on Aro has its own verification.
 
 The pinned portable ZIP above remains an immutable job/source baseline. Reuse
 existing official loading, resolve the current installed and source versions

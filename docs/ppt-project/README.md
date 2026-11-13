@@ -4,6 +4,8 @@ This directory documents the host-independent PPT production path.
 
 ## Current standalone status
 
+- [Private 0.4.16 photo overlay update](PHOTO_COMPARISON_20261113.md) covers
+  publication, the installed guidebook checks and 0.4.17 recovery to 0.4.14.
 - [Private 0.4.14 photo reconstruction update](PHOTO_PLUGIN_UPDATE_0.4.14.md)
   covers official publication, local loading, synthetic validation and
   guarded 0.4.15 recovery to 0.4.12 content.

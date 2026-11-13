@@ -2,6 +2,13 @@
 
 ## Current handoff — 2026-11-13 KST
 
+The [private 0.4.16 photo overlay update](PHOTO_COMPARISON_20261113.md) is saved
+and verified in Codex on the current PC. The installed scripts reproduced
+the guidebook comparison images and checked the two editable PPTX files.
+The guarded 0.4.17 overlay restores 0.4.14 content.
+
+## Prior 0.4.14 checkpoint — 2026-11-13 KST
+
 The [private 0.4.14 photo update](PHOTO_PLUGIN_UPDATE_0.4.14.md) is saved and
 verified in Codex on the current PC. Its guarded 0.4.15 overlay restores
 0.4.12 content. The installed photo checker was tested on synthetic material.
