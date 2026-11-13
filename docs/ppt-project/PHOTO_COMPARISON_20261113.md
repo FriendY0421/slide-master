@@ -83,3 +83,28 @@ The 0.4.17
 restore overlays the prior guide and verifier and requires one explicit
 deletion, `skills/instructions/scripts/review_photo_overlay.py`. Verify the
 restored inventory and local loading separately.
+
+## Illustration and caption revision
+
+The follow-up used the same private source photo, two slides, approved text
+and temporary Pretendard. Four cover illustrations now use separate PNG
+objects with manually traced transparent masks. The caption is a native
+diagonal shape over the lower-left photo with two separate editable text
+objects. The shape starts at the left photo edge and reaches the lower
+margin. Its geometry and blue fill are approximations of the photographed
+design. A thin backing strip closes the existing bottom gap.
+
+PowerPoint 16 reopened the revised PPTX and rendered both pages. The
+installed 0.4.16 overlay tool used the previous corner coordinates to compare
+the same photo with the before and after renders. The rectangular borders
+around the four illustrations are absent in the new render. The diagonal
+caption follows the photographed composition more closely. Some local mask
+edges, the color and the background texture still differ from the photo.
+
+Both revisions contain 31 text objects and seven picture objects. The revised
+file passed all 24 declared transcription checks. On a copy, six edits
+survived saving and reopening in PowerPoint. They covered the cover title,
+two caption text objects, one checklist item, the diagonal caption shape
+width and a masked illustration's position. The delivered file hash was
+unchanged by the edit test. The source photo, editable PPTX and comparison
+images remain in the private job directory.
