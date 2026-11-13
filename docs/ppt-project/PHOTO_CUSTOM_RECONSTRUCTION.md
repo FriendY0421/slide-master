@@ -36,6 +36,14 @@ retain the source and approved snapshot. If layout/content changes after approva
 the existing current-revision approval rule applies again. A recovered synthetic
 fixture is not a substitute for the user's absent photo or approval.
 
+Confirm which images represent each slide and which are detail crops before
+mapping pages. Use the supplied image or a labeled derivative in source
+comparisons. A search result may inform an optional design proposal, but cannot
+serve as a preview of a supplied original. Record an unreadable region's status
+in the plan and final review. If production is approved with that region still
+unreadable, use the approved visible marker or omission with its location
+recorded. Reconstruct wording or values only when the user supplies them.
+
 ## Scale, fonts and preservation
 
 Pixel glyph height is not a directly observed PowerPoint point size. Record the
@@ -71,6 +79,24 @@ row/column sizes, padding, line spacing, merges, image crops, borders and arrows
 Inspect native editability independently of visual similarity. Keep actual
 PowerPoint checks distinct from other renderers. Deliver privately and preserve
 source, approved analysis, final bytes, QA and recovery in the authorized stores.
+
+### Delivery and comparison evidence
+
+Summarize the checks actually run in the existing delivery response. Include
+the authoring route and tool or renderer used, source-to-render comparison
+results for each affected slide, unresolved text or font differences, and
+editability by object type. Record the final file hash and detailed QA
+privately when available. Distinguish editable picture placement from editing
+the contents of the picture.
+
+For a comparison with general PPT creation, use the same authorized input,
+page count, content requirements, font availability and review renderer.
+Produce each arm independently and record the actual route used. The same
+authoring library may be used by both arms. Evaluate observed differences in
+readable wording and numbers, unresolved regions, layout, editability and
+corrections required. Identical package contents establish equivalent delivered
+output for that pair. Any claimed workflow difference needs its own approval,
+review or correction evidence. Keep the files and comparison private.
 
 ## Application boundary
 

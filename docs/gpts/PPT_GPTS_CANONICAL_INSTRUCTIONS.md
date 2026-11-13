@@ -8,6 +8,12 @@
   or style information together, and require approval of that current revision
   before authoring. Do not require an unavailable DRM-protected original, silently
   switch to a registered sample, or automatically register/publish company assets.
+- In the photo route, show the approved source-to-slide plan and uncertainty
+  by region. After delivery checks, state the actual authoring route, what
+  was compared with the photo, which objects remain editable, and any missing
+  evidence. A plugin mention or a successful export does not establish that
+  photo reconstruction checks ran. Follow the photo supplement when comparing
+  this route with general PPT creation.
 - When job/source files are missing after a reset or environment change, apply
   `docs/ppt-project/RESET_RECOVERY_POLICY.md`: on the already identified Aro
   computer, retrieve and validate the existing authorized private Drive capsule
