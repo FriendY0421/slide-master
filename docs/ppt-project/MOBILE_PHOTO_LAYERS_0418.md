@@ -57,3 +57,22 @@ Reuse the approved one-slide specification when an execution route becomes
 available in the same Chat. Confirm the loaded plugin version separately
 from Picker availability. Then require a rendered PPTX attached to the Chat
 and a recipient download and open result before closing the mobile trial.
+
+## Mobile Work trial readback
+
+The Work conversation recorded a synthetic image attachment, a one-slide
+proposal, and the user's explicit approval. The first Work reply reported
+reading the 0.4.18 package instructions directly. This is evidence reported
+by the Work conversation, which does not expose a separate executable
+package or runtime receipt. After approval, the reply reported two attempts
+to reach the cloud execution environment, both unavailable. This trial
+reached plan approval with reported instruction loading and stopped before
+PPTX authoring. No output PPTX was attached. Cloud authoring and rendering,
+private delivery and the phone download and open remain unverified. The
+history does not independently confirm the PC power state.
+
+When the Work execution environment becomes available, continue from the
+already approved proposal in that conversation. Capture actual generation
+and render results before asking for the recipient's phone download and
+open result. A ready saved Codex Cloud configuration does not establish
+execution or delivery in this mobile Work conversation.
