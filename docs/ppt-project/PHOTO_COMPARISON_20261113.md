@@ -237,3 +237,24 @@ The local Codex managed cache still showed 0.4.16 during this verification.
 The test exercised source read directly from the deployed release, so it
 does not establish host cache refresh or a mobile/cloud production run.
 The test deck, render, overlays and original remain in the private job.
+
+### Codex local installation verification on November 14
+
+The Codex session exposed the 0.4.18 skill and its managed local cache
+reported 0.4.18. The local inventory matched all 31 production paths. Of
+those, 29 matched the server byte for byte, including every script and the
+photo reconstruction guide. Two retained Markdown references matched after
+normalizing line endings and trailing whitespace.
+
+The test ran the photo layer helper, overlay tool and transcription checker
+directly from that installed cache. The same guidebook yielded four masked
+illustrations and one masked caption photo. The picture files, previews and
+geometry receipts matched the production-source run byte for byte. The deck
+embedded all five generated assets and retained a native diagonal caption.
+The verifier passed 24 of 24 approved text checks.
+
+PowerPoint 16 reopened and rendered the two slides. The renders matched
+the production-source run pixel for pixel, and all six overlay PNGs matched
+byte for byte. A copy retained four edits after saving and reopening.
+These covered picture movement, caption width, caption detail and Tip
+text. The verification deck and comparison images remain private.
