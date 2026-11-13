@@ -207,3 +207,33 @@ Candidate and restore archives are partial updates for the same plugin.
 | 2 | Keep freeform caption geometry independent of text and photos. Use the existing PowerPoint authoring tool to preserve native objects. [PptxGenJS custom geometry example](https://github.com/gitbrent/PptxGenJS/blob/master/demos/modules/demo_shape.mjs) | Included as a geometry handoff. No new authoring library. |
 | 3 | Review the whole slide for hierarchy, then revisit changed areas at reading size. For shared decks, verify the reading order and meaningful image descriptions in PowerPoint. [PPTAgent](https://github.com/icip-cas/PPTAgent), [Microsoft reading order](https://support.microsoft.com/en-us/powerpoint/make-slides-easier-to-read-by-using-the-reading-order-pane) | Documented for production review. Add a reading-order check only after a representative shared deck is available. |
 | 4 | Trial local foreground segmentation on difficult photos, with manual boundary correction. [OpenCV GrabCut](https://docs.opencv.org/4.x/d8/d83/tutorial_py_grabcut.html) | Deferred. The existing host does not have OpenCV, and segmentation may remove narrow details. Compare results on authorized samples before adding a dependency. |
+
+### 0.4.18 production release on November 14
+
+Plugin Creator updated the existing private personal plugin from 0.4.16 to
+0.4.18 using the observed current release guard. All 31 server files matched
+the expected source. This includes the four archive paths and 27 retained
+files. The Google Drive and Template Picker declarations matched the prior
+release. This source check does not measure a new Drive or Picker round trip.
+
+The helper, photo overlay and text checker were retrieved from the new
+production release and executed locally against the same private guidebook.
+Four masked illustrations and one masked office photo matched the reviewed
+candidate outputs byte for byte. The PPTX was rebuilt with these five
+images and the released caption geometry. PowerPoint 16 reopened and
+rendered both pages. Both renders matched the reviewed 0.4.18 candidate
+pixel for pixel. The production overlay tool also aligned both pages to
+the same source using the existing corner coordinates. There were no
+rectangular borders around the four cover illustrations. The native
+caption followed the diagonal, with separate detail and Tip text.
+
+All 24 approved text checks passed. The PPTX contains seven independent
+picture objects and 32 native text objects. On a copy, picture movement,
+caption width, detail text and the Tip label persisted after save and
+reopen. No rollback was triggered. The 0.4.19 archive remains available
+for guarded recovery to the 0.4.16 behavior.
+
+The local Codex managed cache still showed 0.4.16 during this verification.
+The test exercised source read directly from the deployed release, so it
+does not establish host cache refresh or a mobile/cloud production run.
+The test deck, render, overlays and original remain in the private job.
