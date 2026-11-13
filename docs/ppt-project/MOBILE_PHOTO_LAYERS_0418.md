@@ -1,0 +1,42 @@
+# Slide Master 0.4.18 mobile photo reconstruction trial
+
+The trial uses a [synthetic reference PNG](evidence/synthetic-mobile-photo-layers-0418.png)
+drawn for this test. It contains a fictional tool illustration in a visible
+rectangular crop and a diagonal caption on an abstract background.
+Reference SHA-256:
+`e8f08c66387f3d3411c017cb9bf01f5727b3335c30e2d7c3d5f594399a927584`.
+
+## Phone trial
+
+1. Save the PNG to the phone. With the PC off, invoke the existing private
+   Slide Master in mobile ChatGPT and attach the PNG. Request a single editable
+   16:9 slide through the existing photo reconstruction workflow. Ask for a
+   layout proposal first and approve the current proposal in the phone chat.
+   If the PC-hosted Picker is unavailable, use the documented mobile fallback
+   and keep any required selections and plan approval.
+2. Confirm the mobile host exposes the 0.4.18 skill or executable package.
+   Report the observed version and the source of the helper. If the installed
+   helper is unavailable and repository source is used for diagnostics, record
+   that as source execution. Record whether the cloud can write files, render
+   the actual exported deck and attach it privately in the same chat.
+3. Preserve the visible English words and numbers. Trace the tool silhouette
+   to remove the beige rectangle and keep the tool as a separate picture.
+   Keep the diagonal blue shape, its caption and the TIP label editable.
+   On the synthetic 960 by 540 reference, the diagonal runs from about
+   (405,335) to (825,488). The existing helper can mask the left crop to the
+   edge of the caption. Place the right crop separately. Compare the exported
+   render against the attached PNG and verify the actual PPTX object types.
+4. Download the private PPTX from that chat and open it in PowerPoint on the
+   phone. Record the observed PC power state during generation and download,
+   whether the file opened, and the first failing step if applicable. Keep
+   chat links, file bytes and account details out of GitHub.
+
+## Evidence as of November 14
+
+The synthetic input is ready. The historical Cloud Work task could not be
+queried through its durable host. The saved Codex Cloud environment reported
+ready, which establishes configuration availability only. It does not establish
+access to the existing private mobile ChatGPT plugin or phone download.
+The local 0.4.18 installation and guidebook test remain verified separately.
+The PC-off mobile invocation, actual cloud export/render, private mobile
+download and phone open are pending a physical-phone trial.
