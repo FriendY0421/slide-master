@@ -28,10 +28,14 @@ retained paths. Verify the installed package separately after official loading.
 The user approved the update and Plugin Creator saved 0.4.14 on the same
 personal private plugin using the 0.4.12 release guard. Official readback
 matched all 29 expected files exactly, including five updated paths and 24
-retained paths. The Picker and Drive declarations were preserved. At the
-first local check after publication the managed cache still exposed 0.4.12.
-Local loading of 0.4.14 needs separate confirmation after the official client
-refresh. No new installation, dependencies, connections, permissions or paid
-service were required for the release.
+retained paths. The Picker and Drive declarations were preserved. The first
+local check showed 0.4.12. Opening the installed plugin detail in Codex
+subsequently showed 0.4.14, with both Picker and Google Drive connected. The
+managed 0.4.14 package matched all 29 official paths. Of those, 27 matched
+exactly and two unchanged Markdown files matched after text normalization.
+The installed checker passed the editable unreadable marker and existing
+38-region fixture, rejected the guessed text, and rejected the wrong source
+hash. No new dependencies, connections, permissions or paid service were
+required for the release.
 Company photo comparison and exact font or visual fidelity are outside the
 synthetic fixture. Mobile testing remains paused in this workstream.

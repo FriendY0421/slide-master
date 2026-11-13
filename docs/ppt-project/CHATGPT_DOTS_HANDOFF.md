@@ -1,10 +1,18 @@
 # Slide Master handoff for ChatGPT and DOTS
 
-## Current handoff — 2026-11-11 KST
+## Current handoff — 2026-11-13 KST
+
+The [private 0.4.14 photo update](PHOTO_PLUGIN_UPDATE_0.4.14.md) is saved and
+verified in Codex on the current PC. Its guarded 0.4.15 overlay restores
+0.4.12 content. The installed photo checker was tested on synthetic material.
+Company-photo fidelity and exact Samsung font rendering retain their own
+verification conditions.
+
+## Prior 0.4.12 checkpoint — 2026-11-11 KST
 
 Use the [private 0.4.12 release record](PUBLIC_PRESENTATION_RELEASE_0.4.12.md)
 and the [dense-sample acceptance record](DENSE_SAMPLE_ACCEPTANCE_0.4.12.md)
-as the current state. The local managed 0.4.12 package matches the saved
+as the earlier baseline. The local managed 0.4.12 package matched the saved
 source. The user confirmed phone download and opening of both slides from the
 delivered sample. The user is handling the separate new mobile production
 trial and asked this workstream to stop mobile testing.
